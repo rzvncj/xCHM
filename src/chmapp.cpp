@@ -23,6 +23,7 @@
 #include <chmframe.h>
 #include <chmfshandler.h>
 #include <chmfile.h>
+#include <wx/image.h>
 
 
 bool CHMApp::OnInit()

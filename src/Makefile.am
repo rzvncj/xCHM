@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_srcdir)/art `$(WXCFG) --cppflags`
+INCLUDES = -I$(top_srcdir)/art `$(WXCFG) --cxxflags`
 
 bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \

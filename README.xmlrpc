@@ -1,5 +1,13 @@
 XmlRpc interface documentation
 
+XmlRpc support enables 3rd party applications to issue load, change page, and 
+close instructions to xCHM.
+
+In order to make use of the XmlRpc support in xCHM you must configure with the
+--enable-xmlrpc flag. You must also have the XmlRpc++ (0.7 or higher) library 
+installed on your system. You can aquire this library at:
+	http://xmlrpcpp.sourceforge.net/
+
 
 Calls
 param 1
@@ -22,3 +30,26 @@ Notes:
 
 File paths are relative to the xCHM executable, thus full path names are  the 
 recommended method for opening files via XmlRpc.
+
+Example using Python:
+
+Launch xCHM with the XmlRpc server activated
+xchm --with-xmlrpc=port
+
+Launch python
+>>> import xmlrpclib
+
+# establish connection to xCHM XmlRpc server
+>>> s = xmlrpclib.Server('http://localhost:port')
+
+# tell xCHM to open /path/to/sch/file.chm
+>>> s.xCHM(1,'/path/to/chm/file.chm')
+1 # success
+#tell xCHM to load the contextID from the current file.
+>>> s.xCHM(2,1234)
+0 # failure
+>>> s.xCHM(2,1235)
+1 # success
+# close xCHM
+>>> s.xCHM(0)
+1

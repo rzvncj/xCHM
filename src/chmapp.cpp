@@ -29,6 +29,7 @@
 bool CHMApp::OnInit()
 {
 	long xorig = 50, yorig = 50, width = 600, height = 450;
+	long sashPos = CONTENTS_MARGIN;
 	long fontSize = CHM_DEFAULT_FONT_SIZE;
 	wxString lastOpenedDir, normalFont, fixedFont;
 
@@ -46,12 +47,14 @@ bool CHMApp::OnInit()
 			    &normalFont);
 		config.Read(wxT("/Fonts/fixedFontFace"), &fixedFont);
 		config.Read(wxT("/Fonts/size"), &fontSize);
+		config.Read(wxT("/Sash/leftMargin"), &sashPos);
 	}
 
 	CHMFrame *frame = new CHMFrame(wxT("xCHM v. " VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
-				       fixedFont, static_cast<int>(fontSize));
+				       fixedFont, static_cast<int>(fontSize),
+				       static_cast<int>(sashPos));
 
 	frame->SetSizeHints(200, 200);
 	frame->Show(TRUE);

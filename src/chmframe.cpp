@@ -28,6 +28,8 @@
 #include <wx/accel.h>
 
 
+#define RECENT_FILES_COUNT 5
+
 namespace {
 
 const wxChar *greeting = wxT(
@@ -71,19 +73,16 @@ const wxChar *about_txt = wxT(
 } // namespace
 
 
-#define CONTENTS_MARGIN 170
-
-
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
-		   const int fontSize)
+		   const int fontSize, int sashPosition)
 	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false), _sashPos(CONTENTS_MARGIN)
+	  _bookmarksDeleted(false), _sashPos(sashPosition)
 {
 #ifdef _ENABLE_COPY_AND_FIND
 #	ifdef wxUSE_ACCEL
@@ -393,6 +392,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 {
 	int xorig, yorig, width, height;
+	int sashPos = _sw->IsSplit() ? _sw->GetSashPosition() : _sashPos;
 
 	GetPosition(&xorig, &yorig);
 	GetSize(&width, &height);
@@ -407,6 +407,7 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 	config.Write(wxT("/Fonts/normalFontFace"), _normalFont);
 	config.Write(wxT("/Fonts/fixedFontFace"), _fixedFont);
 	config.Write(wxT("/Fonts/size"), _fontSize);
+	config.Write(wxT("/Sash/leftMargin"), sashPos);
 
 	SaveBookmarks();
 	Destroy();
@@ -681,13 +682,13 @@ void CHMFrame::SaveBookmarks()
 	for(int i = 0; i < noEntries; ++i) {
 		wxString *url = reinterpret_cast<wxString *>(
 #ifdef __WXGTK__
-			_cb->GetClientData((int)i));
+			_cb->GetClientData(i));
 #else
-			_cb->wxItemContainer::GetClientData((int)i));
+			_cb->wxItemContainer::GetClientData(i));
 #endif
 
 		config.Write(wxString::Format(format1, i), 
-			     _cb->GetString((int)i));
+			     _cb->GetString(i));
 
 		if(url)
 			config.Write(wxString::Format(format2, i), *url);

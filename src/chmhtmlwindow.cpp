@@ -134,6 +134,9 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 {
 	if(location.StartsWith(wxT("file:")) || 
 	   !location.Left(5).CmpNoCase(wxT("http:")) ||
+	   !location.Left(6).CmpNoCase(wxT("https:")) ||
+	   !location.Left(4).CmpNoCase(wxT("ftp:")) ||
+	   !location.Left(7).CmpNoCase(wxT("mailto:")) ||
 	   !location.Left(10).CmpNoCase(wxT("javascript")) ||
 	   location.StartsWith(wxT("#")))
 		return false;

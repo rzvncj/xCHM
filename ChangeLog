@@ -96,3 +96,7 @@
 		with /absolute/paths.
 		+ corrected a bug that made xCHM refuse to load pages
 		with ./in/current/dir paths.
+
+	* 0.8.7 Minor feature enhancements:
+		+ the contents panel sash position persists between sessions.
+		+ decreased the default application font size from 14 to 12.

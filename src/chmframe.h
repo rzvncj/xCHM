@@ -37,6 +37,9 @@
 //! Default font size for the wxHtmlWindow.
 #define CHM_DEFAULT_FONT_SIZE 12
 
+//! Default sash position.
+#define CONTENTS_MARGIN 170
+
 
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
@@ -96,7 +99,8 @@ public:
 		 const wxPoint& pos, const wxSize& size,
 		 const wxString& normalFont = wxEmptyString,
 		 const wxString& fixedFont = wxEmptyString,
-		 const int fontSize = CHM_DEFAULT_FONT_SIZE);
+		 const int fontSize = CHM_DEFAULT_FONT_SIZE,
+		 int sashPositon = CONTENTS_MARGIN);
 
 	//! Cleans up.
 	~CHMFrame();

@@ -136,7 +136,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(!h1.empty())
 		for(i = h1.begin(); i != h1.end(); ++i) {
-		
 			wxString full_url = wxString(wxT("file:")) + 
 				chmf->ArchiveName() + wxT("#chm:/") + i->first;
 			_results->Append(i->second, new wxString(full_url));

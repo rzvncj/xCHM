@@ -1,7 +1,8 @@
 
-	* 0.5 is the initial release. It can load CHM files and display the
-	homepage, print the displayed page, go back and forward in the
-	history and toggle the contents tree panel. Enjoy.
+	* 0.5 Initial release. 
+		+ can load CHM files and display the homepage, print the 
+		displayed page, go back and forward in the
+		history and toggle the contents tree panel. Enjoy.
 
 	* 0.5.1. Minor modifications:
 		+ added Doxygen comments and generated some documentation;
@@ -55,3 +56,10 @@
 	* 0.8.1 Major feature enhancement masked as minor number release
 		+ added real Microsoft-like $FIftiMain index-based
 		global search. The searches are as fast as possible now.
+		- removed the 'Case sensitive' checkbox because index
+		search can't use it anyway.
+		+ added support for 'javascript:fullSize' URLs.
+		+ beautified the font dialog a bit.
+		+ fixed empty title in the titlebar bug.
+		+ refined the synchronization between the contents tree and
+		the wxHtmlWindow displayed page.

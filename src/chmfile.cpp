@@ -326,7 +326,7 @@ size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 
 bool CHMFile::GetArchiveInfo()
 {
-#define BUF_SIZE 2048
+#define BUF_SIZE 2049
 	unsigned char buffer[BUF_SIZE];
 	chmUnitInfo ui;
 	
@@ -344,50 +344,53 @@ bool CHMFile::GetArchiveInfo()
 	   == 0)
 		return false;
 
-	for(;;) {
+	buffer[size - 1] = 0;
 
+	for(;;) {
+		// This condition won't hold if I process anything
+		// except NUL-terminated strings!
 		if(index > size - 1 - (long)sizeof(u_int16_t))
 			break;
 
 		cursor = (u_int16_t *)(buffer + index);
 		FIXENDIAN16(*cursor);
-
+		
 		switch(*cursor) {
 		case 0:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
+
 			_topicsFile = wxString(wxT("/")) 
 				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			index += *cursor + 2;
 			break;
 		case 1:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
+
 			_indexFile = wxString(wxT("/"))
 				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			index += *cursor + 2;
 			break;
 		case 2:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
+
 			_home = wxString(wxT("/"))
 				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			index += *cursor + 2;
 			break;
 		case 3:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
+
 			_title = CURRENT_CHAR_STRING(buffer + index + 2);
-			index += *cursor + 2;
 			break;
 		case 6:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);
+			FIXENDIAN16(*cursor);			
 
 			if(_topicsFile.IsEmpty()) {
 				wxString topicAttempt = wxT("/"), tmp;
@@ -409,14 +412,14 @@ bool CHMFile::GetArchiveInfo()
 					_indexFile = tmp;
 			}
 
-			index += *cursor + 2;
 			break;
 		default:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);
-			index += *cursor + 2;
+			FIXENDIAN16(*cursor);			
 		}
+
+		index += *cursor + 2;
 	}
 
 	// one last try to see if we can get contents from "/#STRINGS"
@@ -431,14 +434,18 @@ bool CHMFile::GetArchiveInfo()
 			return true;
 
 		// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-		if(::chm_retrieve_object(_chmFile, &ui,
-				       buffer, 1, BUF_SIZE) == 0)
+		if((size = ::chm_retrieve_object(_chmFile, &ui,
+						  buffer, 1, BUF_SIZE)) == 0)
 			// this should never happen, the specs say
 			// the least the file can be is 4096 bytes.
 			return true;
 
-		// There's that 9 again :).
-		for(int i=0; i<9; ++i) {
+		buffer[size - 1] = 0;
+
+		for(;;) {
+			if(index > size - 1)
+				break;
+
 			chunk = CURRENT_CHAR_STRING(buffer + index);
 			
 			if(chunk.Right(4).Lower() == wxT(".hhc")) {

@@ -26,19 +26,20 @@
 
 namespace {
 
-wxChar* test_page = wxT("<html><body><table><tr><td>Normal face<br>"
-	"(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face.</b> <b>"
-	"<i>Bold italic face.</i></b><br><font size=-2>font size -2</font><br>"
+wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal "
+	"face<br>(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face."
+	"</b> <b><i>Bold italic face.</i></b><br><font size=-2>font size -2"
+	"</font><br><font size=-1>font size -1</font><br><font size=+0>font"
+	" size +0</font><br><font size=+1>font size +1</font><br><font "
+	"size=+2>font size +2</font><br><font size=+3>font size +3</font><br>"
+	"<font size=+4>font size +4</font></td><td valign=\"top\"><tt>Fixed"
+	" size face.<br> <b>bold</b> <i>italic</i> <b><i>bold italic <u>"
+	"underlined</u></i></b><br><font size=-2>font size -2</font><br>"
 	"<font size=-1>font size -1</font><br><font size=+0>font size +0"
 	"</font><br><font size=+1>font size +1</font><br><font size=+2>"
 	"font size +2</font><br><font size=+3>font size +3</font><br>"
-	"<font size=+4>font size +4</font><br><td><p><tt>Fixed size face."
-	"<br> <b>bold</b> <i>italic</i> <b><i>bold italic <u>underlined</u>"
-	"</i></b><br><font size=-2>font size -2</font><br>"
-	"<font size=-1>font size -1</font><br><font size=+0>font size +0"
-	"</font><br><font size=+1>font size +1</font><br><font size=+2>"
-	"font size +2</font><br><font size=+3>font size +3</font><br>"
-	"<font size=+4>font size +4</font></tt></table></body></html>");
+	"<font size=+4>font size +4</font></tt></td></tr></table></body>"
+	"</html>");
 
 }
 

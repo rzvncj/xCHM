@@ -37,6 +37,7 @@
 
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
+#define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
 
 
 CHMFile::CHMFile()
@@ -138,8 +139,8 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
-bool CHMFile::IndexSearch(wxString& text, bool wholeWords, bool titlesOnly,
-			  wxListBox* toPopulate)
+bool CHMFile::IndexSearch(wxString& text, bool WXUNUSED(wholeWords), 
+			  bool WXUNUSED(titlesOnly), wxListBox* toPopulate)
 {
 	if(toPopulate == NULL)
 		return false;
@@ -165,6 +166,35 @@ bool CHMFile::IndexSearch(wxString& text, bool wholeWords, bool titlesOnly,
 
 	if(words.GetCount() == 0)
 		return false;
+
+#define FTS_HEADER_LEN 0x32
+	unsigned char header[FTS_HEADER_LEN];
+
+	if(::chm_retrieve_object(_chmFile, &ui,
+				 header, 0, FTS_HEADER_LEN) == 0)
+		return false;
+	
+	unsigned char doc_index_s = header[0x1E], doc_index_r = header[0x1F];
+	unsigned char code_count_s = header[0x20], code_count_r = header[0x21];
+	unsigned char loc_codes_s = header[0x22], loc_codes_r = header[0x23];
+
+	if(doc_index_s != 2 || code_count_s != 2 || loc_codes_s != 2) {
+		// Don't know how to use values other than 2 yet. Maybe
+		// next chmspec.
+		return false;
+	}
+
+	u_int32_t* cursor32 = reinterpret_cast<u_int32_t*>(header + 0x14);
+	u_int32_t node_offset = *cursor32;
+	FIXENDIAN32(node_offset);
+
+	cursor32 = reinterpret_cast<u_int32_t*>(header + 0x2e);
+	u_int32_t node_len = *cursor32;
+	FIXENDIAN32(node_len);
+
+	u_int16_t* cursor16 = reinterpret_cast<u_int16_t*>(header + 0x18);
+	u_int16_t tree_depth = *cursor16;
+	FIXENDIAN16(tree_depth);
 
 	return false;
 }
@@ -205,7 +235,7 @@ bool CHMFile::GetArchiveInfo()
 
 	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
 	if(::chm_retrieve_object(_chmFile, &ui,
-			       buffer, 4, BUF_SIZE) == 0)
+				 buffer, 4, BUF_SIZE) == 0)
 		return false;
 
 	// 9 is a good magic number :)

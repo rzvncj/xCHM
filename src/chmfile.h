@@ -158,7 +158,7 @@ public:
 
 private:
 	//! Helper. Initializes most of the private data members.
-	bool GetArchiveInfo();
+	bool GetArchiveInfo();			    
 
 private:
 	chmFile* _chmFile;

@@ -91,6 +91,8 @@
 		(Russian, Chinese) properly even when xCHM is being linked
 		with the GTK2/Unicode version of wxWindows.
 
-	* 0.8.6 Minor bugfix:
+	* 0.8.6 Minor bugfixes:
 		+ corrected a bug that made xCHM refuse to load pages
 		with /absolute/paths.
+		+ corrected a bug that made xCHM refuse to load pages
+		with ./in/current/dir paths.

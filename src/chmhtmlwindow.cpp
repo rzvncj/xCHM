@@ -150,6 +150,9 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 		location = location.AfterFirst(wxT('/'));
 		prf = prf.BeforeLast(wxT('/'));
 	}
+
+	if(location.StartsWith(wxT("./")))
+		location = location.AfterFirst(wxT('/'));
 		
 	if(!prf.IsEmpty())
 		prf = wxString(wxT("/")) + prf;

@@ -505,7 +505,7 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 
 			delete[] wrd_buf;
 
-			if(text.CmpNoCase(word) < 0) {
+			if(text.CmpNoCase(word) <= 0) {
 				cursor32 = reinterpret_cast<u_int32_t*>(
 					buffer.get() + i + word_len + 1);
 				initialOffset = *cursor32;

@@ -25,6 +25,19 @@
 #include <wx/stream.h>
 #include <wx/thread.h>
 #include <chmfile.h>
+#include <config.h>
+
+
+
+#ifdef WITH_LIBXMLRPC
+#	define LOCKER(x) wxMutexLocker lock(x);
+#	define LOCK(x)   x.Lock();
+#	define UNLOCK(x) x.Unlock();
+#else
+#	define LOCKER(x)
+#	define LOCK(x)
+#	define UNLOCK(x)
+#endif
 
 
 /*!
@@ -59,8 +72,7 @@ public:
 	  \return A valid pointer to a CHMFile object or NULL if no
 	  .chm file has been opened yet.
 	 */
-	static CHMFile* GetCache() { return _archiveCache; }
-
+	static CHMFile* GetCache();
 	/*!
 	  \brief Cleans up the cache. Has to be public and static
 	  since the stream doesn't know how many other streams using
@@ -102,7 +114,9 @@ private:
 	off_t _currPos;
 	chmUnitInfo _ui;
 	static wxString _path;
+#ifdef WITH_LIBXMLRPC
 	static wxMutex _mutex;
+#endif
 };
 
 #endif // __CHMINPUTSTREAM_H_

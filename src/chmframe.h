@@ -31,6 +31,7 @@
 #include <wx/combobox.h>
 #include <wx/font.h>
 #include <wx/docview.h>
+#include <wx/thread.h>
 
 
 // Forward declarations.
@@ -231,6 +232,7 @@ private:
 	int _sashPos;	
 	wxFont _font;
 	wxFileHistory _fh;
+	wxMutex _mutex;
 
 private:
 	DECLARE_EVENT_TABLE()	

@@ -48,9 +48,9 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 			     wxArrayString *fixedFonts,
 			     const wxString& normalFont,
 			     const wxString& fixedFont, const int fontSize)
-	: wxDialog(parent, -1, "Choose fonts"), _test(NULL),
+	: wxDialog(parent, -1, "Change fonts.."), _test(NULL),
 	  _fontSizeControl(NULL), _normalFControl(NULL), _fixedFControl(NULL),
-	  _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
+	_normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
 	wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 2, 5);

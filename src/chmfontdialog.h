@@ -24,23 +24,46 @@
 #include <wx/combobox.h>
 
 
+//! Custom font chooser dialog class.
 class CHMFontDialog : public wxDialog
 {
 public:
+	/*!
+	  \brief Constructs a CHMFontDialog.
+	  \param parent The parent window.
+	  \param normalFonts Array of strings denoting all the normal
+	  font faces' names available on the system. Managed by the caller.
+	  \param fixedFonts Array of strings denoting all the fixes fonts
+	  faces' names available on the system. Managed by the caller.
+	  \param normalFont The normal font currently in use by the caller.
+	  \param fixedFont The fixed font currently in use by the caller.
+	  \param fontSize The size of the font currently selected.
+	 */
 	CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 		      wxArrayString *fixedFonts, const wxString& normalFont,
 		      const wxString& fixedFont, const int fontSize);
 
+	//! Returns the fixed font face name.
 	const wxString& FixedFont() { return _fixedFont; }
+
+	//! Returns the normal font face name.
 	const wxString& NormalFont() { return _normalFont; }
+
+	//! Return the selected font size.
 	int* Sizes() { return _sizes; }
 
 protected:
+	//! This is called when a font is selected from the combo box.
 	void OnUpdate(wxCommandEvent& event);
+
+	//! This is called when you click on the font size spin control.
 	void OnUpdateSpin(wxSpinEvent& event);
-	void UpdatePreview();
 
 private:
+	//! Helper. Updates the font preview window.
+	void UpdatePreview();
+
+	//! Helper. Initializes the dialog with the passed data.
 	void InitDialog(wxArrayString *normalFonts, wxArrayString *fixedFonts);
 	
 private:
@@ -51,8 +74,8 @@ private:
 
 	wxString _normalFont;
 	wxString _fixedFont;
-	int _fontSize;
 	int _sizes[7];
+	int _fontSize;
 
 	DECLARE_EVENT_TABLE();
 };

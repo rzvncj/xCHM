@@ -1515,7 +1515,7 @@ echo "$as_me: error:
 fi
 
 REZ_FLAGS="`$WX_CONFIG_PATH --rezflags`"
-if test "x$REZ_FLAGS" == "x" -o "x$REZ_FLAGS" == "x#"; then
+if test "x$REZ_FLAGS" = "x" -o "x$REZ_FLAGS" = "x#"; then
 	REZ_COMMAND=""
 else
 	REZ_COMMAND="$REZ_FLAGS xchm"
@@ -1832,7 +1832,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xchm
- VERSION=0.8.10
+ VERSION=0.8.11
 
 
 cat >>confdefs.h <<_ACEOF

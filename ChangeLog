@@ -124,4 +124,7 @@
 		in the search and index tabs.
 		+ added Chanler White Mac OS X patch to be able to launch
 		open a .chm file by double-clicking on it on Mac OS X.
+
+	* 0.8.11 Bugfix release:
+		+ made the configure script sh friendly.
 	

@@ -236,9 +236,7 @@ bool CHMFile::LoadContextIDs()
 	// convert our DWORDs to numbers
 	for( unsigned int i = 0; i < ivb_len; i++ )
 	{
-		ivbs[i] = 
-			FIXENDIAN32(*(reinterpret_cast<u_int32_t *>
-				      (ivb_buf.get() + j)));
+		ivbs[i] = UINT32ARRAY(ivb_buf.get() + j);
 		j+=4; // step to the next DWORD
 	}
 
@@ -317,17 +315,14 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 		return false;
 	}
 
-	u_int32_t* cursor32 = reinterpret_cast<u_int32_t*>(header + 0x14);
-	u_int32_t node_offset = *cursor32;
-	FIXENDIAN32(node_offset);
+	unsigned char* cursor32 = header + 0x14;
+	u_int32_t node_offset = UINT32ARRAY(cursor32);
 
-	cursor32 = reinterpret_cast<u_int32_t*>(header + 0x2e);
-	u_int32_t node_len = *cursor32;
-	FIXENDIAN32(node_len);
+	cursor32 = header + 0x2e;
+	u_int32_t node_len = UINT32ARRAY(cursor32);
 
-	u_int16_t* cursor16 = reinterpret_cast<u_int16_t*>(header + 0x18);
-	u_int16_t tree_depth = *cursor16;
-	FIXENDIAN16(tree_depth);
+	unsigned char* cursor16 = header + 0x18;
+	u_int16_t tree_depth = UINT16ARRAY(cursor16);
 
 	unsigned char word_len, pos;
 	wxString word;
@@ -349,9 +344,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 					 node_offset, node_len) == 0)
 			return false;
 
-		cursor16 = reinterpret_cast<u_int16_t *>(buffer.get() + 6);
-		free_space = *cursor16;
-		FIXENDIAN16(free_space);
+		cursor16 = buffer.get() + 6;
+		free_space = UINT16ARRAY(cursor16);
 
 		i = sizeof(u_int32_t) + sizeof(u_int16_t) + sizeof(u_int16_t);
 		u_int64_t wlc_count, wlc_size;
@@ -380,18 +374,15 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 			wlc_count = be_encint(buffer.get() + i, encsz);
 			i += encsz;
 		
-			cursor32 = reinterpret_cast<u_int32_t *>(
-				buffer.get() + i);
-			wlc_offset = *cursor32;
-			FIXENDIAN32(wlc_offset);
+			cursor32 = buffer.get() + i;
+			wlc_offset = UINT32ARRAY(cursor32);
 
 			i += sizeof(u_int32_t) + sizeof(u_int16_t);
 			wlc_size =  be_encint(buffer.get() + i, encsz);
 			i += encsz;
 
-			cursor32 = reinterpret_cast<u_int32_t*>(buffer.get());
-			node_offset = *cursor32;
-			FIXENDIAN32(node_offset);
+			cursor32 = buffer.get();
+			node_offset = UINT32ARRAY(cursor32);
 		
 			if(!title && titlesOnly)
 				continue;
@@ -467,8 +458,8 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 				     chmUnitInfo *ui)
 {
 	u_int32_t test_offset = 0;
-	u_int16_t* cursor16;
-	u_int32_t* cursor32;
+	unsigned char* cursor16;
+	unsigned char* cursor32;
 	unsigned char word_len, pos;
 	u_int32_t i = sizeof(u_int16_t);
 	UCharPtr buffer(new unsigned char[buffSize]);
@@ -486,9 +477,8 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 					 initialOffset, buffSize) == 0)
 			return 0;
 
-		cursor16 = reinterpret_cast<u_int16_t*>(buffer.get());
-		u_int16_t free_space = *cursor16;
-		FIXENDIAN16(free_space);
+		cursor16 = buffer.get();
+		u_int16_t free_space = UINT16ARRAY(cursor16);
 
 		while(i < buffSize - free_space) {
 
@@ -508,10 +498,8 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 			delete[] wrd_buf;
 
 			if(text.CmpNoCase(word) <= 0) {
-				cursor32 = reinterpret_cast<u_int32_t*>(
-					buffer.get() + i + word_len + 1);
-				initialOffset = *cursor32;
-				FIXENDIAN32(initialOffset);
+				cursor32 = buffer.get() + i + word_len + 1;
+				initialOffset = UINT32ARRAY(cursor32);
 				break;
 			}
 
@@ -541,7 +529,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	u_int64_t index = 0, count;
 	size_t length, off = 0;
 	UCharPtr buffer(new unsigned char[wlc_size]);
-	u_int32_t *cursor32;
+	unsigned char *cursor32;
 	u_int32_t stroff, urloff;
 
 #define TOPICS_ENTRY_LEN 16
@@ -568,10 +556,9 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 					 index * 16, TOPICS_ENTRY_LEN) == 0)
 			return false;
 
-		cursor32 = reinterpret_cast<u_int32_t *>(entry + 4);
+		cursor32 = entry + 4;
 		combuf[COMMON_BUF_LEN - 1] = 0;
-		stroff = *cursor32;
-		FIXENDIAN32(stroff);
+		stroff = UINT32ARRAY(cursor32);
 
 		wxString topic;
 
@@ -595,17 +582,15 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 #endif
 		}
 	      
-		cursor32 = reinterpret_cast<u_int32_t *>(entry + 8);
-		urloff = *cursor32;
-		FIXENDIAN32(urloff);
+		cursor32 = entry + 8;
+		urloff = UINT32ARRAY(cursor32);
 
 		if(::chm_retrieve_object(_chmFile, uitbl, combuf, 
 					 urloff, 12) == 0)
 			return false;
 
-		cursor32 = reinterpret_cast<u_int32_t*>(combuf + 8);
-		urloff = *cursor32;
-		FIXENDIAN32(urloff);
+		cursor32 = combuf + 8;
+		urloff = UINT32ARRAY(cursor32);
 
 		if(::chm_retrieve_object(_chmFile, urlstr, combuf, 
 					 urloff + 8, COMMON_BUF_LEN - 1) == 0)

@@ -88,7 +88,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 #define BUF_SIZE2 1025
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE2];
-	LONGINT64 ret = BUF_SIZE2 - 1, curr = 0;
+	size_t ret = BUF_SIZE2 - 1, curr = 0;
 
 	if(!toBuild)
 		return false;

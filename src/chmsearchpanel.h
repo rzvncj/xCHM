@@ -102,7 +102,7 @@ private:
 	wxTreeCtrl* _tcl;
 	wxTextCtrl* _text;
 	wxCheckBox* _grep;
-	wxCheckBox* _whole;
+	wxCheckBox* _partial;
 	wxCheckBox* _titles;
 	wxButton* _search;
 	wxListBox* _results;

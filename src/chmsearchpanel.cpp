@@ -29,7 +29,7 @@
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxHtmlWindow *html)
 	: wxPanel(parent), _tcl(topics), _text(NULL), _grep(NULL),
-	  _whole(NULL), _titles(NULL), _search(NULL), _results(NULL), 
+	  _partial(NULL), _titles(NULL), _search(NULL), _results(NULL), 
 	  _html(html)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -40,13 +40,14 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxDefaultPosition, wxDefaultSize, 
 			       wxTE_PROCESS_ENTER);
 
-	_whole = new wxCheckBox(this, -1, wxT("Whole words only"));	
+	_partial = new wxCheckBox(this, -1, wxT("Match partial words"));
 	_titles = new wxCheckBox(this, -1, wxT("Search titles only"));	
 	_grep = new wxCheckBox(this, -1, wxT("Grep mode"));
 	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
 
 #if wxUSE_TOOLTIPS
-	_whole->SetToolTip(wxT("Don't list partial matches."));
+	_partial->SetToolTip(wxT("Search for words that start with"
+			       " the typed words."));
 	_titles->SetToolTip(wxT("Only search in the contents' titles. "
 				"Use in combination with grep search for "
 				"CHMs lacking indexed titles."));
@@ -61,7 +62,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 				 0, NULL, wxLB_SINGLE);
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
-        sizer->Add(_whole, 0, wxLEFT | wxRIGHT, 10);
+        sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_grep, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
@@ -86,7 +87,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(_grep->IsChecked()) {
 		PopulateList(_tcl->GetRootItem(), sr, false,
-			     _whole->IsChecked(), _titles->IsChecked());
+			     !_partial->IsChecked(), _titles->IsChecked());
 		return;
 	}
 
@@ -117,7 +118,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	CHMSearchResults h1, h2;
 	CHMSearchResults::iterator i;
 
-	chmf->IndexSearch(word, _whole->IsChecked(), 
+	chmf->IndexSearch(word, !_partial->IsChecked(), 
 			  _titles->IsChecked(), &h1);
 
 	while(tkz.HasMoreTokens()) {
@@ -127,7 +128,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			continue;
 
 		CHMSearchResults tmp;
-		chmf->IndexSearch(token, _whole->IsChecked(), 
+		chmf->IndexSearch(token, !_partial->IsChecked(), 
 				  _titles->IsChecked(), &h2);
 
 		for(i = h2.begin(); i != h2.end(); ++i)
@@ -347,7 +348,7 @@ void CHMSearchPanel::SetConfig()
 	wxConfig config(wxT("xchm"));	
 
 	config.Write(wxT("/Search/grepMode"), (long)_grep->GetValue());
-	config.Write(wxT("/Search/wholeWordsOnly"), (long)_whole->GetValue());
+	config.Write(wxT("/Search/partialWords"), (long)_partial->GetValue());
 	config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
 }
 
@@ -358,11 +359,11 @@ void CHMSearchPanel::GetConfig()
 
 	if(config.Read(wxT("/Search/grepMode"), &grep)) {
 		
-		config.Read(wxT("/Search/wholeWordsOnly"), &words);
+		config.Read(wxT("/Search/partialWords"), &words);
 		config.Read(wxT("/Search/titlesOnly"), &titles);
 
 		_grep->SetValue(grep);
-		_whole->SetValue(words);
+		_partial->SetValue(words);
 		_titles->SetValue(titles);
 	}
 

@@ -23,26 +23,28 @@
 #include <wx/fontmap.h>
 
 
-ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild,
-				     wxFontEncoding enc,
-				     bool useEnc)
-	: _level(0), _treeCtrl(toBuild), _enc(enc), _useEnc(useEnc)
+ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
+				     wxTreeCtrl* tree, wxListBox* list,
+				     wxArrayString* listUrls)
+	: _level(0), _treeCtrl(tree), _listCtrl(list), 
+	  _enc(enc), _useEnc(useEnc), _listUrls(listUrls)
 {
-	if(!_treeCtrl)
+	if(!_treeCtrl && !_listCtrl)
 		return;
 
-	_parents[_level] = _treeCtrl->AddRoot(wxT("Topics"));
+	if(_treeCtrl)
+		_parents[_level] = _treeCtrl->AddRoot(wxT("Topics"));
 }
 
 
 bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 {
-	if(!_treeCtrl)
+	if(!_treeCtrl && !_listCtrl)
 		return FALSE;
 
 	if (tag.GetName() == wxT("UL"))
 	{
-		if(_level >= TREE_BUF_SIZE)
+		if(_treeCtrl && _level >= TREE_BUF_SIZE)
 			return FALSE;
 		
 		++_level;
@@ -80,12 +82,24 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 			_title = _url = wxEmptyString;
 			ParseInner(tag);
 
-			_parents[_level] = 
-				_treeCtrl->AppendItem(_parents[parentIndex],
-						      _title, -1, -1,
-						      new URLTreeItem(_url));
-			if(!_level)
-				_parents[0] = _treeCtrl->GetRootItem();
+			if(_treeCtrl) {
+				_parents[_level] = 
+					_treeCtrl->AppendItem(
+						_parents[parentIndex],
+						_title, -1, -1,
+						new URLTreeItem(_url));
+				if(!_level)
+					_parents[0] = _treeCtrl->GetRootItem();
+			}
+
+			if(_listCtrl) {
+				if(!_url.IsEmpty() && !_title.IsEmpty()) {
+					_listCtrl->Append(_title);
+
+					if(_listUrls)
+						_listUrls->Add(_url);
+				}
+			}
 
 			return TRUE;
 		}
@@ -95,25 +109,28 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 
 		if (tag.GetParam(wxT("NAME")) == wxT("Name")) {
 
-			if(_useEnc) {
+			if(_title.IsEmpty()) {
+				if(_useEnc) {
+					wxCSConv cv(wxFontMapper::Get()->
+						    GetEncodingName(_enc));
 
-				wxCSConv cv(wxFontMapper::Get()->
-					    GetEncodingName(_enc));
-
-				const wxString s = tag.GetParam(wxT("VALUE"));
-				const size_t len = s.length();
-				wxCharBuffer buf(len);
-				char *p = buf.data();
+					const wxString s = 
+						tag.GetParam(wxT("VALUE"));
+					const size_t len = s.length();
+					wxCharBuffer buf(len);
+					char *p = buf.data();
 				
-				for ( size_t n = 0; n < len; n++ ) {
-					wxASSERT_MSG( s[n] < 0x100, 
-						      _T("non ASCII char?") );
-					*p++ = s[n];
-				}
+					for ( size_t n = 0; n < len; n++ ) {
+						wxASSERT_MSG(s[n] < 0x100, 
+							     wxT("non ASCII"
+								 " char?") );
+						*p++ = s[n];
+					}
 
-				_title = wxString(buf, cv);
-			} else 
-				_title = tag.GetParam(wxT("VALUE"));
+					_title = wxString(buf, cv);
+				} else 
+					_title = tag.GetParam(wxT("VALUE"));
+			}
 		}
 
 		if (tag.GetParam(wxT("NAME")) == wxT("Local"))

@@ -28,6 +28,7 @@
 #include <wx/listbox.h>
 #include <wx/hashmap.h>
 #include <wx/font.h>
+#include <wx/string.h>
 
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
@@ -136,6 +137,8 @@ public:
 	 */
 	bool GetTopicsTree(wxTreeCtrl *toBuild);
 
+	bool GetIndex(wxListBox* toBuild, wxArrayString *urls);
+
 
 	/*!
 	  \brief Fast search using the $FIftiMain file in the .chm.
@@ -197,6 +200,8 @@ private:
 			chmUnitInfo* uitbl, chmUnitInfo *uistrings,
 			chmUnitInfo* topics, chmUnitInfo *urlstr,
 			CHMSearchResults *results);
+
+	void GetFileAsString(wxString& str, chmUnitInfo *ui);
 
 private:
 	chmFile* _chmFile;

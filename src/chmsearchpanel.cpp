@@ -54,11 +54,10 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 
 	_results = new wxListBox(this, ID_Results, 
 				 wxDefaultPosition, wxDefaultSize, 
-				 0, NULL, wxLB_SINGLE);
+				 0, NULL, wxLB_SINGLE | wxLB_HSCROLL |
+				 wxLB_NEEDED_SB);
 
-	//_enc = wxFont::GetDefaultEncoding();
-
-        sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
+        sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
@@ -79,6 +78,8 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	wxBusyCursor bcr;
 
 	_results->Clear();
+	_urls.Clear();
+
 	wxString sr = _text->GetLineText(0);
 	wxString word;
 
@@ -141,7 +142,8 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			wxString full_url = wxString(wxT("file:")) + 
 				chmf->ArchiveName() + wxT("#chm:/") + i->first;
 
-			_results->Append(i->second, new wxString(full_url));
+			_results->Append(i->second);
+			_urls.Add(full_url);
 		}
 }
 
@@ -163,8 +165,10 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 			chmf->ArchiveName() + wxT("#chm:/") + data->_url;
 		wxString title = _tcl->GetItemText(root);
 
-		if(TitleSearch(title, text, false, wholeWords))
-			_results->Append(title, new wxString(url));
+		if(TitleSearch(title, text, false, wholeWords)) {
+			_results->Append(title);
+			_urls.Add(url);
+		}
 	}	
 
 	long cookie;
@@ -250,10 +254,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 
 void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))
 {
-	wxString *userData = reinterpret_cast<wxString *>(
-		_results->GetClientData(_results->GetSelection()));
-
-	_html->LoadPage(*userData);
+	_html->LoadPage(_urls[_results->GetSelection()]);
 }
 
 
@@ -261,6 +262,7 @@ void CHMSearchPanel::Reset()
 {
 	_text->Clear();
 	_results->Clear();
+	_urls.Clear();
 }
 
 

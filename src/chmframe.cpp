@@ -79,7 +79,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const int fontSize, const int sashPosition)
 	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 
+	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition)
@@ -127,7 +127,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
 	_font = _tcl->GetFont();
 
+	_cip = new CHMIndexPanel(_nb, _html);
+
 	_nb->AddPage(temp, wxT("Contents"));
+	_nb->AddPage(_cip, wxT("Index"));
 	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
@@ -453,12 +456,14 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 	_html->HistoryClear();
 	_csp->Reset();
+	_cip->Reset();
 
 	wxString title = chmf->Title();
 	
 	if(_tcl->GetCount())
 		_tcl->DeleteAllItems();
 	chmf->GetTopicsTree(_tcl);
+	chmf->GetIndex(_cip->GetIndexList(), _cip->GetUrlArray());
 
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
@@ -490,6 +495,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 			_tcl->SetFont(font);
 			_csp->SetNewFont(font);
+			_cip->SetNewFont(font);
 			_cb->SetFont(font);
 			_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
 					sizes);
@@ -514,6 +520,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		if(tmp.Ok()) {
 			_cb->SetFont(tmp);
 			_csp->SetNewFont(tmp);
+			_cip->SetNewFont(tmp);
 		}
 
 		_html->SetFonts(_normalFont, _fixedFont, sizes);
@@ -541,6 +548,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 	// select Contents
 	_nb->SetSelection(0);	
+
 	LoadBookmarks();
 }
 

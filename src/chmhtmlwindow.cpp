@@ -27,7 +27,8 @@
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL)
+	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL),
+	  _absPathFollows(false)
 #ifdef _ENABLE_COPY_AND_FIND
 	, _fdlg(NULL)
 #endif
@@ -57,7 +58,13 @@ CHMHtmlWindow::~CHMHtmlWindow()
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxString tmp = location;
-	FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
+
+	if(!_absPathFollows)
+		FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
+	else {
+		FixRelativePath(tmp, wxEmptyString);
+		_absPathFollows = false;
+	}
 
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
@@ -132,7 +139,7 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 bool CHMHtmlWindow::FixRelativePath(wxString &location,
 				    const wxString& prefix) const
 {
-	if(location.StartsWith(wxT("file:")) || 
+	if(!location.Left(5).CmpNoCase(wxT("file:")) || 
 	   !location.Left(5).CmpNoCase(wxT("http:")) ||
 	   !location.Left(6).CmpNoCase(wxT("https:")) ||
 	   !location.Left(4).CmpNoCase(wxT("ftp:")) ||
@@ -159,7 +166,7 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 		
 	if(!prf.IsEmpty())
 		prf = wxString(wxT("/")) + prf;
-	
+
 	// Handle absolute paths too (that start with /)
 	if(!location.StartsWith(wxT("/")))
 		location = wxString(wxT("file:")) + chmf->ArchiveName() + 

@@ -31,6 +31,7 @@
 #include <wx/listbox.h>
 #include <wx/html/htmlwin.h>
 #include <wx/font.h>
+#include <wx/string.h>
 
 
 /*!
@@ -104,6 +105,7 @@ private:
 	wxButton* _search;
 	wxListBox* _results;
 	wxHtmlWindow* _html;
+	wxArrayString _urls;
 
 private:
 	DECLARE_EVENT_TABLE()

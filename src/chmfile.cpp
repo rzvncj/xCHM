@@ -141,48 +141,60 @@ void CHMFile::CloseCHM()
 
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
-#define BUF_SIZE2 1025
 	chmUnitInfo ui;
-	char buffer[BUF_SIZE2];
-	size_t ret = BUF_SIZE2 - 1, curr = 0;
 
 	if(!toBuild)
 		return false;
 
-	if(_topicsFile.IsEmpty() && _indexFile.IsEmpty())
-		return false;
-
-
 	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui))
-		   if(_indexFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
-			return false;
-
-	buffer[0] = '\0';
+		return false;
 
 	wxString src;
 	src.Alloc(ui.length);
+	GetFileAsString(src, &ui);
 
-	do {
-		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
-					     buffer), curr, BUF_SIZE2 - 1);
-		buffer[ret] = '\0';
-
-		src.Append(CURRENT_CHAR_STRING(buffer));
-		curr += ret;
-
-	} while(ret == BUF_SIZE2 - 1);
-	
 	if(src.IsEmpty())
 		return false;
 
 	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(toBuild, _enc,
+	parser.AddTagHandler(new ContentTagHandler(_enc,
 #ifdef wxUSE_UNICODE
-						   !_font.IsEmpty()
+						   !_font.IsEmpty(),
 #else
-						   false
+						   false,
 #endif						
-				     ));	
+						   toBuild));	
+	parser.Parse(src);
+
+	return true;
+}
+
+
+bool CHMFile::GetIndex(wxListBox* toBuild, wxArrayString* urls)
+{
+	chmUnitInfo ui;
+
+	if(!toBuild)
+		return false;
+
+	if(_indexFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
+		return false;
+
+	wxString src;
+	src.Alloc(ui.length);
+	GetFileAsString(src, &ui);
+
+	if(src.IsEmpty())
+		return false;
+
+	ContentParser parser;
+	parser.AddTagHandler(new ContentTagHandler(_enc,
+#ifdef wxUSE_UNICODE
+						   !_font.IsEmpty(),
+#else
+						   false,
+#endif						
+						   NULL, toBuild, urls));
 	parser.Parse(src);
 
 	return true;
@@ -362,7 +374,7 @@ size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 
 bool CHMFile::GetArchiveInfo()
 {
-#define BUF_SIZE 2049
+#define BUF_SIZE 4096
 	unsigned char buffer[BUF_SIZE];
 	chmUnitInfo ui;
 	
@@ -682,6 +694,27 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	}
 
 	return true;
+}
+
+
+inline
+void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
+{
+#define BUF_SIZE2 1025
+	char buffer[BUF_SIZE2];
+	size_t ret = BUF_SIZE2 - 1, curr = 0;
+
+	buffer[0] = '\0';
+
+	do {
+		ret = RetrieveObject(ui, reinterpret_cast<unsigned char *>(
+					     buffer), curr, BUF_SIZE2 - 1);
+		buffer[ret] = '\0';
+
+		str.Append(CURRENT_CHAR_STRING(buffer));
+		curr += ret;
+
+	} while(ret == BUF_SIZE2 - 1);
 }
 
 

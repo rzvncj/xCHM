@@ -33,6 +33,7 @@
 #include <wx/docview.h>
 #include <chmsearchpanel.h>
 #include <chmhtmlwindow.h>
+#include <chmindexpanel.h>
 
 
 //! Default font size for the wxHtmlWindow.
@@ -197,6 +198,7 @@ private:
 	wxNotebook* _nb;
 	wxComboBox* _cb;
 	CHMSearchPanel* _csp;
+	CHMIndexPanel* _cip;
 
 	wxString _openPath;
 	wxArrayString* _normalFonts;

@@ -83,6 +83,8 @@ public:
 	*/
 	bool IsCaller() const { return _found; }
 
+	void AbsoluteFollows(bool abs) { _absPathFollows = abs; }
+
 #ifdef _ENABLE_COPY_AND_FIND
 public:
 	/*!
@@ -152,6 +154,7 @@ private:
 	bool _found;
 	wxMenu *_menu;
 	wxString _prefix;
+	bool _absPathFollows;
 
 #ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;

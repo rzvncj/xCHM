@@ -24,7 +24,9 @@
 
 #include <wx/html/htmlpars.h>
 #include <wx/treectrl.h>
+#include <wx/listbox.h>
 #include <wx/font.h>
+#include <wx/string.h>
 
 
 /*!
@@ -82,14 +84,15 @@ class ContentTagHandler : public wxHtmlTagHandler {
 public:
 	/*!
 	  \brief Constructs the tag handler.
-	  \param toBuild The tree control to build. The control must be
-	  empty.
 	  \param enc Encoding to use. Only useful for Unicode builds.
 	  \param useEnc Actually use the information passed in enc or not?
+	  \param tree Tree control to fill. The control must be
+	  empty.
+	  \param list Alternatively (or simultaneously), fill this listbox.
 	 */
-	ContentTagHandler(wxTreeCtrl* toBuild,
-			  wxFontEncoding enc,
-			  bool useEnc);
+	ContentTagHandler(wxFontEncoding enc, bool useEnc,
+			  wxTreeCtrl* tree = NULL, wxListBox *list = NULL,
+			  wxArrayString* listUrls = NULL);
 
 	//! What tags are we interested in?
         wxString GetSupportedTags() { return wxT("UL,OBJECT,PARAM"); }
@@ -105,12 +108,15 @@ private:
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	int _level;
 	wxTreeCtrl* _treeCtrl;
+	wxListBox* _listCtrl;
 	
 	wxString _title;
 	wxString _url;
 
 	wxFontEncoding _enc;
 	bool _useEnc;
+
+	wxArrayString *_listUrls;
 };
 
 

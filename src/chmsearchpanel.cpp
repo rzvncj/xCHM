@@ -89,7 +89,8 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 		return;
 
 	cerr << "CHMFile::IndexSearch() returned "
-	     << chmf->IndexSearch(sr, false, _titles->IsChecked(), _results)
+	     << chmf->IndexSearch(sr, _whole->IsChecked(), 
+				  _titles->IsChecked(), _results)
 	     << endl;
 
 /*

@@ -163,9 +163,11 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 using namespace std;
 
 
-bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords), 
+bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, 
 			  bool titlesOnly, wxListBox* toPopulate)
 {
+	bool partial = false;
+
 	if(toPopulate == NULL)
 		return false;
 	toPopulate->Clear();
@@ -226,65 +228,94 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 					tree_depth, &ui);
 	if(!node_offset)
 		return false;
+
+	do {
 		
-	// got a leaf node here.
-	if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
-				 node_offset, node_len) == 0)
-		return false;
+		// got a leaf node here.
+		if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
+					 node_offset, node_len) == 0)
+			return false;
 
-	cursor16 = reinterpret_cast<u_int16_t *>(buffer.get() + 6);
-	free_space = *cursor16;
-	FIXENDIAN16(free_space);
+		cursor16 = reinterpret_cast<u_int16_t *>(buffer.get() + 6);
+		free_space = *cursor16;
+		FIXENDIAN16(free_space);
 
-	cursor16 = reinterpret_cast<u_int16_t *>(buffer.get());
-	u_int16_t next_chunk = *cursor16; // 0 if last
-	FIXENDIAN16(next_chunk);
+		i = sizeof(u_int32_t) + sizeof(u_int16_t) + sizeof(u_int16_t);
+		u_int64_t wlc_count, wlc_size;
+		u_int32_t wlc_offset;
 
-	i = sizeof(u_int32_t) + sizeof(u_int16_t) + sizeof(u_int16_t);
-	u_int64_t wlc_count, wlc_size;
-	u_int32_t wlc_offset;
+		while(i < node_len - free_space) {
+			word_len = *(buffer.get() + i);
+			pos = *(buffer.get() + i + 1);
 
-	while(i < node_len - free_space) {
-		word_len = *(buffer.get() + i);
-		pos = *(buffer.get() + i + 1);
+			if(pos == 0)
+				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
+							       + i + 2, 
+							       word_len - 1);
+			else
+				word = word.Mid(0, pos) +
+					CURRENT_CHAR_STRING_LEN(buffer.get() 
+								+ i + 2,
+								word_len - 1);
+			i += 2 + word_len;
+			unsigned char title = *(buffer.get() + i - 1);
 
-		if(pos == 0)
-			word = CURRENT_CHAR_STRING_LEN(buffer.get() + i + 2, 
-						       word_len - 1);
-		else
-			word = word.Mid(0, pos) +
-				CURRENT_CHAR_STRING_LEN(buffer.get() + i + 2,
-							word_len - 1);
+			cerr << "Leaf word: " << word.mb_str() << endl;
 
-		i += 2 + word_len;
-
-		unsigned char title = *(buffer.get() + i - 1);
-		cerr << "Leaf word: " << word.mb_str() 
-		     << "; title: " << (int)title << endl;
-
-		size_t encsz;
-		wlc_count = be_encint(buffer.get() + i, encsz);
-		i += encsz;
+			size_t encsz;
+			wlc_count = be_encint(buffer.get() + i, encsz);
+			i += encsz;
 		
-		cursor32 = reinterpret_cast<u_int32_t *>(buffer.get() + i);
-		wlc_offset = *cursor32;
-		FIXENDIAN32(wlc_offset);
+			cursor32 = reinterpret_cast<u_int32_t *>(
+				buffer.get() + i);
+			wlc_offset = *cursor32;
+			FIXENDIAN32(wlc_offset);
 
-		i += sizeof(u_int32_t) + sizeof(u_int16_t);
-		wlc_size =  be_encint(buffer.get() + i, encsz);
-		i += encsz;
+			i += sizeof(u_int32_t) + sizeof(u_int16_t);
+			wlc_size =  be_encint(buffer.get() + i, encsz);
+			i += encsz;
 		
-		if(!title && titlesOnly)
-			continue;
+			if(!title && titlesOnly)
+				continue;
 
-		if(!text.CmpNoCase(word))
-			return ProcessWLC(wlc_count, wlc_size, wlc_offset, 
-					  doc_index_s, doc_index_r,
-					  code_count_s, code_count_r,
-					  loc_codes_s, loc_codes_r, &ui,
-					  &uiurltbl, &uistrings, &uitopics,
-					  &uiurlstr);
-	}
+			if(wholeWords && !text.CmpNoCase(word))
+				return ProcessWLC(wlc_count, wlc_size, 
+						  wlc_offset, doc_index_s, 
+						  doc_index_r,code_count_s, 
+						  code_count_r, loc_codes_s, 
+						  loc_codes_r, &ui, &uiurltbl,
+						  &uistrings, &uitopics,
+						  &uiurlstr);
+
+			if(!wholeWords) {
+				if(word.StartsWith(text.c_str())) {
+					partial = true;
+					cerr << "Bingo!" << endl;
+					ProcessWLC(wlc_count, wlc_size, 
+						   wlc_offset, doc_index_s, 
+						   doc_index_r,code_count_s, 
+						   code_count_r, loc_codes_s, 
+						   loc_codes_r, &ui, &uiurltbl,
+						   &uistrings, &uitopics,
+						   &uiurlstr);
+
+				} else if(text.CmpNoCase(
+						  // Mid() might be buggy.
+						  word.Mid(0, text.Length()))
+					  < -1)
+					break;
+				   
+						  
+			}
+
+			cursor32 = reinterpret_cast<u_int32_t*>(buffer.get());
+			node_offset = *cursor32;
+			FIXENDIAN32(node_offset);
+		}	
+	} while(!wholeWords && word.StartsWith(text.c_str()) && node_offset);
+
+	if(partial)
+		return true;
 
 	return false;
 }
@@ -488,8 +519,6 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 								+ i + 2,
 								word_len - 1);
 
-			cerr << "Word: " << word.mb_str() << endl;
-
 			if(text.CmpNoCase(word) < 0) {
 				cursor32 = reinterpret_cast<u_int32_t*>(
 					buffer.get() + i + word_len + 1);
@@ -581,9 +610,9 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		wxString url = CURRENT_CHAR_STRING(combuf);
 
-		cerr << "Index: " << index 
-		     << ", file: " << topic.mb_str() 
-		     << ", url: " << url.mb_str() << endl;
+//		cerr << "Index: " << index 
+		//	     << ", file: " << topic.mb_str() 
+		//   << ", url: " << url.mb_str() << endl;
 
 		count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
 		off += length;
@@ -596,5 +625,9 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 	return true;
 }
+
+
+
+
 
 

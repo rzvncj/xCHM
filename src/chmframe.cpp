@@ -63,8 +63,9 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const int fontSize)
 	: wxFrame((wxFrame *)NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _openPath(booksDir), _normalFonts(NULL), _fixedFonts(NULL),
-	  _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
+	  _nb(NULL), _csp(NULL), _openPath(booksDir), _normalFonts(NULL), 
+	  _fixedFonts(NULL), _normalFont(normalFont), _fixedFont(fixedFont), 
+	  _fontSize(fontSize)
 {
 	int sizes[7];
 
@@ -84,7 +85,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 
 	_sw = new wxSplitterWindow(this);
-	_sw->SetMinimumPaneSize(100);
+	_sw->SetMinimumPaneSize(120);
 
 	_html = new wxHtmlWindow(_sw, -1,  wxDefaultPosition, wxSize(200,200));
 	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
@@ -93,8 +94,14 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetFonts(_normalFont, _fixedFont, sizes);
 	_html->SetPage(greeting);
 
-	_tcl = new wxTreeCtrl(_sw, ID_TreeCtrl);
-	_tcl->Show(FALSE);
+	_nb = new wxNotebook(_sw, -1);
+	_nb->Show(FALSE);
+
+	_tcl = new wxTreeCtrl(_nb, ID_TreeCtrl);
+	_csp = new CHMSearchPanel(_nb, _tcl);
+
+	_nb->AddPage(_tcl, wxT("Contents"));
+	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
 }
@@ -217,8 +224,8 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 		_tb->ToggleTool(ID_Contents, FALSE);
 		_menuFile->Check(ID_Contents, FALSE);
 		
-		_sw->Unsplit(_tcl);
-		_tcl->Show(FALSE);
+		_sw->Unsplit(_nb);
+		_nb->Show(FALSE);
 	} else {		
 			
 		if(_tcl->GetCount() > 1) {
@@ -226,8 +233,8 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_tb->ToggleTool(ID_Contents, TRUE);
 			_menuFile->Check(ID_Contents, TRUE);
 
-			_tcl->Show(TRUE);
-			_sw->SplitVertically(_tcl, _html, 150);
+			_nb->Show(TRUE);
+			_sw->SplitVertically(_nb, _html, 150);
 
 		} else {
 			_tb->ToggleTool(ID_Contents, FALSE);
@@ -255,9 +262,6 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
-	if(!_tcl)
-		return;
-
 	wxTreeItemId id = event.GetItem();
 	CHMFile *chmf = CHMInputStream::GetCache();
 
@@ -325,21 +329,24 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	// if we have contents..
 	if(_tcl->GetCount() > 1) {		
 		if(!_sw->IsSplit()) {
-			_tcl->Show(TRUE);
-			_sw->SplitVertically(_tcl, _html, 150);
+			_nb->Show(TRUE);
+			_sw->SplitVertically(_nb, _html, 150);
 			_menuFile->Check(ID_Contents, TRUE);
 			_tb->ToggleTool(ID_Contents, TRUE);
 		}
 	} else {
 
 		if(_sw->IsSplit()) {
-			_sw->Unsplit(_tcl);
-			_tcl->Show(FALSE);
+			_sw->Unsplit(_nb);
+			_nb->Show(FALSE);
 		}
 		_menuFile->Check(ID_Contents, FALSE);
 		_tb->ToggleTool(ID_Contents, FALSE);
 	}
 
+	// select Contents
+	_nb->SetSelection(0);
+	_csp->Reset();
 }
 
 

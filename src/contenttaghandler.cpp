@@ -22,13 +22,15 @@
 #include <contenttaghandler.h>
 
 
-ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild)
+ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild,
+				     const wxString& bookTitle)
 	: _level(0), _treeCtrl(toBuild)
 {
 	if(!_treeCtrl)
 		return;
 
-	_parents[_level] = _treeCtrl->AddRoot(wxT("Contents"));
+	_parents[_level] = _treeCtrl->AddRoot(bookTitle.IsEmpty() ? 
+					      wxT("Topics") : bookTitle);
 }
 
 

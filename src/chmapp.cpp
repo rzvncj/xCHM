@@ -69,3 +69,22 @@ bool CHMApp::OnInit()
 IMPLEMENT_APP(CHMApp)
 
 
+
+/*
+#include <wx/regex.h>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	wxString html = wxT("<HTML><BODY>asdasd<BODY></HTML>");
+	wxRegEx ex(wxT("<[^<]*>"));
+
+	ex.ReplaceAll(&html, wxT(" "));
+
+	cout << html.mb_str() << endl;
+	
+	return 0;
+}
+*/

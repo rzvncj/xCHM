@@ -26,7 +26,9 @@
 #include <wx/html/htmlwin.h>
 #include <wx/html/htmprint.h>
 #include <wx/splitter.h>
+#include <wx/notebook.h>
 #include <wx/treectrl.h>
+#include <chmsearchpanel.h>
 
 
 //! Default font size for the wxHtmlWindow.
@@ -150,10 +152,13 @@ private:
 	wxSplitterWindow* _sw;
 	wxMenu* _menuFile;
 	wxToolBar* _tb;
-	wxHtmlEasyPrinting *_ep;
+	wxHtmlEasyPrinting* _ep;
+	wxNotebook* _nb;
+	CHMSearchPanel* _csp;
+
 	wxString _openPath;
-	wxArrayString *_normalFonts;
-	wxArrayString *_fixedFonts;
+	wxArrayString* _normalFonts;
+	wxArrayString* _fixedFonts;
 	wxString _normalFont;
 	wxString _fixedFont;
 	int _fontSize;

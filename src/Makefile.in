@@ -123,11 +123,13 @@ INCLUDES = -I$(top_srcdir)/art
 
 bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp
+	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp \
+	chmsearchpanel.cpp
 
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-	chminputstream.h contenttaghandler.h chmfontdialog.h
+	chminputstream.h contenttaghandler.h chmfontdialog.h \
+	chmsearchpanel.h
 
 
 xchm_LDADD = @LINKOPT@ 
@@ -140,7 +142,8 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) chmframe.$(OBJEXT) \
 	chmfshandler.$(OBJEXT) chminputstream.$(OBJEXT) \
-	contenttaghandler.$(OBJEXT) chmfontdialog.$(OBJEXT)
+	contenttaghandler.$(OBJEXT) chmfontdialog.$(OBJEXT) \
+	chmsearchpanel.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 xchm_LDFLAGS =
@@ -152,6 +155,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/chmfontdialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/chmframe.Po ./$(DEPDIR)/chmfshandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/chminputstream.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/chmsearchpanel.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/contenttaghandler.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -213,6 +217,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmframe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfshandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chminputstream.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmsearchpanel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contenttaghandler.Po@am__quote@
 
 distclean-depend:

@@ -443,8 +443,6 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	static bool noSpecialFont = true;
 
 	SaveBookmarks();
-
-	_html->HistoryClear();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
 		      wxT("#chm:/"));
 
@@ -453,7 +451,9 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	if(!chmf)
 		return;
 
+	_html->HistoryClear();
 	_csp->Reset();
+
 	wxString title = chmf->Title();
 	
 	if(_tcl->GetCount())

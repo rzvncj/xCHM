@@ -63,7 +63,7 @@ CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS =  -D_ENABLE_COPY_AND_FIND -I/usr/local/lib/wx/include/gtk2u-2.5 -I/usr/local/include -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES
 CXX = g++
-CXXCPP = 
+CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS =   -W -Wall
 CYGPATH_W = echo
@@ -84,7 +84,7 @@ LDFLAGS =
 LIBICONV = -liconv
 LIBINTL = 
 LIBOBJS = 
-LIBS = -lchm 
+LIBS = -lchm  -lXmlRpc
 LINKOPT = -L/usr/local/lib -pthread -L/usr/X11R6/lib -lwx_gtk2u_html-2.5 -lwx_gtk2u_adv-2.5 -lwx_gtk2u_core-2.5 -lwx_baseu_xml-2.5 -lwx_baseu_net-2.5 -lwx_baseu-2.5
 LTLIBICONV = -liconv
 LTLIBINTL = 

@@ -179,10 +179,18 @@ public:
 	bool LoadContextIDs();
 
 	/*!
+	  \brief Checks whether or not the context ID is valid for the
+	   loaded file.
+	  \param contextID The context-ID to check.
+	  \return TRUE if the context ID is valid. FALSE otherwise.
+	 */
+	bool IsValidCID( const int contextID );
+
+	/*!
 	 \brief Looks up the page referred to by the context-ID
 	 \param contextID The context-ID to look up
 	 \return the page referred to by the context-ID, 
-	  or blank if ID is invalid.
+	  or file root"/"  if ID is invalid.
 	 */
 	wxString GetPageByCID( const int contextID );
 

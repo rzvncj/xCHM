@@ -63,28 +63,26 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 			if( params.size() == 2 && 
 			    params[1].getType() == XmlRpcValue::TypeString )
 			{
-				_frame->LoadCHM( 
+				result = _frame->LoadCHM( 
 				  CURRENT_CHAR_STRING(
 					std::string(params[1]).c_str()));
-				result = TRUE;
 			}
 			if( params.size() == 3 && 
 			    params[1].getType() == XmlRpcValue::TypeString && 
 			    params[2].getType() == XmlRpcValue::TypeInt )
 			{
-				_frame->LoadCHM( 
+				result = _frame->LoadCHM( 
 				  CURRENT_CHAR_STRING(
-					std::string(params[1]).c_str()), 
-				  int(params[2]) );
-				result = TRUE;
+					std::string(params[1]).c_str())) &&
+				   _frame->LoadContextID( int(params[2]) );
 			}
 			break;
 		case 2:
 			if( params.size() == 2 && 
 			    params[1].getType() == XmlRpcValue::TypeInt )
 			{
-				_frame->LoadContextID( int(params[1]) );
-				result = TRUE;
+				result = 
+				    _frame->LoadContextID( int(params[1]) );
 			}
 			break;
 		}
@@ -188,10 +186,10 @@ bool CHMApp::OnInit()
 #endif
 	if( _cmdLP.GetParamCount() == 1 )
 	{
+		_frame->LoadCHM( file );
+
 		if( id != -1 )
-			_frame->LoadCHM( file, id );
-		else
-			_frame->LoadCHM( file );
+			_frame->LoadContextID( id );
 	}
 
 

@@ -443,51 +443,35 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 }
 
 
-void CHMFrame::LoadCHM(const wxString& archive)
+bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
-
+	bool rtn;
 	SaveBookmarks();
-	_html->LoadPage(wxString(wxT("file:")) + archive +
+	rtn = _html->LoadPage(wxString(wxT("file:")) + archive +
 		      wxT("#chm:/"));
 
 	UpdateCHMInfo();
 	LoadBookmarks();
+
+	return rtn;
 }
 
 
-void CHMFrame::LoadCHM(const wxString& archive, const int contextID )
+bool CHMFrame::LoadContextID( const int contextID )
 {
 	wxBusyCursor bc;
 
-	SaveBookmarks();
-
-	// there has to be a nicer way of doing this
-	_html->LoadPage(wxString(wxT("file:")) + archive + wxT("#chm:/") );
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(!chmf)
-		return;
-	
-	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
+		return FALSE;
+
+	if( !chmf->IsValidCID( contextID ) )
+		return FALSE;
+
+	return _html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
 		+ wxT("#chm:") + chmf->GetPageByCID( contextID ) );
-
-	UpdateCHMInfo();
-	LoadBookmarks();
-}
-
-
-void CHMFrame::LoadContextID( const int contextID )
-{
-	wxBusyCursor bc;
-
-	SaveBookmarks();
-	CHMFile *chmf = CHMInputStream::GetCache();
-	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
-		+ wxT("#chm:") + chmf->GetPageByCID( contextID ) );
-
-	UpdateCHMInfo();
-	LoadBookmarks();
 }
 
 

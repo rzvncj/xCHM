@@ -262,6 +262,16 @@ bool CHMFile::LoadContextIDs()
 	return true;
 }
 
+bool CHMFile::IsValidCID( const int contextID )
+{
+	if(_cidMap.empty())
+		return FALSE;
+	CHMIDMap::iterator itr = _cidMap.find( contextID );
+	if( itr == _cidMap.end() )
+		return FALSE;
+
+	return TRUE;
+}
 
 wxString CHMFile::GetPageByCID( const int contextID )
 {

@@ -23,21 +23,7 @@
 #define __CHMINPUTSTREAM_H_
 
 #include <wx/stream.h>
-#include <wx/thread.h>
 #include <chmfile.h>
-#include <config.h>
-
-
-
-#ifdef WITH_LIBXMLRPC
-#	define LOCKER(x) wxMutexLocker lock(x);
-#	define LOCK(x)   x.Lock();
-#	define UNLOCK(x) x.Unlock();
-#else
-#	define LOCKER(x)
-#	define LOCK(x)
-#	define UNLOCK(x)
-#endif
 
 
 /*!
@@ -114,9 +100,6 @@ private:
 	off_t _currPos;
 	chmUnitInfo _ui;
 	static wxString _path;
-#ifdef WITH_LIBXMLRPC
-	static wxMutex _mutex;
-#endif
 };
 
 #endif // __CHMINPUTSTREAM_H_

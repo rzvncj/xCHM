@@ -450,23 +450,25 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 	CHMFile *chmf = CHMInputStream::GetCache();
 
-	if(chmf) {
-		wxString title = chmf->Title();
+	if(!chmf)
+		return;
 
-		if(_tcl->GetCount())
-			_tcl->DeleteAllItems();
-		chmf->GetTopicsTree(_tcl);
+	_csp->Reset();
+	wxString title = chmf->Title();
+	
+	if(_tcl->GetCount())
+		_tcl->DeleteAllItems();
+	chmf->GetTopicsTree(_tcl);
 
-		if(!title.IsEmpty()) {
-			wxString titleBarText = 
-				wxString(wxT("xCHM v. " VERSION ": ")) + title;
+	if(!title.IsEmpty()) {
+		wxString titleBarText = 
+			wxString(wxT("xCHM v. " VERSION ": ")) + title;
 
-			SetTitle(titleBarText);
-			_html->SetRelatedFrame(this, titleBarText);
-		} else {
-			SetTitle(wxT("xCHM v. " VERSION));
-			_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
-		}
+		SetTitle(titleBarText);
+		_html->SetRelatedFrame(this, titleBarText);
+	} else {
+		SetTitle(wxT("xCHM v. " VERSION));
+		_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	}
 	
 	wxString fontFace = chmf->DefaultFont();
@@ -524,9 +526,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	}
 
 	// select Contents
-	_nb->SetSelection(0);
-	_csp->Reset();
-	
+	_nb->SetSelection(0);	
 	LoadBookmarks();
 }
 

@@ -221,7 +221,7 @@ msgstr "Zurück"
 
 #: src/chmframe.cpp:801
 msgid "Forward"
-msgstr "Forwärts"
+msgstr "Vorwärts"
 
 #: src/chmframe.cpp:803
 msgid "Home"
@@ -233,7 +233,7 @@ msgstr "Über"
 
 #: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
-msgstr "&Forwärts"
+msgstr "&Vorwärts"
 
 #: src/chmhtmlwindow.cpp:44
 msgid "&Back"

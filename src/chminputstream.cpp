@@ -28,6 +28,7 @@
 
 
 CHMFile *CHMInputStream::_archiveCache = NULL;
+wxString CHMInputStream::_path;
 
 
 void CHMInputStream::Cleanup()
@@ -49,13 +50,15 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 
 {
 	wxString filename = file;
-	wxString path = archive.BeforeLast(wxT('/')) + wxT("/");
+
+	if(!archive.IsEmpty())
+		_path = archive.BeforeLast(wxT('/')) + wxT("/");
 
 	memset(&_ui, 0, sizeof(_ui));
 
 	// Maybe the cached chmFile* isn't valid anymore,
 	// or maybe there is no chached chmFile* yet.
-	if(!Init(archive)) {
+	if(!archive.IsEmpty() && !Init(archive)) {
 		m_lasterror = wxSTREAM_READ_ERROR;
 		return;
 	}
@@ -80,7 +83,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 
 		// Reset the cached chmFile* and all.
 		if(!Init(arch_link))
-			if(!Init(path + arch_link)) {
+			if(!Init(_path + arch_link)) {
 				m_lasterror = wxSTREAM_READ_ERROR;
 				return;
 			}

@@ -23,3 +23,8 @@
 		properly on RedHat 9. Many thanks go to Stefano Caselli
 		for his aid and patience in testing the release candidates.
 
+	* 0.6.2. Minor bugfixes:
+		+ fixed references from a .chm file to pages in other
+		.chm files (more MS-style petty stuff).
+		+ applied PLD Linux configure patch and added
+		--enable-optimize to the set of configure flags.

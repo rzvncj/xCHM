@@ -24,7 +24,7 @@ AC_ARG_ENABLE(optimize,
 	      [  --enable-optimize       optimize compiled code (-O2).], 
 	      CXXFLAGS="$CXXFLAGS -O2")
 
-AM_INIT_AUTOMAKE(xchm, 0.6.1)
+AM_INIT_AUTOMAKE(xchm, 0.6.2)
 AC_PROG_CXX
 AC_PROG_INSTALL
 

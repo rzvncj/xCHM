@@ -38,7 +38,9 @@ class CHMInputStream : public wxInputStream
 public:
 	/*!
 	  \brief Creates a stream.
-	  \param archive The .chm file name on disk.
+	  \param archive The .chm file name on disk. It makes sense to
+	  pass the empty string if you're sure file is a link to a
+	  page, in the form of "/MS-ITS:archive.chm::/filename.html".
 	  \param file The file requested from the archive.
 	 */
 	CHMInputStream(const wxString& archive, const wxString& file);
@@ -99,6 +101,7 @@ private:
 	static CHMFile *_archiveCache;
 	off_t _currPos;
 	chmUnitInfo _ui;
+	static wxString _path;
 };
 
 #endif // __CHMINPUTSTREAM_H_

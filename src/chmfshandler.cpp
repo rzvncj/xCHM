@@ -39,8 +39,9 @@ CHMFSHandler::~CHMFSHandler()
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
 	wxString p = GetProtocol(location);
-	return (p == wxT("chm")) &&
-		(GetProtocol(GetLeftLocation(location)) == wxT("file"));
+	return (p == wxT("chm") 
+		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
+		|| location.StartsWith(wxT("MS-ITS"));
 }
 
 
@@ -50,15 +51,20 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 	wxString right = GetRightLocation(location);
 	wxString left = GetLeftLocation(location);
 	CHMInputStream *s = NULL;
+
+	if(location.StartsWith(wxT("MS-ITS"))) {
+		right = wxString(wxT("/")) + location;
+		left = wxEmptyString;
+
+	} else if (GetProtocol(left) != wxT("file"))
+		return NULL;
 	
 	// HTML code for space is %20
 	right.Replace(wxT("%20"), wxT(" "), TRUE);
-
-	if (GetProtocol(left) != wxT("file"))
-		return NULL;
             
-	wxFileName leftFilename = wxFileSystem::URLToFileName(left);    
-	s = new CHMInputStream(leftFilename.GetFullPath(), right);
+	wxFileName filename = wxFileSystem::URLToFileName(left);
+	s = new CHMInputStream(left.IsEmpty() ? 
+			       left : filename.GetFullPath(), right);
 
 	if (s && s->IsOk()) {
 		

@@ -57,8 +57,9 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
-	if(data && (data->_url).AfterLast(wxT('/')).Lower() == 
-	   page.AfterLast(wxT('/')).Lower()) {
+	if(data && (data->_url).AfterLast(wxT('/')).BeforeFirst(
+		   wxT('#')).Lower() == 
+	   page.AfterLast(wxT('/')).BeforeFirst(wxT('#')).Lower()) {
 		// Order counts!
 		_found = true;
 		_tcl->SelectItem(root);

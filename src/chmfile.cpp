@@ -26,8 +26,14 @@
 #include <assert.h>
 
 
-#define CURRENT_CHAR_TYPE(x) static_cast<const wxChar *>( \
-	wxConvCurrent->cMB2WX(reinterpret_cast<const char *>(x)))
+#ifdef wxUSE_UNICODE
+#	define CURRENT_CHAR_STRING(x) \
+	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
+#else
+#	define CURRENT_CHAR_STRING(x) \
+	wxString(reinterpret_cast<const char *>(x))
+#endif
+
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 
@@ -84,7 +90,6 @@ void CHMFile::CloseCHM()
 }
 
 
-
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
 #define BUF_SIZE2 1025
@@ -112,13 +117,16 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
 					     buffer), curr, BUF_SIZE2 - 1);
 		buffer[ret] = '\0';
-		src.Append(CURRENT_CHAR_TYPE(buffer));
+
+		src.Append(CURRENT_CHAR_STRING(buffer));
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
 	
 	if(src.IsEmpty())
 		return false;
+
+	//cerr << src.mb_str() << endl;
 
 	ContentParser parser;
 	parser.AddTagHandler(new ContentTagHandler(toBuild));
@@ -181,8 +189,7 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_topicsFile = wxString(wxT("/")) 
-				+ wxString(CURRENT_CHAR_TYPE(
-						   buffer + index + 2));
+				+ CURRENT_CHAR_STRING(buffer + index + 2);
 			index += *cursor + 2;
 			break;
 		case 1:
@@ -190,8 +197,7 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_indexFile = wxString(wxT("/"))
-				+ wxString(CURRENT_CHAR_TYPE(
-						   buffer + index + 2));
+				+ CURRENT_CHAR_STRING(buffer + index + 2);
 			index += *cursor + 2;
 			break;
 		case 2:
@@ -199,16 +205,14 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_home = wxString(wxT("/"))
-				+ wxString(CURRENT_CHAR_TYPE(
-						   buffer + index + 2));
+				+ CURRENT_CHAR_STRING(buffer + index + 2);
 			index += *cursor + 2;
 			break;
 		case 3:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_title = wxString(CURRENT_CHAR_TYPE(
-						  buffer + index + 2));
+			_title = CURRENT_CHAR_STRING(buffer + index + 2);
 			index += *cursor + 2;
 			break;
 		case 6:
@@ -218,8 +222,9 @@ bool CHMFile::GetArchiveInfo()
 
 			if(_topicsFile.IsEmpty()) {
 				wxString topicAttempt = wxT("/"), tmp;
-				topicAttempt += wxString(CURRENT_CHAR_TYPE(
-						buffer + index + 2));
+				topicAttempt += 
+					CURRENT_CHAR_STRING(buffer +index +2);
+
 				tmp = topicAttempt + wxT(".hhc");
 				
 				if(chm_resolve_object(_chmFile,
@@ -266,7 +271,7 @@ bool CHMFile::GetArchiveInfo()
 
 		// There's that 9 again :).
 		for(int i=0; i<9; ++i) {
-			chunk = CURRENT_CHAR_TYPE(buffer + index);
+			chunk = CURRENT_CHAR_STRING(buffer + index);
 			
 			if(chunk.Right(4).Lower() == wxT(".hhc")) {
 				_topicsFile = wxString(wxT("/")) + chunk;

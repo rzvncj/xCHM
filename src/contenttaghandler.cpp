@@ -92,6 +92,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 
 		if (tag.GetParam(wxT("NAME")) == wxT("Name"))
 			_title = tag.GetParam(wxT("VALUE"));
+
 		if (tag.GetParam(wxT("NAME")) == wxT("Local"))
 			_url = tag.GetParam(wxT("VALUE"));
 

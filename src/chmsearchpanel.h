@@ -65,7 +65,7 @@ public:
 	//! Calls SetConfig().
 	~CHMSearchPanel();
 
-	//! Resets the panel (clears the result list, the checkboxes, etc.)
+	//! Resets the panel (clears the result list and the textbox.)
 	void Reset();
 
 protected:

@@ -51,7 +51,8 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		if(_treeCtrl && _level >= TREE_BUF_SIZE)
 			return FALSE;
 
-		bool inc = _level >= 0 && _parents[_level] != 0;
+		bool inc = _level >= 0 
+			&& (long)_parents[_level] != 0;
 		
 		if(inc)
 			++_level;

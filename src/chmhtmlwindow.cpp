@@ -79,7 +79,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 		tmp = page.AfterLast(wxT(':')).AfterFirst(
 			wxT('/')).BeforeFirst(wxT('#')).Lower();
 	else
-		tmp = page.Lower();
+		tmp = page.BeforeFirst(wxT('#')).Lower();
 
 	if(data)
 		url = (data->_url).BeforeFirst(wxT('#')).Lower();

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-07-05 15:47+0300\n"
+"POT-Creation-Date: 2004-07-14 16:10+0300\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -98,7 +98,7 @@ msgstr "Despre program."
 msgid "Ready."
 msgstr "Pregatit."
 
-#: src/chmframe.cpp:145 src/chmframe.cpp:765
+#: src/chmframe.cpp:145 src/chmframe.cpp:769
 msgid "Contents"
 msgstr "Cuprins"
 
@@ -126,123 +126,123 @@ msgstr "Nu am putut extrage cuprinsul cartii."
 msgid "No contents.."
 msgstr "Nu exista cuprins.."
 
-#: src/chmframe.cpp:573
+#: src/chmframe.cpp:577
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide..\tCtrl-O"
 
-#: src/chmframe.cpp:574
+#: src/chmframe.cpp:578
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipareste pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:575
+#: src/chmframe.cpp:579
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Fonturi..\tCtrl-T"
 
-#: src/chmframe.cpp:578
+#: src/chmframe.cpp:582
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arata cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:583
+#: src/chmframe.cpp:587
 msgid "&Recent files"
 msgstr "F&isiere recente"
 
-#: src/chmframe.cpp:599
+#: src/chmframe.cpp:603
 msgid "E&xit\tCtrl-X"
 msgstr "E&xit\tCtrl-X"
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:604
 msgid "Quit the application."
 msgstr "Inchide aplicatia."
 
-#: src/chmframe.cpp:604
+#: src/chmframe.cpp:608
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:609
 msgid "For&ward\tCtrl-W"
 msgstr "&Inainte\tCtrl-W"
 
-#: src/chmframe.cpp:606
+#: src/chmframe.cpp:610
 msgid "&Back\tCtrl-B"
 msgstr "I&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:613
 msgid "&About ..\tF1"
 msgstr "&Despre ..\tF1"
 
-#: src/chmframe.cpp:612
+#: src/chmframe.cpp:616
 msgid "&File"
 msgstr "&Fisiere"
 
-#: src/chmframe.cpp:613
+#: src/chmframe.cpp:617
 msgid "Hi&story"
 msgstr "&Istorie"
 
-#: src/chmframe.cpp:614
+#: src/chmframe.cpp:618
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:629
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:651
 msgid "Add"
 msgstr "Adauga"
 
-#: src/chmframe.cpp:648
+#: src/chmframe.cpp:652
 msgid "Remove"
 msgstr "Sterge"
 
-#: src/chmframe.cpp:651
+#: src/chmframe.cpp:655
 msgid "Add displayed page to bookmarks."
 msgstr "Adauga pagina afisata la semnele de carte."
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:656
 msgid "Remove selected bookmark."
 msgstr "Sterge semnul de carte selectat."
 
-#: src/chmframe.cpp:759
+#: src/chmframe.cpp:763
 msgid "Open .."
 msgstr "Deschide .."
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:765
 msgid "Print .."
 msgstr "Tipareste .."
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:767
 msgid "Fonts .."
 msgstr "Fonturi .."
 
-#: src/chmframe.cpp:770
+#: src/chmframe.cpp:774
 msgid "Back"
 msgstr "Inapoi"
 
-#: src/chmframe.cpp:771
+#: src/chmframe.cpp:775
 msgid "Forward"
 msgstr "Inainte"
 
-#: src/chmframe.cpp:773
+#: src/chmframe.cpp:777
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:776
+#: src/chmframe.cpp:780
 msgid "About"
 msgstr "Despre"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
 msgstr "Inainte"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:44
 msgid "&Back"
 msgstr "Inapoi"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
 msgstr "&Copiaza selectia"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
 msgstr "&Gaseste in pagina.."
 

@@ -155,3 +155,6 @@
 		bug Markus Schwarzenberg, for helping solve a bug on a
 		platform I had no access to.
 
+	* 0.9.3 Minor bugfixes:
+		+ fixed 'MS-ITS:' link handling.
+		+ corrected a contents tree bug.

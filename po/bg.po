@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
-"POT-Creation-Date: 2004-07-05 15:47+0300\n"
+"POT-Creation-Date: 2004-07-14 16:10+0300\n"
 "PO-Revision-Date: 2004-06-05 23:36+0300\n"
 "Last-Translator: Атанас Мавров <bugar@developer.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -100,7 +100,7 @@ msgstr "Относно програмата"
 msgid "Ready."
 msgstr "Готов"
 
-#: src/chmframe.cpp:145 src/chmframe.cpp:765
+#: src/chmframe.cpp:145 src/chmframe.cpp:769
 msgid "Contents"
 msgstr "Съдържание"
 
@@ -128,123 +128,123 @@ msgstr "Не може да извлече съдържанието на книг
 msgid "No contents.."
 msgstr "Няма съдържание..."
 
-#: src/chmframe.cpp:573
+#: src/chmframe.cpp:577
 msgid "&Open..\tCtrl-O"
 msgstr "&Отваряне...\tCtrl-O"
 
-#: src/chmframe.cpp:574
+#: src/chmframe.cpp:578
 msgid "&Print page..\tCtrl-P"
 msgstr "&Отпечатване на страница...\tCtrl-P"
 
-#: src/chmframe.cpp:575
+#: src/chmframe.cpp:579
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Шриф&т...\tCtrl-T"
 
-#: src/chmframe.cpp:578
+#: src/chmframe.cpp:582
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Показване на &съдържанието\tCtrl-S"
 
-#: src/chmframe.cpp:583
+#: src/chmframe.cpp:587
 msgid "&Recent files"
 msgstr "&Последните файлове"
 
-#: src/chmframe.cpp:599
+#: src/chmframe.cpp:603
 msgid "E&xit\tCtrl-X"
 msgstr "Из&ход\tCtrl-X"
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:604
 msgid "Quit the application."
 msgstr "Изход от приложението"
 
-#: src/chmframe.cpp:604
+#: src/chmframe.cpp:608
 msgid "&Home\tCtrl-H"
 msgstr "&Начална страница\tCtrl-H"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:609
 msgid "For&ward\tCtrl-W"
 msgstr "Напре&д\tCtrl-W"
 
-#: src/chmframe.cpp:606
+#: src/chmframe.cpp:610
 msgid "&Back\tCtrl-B"
 msgstr "&Назад\tCtrl-B"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:613
 msgid "&About ..\tF1"
 msgstr "&Относно...\tF1"
 
-#: src/chmframe.cpp:612
+#: src/chmframe.cpp:616
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:613
+#: src/chmframe.cpp:617
 msgid "Hi&story"
 msgstr "Истор&ия"
 
-#: src/chmframe.cpp:614
+#: src/chmframe.cpp:618
 msgid "&Help"
 msgstr "По&мощ"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:629
 msgid "Bookmarks"
 msgstr "Отметки"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:651
 msgid "Add"
 msgstr "Добавяне"
 
-#: src/chmframe.cpp:648
+#: src/chmframe.cpp:652
 msgid "Remove"
 msgstr "Премахване"
 
-#: src/chmframe.cpp:651
+#: src/chmframe.cpp:655
 msgid "Add displayed page to bookmarks."
 msgstr "Добавяне на текущата страница в отметките"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:656
 msgid "Remove selected bookmark."
 msgstr "Премахване на избраната страница"
 
-#: src/chmframe.cpp:759
+#: src/chmframe.cpp:763
 msgid "Open .."
 msgstr "Отваряне..."
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:765
 msgid "Print .."
 msgstr "Отпечатване..."
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:767
 msgid "Fonts .."
 msgstr "Шрифтове..."
 
-#: src/chmframe.cpp:770
+#: src/chmframe.cpp:774
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:771
+#: src/chmframe.cpp:775
 msgid "Forward"
 msgstr "Напред"
 
-#: src/chmframe.cpp:773
+#: src/chmframe.cpp:777
 msgid "Home"
 msgstr "Стартова страница"
 
-#: src/chmframe.cpp:776
+#: src/chmframe.cpp:780
 msgid "About"
 msgstr "Относно"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
 msgstr "Нап&ред"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:44
 msgid "&Back"
 msgstr "&Назад"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
 msgstr "&Копиране на избраното"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
 msgstr "&Търсене в страницата..."
 

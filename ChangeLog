@@ -41,4 +41,12 @@
 		+ added a full search panel and changed the layout of the
 		contents panel. Now you can look for text in all the pages
 		of the loaded .chm file.
+
+	* 0.7.1 Minor bugfixes:
+		+ fixed bugs in the full document HTML search. 
+		+ added a 'Search titles only' checkbox.
+		+ the contents tree is now synchronized with the displayed
+		document even if a document is not opened by selecting a
+		tree item.
+		
 	

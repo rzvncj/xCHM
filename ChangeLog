@@ -166,8 +166,9 @@
 		+ added support for context sensitive help; code contributed
 		by Eamon Millman from PCI Geomatics.
 
-	* Minor feature enhancements:
+	* 0.9.6 Minor bugfixes:
 		+ added Latvian translation.
 		+ Eamon Millman fixed the way xCHM treated '&' characters in
 		URLs.
+		+ fixed a TOC bug.
 

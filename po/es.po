@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 0.9\n"
-"POT-Creation-Date: 2004-09-21 16:09+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-10-24 13:23+0300\n"
 "PO-Revision-Date: 2004-04-06 21:43+0200\n"
 "Last-Translator: gabriel <fgabriel.munoz@andaluciajunta.es>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: src/chmfile.cpp:577
 msgid "Untitled in index"

@@ -49,4 +49,5 @@
 		document even if a document is not opened by selecting a
 		tree item.
 		
-	
+	* 0.8 Major feature enhancements:
+		+ added bookmark support.

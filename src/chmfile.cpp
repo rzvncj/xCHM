@@ -45,16 +45,10 @@ wxDEFINE_SCOPED_ARRAY(unsigned char, UCharPtr)
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
 
-#	define CURRENT_CHAR_STRING_LEN(x, len) \
-	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1, len)
-
 #else
 
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x))
-
-#	define CURRENT_CHAR_STRING_LEN(x, len) \
-	wxString(reinterpret_cast<const char *>(x), len)
 
 #endif
 
@@ -218,7 +212,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 
 	node_offset = GetLeafNodeOffset(text, node_offset, node_len,
 					tree_depth, &ui);
-	if(!node_offset)
+
+	if(!node_offset) 
 		return false;
 
 	do {
@@ -240,15 +235,18 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 			word_len = *(buffer.get() + i);
 			pos = *(buffer.get() + i + 1);
 
+			char *wrd_buf = new char[word_len];
+			memcpy(wrd_buf, buffer.get() + i + 2, word_len - 1);
+			wrd_buf[word_len - 1] = 0;
+
 			if(pos == 0)
-				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
-							       + i + 2, 
-							       word_len - 1);
+				word = CURRENT_CHAR_STRING(wrd_buf);
 			else
 				word = word.Mid(0, pos) +
-					CURRENT_CHAR_STRING_LEN(buffer.get() 
-								+ i + 2,
-								word_len - 1);
+					CURRENT_CHAR_STRING(wrd_buf);
+
+			delete[] wrd_buf;
+
 			i += 2 + word_len;
 			unsigned char title = *(buffer.get() + i - 1);
 
@@ -490,20 +488,22 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 		u_int16_t free_space = *cursor16;
 		FIXENDIAN16(free_space);
 
-		while(i < buffSize - free_space) {			
+		while(i < buffSize - free_space) {
 
 			word_len = *(buffer.get() + i);
 			pos = *(buffer.get() + i + 1);
 
+			char *wrd_buf = new char[word_len];
+			memcpy(wrd_buf, buffer.get() + i + 2, word_len - 1);
+			wrd_buf[word_len - 1] = 0;
+
 			if(pos == 0)
-				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
-							       + i + 2, 
-							       word_len - 1);
+				word = CURRENT_CHAR_STRING(wrd_buf);
 			else
 				word = word.Mid(0, pos) +
-					CURRENT_CHAR_STRING_LEN(buffer.get() 
-								+ i + 2,
-								word_len - 1);
+					CURRENT_CHAR_STRING(wrd_buf);
+
+			delete[] wrd_buf;
 
 			if(text.CmpNoCase(word) < 0) {
 				cursor32 = reinterpret_cast<u_int32_t*>(

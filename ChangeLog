@@ -51,3 +51,7 @@
 		
 	* 0.8 Major feature enhancements:
 		+ added bookmark support.
+
+	* 0.8.1 Major feature enhancement masked as minor number release
+		+ added real Microsoft-like $FIftiMain index-based
+		global search. The searches are as fast as possible now.

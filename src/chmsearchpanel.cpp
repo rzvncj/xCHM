@@ -71,6 +71,9 @@ CHMSearchPanel::~CHMSearchPanel()
 }
 
 
+#include <iostream>
+using namespace std;
+
 void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 {
 	wxBusyCursor bcr;
@@ -95,7 +98,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	sr.Replace(wxT("&"), wxT(" "), TRUE);
 	sr.Replace(wxT("%"), wxT(" "), TRUE);
 
-	wxStringTokenizer tkz(sr, " ");
+	wxStringTokenizer tkz(sr, wxT(" "));
 
 	while(word.IsEmpty())
 		if(tkz.HasMoreTokens())
@@ -120,13 +123,17 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 		for(i = h2.begin(); i != h2.end(); ++i)
 			if(h1.find(i->first) != h1.end())
 				tmp[i->first] = i->second;
-
-		h1.clear();
 		h1 = tmp;
+		if(h1.empty())
+			return;
 	}
 
-	for(i = h1.begin(); i != h1.end(); ++i)
-		_results->Append(i->second, new wxString(i->first));
+	for(i = h1.begin(); i != h1.end(); ++i) {
+		
+		wxString full_url = wxString(wxT("file:")) + 
+			chmf->ArchiveName() + wxT("#chm:/") + i->first;
+		_results->Append(i->second, new wxString(full_url));
+	}
 	
 
 /*

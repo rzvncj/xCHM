@@ -29,6 +29,29 @@
 #include <wx/settings.h>
 
 
+// Thanks to Vadim Zeitlin.
+#define ANSI_CHARSET            0
+#define DEFAULT_CHARSET         1
+#define SYMBOL_CHARSET          2
+#define SHIFTJIS_CHARSET        128
+#define HANGEUL_CHARSET         129
+#define HANGUL_CHARSET          129
+#define GB2312_CHARSET          134
+#define CHINESEBIG5_CHARSET     136
+#define OEM_CHARSET             255
+#define JOHAB_CHARSET           130
+#define HEBREW_CHARSET          177
+#define ARABIC_CHARSET          178
+#define GREEK_CHARSET           161
+#define TURKISH_CHARSET         162
+#define VIETNAMESE_CHARSET      163
+#define THAI_CHARSET            222
+#define EASTEUROPE_CHARSET      238
+#define RUSSIAN_CHARSET         204
+#define MAC_CHARSET             77
+#define BALTIC_CHARSET          186
+
+
 namespace {
 
 const wxChar *greeting = wxT(
@@ -127,8 +150,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetPage(greeting);
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
-	_tcl->SetFont(wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE, 
-			     wxEmptyString, wxFONTENCODING_SYSTEM));
+	_font = _tcl->GetFont();
 
 	_nb->AddPage(temp, wxT("Contents"));
 	_nb->AddPage(_csp, wxT("Search"));
@@ -445,6 +467,21 @@ void CHMFrame::LoadCHM(const wxString& archive)
 			_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 		}
 	}
+	
+	wxString fontFace = chmf->DefaultFont();
+
+	if(!fontFace.IsEmpty()) {
+		long cs = -1;
+		fontFace.AfterLast(wxT(',')).ToLong(&cs);
+
+		wxFont font(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
+			    wxEmptyString, GetFontEncFromCharSet((int)cs));
+		_tcl->SetFont(font);
+		_csp->SetNewFont(font);
+	} else {
+		_tcl->SetFont(_font);
+		_csp->SetNewFont(_font);
+	}
 
 	// if we have contents..
 	if(_tcl->GetCount() > 1) {		
@@ -613,9 +650,8 @@ void CHMFrame::SaveBookmarks()
 	bookname.Replace(wxT("/"), wxT("."), TRUE);
 	bookname = wxString(wxT("/Bookmarks/")) + bookname;
 
-	if(_bookmarksDeleted) {
+	if(_bookmarksDeleted)
 		config.DeleteGroup(bookname);
-	}
 
 	if(noEntries == 0)
 		return;
@@ -640,6 +676,63 @@ void CHMFrame::SaveBookmarks()
 		if(url)
 			config.Write(wxString::Format(format2, i), *url);
 	}
+}
+
+
+wxFontEncoding CHMFrame::GetFontEncFromCharSet(int cs)
+{
+    wxFontEncoding fontEncoding;
+            
+    switch(cs) {
+        case ANSI_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_1;
+            break;            
+        case EASTEUROPE_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_2;
+            break;        
+        case BALTIC_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_13;
+            break;    
+        case RUSSIAN_CHARSET:
+            fontEncoding = wxFONTENCODING_KOI8;
+            break;
+        case ARABIC_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_6;
+            break;
+        case GREEK_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_7;
+            break;
+        case HEBREW_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_8;
+            break;
+        case TURKISH_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_9;
+            break;
+        case THAI_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_11;
+            break;
+        case SHIFTJIS_CHARSET:
+            fontEncoding = wxFONTENCODING_CP932;
+            break;
+        case GB2312_CHARSET:
+            fontEncoding = wxFONTENCODING_CP936;
+            break;
+        case HANGUL_CHARSET:
+            fontEncoding = wxFONTENCODING_CP949;
+            break;
+        case CHINESEBIG5_CHARSET:
+            fontEncoding = wxFONTENCODING_CP950;
+            break;
+        case OEM_CHARSET:
+            fontEncoding = wxFONTENCODING_CP437;
+            break;
+        default:
+            // assume the system charset
+            fontEncoding = wxFONTENCODING_SYSTEM;
+            break;            
+    }
+    
+    return fontEncoding;
 }
 
 

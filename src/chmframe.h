@@ -29,6 +29,7 @@
 #include <wx/treectrl.h>
 #include <wx/panel.h>
 #include <wx/combobox.h>
+#include <wx/font.h>
 #include <chmsearchpanel.h>
 #include <chmhtmlwindow.h>
 
@@ -175,6 +176,9 @@ private:
 	//! Helper. Saves the bookmarks for the currently opened CHM file.
 	void SaveBookmarks();
 
+	//! Helper. Translates from Win32 encodings to generic wxWindows ones.
+	wxFontEncoding GetFontEncFromCharSet(int cs);
+
 private:
 	CHMHtmlWindow* _html;
 	wxTreeCtrl* _tcl;
@@ -194,7 +198,8 @@ private:
 	int _fontSize;
 	bool _bookmarkSel;
 	bool _bookmarksDeleted;
-	int _sashPos;
+	int _sashPos;	
+	wxFont _font;
 
 private:
 	DECLARE_EVENT_TABLE()	

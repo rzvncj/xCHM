@@ -420,6 +420,14 @@ bool CHMFile::GetArchiveInfo()
 			}
 
 			break;
+
+		case 16:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			_font = CURRENT_CHAR_STRING(buffer + index + 2);
+			break;
 		default:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);

@@ -56,9 +56,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 				 wxDefaultPosition, wxDefaultSize, 
 				 0, NULL, wxLB_SINGLE);
 
-	_results->SetFont(wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL,
-				 FALSE, wxEmptyString, wxFONTENCODING_SYSTEM));
-
+	_font = _results->GetFont();
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
@@ -262,6 +260,21 @@ void CHMSearchPanel::Reset()
 {
 	_text->Clear();
 	_results->Clear();
+}
+
+
+void CHMSearchPanel::SetNewFont(const wxFont& font)
+{
+	_results->SetFont(font);
+}
+
+
+void CHMSearchPanel::ResetFont()
+{
+	wxFont::SetDefaultEncoding(wxFONTENCODING_ISO8859_1);
+	_results->SetFont(_font);
+		//wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
+		//	 wxEmptyString, wxFONTENCODING_ISO8859_1));
 }
 
 

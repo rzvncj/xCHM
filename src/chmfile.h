@@ -92,6 +92,13 @@ public:
 	wxString Title() const { return _title; }
 
 	/*!
+	  \brief Gets the name of the default font.
+	  \return The name of the default font or the empty string if
+	  no default font was selected.
+	*/
+	wxString DefaultFont() const { return _font; }
+
+	/*!
 	  \brief Checks if the last attempt to load a .chm file was
 	  succesful.
 	  \return true, if the last attempt to load a .chm file was
@@ -187,6 +194,7 @@ private:
 	wxString _topicsFile;
 	wxString _indexFile;
 	wxString _title;
+	wxString _font;
 
 private:
 	//! No copy construction allowed.

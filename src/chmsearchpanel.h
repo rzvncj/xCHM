@@ -30,6 +30,7 @@
 #include <wx/button.h>
 #include <wx/listbox.h>
 #include <wx/html/htmlwin.h>
+#include <wx/font.h>
 
 
 /*!
@@ -68,6 +69,12 @@ public:
 	//! Resets the panel (clears the result list and the textbox.)
 	void Reset();
 
+	//! Sets the font.
+	void SetNewFont(const wxFont& font);
+
+	//! Resets font.
+	void ResetFont();
+
 protected:
 	/*! 
 	  This gets called when the user clicks the Search button or
@@ -100,6 +107,7 @@ private:
 	wxButton* _search;
 	wxListBox* _results;
 	wxHtmlWindow* _html;
+	wxFont _font;
 
 private:
 	DECLARE_EVENT_TABLE()

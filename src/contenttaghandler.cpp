@@ -21,6 +21,7 @@
 
 #include <chmlistctrl.h>
 #include <contenttaghandler.h>
+#include <wx/wx.h>
 #include <wx/fontmap.h>
 
 
@@ -33,7 +34,7 @@ ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
 		return;
 
 	if(_treeCtrl)
-		_parents[_level] = _treeCtrl->AddRoot(wxT("Topics"));
+		_parents[_level] = _treeCtrl->AddRoot(_("Topics"));
 }
 
 

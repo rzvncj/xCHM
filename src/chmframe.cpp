@@ -34,7 +34,7 @@
 
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
-#define PRINT_HELP _("Print the page currently displayed")
+#define PRINT_HELP _("Print the page currently displayed.")
 #define CONTENTS_HELP _("On or off?")
 #define HOME_HELP _("Go to the book's start page.")
 #define FORWARD_HELP _("Go forward in history. Per book.")

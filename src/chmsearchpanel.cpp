@@ -80,6 +80,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 {
 	static CHMFile *chmf = CHMInputStream::GetCache();
 
+	if(!chmf)
+		return;
+
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 

@@ -91,13 +91,6 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_sw = new wxSplitterWindow(this);
 	_sw->SetMinimumPaneSize(120);
 
-	_html = new wxHtmlWindow(_sw, -1,  wxDefaultPosition, wxSize(200,200));
-	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
-	_html->SetRelatedStatusBar(0);
-
-	_html->SetFonts(_normalFont, _fixedFont, sizes);
-	_html->SetPage(greeting);
-
 	_nb = new wxNotebook(_sw, -1);
 	_nb->Show(FALSE);
 
@@ -111,6 +104,13 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT |
 			      wxTR_SINGLE | wxTR_LINES_AT_ROOT);
 	sizer->Add(_tcl, 1, wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT, 0);
+
+	_html = new CHMHtmlWindow(_sw, _tcl);
+	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
+	_html->SetRelatedStatusBar(0);
+
+	_html->SetFonts(_normalFont, _fixedFont, sizes);
+	_html->SetPage(greeting);
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
 
@@ -288,8 +288,10 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(!data || data->_url.IsEmpty())
 		return;
 
+	_html->SetSync(false);
 	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
 			wxT("#chm:/") + data->_url);
+	_html->SetSync(true);
 }
 
 

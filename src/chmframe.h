@@ -23,12 +23,12 @@
 #define __CHMFRAME_HPP_
 
 #include <wx/wx.h>
-#include <wx/html/htmlwin.h>
 #include <wx/html/htmprint.h>
 #include <wx/splitter.h>
 #include <wx/notebook.h>
 #include <wx/treectrl.h>
 #include <chmsearchpanel.h>
+#include <chmhtmlwindow.h>
 
 
 //! Default font size for the wxHtmlWindow.
@@ -147,7 +147,7 @@ private:
 	bool InitToolBar(wxToolBar *toolbar);
 
 private:
-	wxHtmlWindow* _html;
+	CHMHtmlWindow* _html;
 	wxTreeCtrl* _tcl;
 	wxSplitterWindow* _sw;
 	wxMenu* _menuFile;

@@ -133,9 +133,10 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 bool CHMHtmlWindow::FixRelativePath(wxString &location,
 				    const wxString& prefix) const
 {
-	if(location.StartsWith(wxT("file:")))
+	if(location.StartsWith(wxT("file:")) || 
+	   !location.Left(5).CmpNoCase(wxT("http:")))
 		return false;
-
+	  
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(!chmf)

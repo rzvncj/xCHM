@@ -861,11 +861,9 @@ Optional Features:
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-wxdir=PATH       Use uninstalled version of wxWindows in PATH
-  --with-wx-config=CONFIG wx-config script to use (optional)
-  --with-wx-prefix=PREFIX Prefix where wxWindows is installed (optional)
-  --with-wx-exec-prefix=PREFIX
-                          Exec prefix where wxWindows is installed (optional)
+  --with-wx-prefix=PREFIX   Prefix where wxWindows is installed (optional)
+  --with-wx-exec-prefix=PREFIX Exec prefix where wxWindows is installed (optional)
+  --with-wx-config=CONFIG   wx-config script to use (optional)
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -1289,19 +1287,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-# Check whether --with-wxdir or --without-wxdir was given.
-if test "${with_wxdir+set}" = set; then
-  withval="$with_wxdir"
-   wx_config_name="$withval/wx-config"
-                  wx_config_args="--inplace"
-fi;
-
-# Check whether --with-wx-config or --without-wx-config was given.
-if test "${with_wx_config+set}" = set; then
-  withval="$with_wx_config"
-  wx_config_name="$withval"
-fi;
-
 # Check whether --with-wx-prefix or --without-wx-prefix was given.
 if test "${with_wx_prefix+set}" = set; then
   withval="$with_wx_prefix"
@@ -1318,12 +1303,19 @@ else
   wx_config_exec_prefix=""
 fi;
 
+# Check whether --with-wx-config or --without-wx-config was given.
+if test "${with_wx_config+set}" = set; then
+  withval="$with_wx_config"
+  wx_config_name="$withval"
+else
+  wx_config_name=""
+fi;
+
 
 
     if test x${WX_CONFIG_NAME+set} != xset ; then
      WX_CONFIG_NAME=wx-config
   fi
-
   if test "x$wx_config_name" != x ; then
      WX_CONFIG_NAME="$wx_config_name"
   fi
@@ -1432,13 +1424,8 @@ echo $ECHO_N "checking for wxWindows version >= $min_wx_version... $ECHO_C" >&6
     if test "x$wx_ver_ok" = x ; then
       no_wx=yes
     else
-      if test "x" = "x" ; then
-        wx_libs_arg="--libs"
-      else
-        wx_libs_arg="--libs="
-      fi
-      WX_LIBS=`$WX_CONFIG_WITH_ARGS $wx_libs_arg`
-      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static $wx_libs_arg`
+      WX_LIBS=`$WX_CONFIG_WITH_ARGS --libs`
+      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static --libs`
 
             wx_has_cppflags=""
       if test $wx_config_major_version -gt 2; then
@@ -1480,10 +1467,10 @@ echo "${ECHO_T}yes (version $WX_VERSION)" >&6
        wxWin=1
     else
        if test "x$WX_VERSION" = x; then
-                    echo "$as_me:$LINENO: result: no" >&5
+	  	  echo "$as_me:$LINENO: result: no" >&5
 echo "${ECHO_T}no" >&6
        else
-          echo "$as_me:$LINENO: result: no (version $WX_VERSION is not new enough)" >&5
+	  echo "$as_me:$LINENO: result: no (version $WX_VERSION is not new enough)" >&5
 echo "${ECHO_T}no (version $WX_VERSION is not new enough)" >&6
        fi
 

@@ -54,7 +54,6 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	szButtons->Add(new wxButton(this, wxID_CANCEL, wxT("Cancel")), 
 		       0, wxLEFT | wxRIGHT | wxTOP, 5);
 
-	find->SetDefault();
 	wxSizer *topsizer = new wxBoxSizer(wxHORIZONTAL);
 	topsizer->Add(sizer);
 	topsizer->Add(szButtons);

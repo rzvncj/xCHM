@@ -64,7 +64,7 @@
 		+ refined the synchronization between the contents tree and
 		the wxHtmlWindow displayed page.
 
-	* 0.8,2 Bug fixes and improvements: 
+	* 0.8.2 Bug fixes and improvements: 
 		+ added 'find in page' code (wxWindows 2.5.x only).
 		+ added 'copy text' code (wxWindows 2.5 only).
 		+ added a 'find in page' dialog that hopefully pops up

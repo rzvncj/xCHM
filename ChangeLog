@@ -7,3 +7,8 @@
 		+ added Doxygen comments and generated some documentation;
 		+ added code to display the book's title on the titlebar,
 		if the book's title can be determined.
+
+	* 0.5.2. Minor bugfixes:
+		+ corrected a path-related bug that happened when
+		opening a CHM file who's default page was only a reference
+		to a page in a different CHM file.

@@ -2,6 +2,9 @@
 AC_INIT(src/chmfile.cpp)
 AM_CONFIG_HEADER(config.h)
 
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION(0.11)
+
 AM_OPTIONS_WXCONFIG
 
 AM_PATH_WXCONFIG(2.4.0, wxWin=1)
@@ -69,5 +72,5 @@ AC_CHECK_LIB(
     AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
 )
 
-AC_OUTPUT(Makefile src/Makefile art/Makefile)
+AC_OUTPUT(Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile )
 

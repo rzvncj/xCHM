@@ -1,3 +1,6 @@
 
-SUBDIRS = src art
-EXTRA_DIST = art/*.xpm Doxyfile
+SUBDIRS = m4 po src art
+EXTRA_DIST = config.rpath Doxyfile
+
+ACLOCAL_AMFLAGS = -I m4 -I /usr/local/share/aclocal
+

@@ -22,8 +22,12 @@
 #include <chmfile.h>
 #include <contenttaghandler.h>
 #include <endianmacros.h>
+#include <wx/strconv.h>
 #include <assert.h>
-#include <wx/wx.h>
+
+
+#define CURRENT_CHAR_TYPE(x) static_cast<const wxChar *>( \
+	wxConvCurrent->cMB2WX(reinterpret_cast<const char *>(x)))
 
 
 CHMFile::CHMFile()
@@ -51,7 +55,7 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 
 	assert(_chmFile == NULL);
 
-	_chmFile = chm_open(archiveName.mb_str());
+	_chmFile = chm_open(static_cast<const char *>(archiveName.mb_str()));
 	
 	if(_chmFile == NULL)
 		return false;
@@ -103,10 +107,10 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	src.Alloc(ui.length);
 
 	do {
-		ret = RetrieveObject(&ui, (unsigned char *)buffer, curr,
-				     BUF_SIZE2 - 1);
+		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
+					     buffer), curr, BUF_SIZE2 - 1);
 		buffer[ret] = '\0';
-		src.Append(_(buffer));
+		src.Append(CURRENT_CHAR_TYPE(buffer));
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
@@ -127,9 +131,11 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 {
-	return _chmFile != NULL && chm_resolve_object(_chmFile, 
-						      fileName.mb_str(), 
-						      ui)
+	return _chmFile != NULL && 
+		chm_resolve_object(_chmFile, 
+				   static_cast<const char *>(
+					   fileName.mb_str()), 
+				   ui)
 		== CHM_RESOLVE_SUCCESS;
 }
 
@@ -173,8 +179,8 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_topicsFile = wxString(wxT("/")) 
-				+ wxString(_(reinterpret_cast<const char *>(
-						     buffer + index + 2)));
+				+ wxString(CURRENT_CHAR_TYPE(
+						   buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 1:
@@ -182,8 +188,8 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_indexFile = wxString(wxT("/"))
-				+ wxString(_(reinterpret_cast<const char *>(
-						     buffer + index + 2)));
+				+ wxString(CURRENT_CHAR_TYPE(
+						   buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 2:
@@ -191,16 +197,16 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_home = wxString(wxT("/"))
-				+ wxString(_(reinterpret_cast<const char *>(
-						     buffer + index + 2)));
+				+ wxString(CURRENT_CHAR_TYPE(
+						   buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 3:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_title = wxString(_(reinterpret_cast<const char *>(
-						    buffer + index + 2)));
+			_title = wxString(CURRENT_CHAR_TYPE(
+						  buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 6:
@@ -210,9 +216,8 @@ bool CHMFile::GetArchiveInfo()
 
 			if(_topicsFile.IsEmpty()) {
 				wxString topicAttempt = wxT("/"), tmp;
-				topicAttempt += wxString(
-					_(reinterpret_cast<const char *>(
-						  buffer + index + 2)));
+				topicAttempt += wxString(CURRENT_CHAR_TYPE(
+						buffer + index + 2));
 				tmp = topicAttempt + wxT(".hhc");
 				
 				if(chm_resolve_object(_chmFile,

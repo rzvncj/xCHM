@@ -28,7 +28,7 @@
 
 namespace {
 
-const char *greeting =
+const wxChar *greeting = wxT(
 	"<html><body>Hello, and welcome to "
 	"<B>xCHM</B>, the UNIX CHM viewer.<br><br><B>"
 	"xCHM</B> has been written by Razvan Cojocaru "
@@ -43,14 +43,14 @@ const char *greeting =
 	" Specification page</a>.<br><br>If you'd like to use the code in"
 	" your own stuff please figure <TT>GPL</TT> out first. Far too"
 	" many people think <TT>GPL</TT>"
-	" is bad out of utter ignorance.<br><br>Enjoy.</body></html>";
+	" is bad out of utter ignorance.<br><br>Enjoy.</body></html>");
 
 
-const char *about_txt = 
+const wxChar *about_txt = wxT(
 	"xCHM v. " VERSION "\nby Razvan Cojocaru (razvanco@gmx.net)\n\n"
 	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects).\n"
 	"Written with wxWindows (http://www.wxwindows.org).\n\n"
-	"This program is (proudly) under the GPL.";
+	"This program is (proudly) under the GPL.");
 
 #include <htmbook.xpm>
 
@@ -79,19 +79,19 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	InitToolBar(_tb);
 
 	CreateStatusBar();
-	SetStatusText(_("Ready."));
+	SetStatusText(wxT("Ready."));
 
-	_ep = new wxHtmlEasyPrinting(_("Printing"), this);
+	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 
 	_sw = new wxSplitterWindow(this);
 	_sw->SetMinimumPaneSize(100);
 
 	_html = new wxHtmlWindow(_sw, -1,  wxDefaultPosition, wxSize(200,200));
-	_html->SetRelatedFrame(this, wxString(_("xCHM v. ")) + wxT(VERSION));
+	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	_html->SetRelatedStatusBar(0);
 
 	_html->SetFonts(_normalFont, _fixedFont, sizes);
-	_html->SetPage(_(greeting));
+	_html->SetPage(greeting);
 
 	_tcl = new wxTreeCtrl(_sw, ID_TreeCtrl);
 	_tcl->Show(FALSE);
@@ -116,7 +116,7 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-	::wxMessageBox(_(about_txt), _("About xCHM"),
+	::wxMessageBox(about_txt, wxT("About xCHM"),
 		       wxOK | wxICON_INFORMATION, this );
 }
 
@@ -124,8 +124,8 @@ void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
 	wxString selection =
-		::wxFileSelector(_("Choose a file.."), _openPath, 
-				 wxEmptyString, _("chm"),
+		::wxFileSelector(wxT("Choose a file.."), _openPath, 
+				 wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
 				 // they say Motif can't handle the following.
 				 wxT("CHM files (*.chm)|*.chm;*.CHM|"
@@ -182,7 +182,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		wxString page = _html->GetOpenedPage();
 
 		if(page.IsEmpty())
-			_html->SetPage(_(greeting)); 
+			_html->SetPage(greeting); 
 	}
 }
 
@@ -233,9 +233,9 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_tb->ToggleTool(ID_Contents, FALSE);
 			_menuFile->Check(ID_Contents, FALSE);
 			
-			::wxMessageBox(_("Couldn't extract the book"
+			::wxMessageBox(wxT("Couldn't extract the book"
 				       " contents tree."), 
-				       _("No contents.."), 
+				       wxT("No contents.."), 
 				       wxOK | wxICON_WARNING, this );
 		}
 	}
@@ -247,7 +247,7 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 	wxString page = _html->GetOpenedPage();
 
 	if(page.IsEmpty())
-		_ep->PrintText(_(greeting));
+		_ep->PrintText(greeting);
 	else
 		_ep->PrintFile(page);
 }
@@ -345,14 +345,14 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 namespace {
 
-const char *open_help = "Open a CHM book.";
-const char *fonts_help = "Change fonts.";
-const char *print_help = "Print the page currently displayed";
-const char *contents_help = "On or off?";
-const char *home_help = "Go to the book's start page.";
-const char *forward_help = "Go forward in history. Per book.";
-const char *back_help = "Back to the last visited page. Per book.";
-const char *about_help = "About the program.";
+const wxChar *open_help = wxT("Open a CHM book.");
+const wxChar *fonts_help = wxT("Change fonts.");
+const wxChar *print_help = wxT("Print the page currently displayed");
+const wxChar *contents_help = wxT("On or off?");
+const wxChar *home_help = wxT("Go to the book's start page.");
+const wxChar *forward_help = wxT("Go forward in history. Per book.");
+const wxChar *back_help = wxT("Back to the last visited page. Per book.");
+const wxChar *about_help = wxT("About the program.");
 
 } // namespace
 
@@ -361,25 +361,24 @@ wxMenuBar* CHMFrame::CreateMenu()
 {
 	_menuFile = new wxMenu;
 
-	_menuFile->Append(ID_Open, wxT("&Open .."), _(open_help));
-	_menuFile->Append(ID_Print, wxT("&Print page.."), 
-			  _(print_help));
-	_menuFile->Append(ID_Fonts, wxT("&Fonts.."), _(fonts_help));
+	_menuFile->Append(ID_Open, wxT("&Open .."), open_help);
+	_menuFile->Append(ID_Print, wxT("&Print page.."), print_help);
+	_menuFile->Append(ID_Fonts, wxT("&Fonts.."), fonts_help);
 	_menuFile->AppendSeparator();
 	_menuFile->AppendCheckItem(ID_Contents, wxT("&Show contents tree"),
-				   _(contents_help));
+				   contents_help);
 	_menuFile->AppendSeparator();
 	_menuFile->Append(ID_Quit, wxT("E&xit"), 
-			  _("Quit the application."));
+			  wxT("Quit the application."));
 
 	wxMenu *menuHistory = new wxMenu;
 
-	menuHistory->Append(ID_Home, wxT("&Home"), _(home_help));
-	menuHistory->Append(ID_Forward, wxT("&Forward"), _(forward_help));
-	menuHistory->Append(ID_Back, wxT("&Back"), _(back_help));
+	menuHistory->Append(ID_Home, wxT("&Home"), home_help);
+	menuHistory->Append(ID_Forward, wxT("&Forward"), forward_help);
+	menuHistory->Append(ID_Back, wxT("&Back"), back_help);
 	
 	wxMenu *menuHelp = new wxMenu;
-	menuHelp->Append(ID_About, wxT("&About .."), _(about_help));
+	menuHelp->Append(ID_About, wxT("&About .."), about_help);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, wxT("&File"));
@@ -407,24 +406,23 @@ namespace {
 bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 {
 	toolbar->AddTool(ID_Open, wxT("Open .."), wxBitmap(fileopen_xpm),
-			 _(open_help));
+			 open_help);
 	toolbar->AddTool(ID_Print, wxT("Print .."), wxBitmap(print_xpm),
-			 _(print_help));
+			 print_help);
 	toolbar->AddTool(ID_Fonts, wxT("Fonts .."), wxBitmap(htmoptns_xpm),
-			 _(fonts_help));
+			 fonts_help);
 	toolbar->AddCheckTool(ID_Contents, wxT("Contents"),
 			      wxBitmap(htmsidep_xpm),
-			      wxBitmap(htmsidep_xpm), _(contents_help));
+			      wxBitmap(htmsidep_xpm), contents_help);
 	toolbar->AddSeparator();
-	toolbar->AddTool(ID_Back, wxT("Back"), wxBitmap(back_xpm), 
-			 _(back_help));
+	toolbar->AddTool(ID_Back, wxT("Back"), wxBitmap(back_xpm), back_help);
 	toolbar->AddTool(ID_Forward, wxT("Forward"), wxBitmap(forward_xpm), 
-			 _(forward_help));
+			 forward_help);
 	toolbar->AddTool(ID_Home, wxT("Home"), wxBitmap(home_xpm), 
-			 _(home_help));
+			 home_help);
 	toolbar->AddSeparator();
 	toolbar->AddTool(ID_About, wxT("About"), wxBitmap(helpicon_xpm), 
-			 _(about_help));
+			 about_help);
 
 	toolbar->Realize();
 

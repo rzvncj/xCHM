@@ -23,11 +23,10 @@
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/button.h>
-#include <wx/wx.h>
 
 namespace {
 
-const char* test_page = "<html><body><table><tr><td>Normal face<br>"
+wxChar* test_page = wxT("<html><body><table><tr><td>Normal face<br>"
 	"(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face.</b> <b>"
 	"<i>Bold italic face.</i></b><br><font size=-2>font size -2</font><br>"
 	"<font size=-1>font size -1</font><br><font size=+0>font size +0"
@@ -39,7 +38,7 @@ const char* test_page = "<html><body><table><tr><td>Normal face<br>"
 	"<font size=-1>font size -1</font><br><font size=+0>font size +0"
 	"</font><br><font size=+1>font size +1</font><br><font size=+2>"
 	"font size +2</font><br><font size=+3>font size +3</font><br>"
-	"<font size=+4>font size +4</font></tt></table></body></html>";
+	"<font size=+4>font size +4</font></tt></table></body></html>");
 
 }
 
@@ -49,16 +48,16 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 			     wxArrayString *fixedFonts,
 			     const wxString& normalFont,
 			     const wxString& fixedFont, const int fontSize)
-	: wxDialog(parent, -1, wxString(_("Change fonts.."))), _test(NULL),
+	: wxDialog(parent, -1, wxString(wxT("Change fonts.."))), _test(NULL),
 	  _fontSizeControl(NULL), _normalFControl(NULL), _fixedFControl(NULL),
 	_normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
 	wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 2, 5);
 
-	sizer->Add(new wxStaticText(this, -1, _("Normal font:")));
-	sizer->Add(new wxStaticText(this, -1, _("Fixed font:")));
-	sizer->Add(new wxStaticText(this, -1, _("Font size:")));
+	sizer->Add(new wxStaticText(this, -1, wxT("Normal font:")));
+	sizer->Add(new wxStaticText(this, -1, wxT("Fixed font:")));
+	sizer->Add(new wxStaticText(this, -1, wxT("Font size:")));
 
 	sizer->Add(_normalFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, 
@@ -75,7 +74,7 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 	
 	topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
 
-	topsizer->Add(new wxStaticText(this, -1, _("Preview:")),
+	topsizer->Add(new wxStaticText(this, -1, wxT("Preview:")),
 				       0, wxLEFT | wxTOP, 10);
 	topsizer->Add(_test = 
 		      new wxHtmlWindow(this, -1, wxDefaultPosition, 
@@ -85,9 +84,9 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 
 	wxBoxSizer *sizer2 = new wxBoxSizer(wxHORIZONTAL);
 	wxButton *ok;
-	sizer2->Add(ok = new wxButton(this, wxID_OK, _("OK")), 0, wxALL, 10);
+	sizer2->Add(ok = new wxButton(this, wxID_OK, wxT("OK")), 0, wxALL, 10);
 	ok->SetDefault();
-	sizer2->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 
+	sizer2->Add(new wxButton(this, wxID_CANCEL, wxT("Cancel")), 
 		    0, wxALL, 10);
 	topsizer->Add(sizer2, 0, wxALIGN_RIGHT);
 			
@@ -113,7 +112,7 @@ void CHMFontDialog::UpdatePreview()
 		_sizes[i+3] = size + i * 2;
 
 	_test->SetFonts(_normalFont, _fixedFont, _sizes);
-	_test->SetPage(_(test_page));
+	_test->SetPage(test_page);
 }
 
 

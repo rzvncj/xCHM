@@ -2,7 +2,7 @@
 AC_INIT(src/chmfile.cpp)
 AM_CONFIG_HEADER(config.h)
 
-CXXFLAGS="-W -Wall"
+CXXFLAGS="-W -Wall -DwxUSE_UNICODE" 
 
 AC_ARG_ENABLE(static, 
 	      [  --enable-static         link statically to wxWindows.], 

@@ -72,10 +72,13 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 			tmp = tmp.AfterFirst(wxT('/'));
 			prefix = prefix.BeforeLast(wxT('/'));
 		}
-			      
+		
+		if(!prefix.IsEmpty())
+			prefix = wxString(wxT("/")) + prefix;
+
 		tmp = wxString(wxT("file:")) + chmf->ArchiveName() + 
 			wxT("#chm:") + prefix + wxT("/") + tmp;
-	
+
 	} else if(tmp.StartsWith(wxT("javascript:fullSize"))) {
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 	}

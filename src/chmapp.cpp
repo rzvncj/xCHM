@@ -47,7 +47,7 @@ bool CHMApp::OnInit()
 		config.Read(wxT("/Fonts/fixedFontFace"), &fixedFont);
 		config.Read(wxT("/Fonts/size"), &fontSize);
 	}
-	
+
 	CHMFrame *frame = new CHMFrame(wxT("xCHM v. " VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,

@@ -530,7 +530,9 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
 			      wxDefaultSize, wxTR_HAS_BUTTONS |
 			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT |
-			      wxTR_SINGLE | wxTR_LINES_AT_ROOT);
+			      wxTR_SINGLE | wxTR_LINES_AT_ROOT |
+			      wxTR_HAS_VARIABLE_ROW_HEIGHT | 
+			      wxTR_TWIST_BUTTONS);
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
 			     wxDefaultSize, 0, NULL, wxCB_DROPDOWN 

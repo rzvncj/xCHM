@@ -26,6 +26,8 @@
 #include <wx/config.h>
 #include <wx/tokenzr.h>
 
+
+
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxHtmlWindow *html)
 	: wxPanel(parent), _tcl(topics), _text(NULL), _grep(NULL),

@@ -84,11 +84,11 @@ private:
 			  bool caseSensitive, bool wholeWords,
 			  bool titlesOnly);
 
-	//! Helper. Searches a HTML file for the given text.
+	//! Helper. Grep searches a HTML file for the given text.
 	bool FileSearch(const wxString& filename, wxString& text,
 			bool caseSensitive, bool wholeWords);
 
-	//! Helper. Searches page titles for the given text.
+	//! Helper. Grep searches page titles for the given text.
 	bool TitleSearch(const wxString& title, wxString& text,
 			 bool caseSensitive, bool wholeWords);
 

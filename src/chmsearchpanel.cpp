@@ -23,6 +23,7 @@
 #include <chminputstream.h>
 #include <chmlistctrl.h>
 #include <chmhtmlwindow.h>
+#include <wx/wx.h>
 #include <wx/sizer.h>
 #include <wx/utils.h>
 #include <wx/config.h>
@@ -43,15 +44,15 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxDefaultPosition, wxDefaultSize, 
 			       wxTE_PROCESS_ENTER);
 
-	_partial = new wxCheckBox(this, -1, wxT("Get partial matches"));
-	_titles = new wxCheckBox(this, -1, wxT("Search titles only"));	
-	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
+	_partial = new wxCheckBox(this, -1, _("Get partial matches"));
+	_titles = new wxCheckBox(this, -1, _("Search titles only"));	
+	_search = new wxButton(this, ID_SearchButton, _("Search"));
 
 #if wxUSE_TOOLTIPS
-	_partial->SetToolTip(wxT("Allow partial matches."));
-	_titles->SetToolTip(wxT("Only search in the contents' titles."));
-	_search->SetToolTip(wxT("Search contents for occurences of"
-				" the specified text."));
+	_partial->SetToolTip(_("Allow partial matches."));
+	_titles->SetToolTip(_("Only search in the contents' titles."));
+	_search->SetToolTip(_("Search contents for occurences of"
+			      " the specified text."));
 #endif
 	_results = new CHMListCtrl(this, html, ID_Results);
 

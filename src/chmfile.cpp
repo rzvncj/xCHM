@@ -22,6 +22,7 @@
 #include <chmfile.h>
 #include <contenttaghandler.h>
 #include <chmlistctrl.h>
+#include <wx/wx.h>
 #include <wx/defs.h>
 #include <wx/strconv.h>
 #include <wx/fontmap.h>
@@ -505,7 +506,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		if(::chm_retrieve_object(_chmFile, uistrings, combuf, 
 					 stroff, COMMON_BUF_LEN - 1) == 0) {
-			topic = wxString(wxT("Untitled in index"));
+			topic = wxString(_("Untitled in index"));
 
 		} else {
 			combuf[COMMON_BUF_LEN - 1] = 0;

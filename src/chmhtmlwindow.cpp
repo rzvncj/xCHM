@@ -24,6 +24,7 @@
 #include <chmhtmlwindow.h>
 #include <contenttaghandler.h>
 #include <chminputstream.h>
+#include <wx/wx.h>
 #include <wx/log.h>
 
 
@@ -37,14 +38,14 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 #endif
 {
 	_menu = new wxMenu;
-	_menu->Append(ID_PopupForward, wxT("For&ward"));
-	_menu->Append(ID_PopupBack, wxT("&Back"));
+	_menu->Append(ID_PopupForward, _("For&ward"));
+	_menu->Append(ID_PopupBack, _("&Back"));
 
 #ifdef _ENABLE_COPY_AND_FIND
 	_menu->AppendSeparator();
-	_menu->Append(ID_CopySel, wxT("&Copy selection"));
+	_menu->Append(ID_CopySel, _("&Copy selection"));
 	_menu->AppendSeparator();
-	_menu->Append(ID_PopupFind, wxT("&Find in page.."));
+	_menu->Append(ID_PopupFind, _("&Find in page.."));
 #endif
 }
 

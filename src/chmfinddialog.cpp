@@ -31,7 +31,7 @@
 
 
 CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
-	: wxDialog(parent, -1, wxString(wxT("Find in page.."))),
+	: wxDialog(parent, -1, wxString(_("Find in page.."))),
 	  _html(toSearch), _cell(NULL)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -40,19 +40,18 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 			       wxDefaultPosition, wxSize(200, -1), 
 			       wxTE_PROCESS_ENTER);
 
-	_whole = new wxCheckBox(this, -1, wxT("Whole words only"));
-	_case = new wxCheckBox(this, -1, wxT("Case sensitive"));
+	_whole = new wxCheckBox(this, -1, _("Whole words only"));
+	_case = new wxCheckBox(this, -1, _("Case sensitive"));
 
 	sizer->Add(_text, 0, wxLEFT | wxTOP | wxBOTTOM, 5);
 	sizer->Add(_whole, 0, wxLEFT, 5);
 	sizer->Add(_case, 0, wxLEFT | wxBOTTOM, 5);
 
 	wxSizer *szButtons = new wxBoxSizer(wxVERTICAL);
-	wxButton *find = new wxButton(this, ID_FindNext, 
-				      wxT("Find next"));
+	wxButton *find = new wxButton(this, ID_FindNext, _("Find next"));
 
 	szButtons->Add(find, 0, wxLEFT | wxRIGHT | wxTOP, 5);
-	szButtons->Add(new wxButton(this, wxID_CANCEL, wxT("Cancel")), 
+	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 
 		       0, wxLEFT | wxRIGHT | wxTOP, 5);
 
 	wxSizer *topsizer = new wxBoxSizer(wxHORIZONTAL);

@@ -20,6 +20,7 @@
 
 
 #include <chmfontdialog.h>
+#include <wx/wx.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/button.h>
@@ -49,16 +50,16 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 			     wxArrayString *fixedFonts,
 			     const wxString& normalFont,
 			     const wxString& fixedFont, const int fontSize)
-	: wxDialog(parent, -1, wxString(wxT("Change fonts.."))), _test(NULL),
+	: wxDialog(parent, -1, wxString(_("Change fonts.."))), _test(NULL),
 	  _fontSizeControl(NULL), _normalFControl(NULL), _fixedFControl(NULL),
 	_normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
 	wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 2, 5);
 
-	sizer->Add(new wxStaticText(this, -1, wxT("Normal font:")));
-	sizer->Add(new wxStaticText(this, -1, wxT("Fixed font:")));
-	sizer->Add(new wxStaticText(this, -1, wxT("Font size:")));
+	sizer->Add(new wxStaticText(this, -1, _("Normal font:")));
+	sizer->Add(new wxStaticText(this, -1, _("Fixed font:")));
+	sizer->Add(new wxStaticText(this, -1, _("Font size:")));
 
 	sizer->Add(_normalFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, 
@@ -75,7 +76,7 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 	
 	topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
 
-	topsizer->Add(new wxStaticText(this, -1, wxT("Preview:")),
+	topsizer->Add(new wxStaticText(this, -1, _("Preview:")),
 				       0, wxLEFT | wxTOP, 10);
 	topsizer->Add(_test = 
 		      new wxHtmlWindow(this, -1, wxDefaultPosition, 
@@ -85,9 +86,9 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 
 	wxBoxSizer *sizer2 = new wxBoxSizer(wxHORIZONTAL);
 	wxButton *ok;
-	sizer2->Add(ok = new wxButton(this, wxID_OK, wxT("OK")), 0, wxALL, 10);
+	sizer2->Add(ok = new wxButton(this, wxID_OK, _("OK")), 0, wxALL, 10);
 	ok->SetDefault();
-	sizer2->Add(new wxButton(this, wxID_CANCEL, wxT("Cancel")), 
+	sizer2->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 
 		    0, wxALL, 10);
 	topsizer->Add(sizer2, 0, wxALIGN_RIGHT);
 			

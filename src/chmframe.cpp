@@ -32,6 +32,16 @@
 #include <wx/accel.h>
 
 
+#define OPEN_HELP _("Open a CHM book.")
+#define FONTS_HELP _("Change fonts.")
+#define PRINT_HELP _("Print the page currently displayed")
+#define CONTENTS_HELP _("On or off?")
+#define HOME_HELP _("Go to the book's start page.")
+#define FORWARD_HELP _("Go forward in history. Per book.")
+#define BACK_HELP _("Back to the last visited page. Per book.")
+#define ABOUT_HELP _("About the program.")
+
+
 namespace {
 
 const wxChar *greeting = wxT(
@@ -75,6 +85,7 @@ const wxChar *about_txt = wxT(
 } // namespace
 
 
+
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
@@ -107,7 +118,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	InitToolBar(_tb);
 
 	CreateStatusBar();
-	SetStatusText(wxT("Ready."));
+	SetStatusText(_("Ready."));
 
 	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 
@@ -131,9 +142,9 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 
 	_cip = new CHMIndexPanel(_nb, _html);
 
-	_nb->AddPage(temp, wxT("Contents"));
-	_nb->AddPage(_cip, wxT("Index"));
-	_nb->AddPage(_csp, wxT("Search"));
+	_nb->AddPage(temp, _("Contents"));
+	_nb->AddPage(_cip, _("Index"));
+	_nb->AddPage(_csp, _("Search"));
 
 	_sw->Initialize(_html);
 	_html->SetFocusFromKbd();
@@ -156,7 +167,7 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-	::wxMessageBox(about_txt, wxT("About xCHM"),
+	::wxMessageBox(about_txt, _("About xCHM"),
 		       wxOK | wxICON_INFORMATION, this );
 }
 
@@ -164,7 +175,7 @@ void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
 	wxString selection =
-		::wxFileSelector(wxT("Choose a file.."), _openPath, 
+		::wxFileSelector(_("Choose a file.."), _openPath, 
 				 wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
 				 // they say Motif can't handle the following.
@@ -274,9 +285,9 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_tb->ToggleTool(ID_Contents, FALSE);
 			_menuFile->Check(ID_Contents, FALSE);
 			
-			::wxMessageBox(wxT("Couldn't extract the book"
+			::wxMessageBox(_("Couldn't extract the book"
 				       " contents tree."), 
-				       wxT("No contents.."), 
+				       _("No contents.."), 
 				       wxOK | wxICON_WARNING, this );
 		}
 	}
@@ -555,35 +566,21 @@ void CHMFrame::LoadCHM(const wxString& archive)
 }
 
 
-namespace {
-
-const wxChar *open_help = wxT("Open a CHM book.");
-const wxChar *fonts_help = wxT("Change fonts.");
-const wxChar *print_help = wxT("Print the page currently displayed");
-const wxChar *contents_help = wxT("On or off?");
-const wxChar *home_help = wxT("Go to the book's start page.");
-const wxChar *forward_help = wxT("Go forward in history. Per book.");
-const wxChar *back_help = wxT("Back to the last visited page. Per book.");
-const wxChar *about_help = wxT("About the program.");
-
-} // namespace
-
-
 wxMenuBar* CHMFrame::CreateMenu()
 {
 	_menuFile = new wxMenu;
 
-	_menuFile->Append(ID_Open, wxT("&Open..\tCtrl-O"), open_help);
-	_menuFile->Append(ID_Print, wxT("&Print page..\tCtrl-P"), print_help);
-	_menuFile->Append(ID_Fonts, wxT("Fon&ts..\tCtrl-T"), fonts_help);
+	_menuFile->Append(ID_Open, _("&Open..\tCtrl-O"), OPEN_HELP);
+	_menuFile->Append(ID_Print, _("&Print page..\tCtrl-P"), PRINT_HELP);
+	_menuFile->Append(ID_Fonts, _("Fon&ts..\tCtrl-T"), FONTS_HELP);
 	_menuFile->AppendSeparator();
 	_menuFile->AppendCheckItem(ID_Contents, 
-				   wxT("&Show contents tree\tCtrl-S"),
-				   contents_help);
+				   _("&Show contents tree\tCtrl-S"),
+				   CONTENTS_HELP);
 	_menuFile->AppendSeparator();
 
 	wxMenu *recent = new wxMenu;
-	_menuFile->Append(ID_Recent, wxT("&Recent files"), recent);
+	_menuFile->Append(ID_Recent, _("&Recent files"), recent);
 	_fh.UseMenu(recent);
 
 	// Fill the file history menu.
@@ -595,22 +592,22 @@ wxMenuBar* CHMFrame::CreateMenu()
 		_menuFile->Enable(ID_Recent, FALSE);
 
 	_menuFile->AppendSeparator();
-	_menuFile->Append(ID_Quit, wxT("E&xit\tCtrl-X"), 
-			  wxT("Quit the application."));
+	_menuFile->Append(ID_Quit, _("E&xit\tCtrl-X"), 
+			  _("Quit the application."));
 
 	wxMenu *menuHistory = new wxMenu;
 
-	menuHistory->Append(ID_Home, wxT("&Home\tCtrl-H"), home_help);
-	menuHistory->Append(ID_Forward, wxT("For&ward\tCtrl-W"), forward_help);
-	menuHistory->Append(ID_Back, wxT("&Back\tCtrl-B"), back_help);
+	menuHistory->Append(ID_Home, _("&Home\tCtrl-H"), HOME_HELP);
+	menuHistory->Append(ID_Forward, _("For&ward\tCtrl-W"), FORWARD_HELP);
+	menuHistory->Append(ID_Back, _("&Back\tCtrl-B"), BACK_HELP);
 	
 	wxMenu *menuHelp = new wxMenu;
-	menuHelp->Append(ID_About, wxT("&About ..\tF1"), about_help);
+	menuHelp->Append(ID_About, _("&About ..\tF1"), ABOUT_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;
-	menuBar->Append(_menuFile, wxT("&File"));
-	menuBar->Append(menuHistory, wxT("Hi&story"));
-	menuBar->Append(menuHelp, wxT("&Help"));
+	menuBar->Append(_menuFile, _("&File"));
+	menuBar->Append(menuHistory, _("Hi&story"));
+	menuBar->Append(menuHelp, _("&Help"));
 
 	return menuBar;
 }
@@ -621,7 +618,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	wxPanel *temp = new wxPanel(_nb);
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 	wxSizer *bmarks = new wxStaticBoxSizer(
-		new wxStaticBox(temp, -1, wxT("Bookmarks")), wxVERTICAL);
+		new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
 	wxSizer *inner = new  wxBoxSizer(wxHORIZONTAL);
 
 	temp->SetAutoLayout(TRUE);
@@ -643,12 +640,12 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	bmarks->Add(_cb, 0, wxEXPAND | wxBOTTOM, 5);
 	bmarks->Add(inner, 1, wxEXPAND, 0);
 
-	wxButton *badd = new wxButton(temp, ID_Add, wxT("Add"));
-	wxButton *bremove = new wxButton(temp, ID_Remove, wxT("Remove"));
+	wxButton *badd = new wxButton(temp, ID_Add, _("Add"));
+	wxButton *bremove = new wxButton(temp, ID_Remove, _("Remove"));
 
 #if wxUSE_TOOLTIPS
-	badd->SetToolTip(wxT("Add displayed page to bookmarks."));
-	bremove->SetToolTip(wxT("Remove selected bookmark."));
+	badd->SetToolTip(_("Add displayed page to bookmarks."));
+	bremove->SetToolTip(_("Remove selected bookmark."));
 #endif
 
 	inner->Add(badd, 1, wxEXPAND | wxRIGHT, 2);
@@ -755,25 +752,25 @@ namespace {
 
 bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 {
-	toolbar->AddTool(ID_Open, wxT("Open .."), wxBitmap(fileopen_xpm),
-			 open_help);
-	toolbar->AddTool(ID_Print, wxT("Print .."), wxBitmap(print_xpm),
-			 print_help);
-	toolbar->AddTool(ID_Fonts, wxT("Fonts .."), wxBitmap(htmoptns_xpm),
-			 fonts_help);
-	toolbar->AddCheckTool(ID_Contents, wxT("Contents"),
+	toolbar->AddTool(ID_Open, _("Open .."), wxBitmap(fileopen_xpm),
+			 OPEN_HELP);
+	toolbar->AddTool(ID_Print, _("Print .."), wxBitmap(print_xpm),
+			 PRINT_HELP);
+	toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm),
+			 FONTS_HELP);
+	toolbar->AddCheckTool(ID_Contents, _("Contents"),
 			      wxBitmap(htmsidep_xpm),
-			      wxBitmap(htmsidep_xpm), contents_help);
+			      wxBitmap(htmsidep_xpm), CONTENTS_HELP);
 	toolbar->AddSeparator();
 
-	toolbar->AddTool(ID_Back, wxT("Back"), wxBitmap(back_xpm), back_help);
-	toolbar->AddTool(ID_Forward, wxT("Forward"), wxBitmap(forward_xpm), 
-			 forward_help);
-	toolbar->AddTool(ID_Home, wxT("Home"), wxBitmap(home_xpm), 
-			 home_help);
+	toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);
+	toolbar->AddTool(ID_Forward, _("Forward"), wxBitmap(forward_xpm), 
+			 FORWARD_HELP);
+	toolbar->AddTool(ID_Home, _("Home"), wxBitmap(home_xpm), 
+			 HOME_HELP);
 	toolbar->AddSeparator();
-	toolbar->AddTool(ID_About, wxT("About"), wxBitmap(helpicon_xpm), 
-			 about_help);
+	toolbar->AddTool(ID_About, _("About"), wxBitmap(helpicon_xpm), 
+			 ABOUT_HELP);
 
 	toolbar->Realize();
 

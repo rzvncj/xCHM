@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-03-16 17:50+0200\n"
+"POT-Creation-Date: 2004-04-23 14:57+0300\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
 "Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
 "Language-Team: Brazilian Portuguese \n"

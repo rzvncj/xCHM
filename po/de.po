@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-03-16 17:50+0200\n"
+"POT-Creation-Date: 2004-04-23 14:57+0300\n"
 "PO-Revision-Date: 2004-03-05 19:00+0100\n"
 "Last-Translator: Lars Brand <altow@users.sourceforge.net>\n"
 "Language-Team: German\n"

@@ -72,7 +72,7 @@ public:
 	  directory just pass the empty string.
 	  \param pos The upper left corner of the frame.
 	  \param normalFont Name of the font face to use for normal text.
-	  \param fixedFont Name of the font face to use for fixed text (<TT>).
+	  \param fixedFont Name of the font face to use for fixed text.
 	  \param fontSize The font size.
 	  \param size The size of the frame.
 	*/

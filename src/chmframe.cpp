@@ -247,7 +247,7 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 	wxString page = _html->GetOpenedPage();
 
 	if(page.IsEmpty())
-		_ep->PrintText(wxT(greeting));
+		_ep->PrintText(_(greeting));
 	else
 		_ep->PrintFile(page);
 }
@@ -314,8 +314,8 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		chmf->GetTopicsTree(_tcl);
 
 		if(!title.IsEmpty()) {
-			wxString titleBarText = wxString(_("xCHM v. ")) 
-				+ wxT(VERSION) + wxT(": ") + title;
+			wxString titleBarText = 
+				wxString(wxT("xCHM v. " VERSION ": ")) + title;
 
 			SetTitle(titleBarText);
 			_html->SetRelatedFrame(this, titleBarText);

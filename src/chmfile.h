@@ -23,6 +23,7 @@
 #define __CHMFILE_H_
 
 #include <chm_lib.h>
+#include <wx/filefn.h>
 #include <wx/string.h>
 #include <wx/hashmap.h>
 #include <wx/font.h>

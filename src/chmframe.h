@@ -32,7 +32,7 @@
 #	include <config.h>
 #else
 	// this should never happen
-#	define VERSION "0.5.1"
+#	define VERSION "unknown"
 #endif
 
 

@@ -24,18 +24,28 @@
 #include <wx/defs.h>
 #include <wx/strconv.h>
 #include <wx/tokenzr.h>
-#include <wx/ptr_scpd.h>
 #include <assert.h>
-
 
 #include <bitfiddle.inl>
 
 
 namespace {
 
-// I'm defining a smart pointer class called wxCharArray, wxWindows style.
-wxDECLARE_SCOPED_ARRAY(unsigned char, UCharPtr)
-wxDEFINE_SCOPED_ARRAY(unsigned char, UCharPtr)
+// damn wxWindows and it's scoped ptr.
+class UCharPtr {
+public:
+	UCharPtr(unsigned char *p) : _p(p) {}
+	~UCharPtr() { delete[] _p; }
+
+	unsigned char *get() { return _p; }
+
+private:
+	UCharPtr(const UCharPtr&);
+	UCharPtr& operator=(const UCharPtr&);
+
+private:
+	unsigned char *_p;
+};
 
 } // namespace
 

@@ -1,0 +1,9 @@
+
+	* 0.5 is the initial release. It can load CHM files and display the
+	homepage, print the displayed page, go back and forward in the
+	history and toggle the contents tree panel. Enjoy.
+
+	* 0.5.1. Minor modifications:
+		+ added Doxygen comments and generated some documentation;
+		+ added code to display the book's title on the titlebar,
+		if the book's title can be determined.

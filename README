@@ -39,8 +39,28 @@
  xchm
 
  and start your session.
+
+ 
+ * Generating documentation
+
+ If you'd like to generate developer documentation go to the root
+ of the distribution and type
+
+ doxygen
+
+ This of course implies that you have doxygen installed. The documentation
+ will be generated in the doc directory in HTML and LaTex format. The doc
+ directory will be created in the process of creating the documentation so
+ it's ok that it's not present by default in the tarball.
+ Alternatively, you can just download the already generated docs from the
+ Sourceforge project page.
+
+
+ * Contact
+
  For bug reports and patches, please use the address above.
  For everything else, count to 10 and if you still want to send the
  message, go ahead. Can't promise I'll answer everything though.
+
 
  * Happy reading!

@@ -25,7 +25,10 @@
 #include <wx/wx.h>
 
 
+//! This is the application class.
 class CHMApp : public wxApp {
+
+	//! Our entry point into the application.
 	virtual bool OnInit();
 };
 

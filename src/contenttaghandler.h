@@ -26,29 +26,56 @@
 #include <wx/treectrl.h>
 
 
+//! Useful only as a dummy. The real work is done by ContentTagHandler.
 class ContentParser : public wxHtmlParser {
 public:
+	//! Dummy implementation. Returns NULL.
 	wxObject* GetProduct() { return NULL; }
 
 protected:
+	//! Dummy implementation. Does nothing.
 	virtual void AddText(const wxChar* WXUNUSED(txt)) {}
 };
 
 
+/*! 
+  \brief Objects of this class will be used as opaque data to be used with
+  a tree item, to that when the user select a tree item it will be easy
+  to retrieve the filename associated with the item.
+*/
 struct URLTreeItem : public wxTreeItemData {
-	URLTreeItem(const wxString& str) : _url(str) {}		
+
+	//! Sets the data to str.
+	URLTreeItem(const wxString& str) : _url(str) {}
+
+	//! Useful data.
 	wxString _url;
 };
 
 
+//! Maximum number of tree levels.
 #define TREE_BUF_SIZE 128
 
+
+//! The busiest class in extracting the contents tree by parsing an index file.
 class ContentTagHandler : public wxHtmlTagHandler {
 
 public:
+	/*!
+	  \brief Constructs the tag handler.
+	  \param toBuild The tree control to build. The control must be
+	  empty.
+	 */
 	ContentTagHandler(wxTreeCtrl* toBuild);
 
+	//! What tags are we interested in?
         wxString GetSupportedTags() { return wxT("UL,OBJECT,PARAM"); }
+
+	/*!
+	  \brief Does the bulk of the work, constructing the tree.
+	  \param tag The current tag to handle.
+	  \return true if we've parsed inner tags also, false otherwise.
+	 */
         bool HandleTag(const wxHtmlTag& tag);
 
 private:

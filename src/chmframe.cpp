@@ -107,8 +107,8 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
 	::wxMessageBox(about_txt, 
-		     "About xCHM", 
-		     wxOK | wxICON_INFORMATION, this );
+		       "About xCHM", 
+		       wxOK | wxICON_INFORMATION, this );
 }
 
 
@@ -248,9 +248,20 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(chmf) {
+		wxString title = chmf->Title();
+
 		if(_tcl->GetCount())
 			_tcl->DeleteAllItems();
 		chmf->GetTopicsTree(_tcl);
+
+		if(!title.IsEmpty()) {
+			wxString titleBarText = wxString("xCHM v. ") 
+				+ VERSION
+				+ ": " + title;
+
+			SetTitle(titleBarText);
+			_html->SetRelatedFrame(this, titleBarText);
+		}
 	}
 
 	// if we have contents..

@@ -26,17 +26,41 @@
 #include <wx/filesys.h>
 
 
+//! CHM filesystem handler class.
 class CHMFSHandler : public wxFileSystemHandler
 {
 public:
+	/*!
+	  \brief Doesn't do anything but needs to be here because of
+	  the private copy constructor.
+	 */
         CHMFSHandler();
+
+	//! Cleanup code. This calls CHMInputStream's Cleanup().
 	~CHMFSHandler();
 
+	/*!
+	  \brief Checks if it can open the file passed in location.
+	  \param location File to open.
+	  \returns true if location is in the form 
+	  "file:filename.chm#chm:/file_inside_archive.extension", false
+	  otherwise. Does not attempt to actually open the file.
+	 */
         virtual bool CanOpen(const wxString& location);
+
+	/*!
+	  \brief Tries to open the file specified.
+	  \param fs Currently ignored.
+	  \param location filename.
+	  \return A valid pointer to a wxFSFile or NULL on failure.
+	 */
         virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
 
 private:
+	//! No copy construction.
 	CHMFSHandler(const CHMFSHandler&);
+
+	//! No assignment.
 	CHMFSHandler& operator=(const CHMFSHandler&);
 };
 

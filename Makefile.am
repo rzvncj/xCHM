@@ -1,3 +1,3 @@
 
 SUBDIRS = src
-EXTRA_DIST = art
+EXTRA_DIST = art Doxyfile

@@ -63,9 +63,9 @@ public:
 	  \param parent The parent widget.
 	  \param tc Pointer to the tree control we want to synchronize
 	  with.
+	  \param frame Outer frame.
 	 */
-	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
-		      CHMFrame* frame);
+	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame* frame);
 
 	//! Destructor. Deletes heap objects allocated in the constructor.
 	~CHMHtmlWindow();

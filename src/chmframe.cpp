@@ -76,7 +76,7 @@ const wxChar *about_txt = wxT(
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
-		   const int fontSize, int sashPosition)
+		   const int fontSize, const int sashPosition)
 	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 

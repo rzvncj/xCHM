@@ -92,17 +92,19 @@ public:
 	  a book was sucessfully opened. For the current working
 	  directory just pass the empty string.
 	  \param pos The upper left corner of the frame.
+	  \param size The size of the frame.
 	  \param normalFont Name of the font face to use for normal text.
 	  \param fixedFont Name of the font face to use for fixed text.
 	  \param fontSize The font size.
-	  \param size The size of the frame.
+	  \param sashPosition Distance from the left of the frame to
+	  the end of the contents / search panel.
 	*/
 	CHMFrame(const wxString& title, const wxString& booksDir,
 		 const wxPoint& pos, const wxSize& size,
 		 const wxString& normalFont = wxEmptyString,
 		 const wxString& fixedFont = wxEmptyString,
 		 const int fontSize = CHM_DEFAULT_FONT_SIZE,
-		 int sashPositon = CONTENTS_MARGIN);
+		 const int sashPosition = CONTENTS_MARGIN);
 
 	//! Cleans up.
 	~CHMFrame();

@@ -25,6 +25,7 @@
 #include <chm_lib.h>
 #include <wx/string.h>
 #include <wx/treectrl.h>
+#include <wx/listbox.h>
 
 
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
@@ -114,6 +115,22 @@ public:
 	  \return true if it's possible to build the tree, false otherwise.
 	 */
 	bool GetTopicsTree(wxTreeCtrl *toBuild);
+
+
+	/*!
+	  \brief Fast search using the $FIftiMain file in the .chm.
+	  This just going to be an 'and' search, in that the words
+	  separated by spaces have to all be present, kind of
+	  search-engine like.
+	  \param text The text we're looking for. Can be more words,
+	  separated by spaces.
+	  \param wholeWords Are we looking for whole words only?
+	  \param titlesOnly Are we looking for titles only?
+	  \param toPopulate The list box we'll be filling with results.
+	  \return true if the search succeeded, false otherwise.
+	 */
+	bool IndexSearch(wxString& text, bool wholeWords, bool titlesOnly,
+			 wxListBox* toPopulate);
 
 	/*!
 	  \brief Looks up fileName in the archive.

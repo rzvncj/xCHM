@@ -23,6 +23,7 @@
 #include <contenttaghandler.h>
 #include <wx/defs.h>
 #include <wx/strconv.h>
+#include <wx/tokenzr.h>
 #include <assert.h>
 
 
@@ -126,8 +127,6 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	if(src.IsEmpty())
 		return false;
 
-	//cerr << src.mb_str() << endl;
-
 	ContentParser parser;
 	parser.AddTagHandler(new ContentTagHandler(toBuild));
 
@@ -139,13 +138,45 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
+bool CHMFile::IndexSearch(wxString& text, bool wholeWords, bool titlesOnly,
+			  wxListBox* toPopulate)
+{
+	if(toPopulate == NULL)
+		return false;
+
+	toPopulate->Clear();
+
+	if(text.IsEmpty())
+		return false;
+
+	chmUnitInfo ui;
+       
+	if(::chm_resolve_object(_chmFile, "/$FIftiMain", &ui) !=
+	   CHM_RESOLVE_SUCCESS)
+		return false;
+
+	wxStringTokenizer tkz(text, " ");
+	wxArrayString words;
+
+	while(tkz.HasMoreTokens()) {
+		wxString token = tkz.GetNextToken();
+		words.Add(token);
+	}
+
+	if(words.GetCount() == 0)
+		return false;
+
+	return false;
+}
+
+
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 {
 	return _chmFile != NULL && 
-		chm_resolve_object(_chmFile, 
-				   static_cast<const char *>(
-					   fileName.mb_str()), 
-				   ui)
+		::chm_resolve_object(_chmFile, 
+				     static_cast<const char *>(
+					     fileName.mb_str()), 
+				     ui)
 		== CHM_RESOLVE_SUCCESS;
 }
 
@@ -153,8 +184,8 @@ bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 			       off_t fileOffset, size_t bufferSize)
 {
-	return chm_retrieve_object(_chmFile, ui, buffer, fileOffset,
-				   bufferSize);
+	return ::chm_retrieve_object(_chmFile, ui, buffer, fileOffset,
+				     bufferSize);
 }
 
 
@@ -168,12 +199,12 @@ bool CHMFile::GetArchiveInfo()
 	u_int16_t *cursor = NULL;
 
 	// Do we have the #SYSTEM file in the archive?
-	if(chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
+	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
 	   CHM_RESOLVE_SUCCESS)
 		return false;
 
 	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-	if(chm_retrieve_object(_chmFile, &ui,
+	if(::chm_retrieve_object(_chmFile, &ui,
 			       buffer, 4, BUF_SIZE) == 0)
 		return false;
 
@@ -257,13 +288,13 @@ bool CHMFile::GetArchiveInfo()
 		index = 0;
 		wxString chunk;
 
-		if(chm_resolve_object(_chmFile, "/#STRINGS", &ui) !=
+		if(::chm_resolve_object(_chmFile, "/#STRINGS", &ui) !=
 		   CHM_RESOLVE_SUCCESS)
 			// no /#STRINGS, but we did get some info.
 			return true;
 
 		// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-		if(chm_retrieve_object(_chmFile, &ui,
+		if(::chm_retrieve_object(_chmFile, &ui,
 				       buffer, 1, BUF_SIZE) == 0)
 			// this should never happen, the specs say
 			// the least the file can be is 4096 bytes.

@@ -526,8 +526,8 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	u_int32_t *cursor32;
 	u_int32_t stroff, urloff;
 
-#define TOPICS_HEADER_LEN 0xe
-	unsigned char header[TOPICS_HEADER_LEN];
+#define TOPICS_ENTRY_LEN 16
+	unsigned char entry[TOPICS_ENTRY_LEN];
 
 #define COMMON_BUF_LEN 1025
 	unsigned char combuf[COMMON_BUF_LEN];
@@ -546,11 +546,11 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		index += sr_int(buffer.get() + off, &wlc_bit, ds, dr, length);
 		off += length;
 
-		if(::chm_retrieve_object(_chmFile, topics, header, 
-					 index * 16, TOPICS_HEADER_LEN) == 0)
+		if(::chm_retrieve_object(_chmFile, topics, entry, 
+					 index * 16, TOPICS_ENTRY_LEN) == 0)
 			return false;
 
-		cursor32 = reinterpret_cast<u_int32_t *>(header + 4);
+		cursor32 = reinterpret_cast<u_int32_t *>(entry + 4);
 		combuf[COMMON_BUF_LEN - 1] = 0;
 		stroff = *cursor32;
 		FIXENDIAN32(stroff);
@@ -562,25 +562,24 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		combuf[COMMON_BUF_LEN - 1] = 0;
 		wxString topic = CURRENT_CHAR_STRING(combuf);
 	      
-		cursor32 = reinterpret_cast<u_int32_t *>(header + 8);
+		cursor32 = reinterpret_cast<u_int32_t *>(entry + 8);
 		urloff = *cursor32;
 		FIXENDIAN32(urloff);
 
 		if(::chm_retrieve_object(_chmFile, uitbl, combuf, 
-					 urloff, 10) == 0)
+					 urloff, 12) == 0)
 			return false;
 
-/*
 		cursor32 = reinterpret_cast<u_int32_t*>(combuf + 8);
 		urloff = *cursor32;
 		FIXENDIAN32(urloff);
 
 		if(::chm_retrieve_object(_chmFile, urlstr, combuf, 
-					 urloff, COMMON_BUF_LEN - 1) == 0)
+					 urloff + 8, COMMON_BUF_LEN - 1) == 0)
 			return false;
 		combuf[COMMON_BUF_LEN - 1] = 0;
-*/
-		wxString url; // = CURRENT_CHAR_STRING(combuf);
+
+		wxString url = CURRENT_CHAR_STRING(combuf);
 
 		cerr << "Index: " << index 
 		     << ", file: " << topic.mb_str() 

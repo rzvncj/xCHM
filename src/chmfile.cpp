@@ -132,8 +132,8 @@ bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 }
 
 
-LONGINT64 CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
-				  LONGUINT64 fileOffset, LONGINT64 bufferSize)
+size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
+			       off_t fileOffset, size_t bufferSize)
 {
 	return chm_retrieve_object(_chmFile, ui, buffer, fileOffset,
 				   bufferSize);

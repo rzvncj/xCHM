@@ -136,8 +136,8 @@ public:
 	  \param bufferSize The size of the buffer.
 	  \return 0 on error, length of chunk retrieved otherwise.
 	 */
-	LONGINT64 RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
-				 LONGUINT64 fileOffset, LONGINT64 bufferSize);
+	size_t RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
+			      off_t fileOffset, size_t bufferSize);
 
 private:
 	//! Helper. Initializes most of the private data members.

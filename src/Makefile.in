@@ -111,7 +111,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-INCLUDES = -I$(top_srcdir)/art `wx-config --cppflags`
+INCLUDES = -I$(top_srcdir)/art `$(WXCFG) --cppflags`
 
 bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \

@@ -2,17 +2,26 @@
 AC_INIT(src/chmfile.cpp)
 AM_CONFIG_HEADER(config.h)
 
-CXXFLAGS="-W -Wall" 
+CXXFLAGS="$CXXFLAGS -W -Wall"
+
+AC_CHECK_PROG(WXCFG, wx-config, wx-config, no)
+if test "x$WXCFG" == "xno"; then
+    AC_MSG_ERROR([wx-config not found in PATH. Do you have wxWindows installed?])
+fi
+AC_SUBST(WXCFG)
 
 AC_ARG_ENABLE(static, 
 	      [  --enable-static         link statically to wxWindows.], 
-	      LINKOPT="`wx-config --static --libs`",
-	      LINKOPT="`wx-config --libs`")
+	      LINKOPT="`$WXCFG --static --libs`",
+	      LINKOPT="`$WXCFG --libs`")
 AC_SUBST(LINKOPT)
 
 AC_ARG_ENABLE(debug,
 	      [  --enable-debug          compile with gdb debug information.], 
-	      CXXFLAGS="$CXXFLAGS -g",
+	      CXXFLAGS="$CXXFLAGS -g")
+
+AC_ARG_ENABLE(optimize,
+	      [  --enable-optimize       optimize compiled code (-O2).], 
 	      CXXFLAGS="$CXXFLAGS -O2")
 
 AM_INIT_AUTOMAKE(xchm, 0.6.1)
@@ -24,12 +33,6 @@ AC_CHECK_LIB(
     chm, chm_open,,
     AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
 )
-
-AC_CHECK_PROG(WXCFG, wx-config, wx-config, no)
-if test "x$WXCFG" == "xno"; then
-    AC_MSG_ERROR([wx-config not found in PATH. Do you have wxWindows installed?])
-fi
-
 
 AC_OUTPUT(Makefile src/Makefile)
 

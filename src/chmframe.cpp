@@ -288,10 +288,12 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(!data || data->_url.IsEmpty())
 		return;
 
-	_html->SetSync(false);
-	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-			wxT("#chm:/") + data->_url);
-	_html->SetSync(true);
+	if(!_html->IsCaller()) {
+		_html->SetSync(false);
+		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
+				wxT("#chm:/") + data->_url);
+		_html->SetSync(true);
+	}
 }
 
 

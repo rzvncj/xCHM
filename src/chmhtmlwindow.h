@@ -58,6 +58,13 @@ public:
 	  \param value Synchronize the tree widget on load?
 	 */
 	void SetSync(bool value) { _syncTree = value; }
+	
+	/*!
+	  Returns true if the tree control's EVT_TREE_SEL_CHANGED
+	  event happened as a result of the CHMHtmlWindow calling
+	  SelectItem() on it.
+	*/
+	bool IsCaller() { return _found; }
 
 private:
 	//! Helper. Recursively looks for the opened page in the tree.

@@ -29,7 +29,6 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 {}
 
 
-
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	if(_syncTree && 
@@ -42,10 +41,8 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 		// LoadPage() with _syncTree set to false.
 		Sync(_tcl->GetRootItem(), location);
 
-		if(_found) {
+		if(_found)
 			_found = false;
-			return true;
-		}
 	}
 
 	return wxHtmlWindow::LoadPage(location);
@@ -62,8 +59,9 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 
 	if(data && (data->_url).AfterLast(wxT('/')).Lower() == 
 	   page.AfterLast(wxT('/')).Lower()) {
-		_tcl->SelectItem(root);
+		// Order counts!
 		_found = true;
+		_tcl->SelectItem(root);
 		return;
 	}
 

@@ -49,7 +49,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 {
 	wxString right = GetRightLocation(location);
 	wxString left = GetLeftLocation(location);
-	CHMInputStream *s;
+	CHMInputStream *s = NULL;
 	
 	// HTML code for space is %20
 	right.Replace(wxT("%20"), wxT(" "), TRUE);

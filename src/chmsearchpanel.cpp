@@ -108,7 +108,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 
 static inline bool WHITESPACE(wxChar c)
 {
-	return c == _T(' ') || c == _T('\n') || c == _T('\r') || c == _T('\t');
+	return c == _T(' ') || c == _T('\n') || 
+		c == _T('\r') || c == _T('\t') ||
+		c == _T('<') || c == _T('>');
 }
 
 

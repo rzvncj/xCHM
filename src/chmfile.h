@@ -127,7 +127,9 @@ public:
 	  \param text The text we're looking for.
 	  \param wholeWords Are we looking for whole words only?
 	  \param titlesOnly Are we looking for titles only?
-	  \param toPopulate The list box we'll be filling with results.
+	  \param results A string-string hashmap that will hold
+	  the results in case of successful search. The keys are
+	  the URLs and the values are the page titles.
 	  \return true if the search succeeded, false otherwise.
 	 */
 	bool IndexSearch(const wxString& text, bool wholeWords, 

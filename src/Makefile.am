@@ -12,3 +12,5 @@ noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 
 xchm_LDADD= @LINKOPT@ 
 
+all-local:
+	@REZ_COMMAND@

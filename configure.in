@@ -17,6 +17,9 @@ if test "$wxWin" != 1; then
         ])
 fi
 
+REZ_COMMAND="`$WX_CONFIG_PATH --rezflags` xchm"
+AC_SUBST(REZ_COMMAND)
+
 wx_config_major_version=`echo $WX_VERSION | \
 	sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
 wx_config_minor_version=`echo $WX_VERSION | \

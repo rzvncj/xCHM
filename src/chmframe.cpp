@@ -83,7 +83,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false)
+	  _bookmarksDeleted(false), _sashPos(CONTENTS_MARGIN)
 {
 #ifdef _ENABLE_COPY_AND_FIND
 #	ifdef wxUSE_ACCEL
@@ -251,6 +251,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 	if(_sw->IsSplit()) {
 		_tb->ToggleTool(ID_Contents, FALSE);
 		_menuFile->Check(ID_Contents, FALSE);
+		_sashPos = _sw->GetSashPosition();
 		
 		_sw->Unsplit(_nb);
 		_nb->Show(FALSE);
@@ -262,7 +263,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_menuFile->Check(ID_Contents, TRUE);
 
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, CONTENTS_MARGIN);
+			_sw->SplitVertically(_nb, _html, _sashPos);
 
 		} else {
 			_tb->ToggleTool(ID_Contents, FALSE);
@@ -346,7 +347,11 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& WXUNUSED(event))
 		return;
 
 	wxString *url = reinterpret_cast<wxString *>(
+#ifdef __WXGTK__
 		_cb->GetClientData(_cb->GetSelection()));
+#else
+		_cb->wxItemContainer::GetClientData(_cb->GetSelection()));
+#endif
 
 	if(!url || url->IsEmpty())
 		return;
@@ -442,7 +447,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	if(_tcl->GetCount() > 1) {		
 		if(!_sw->IsSplit()) {
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, CONTENTS_MARGIN);
+			_sw->SplitVertically(_nb, _html, _sashPos);
 			_menuFile->Check(ID_Contents, TRUE);
 			_tb->ToggleTool(ID_Contents, TRUE);
 		}
@@ -616,9 +621,13 @@ void CHMFrame::SaveBookmarks()
 	const wxChar* format1 = wxT("bookmark_%ld_title");
 	const wxChar* format2 = wxT("bookmark_%ld_url");
 
-	for(long i = 0; i < noEntries; ++i) {
+	for(int i = 0; i < noEntries; ++i) {
 		wxString *url = reinterpret_cast<wxString *>(
+#ifdef __WXGTK__
 			_cb->GetClientData((int)i));
+#else
+			_cb->wxItemContainer::GetClientData((int)i));
+#endif
 
 		config.Write(wxString::Format(format1, i), 
 			     _cb->GetString((int)i));

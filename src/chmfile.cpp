@@ -154,12 +154,9 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 	ContentParser parser;
 	parser.AddTagHandler(new ContentTagHandler(toBuild));
-
 	parser.Parse(src);
-	toBuild->Expand(toBuild->GetRootItem());
 
 	return true;
-
 }
 
 

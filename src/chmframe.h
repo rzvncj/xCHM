@@ -194,6 +194,7 @@ private:
 	int _fontSize;
 	bool _bookmarkSel;
 	bool _bookmarksDeleted;
+	int _sashPos;
 
 private:
 	DECLARE_EVENT_TABLE()	

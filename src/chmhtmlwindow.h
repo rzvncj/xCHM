@@ -141,16 +141,17 @@ private:
 	void Sync(wxTreeItemId root, const wxString& page);
 
 	//! Helper. Returns the prefix of the currently loaded page.
-	wxString GetPrefix() const;
+	wxString GetPrefix(const wxString& location) const;
 
 	//! Helper. Fixes ../dir/file locations.
-	bool FixRelativePath(wxString &location) const;
+	bool FixRelativePath(wxString& location, const wxString& prefix) const;
 	
 private:
 	wxTreeCtrl* _tcl;
 	bool _syncTree;
 	bool _found;
 	wxMenu *_menu;
+	wxString _prefix;
 
 #ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;

@@ -57,11 +57,13 @@ CHMHtmlWindow::~CHMHtmlWindow()
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxString tmp = location;
-	FixRelativePath(tmp);
+	FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
 
 	if(tmp.StartsWith(wxT("javascript:fullSize"))) {
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 	}
+
+	_prefix = GetPrefix(tmp);
 
 	if(_syncTree && 
 	   // We should be looking for a valid page, not / (home).
@@ -102,7 +104,8 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 		url = (data->_url).BeforeFirst(wxT('#'));
 
 	if(data && (!url.CmpNoCase(page) || 
-		    !url.CmpNoCase(GetPrefix() + wxT("/") + page))) {
+		    !url.CmpNoCase(GetPrefix(GetOpenedPage()) + wxT("/") 
+				   + page))) {
 		// Order counts!
 		_found = true;
 		_tcl->SelectItem(root);
@@ -120,17 +123,17 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 
 
 inline 
-wxString CHMHtmlWindow::GetPrefix() const
+wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 {
-	return GetOpenedPage().AfterLast(wxT(':')).AfterFirst(
+	return location.AfterLast(wxT(':')).AfterFirst(
 		wxT('/')).BeforeLast(wxT('/'));
 }
 
 
-bool CHMHtmlWindow::FixRelativePath(wxString &location) const
+bool CHMHtmlWindow::FixRelativePath(wxString &location,
+				    const wxString& prefix) const
 {
-	// handle relative paths
-	if(!location.StartsWith(wxT("..")))
+	if(location.StartsWith(wxT("file:")))
 		return false;
 
 	CHMFile *chmf = CHMInputStream::GetCache();
@@ -138,22 +141,24 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location) const
 	if(!chmf)
 		return false;
 
-	wxString prefix = GetPrefix();
+	bool result = location.StartsWith(wxT(".."));
+	wxString prf = prefix;
 
 	while(location.StartsWith(wxT(".."))) {
 		location = location.AfterFirst(wxT('/'));
-		prefix = prefix.BeforeLast(wxT('/'));
+		prf = prf.BeforeLast(wxT('/'));
 	}
 		
-	if(!prefix.IsEmpty())
-		prefix = wxString(wxT("/")) + prefix;
+	if(!prf.IsEmpty())
+		prf = wxString(wxT("/")) + prf;
 	
 	location = wxString(wxT("file:")) + chmf->ArchiveName() + 
-		wxT("#chm:") + prefix + wxT("/") + location;
+		wxT("#chm:") + prf + wxT("/") + location;
 
-	return true;
+	// Don't redirect for simple relative paths that wxHTML can
+	// handle by itself.
+	return result;
 }
-
 
 
 wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
@@ -165,7 +170,7 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 
 	wxString tmp = url;
 
-	if(FixRelativePath(tmp)) {
+	if(FixRelativePath(tmp, _prefix)) {
 		*redirect = tmp;
 		return wxHTML_REDIRECT;
 	}

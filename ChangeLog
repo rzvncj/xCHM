@@ -109,3 +109,7 @@
 		+ added real-time searchable index support via a new 'Index'
 		panel (status / selected index word changes as you type).
 		+ suppressed unhelpful error messages while loading a page.
+		+ hacked around wxWindows file system handler bug.
+		GetMimeTypeFromExt() couldn't figure out that pages that
+		ended in ".HTM" (as opposed to lowercase ".htm") are of
+		"text/html" MIME type.

@@ -46,8 +46,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
 
 #if wxUSE_TOOLTIPS
-	_partial->SetToolTip(wxT("Search for words that start with"
-			       " the typed words."));
+	_partial->SetToolTip(wxT("Allow partial matches."));
 	_titles->SetToolTip(wxT("Only search in the contents' titles."));
 	_search->SetToolTip(wxT("Search contents for occurences of"
 				" the specified text."));

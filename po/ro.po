@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-01-31 14:12+0200\n"
+"POT-Creation-Date: 2004-01-31 14:23+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -100,7 +100,7 @@ msgstr "Pregatit."
 
 #: src/chmframe.cpp:145 src/chmframe.cpp:761
 msgid "Contents"
-msgstr "Continut"
+msgstr "Cuprins"
 
 #: src/chmframe.cpp:146
 msgid "Index"
@@ -265,3 +265,7 @@ msgstr "Cauta doar in titlurile din cuprins."
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
 msgstr "Cauta in carte pagini care contin aparitii ale textului specificat."
+
+#: src/contenttaghandler.cpp:37
+msgid "Topics"
+msgstr "Cuprins"

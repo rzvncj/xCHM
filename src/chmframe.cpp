@@ -78,24 +78,25 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
 		   const int fontSize)
-	: wxFrame((wxFrame *)NULL, -1, title, pos, size), _html(NULL),
+	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false)
 {
-	int sizes[7];
-
-	for(int i = -3; i <= 3; ++i)
-		sizes[i+3] = _fontSize + i * 2;
-
 #ifdef _ENABLE_COPY_AND_FIND
+#	ifdef wxUSE_ACCEL
 	wxAcceleratorEntry entries[1];
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
 	wxAcceleratorTable accel(1, entries);
 	SetAcceleratorTable(accel);
+#	endif
 #endif
+
+	int sizes[7];
+	for(int i = -3; i <= 3; ++i)
+		sizes[i+3] = _fontSize + i * 2;
 
 	SetIcon(wxIcon(manual_xpm));
 	SetMenuBar(CreateMenu());
@@ -481,7 +482,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 {
 	_menuFile = new wxMenu;
 
-	_menuFile->Append(ID_Open, wxT("&Open ..\tCtrl-O"), open_help);
+	_menuFile->Append(ID_Open, wxT("&Open..\tCtrl-O"), open_help);
 	_menuFile->Append(ID_Print, wxT("&Print page..\tCtrl-P"), print_help);
 	_menuFile->Append(ID_Fonts, wxT("Fon&ts..\tCtrl-T"), fonts_help);
 	_menuFile->AppendSeparator();

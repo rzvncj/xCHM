@@ -40,7 +40,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 	_menu->AppendSeparator();
 	_menu->Append(ID_CopySel, wxT("&Copy selection"));
 	_menu->AppendSeparator();
-	_menu->Append(ID_PopupFind, wxT("&Find in page .."));
+	_menu->Append(ID_PopupFind, wxT("&Find in page.."));
 #endif
 }
 
@@ -179,17 +179,13 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 	}
 
 	if(found) {
-		int w, h;
-		GetSize(&w, &h);
-
 		// What is all this wxWindows protected member crap?
 		delete m_selection;
 		m_selection = new wxHtmlSelection();
 
-		// The wxPoint(w,h) is a hack because Set(parent, parent)
-		// doesn't select the whole word on screen.
-		m_selection->Set(wxDefaultPosition, parent, wxPoint(w,h), 
-				 parent);		
+		// !! Must see if this works now. !!
+		m_selection->Set(parent, parent);		
+
 		int y;
 		wxHtmlCell *cell = parent;
 
@@ -288,6 +284,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 	PopupMenu(_menu, event.GetPosition());
 }
+
 
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)

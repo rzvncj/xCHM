@@ -115,12 +115,13 @@ public:
 	~CHMFrame();
 
 	/*!
-	  \brief Attempts to load a .chm file and display it's home page,
-	  and if available, the contents tree. Otherwise an error message
-	  is issued.
+	  \brief Attempts to load a .chm file and display it's home page.
 	  \param archive The .chm file name on disk.
 	 */
 	void LoadCHM(const wxString& archive);
+
+	//! Fills the index and the contents tree.
+	void UpdateCHMInfo();
 
 protected:
 	//! Called when the user closes the window.

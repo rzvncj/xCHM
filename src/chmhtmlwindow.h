@@ -41,6 +41,10 @@ enum {
 };
 
 
+//! Minimize dependencies. Forward declaration.
+class CHMFrame;
+
+
 /*!
   \class wxHtmlWindow
   \brief wxWidgets HTML widget class.
@@ -60,7 +64,8 @@ public:
 	  \param tc Pointer to the tree control we want to synchronize
 	  with.
 	 */
-	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc);
+	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
+		      CHMFrame* frame);
 
 	//! Destructor. Deletes heap objects allocated in the constructor.
 	~CHMHtmlWindow();
@@ -144,6 +149,9 @@ protected:
 					 const wxString& url,
 					 wxString *redirect) const;
 
+	//! Overridden. Called when the user clicks on a link.
+	void OnLinkClicked(const wxHtmlLinkInfo& link);
+
 private:
 	//! Helper. Recursively looks for the opened page in the tree.
 	void Sync(wxTreeItemId root, const wxString& page);
@@ -161,6 +169,7 @@ private:
 	wxMenu *_menu;
 	wxString _prefix;
 	bool _absolute;
+	CHMFrame *_frame;
 
 #ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;

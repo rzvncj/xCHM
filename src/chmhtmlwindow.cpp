@@ -24,15 +24,17 @@
 #include <chmhtmlwindow.h>
 #include <contenttaghandler.h>
 #include <chminputstream.h>
+#include <chmframe.h>
 #include <wx/wx.h>
 #include <wx/log.h>
 
 
 
-CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
+CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
+			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
-	  _absolute(false)
+	  _absolute(false), _frame(frame)
 #ifdef _ENABLE_COPY_AND_FIND
 	, _fdlg(NULL)
 #endif
@@ -209,8 +211,18 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 }
 
 
-#ifdef _ENABLE_COPY_AND_FIND
+void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
+{
+	wxString url = link.GetHref();
 
+	LoadPage(url);
+
+	if(!url.Left(7).CmpNoCase(wxT("MS-ITS:")))
+		_frame->UpdateCHMInfo();
+}
+
+
+#ifdef _ENABLE_COPY_AND_FIND
 
 wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 				     bool wholeWords, bool caseSensitive)

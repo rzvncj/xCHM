@@ -130,7 +130,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 
 	wxPanel* temp = CreateContentsPanel();
 
-	_html = new CHMHtmlWindow(_sw, _tcl);
+	_html = new CHMHtmlWindow(_sw, _tcl, this);
 	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	_html->SetRelatedStatusBar(0);
 
@@ -445,15 +445,21 @@ void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
 
-#if !wxUSE_UNICODE
-	static bool noSpecialFont = true;
-	static wxFontEncoding enc = wxFont::GetDefaultEncoding();
-#endif
-
 	SaveBookmarks();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
 		      wxT("#chm:/"));
 
+	UpdateCHMInfo();
+	LoadBookmarks();
+}
+
+
+void CHMFrame::UpdateCHMInfo()
+{
+#if !wxUSE_UNICODE
+	static bool noSpecialFont = true;
+	static wxFontEncoding enc = wxFont::GetDefaultEncoding();
+#endif
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(!chmf)
@@ -560,9 +566,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	}
 
 	// select Contents
-	_nb->SetSelection(0);
-
-	LoadBookmarks();
+	_nb->SetSelection(0);	
 }
 
 

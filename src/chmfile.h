@@ -113,6 +113,8 @@ public:
 	 */
 	bool IsOk() const { return _chmFile != NULL; }
 
+	//! Checks if a 'ms-its' link has been clicked and the chm changed.
+	bool HasChanged();
 
 	/*!
 	  \brief Determines the encoding that the CHM creator would like

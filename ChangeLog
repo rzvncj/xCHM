@@ -64,11 +64,13 @@
 		+ refined the synchronization between the contents tree and
 		the wxHtmlWindow displayed page.
 
-	* 0.9 Major feature enhancements (wxWindows >= 2.5.0 only):
-		+ added 'find in page' code.
-		+ added 'copy text' code.
+	* 0.8,2 Bug fixes and improvements: 
+		+ added 'find in page' code (wxWindows 2.5.x only).
+		+ added 'copy text' code (wxWindows 2.5 only).
 		+ added a 'find in page' dialog that hopefully pops up
-		on Ctrl-F :)
+		on Ctrl-F :) (wxWindows 2.5.x only)
 		+ added a popup menu with common options (back, forward,
 		copy selection, find in page) that pops up when the user
 		right clicks the HTML window.
+		+ beautified the tree control and enabled variable sizes
+		for the tree items.

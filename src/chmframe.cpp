@@ -440,6 +440,7 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
+	static bool noSpecialFont = true;
 
 	SaveBookmarks();
 
@@ -474,13 +475,30 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		long cs = -1;
 		fontFace.AfterLast(wxT(',')).ToLong(&cs);
 
+		int sizes[7];
+		for(int i = -3; i <= 3; ++i)
+			sizes[i+3] = _fontSize + i * 2;
+
 		wxFont font(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
 			    wxEmptyString, GetFontEncFromCharSet((int)cs));
 		_tcl->SetFont(font);
 		_csp->SetNewFont(font);
-	} else {
+		_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
+				sizes);
+
+		noSpecialFont = false;
+
+	} else if(noSpecialFont == false) {
+
+		int sizes[7];
+		for(int i = -3; i <= 3; ++i)
+			sizes[i+3] = _fontSize + i * 2;
+
 		_tcl->SetFont(_font);
-		_csp->SetNewFont(_font);
+		_csp->ResetFont(_font);
+		_html->SetFonts(_normalFont, _fixedFont, sizes);
+
+		noSpecialFont = true;
 	}
 
 	// if we have contents..

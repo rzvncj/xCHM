@@ -56,7 +56,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 				 wxDefaultPosition, wxDefaultSize, 
 				 0, NULL, wxLB_SINGLE);
 
-	_font = _results->GetFont();
+	_enc = wxFont::GetDefaultEncoding();
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
@@ -269,14 +269,14 @@ void CHMSearchPanel::SetNewFont(const wxFont& font)
 }
 
 
-void CHMSearchPanel::ResetFont()
+void CHMSearchPanel::ResetFont(const wxFont& font)
 {
-	wxFont::SetDefaultEncoding(wxFONTENCODING_ISO8859_1);
-	_results->SetFont(_font);
-		//wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
-		//	 wxEmptyString, wxFONTENCODING_ISO8859_1));
+	// wxWindows bug I have to get around.
+	_results->SetFont(wxFont(font.GetPointSize(), font.GetFamily(),
+				 font.GetStyle(), font.GetWeight(), 
+				 font.GetUnderlined(), font.GetFaceName(),
+				 _enc));
 }
-
 
 void CHMSearchPanel::SetConfig()
 {

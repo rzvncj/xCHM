@@ -137,6 +137,38 @@ static inline bool HTML_WHITESPACE(wxChar c)
 }
 
 
+#define REHASH(a, b, h) ((((h) - (a)*d) << 1) + (b))
+
+bool KR(const wxChar *x, int m, const wxChar *y, int n) 
+{
+	int d, hx, hy, i, j;
+
+	/* Preprocessing */
+	/* computes d = 2^(m-1) with
+	   the left-shift operator */
+	for (d = i = 1; i < m; ++i)
+		d = (d<<1);
+	for (hy = hx = i = 0; i < m; ++i) {
+		hx = ((hx<<1) + x[i]);
+		hy = ((hy<<1) + y[i]);
+	}
+
+	/* Searching */
+	j = 0;
+	while (j <= n-m) {
+		if (hx == hy && memcmp(x, y + j, m * sizeof(wxChar)) == 0)
+			return true;
+		hy = REHASH(y[j], y[j + m], hy);
+		++j;
+	}
+
+	return false;
+}
+
+
+#include <iostream>
+using namespace std;
+
 // The following two functions should be changed with faster ones.
 
 bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
@@ -161,27 +193,27 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 		text.MakeLower();
 	}
 
-	const wxChar *buf = tmp.c_str();
+	const wxChar *buf1 = tmp.c_str(), *buf2 = text.c_str();
 	bool inTag = false;
 
 	if(wholeWords) {
 		for(i = 0; i < lng - wrd + 1; ++i) {
 
-			if(buf[i] == wxT('<'))
+			if(buf1[i] == '<')
 				inTag = true;
-			else if(buf[i] == wxT('>'))
+			else if(buf1[i] == '>')
 				inTag = false;
 
-			if(HTML_WHITESPACE(buf[i]) || inTag) 
+			if(HTML_WHITESPACE(buf1[i]) || inTag) 
 				continue;
 			 			
 			j = 0;
-			while(buf[i + j] == text[(size_t)j] && j < wrd) 
+			while(buf1[i + j] == buf2[j] && j < wrd) 
 				++j;
 
 			if (j == wrd && 
-			    (HTML_WHITESPACE(buf[i + j]) || i+j == lng)) 
-				if(i == 0 || HTML_WHITESPACE(buf[i - 1])) {
+			    (HTML_WHITESPACE(buf1[i + j]) || i+j == lng)) 
+				if(i == 0 || HTML_WHITESPACE(buf1[i - 1])) {
 					found = TRUE; 
 					break; 
 				}
@@ -189,9 +221,9 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 	} else {
 		for (i = 0; i < lng - wrd + 1; ++i) {
 
-  			if(buf[i] == wxT('<'))
+  			if(buf1[i] == '<')
 				inTag = true;
-			else if(buf[i] == wxT('>')) {
+			else if(buf1[i] == '>') {
 				inTag = false;
 				continue;
 			}
@@ -200,7 +232,7 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 				continue;
 
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+			while ((j < wrd) && (buf1[i + j] == buf2[j])) 
 				++j;
 			if (j == wrd) { 
 				found = TRUE; 
@@ -227,21 +259,21 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 		text.MakeLower();
 	}
 
-	const wxChar *buf = tmp.c_str();
+	const wxChar *buf1 = tmp.c_str(), *buf2 = text.c_str();
 
 	if(wholeWords) {
 		for(i = 0; i < lng - wrd + 1; ++i) {
 
-			if(WHITESPACE(buf[i])) 
+			if(WHITESPACE(buf1[i])) 
 				continue;
 			 			
 			j = 0;
-			while(buf[i + j] == text[(size_t)j] && j < wrd) 
+			while(buf1[i + j] == buf2[j] && j < wrd) 
 				++j;
 
-			if (j == wrd && (WHITESPACE(buf[i + j]) || 
+			if (j == wrd && (WHITESPACE(buf1[i + j]) || 
 					 i+j == lng))
-				if(i == 0 || WHITESPACE(buf[i - 1])) {
+				if(i == 0 || WHITESPACE(buf1[i - 1])) {
 					found = TRUE; 
 					break; 
 				}
@@ -251,7 +283,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 		for (i = 0; i < lng - wrd + 1; ++i) {
 
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+			while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j])) 
 				++j;
 			if (j == wrd) { 
 				found = TRUE; 

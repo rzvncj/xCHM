@@ -47,7 +47,6 @@ void CHMInputStream::Cleanup()
 CHMInputStream::CHMInputStream(const wxString& archive, 
 			       const wxString& file)
 	: _currPos(0)
-
 {
 	wxString filename = file;
 

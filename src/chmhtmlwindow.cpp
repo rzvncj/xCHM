@@ -57,29 +57,9 @@ CHMHtmlWindow::~CHMHtmlWindow()
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxString tmp = location;
+	FixRelativePath(tmp);
 
-	// handle relative paths
-	if(tmp.StartsWith(wxT(".."))) {
-
-		CHMFile *chmf = CHMInputStream::GetCache();
-
-		if(!chmf)
-			return false;
-
-		wxString prefix = GetPrefix();
-		
-		while(tmp.StartsWith(wxT(".."))) {
-			tmp = tmp.AfterFirst(wxT('/'));
-			prefix = prefix.BeforeLast(wxT('/'));
-		}
-		
-		if(!prefix.IsEmpty())
-			prefix = wxString(wxT("/")) + prefix;
-
-		tmp = wxString(wxT("file:")) + chmf->ArchiveName() + 
-			wxT("#chm:") + prefix + wxT("/") + tmp;
-
-	} else if(tmp.StartsWith(wxT("javascript:fullSize"))) {
+	if(tmp.StartsWith(wxT("javascript:fullSize"))) {
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 	}
 
@@ -144,6 +124,53 @@ wxString CHMHtmlWindow::GetPrefix() const
 {
 	return GetOpenedPage().AfterLast(wxT(':')).AfterFirst(
 		wxT('/')).BeforeLast(wxT('/'));
+}
+
+
+bool CHMHtmlWindow::FixRelativePath(wxString &location) const
+{
+	// handle relative paths
+	if(!location.StartsWith(wxT("..")))
+		return false;
+
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return false;
+
+	wxString prefix = GetPrefix();
+
+	while(location.StartsWith(wxT(".."))) {
+		location = location.AfterFirst(wxT('/'));
+		prefix = prefix.BeforeLast(wxT('/'));
+	}
+		
+	if(!prefix.IsEmpty())
+		prefix = wxString(wxT("/")) + prefix;
+	
+	location = wxString(wxT("file:")) + chmf->ArchiveName() + 
+		wxT("#chm:") + prefix + wxT("/") + location;
+
+	return true;
+}
+
+
+
+wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
+						const wxString& url, 
+						wxString *redirect) const
+{
+	if(type == wxHTML_URL_PAGE)
+		return wxHTML_OPEN;
+
+	wxString tmp = url;
+
+	if(FixRelativePath(tmp)) {
+		*redirect = tmp;
+		return wxHTML_REDIRECT;
+	}
+
+	return wxHTML_OPEN;
 }
 
 
@@ -247,7 +274,6 @@ void CHMHtmlWindow::ClearSelection()
 	m_selection = NULL;
 	Refresh();
 }
-
 
 void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
 {

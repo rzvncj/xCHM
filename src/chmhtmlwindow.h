@@ -116,7 +116,7 @@ public:
 	//! Called when the user selects 'Find' from the popup menu.
 	void OnFind(wxCommandEvent& event);
 
-protected:
+protected:	
 	//! Called when the user selects 'Copy' from the popup menu.
 	void OnCopy(wxCommandEvent& event);
 #endif
@@ -130,12 +130,21 @@ protected:
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
 
+	//! Overridden to correct relative images paths.
+	virtual 
+	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type,
+					 const wxString& url,
+					 wxString *redirect) const;
+
 private:
 	//! Helper. Recursively looks for the opened page in the tree.
 	void Sync(wxTreeItemId root, const wxString& page);
 
 	//! Helper. Returns the prefix of the currently loaded page.
 	wxString GetPrefix() const;
+
+	//! Helper. Fixes ../dir/file locations.
+	bool FixRelativePath(wxString &location) const;
 	
 private:
 	wxTreeCtrl* _tcl;

@@ -122,10 +122,14 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	_html->SetRelatedStatusBar(0);
 
-	_html->SetFonts(_normalFont, _fixedFont, sizes);
+	_html->SetFonts(_normalFont, _fixedFont, sizes);	
 	_html->SetPage(greeting);
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
+
+	int pointSize = (_tcl->GetFont()).GetPointSize();
+	_tcl->SetFont(wxFont(pointSize, wxDEFAULT, wxNORMAL, wxNORMAL, 
+			     FALSE, wxEmptyString, wxFONTENCODING_SYSTEM));
 
 	_nb->AddPage(temp, wxT("Contents"));
 	_nb->AddPage(_csp, wxT("Search"));

@@ -63,15 +63,16 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 
 	sizer->Add(_normalFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, 
-				  wxDefaultPosition, wxSize(200, 200),
+				  wxDefaultPosition, wxSize(200, -1),
 				  0, NULL, wxCB_DROPDOWN | wxCB_READONLY));
 
 	sizer->Add(_fixedFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition,
-				  wxSize(200, 200),
+				  wxSize(200, -1),
 				  0, NULL, wxCB_DROPDOWN | wxCB_READONLY));
 
 	sizer->Add(_fontSizeControl = new wxSpinCtrl(this, -1));
+
 	_fontSizeControl->SetRange(2, 100);
 	
 	topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);

@@ -101,3 +101,10 @@
 		+ the contents panel sash position persists between sessions.
 		+ decreased the default application font size from 14 to 12.
 		+ added opened files history support.
+
+	* 0.8.8 Major feature enhancements:
+		+ all the wxListBox widgets have been replaced with
+		wxListCtrl derived virtual controls thus speeding up
+		element addition and visualization.
+		+ added real-time searchable index support via a new 'Index'
+		panel (status / selected index word changes as you type).

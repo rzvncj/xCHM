@@ -33,20 +33,14 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 #endif
 {
 	_menu = new wxMenu;
-	_menu->Append(ID_PopupForward, wxT("Forward"));
-	_menu->Append(ID_PopupBack, wxT("Back"));
+	_menu->Append(ID_PopupForward, wxT("For&ward"));
+	_menu->Append(ID_PopupBack, wxT("&Back"));
 
 #ifdef _ENABLE_COPY_AND_FIND
 	_menu->AppendSeparator();
-	_menu->Append(ID_CopySel, wxT("Copy selection"));
+	_menu->Append(ID_CopySel, wxT("&Copy selection"));
 	_menu->AppendSeparator();
-	_menu->Append(ID_PopupFind, wxT("Find in page .."));
-	
-	wxWindow* p = parent;
-	while(p->GetParent())
-		p = p->GetParent();
-
-	_fdlg = new CHMFindDialog(p, this);
+	_menu->Append(ID_PopupFind, wxT("&Find in page .."));
 #endif
 }
 
@@ -253,8 +247,18 @@ void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
 {
+	if(!_fdlg) {
+		wxWindow* p = GetParent();
+		while(p->GetParent())
+			p = p->GetParent();
+
+		_fdlg = new CHMFindDialog(p, this);
+	}
+
+	_fdlg->CentreOnParent();
 	_fdlg->ShowModal();
 	_fdlg->SetFocusToTextBox();
+	_fdlg->Reset();
 }
 
 #endif // _ENABLE_COPY_AND_FIND

@@ -109,6 +109,14 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 
 		_cell = _html->FindNext(_cell, word, _whole->IsChecked(), 
 				       _case->IsChecked());
+
+		// Wrap around.
+		if(!_cell) {
+			_cell = _html->FindFirst(
+				_html->GetInternalRepresentation(),
+				word, _whole->IsChecked(),
+				_case->IsChecked());
+		}
 	}
 }
 

@@ -49,6 +49,9 @@ public:
 	//! Sets the focus to the textbox.
 	void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
 
+	//! Resets the word to be found, so 'Find next' will start over.
+	void Reset() { _cell = NULL; }
+
 protected:
 	//! Called when the user clicks the 'Find next' button.
 	void OnFind(wxCommandEvent& event);

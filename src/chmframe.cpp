@@ -66,7 +66,7 @@ const wxChar *about_txt = wxT(
 	"Written with wxWindows (http://www.wxwindows.org).\n\n"
 	"This program is (proudly) under the GPL.");
 
-#include <htmbook.xpm>
+#include <manual.xpm>
 
 } // namespace
 
@@ -97,7 +97,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	SetAcceleratorTable(accel);
 #endif
 
-	SetIcon(wxIcon(htmbook_xpm));
+	SetIcon(wxIcon(manual_xpm));
 	SetMenuBar(CreateMenu());
 
 	_tb = CreateToolBar(wxTB_FLAT | wxTB_DOCKABLE
@@ -130,7 +130,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
-	_html->SetFocusFromKbd();
+	//_html->SetFocusFromKbd();
 }
 
 
@@ -481,24 +481,25 @@ wxMenuBar* CHMFrame::CreateMenu()
 {
 	_menuFile = new wxMenu;
 
-	_menuFile->Append(ID_Open, wxT("&Open .."), open_help);
-	_menuFile->Append(ID_Print, wxT("&Print page.."), print_help);
-	_menuFile->Append(ID_Fonts, wxT("&Fonts.."), fonts_help);
+	_menuFile->Append(ID_Open, wxT("&Open ..\tCtrl-O"), open_help);
+	_menuFile->Append(ID_Print, wxT("&Print page..\tCtrl-P"), print_help);
+	_menuFile->Append(ID_Fonts, wxT("Fon&ts..\tCtrl-T"), fonts_help);
 	_menuFile->AppendSeparator();
-	_menuFile->AppendCheckItem(ID_Contents, wxT("&Show contents tree"),
+	_menuFile->AppendCheckItem(ID_Contents, 
+				   wxT("&Show contents tree\tCtrl-S"),
 				   contents_help);
 	_menuFile->AppendSeparator();
-	_menuFile->Append(ID_Quit, wxT("E&xit"), 
+	_menuFile->Append(ID_Quit, wxT("E&xit\tCtrl-X"), 
 			  wxT("Quit the application."));
 
 	wxMenu *menuHistory = new wxMenu;
 
-	menuHistory->Append(ID_Home, wxT("&Home"), home_help);
-	menuHistory->Append(ID_Forward, wxT("&Forward"), forward_help);
-	menuHistory->Append(ID_Back, wxT("&Back"), back_help);
+	menuHistory->Append(ID_Home, wxT("&Home\tCtrl-H"), home_help);
+	menuHistory->Append(ID_Forward, wxT("For&ward\tCtrl-W"), forward_help);
+	menuHistory->Append(ID_Back, wxT("&Back\tCtrl-B"), back_help);
 	
 	wxMenu *menuHelp = new wxMenu;
-	menuHelp->Append(ID_About, wxT("&About .."), about_help);
+	menuHelp->Append(ID_About, wxT("&About ..\tF1"), about_help);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, wxT("&File"));

@@ -21,13 +21,15 @@
 
 #include <chmfile.h>
 #include <contenttaghandler.h>
-#include <endianmacros.h>
+#include <wx/defs.h>
 #include <wx/strconv.h>
 #include <assert.h>
 
 
 #define CURRENT_CHAR_TYPE(x) static_cast<const wxChar *>( \
 	wxConvCurrent->cMB2WX(reinterpret_cast<const char *>(x)))
+
+#define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 
 
 CHMFile::CHMFile()

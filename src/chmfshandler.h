@@ -28,7 +28,7 @@
 
 /*!
   \class wxFileSystemHandler
-  \brief wxWindows virtual filesystem handler class.
+  \brief wxWidgets virtual filesystem handler class.
 */
 
 

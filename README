@@ -5,13 +5,13 @@
  
  * Prerequisites
 
- In order to be able to compile the code you need to have wxWindows and
- CHMLIB installed. You can get wxWindows from:
+ In order to be able to compile the code you need to have wxWidgets and
+ CHMLIB installed. You can get wxWidgets from:
 
- http://www.wxwindows.org
+ http://www.wxwidgets.org
 
  Get the GTK+ version (also known as wxGTK). xCHM currently compiles
- with all flavours of wxWindows, but only works well and looks truly
+ with all flavours of wxWidgets, but only works well and looks truly
  appealing with wxGTK, so I recommend against bothering to use it with
  anything else.
 

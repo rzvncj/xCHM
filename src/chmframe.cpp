@@ -50,7 +50,7 @@ const wxChar *greeting = wxT(
 	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
 	"<B>xCHM</B> is based on Jed Wing's <a href=\"http://66.93.236.84/"
 	"~jedwin/projects/chmlib/\">CHMLIB</a> and <a href=\"http://www."
-	"wxwindows.org\">wxWindows</a>.<br><br>If you'd like to know more"
+	"wxwidgets.org\">wxWidgets</a>.<br><br>If you'd like to know more"
 	" about CHM, you could check out <a href=\"http://www.speakeasy."
 	"org/~russotto/chm/\">Matthew Russoto's CHM page</a> or <a"
 	" href=\"http://bonedaddy.net/pabs3/hhm/\">Pabs' CHM Specification"
@@ -77,7 +77,7 @@ const wxChar *about_txt = wxT(
 	"xCHM v. " VERSION "\nby Razvan Cojocaru (razvanco@gmx.net)\n\n"
 	"With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n"
 	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n"
-	"Written with wxWindows (http://www.wxwindows.org).\n\n"
+	"Written with wxWidgets (http://www.wxwidgets.org).\n\n"
 	"This program is (proudly) under the GPL.");
 
 #include <xchm-32.xpm>

@@ -32,7 +32,7 @@ class CHMFrame;
 
 /*! 
   \class wxApp
-  \brief wxWindows application class.
+  \brief wxWidgets application class.
 */
 
 //! This is the application class.

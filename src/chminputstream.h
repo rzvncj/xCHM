@@ -28,7 +28,7 @@
 
 /*!
   \class wxInputStream
-  \brief wxWindows input stream class.
+  \brief wxWidgets input stream class.
 */
 
 

@@ -93,7 +93,7 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 USE_NLS = yes
-VERSION = 0.8.11
+VERSION = 0.9
 WX_CFLAGS = -I/usr/local/lib/wx/include/gtk2u-2.4 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES
 WX_CFLAGS_ONLY = 
 WX_CONFIG_PATH = /usr/local/bin/wx-config

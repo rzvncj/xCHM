@@ -31,11 +31,11 @@
 		--enable-optimize to the set of configure flags.
 
 	* 0.6.3. Major bugfix:
-		+ thanks to Vadim Zeitlin of wxWindows.org, fixed an endianess
+		+ thanks to Vadim Zeitlin of wxWidgets.org, fixed an endianess
 		bug which prevented xCHM from working properly on big endian
 		machines.
 		+ changed the configure.in method to figure out where
-		wxWindows is from plain old `wx-config --cxxflags`, etc.,
+		wxWidgets is from plain old `wx-config --cxxflags`, etc.,
 		to AM_PATH_WXCONFIG.
 
 	* 0.7 Major feature enhancements:
@@ -65,10 +65,10 @@
 		the wxHtmlWindow displayed page.
 
 	* 0.8.2 Bug fixes and improvements: 
-		+ added 'find in page' code (wxWindows 2.5.x only).
-		+ added 'copy text' code (wxWindows 2.5 only).
+		+ added 'find in page' code (wxWidgets 2.5.x only).
+		+ added 'copy text' code (wxWidgets 2.5 only).
 		+ added a 'find in page' dialog that hopefully pops up
-		on Ctrl-F :) (wxWindows 2.5.x only)
+		on Ctrl-F :) (wxWidgets 2.5.x only)
 		+ added a popup menu with common options (back, forward,
 		copy selection, find in page) that pops up when the user
 		right clicks the HTML window.
@@ -89,7 +89,7 @@
 	* 0.8.5 Major bugfixes:
 		+ made xCHM properly handle weird charset languages 
 		(Russian, Chinese) properly even when xCHM is being linked
-		with the GTK2/Unicode version of wxWindows.
+		with the GTK2/Unicode version of wxWidgets.
 
 	* 0.8.6 Minor bugfixes:
 		+ corrected a bug that made xCHM refuse to load pages
@@ -108,7 +108,7 @@
 		+ added real-time searchable index support via a new 'Index'
 		panel (status / selected index word changes as you type).
 		+ suppressed unhelpful error messages while loading a page.
-		+ hacked around wxWindows file system handler bug.
+		+ hacked around wxWidgets file system handler bug.
 		GetMimeTypeFromExt() couldn't figure out that pages that
 		ended in ".HTM" (as opposed to lowercase ".htm") are of
 		"text/html" MIME type.
@@ -135,3 +135,8 @@
 		mouse wheel to scroll under Mac OS X.
 		+ replaced the application icon with a much better one
 		contributed by Steven Chan.
+		
+	* 0.9 Major features enhancements:
+		+ added i18n support.
+		+ added Romanian and French translations of xCHM's interface.
+		

@@ -858,7 +858,7 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-rpath         do not hardcode runtime library paths
   --disable-nls           do not use Native Language Support
-  --enable-static         link statically to wxWindows.
+  --enable-static         link statically to wxWidgets.
   --enable-debug          compile with gdb debug information.
   --enable-optimize       optimize compiled code (-O2).
   --disable-dependency-tracking Speeds up one-time builds
@@ -4088,22 +4088,22 @@ echo "${ECHO_T}no (version $WX_VERSION is not new enough)" >&6
 
 if test "$wxWin" != 1; then
 	{ { echo "$as_me:$LINENO: error:
-           wxWindows must be installed on your system
+           wxWidgets must be installed on your system
            but the wx-config script couldn't be found.
 
      	   Please check that wx-config is in path, the directory
-     	   where wxWindows libraries are installed (returned by
+     	   where wxWidgets libraries are installed (returned by
      	   'wx-config --libs' command) is in LD_LIBRARY_PATH or
-     	   equivalent variable and wxWindows version is 2.3.4 or above.
+     	   equivalent variable and wxWidgets version is 2.3.4 or above.
         " >&5
 echo "$as_me: error:
-           wxWindows must be installed on your system
+           wxWidgets must be installed on your system
            but the wx-config script couldn't be found.
 
      	   Please check that wx-config is in path, the directory
-     	   where wxWindows libraries are installed (returned by
+     	   where wxWidgets libraries are installed (returned by
      	   'wx-config --libs' command) is in LD_LIBRARY_PATH or
-     	   equivalent variable and wxWindows version is 2.3.4 or above.
+     	   equivalent variable and wxWidgets version is 2.3.4 or above.
         " >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -4360,7 +4360,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xchm
- VERSION=0.8.11
+ VERSION=0.9
 
 
 cat >>confdefs.h <<_ACEOF

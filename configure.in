@@ -10,13 +10,13 @@ AM_OPTIONS_WXCONFIG
 AM_PATH_WXCONFIG(2.4.0, wxWin=1)
 if test "$wxWin" != 1; then
 	AC_MSG_ERROR([
-           wxWindows must be installed on your system
+           wxWidgets must be installed on your system
            but the wx-config script couldn't be found.
      
      	   Please check that wx-config is in path, the directory
-     	   where wxWindows libraries are installed (returned by
+     	   where wxWidgets libraries are installed (returned by
      	   'wx-config --libs' command) is in LD_LIBRARY_PATH or
-     	   equivalent variable and wxWindows version is 2.3.4 or above.
+     	   equivalent variable and wxWidgets version is 2.3.4 or above.
         ])
 fi
 
@@ -45,7 +45,7 @@ CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
 
      
 AC_ARG_ENABLE(static, 
-	      [  --enable-static         link statically to wxWindows.], 
+	      [  --enable-static         link statically to wxWidgets.], 
 	      LINKOPT="$WX_LIBS_STATIC",
 	      LINKOPT="$WX_LIBS")
 AC_SUBST(LINKOPT)
@@ -58,7 +58,7 @@ AC_ARG_ENABLE(optimize,
 	      [  --enable-optimize       optimize compiled code (-O2).], 
 	      CXXFLAGS="$CXXFLAGS -O2")
 
-AM_INIT_AUTOMAKE(xchm, 0.8.11)
+AM_INIT_AUTOMAKE(xchm, 0.9)
 AC_PROG_CXX
 AC_PROG_INSTALL
 

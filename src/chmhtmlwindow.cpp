@@ -250,7 +250,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 	}
 
 	if(found) {
-		// What is all this wxWindows protected member crap?
+		// What is all this wxWidgets protected member crap?
 		delete m_selection;
 		m_selection = new wxHtmlSelection();
 
@@ -357,10 +357,10 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 #ifdef __WXMAC__
 /* This is a hack, consisting of copying the relevent event handler from
-   the wxWindows src/generic/scrlwing.cpp file to make up for the fact that for
-   some reason, compiling wxWindows with scroll wheel support is exposing a 
+   the wxWidgets src/generic/scrlwing.cpp file to make up for the fact that for
+   some reason, compiling wxWidgets with scroll wheel support is exposing a 
    crashing bug on OS X.
-   When this gets fixed in wxWindows, this should prob be just removed.. */
+   When this gets fixed in wxWidgets, this should prob be just removed.. */
 void CHMHtmlWindow::HandleOnMouseWheel(wxMouseEvent& event)
 {
     int m_wheelRotation = 0;

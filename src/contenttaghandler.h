@@ -33,7 +33,7 @@ class CHMListCtrl;
 
 /*!
   \class wxHtmlParser
-  \brief wxWindows HTML parser class.
+  \brief wxWidgets HTML parser class.
 */
 
 
@@ -51,7 +51,7 @@ protected:
 
 /*!
   \class wxTreeItemData
-  \brief wxWindows generic data type to associate with a wxTreeCtrl item.
+  \brief wxWidgets generic data type to associate with a wxTreeCtrl item.
 */
 
 
@@ -72,7 +72,7 @@ struct URLTreeItem : public wxTreeItemData {
 
 /*!
   \class wxHtmlTagHandler
-  \brief wxWindows HTML tag handler class.
+  \brief wxWidgets HTML tag handler class.
 */
 
 

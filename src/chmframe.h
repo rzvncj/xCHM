@@ -78,7 +78,7 @@ enum
 
 /*!
   \class wxFrame
-  \brief wxWindows frame widget class.
+  \brief wxWidgets frame widget class.
 */
 
 

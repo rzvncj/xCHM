@@ -192,7 +192,7 @@ public:
 			      off_t fileOffset, size_t bufferSize);
 
 private:
-	//! Helper. Translates from Win32 encodings to generic wxWindows ones.
+	//! Helper. Translates from Win32 encodings to generic wxWidgets ones.
 	wxFontEncoding GetFontEncFromCharSet(int cs);
 
 	//! Helper. Initializes most of the private data members.

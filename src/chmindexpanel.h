@@ -33,7 +33,7 @@ class CHMListCtrl;
 
 /*!
   \class wxPanel
-  \brief generic wxWindows panel widget class.
+  \brief generic wxWidgets panel widget class.
 */
 
 

@@ -43,7 +43,7 @@ enum {
 
 /*!
   \class wxHtmlWindow
-  \brief wxWindows HTML widget class.
+  \brief wxWidgets HTML widget class.
 */
 
 

@@ -34,7 +34,7 @@
 
 namespace {
 
-// damn wxWindows and it's scoped ptr.
+// damn wxWidgets and it's scoped ptr.
 class UCharPtr {
 public:
 	UCharPtr(unsigned char *p) : _p(p) {}

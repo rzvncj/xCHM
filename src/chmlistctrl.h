@@ -33,7 +33,7 @@ class CHMHtmlWindow;
 
 /*! 
   \class wxListCtrl
-  \brief wxWindows list control class.
+  \brief wxWidgets list control class.
 */
 
 

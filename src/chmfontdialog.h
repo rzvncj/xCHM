@@ -31,7 +31,7 @@
 
 /*!
   \class wxDialog
-  \brief wxWindows generic dialog class.
+  \brief wxWidgets generic dialog class.
 */
 
 

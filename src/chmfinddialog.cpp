@@ -63,6 +63,8 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	SetSizer(topsizer);
 	topsizer->Fit(this);
 	Centre(wxBOTH);
+
+	SetFocusToTextBox();
 }
 
 

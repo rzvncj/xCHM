@@ -253,8 +253,8 @@ void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
 {
-	
 	_fdlg->ShowModal();
+	_fdlg->SetFocusToTextBox();
 }
 
 #endif // _ENABLE_COPY_AND_FIND

@@ -46,6 +46,9 @@ public:
 	//! Initializes the dialog.
 	CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch);
 
+	//! Sets the focus to the textbox.
+	void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
+
 protected:
 	//! Called when the user clicks the 'Find next' button.
 	void OnFind(wxCommandEvent& event);

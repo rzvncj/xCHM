@@ -26,6 +26,7 @@
 #include <wx/html/htmlwin.h>
 #include <wx/html/htmprint.h>
 #include <wx/splitter.h>
+#include <wx/treectrl.h>
 
 
 //! Default font size for the wxHtmlWindow.

@@ -91,7 +91,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 	assert(_archiveCache != NULL);
 
 	// See if the file really is in the archive.
-	if(!_archiveCache->ResolveObject(filename.c_str(), &_ui)) {
+	if(!_archiveCache->ResolveObject(filename, &_ui)) {
 		m_lasterror = wxSTREAM_READ_ERROR;
 		return;
 	}

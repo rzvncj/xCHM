@@ -50,7 +50,7 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 
 	assert(_chmFile == NULL);
 
-	_chmFile = chm_open(archiveName.c_str());
+	_chmFile = chm_open(archiveName.mb_str());
 	
 	if(_chmFile == NULL)
 		return false;
@@ -105,7 +105,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 		ret = RetrieveObject(&ui, (unsigned char *)buffer, curr,
 				     BUF_SIZE2 - 1);
 		buffer[ret] = '\0';
-		src.Append(buffer);
+		src.Append(wxT(buffer));
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
@@ -127,7 +127,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 {
 	return _chmFile != NULL && chm_resolve_object(_chmFile, 
-						      fileName.c_str(), 
+						      fileName.mb_str(), 
 						      ui)
 		== CHM_RESOLVE_SUCCESS;
 }
@@ -172,7 +172,7 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_topicsFile = wxString(wxT("/")) 
-				+ (buffer + index + 2);
+				+ wxString(wxT(buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 1:
@@ -180,7 +180,7 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_indexFile = wxString(wxT("/"))
-				+ (buffer + index + 2);
+				+ wxString(wxT(buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 2:
@@ -188,14 +188,14 @@ bool CHMFile::GetArchiveInfo()
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
 			_home = wxString(wxT("/"))
-				+ (buffer + index + 2);
+				+ wxString(wxT(buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 3:
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_title = wxString(buffer + index + 2);
+			_title = wxString(wxT(buffer + index + 2));
 			index += *cursor + 2;
 			break;
 		case 6:
@@ -205,18 +205,19 @@ bool CHMFile::GetArchiveInfo()
 
 			if(_topicsFile.IsEmpty()) {
 				wxString topicAttempt = wxT("/"), tmp;
-				topicAttempt += wxString(buffer + index + 2);
+				topicAttempt += wxString(
+					wxT(buffer + index + 2));
 				tmp = topicAttempt + wxT(".hhc");
 				
 				if(chm_resolve_object(_chmFile,
-						      tmp.c_str(), &ui)
+						      tmp.mb_str(), &ui)
 				   == CHM_RESOLVE_SUCCESS)
 					_topicsFile = tmp;
 
 				tmp = topicAttempt + wxT(".hhk");
 				
 				if(chm_resolve_object(_chmFile,
-						      tmp.c_str(), &ui)
+						      tmp.mb_str(), &ui)
 				   == CHM_RESOLVE_SUCCESS)
 					_indexFile = tmp;
 			}

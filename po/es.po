@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 0.9\n"
-"POT-Creation-Date: 2004-04-23 14:57+0300\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-04-06 21:43+0200\n"
 "Last-Translator: gabriel <fgabriel.munoz@andaluciajunta.es>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
@@ -36,7 +36,7 @@ msgstr "Sensible a mayúsculas"
 msgid "Find next"
 msgstr "Buscar siguiente"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -56,11 +56,11 @@ msgstr "Fuente fija:"
 msgid "Font size:"
 msgstr "Tamaño de fuente:"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Vista previa:"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "OK"
 

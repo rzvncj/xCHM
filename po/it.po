@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-04-23 14:57+0300\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-02-25 00:33+0100\n"
 "Last-Translator: Fabio Vescarelli <faber@faberbox.com>\n"
 "Language-Team: Italian <faber@faberbox.com>\n"
@@ -34,7 +34,7 @@ msgstr "Maiuscole / Minuscole"
 msgid "Find next"
 msgstr "Trova successivo"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -54,11 +54,11 @@ msgstr "Carattere a largezza fissa:"
 msgid "Font size:"
 msgstr "Dimensione"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Anteprima"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "Ok"
 

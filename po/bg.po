@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
-"POT-Creation-Date: 2004-03-16 17:50+0200\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-06-05 23:36+0300\n"
 "Last-Translator: Атанас Мавров <bugar@developer.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -36,7 +36,7 @@ msgstr "Чувствителен към големината на буквите
 msgid "Find next"
 msgstr "Търси следващ"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Отмяна"
 
@@ -56,11 +56,11 @@ msgstr "Фиксиран шрифт:"
 msgid "Font size:"
 msgstr "Големина на шрифта:"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Преглед:"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "Добре"
 
@@ -271,4 +271,3 @@ msgstr "Търси в определения текст."
 #: src/contenttaghandler.cpp:37
 msgid "Topics"
 msgstr "Теми"
-

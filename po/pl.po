@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
-"POT-Creation-Date: 2004-04-23 14:57+0300\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -35,7 +35,7 @@ msgstr "Z uwzględnieniem wielkości liter"
 msgid "Find next"
 msgstr "Znajdź następny"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -55,11 +55,11 @@ msgstr "Font o stałej szerokości:"
 msgid "Font size:"
 msgstr "Rozmiar fontu:"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Podgląd:"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "OK"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-04-23 14:57+0300\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -34,7 +34,7 @@ msgstr "Conteaza majuscule/minuscule"
 msgid "Find next"
 msgstr "Gaseste urmatorul"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Anuleaza"
 
@@ -54,11 +54,11 @@ msgstr "Font fixed"
 msgid "Font size:"
 msgstr "Marimea fontului:"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Vizualizare:"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "OK"
 

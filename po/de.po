@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-04-23 14:57+0300\n"
+"POT-Creation-Date: 2004-07-05 15:47+0300\n"
 "PO-Revision-Date: 2004-03-05 19:00+0100\n"
 "Last-Translator: Lars Brand <altow@users.sourceforge.net>\n"
 "Language-Team: German\n"
@@ -34,7 +34,7 @@ msgstr "Groß/Kleinschreibung beachten"
 msgid "Find next"
 msgstr "Finde nächsten"
 
-#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Abbruch"
 
@@ -54,11 +54,11 @@ msgstr "Fixierter Font:"
 msgid "Font size:"
 msgstr "Fontgröße:"
 
-#: src/chmfontdialog.cpp:79
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Vorschau:"
 
-#: src/chmfontdialog.cpp:89
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "OK"
 

@@ -1,0 +1,46 @@
+
+ xCHM - the CHM viewer for UNIX
+ (c) 2003 Razvan Cojocaru <razvanco@gmx.net>
+
+ 
+ * Prerequisites
+
+ In order to be able to compile the code you need to have wxWindows and
+ CHMLIB installed. You can get wxWindows from:
+
+ http://www.wxwindows.org
+
+ I strongly suggest you download the GTK+ flavour of wxWindows. If you
+ can't do that (you might not have GTK+ installed), use the Xlib version.
+ Only as a last resort use the Motif version.
+
+ You can get CHMLIB from:
+
+ http://66.93.236.84/~jedwin/projects/
+
+ After you've installed the above you're ready for the next phase.
+
+
+ * Installing
+
+ Type ./configure --help if you're interested in parameters you can pass
+ to configure for compile switches. Most people will be perfectly happy
+ doing a:
+
+ ./configure && make
+
+ Once everything is built, type
+
+ make install
+
+ and the executable should be somewhere in your $PATH (hopefully :)).
+ Now you can just type
+
+ xchm
+
+ and start your session.
+ For bug reports and patches, please use the address above.
+ For everything else, count to 10 and if you still want to send the
+ message, go ahead. Can't promise I'll answer everything though.
+
+ * Happy reading!

@@ -62,6 +62,9 @@ public:
 	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 		       wxHtmlWindow* html);
 
+	//! Calls SetConfig().
+	~CHMSearchPanel();
+
 	//! Resets the panel (clears the result list, the checkboxes, etc.)
 	void Reset();
 
@@ -88,6 +91,12 @@ private:
 	//! Helper. Searches page titles for the given text.
 	bool TitleSearch(const wxString& title, wxString& text,
 			 bool caseSensitive, bool wholeWords);
+
+	//! Reads the search configuration from .xchm (case sensitive, etc.).
+	void GetConfig();
+
+	//! Writes the search configuration to .xchm.
+	void SetConfig();
 
 private:
 	wxTreeCtrl* _tcl;

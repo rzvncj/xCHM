@@ -23,7 +23,7 @@
 #include <chminputstream.h>
 #include <wx/sizer.h>
 #include <wx/utils.h>
-#include <wx/regex.h>
+#include <wx/config.h>
 
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
@@ -60,6 +60,14 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
         sizer->Add(_results, 1, wxALL | wxEXPAND, 2);
+
+	GetConfig();
+}
+
+
+CHMSearchPanel::~CHMSearchPanel()
+{
+	SetConfig();
 }
 
 
@@ -269,11 +277,35 @@ void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))
 void CHMSearchPanel::Reset()
 {
 	_text->Clear();
-	_case->SetValue(FALSE);
-	_whole->SetValue(FALSE);
 	_results->Clear();
 }
 
+
+void CHMSearchPanel::SetConfig()
+{
+	wxConfig config(wxT("xchm"));	
+
+	config.Write(wxT("/Search/caseSensitive"), (long)_case->GetValue());
+	config.Write(wxT("/Search/wholeWordsOnly"), (long)_whole->GetValue());
+	config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
+}
+
+void CHMSearchPanel::GetConfig()
+{
+	long casesens, words, titles;
+	wxConfig config(wxT("xchm"));
+
+	if(config.Read(wxT("/Search/caseSensitive"), &casesens)) {
+		
+		config.Read(wxT("/Search/wholeWordsOnly"), &words);
+		config.Read(wxT("/Search/titlesOnly"), &titles);
+
+		_case->SetValue(casesens);
+		_whole->SetValue(words);
+		_titles->SetValue(titles);
+	}
+
+}
 
 
 BEGIN_EVENT_TABLE(CHMSearchPanel, wxPanel)

@@ -96,7 +96,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	sr.Replace(wxT("&"), wxT(" "), TRUE);
 	sr.Replace(wxT("%"), wxT(" "), TRUE);
 
-	wxStringTokenizer tkz(sr, wxT(" "));
+	wxStringTokenizer tkz(sr, wxT(" \t\r\n"));
 
 	while(word.IsEmpty())
 		if(tkz.HasMoreTokens())
@@ -184,48 +184,61 @@ static inline bool WHITESPACE(wxChar c)
 bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 				 bool caseSensitive, bool wholeWords)
 {
-	int i, j, wrd = text.Length();
-	bool found = false;
-
+	int i, j, lng = title.Length();
+	bool found = FALSE;
 	wxString tmp = title;
-	int lng = tmp.Length();
 
 	if (!caseSensitive) {
 		tmp.MakeLower();
 		text.MakeLower();
 	}
 
-	const wxChar *buf1 = tmp.c_str(), *buf2 = text.c_str();
+	wxStringTokenizer tkz(text, wxT(" \t\r\n"));
 
-	if(wholeWords) {
-		for(i = 0; i < lng - wrd + 1; ++i) {
+	while(tkz.HasMoreTokens()) {
+		
+		found = FALSE;
+		wxString token = tkz.GetNextToken();
+		if(token.IsEmpty())
+			continue;
 
-			if(WHITESPACE(buf1[i])) 
-				continue;
+		int wrd = token.Length();
+		const wxChar *buf1 = tmp.c_str(), *buf2 = token.c_str();
+
+		if(wholeWords) {
+			for(i = 0; i < lng - wrd + 1; ++i) {
+
+				if(WHITESPACE(buf1[i])) 
+					continue;
 			 			
-			j = 0;
-			while(buf1[i + j] == buf2[j] && j < wrd) 
-				++j;
-
-			if (j == wrd && (WHITESPACE(buf1[i + j]) || 
-					 i+j == lng))
-				if(i == 0 || WHITESPACE(buf1[i - 1])) {
+				j = 0;
+				while(buf1[i + j] == buf2[j] && j < wrd) 
+					++j;
+				
+				if (j == wrd && (WHITESPACE(buf1[i + j]) || 
+						 i+j == lng))
+					if(i == 0 || WHITESPACE(buf1[i - 1])) {
+						found = TRUE; 
+						break; 
+					}			
+			}
+		} else {
+			for (i = 0; i < lng - wrd + 1; ++i) {
+				
+				j = 0;
+				while ((j < wrd) && 
+				       (buf1[i + j] == buf2[(size_t)j])) 
+					++j;
+				if (j == wrd && 
+				    (i == 0 || WHITESPACE(buf1[i - 1]))) { 
 					found = TRUE; 
 					break; 
 				}
-			
-		}
-	} else {
-		for (i = 0; i < lng - wrd + 1; ++i) {
-
-			j = 0;
-			while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j])) 
-				++j;
-			if (j == wrd) { 
-				found = TRUE; 
-				break; 
 			}
 		}
+
+		if(!found)
+			break;
 	}
 
 	return found;

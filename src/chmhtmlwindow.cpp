@@ -190,9 +190,6 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 }
 
 
-#include <iostream>
-using namespace std;
-
 wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 						const wxString& url, 
 						wxString *redirect) const
@@ -208,27 +205,6 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 	}
 
 	return wxHTML_OPEN;
-}
-
-
-void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
-{
-	wxString target = link.GetHref();
-	wxString browser =
-		::wxGetTextFromUser(_("Type in the full path to the "
-				      "browser you'd like to use\n"
-				      "for http(s)://, ftp:// and mailto:"
-				      " links.\n"),
-				    _("Select external browser .."), 
-				    wxT("mozilla"),
-				    this);
-
-	if(!browser.IsEmpty()) {
-		wxExecute(browser + wxT(" ") + target);
-		return;
-	}
-
-	wxHtmlWindow::OnLinkClicked(link);
 }
 
 

@@ -119,11 +119,7 @@ public:
 
 	/*!
 	  \brief Fast search using the $FIftiMain file in the .chm.
-	  This just going to be an 'and' search, in that the words
-	  separated by spaces have to all be present, kind of
-	  search-engine like.
-	  \param text The text we're looking for. Can be more words,
-	  separated by spaces.
+	  \param text The text we're looking for.
 	  \param wholeWords Are we looking for whole words only?
 	  \param titlesOnly Are we looking for titles only?
 	  \param toPopulate The list box we'll be filling with results.

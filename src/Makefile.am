@@ -7,7 +7,7 @@ xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h contenttaghandler.h chmfontdialog.h \
-	chmsearchpanel.h chmhtmlwindow.h
+	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl
 
 xchm_LDADD= @LINKOPT@ 
 

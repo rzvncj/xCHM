@@ -28,6 +28,9 @@
 #include <assert.h>
 
 
+#include <bitfiddle.inl>
+
+
 namespace {
 
 // I'm defining a smart pointer class called wxCharArray, wxWindows style.
@@ -55,9 +58,6 @@ wxDEFINE_SCOPED_ARRAY(unsigned char, UCharPtr)
 
 #endif
 
-
-#define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
-#define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
 
 
 CHMFile::CHMFile()
@@ -164,31 +164,18 @@ using namespace std;
 
 
 bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords), 
-			  bool WXUNUSED(titlesOnly), wxListBox* toPopulate)
+			  bool titlesOnly, wxListBox* toPopulate)
 {
 	if(toPopulate == NULL)
 		return false;
-
 	toPopulate->Clear();
 
 	if(text.IsEmpty())
 		return false;
 
-	chmUnitInfo ui;
-       
+	chmUnitInfo ui;       
 	if(::chm_resolve_object(_chmFile, "/$FIftiMain", &ui) !=
 	   CHM_RESOLVE_SUCCESS)
-		return false;
-
-	wxStringTokenizer tkz(text, " ");
-	wxArrayString words;
-
-	while(tkz.HasMoreTokens()) {
-		wxString token = tkz.GetNextToken();
-		words.Add(token);
-	}
-
-	if(words.GetCount() == 0)
 		return false;
 
 #define FTS_HEADER_LEN 0x32
@@ -226,45 +213,106 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 		return false;
 
 	unsigned char word_len, pos;
+	u_int32_t test_offset = 0;
 	wxString word;
+	u_int32_t i = sizeof(u_int16_t);
+	u_int16_t free_space;
 
 	while(--tree_depth) {
+		if(node_offset == test_offset)
+			return false;
 
+		test_offset = node_offset;
 		if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
 					 node_offset, node_len) == 0)
-		return false;
+			return false;
 
 		cursor16 = reinterpret_cast<u_int16_t*>(buffer.get());
-		u_int16_t free_space = *cursor16;
+		free_space = *cursor16;
 		FIXENDIAN16(free_space);
-
-		u_int32_t i = 0;
 
 		while(i < node_len - free_space) {			
 
-			word_len = *(buffer.get() + i + 2);
-			pos = *(buffer.get() + i + 3);
+			word_len = *(buffer.get() + i);
+			pos = *(buffer.get() + i + 1);
 
 			if(pos == 0)
 				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
-							       + i + 4, 
+							       + i + 2, 
 							       word_len - 1);
 			else
 				word = word.Mid(0, pos) +
 					CURRENT_CHAR_STRING_LEN(buffer.get() 
-								+ i + 4,
+								+ i + 2,
 								word_len - 1);
 
 			cerr << "Word: " << word.mb_str() << endl;
-			// process word here; if match break
+
+			if(text.CmpNoCase(word) < 0) {
+				cursor32 = reinterpret_cast<u_int32_t*>(
+					buffer.get() + i + word_len + 1);
+				node_offset = *cursor32;
+				FIXENDIAN32(node_offset);
+				break;
+			}
 
 			i += word_len + sizeof(unsigned char) +
 				+ sizeof(u_int32_t) + sizeof(u_int16_t);
 		}
 	}
 
-	// dummy return value
-	return true;
+	// got a leaf node here.
+	if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
+				 node_offset, node_len) == 0)
+		return false;
+
+	cursor16 = reinterpret_cast<u_int16_t *>(buffer.get() + 6);
+	free_space = *cursor16;
+	FIXENDIAN16(free_space);
+
+	i = sizeof(u_int32_t) + sizeof(u_int16_t) + sizeof(u_int16_t);
+	u_int64_t wlc_count, wlc_size;
+	u_int32_t wlc_offset;
+
+	while(i < node_len - free_space) {
+		word_len = *(buffer.get() + i);
+		pos = *(buffer.get() + i + 1);
+
+		if(pos == 0)
+			word = CURRENT_CHAR_STRING_LEN(buffer.get() + i + 2, 
+						       word_len - 1);
+		else
+			word = word.Mid(0, pos) +
+				CURRENT_CHAR_STRING_LEN(buffer.get() + i + 2,
+							word_len - 1);
+
+		cerr << "Leaf word: " << word.mb_str() << endl;
+		i += 2 + word_len;
+
+		unsigned char title = *(buffer.get() + i - 1);
+
+		size_t encsz;
+		wlc_count = be_encint(buffer.get() + i, encsz);
+		i += encsz;
+		
+		cursor32 = reinterpret_cast<u_int32_t *>(buffer.get() + i);
+		wlc_offset = *cursor32;
+		FIXENDIAN32(wlc_offset);
+
+		i += sizeof(u_int32_t) + sizeof(u_int16_t);
+		wlc_size =  be_encint(buffer.get() + i, encsz);
+		i += encsz;
+
+		if(!title && titlesOnly)
+			continue;
+
+		if(!text.CmpNoCase(word)) {
+			// process WLC data here
+			return true;
+		}
+	}
+
+	return false;
 }
 
 

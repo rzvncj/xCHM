@@ -99,7 +99,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	for(int i = -3; i <= 3; ++i)
 		sizes[i+3] = _fontSize + i * 2;
 
-	SetIcon(wxIcon(xchm_32));
+	SetIcon(wxIcon(xchm_32_xpm));
 	SetMenuBar(CreateMenu());
 
 	_tb = CreateToolBar(wxTB_FLAT | wxTB_DOCKABLE

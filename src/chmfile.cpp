@@ -580,75 +580,113 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 }
 
 
+#include <iostream>
+using namespace std;
+
+
 inline
 bool CHMFile::InfoFromWindows()
 {
+#define WIN_HEADER_LEN 0x08
 	unsigned char buffer[BUF_SIZE];
+	unsigned int factor;
 	chmUnitInfo ui;
 	long size = 0;
 
 	if(::chm_resolve_object(_chmFile, "/#WINDOWS", &ui) == 
 	   CHM_RESOLVE_SUCCESS) {
-		if(::chm_retrieve_object(_chmFile, &ui, 
-					 buffer, 0, BUF_SIZE) < 0x78)
+		if(!::chm_retrieve_object(_chmFile, &ui, 
+		  			  buffer, 0, WIN_HEADER_LEN))
 			return false;
 
-		u_int32_t off_title = *(u_int32_t *)(buffer + 0x1c);
-		FIXENDIAN32(off_title);
-		u_int32_t off_home = *(u_int32_t *)(buffer + 0x70);
-		FIXENDIAN32(off_home);
-		u_int32_t off_hhc = *(u_int32_t *)(buffer + 0x68);
-		FIXENDIAN32(off_hhc);
-		u_int32_t off_hhk = *(u_int32_t *)(buffer + 0x6c);
-		FIXENDIAN32(off_hhk);
+		u_int32_t entries = *(u_int32_t *)(buffer);
+		FIXENDIAN32(entries);
+		u_int32_t entry_size = *(u_int32_t *)(buffer + 0x04);
+		FIXENDIAN32(entry_size);
+		
+		UCharPtr uptr(new unsigned char[entries * entry_size]);
+		unsigned char* raw = uptr.get();
+		
+		if(!::chm_retrieve_object(_chmFile, &ui, raw, 8, 
+					  entries * entry_size))
+			return false;
 
 		if(::chm_resolve_object(_chmFile, "/#STRINGS", &ui) != 
 		   CHM_RESOLVE_SUCCESS)
 			return false;
 
-		unsigned int factor = off_title / 4096;
+		for(u_int32_t i = 0; i < entries; ++i) {
 
-		if((size = ::chm_retrieve_object(_chmFile, &ui, 
-						 buffer, factor * 4096, 
-						 BUF_SIZE)) != 0)
-			_title = CURRENT_CHAR_STRING(buffer + off_title 
-						     % 4096);
+			u_int32_t offset = i * entry_size;
 
-		if(factor != off_home / 4096) {
-			factor = off_home / 4096;
+			u_int32_t off_title = 
+				*(u_int32_t *)(raw + offset + 0x14);
+			FIXENDIAN32(off_title);
+
+			u_int32_t off_home = 
+				*(u_int32_t *)(raw + offset + 0x68);
+			FIXENDIAN32(off_home);
+
+			u_int32_t off_hhc = 
+				*(u_int32_t *)(raw + offset + 0x60);
+			FIXENDIAN32(off_hhc);
 			
-			size = ::chm_retrieve_object(_chmFile, &ui, 
-						     buffer, factor * 4096, 
-						     BUF_SIZE);
-		}
+			u_int32_t off_hhk = 
+				*(u_int32_t *)(raw + offset + 0x64);
+			FIXENDIAN32(off_hhk);
+
+			factor = off_title / 4096;
+
+			if(size == 0) 
+				size = ::chm_retrieve_object(_chmFile, &ui, 
+							     buffer, 
+							     factor * 4096, 
+							     BUF_SIZE);
+
+			if(size && off_title)
+				_title = CURRENT_CHAR_STRING(buffer + 
+							     off_title % 4096);
 			
-		if(size)
-			_home = wxString(wxT("/")) +
-				CURRENT_CHAR_STRING(buffer + off_home % 4096);
+			if(factor != off_home / 4096) {
+				factor = off_home / 4096;		
+				size = ::chm_retrieve_object(_chmFile, &ui, 
+							     buffer, 
+							     factor * 4096, 
+							     BUF_SIZE);
+			}
+			
+			if(size && off_home)
+				_home = wxString(wxT("/")) +
+					CURRENT_CHAR_STRING(buffer + 
+							    off_home % 4096);
 	       
-
-		if(factor != off_hhc / 4096) {
-			factor = off_hhc / 4096;			
-			size = ::chm_retrieve_object(_chmFile, &ui, 
-						     buffer, factor * 4096, 
-						     BUF_SIZE);
-		}
+			if(factor != off_hhc / 4096) {
+				factor = off_hhc / 4096;
+				size = ::chm_retrieve_object(_chmFile, &ui, 
+							     buffer, 
+							     factor * 4096, 
+							     BUF_SIZE);
+			}
 		
-		if(size)
-			_topicsFile = wxString(wxT("/")) + 
-				CURRENT_CHAR_STRING(buffer + off_hhc % 4096);
+			if(size && off_hhc) {
+				_topicsFile = wxString(wxT("/")) + 
+					CURRENT_CHAR_STRING(buffer + 
+							    off_hhc % 4096);
+			}
 
-		if(factor != off_hhk / 4096) {
-			factor = off_hhk / 4096;			
-			size = ::chm_retrieve_object(_chmFile, &ui, 
-						     buffer, factor * 4096, 
-						     BUF_SIZE);
+			if(factor != off_hhk / 4096) {
+				factor = off_hhk / 4096;		
+				size = ::chm_retrieve_object(_chmFile, &ui, 
+							     buffer, 
+							     factor * 4096, 
+							     BUF_SIZE);
+			}
+
+			if(size && off_hhk)
+				_indexFile = wxString(wxT("/")) + 
+					CURRENT_CHAR_STRING(buffer + off_hhk 
+							    % 4096);
 		}
-
-		if(size)
-			_indexFile = wxString(wxT("/")) + 
-				CURRENT_CHAR_STRING(buffer + off_hhk 
-						    % 4096);
 	}
 
 	return true;

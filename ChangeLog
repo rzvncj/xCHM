@@ -126,6 +126,8 @@
 		open a .chm file by double-clicking on it on Mac OS X.
 
 	* 0.8.11 Bugfix release:
+		+ fixed a bug that prevented xCHM from properly figuring out
+		where to construct the table of contents from.
 		+ made the configure script sh friendly.
 		+ added Chanler White Mac OS X patch to be able to use the
 		mouse wheel to scroll under Mac OS X.

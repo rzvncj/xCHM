@@ -53,7 +53,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 
 		return TRUE;
 
-	} else if (tag.GetName() == wxT("OBJECT")) {
+	} else if(!tag.GetName().CmpNoCase(wxT("OBJECT"))) {
         
 		/* 
 		   Valid HHW's file may contain only two object tags: 
@@ -72,7 +72,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		   We're interested in the latter.
 		*/
 		
-		if (tag.GetParam(wxT("TYPE")) == wxT("text/sitemap")) {
+		if(!tag.GetParam(wxT("TYPE")).CmpNoCase(wxT("text/sitemap"))) {
 
 			// handle broken <UL> tags that would
 			// otherwise SEGFAULT by trying to access
@@ -101,7 +101,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		return FALSE;
 	} else { // "PARAM"
 
-		if (tag.GetParam(wxT("NAME")) == wxT("Name")) {
+		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Name"))) {
 
 			if(_title.IsEmpty()) {
 				if(_useEnc) {
@@ -127,7 +127,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 			}
 		}
 
-		if (tag.GetParam(wxT("NAME")) == wxT("Local"))
+		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Local")))
 			_url = tag.GetParam(wxT("VALUE"));
 
 		return FALSE;

@@ -22,6 +22,9 @@
 #include <chminputstream.h>
 #include <wx/wx.h>
 
+#include <iostream>
+using namespace std;
+
 
 
 /*----------------------------------------------------------------------
@@ -51,6 +54,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 
 {
 	wxString filename = file;
+	wxString path = archive.BeforeLast('/') + "/";
 
 	memset(&_ui, 0, sizeof(_ui));
 
@@ -80,10 +84,11 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		filename = filename.AfterLast(':');
 
 		// Reset the cached chmFile* and all.
-		if(!Init(arch_link)) {
-			m_lasterror = wxSTREAM_READ_ERROR;
-			return;
-		}
+		if(!Init(arch_link))
+			if(!Init(path + arch_link)) {
+				m_lasterror = wxSTREAM_READ_ERROR;
+				return;
+			}
 	}
 
 	assert(_archiveCache != NULL);

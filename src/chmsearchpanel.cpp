@@ -144,6 +144,8 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 			_results->AddPairItem(i->second, full_url);
 		}
+    
+    _results->ListDirty();
 	_results->UpdateUI();
 }
 

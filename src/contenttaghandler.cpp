@@ -50,22 +50,21 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 
 	} else if (tag.GetName() == wxT("OBJECT")) {
         
-		/* Valid HHW's file may contain only two object tags: 
+		/* 
+		   Valid HHW's file may contain only two object tags: 
  
-		<OBJECT type="text/site properties"> 
-		<param name="ImageType" value="Folder"> 
-		</OBJECT> 
+		   <OBJECT type="text/site properties"> 
+		   <param name="ImageType" value="Folder"> 
+		   </OBJECT> 
  
-		or 
+		   or 
  
-		<OBJECT type="text/sitemap"> 
-		<param name="Name" value="main page"> 
-		<param name="Local" value="another.htm"> 
-		</OBJECT> 
+		   <OBJECT type="text/sitemap"> 
+		   <param name="Name" value="main page"> 
+		   <param name="Local" value="another.htm"> 
+		   </OBJECT> 
  
-		We're interested in the latter. !m_Page.IsEmpty() is valid 
-		condition because text/site properties does not contain 
-		Local param 
+		   We're interested in the latter.
 		*/
 		
 		if (tag.GetParam(wxT("TYPE")) == wxT("text/sitemap")) {

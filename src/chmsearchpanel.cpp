@@ -24,7 +24,7 @@
 #include <wx/sizer.h>
 #include <wx/utils.h>
 #include <wx/config.h>
-
+#include <wx/tokenzr.h>
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxHtmlWindow *html)
@@ -77,21 +77,53 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	_results->Clear();
 	wxString sr = _text->GetLineText(0);
+	wxString word;
 
-	if (sr.IsEmpty() || _tcl->GetCount() <= 1)
+	if (sr.IsEmpty())
 		return;
 
 	CHMFile* chmf = CHMInputStream::GetCache();
-
 	if(!chmf)
 		return;
 
-	CHMSearchResults res;
+	sr.MakeLower();
+	sr.Replace(wxT("+"), wxT(" "), TRUE);
+	sr.Replace(wxT("-"), wxT(" "), TRUE);	
+	sr.Replace(wxT("#"), wxT(" "), TRUE);
+	sr.Replace(wxT("@"), wxT(" "), TRUE);
+	sr.Replace(wxT("^"), wxT(" "), TRUE);
+	sr.Replace(wxT("&"), wxT(" "), TRUE);
+	sr.Replace(wxT("%"), wxT(" "), TRUE);
 
-	chmf->IndexSearch(sr, _whole->IsChecked(), 
-			  _titles->IsChecked(), &res);
+	wxStringTokenizer tkz(sr, " ");
 
-	for(CHMSearchResults::iterator i = res.begin(); i != res.end(); ++i)
+	while(tkz.HasMoreTokens() && word.IsEmpty())
+		word = tkz.GetNextToken();
+
+	CHMSearchResults h1, h2;
+	CHMSearchResults::iterator i;
+
+	chmf->IndexSearch(word, _whole->IsChecked(), 
+			  _titles->IsChecked(), &h1);
+	
+	while(tkz.HasMoreTokens()) {
+
+		wxString token = tkz.GetNextToken();
+		if(token.IsEmpty())
+			continue;
+
+		CHMSearchResults tmp;
+		chmf->IndexSearch(word, _whole->IsChecked(), 
+				  _titles->IsChecked(), &h2);
+
+		for(i = h2.begin(); i != h2.end(); ++i)
+			if(h1.find(i->first) != h1.end())
+				tmp[i->first] = i->second;
+		
+		h1 = tmp;
+	}
+
+	for(i = h1.begin(); i != h1.end(); ++i)
 		_results->Append(i->second, new wxString(i->first));
 	
 

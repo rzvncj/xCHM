@@ -172,3 +172,8 @@
 		URLs.
 		+ fixed a TOC bug.
 
+	* ?:
+		+ added ListDirty() optimization hack from Iulian Dragos
+		<dragosiulian@users.sourceforge.net>
+
+

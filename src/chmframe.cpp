@@ -506,6 +506,9 @@ void CHMFrame::UpdateCHMInfo()
 		_tcl->DeleteAllItems();
 	chmf->GetTopicsTree(_tcl);
 	chmf->GetIndex(_cip->GetResultsList());
+ 
+	// call the dirty method
+	_cip->GetResultsList()->ListDirty();
 
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 

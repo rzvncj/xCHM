@@ -1,6 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  ListDirty() patch contributed by Iulian Dragos
+  <dragosiulian@users.sourceforge.net>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -70,6 +72,12 @@ public:
 
 	//! Should be called each time the list control's state changes.
 	void UpdateUI();
+  
+	/*!
+	  Called by ContentHandler to allow the list to perform (expensive)
+	  size computation.
+	*/
+	void ListDirty();
 
 	/*! 
 	  \brief Finds the list item that is the best match.
@@ -84,6 +92,7 @@ protected:
 private:
 	wxArrayString _urls;
 	CHMHtmlWindow *_html;
+	int _currentSize;
 
 private:
 	DECLARE_EVENT_TABLE()

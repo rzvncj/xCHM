@@ -1,7 +1,9 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
- 
+  ListDirty() patch contributed by Iulian Dragos
+  <dragosiulian@users.sourceforge.net>
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
@@ -68,8 +70,9 @@ void CHMListCtrl::UpdateUI()
 	int newSize = GetClientSize().GetWidth() - 1;
 	int cpp = GetCountPerPage();
 	
-	SetColumnWidth(0, wxLIST_AUTOSIZE);
-	int currSize = GetColumnWidth(0);
+	//	SetColumnWidth(0, wxLIST_AUTOSIZE);
+	//	int currSize = GetColumnWidth(0);
+	int currSize = _currentSize;
 
 	// If there's a scrollbar extract the width from the client area.
 	if(cpp >= 0 && GetItemCount() > cpp)
@@ -114,8 +117,14 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
 	event.Skip();
 }
 
+void CHMListCtrl::ListDirty() 
+{
+	SetColumnWidth(0, wxLIST_AUTOSIZE);
+	_currentSize = GetColumnWidth(0);  
+}
 
 
 BEGIN_EVENT_TABLE(CHMListCtrl, wxListCtrl)
 	EVT_SIZE(CHMListCtrl::OnSize)
 END_EVENT_TABLE()
+

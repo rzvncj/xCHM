@@ -26,7 +26,11 @@
 #include <wx/string.h>
 #include <wx/treectrl.h>
 #include <wx/listbox.h>
+#include <wx/hashmap.h>
 
+
+//! Declares a class called CHMSearchResults - <string, string> hashmap.
+WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
 
 
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
@@ -127,7 +131,7 @@ public:
 	  \return true if the search succeeded, false otherwise.
 	 */
 	bool IndexSearch(const wxString& text, bool wholeWords, 
-			 bool titlesOnly, wxListBox* toPopulate);
+			 bool titlesOnly, CHMSearchResults *results);
 
 	/*!
 	  \brief Looks up fileName in the archive.
@@ -171,7 +175,8 @@ private:
 			unsigned char cr, unsigned char ls,
 			unsigned char lr, chmUnitInfo *uifmain,
 			chmUnitInfo* uitbl, chmUnitInfo *uistrings,
-			chmUnitInfo* topics, chmUnitInfo *urlstr);
+			chmUnitInfo* topics, chmUnitInfo *urlstr,
+			CHMSearchResults *results);
 
 private:
 	chmFile* _chmFile;

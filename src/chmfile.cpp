@@ -159,18 +159,10 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
-#include <iostream>
-using namespace std;
-
-
 bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, 
-			  bool titlesOnly, wxListBox* toPopulate)
+			  bool titlesOnly, CHMSearchResults *results)
 {
 	bool partial = false;
-
-	if(toPopulate == NULL)
-		return false;
-	toPopulate->Clear();
 
 	if(text.IsEmpty())
 		return false;
@@ -260,8 +252,6 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 			i += 2 + word_len;
 			unsigned char title = *(buffer.get() + i - 1);
 
-			cerr << "Leaf word: " << word.mb_str() << endl;
-
 			size_t encsz;
 			wlc_count = be_encint(buffer.get() + i, encsz);
 			i += encsz;
@@ -285,19 +275,18 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 						  code_count_r, loc_codes_s, 
 						  loc_codes_r, &ui, &uiurltbl,
 						  &uistrings, &uitopics,
-						  &uiurlstr);
+						  &uiurlstr, results);
 
 			if(!wholeWords) {
 				if(word.StartsWith(text.c_str())) {
 					partial = true;
-					cerr << "Bingo!" << endl;
 					ProcessWLC(wlc_count, wlc_size, 
 						   wlc_offset, doc_index_s, 
 						   doc_index_r,code_count_s, 
 						   code_count_r, loc_codes_s, 
 						   loc_codes_r, &ui, &uiurltbl,
 						   &uistrings, &uitopics,
-						   &uiurlstr);
+						   &uiurlstr, results);
 
 				} else if(text.CmpNoCase(
 						  // Mid() might be buggy.
@@ -314,10 +303,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 		}	
 	} while(!wholeWords && word.StartsWith(text.c_str()) && node_offset);
 
-	if(partial)
-		return true;
-
-	return false;
+	return partial;
 }
 
 
@@ -546,7 +532,8 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 			 unsigned char cr, unsigned char ls,
 			 unsigned char lr, chmUnitInfo *uimain,
 			 chmUnitInfo* uitbl, chmUnitInfo *uistrings,
-			 chmUnitInfo* topics, chmUnitInfo *urlstr)
+			 chmUnitInfo* topics, chmUnitInfo *urlstr,
+			 CHMSearchResults *results)
 {
 	int wlc_bit = 7;
 	u_int64_t index = 0, count;
@@ -610,9 +597,8 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		wxString url = CURRENT_CHAR_STRING(combuf);
 
-//		cerr << "Index: " << index 
-		//	     << ", file: " << topic.mb_str() 
-		//   << ", url: " << url.mb_str() << endl;
+		if(!url.IsEmpty() && !topic.IsEmpty())
+			(*results)[url] = topic;
 
 		count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
 		off += length;

@@ -71,30 +71,31 @@ CHMSearchPanel::~CHMSearchPanel()
 }
 
 
-#include <iostream>
-using namespace std;
-
-
 void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 {
-	CHMFile* chmf = CHMInputStream::GetCache();
-
-	if(!chmf)
-		return;
-
 	wxBusyCursor bcr;
+
+	_results->Clear();
 	wxString sr = _text->GetLineText(0);
 
 	if (sr.IsEmpty() || _tcl->GetCount() <= 1)
 		return;
 
-	cerr << "CHMFile::IndexSearch() returned "
-	     << chmf->IndexSearch(sr, _whole->IsChecked(), 
-				  _titles->IsChecked(), _results)
-	     << endl;
+	CHMFile* chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return;
+
+	CHMSearchResults res;
+
+	chmf->IndexSearch(sr, _whole->IsChecked(), 
+			  _titles->IsChecked(), &res);
+
+	for(CHMSearchResults::iterator i = res.begin(); i != res.end(); ++i)
+		_results->Append(i->second, new wxString(i->first));
+	
 
 /*
-	_results->Clear();
 
 	PopulateList(_tcl->GetRootItem(), sr, _case->IsChecked(),
 		     _whole->IsChecked(), _titles->IsChecked());

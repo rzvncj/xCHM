@@ -121,7 +121,7 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-SUBDIRS = src
+SUBDIRS = src art
 EXTRA_DIST = art/*.xpm Doxyfile
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4

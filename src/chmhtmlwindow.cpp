@@ -60,12 +60,21 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 
 	// handle relative paths
 	if(tmp.StartsWith(wxT(".."))) {
+
 		CHMFile *chmf = CHMInputStream::GetCache();
 
-		if(chmf)
-			tmp.Replace(wxT(".."), wxString(wxT("file:")) + 
-				    chmf->ArchiveName() + wxT("#chm:") +
-				    GetPrefix().BeforeLast(wxT('/')));
+		if(!chmf)
+			return false;
+
+		wxString prefix = GetPrefix();
+		
+		while(tmp.StartsWith(wxT(".."))) {
+			tmp = tmp.AfterFirst(wxT('/'));
+			prefix = prefix.BeforeLast(wxT('/'));
+		}
+			      
+		tmp = wxString(wxT("file:")) + chmf->ArchiveName() + 
+			wxT("#chm:") + prefix + wxT("/") + tmp;
 	
 	} else if(tmp.StartsWith(wxT("javascript:fullSize"))) {
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
@@ -76,10 +85,17 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	   !location.AfterLast(wxT('/')).IsEmpty() && 
 	   _tcl->GetCount() > 1) {
 
+		wxString srch;
+		if(tmp.StartsWith(wxT("/")) || tmp.StartsWith(wxT("file:")))
+			srch = tmp.AfterLast(wxT(':')).AfterFirst(
+				wxT('/')).BeforeFirst(wxT('#'));
+		else
+			srch = tmp.BeforeFirst(wxT('#'));
+		
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call
 		// LoadPage() with _syncTree set to false.
-		Sync(_tcl->GetRootItem(), tmp);
+		Sync(_tcl->GetRootItem(), srch);
 
 		if(_found)
 			_found = false;
@@ -97,18 +113,13 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
-	wxString url, tmp;
-
-	if(page.StartsWith(wxT("/")) || page.StartsWith(wxT("file:")))
-		tmp = page.AfterLast(wxT(':')).AfterFirst(
-			wxT('/')).BeforeFirst(wxT('#')).Lower();
-	else
-		tmp = page.BeforeFirst(wxT('#')).Lower();
+	wxString url;
 
 	if(data)
-		url = (data->_url).BeforeFirst(wxT('#')).Lower();
+		url = (data->_url).BeforeFirst(wxT('#'));
 
-	if(data && (url == tmp || url == GetPrefix() + wxT("/") + tmp)) {
+	if(data && (!url.CmpNoCase(page) || 
+		    !url.CmpNoCase(GetPrefix() + wxT("/") + page))) {
 		// Order counts!
 		_found = true;
 		_tcl->SelectItem(root);
@@ -129,7 +140,7 @@ inline
 wxString CHMHtmlWindow::GetPrefix() const
 {
 	return GetOpenedPage().AfterLast(wxT(':')).AfterFirst(
-		wxT('/')).BeforeLast(wxT('/')).Lower();
+		wxT('/')).BeforeLast(wxT('/'));
 }
 
 

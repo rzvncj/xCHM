@@ -23,7 +23,6 @@
 #include <contenttaghandler.h>
 
 
-
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false)
@@ -61,8 +60,8 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
-	if(data && (data->_url).AfterLast(wxT('/')) == 
-	   page.AfterLast(wxT('/'))) {
+	if(data && (data->_url).AfterLast(wxT('/')).Lower() == 
+	   page.AfterLast(wxT('/')).Lower()) {
 		_tcl->SelectItem(root);
 		_found = true;
 		return;

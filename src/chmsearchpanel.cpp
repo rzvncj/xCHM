@@ -40,7 +40,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxDefaultPosition, wxDefaultSize, 
 			       wxTE_PROCESS_ENTER);
 
-	_partial = new wxCheckBox(this, -1, wxT("Match partial words"));
+	_partial = new wxCheckBox(this, -1, wxT("Get partial matches"));
 	_titles = new wxCheckBox(this, -1, wxT("Search titles only"));	
 	_grep = new wxCheckBox(this, -1, wxT("Grep mode"));
 	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
@@ -51,8 +51,8 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 	_titles->SetToolTip(wxT("Only search in the contents' titles. "
 				"Use in combination with grep search for "
 				"CHMs lacking indexed titles."));
-	_grep->SetToolTip(wxT("Plain grep search. Much slower, but finer"
-			      " grained. Not recommended."));
+	_grep->SetToolTip(wxT("Plain grep search. Safer bet but too slow."
+			      " Don't use unless desperate."));
 	_search->SetToolTip(wxT("Search contents for occurences of"
 				" the specified text."));
 #endif

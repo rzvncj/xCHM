@@ -3936,6 +3936,9 @@ fi;
      wx_config_args="$wx_config_args --prefix=$wx_config_prefix"
      WX_LOOKUP_PATH="$WX_LOOKUP_PATH:$wx_config_prefix/bin"
   fi
+  if test "$cross_compiling" = "yes"; then
+     wx_config_args="$wx_config_args --host=$host_alias"
+  fi
 
     if test -x "$WX_CONFIG_NAME" ; then
      echo "$as_me:$LINENO: checking for wx-config" >&5
@@ -3992,12 +3995,17 @@ fi
     no_wx=""
 
     min_wx_version=2.4.0
-    echo "$as_me:$LINENO: checking for wxWindows version >= $min_wx_version" >&5
+    if test -z "" ; then
+      echo "$as_me:$LINENO: checking for wxWindows version >= $min_wx_version" >&5
 echo $ECHO_N "checking for wxWindows version >= $min_wx_version... $ECHO_C" >&6
+    else
+      echo "$as_me:$LINENO: checking for wxWindows version >= $min_wx_version ()" >&5
+echo $ECHO_N "checking for wxWindows version >= $min_wx_version ()... $ECHO_C" >&6
+    fi
 
-    WX_CONFIG_WITH_ARGS="$WX_CONFIG_PATH $wx_config_args"
+    WX_CONFIG_WITH_ARGS="$WX_CONFIG_PATH $wx_config_args  "
 
-    WX_VERSION=`$WX_CONFIG_WITH_ARGS --version`
+    WX_VERSION=`$WX_CONFIG_WITH_ARGS --version 2>/dev/null`
     wx_config_major_version=`echo $WX_VERSION | \
            sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\1/'`
     wx_config_minor_version=`echo $WX_VERSION | \
@@ -4013,32 +4021,29 @@ echo $ECHO_N "checking for wxWindows version >= $min_wx_version... $ECHO_C" >&6
            sed 's/\([0-9]*\).\([0-9]*\).\([0-9]*\)/\3/'`
 
     wx_ver_ok=""
-    if test $wx_config_major_version -gt $wx_requested_major_version; then
-      wx_ver_ok=yes
-    else
-      if test $wx_config_major_version -eq $wx_requested_major_version; then
-         if test $wx_config_minor_version -gt $wx_requested_minor_version; then
-            wx_ver_ok=yes
-         else
-            if test $wx_config_minor_version -eq $wx_requested_minor_version; then
-               if test $wx_config_micro_version -ge $wx_requested_micro_version; then
-                  wx_ver_ok=yes
-               fi
-            fi
-         fi
+    if test "x$WX_VERSION" != x ; then
+      if test $wx_config_major_version -gt $wx_requested_major_version; then
+        wx_ver_ok=yes
+      else
+        if test $wx_config_major_version -eq $wx_requested_major_version; then
+           if test $wx_config_minor_version -gt $wx_requested_minor_version; then
+              wx_ver_ok=yes
+           else
+              if test $wx_config_minor_version -eq $wx_requested_minor_version; then
+                 if test $wx_config_micro_version -ge $wx_requested_micro_version; then
+                    wx_ver_ok=yes
+                 fi
+              fi
+           fi
+        fi
       fi
     fi
 
     if test "x$wx_ver_ok" = x ; then
       no_wx=yes
     else
-      if test "x" = "x" ; then
-        wx_libs_arg="--libs"
-      else
-        wx_libs_arg="--libs="
-      fi
-      WX_LIBS=`$WX_CONFIG_WITH_ARGS $wx_libs_arg`
-      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static $wx_libs_arg`
+      WX_LIBS=`$WX_CONFIG_WITH_ARGS --libs`
+      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static --libs`
 
             wx_has_cppflags=""
       if test $wx_config_major_version -gt 2; then

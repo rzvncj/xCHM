@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 0.9\n"
-"POT-Creation-Date: 2004-09-20 18:09+0300\n"
+"POT-Creation-Date: 2004-09-21 16:09+0300\n"
 "PO-Revision-Date: 2004-04-06 21:43+0200\n"
 "Last-Translator: gabriel <fgabriel.munoz@andaluciajunta.es>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
@@ -96,139 +96,139 @@ msgstr "Atras a la ultima pagina visitada. Por libro."
 msgid "About the program."
 msgstr "Acerca del programa."
 
-#: src/chmframe.cpp:123
+#: src/chmframe.cpp:125
 msgid "Ready."
 msgstr "Listo."
 
-#: src/chmframe.cpp:147 src/chmframe.cpp:790
+#: src/chmframe.cpp:149 src/chmframe.cpp:792
 msgid "Contents"
 msgstr "Contenido"
 
-#: src/chmframe.cpp:148
+#: src/chmframe.cpp:150
 msgid "Index"
 msgstr "Índice"
 
-#: src/chmframe.cpp:149 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:151 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Buscar"
 
-#: src/chmframe.cpp:172
+#: src/chmframe.cpp:174
 msgid "About xCHM"
 msgstr "Acerca de xCHM"
 
-#: src/chmframe.cpp:180
+#: src/chmframe.cpp:182
 msgid "Choose a file.."
 msgstr "Elija un archivo.."
 
-#: src/chmframe.cpp:290
+#: src/chmframe.cpp:292
 msgid "Couldn't extract the book contents tree."
 msgstr "No se pudo obtener el árbol de contenidos del libro."
 
-#: src/chmframe.cpp:292
+#: src/chmframe.cpp:294
 msgid "No contents.."
 msgstr "Sin contenidos.."
 
-#: src/chmframe.cpp:598
+#: src/chmframe.cpp:600
 msgid "&Open..\tCtrl-O"
 msgstr "&Abrir..\tCtrl-O"
 
-#: src/chmframe.cpp:599
+#: src/chmframe.cpp:601
 msgid "&Print page..\tCtrl-P"
 msgstr "Im&primir pagina..\tCtrl-P"
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:602
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Fuen&tes..\tCtrl-T"
 
-#: src/chmframe.cpp:603
+#: src/chmframe.cpp:605
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Mostrar árbol de contenidos\tCtrl-S"
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:610
 msgid "&Recent files"
 msgstr "Archivos &recientes"
 
-#: src/chmframe.cpp:624
+#: src/chmframe.cpp:626
 msgid "E&xit\tCtrl-X"
 msgstr "&Salir\tCtrl-X"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:627
 msgid "Quit the application."
 msgstr "Cerrar la aplicación."
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:631
 msgid "&Home\tCtrl-H"
 msgstr "&Inicio\tCtrl-H"
 
-#: src/chmframe.cpp:630
+#: src/chmframe.cpp:632
 msgid "For&ward\tCtrl-W"
 msgstr "&Adelante\tCtrl-W"
 
-#: src/chmframe.cpp:631
+#: src/chmframe.cpp:633
 msgid "&Back\tCtrl-B"
 msgstr "A&trás\tCtrl-B"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:636
 msgid "&About ..\tF1"
 msgstr "&Acerca ..\tF1"
 
-#: src/chmframe.cpp:637
+#: src/chmframe.cpp:639
 msgid "&File"
 msgstr "&Archivo"
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:640
 msgid "Hi&story"
 msgstr "Hi&storial"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:641
 msgid "&Help"
 msgstr "A&yuda"
 
-#: src/chmframe.cpp:650
+#: src/chmframe.cpp:652
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:674
 msgid "Add"
 msgstr "Añadir"
 
-#: src/chmframe.cpp:673
+#: src/chmframe.cpp:675
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/chmframe.cpp:676
+#: src/chmframe.cpp:678
 msgid "Add displayed page to bookmarks."
 msgstr "Añadir página actual a favoritos"
 
-#: src/chmframe.cpp:677
+#: src/chmframe.cpp:679
 msgid "Remove selected bookmark."
 msgstr "Eliminar favorito seleccionado."
 
-#: src/chmframe.cpp:784
+#: src/chmframe.cpp:786
 msgid "Open .."
 msgstr "Abrir .."
 
-#: src/chmframe.cpp:786
+#: src/chmframe.cpp:788
 msgid "Print .."
 msgstr "Imprimir .."
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:790
 msgid "Fonts .."
 msgstr "Fuentes .."
 
-#: src/chmframe.cpp:795
+#: src/chmframe.cpp:797
 msgid "Back"
 msgstr "Atrás"
 
-#: src/chmframe.cpp:796
+#: src/chmframe.cpp:798
 msgid "Forward"
 msgstr "Adelante"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:800
 msgid "Home"
 msgstr "Inicio"
 
-#: src/chmframe.cpp:801
+#: src/chmframe.cpp:803
 msgid "About"
 msgstr "Acerca"
 

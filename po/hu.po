@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-09-20 18:09+0300\n"
+"POT-Creation-Date: 2004-09-21 16:09+0300\n"
 "PO-Revision-Date: 2004-07-24 09:39+0000\n"
 "Last-Translator: Aron Novak <aaron@szentimre.hu>\n"
 "Language-Team: Hungarian\n"
@@ -95,139 +95,139 @@ msgstr "Vissza a legutóbbi oldalra."
 msgid "About the program."
 msgstr "Megjeleníti a program névjegyét."
 
-#: src/chmframe.cpp:123
+#: src/chmframe.cpp:125
 msgid "Ready."
 msgstr "Kész."
 
-#: src/chmframe.cpp:147 src/chmframe.cpp:790
+#: src/chmframe.cpp:149 src/chmframe.cpp:792
 msgid "Contents"
 msgstr "Tartalom"
 
-#: src/chmframe.cpp:148
+#: src/chmframe.cpp:150
 msgid "Index"
 msgstr "Tartalomjegyzék"
 
-#: src/chmframe.cpp:149 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:151 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Keresés"
 
-#: src/chmframe.cpp:172
+#: src/chmframe.cpp:174
 msgid "About xCHM"
 msgstr "Az xCHM névjegye"
 
-#: src/chmframe.cpp:180
+#: src/chmframe.cpp:182
 msgid "Choose a file.."
 msgstr "Fájl kiválasztása.."
 
-#: src/chmframe.cpp:290
+#: src/chmframe.cpp:292
 msgid "Couldn't extract the book contents tree."
 msgstr "Nem lehet a tartalomjegyzéket kibontani."
 
-#: src/chmframe.cpp:292
+#: src/chmframe.cpp:294
 msgid "No contents.."
 msgstr "Nincs tartalom.."
 
-#: src/chmframe.cpp:598
+#: src/chmframe.cpp:600
 msgid "&Open..\tCtrl-O"
 msgstr "&Megnyitás..\tCtrl-O"
 
-#: src/chmframe.cpp:599
+#: src/chmframe.cpp:601
 msgid "&Print page..\tCtrl-P"
 msgstr "&Oldal nyomtatása..\tCtrl-D"
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:602
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Betûtípusok..\tCtrl-F"
 
-#: src/chmframe.cpp:603
+#: src/chmframe.cpp:605
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Tartalomjegyzék mutatása\tCtrl-S"
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:610
 msgid "&Recent files"
 msgstr "&Legutóbbi fájlok"
 
-#: src/chmframe.cpp:624
+#: src/chmframe.cpp:626
 msgid "E&xit\tCtrl-X"
 msgstr "&Kilépés\tCtrl-X"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:627
 msgid "Quit the application."
 msgstr "Kilépés a programból."
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:631
 msgid "&Home\tCtrl-H"
 msgstr "&Kezdõlap\tCtrl-H"
 
-#: src/chmframe.cpp:630
+#: src/chmframe.cpp:632
 msgid "For&ward\tCtrl-W"
 msgstr "&Elõre\tCtrl-W"
 
-#: src/chmframe.cpp:631
+#: src/chmframe.cpp:633
 msgid "&Back\tCtrl-B"
 msgstr "&Vissza\tCtrl-B"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:636
 msgid "&About ..\tF1"
 msgstr "&Névjegy ..\tF1"
 
-#: src/chmframe.cpp:637
+#: src/chmframe.cpp:639
 msgid "&File"
 msgstr "&Fájl"
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:640
 msgid "Hi&story"
 msgstr "El&õzmények"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:641
 msgid "&Help"
 msgstr "&Súgó"
 
-#: src/chmframe.cpp:650
+#: src/chmframe.cpp:652
 msgid "Bookmarks"
 msgstr "Könyvjelzõk"
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:674
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: src/chmframe.cpp:673
+#: src/chmframe.cpp:675
 msgid "Remove"
 msgstr "Eltávolitás"
 
-#: src/chmframe.cpp:676
+#: src/chmframe.cpp:678
 msgid "Add displayed page to bookmarks."
 msgstr "Aktuális oldal a könyvjelzõkhöz"
 
-#: src/chmframe.cpp:677
+#: src/chmframe.cpp:679
 msgid "Remove selected bookmark."
 msgstr "Kijelölt könyvjelzõ törlése."
 
-#: src/chmframe.cpp:784
+#: src/chmframe.cpp:786
 msgid "Open .."
 msgstr "Megnyitás .."
 
-#: src/chmframe.cpp:786
+#: src/chmframe.cpp:788
 msgid "Print .."
 msgstr "Nyomtatás .."
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:790
 msgid "Fonts .."
 msgstr "Betûtípusok .."
 
-#: src/chmframe.cpp:795
+#: src/chmframe.cpp:797
 msgid "Back"
 msgstr "Vissza"
 
-#: src/chmframe.cpp:796
+#: src/chmframe.cpp:798
 msgid "Forward"
 msgstr "Elõre"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:800
 msgid "Home"
 msgstr "Kezdõlap"
 
-#: src/chmframe.cpp:801
+#: src/chmframe.cpp:803
 msgid "About"
 msgstr "Névjegy"
 

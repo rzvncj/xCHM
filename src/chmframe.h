@@ -42,6 +42,7 @@ enum
     ID_Quit = 1,
     ID_About,
     ID_Open,
+    ID_Fonts,
     ID_Print,
     ID_Home,
     ID_Forward,
@@ -74,6 +75,15 @@ public:
 	//! Cleans up.
 	~CHMFrame();
 
+	/*!
+	  \brief Attempts to load a .chm file and display it's home page,
+	  and if available, the contents tree. Otherwise an error message
+	  is issued.
+	  \param archive The .chm file name on disk.
+	 */
+	void LoadCHM(const wxString& archive);
+
+protected:
 	//! Called when the user closes the window.
 	void OnQuit(wxCommandEvent& event);
 
@@ -82,6 +92,9 @@ public:
 
 	//! Called when the user wants to open a file.
 	void OnOpen(wxCommandEvent& event);
+
+	//! Called when the user wants to change the fonts.
+	void OnChangeFonts(wxCommandEvent& event);
 
 	//! Called when the user wants to see the default page.
 	void OnHome(wxCommandEvent& event);
@@ -106,15 +119,7 @@ public:
 
 	//! Cleanup code. This saves the window position and last open dir.
 	void OnCloseWindow(wxCloseEvent& event);
-
-	/*!
-	  \brief Attempts to load a .chm file and display it's home page,
-	  and if available, the contents tree. Otherwise an error message
-	  is issued.
-	  \param archive The .chm file name on disk.
-	 */
-	void LoadCHM(const wxString& archive);
-	
+ 	
 private:
 	//! Helper. Creates the menu.
 	wxMenuBar *CreateMenu();
@@ -130,6 +135,8 @@ private:
 	wxToolBar* _tb;
 	wxHtmlEasyPrinting *_ep;
 	wxString _openPath;
+	wxArrayString *_normalFonts;
+	wxArrayString *_fixedFonts;
 
 private:
 	DECLARE_EVENT_TABLE()	

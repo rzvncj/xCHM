@@ -22,6 +22,8 @@
 #include <chmframe.h>
 #include <chminputstream.h>
 #include <contenttaghandler.h>
+#include <chmfontdialog.h>
+#include <wx/fontenum.h>
 
 
 namespace {
@@ -59,9 +61,12 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const wxPoint& pos, const wxSize& size)
 	: wxFrame((wxFrame *)NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _openPath(booksDir)
+	  _openPath(booksDir), _normalFonts(NULL), _fixedFonts(NULL)
 {
-	int sizes[] = {8, 10, 12, 14, 16, 18, 20};
+	int sizes[7];
+
+	for(int i = -3; i <= 3; ++i)
+		sizes[i+3] = CHM_DEFAULT_FONT_SIZE + i * 2;	
 
 	SetIcon(wxIcon(htmbook_xpm));
 	SetMenuBar(CreateMenu());
@@ -95,6 +100,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 CHMFrame::~CHMFrame()
 {
 	delete _ep;
+	delete _fixedFonts;
+	delete _normalFonts;
 }
 
 
@@ -106,6 +113,7 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
+
 	::wxMessageBox(about_txt, 
 		       "About xCHM", 
 		       wxOK | wxICON_INFORMATION, this );
@@ -130,6 +138,43 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 
 	_openPath = selection.BeforeLast('/');
 	LoadCHM(selection);
+}
+
+
+void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
+{
+	// First time initialization only.
+	if(_normalFonts == NULL) {
+		wxFontEnumerator enu;
+		enu.EnumerateFacenames();
+		_normalFonts = new wxArrayString;
+		*_normalFonts = *enu.GetFacenames();
+		_normalFonts->Sort();
+	}
+
+	if(_fixedFonts == NULL) {
+		wxFontEnumerator enu;
+		enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, TRUE);
+		_fixedFonts = new wxArrayString;
+		*_fixedFonts = *enu.GetFacenames();
+		_fixedFonts->Sort();
+	}
+
+
+	assert(_normalFonts != NULL);
+	assert(_fixedFonts != NULL);
+
+	CHMFontDialog cfd(this, _normalFonts, _fixedFonts);
+
+	cfd.ShowModal();
+
+	_html->SetFonts(cfd.NormalFont(), cfd.FixedFont(),
+			cfd.Sizes());
+
+	wxString page = _html->GetOpenedPage();
+
+	if(page.IsEmpty())
+		_html->SetPage(greeting); 
 }
 
 
@@ -288,6 +333,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 namespace {
 
 const char *open_help = "Open a CHM book.";
+const char *fonts_help = "Change fonts.";
 const char *print_help = "Print the page currently displayed";
 const char *contents_help = "On or off?";
 const char *home_help = "Go to the book's start page.";
@@ -304,6 +350,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 
 	_menuFile->Append(ID_Open, "&Open ..", open_help);
 	_menuFile->Append(ID_Print, "&Print page..", print_help);
+	_menuFile->Append(ID_Fonts, "&Fonts..", fonts_help);
 	_menuFile->AppendSeparator();
 	_menuFile->AppendCheckItem(ID_Contents, "&Show contents tree",
 				   contents_help);
@@ -337,6 +384,7 @@ namespace {
 #include <home.xpm>
 #include <helpicon.xpm>
 #include <htmsidep.xpm>
+#include <htmoptns.xpm>
 
 } // namespace
 
@@ -347,6 +395,8 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 			 open_help);
 	toolbar->AddTool(ID_Print, "Print ..", wxBitmap(print_xpm),
 			 print_help);
+	toolbar->AddTool(ID_Fonts, "Fonts ..", wxBitmap(htmoptns_xpm),
+			 fonts_help);
 	toolbar->AddCheckTool(ID_Contents, "Contents", 
 			      wxBitmap(htmsidep_xpm),
 			      wxBitmap(htmsidep_xpm), contents_help);
@@ -370,6 +420,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Quit,  CHMFrame::OnQuit)
 	EVT_MENU(ID_About, CHMFrame::OnAbout)
 	EVT_MENU(ID_Open, CHMFrame::OnOpen)
+	EVT_MENU(ID_Fonts, CHMFrame::OnChangeFonts)
 	EVT_MENU(ID_Home, CHMFrame::OnHome)
 	EVT_MENU(ID_Forward, CHMFrame::OnHistoryForward)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)

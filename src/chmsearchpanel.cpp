@@ -115,7 +115,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 		if(tkz.HasMoreTokens())
 			word = tkz.GetNextToken();
 
-	CHMSearchResults h1, h2;
+	CHMSearchResults h1;
 	CHMSearchResults::iterator i;
 
 	chmf->IndexSearch(word, !_partial->IsChecked(), 
@@ -127,15 +127,16 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 		if(token.IsEmpty())
 			continue;
 
-		CHMSearchResults tmp;
+		CHMSearchResults h2, tmp;
 		chmf->IndexSearch(token, !_partial->IsChecked(), 
 				  _titles->IsChecked(), &h2);
 
-		for(i = h2.begin(); i != h2.end(); ++i)
-			if(h1.find(i->first) != h1.end())
-				tmp[i->first] = i->second;
-		h1 = tmp;
-		if(h1.empty())
+		if(!h2.empty()) {
+			for(i = h2.begin(); i != h2.end(); ++i)
+				if(h1.find(i->first) != h1.end())
+					tmp[i->first] = i->second;	
+			h1 = tmp;
+		} else
 			return;
 	}
 

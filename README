@@ -10,9 +10,10 @@
 
  http://www.wxwindows.org
 
- I strongly suggest you download the GTK+ flavour of wxWindows. If you
- can't do that (you might not have GTK+ installed), use the Xlib version.
- Only as a last resort use the Motif version.
+ Get the GTK+ version (also known as wxGTK). xCHM currently compiles
+ with all flavours of wxWindows, but only works well and looks truly
+ appealing with wxGTK, so I recommend against bothering to use it with
+ anything else.
 
  You can get CHMLIB from:
 

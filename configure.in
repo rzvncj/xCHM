@@ -39,6 +39,7 @@ fi
 CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
 CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY -W -Wall"
 CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
+
      
 AC_ARG_ENABLE(static, 
 	      [  --enable-static         link statically to wxWindows.], 

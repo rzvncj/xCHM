@@ -146,12 +146,12 @@ void CHMFontDialog::InitDialog(wxArrayString *normalFonts,
 	for (unsigned int i = 0; i < fixedFonts->GetCount(); i++)
 		_fixedFControl->Append((*fixedFonts)[i]);
 
-	if (!_normalFont.empty())
+	if (!_normalFont.IsEmpty())
 		_normalFControl->SetStringSelection(_normalFont);
 	else
 		_normalFControl->SetSelection(0);
 
-	if (!_fixedFont.empty())
+	if (!_fixedFont.IsEmpty())
 		_fixedFControl->SetStringSelection(_fixedFont);
 	else
 		_fixedFControl->SetSelection(0);

@@ -12,3 +12,10 @@
 		+ corrected a path-related bug that happened when
 		opening a CHM file who's default page was only a reference
 		to a page in a different CHM file.
+
+	* 0.6. Feature enhancements:
+		+ added a custom selection font chooser dialog. Turns out to
+		be a major feature as some (crappy) books display garbage
+		with the default font.
+
+	

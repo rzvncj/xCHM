@@ -25,6 +25,10 @@
 #include <wx/wx.h>
 
 
+// Forward declaration.
+class CHMFrame;
+
+
 /*! 
   \class wxApp
   \brief wxWindows application class.
@@ -35,6 +39,14 @@ class CHMApp : public wxApp {
 
 	//! Our entry point into the application.
 	virtual bool OnInit();
+
+#ifdef __WXMAC__
+	//! Respond to Apple Event for opening a document
+	virtual void MacOpenFile(const wxString& filename);
+#endif
+
+private:
+	CHMFrame* _frame;
 };
 
 

@@ -51,22 +51,28 @@ bool CHMApp::OnInit()
 		config.Read(wxT("/Sash/leftMargin"), &sashPos);
 	}
 
-	CHMFrame *frame = new CHMFrame(wxT("xCHM v. " VERSION),
+	_frame = new CHMFrame(wxT("xCHM v. " VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
 				       fixedFont, static_cast<int>(fontSize),
 				       static_cast<int>(sashPos));
 
-	frame->SetSizeHints(200, 200);
-	frame->Show(TRUE);
-	SetTopWindow(frame);
+	_frame->SetSizeHints(200, 200);
+	_frame->Show(TRUE);
+	SetTopWindow(_frame);
 
 	if(argc > 1)
-		frame->LoadCHM(argv[1]);
+		_frame->LoadCHM(argv[1]);
 	
 	return TRUE;
 }
 
+#ifdef __WXMAC__
+void CHMApp::MacOpenFile(const wxString& filename)
+{
+	_frame->LoadCHM(filename);
+}
+#endif
 
 // Apparently this macro gets main() pumping.
 IMPLEMENT_APP(CHMApp)

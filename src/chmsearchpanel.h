@@ -80,13 +80,7 @@ protected:
 
 private:
 	//! Helper. Searches through the tree recursively.
-	void PopulateList(wxTreeItemId root, wxString& text, 
-			  bool caseSensitive, bool wholeWords,
-			  bool titlesOnly);
-
-	//! Helper. Grep searches a HTML file for the given text.
-	bool FileSearch(const wxString& filename, wxString& text,
-			bool caseSensitive, bool wholeWords);
+	void PopulateList(wxTreeItemId root, wxString& text, bool wholeWords);
 
 	//! Helper. Grep searches page titles for the given text.
 	bool TitleSearch(const wxString& title, wxString& text,
@@ -101,7 +95,6 @@ private:
 private:
 	wxTreeCtrl* _tcl;
 	wxTextCtrl* _text;
-	wxCheckBox* _grep;
 	wxCheckBox* _partial;
 	wxCheckBox* _titles;
 	wxButton* _search;

@@ -30,9 +30,8 @@
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxHtmlWindow *html)
-	: wxPanel(parent), _tcl(topics), _text(NULL), _grep(NULL),
-	  _partial(NULL), _titles(NULL), _search(NULL), _results(NULL), 
-	  _html(html)
+	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL), 
+	  _titles(NULL), _search(NULL), _results(NULL), _html(html)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
@@ -44,17 +43,12 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 
 	_partial = new wxCheckBox(this, -1, wxT("Get partial matches"));
 	_titles = new wxCheckBox(this, -1, wxT("Search titles only"));	
-	_grep = new wxCheckBox(this, -1, wxT("Grep mode"));
 	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
 
 #if wxUSE_TOOLTIPS
 	_partial->SetToolTip(wxT("Search for words that start with"
 			       " the typed words."));
-	_titles->SetToolTip(wxT("Only search in the contents' titles. "
-				"Use in combination with grep search for "
-				"CHMs lacking indexed titles."));
-	_grep->SetToolTip(wxT("Plain grep search. Safer bet but too slow."
-			      " Don't use unless desperate."));
+	_titles->SetToolTip(wxT("Only search in the contents' titles."));
 	_search->SetToolTip(wxT("Search contents for occurences of"
 				" the specified text."));
 #endif
@@ -66,7 +60,6 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
-        sizer->Add(_grep, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
         sizer->Add(_results, 1, wxALL | wxEXPAND, 2);
 
@@ -86,13 +79,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	_results->Clear();
 	wxString sr = _text->GetLineText(0);
-
-	if(_grep->IsChecked()) {
-		PopulateList(_tcl->GetRootItem(), sr, false,
-			     !_partial->IsChecked(), _titles->IsChecked());
-		return;
-	}
-
 	wxString word;
 
 	if (sr.IsEmpty())
@@ -138,22 +124,29 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 				if(h1.find(i->first) != h1.end())
 					tmp[i->first] = i->second;	
 			h1 = tmp;
-		} else
-			return;
+		} else {
+			h1.clear();
+			break;
+		}
 	}
 
-	for(i = h1.begin(); i != h1.end(); ++i) {
-		
-		wxString full_url = wxString(wxT("file:")) + 
-			chmf->ArchiveName() + wxT("#chm:/") + i->first;
-		_results->Append(i->second, new wxString(full_url));
+	if(_titles->IsChecked() && h1.empty()) {
+		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
+		return;
 	}
+
+	if(!h1.empty())
+		for(i = h1.begin(); i != h1.end(); ++i) {
+		
+			wxString full_url = wxString(wxT("file:")) + 
+				chmf->ArchiveName() + wxT("#chm:/") + i->first;
+			_results->Append(i->second, new wxString(full_url));
+		}
 }
 
 
 void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
-				  bool caseSensitive, bool wholeWords,
-				  bool titlesOnly)
+				  bool wholeWords)
 {
 	static CHMFile *chmf = CHMInputStream::GetCache();
 
@@ -169,21 +162,15 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 			chmf->ArchiveName() + wxT("#chm:/") + data->_url;
 		wxString title = _tcl->GetItemText(root);
 
-		if(!titlesOnly) {
-			if(FileSearch(url, text, caseSensitive, wholeWords))
-				_results->Append(title, new wxString(url));
-		} else {
-			if(TitleSearch(title, text, caseSensitive, wholeWords))
-				_results->Append(title, new wxString(url));
-		}
+		if(TitleSearch(title, text, false, wholeWords))
+			_results->Append(title, new wxString(url));
 	}	
 
 	long cookie;
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
 
 	for(size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {
-		PopulateList(child, text, caseSensitive, wholeWords,
-			     titlesOnly);
+		PopulateList(child, text, wholeWords);
 		child = _tcl->GetNextChild(root, cookie);
 	}
 }
@@ -192,89 +179,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 static inline bool WHITESPACE(wxChar c)
 {
 	return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') 
-		|| c == wxT('\t') || c == wxT('<') || c == wxT('>');
-}
-
-
-static inline bool HTML_WHITESPACE(wxChar c)
-{
-	return WHITESPACE(c) || c == wxT('<') || c == wxT('>');
-}
-
-
-// The following two functions should be changed with faster ones.
-
-bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
-				bool caseSensitive, bool wholeWords)
-{
-	int i, j, wrd = text.Length();
-	bool found = false;
-
-	wxFileSystem fsys;
-	wxFSFile *file = fsys.OpenFile(filename);
-
-	if (file == NULL)
-		return FALSE;
-
-	wxHtmlFilterHTML filter;
-	wxString tmp = filter.ReadFile(*file);
-
-	int lng = tmp.Length();
-
-	if (!caseSensitive) {
-		tmp.MakeLower();
-		text.MakeLower();
-	}
-
-	const wxChar *buf1 = tmp.c_str(), *buf2 = text.c_str();
-	bool inTag = false;
-
-	if(wholeWords) {
-		for(i = 0; i < lng - wrd + 1; ++i) {
-
-			if(buf1[i] == wxT('<'))
-				inTag = true;
-			else if(buf1[i] == wxT('>'))
-				inTag = false;
-
-			if(HTML_WHITESPACE(buf1[i]) || inTag) 
-				continue;
-			 			
-			j = 0;
-			while(buf1[i + j] == buf2[j] && j < wrd) 
-				++j;
-
-			if (j == wrd && 
-			    (HTML_WHITESPACE(buf1[i + j]) || i+j == lng)) 
-				if(i == 0 || HTML_WHITESPACE(buf1[i - 1])) {
-					found = TRUE; 
-					break; 
-				}
-		}
-	} else {
-		for (i = 0; i < lng - wrd + 1; ++i) {
-
-  			if(buf1[i] == wxT('<'))
-				inTag = true;
-			else if(buf1[i] == wxT('>')) {
-				inTag = false;
-				continue;
-			}
-
-			if(inTag)
-				continue;
-
-			j = 0;
-			while ((j < wrd) && (buf1[i + j] == buf2[j])) 
-				++j;
-			if (j == wrd) { 
-				found = TRUE; 
-				break; 
-			}
-		}
-	}
-
-	return found;
+		|| c == wxT('\t');
 }
 
 
@@ -329,7 +234,6 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 }
 
 
-
 void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))
 {
 	wxString *userData = reinterpret_cast<wxString *>(
@@ -349,23 +253,17 @@ void CHMSearchPanel::Reset()
 void CHMSearchPanel::SetConfig()
 {
 	wxConfig config(wxT("xchm"));	
-
-	config.Write(wxT("/Search/grepMode"), (long)_grep->GetValue());
 	config.Write(wxT("/Search/partialWords"), (long)_partial->GetValue());
 	config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
 }
 
 void CHMSearchPanel::GetConfig()
 {
-	long grep, partial, titles;
+	long partial, titles;
 	wxConfig config(wxT("xchm"));
 
-	if(config.Read(wxT("/Search/grepMode"), &grep)) {
-		
-		config.Read(wxT("/Search/partialWords"), &partial);
+	if(config.Read(wxT("/Search/partialWords"), &partial)) {
 		config.Read(wxT("/Search/titlesOnly"), &titles);
-
-		_grep->SetValue(grep);
 		_partial->SetValue(partial);
 		_titles->SetValue(titles);
 	}

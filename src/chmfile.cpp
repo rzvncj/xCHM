@@ -24,15 +24,35 @@
 #include <wx/defs.h>
 #include <wx/strconv.h>
 #include <wx/tokenzr.h>
+#include <wx/ptr_scpd.h>
 #include <assert.h>
 
 
+namespace {
+
+// I'm defining a smart pointer class called wxCharArray, wxWindows style.
+wxDECLARE_SCOPED_ARRAY(unsigned char, UCharPtr)
+wxDEFINE_SCOPED_ARRAY(unsigned char, UCharPtr)
+
+} // namespace
+
+
 #ifdef wxUSE_UNICODE
+
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
+
+#	define CURRENT_CHAR_STRING_LEN(x, len) \
+	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1, len)
+
 #else
+
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x))
+
+#	define CURRENT_CHAR_STRING_LEN(x, len) \
+	wxString(reinterpret_cast<const char *>(x), len)
+
 #endif
 
 
@@ -139,7 +159,11 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
-bool CHMFile::IndexSearch(wxString& text, bool WXUNUSED(wholeWords), 
+#include <iostream>
+using namespace std;
+
+
+bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords), 
 			  bool WXUNUSED(titlesOnly), wxListBox* toPopulate)
 {
 	if(toPopulate == NULL)
@@ -196,7 +220,51 @@ bool CHMFile::IndexSearch(wxString& text, bool WXUNUSED(wholeWords),
 	u_int16_t tree_depth = *cursor16;
 	FIXENDIAN16(tree_depth);
 
-	return false;
+	UCharPtr buffer(new unsigned char[node_len]);
+	
+	if(!buffer.get())
+		return false;
+
+	unsigned char word_len, pos;
+	wxString word;
+
+	while(--tree_depth) {
+
+		if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
+					 node_offset, node_len) == 0)
+		return false;
+
+		cursor16 = reinterpret_cast<u_int16_t*>(buffer.get());
+		u_int16_t free_space = *cursor16;
+		FIXENDIAN16(free_space);
+
+		u_int32_t i = 0;
+
+		while(i < node_len - free_space) {			
+
+			word_len = *(buffer.get() + i + 2);
+			pos = *(buffer.get() + i + 3);
+
+			if(pos == 0)
+				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
+							       + i + 4, 
+							       word_len - 1);
+			else
+				word = word.Mid(0, pos) +
+					CURRENT_CHAR_STRING_LEN(buffer.get() 
+								+ i + 4,
+								word_len - 1);
+
+			cerr << "Word: " << word.mb_str() << endl;
+			// process word here; if match break
+
+			i += word_len + sizeof(unsigned char) +
+				+ sizeof(u_int32_t) + sizeof(u_int16_t);
+		}
+	}
+
+	// dummy return value
+	return true;
 }
 
 

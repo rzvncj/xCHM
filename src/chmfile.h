@@ -129,8 +129,8 @@ public:
 	  \param toPopulate The list box we'll be filling with results.
 	  \return true if the search succeeded, false otherwise.
 	 */
-	bool IndexSearch(wxString& text, bool wholeWords, bool titlesOnly,
-			 wxListBox* toPopulate);
+	bool IndexSearch(const wxString& text, bool wholeWords, 
+			 bool titlesOnly, wxListBox* toPopulate);
 
 	/*!
 	  \brief Looks up fileName in the archive.

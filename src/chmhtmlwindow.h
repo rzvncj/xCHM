@@ -35,6 +35,7 @@
 //! Event IDs.
 enum {
 	ID_CopySel = 1216,
+	ID_CopyLink,
 	ID_PopupForward,
 	ID_PopupBack,
 	ID_PopupFind,
@@ -136,6 +137,9 @@ protected:
 
 	//! Called when the user selects 'Back' from the popup menu.
 	void OnBack(wxCommandEvent& event);
+	
+	//! Called when the user selects 'Copy link' from the popup menu.
+	void OnCopyLink(wxCommandEvent& event);
 
 protected:	
 	//! Called when the user right clicks the HTML window.
@@ -170,6 +174,7 @@ private:
 	wxString _prefix;
 	bool _absolute;
 	CHMFrame *_frame;
+	wxHtmlLinkInfo *_link;
 
 #ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;

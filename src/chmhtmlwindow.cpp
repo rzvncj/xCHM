@@ -27,6 +27,7 @@
 #include <chmframe.h>
 #include <wx/wx.h>
 #include <wx/log.h>
+#include <wx/clipbrd.h>
 
 
 
@@ -34,7 +35,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
-	  _absolute(false), _frame(frame)
+	  _absolute(false), _frame(frame), _link(NULL)
 #ifdef _ENABLE_COPY_AND_FIND
 	, _fdlg(NULL)
 #endif
@@ -42,6 +43,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
 	_menu->Append(ID_PopupBack, _("&Back"));
+	_menu->Append(ID_CopyLink, _("Copy &link location"));
 
 #ifdef _ENABLE_COPY_AND_FIND
 	_menu->AppendSeparator();
@@ -359,6 +361,16 @@ void CHMHtmlWindow::OnBack(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
+{
+	if(wxTheClipboard->Open()) {
+		wxTheClipboard->SetData(
+			new wxTextDataObject(_link->GetHref()));
+		wxTheClipboard->Close();
+	}
+}
+
+
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
 #ifdef _ENABLE_COPY_AND_FIND
@@ -368,6 +380,18 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 	_menu->Enable(ID_PopupForward, HistoryCanForward());
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
+	_menu->Enable(ID_CopyLink, false);
+
+	wxHtmlCell *cell = 
+		m_Cell->FindCellByPos(event.m_x, event.m_y);
+
+	if(cell) {
+		_link = cell->GetLink();
+
+		if(_link) {
+			_menu->Enable(ID_CopyLink, true);
+		}
+	}
 
 	PopupMenu(_menu, event.GetPosition());
 }
@@ -431,6 +455,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 #endif
 	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
+	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
 #ifdef __WXMAC__
 	EVT_MOUSEWHEEL(CHMHtmlWindow::HandleOnMouseWheel)

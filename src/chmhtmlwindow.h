@@ -144,6 +144,8 @@ protected:
 					 const wxString& url,
 					 wxString *redirect) const;
 
+	void OnLinkClicked(const wxHtmlLinkInfo& link);
+
 private:
 	//! Helper. Recursively looks for the opened page in the tree.
 	void Sync(wxTreeItemId root, const wxString& page);

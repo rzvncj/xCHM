@@ -190,6 +190,9 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 }
 
 
+#include <iostream>
+using namespace std;
+
 wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 						const wxString& url, 
 						wxString *redirect) const
@@ -205,6 +208,27 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 	}
 
 	return wxHTML_OPEN;
+}
+
+
+void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
+{
+	wxString target = link.GetHref();
+	wxString browser =
+		::wxGetTextFromUser(_("Type in the full path to the "
+				      "browser you'd like to use\n"
+				      "for http(s)://, ftp:// and mailto:"
+				      " links.\n"),
+				    _("Select external browser .."), 
+				    wxT("mozilla"),
+				    this);
+
+	if(!browser.IsEmpty()) {
+		wxExecute(browser + wxT(" ") + target);
+		return;
+	}
+
+	wxHtmlWindow::OnLinkClicked(link);
 }
 
 
@@ -359,6 +383,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	PopupMenu(_menu, event.GetPosition());
 }
 
+
 #ifdef __WXMAC__
 /* This is a hack, consisting of copying the relevent event handler from
    the wxWidgets src/generic/scrlwing.cpp file to make up for the fact that for
@@ -367,42 +392,44 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
    When this gets fixed in wxWidgets, this should prob be just removed.. */
 void CHMHtmlWindow::HandleOnMouseWheel(wxMouseEvent& event)
 {
-    int m_wheelRotation = 0;
-    m_wheelRotation += event.GetWheelRotation();
-    int lines = m_wheelRotation / event.GetWheelDelta();
-    m_wheelRotation -= lines * event.GetWheelDelta();
+	int m_wheelRotation = 0;
+	m_wheelRotation += event.GetWheelRotation();
+	int lines = m_wheelRotation / event.GetWheelDelta();
+	m_wheelRotation -= lines * event.GetWheelDelta();
 
-    if (lines != 0)
-    {
+	if (lines != 0)
+	{
+		wxScrollWinEvent newEvent;
 
-        wxScrollWinEvent newEvent;
+		newEvent.SetPosition(0);
+		newEvent.SetOrientation(wxVERTICAL);
+		newEvent.m_eventObject = m_win;
 
-        newEvent.SetPosition(0);
-        newEvent.SetOrientation(wxVERTICAL);
-        newEvent.m_eventObject = m_win;
+		if (event.IsPageScroll())
+		{
+			if (lines > 0)
+				newEvent.m_eventType = 
+					wxEVT_SCROLLWIN_PAGEUP;
+			else
+				newEvent.m_eventType = 
+					wxEVT_SCROLLWIN_PAGEDOWN;
 
-        if (event.IsPageScroll())
-        {
-            if (lines > 0)
-                newEvent.m_eventType = wxEVT_SCROLLWIN_PAGEUP;
-            else
-                newEvent.m_eventType = wxEVT_SCROLLWIN_PAGEDOWN;
+			m_win->GetEventHandler()->ProcessEvent(newEvent);
+		} else {
+			lines *= event.GetLinesPerAction();
+			if (lines > 0)
+				newEvent.m_eventType = 
+					wxEVT_SCROLLWIN_LINEUP;
+			else
+				newEvent.m_eventType = 
+					wxEVT_SCROLLWIN_LINEDOWN;
 
-            m_win->GetEventHandler()->ProcessEvent(newEvent);
-        }
-        else
-        {
-            lines *= event.GetLinesPerAction();
-            if (lines > 0)
-                newEvent.m_eventType = wxEVT_SCROLLWIN_LINEUP;
-            else
-                newEvent.m_eventType = wxEVT_SCROLLWIN_LINEDOWN;
-
-            int times = abs(lines);
-            for (; times > 0; times--)
-                m_win->GetEventHandler()->ProcessEvent(newEvent);
-        }
-    }
+			int times = abs(lines);
+			for (; times > 0; times--)
+				m_win->GetEventHandler()
+					->ProcessEvent(newEvent);
+		}
+	}
 }
 #endif
 

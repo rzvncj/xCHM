@@ -74,3 +74,10 @@
 		right clicks the HTML window.
 		+ beautified the tree control and enabled variable sizes
 		for the tree items.
+
+	* 0.8.3 Bug fixes:
+		+ fixed a relative path bug (i.e. for file paths like
+		../directory/file) both for HTML pages and imaged (had to
+		override wxHtmlWindow::OnOpeningURL()).
+		+ fixed the tree control to display contents in the native
+		font encoding.

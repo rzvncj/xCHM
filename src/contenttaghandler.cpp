@@ -93,8 +93,6 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 					_parents[0] = _treeCtrl->GetRootItem();
 			}
 
-			if(_listCtrl && !_url.IsEmpty() && !_title.IsEmpty())
-				_listCtrl->AddPairItem(_title, _url);
 
 			return TRUE;
 		}
@@ -128,8 +126,14 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 			}
 		}
 
-		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Local")))
+		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Local"))) {
 			_url = tag.GetParam(wxT("VALUE"));
+		}
+
+		if(_listCtrl && !_url.IsEmpty() && !_title.IsEmpty()) {
+			_listCtrl->AddPairItem(_title, _url);
+			_title = _url = wxEmptyString;
+		}
 
 		return FALSE;
 	}

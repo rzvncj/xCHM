@@ -581,10 +581,6 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 }
 
 
-#include <iostream>
-using namespace std;
-
-
 inline
 bool CHMFile::InfoFromWindows()
 {

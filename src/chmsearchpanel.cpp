@@ -355,16 +355,16 @@ void CHMSearchPanel::SetConfig()
 
 void CHMSearchPanel::GetConfig()
 {
-	long grep, words, titles;
+	long grep, partial, titles;
 	wxConfig config(wxT("xchm"));
 
 	if(config.Read(wxT("/Search/grepMode"), &grep)) {
 		
-		config.Read(wxT("/Search/partialWords"), &words);
+		config.Read(wxT("/Search/partialWords"), &partial);
 		config.Read(wxT("/Search/titlesOnly"), &titles);
 
 		_grep->SetValue(grep);
-		_partial->SetValue(words);
+		_partial->SetValue(partial);
 		_titles->SetValue(titles);
 	}
 

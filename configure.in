@@ -69,5 +69,5 @@ AC_CHECK_LIB(
     AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
 )
 
-AC_OUTPUT(Makefile src/Makefile)
+AC_OUTPUT(Makefile src/Makefile art/Makefile)
 

@@ -70,7 +70,7 @@ const wxChar *about_txt = wxT(
 	"Written with wxWindows (http://www.wxwindows.org).\n\n"
 	"This program is (proudly) under the GPL.");
 
-#include <manual.xpm>
+#include <xchm-32.xpm>
 
 } // namespace
 
@@ -99,7 +99,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	for(int i = -3; i <= 3; ++i)
 		sizes[i+3] = _fontSize + i * 2;
 
-	SetIcon(wxIcon(manual_xpm));
+	SetIcon(wxIcon(xchm_32));
 	SetMenuBar(CreateMenu());
 
 	_tb = CreateToolBar(wxTB_FLAT | wxTB_DOCKABLE

@@ -97,15 +97,16 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	wxStringTokenizer tkz(sr, " ");
 
-	while(tkz.HasMoreTokens() && word.IsEmpty())
-		word = tkz.GetNextToken();
+	while(word.IsEmpty())
+		if(tkz.HasMoreTokens())
+			word = tkz.GetNextToken();
 
 	CHMSearchResults h1, h2;
 	CHMSearchResults::iterator i;
 
 	chmf->IndexSearch(word, _whole->IsChecked(), 
 			  _titles->IsChecked(), &h1);
-	
+
 	while(tkz.HasMoreTokens()) {
 
 		wxString token = tkz.GetNextToken();
@@ -113,13 +114,14 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			continue;
 
 		CHMSearchResults tmp;
-		chmf->IndexSearch(word, _whole->IsChecked(), 
+		chmf->IndexSearch(token, _whole->IsChecked(), 
 				  _titles->IsChecked(), &h2);
 
 		for(i = h2.begin(); i != h2.end(); ++i)
 			if(h1.find(i->first) != h1.end())
 				tmp[i->first] = i->second;
-		
+
+		h1.clear();
 		h1 = tmp;
 	}
 

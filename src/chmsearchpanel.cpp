@@ -21,6 +21,8 @@
 #include <chmsearchpanel.h>
 #include <contenttaghandler.h>
 #include <chminputstream.h>
+#include <chmlistctrl.h>
+#include <chmhtmlwindow.h>
 #include <wx/sizer.h>
 #include <wx/utils.h>
 #include <wx/config.h>
@@ -29,7 +31,7 @@
 
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
-			       wxHtmlWindow *html)
+			       CHMHtmlWindow *html)
 	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL), 
 	  _titles(NULL), _search(NULL), _results(NULL), _html(html)
 {
@@ -51,11 +53,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 	_search->SetToolTip(wxT("Search contents for occurences of"
 				" the specified text."));
 #endif
-
-	_results = new wxListBox(this, ID_Results, 
-				 wxDefaultPosition, wxDefaultSize, 
-				 0, NULL, wxLB_SINGLE | wxLB_HSCROLL |
-				 wxLB_NEEDED_SB);
+	_results = new CHMListCtrl(this, html, ID_Results);
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
@@ -77,8 +75,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 {
 	wxBusyCursor bcr;
 
-	_results->Clear();
-	_urls.Clear();
+	_results->Reset();
 
 	wxString sr = _text->GetLineText(0);
 	wxString word;
@@ -134,6 +131,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(_titles->IsChecked() && h1.empty()) {
 		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
+		_results->UpdateUI();
 		return;
 	}
 
@@ -142,9 +140,10 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			wxString full_url = wxString(wxT("file:")) + 
 				chmf->ArchiveName() + wxT("#chm:/") + i->first;
 
-			_results->Append(i->second);
-			_urls.Add(full_url);
+			_results->AddTitle(i->second);
+			_results->AddUrl(full_url);
 		}
+	_results->UpdateUI();
 }
 
 
@@ -166,8 +165,8 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 		wxString title = _tcl->GetItemText(root);
 
 		if(TitleSearch(title, text, false, wholeWords)) {
-			_results->Append(title);
-			_urls.Add(url);
+			_results->AddTitle(title);
+			_results->AddUrl(url);
 		}
 	}	
 
@@ -254,15 +253,14 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 
 void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))
 {
-	_html->LoadPage(_urls[_results->GetSelection()]);
+	_results->LoadSelected();
 }
 
 
 void CHMSearchPanel::Reset()
 {
 	_text->Clear();
-	_results->Clear();
-	_urls.Clear();
+	_results->Reset();
 }
 
 
@@ -294,7 +292,7 @@ void CHMSearchPanel::GetConfig()
 
 
 BEGIN_EVENT_TABLE(CHMSearchPanel, wxPanel)
-    EVT_LISTBOX(ID_Results, CHMSearchPanel::OnSearchSel)
+    EVT_LIST_ITEM_SELECTED(ID_Results, CHMSearchPanel::OnSearchSel)
     EVT_BUTTON(ID_SearchButton, CHMSearchPanel::OnSearch)
     EVT_TEXT_ENTER(ID_SearchText, CHMSearchPanel::OnSearch)
 END_EVENT_TABLE()

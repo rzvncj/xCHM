@@ -24,12 +24,13 @@
 #define __CHMFINDDIALOG_H
 
 
-#include <wx/checkbox.h>
 #include <wx/dialog.h>
 #include <wx/textctrl.h>
 #include <wx/html/htmlcell.h>
 
 
+// Forward declarations.
+class wxCheckBox;
 class CHMHtmlWindow;
 
 

@@ -31,9 +31,12 @@
 #include <wx/combobox.h>
 #include <wx/font.h>
 #include <wx/docview.h>
-#include <chmsearchpanel.h>
-#include <chmhtmlwindow.h>
-#include <chmindexpanel.h>
+
+
+// Forward declarations.
+class CHMHtmlWindow;
+class CHMSearchPanel;
+class CHMIndexPanel;
 
 
 //! Default font size for the wxHtmlWindow.
@@ -68,6 +71,7 @@ enum
 	ID_Remove,
 	ID_FindInPage,
 	ID_Recent,
+	ID_Notebook,
 	ID_TreeCtrl = 1000,
 };
 
@@ -172,6 +176,8 @@ protected:
 	//! Cleanup code. This saves the window position and last open dir.
 	void OnCloseWindow(wxCloseEvent& event);
  	
+	void OnPageChanged(wxNotebookEvent& event);
+
 private:
 	//! Helper. Creates the menu.
 	wxMenuBar *CreateMenu();

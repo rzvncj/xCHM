@@ -19,12 +19,14 @@
 */
 
 
-#include <wx/sizer.h>
 #include <chmindexpanel.h>
+#include <chmhtmlwindow.h>
+#include <chmlistctrl.h>
+#include <wx/sizer.h>
 
 
 CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlWindow *html)
-	: wxPanel(parent), _html(html), _list(NULL)
+	: wxPanel(parent), _html(html), _lc(NULL), _navigate(true)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
@@ -34,58 +36,57 @@ CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlWindow *html)
 			       wxDefaultPosition, wxDefaultSize, 
 			       wxTE_PROCESS_ENTER);
 
-	_list = new wxListBox(this, ID_IndexList, 
-			      wxDefaultPosition, wxDefaultSize, 
-			      0, NULL, wxLB_SINGLE | wxLB_HSCROLL |
-			      wxLB_NEEDED_SB);
+	_lc = new CHMListCtrl(this, html, ID_IndexClicked);
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
-        sizer->Add(_list, 1, wxALL | wxEXPAND, 2);
+        sizer->Add(_lc, 1, wxALL | wxEXPAND, 2);
 }
-
-
-CHMIndexPanel::~CHMIndexPanel()
-{}
 
 
 void CHMIndexPanel::Reset()
 {
-	_listUrls.Clear();
 	_text->Clear();
-	_list->Clear();
+	_lc->Reset();
 }
 
 
 void CHMIndexPanel::SetNewFont(const wxFont& font)
 {
-	_list->SetFont(font);
+	_lc->SetFont(font);
 }
 
 
 
 void CHMIndexPanel::OnIndexSel(wxCommandEvent& WXUNUSED(event))
 {
-	int sel = _list->GetSelection();
-
-	if(sel < 0)
-		return;
-
-	_html->AbsoluteFollows(true);
-	_html->LoadPage(_listUrls[sel]);
+	if(_navigate)
+		_lc->LoadSelected();
 }
+
 
 
 void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 {
-	int sz = _list->GetCount();
-	wxString typedText = _text->GetLineText(0);
+	wxListItem info;
+	info.m_col = 0;
 
-	for(int i = 0; i < sz; ++i) {
-		wxString str = _list->GetString(i);
-		
-		if(!str.Left(typedText.length()).CmpNoCase(typedText)) {
-			_list->SetSelection(i);
-			_list->SetFirstItem(i);
+	long sz = _lc->GetItemCount();
+	wxString typedText = _text->GetLineText(0);
+	int tl = typedText.length();
+
+	for(long i = 0; i < sz; ++i) {
+
+		info.m_itemId = i;
+		_lc->GetItem(info);
+
+		if(!info.m_text.Left(tl).CmpNoCase(typedText)) {
+
+			_navigate = false;
+			_lc->SetItemState(i, wxLIST_STATE_SELECTED,
+					  wxLIST_STATE_SELECTED);
+			_navigate = true;
+			_lc->EnsureVisible(i);
+
 			break;
 		}
 	}
@@ -94,8 +95,8 @@ void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 
 BEGIN_EVENT_TABLE(CHMIndexPanel, wxPanel)
 	EVT_TEXT(ID_SearchIndex, CHMIndexPanel::OnText)
-	EVT_LISTBOX(ID_IndexList, CHMIndexPanel::OnIndexSel)
 	EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSel)
+	EVT_LIST_ITEM_SELECTED(ID_IndexClicked, CHMIndexPanel::OnIndexSel)
 END_EVENT_TABLE()
 
 

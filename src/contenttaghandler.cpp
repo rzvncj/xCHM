@@ -19,15 +19,15 @@
 */
 
 
+#include <chmlistctrl.h>
 #include <contenttaghandler.h>
 #include <wx/fontmap.h>
 
 
 ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
-				     wxTreeCtrl* tree, wxListBox* list,
-				     wxArrayString* listUrls)
-	: _level(0), _treeCtrl(tree), _listCtrl(list), 
-	  _enc(enc), _useEnc(useEnc), _listUrls(listUrls)
+				     wxTreeCtrl* tree, CHMListCtrl *list)
+	: _level(0), _treeCtrl(tree), _listCtrl(list), _enc(enc), 
+	  _useEnc(useEnc)
 {
 	if(!_treeCtrl && !_listCtrl)
 		return;
@@ -92,13 +92,9 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 					_parents[0] = _treeCtrl->GetRootItem();
 			}
 
-			if(_listCtrl) {
-				if(!_url.IsEmpty() && !_title.IsEmpty()) {
-					_listCtrl->Append(_title);
-
-					if(_listUrls)
-						_listUrls->Add(_url);
-				}
+			if(_listCtrl && !_url.IsEmpty() && !_title.IsEmpty()) {
+					_listCtrl->AddTitle(_title);
+					_listCtrl->AddUrl(_url);
 			}
 
 			return TRUE;

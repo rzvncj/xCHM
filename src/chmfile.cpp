@@ -21,9 +21,11 @@
 
 #include <chmfile.h>
 #include <contenttaghandler.h>
+#include <chmlistctrl.h>
 #include <wx/defs.h>
 #include <wx/strconv.h>
 #include <wx/fontmap.h>
+#include <wx/treectrl.h>
 #include <assert.h>
 
 #include <bitfiddle.inl>
@@ -170,7 +172,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
-bool CHMFile::GetIndex(wxListBox* toBuild, wxArrayString* urls)
+bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
 	chmUnitInfo ui;
 
@@ -194,9 +196,8 @@ bool CHMFile::GetIndex(wxListBox* toBuild, wxArrayString* urls)
 #else
 						   false,
 #endif						
-						   NULL, toBuild, urls));
+						   NULL, toBuild));
 	parser.Parse(src);
-
 	return true;
 }
 

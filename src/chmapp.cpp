@@ -24,6 +24,7 @@
 #include <chmfshandler.h>
 #include <chmfile.h>
 #include <wx/image.h>
+#include <wx/config.h>
 
 
 bool CHMApp::OnInit()

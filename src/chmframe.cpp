@@ -22,13 +22,15 @@
 #include <chmframe.h>
 #include <chminputstream.h>
 #include <contenttaghandler.h>
+#include <chmhtmlwindow.h>
 #include <chmfontdialog.h>
+#include <chmsearchpanel.h>
+#include <chmindexpanel.h>
+#include <chmlistctrl.h>
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
 #include <wx/accel.h>
 
-
-#define RECENT_FILES_COUNT 5
 
 namespace {
 
@@ -112,7 +114,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_sw = new wxSplitterWindow(this);
 	_sw->SetMinimumPaneSize(CONTENTS_MARGIN);
 
-	_nb = new wxNotebook(_sw, -1);
+	_nb = new wxNotebook(_sw, ID_Notebook);
 	_nb->Show(FALSE);
 
 	wxPanel* temp = CreateContentsPanel();
@@ -428,6 +430,15 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 }
 
 
+void CHMFrame::OnPageChanged(wxNotebookEvent& event)
+{
+	// Have to make sure the index is properly displayed somehow.
+	if(event.GetSelection() == 1) {
+		_cip->GetResultsList()->UpdateUI();
+	}
+}
+
+
 void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
@@ -463,7 +474,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	if(_tcl->GetCount())
 		_tcl->DeleteAllItems();
 	chmf->GetTopicsTree(_tcl);
-	chmf->GetIndex(_cip->GetIndexList(), _cip->GetUrlArray());
+	chmf->GetIndex(_cip->GetResultsList());
 
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
@@ -547,7 +558,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	}
 
 	// select Contents
-	_nb->SetSelection(0);	
+	_nb->SetSelection(0);
 
 	LoadBookmarks();
 }
@@ -799,6 +810,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)
 	EVT_COMBOBOX(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 	EVT_CLOSE(CHMFrame::OnCloseWindow)
+	EVT_NOTEBOOK_PAGE_CHANGED(ID_Notebook, CHMFrame::OnPageChanged)
 END_EVENT_TABLE()
 
 

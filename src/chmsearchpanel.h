@@ -34,6 +34,11 @@
 #include <wx/string.h>
 
 
+// Forward declaration.
+class CHMListCtrl;
+class CHMHtmlWindow;
+
+
 /*!
   \class wxPanel
   \brief generic wxWindows panel widget class.
@@ -58,11 +63,11 @@ public:
 	  \param topics A wxTreeCtrl* that will be iterated over
 	  recursively in order to figure out which files from the
 	  archive to be searched.
-	  \param html The widget that can load a html page that
-	  has been found as a result of searching.
+	  \param html The widget that can load a html page found as a 
+	  result of searching.
 	 */
 	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
-		       wxHtmlWindow* html);
+		       CHMHtmlWindow* html);
 
 	//! Calls SetConfig().
 	~CHMSearchPanel();
@@ -103,9 +108,8 @@ private:
 	wxCheckBox* _partial;
 	wxCheckBox* _titles;
 	wxButton* _search;
-	wxListBox* _results;
-	wxHtmlWindow* _html;
-	wxArrayString _urls;
+	CHMListCtrl* _results;
+	CHMHtmlWindow* _html;
 
 private:
 	DECLARE_EVENT_TABLE()

@@ -24,6 +24,7 @@
 
 #include <chmfinddialog.h>
 #include <chmhtmlwindow.h>
+#include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/tokenzr.h>

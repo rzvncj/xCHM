@@ -24,11 +24,14 @@
 
 #include <chm_lib.h>
 #include <wx/string.h>
-#include <wx/treectrl.h>
-#include <wx/listbox.h>
 #include <wx/hashmap.h>
 #include <wx/font.h>
 #include <wx/string.h>
+
+
+// Forward declarations.
+class wxTreeCtrl;
+class CHMListCtrl;
 
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
@@ -127,17 +130,26 @@ public:
 	void CloseCHM();
 
 	/*!
-	  \brief Attempts to create a wxTreeCtrl by parsing the topics
-	  file, or if that's not available, the index file.
-	  \param toBuild Pointer to the tree that will be constructed.
-	  If neither a topics file or an index file are available, the
+	  \brief Attempts to fill a wxTreeCtrl by parsing the topics
+	  file.
+	  \param toBuild Pointer to the tree to be filled.
+	  If the topics file is not available, the
 	  tree is unmodified. The tree must be empty before passing it
 	  to this function.
 	  \return true if it's possible to build the tree, false otherwise.
 	 */
 	bool GetTopicsTree(wxTreeCtrl *toBuild);
 
-	bool GetIndex(wxListBox* toBuild, wxArrayString *urls);
+	/*!
+	  \brief Attempts to fill a CHMListCtrl by parsing the index
+	  file.
+	  \param toBuild Pointer to the list control to be filled.
+	  If the index file is not available, the list control
+	  is unmodified. The lost must be empty before passing it
+	  to this function.
+	  \return true if it's possible to build the tree, false otherwise.
+	 */
+	bool GetIndex(CHMListCtrl* toBuild);
 
 
 	/*!
@@ -201,6 +213,7 @@ private:
 			chmUnitInfo* topics, chmUnitInfo *urlstr,
 			CHMSearchResults *results);
 
+	//! Puts in the str parameter the contents of the file referred by ui.
 	void GetFileAsString(wxString& str, chmUnitInfo *ui);
 
 private:

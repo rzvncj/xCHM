@@ -24,9 +24,11 @@
 
 #include <wx/html/htmlpars.h>
 #include <wx/treectrl.h>
-#include <wx/listbox.h>
 #include <wx/font.h>
 #include <wx/string.h>
+
+
+class CHMListCtrl;
 
 
 /*!
@@ -87,12 +89,13 @@ public:
 	  \param enc Encoding to use. Only useful for Unicode builds.
 	  \param useEnc Actually use the information passed in enc or not?
 	  \param tree Tree control to fill. The control must be
-	  empty.
-	  \param list Alternatively (or simultaneously), fill this listbox.
+	  empty. Used for the content tree.
+	  \param list Alternatively (or simultaneously), fill this custom
+	  list control (used for the index).
 	 */
 	ContentTagHandler(wxFontEncoding enc, bool useEnc,
-			  wxTreeCtrl* tree = NULL, wxListBox *list = NULL,
-			  wxArrayString* listUrls = NULL);
+			  wxTreeCtrl* tree = NULL, 
+			  CHMListCtrl *list = NULL);
 
 	//! What tags are we interested in?
         wxString GetSupportedTags() { return wxT("UL,OBJECT,PARAM"); }
@@ -108,15 +111,13 @@ private:
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	int _level;
 	wxTreeCtrl* _treeCtrl;
-	wxListBox* _listCtrl;
+	CHMListCtrl* _listCtrl;
 	
 	wxString _title;
 	wxString _url;
 
 	wxFontEncoding _enc;
 	bool _useEnc;
-
-	wxArrayString *_listUrls;
 };
 
 

@@ -23,29 +23,44 @@
 #define __CHMINDEXPANEL_H_
 
 
-#include <chmhtmlwindow.h>
 #include <wx/panel.h>
 #include <wx/textctrl.h>
-#include <wx/listbox.h>
+
+
+class CHMHtmlWindow;
+class CHMListCtrl;
+
+
+/*!
+  \class wxPanel
+  \brief generic wxWindows panel widget class.
+*/
 
 
 //! IDs for various widget events.
 enum {
 	ID_SearchIndex = 1500,
-	ID_IndexList,
+	ID_IndexClicked,
 };
 
 
+//! Custom panel for displaying the .chm index (if available).
 class CHMIndexPanel : public wxPanel {
 
-public:
+public:	
+	/*!
+	  \brief Initializes the panel.
+	  \param parent Parent widget.
+	  \param html HTML-capable widget used for displaying pages
+	  from the index.
+	 */
 	CHMIndexPanel(wxWindow *parent, CHMHtmlWindow* html);
-	~CHMIndexPanel();
 
 public:
-	wxListBox* GetIndexList() const { return _list; }
-	wxArrayString* GetUrlArray() { return &_listUrls; }
+	//! Accesor for the CHMListCtrl used by this panel.
+	CHMListCtrl* GetResultsList() { return _lc; }
 
+	//! Clears the textbox and removes all items from the list control.
 	void Reset();
 
 	//! Sets the font.
@@ -55,13 +70,14 @@ protected:
 	//! This gets called when the user clicks on a list item.
 	void OnIndexSel(wxCommandEvent& event);
 
+	//! Called whenever the user types a letter in the textbox.
 	void OnText(wxCommandEvent& event);
 
 private:
 	CHMHtmlWindow* _html;
-	wxListBox* _list;
 	wxTextCtrl* _text;
-	wxArrayString _listUrls;
+	CHMListCtrl* _lc;
+	bool _navigate;
 
 private:
 	DECLARE_EVENT_TABLE()

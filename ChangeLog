@@ -146,9 +146,9 @@
 		+ added translations for Italian, German, Portuguese and 
 		Russian.
 		
-
 	* 0.9.2 Minor bugfixes:
 		+ added Polish translation.
 		+ added Bulgarian translation.
 		+ fixed a Fonts dialog bug.
 		+ added sunos patch for correct #SYSTEM .chm info detection.
+

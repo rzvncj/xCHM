@@ -167,3 +167,5 @@ BEGIN_EVENT_TABLE(CHMFontDialog, wxDialog)
 	EVT_COMBOBOX(-1, CHMFontDialog::OnUpdate)
 	EVT_SPINCTRL(-1, CHMFontDialog::OnUpdateSpin)
 END_EVENT_TABLE()
+
+

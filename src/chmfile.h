@@ -56,7 +56,7 @@ public:
 	  relative to the root of the archive filesystem. If no .chm
 	  has been opened, the returned value is "/".
 	 */
-	wxString HomePage() { return _home; }
+	wxString HomePage() const { return _home; }
 
 	/*!
 	  \brief Gets name of the .hhc file in the archive that
@@ -64,8 +64,8 @@ public:
 	  \return The topics file name, with a '/' added in front and
 	  relative to the root of the archive filesystem. If no .chm
 	  has been opened, the return value is an empty string.
-	 */
-	wxString TopicsFile() { return _topicsFile; }
+	*/
+	wxString TopicsFile() const { return _topicsFile; }
 
 	/*!
 	  \brief Gets the filename of the currently opened .chm file.
@@ -73,7 +73,7 @@ public:
 	  to the root of the filesystem, or the empty string if no
 	  archive has been opened.
 	 */
-	wxString ArchiveName() { return _filename; }
+	wxString ArchiveName() const { return _filename; }
 
 	/*!
 	  \brief Gets name of the .hhk file in the archive that
@@ -82,14 +82,14 @@ public:
 	  relative to the root of the archive filesystem. If no .chm
 	  has been opened, the return value is an empty string.
 	 */
-	wxString IndexFile() { return _indexFile; }
+	wxString IndexFile() const { return _indexFile; }
 
 	/*!
 	  \brief Gets the name of the opened .chm.
 	  \return The name of the opened document, or an empty string
 	  if no .chm has been loaded.
 	*/
-	wxString Title() { return _title; }
+	wxString Title() const { return _title; }
 
 	/*!
 	  \brief Checks if the last attempt to load a .chm file was
@@ -97,7 +97,7 @@ public:
 	  \return true, if the last attempt to load a .chm file was
 	  succesful, false otherwise.
 	 */
-	bool IsOk() { return _chmFile != NULL; }
+	bool IsOk() const { return _chmFile != NULL; }
 
 
 	/*!

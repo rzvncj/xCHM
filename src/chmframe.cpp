@@ -25,6 +25,7 @@
 #include <chmfontdialog.h>
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
+#include <wx/accel.h>
 
 
 namespace {
@@ -53,14 +54,15 @@ const wxChar *greeting = wxT(
 	"<li>Allowing partial matches will find pages that contain"
 	" words that only start with the typed strings, i.e. searching"
 	" for \'ans 4\' (quotes not included) will find pages that"
-	" contain the sentence \'The answer is 42.\'.</li></ul>"
-	"<br><br>Enjoy.</body></html>");
+	" contain the sentence \'The answer is 42.\'.</li><li>Right"
+	" clicking on the displayed page brings out a popup menu with"
+	" common options.</li></ul><br><br>Enjoy.</body></html>");
 
 
 const wxChar *about_txt = wxT(
 	"xCHM v. " VERSION "\nby Razvan Cojocaru (razvanco@gmx.net)\n\n"
-	"With thanks to Pabs (http://bonedaddy.net/pabs3/hhm).\n"
-	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects).\n"
+	"With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n"
+	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n"
 	"Written with wxWindows (http://www.wxwindows.org).\n\n"
 	"This program is (proudly) under the GPL.");
 
@@ -87,6 +89,13 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 
 	for(int i = -3; i <= 3; ++i)
 		sizes[i+3] = _fontSize + i * 2;
+
+#ifdef _ENABLE_COPY_AND_FIND
+	wxAcceleratorEntry entries[1];
+	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
+	wxAcceleratorTable accel(1, entries);
+	SetAcceleratorTable(accel);
+#endif
 
 	SetIcon(wxIcon(htmbook_xpm));
 	SetMenuBar(CreateMenu());
@@ -121,6 +130,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
+	_html->SetFocusFromKbd();
 }
 
 
@@ -275,6 +285,14 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 	else
 		_ep->PrintFile(page);
 }
+
+
+#ifdef _ENABLE_COPY_AND_FIND
+void CHMFrame::OnFind(wxCommandEvent& event)
+{
+	_html->OnFind(event);
+}
+#endif
 
 
 void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
@@ -635,6 +653,7 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 			      wxBitmap(htmsidep_xpm),
 			      wxBitmap(htmsidep_xpm), contents_help);
 	toolbar->AddSeparator();
+
 	toolbar->AddTool(ID_Back, wxT("Back"), wxBitmap(back_xpm), back_help);
 	toolbar->AddTool(ID_Forward, wxT("Forward"), wxBitmap(forward_xpm), 
 			 forward_help);
@@ -661,10 +680,15 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
+#ifdef _ENABLE_COPY_AND_FIND
+	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
+#endif
 	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)
 	EVT_COMBOBOX(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 	EVT_CLOSE(CHMFrame::OnCloseWindow)
 END_EVENT_TABLE()
+
+
 

@@ -63,3 +63,12 @@
 		+ fixed empty title in the titlebar bug.
 		+ refined the synchronization between the contents tree and
 		the wxHtmlWindow displayed page.
+
+	* 0.9 Major feature enhancements (wxWindows >= 2.5.0 only):
+		+ added 'find in page' code.
+		+ added 'copy text' code.
+		+ added a 'find in page' dialog that hopefully pops up
+		on Ctrl-F :)
+		+ added a popup menu with common options (back, forward,
+		copy selection, find in page) that pops up when the user
+		right clicks the HTML window.

@@ -48,19 +48,20 @@
 //! IDs for various widget events.
 enum
 {
-    ID_Quit = 1,
-    ID_About,
-    ID_Open,
-    ID_Fonts,
-    ID_Print,
-    ID_Home,
-    ID_Forward,
-    ID_Back,
-    ID_Contents,
-    ID_Bookmarks,
-    ID_Add,
-    ID_Remove,
-    ID_TreeCtrl = 1000,
+	ID_Quit = 1,
+	ID_About,
+	ID_Open,
+	ID_Fonts,
+	ID_Print,
+	ID_Home,
+	ID_Forward,
+	ID_Back,
+	ID_Contents,
+	ID_Bookmarks,
+	ID_Add,
+	ID_Remove,
+	ID_FindInPage,
+	ID_TreeCtrl = 1000,
 };
 
 
@@ -137,6 +138,11 @@ protected:
 
 	//! Called when the user wants to print the displayed page.
 	void OnPrint(wxCommandEvent& event);
+
+#ifdef _ENABLE_COPY_AND_FIND
+	//! Called when the user types Ctrl-F.
+	void OnFind(wxCommandEvent& event);
+#endif
 
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);

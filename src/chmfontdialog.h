@@ -18,6 +18,11 @@
 
 */
 
+
+#ifndef __CHMFONTDIALOG_H
+#define __CHMFONTDIALOG_H
+
+
 #include <wx/html/htmlwin.h>
 #include <wx/spinctrl.h>
 #include <wx/dialog.h>
@@ -50,10 +55,10 @@ public:
 		      const wxString& fixedFont, const int fontSize);
 
 	//! Returns the fixed font face name.
-	const wxString& FixedFont() { return _fixedFont; }
+	const wxString& FixedFont() const { return _fixedFont; }
 
 	//! Returns the normal font face name.
-	const wxString& NormalFont() { return _normalFont; }
+	const wxString& NormalFont() const { return _normalFont; }
 
 	//! Return the selected font size.
 	int* Sizes() { return _sizes; }
@@ -83,6 +88,11 @@ private:
 	int _sizes[7];
 	int _fontSize;
 
+private:
 	DECLARE_EVENT_TABLE();
 };
+
+
+#endif // __CHMFONTDIALOG_H
+
 

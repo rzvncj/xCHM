@@ -124,12 +124,13 @@ INCLUDES = -I$(top_srcdir)/art
 bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
 	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp \
-	chmsearchpanel.cpp chmhtmlwindow.cpp
+	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp
 
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h contenttaghandler.h chmfontdialog.h \
-	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl
+	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
+	chmfinddialog.h
 
 
 xchm_LDADD = @LINKOPT@ 
@@ -143,7 +144,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) chmframe.$(OBJEXT) \
 	chmfshandler.$(OBJEXT) chminputstream.$(OBJEXT) \
 	contenttaghandler.$(OBJEXT) chmfontdialog.$(OBJEXT) \
-	chmsearchpanel.$(OBJEXT) chmhtmlwindow.$(OBJEXT)
+	chmsearchpanel.$(OBJEXT) chmhtmlwindow.$(OBJEXT) \
+	chmfinddialog.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 xchm_LDFLAGS =
@@ -152,6 +154,7 @@ DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/chmapp.Po ./$(DEPDIR)/chmfile.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/chmfinddialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/chmfontdialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/chmframe.Po ./$(DEPDIR)/chmfshandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/chmhtmlwindow.Po \
@@ -214,6 +217,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmapp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfile.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfinddialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfontdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmframe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfshandler.Po@am__quote@

@@ -64,7 +64,6 @@ bool CHMApp::OnInit()
 }
 
 
-
 // Apparently this macro gets main() pumping.
 IMPLEMENT_APP(CHMApp)
 

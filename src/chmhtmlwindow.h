@@ -25,6 +25,20 @@
 
 #include <wx/html/htmlwin.h>
 #include <wx/treectrl.h>
+#include <wx/menu.h>
+
+#ifdef _ENABLE_COPY_AND_FIND
+#	include <chmfinddialog.h>
+#endif
+
+
+//! Event IDs.
+enum {
+	ID_CopySel = 1216,
+	ID_PopupForward,
+	ID_PopupBack,
+	ID_PopupFind,
+};
 
 
 /*!
@@ -48,6 +62,9 @@ public:
 	 */
 	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc);
 
+	//! Destructor. Deletes heap objects allocated in the constructor.
+	~CHMHtmlWindow();
+
 	//! Override. Looks up the wanted page in the tree and selects it.
 	bool LoadPage(const wxString& location);
 
@@ -64,19 +81,74 @@ public:
 	  event happened as a result of the CHMHtmlWindow calling
 	  SelectItem() on it.
 	*/
-	bool IsCaller() { return _found; }
+	bool IsCaller() const { return _found; }
+
+#ifdef _ENABLE_COPY_AND_FIND
+public:
+	/*!
+	  \brief Finds the first occurence of word in the displayed page.
+	  \param parent Root of the wxHtmlCell tree where the search should
+	  begin.
+	  \param word The word we're looking for. If more words separated
+	  by spaces are typed in, only the first one is taken into
+	  account.
+	  \param wholeWords If true, will search for words that match
+	  word exactly.
+	  \param caseSensitive If true, the search will be performed
+	  case sensitive.
+	  \return A valid cell if the result was found, NULL otherwise.
+	 */
+	wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word, 
+			      bool wholeWords, bool caseSensitive);
+	
+	/*! 
+	  \brief Same as FindFirst(), but continues the search from start
+	  (start is considered in the search process).
+	*/
+	wxHtmlCell* FindNext(wxHtmlCell *start, 
+			     const wxString& word, bool wholeWords,
+			     bool caseSensitive);
+
+	//! Clears the current selection.
+	void ClearSelection();
+	
+	// Needs to be public, cause I call it from CHMHtmlFrame.
+	//! Called when the user selects 'Find' from the popup menu.
+	void OnFind(wxCommandEvent& event);
+
+protected:
+	//! Called when the user selects 'Copy' from the popup menu.
+	void OnCopy(wxCommandEvent& event);
+#endif
+	//! Called when the user selects 'Forward' from the popup menu.
+	void OnForward(wxCommandEvent& event);
+
+	//! Called when the user selects 'Back' from the popup menu.
+	void OnBack(wxCommandEvent& event);
+
+protected:	
+	//! Called when the user right clicks the HTML window.
+	void OnRightClick(wxMouseEvent& event);
 
 private:
 	//! Helper. Recursively looks for the opened page in the tree.
 	void Sync(wxTreeItemId root, const wxString& page);
 
 	//! Helper. Returns the prefix of the currently loaded page.
-	wxString GetPrefix();
+	wxString GetPrefix() const;
 	
 private:
 	wxTreeCtrl* _tcl;
 	bool _syncTree;
 	bool _found;
+	wxMenu *_menu;
+
+#ifdef _ENABLE_COPY_AND_FIND
+	CHMFindDialog* _fdlg;
+#endif
+
+private:
+	DECLARE_EVENT_TABLE()
 };
 
 

@@ -24,10 +24,40 @@
 #include <chminputstream.h>
 
 
+
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false)
-{}
+	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL)
+#ifdef _ENABLE_COPY_AND_FIND
+	, _fdlg(NULL)
+#endif
+{
+	_menu = new wxMenu;
+	_menu->Append(ID_PopupForward, wxT("Forward"));
+	_menu->Append(ID_PopupBack, wxT("Back"));
+
+#ifdef _ENABLE_COPY_AND_FIND
+	_menu->AppendSeparator();
+	_menu->Append(ID_CopySel, wxT("Copy selection"));
+	_menu->AppendSeparator();
+	_menu->Append(ID_PopupFind, wxT("Find in page .."));
+	
+	wxWindow* p = parent;
+	while(p->GetParent())
+		p = p->GetParent();
+
+	_fdlg = new CHMFindDialog(p, this);
+#endif
+}
+
+
+CHMHtmlWindow::~CHMHtmlWindow()
+{
+	delete _menu;
+#ifdef _ENABLE_COPY_AND_FIND
+	delete _fdlg;
+#endif
+}
 
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
@@ -102,9 +132,169 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 
 
 inline 
-wxString CHMHtmlWindow::GetPrefix()
+wxString CHMHtmlWindow::GetPrefix() const
 {
 	return GetOpenedPage().AfterLast(wxT(':')).AfterFirst(
 		wxT('/')).BeforeLast(wxT('/')).Lower();
 }
+
+
+#ifdef _ENABLE_COPY_AND_FIND
+
+
+wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
+				     bool wholeWords, bool caseSensitive)
+{
+	wxString tmp = word;
+	
+	if(!parent)
+		return NULL;
+ 
+	if(!caseSensitive)
+		tmp.MakeLower();
+
+	// If this cell is not a container, the for body will never happen
+	// (GetFirstChild() will return NULL).
+	for(wxHtmlCell *cell = parent->GetFirstChild(); cell; 
+	    cell = cell->GetNext()) {
+		
+		wxHtmlCell *result;
+		if((result = FindFirst(cell, word, wholeWords, caseSensitive)))
+			return result;
+	}
+
+	wxHtmlSelection ws;
+	ws.Set(parent, parent);
+	wxString text = parent->ConvertToText(&ws);
+
+	if(text.IsEmpty())
+		return NULL;
+
+	if(!caseSensitive)
+		text.MakeLower();
+
+	text.Trim(TRUE);
+	text.Trim(FALSE);
+
+	bool found = false;
+
+	if(wholeWords && text == tmp) {
+		found = true;
+	} else if(!wholeWords && text.Find(tmp.c_str()) != -1) {
+		found = true;
+	}
+
+	if(found) {
+		int w, h;
+		GetSize(&w, &h);
+
+		// What is all this wxWindows protected member crap?
+		delete m_selection;
+		m_selection = new wxHtmlSelection();
+
+		// The wxPoint(w,h) is a hack because Set(parent, parent)
+		// doesn't select the whole word on screen.
+		m_selection->Set(wxDefaultPosition, parent, wxPoint(w,h), 
+				 parent);		
+		int y;
+		wxHtmlCell *cell = parent;
+
+		for (y = 0; cell != NULL; cell = cell->GetParent()) 
+			y += cell->GetPosY();
+		Scroll(-1, y / wxHTML_SCROLL_STEP);
+		Refresh();
+		
+		return parent;
+	}
+
+	return NULL;
+}
+
+
+wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word, 
+				    bool wholeWords, bool caseSensitive)
+{
+	wxHtmlCell *cell;
+
+	if(!start)
+		return NULL;
+
+	for(cell = start; cell; cell = cell->GetNext()) {
+		wxHtmlCell *result;
+		if((result = FindFirst(cell, word, wholeWords, caseSensitive)))
+			return result;
+	}
+
+	cell = start->GetParent();
+	
+	while(cell && !cell->GetNext())
+		cell = cell->GetParent();
+
+	if(!cell)
+		return NULL;
+
+	return FindNext(cell->GetNext(), word, wholeWords, caseSensitive);
+}
+
+
+void CHMHtmlWindow::ClearSelection()
+{
+	delete m_selection;
+	m_selection = NULL;
+	Refresh();
+}
+
+
+void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
+{
+	CopySelection();
+}
+
+
+void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
+{
+	
+	_fdlg->ShowModal();
+}
+
+#endif // _ENABLE_COPY_AND_FIND
+
+
+void CHMHtmlWindow::OnForward(wxCommandEvent& WXUNUSED(event))
+{
+	HistoryForward();
+}
+
+
+void CHMHtmlWindow::OnBack(wxCommandEvent& WXUNUSED(event))
+{
+	HistoryBack();
+}
+
+
+void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
+{
+#ifdef _ENABLE_COPY_AND_FIND
+	if(IsSelectionEnabled())
+		_menu->Enable(ID_CopySel, m_selection != NULL);
+#endif
+
+	_menu->Enable(ID_PopupForward, HistoryCanForward());
+	_menu->Enable(ID_PopupBack, HistoryCanBack());
+
+	PopupMenu(_menu, event.GetPosition());
+}
+
+
+BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
+#ifdef _ENABLE_COPY_AND_FIND
+	EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)
+	EVT_MENU(ID_PopupFind, CHMHtmlWindow::OnFind)
+#endif
+	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
+	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
+	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
+END_EVENT_TABLE()
+
+
 

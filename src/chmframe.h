@@ -35,7 +35,7 @@
 
 
 //! Default font size for the wxHtmlWindow.
-#define CHM_DEFAULT_FONT_SIZE 14
+#define CHM_DEFAULT_FONT_SIZE 12
 
 
 #ifdef HAVE_CONFIG_H

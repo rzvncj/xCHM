@@ -77,18 +77,24 @@ protected:
 
 private:
 	//! Helper. Searches through the tree recursively.
-	void PopulateList(wxTreeItemId root, wxString& text,
-			  bool caseSensitive, bool wholeWords);
+	void PopulateList(wxTreeItemId root, wxString& text, 
+			  bool caseSensitive, bool wholeWords,
+			  bool titlesOnly);
 
 	//! Helper. Searches a HTML file for the given text.
-	bool SearchFile(const wxString& filename, wxString& text,
+	bool FileSearch(const wxString& filename, wxString& text,
 			bool caseSensitive, bool wholeWords);
+
+	//! Helper. Searches page titles for the given text.
+	bool TitleSearch(const wxString& title, wxString& text,
+			 bool caseSensitive, bool wholeWords);
 
 private:
 	wxTreeCtrl* _tcl;
 	wxTextCtrl* _text;
 	wxCheckBox* _case;
 	wxCheckBox* _whole;
+	wxCheckBox* _titles;
 	wxButton* _search;
 	wxListBox* _results;
 	wxHtmlWindow* _html;

@@ -29,7 +29,8 @@
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       wxHtmlWindow *html)
 	: wxPanel(parent), _tcl(topics), _text(NULL), _case(NULL),
-	  _whole(NULL), _search(NULL), _results(NULL), _html(html)
+	  _whole(NULL), _titles(NULL), _search(NULL), _results(NULL), 
+	  _html(html)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
@@ -41,6 +42,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 
 	_case = new wxCheckBox(this, -1, wxT("Case sensitive"));
 	_whole = new wxCheckBox(this, -1, wxT("Whole words only"));	
+	_titles = new wxCheckBox(this, -1, wxT("Search titles only"));	
 	_search = new wxButton(this, ID_SearchButton, wxT("Search"));
 
 #if wxUSE_TOOLTIPS
@@ -55,6 +57,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
         sizer->Add(_case, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_whole, 0, wxLEFT | wxRIGHT, 10);
+        sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
         sizer->Add(_results, 1, wxALL | wxEXPAND, 2);
 }
@@ -71,12 +74,13 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	_results->Clear();
 
 	PopulateList(_tcl->GetRootItem(), sr, _case->IsChecked(),
-		     _whole->IsChecked());
+		     _whole->IsChecked(), _titles->IsChecked());
 }
 
 
 void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
-				  bool caseSensitive, bool wholeWords)
+				  bool caseSensitive, bool wholeWords,
+				  bool titlesOnly)
 {
 	static CHMFile *chmf = CHMInputStream::GetCache();
 
@@ -88,22 +92,25 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 
 	if(data && (!data->_url.IsEmpty())) {
 
-		wxString tmp = wxString(wxT("file:")) + 
+		wxString url = wxString(wxT("file:")) + 
 			chmf->ArchiveName() + wxT("#chm:/") + data->_url;
+		wxString title = _tcl->GetItemText(root);
 
-		if(SearchFile(tmp, text,
-			      caseSensitive, wholeWords)) {
-			_results->Append(_tcl->GetItemText(root),
-					 new wxString(tmp));
+		if(!titlesOnly) {
+			if(FileSearch(url, text, caseSensitive, wholeWords))
+				_results->Append(title, new wxString(url));
+		} else {
+			if(TitleSearch(title, text, caseSensitive, wholeWords))
+				_results->Append(title, new wxString(url));
 		}
-	}
-	
+	}	
 
 	long cookie;
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
 
 	for(size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {
-		PopulateList(child, text, caseSensitive, wholeWords);
+		PopulateList(child, text, caseSensitive, wholeWords,
+			     titlesOnly);
 		child = _tcl->GetNextChild(root, cookie);
 	}
 }
@@ -111,29 +118,35 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 
 static inline bool WHITESPACE(wxChar c)
 {
-	return c == _T(' ') || c == _T('\n') || 
-		c == _T('\r') || c == _T('\t') ||
-		c == _T('<') || c == _T('>');
+	return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') 
+		|| c == wxT('\t') || c == wxT('<') || c == wxT('>');
 }
 
 
-bool CHMSearchPanel::SearchFile(const wxString& filename, 
-				wxString& text,
+static inline bool HTML_WHITESPACE(wxChar c)
+{
+	return WHITESPACE(c) || c == wxT('<') || c == wxT('>');
+}
+
+
+// The following two functions should be changed with faster ones.
+
+bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 				bool caseSensitive, bool wholeWords)
 {
-	size_t i, j, wrd = text.Length();
+	int i, j, wrd = text.Length();
+	bool found = false;
 
-	bool found = FALSE;
+	wxFileSystem fsys;
+	wxFSFile *file = fsys.OpenFile(filename);
 
-        wxFileSystem fsys;
-        wxFSFile *file = fsys.OpenFile(filename);
-
-        if (file == NULL)
-            return FALSE;
+	if (file == NULL)
+		return FALSE;
 
 	wxHtmlFilterHTML filter;
 	wxString tmp = filter.ReadFile(*file);
-	int lng = tmp.length();
+
+	int lng = tmp.Length();
 
 	if (!caseSensitive) {
 		tmp.MakeLower();
@@ -144,37 +157,41 @@ bool CHMSearchPanel::SearchFile(const wxString& filename,
 	bool inTag = false;
 
 	if(wholeWords) {
-		for(i = 0; i < lng - wrd; ++i) {
-			
+		for(i = 0; i < lng - wrd + 1; ++i) {
+
 			if(buf[i] == wxT('<'))
 				inTag = true;
 			else if(buf[i] == wxT('>'))
 				inTag = false;
 
-			if(WHITESPACE(buf[i]) || inTag) 
+			if(HTML_WHITESPACE(buf[i]) || inTag) 
 				continue;
 			 			
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[j])) 
+			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
 				++j;
-			if (j == wrd && WHITESPACE(buf[i + j])) { 
+
+			if (j == wrd && (HTML_WHITESPACE(buf[i + j]) ||
+					 i+j == lng)) { 
 				found = TRUE; 
 				break; 
 			}
 		}
 	} else {
-		for (i = 0; i < lng - wrd; ++i) {
+		for (i = 0; i < lng - wrd + 1; ++i) {
 
   			if(buf[i] == wxT('<'))
 				inTag = true;
-			else if(buf[i] == wxT('>'))
+			else if(buf[i] == wxT('>')) {
 				inTag = false;
+				continue;
+			}
 
 			if(inTag)
 				continue;
 
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[j])) 
+			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
 				++j;
 			if (j == wrd) { 
 				found = TRUE; 
@@ -185,6 +202,56 @@ bool CHMSearchPanel::SearchFile(const wxString& filename,
 
 	return found;
 }
+
+
+bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
+				 bool caseSensitive, bool wholeWords)
+{
+	int i, j, wrd = text.Length();
+	bool found = false;
+
+	wxString tmp = title;
+	int lng = tmp.Length();
+
+	if (!caseSensitive) {
+		tmp.MakeLower();
+		text.MakeLower();
+	}
+
+	const wxChar *buf = tmp.c_str();
+
+	if(wholeWords) {
+		for(i = 0; i < lng - wrd + 1; ++i) {
+
+			if(WHITESPACE(buf[i])) 
+				continue;
+			 			
+			j = 0;
+			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+				++j;
+
+			if (j == wrd && (WHITESPACE(buf[i + j]) || 
+					 i+j == lng)) { 
+				found = TRUE; 
+				break; 
+			}
+		}
+	} else {
+		for (i = 0; i < lng - wrd + 1; ++i) {
+
+			j = 0;
+			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+				++j;
+			if (j == wrd) { 
+				found = TRUE; 
+				break; 
+			}
+		}
+	}
+
+	return found;
+}
+
 
 
 void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))

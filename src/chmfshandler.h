@@ -26,6 +26,12 @@
 #include <wx/filesys.h>
 
 
+/*!
+  \class wxFileSystemHandler
+  \brief wxWindows virtual filesystem handler class.
+*/
+
+
 //! CHM filesystem handler class.
 class CHMFSHandler : public wxFileSystemHandler
 {

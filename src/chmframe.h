@@ -56,6 +56,12 @@ enum
 };
 
 
+/*!
+  \class wxFrame
+  \brief wxWindows frame widget class.
+*/
+
+
 /*! 
   \brief The frame, owner of the wxHtmlWindow, contents tree control and
   all the other nifty stuff. 

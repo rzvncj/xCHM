@@ -26,6 +26,12 @@
 #include <wx/treectrl.h>
 
 
+/*!
+  \class wxHtmlParser
+  \brief wxWindows HTML parser class.
+*/
+
+
 //! Useful only as a dummy. The real work is done by ContentTagHandler.
 class ContentParser : public wxHtmlParser {
 public:
@@ -36,6 +42,12 @@ protected:
 	//! Dummy implementation. Does nothing.
 	virtual void AddText(const wxChar* WXUNUSED(txt)) {}
 };
+
+
+/*!
+  \class wxTreeItemData
+  \brief wxWindows generic data type to associate with a wxTreeCtrl item.
+*/
 
 
 /*! 
@@ -51,6 +63,12 @@ struct URLTreeItem : public wxTreeItemData {
 	//! Useful data.
 	wxString _url;
 };
+
+
+/*!
+  \class wxHtmlTagHandler
+  \brief wxWindows HTML tag handler class.
+*/
 
 
 //! Maximum number of tree levels.

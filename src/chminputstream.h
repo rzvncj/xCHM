@@ -26,6 +26,12 @@
 #include <chmfile.h>
 
 
+/*!
+  \class wxInputStream
+  \brief wxWindows input stream class.
+*/
+
+
 //! Input stream from a .chm archive.
 class CHMInputStream : public wxInputStream
 {

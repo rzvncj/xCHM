@@ -24,6 +24,12 @@
 #include <wx/combobox.h>
 
 
+/*!
+  \class wxDialog
+  \brief wxWindows generic dialog class.
+*/
+
+
 //! Custom font chooser dialog class.
 class CHMFontDialog : public wxDialog
 {

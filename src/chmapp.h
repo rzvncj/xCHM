@@ -25,6 +25,11 @@
 #include <wx/wx.h>
 
 
+/*! 
+  \class wxApp
+  \brief wxWindows application class.
+*/
+
 //! This is the application class.
 class CHMApp : public wxApp {
 

@@ -51,7 +51,7 @@ CPP = gcc -E
 CPPFLAGS =  -I/usr/local/lib/wx/include/gtk2u-2.4 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =   -W -Wall -O2
+CXXFLAGS =   -W -Wall
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps

@@ -1,0 +1,273 @@
+# translation of ru.po to Russian
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>, 2004.
+# Andy Shevchenko <andy@smile.org.ua>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ru\n"
+"POT-Creation-Date: 2004-02-24 17:18+0200\n"
+"PO-Revision-Date: 2004-03-21 04:16+0200\n"
+"Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: src/chmfile.cpp:509
+msgid "Untitled in index"
+msgstr ""
+
+#: src/chmfinddialog.cpp:35
+msgid "Find in page.."
+msgstr "Найти на этой странице..."
+
+#: src/chmfinddialog.cpp:44
+msgid "Whole words only"
+msgstr "Только полные слова"
+
+#: src/chmfinddialog.cpp:45
+msgid "Case sensitive"
+msgstr "Регистрозависимый"
+
+#: src/chmfinddialog.cpp:52
+msgid "Find next"
+msgstr "Продолжить поиск"
+
+#: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/chmfontdialog.cpp:53
+msgid "Change fonts.."
+msgstr "Параметры шрифтов.."
+
+#: src/chmfontdialog.cpp:60
+msgid "Normal font:"
+msgstr "Нормальный шрифт:"
+
+#: src/chmfontdialog.cpp:61
+msgid "Fixed font:"
+msgstr "Фиксированный шрифт:"
+
+#: src/chmfontdialog.cpp:62
+msgid "Font size:"
+msgstr "Размер:"
+
+#: src/chmfontdialog.cpp:79
+msgid "Preview:"
+msgstr "Просмотр:"
+
+#: src/chmfontdialog.cpp:89
+msgid "OK"
+msgstr "ОК"
+
+#: src/chmframe.cpp:35
+msgid "Open a CHM book."
+msgstr "Открыть CHM книгу."
+
+#: src/chmframe.cpp:36
+msgid "Change fonts."
+msgstr "Параметры шрифтов."
+
+#: src/chmframe.cpp:37
+msgid "Print the page currently displayed."
+msgstr "Печать текущей страницы."
+
+#: src/chmframe.cpp:38
+msgid "On or off?"
+msgstr "Включить или выключить?"
+
+#: src/chmframe.cpp:39
+msgid "Go to the book's start page."
+msgstr "Перейти к начальной странице."
+
+#: src/chmframe.cpp:40
+msgid "Go forward in history. Per book."
+msgstr "Вперед по истории"
+
+#: src/chmframe.cpp:41
+msgid "Back to the last visited page. Per book."
+msgstr "Вернуться к последней посещенной странице. "
+
+#: src/chmframe.cpp:42
+msgid "About the program."
+msgstr "О программе."
+
+#: src/chmframe.cpp:121
+msgid "Ready."
+msgstr "Готово."
+
+#: src/chmframe.cpp:145 src/chmframe.cpp:765
+msgid "Contents"
+msgstr "Содержание"
+
+#: src/chmframe.cpp:146
+msgid "Index"
+msgstr "Индекс"
+
+#: src/chmframe.cpp:147 src/chmsearchpanel.cpp:49
+msgid "Search"
+msgstr "Поиск"
+
+#: src/chmframe.cpp:170
+msgid "About xCHM"
+msgstr "О программе xCHM"
+
+#: src/chmframe.cpp:178
+msgid "Choose a file.."
+msgstr "Открыть файл .."
+
+#: src/chmframe.cpp:288
+msgid "Couldn't extract the book contents tree."
+msgstr "Невозможно развернуть содержание книги."
+
+#: src/chmframe.cpp:290
+msgid "No contents.."
+msgstr "Без содержания.."
+
+#: src/chmframe.cpp:573
+msgid "&Open..\tCtrl-O"
+msgstr "&Открыть..\tCtrl-O"
+
+#: src/chmframe.cpp:574
+msgid "&Print page..\tCtrl-P"
+msgstr "&Печать..\tCtrl-P"
+
+#: src/chmframe.cpp:575
+msgid "Fon&ts..\tCtrl-T"
+msgstr "&Шрифты..\tCtrl-T"
+
+#: src/chmframe.cpp:578
+msgid "&Show contents tree\tCtrl-S"
+msgstr "О&тобразить содержание\tCtrl-S"
+
+#: src/chmframe.cpp:583
+msgid "&Recent files"
+msgstr "Открыть &недавние"
+
+#: src/chmframe.cpp:599
+msgid "E&xit\tCtrl-X"
+msgstr "В&ыход\tCtrl-X"
+
+#: src/chmframe.cpp:600
+msgid "Quit the application."
+msgstr "Выход из приложения."
+
+#: src/chmframe.cpp:604
+msgid "&Home\tCtrl-H"
+msgstr "&Домой\tCtrl-H"
+
+#: src/chmframe.cpp:605
+msgid "For&ward\tCtrl-W"
+msgstr "&Вперед\tCtrl-W"
+
+#: src/chmframe.cpp:606
+msgid "&Back\tCtrl-B"
+msgstr "&Назад\tCtrl-B"
+
+#: src/chmframe.cpp:609
+msgid "&About ..\tF1"
+msgstr "&О программе ..\tF1"
+
+#: src/chmframe.cpp:612
+msgid "&File"
+msgstr "&Файл"
+
+#: src/chmframe.cpp:613
+msgid "Hi&story"
+msgstr "&История"
+
+#: src/chmframe.cpp:614
+msgid "&Help"
+msgstr "Помо&щь"
+
+#: src/chmframe.cpp:625
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: src/chmframe.cpp:647
+msgid "Add"
+msgstr "Добавить"
+
+#: src/chmframe.cpp:648
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/chmframe.cpp:651
+msgid "Add displayed page to bookmarks."
+msgstr "Добавить отображаемую страницу к закладкам."
+
+#: src/chmframe.cpp:652
+msgid "Remove selected bookmark."
+msgstr "Удалить выбранную закладку."
+
+#: src/chmframe.cpp:759
+msgid "Open .."
+msgstr "Открыть .."
+
+#: src/chmframe.cpp:761
+msgid "Print .."
+msgstr "Печать .."
+
+#: src/chmframe.cpp:763
+msgid "Fonts .."
+msgstr "Шрифты .."
+
+#: src/chmframe.cpp:770
+msgid "Back"
+msgstr "Назад"
+
+#: src/chmframe.cpp:771
+msgid "Forward"
+msgstr "Вперед"
+
+#: src/chmframe.cpp:773
+msgid "Home"
+msgstr "Домой"
+
+#: src/chmframe.cpp:776
+msgid "About"
+msgstr "О программе"
+
+#: src/chmhtmlwindow.cpp:41
+msgid "For&ward"
+msgstr "&Вперед"
+
+#: src/chmhtmlwindow.cpp:42
+msgid "&Back"
+msgstr "&Назад"
+
+#: src/chmhtmlwindow.cpp:46
+msgid "&Copy selection"
+msgstr "&Копировать выделение "
+
+#: src/chmhtmlwindow.cpp:48
+msgid "&Find in page.."
+msgstr "&Найти на этой странице"
+
+#: src/chmsearchpanel.cpp:47
+msgid "Get partial matches"
+msgstr "Частичное совпадение"
+
+#: src/chmsearchpanel.cpp:48
+msgid "Search titles only"
+msgstr "Искать только в заголовках"
+
+#: src/chmsearchpanel.cpp:52
+msgid "Allow partial matches."
+msgstr "Разрешить частичное совпадение."
+
+#: src/chmsearchpanel.cpp:53
+msgid "Only search in the contents' titles."
+msgstr "Искать только в заголовках содежания."
+
+#: src/chmsearchpanel.cpp:54
+msgid "Search contents for occurences of the specified text."
+msgstr ""
+
+#: src/contenttaghandler.cpp:37
+msgid "Topics"
+msgstr "Темы"
+

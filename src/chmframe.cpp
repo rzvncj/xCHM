@@ -130,7 +130,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
-	//_html->SetFocusFromKbd();
+	_html->SetFocusFromKbd();
 }
 
 

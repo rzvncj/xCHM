@@ -100,3 +100,4 @@
 	* 0.8.7 Minor feature enhancements:
 		+ the contents panel sash position persists between sessions.
 		+ decreased the default application font size from 14 to 12.
+		+ added opened files history support.

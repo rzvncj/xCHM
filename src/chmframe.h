@@ -30,6 +30,7 @@
 #include <wx/panel.h>
 #include <wx/combobox.h>
 #include <wx/font.h>
+#include <wx/docview.h>
 #include <chmsearchpanel.h>
 #include <chmhtmlwindow.h>
 
@@ -65,6 +66,7 @@ enum
 	ID_Add,
 	ID_Remove,
 	ID_FindInPage,
+	ID_Recent,
 	ID_TreeCtrl = 1000,
 };
 
@@ -144,6 +146,9 @@ protected:
 	//! Called when the user wants to print the displayed page.
 	void OnPrint(wxCommandEvent& event);
 
+	//! Called when the user selects a file from the file history.
+	void CHMFrame::OnHistFile(wxCommandEvent& event);
+
 #ifdef _ENABLE_COPY_AND_FIND
 	//! Called when the user types Ctrl-F.
 	void OnFind(wxCommandEvent& event);
@@ -201,6 +206,7 @@ private:
 	bool _bookmarksDeleted;
 	int _sashPos;	
 	wxFont _font;
+	wxFileHistory _fh;
 
 private:
 	DECLARE_EVENT_TABLE()	

@@ -289,6 +289,14 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void CHMFrame::OnHistFile(wxCommandEvent& event)
+{
+      wxString f(_fh.GetHistoryFile(event.GetId() - wxID_FILE1));
+      if (!f.IsEmpty())
+	      LoadCHM(f);
+}
+
+
 #ifdef _ENABLE_COPY_AND_FIND
 void CHMFrame::OnFind(wxCommandEvent& event)
 {
@@ -409,6 +417,9 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 	config.Write(wxT("/Fonts/size"), _fontSize);
 	config.Write(wxT("/Sash/leftMargin"), sashPos);
 
+	config.SetPath(wxT("/Recent"));
+	_fh.Save(config);
+
 	SaveBookmarks();
 	Destroy();
 }
@@ -431,6 +442,14 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 	if(!chmf)
 		return;
+
+	wxString filename = chmf->ArchiveName();
+	if(!filename.IsEmpty()) {		
+		_fh.AddFileToHistory(filename);
+
+		if(!_menuFile->IsEnabled(ID_Recent))
+			_menuFile->Enable(ID_Recent, TRUE);
+	}
 
 	_html->HistoryClear();
 	_csp->Reset();
@@ -551,6 +570,20 @@ wxMenuBar* CHMFrame::CreateMenu()
 	_menuFile->AppendCheckItem(ID_Contents, 
 				   wxT("&Show contents tree\tCtrl-S"),
 				   contents_help);
+	_menuFile->AppendSeparator();
+
+	wxMenu *recent = new wxMenu;
+	_menuFile->Append(ID_Recent, wxT("&Recent files"), recent);
+	_fh.UseMenu(recent);
+
+	// Fill the file history menu.
+       	wxConfig config(wxT("xchm"));
+	config.SetPath(wxT("/Recent"));
+	_fh.Load(config);
+
+	if(_fh.GetNoHistoryFiles() == 0)
+		_menuFile->Enable(ID_Recent, FALSE);
+
 	_menuFile->AppendSeparator();
 	_menuFile->Append(ID_Quit, wxT("E&xit\tCtrl-X"), 
 			  wxT("Quit the application."));
@@ -749,6 +782,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
+	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
 #ifdef _ENABLE_COPY_AND_FIND
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
 #endif

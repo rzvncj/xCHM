@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-26 16:55+0200\n"
+"POT-Creation-Date: 2005-02-18 18:16+0200\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -232,19 +232,24 @@ msgstr "Początek"
 msgid "About"
 msgstr "O programie"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 msgid "For&ward"
 msgstr "&W przód"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:45
 msgid "&Back"
 msgstr "W &tył"
 
-#: src/chmhtmlwindow.cpp:48
-msgid "&Copy selection"
+#: src/chmhtmlwindow.cpp:46
+#, fuzzy
+msgid "Copy &link location"
 msgstr "&Kopiuj zaznaczenie"
 
 #: src/chmhtmlwindow.cpp:50
+msgid "&Copy selection"
+msgstr "&Kopiuj zaznaczenie"
+
+#: src/chmhtmlwindow.cpp:52
 msgid "&Find in page.."
 msgstr "&Szukaj na stronie.."
 

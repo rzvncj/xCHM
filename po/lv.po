@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XChm Latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-26 16:55+0200\n"
+"POT-Creation-Date: 2005-02-18 18:16+0200\n"
 "PO-Revision-Date: 2004-10-13 13:32+0300\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
@@ -229,19 +229,24 @@ msgstr "Starts"
 msgid "About"
 msgstr "Par..."
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 msgid "For&ward"
 msgstr "&Uz priekšu"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:45
 msgid "&Back"
 msgstr "&Atpakaļ"
 
-#: src/chmhtmlwindow.cpp:48
-msgid "&Copy selection"
+#: src/chmhtmlwindow.cpp:46
+#, fuzzy
+msgid "Copy &link location"
 msgstr "&Kopēt iezīmēto"
 
 #: src/chmhtmlwindow.cpp:50
+msgid "&Copy selection"
+msgstr "&Kopēt iezīmēto"
+
+#: src/chmhtmlwindow.cpp:52
 msgid "&Find in page.."
 msgstr "&Meklēt lappusē"
 

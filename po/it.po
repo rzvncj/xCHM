@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-26 16:55+0200\n"
+"POT-Creation-Date: 2005-02-18 18:16+0200\n"
 "PO-Revision-Date: 2004-02-25 00:33+0100\n"
 "Last-Translator: Fabio Vescarelli <faber@faberbox.com>\n"
 "Language-Team: Italian <faber@faberbox.com>\n"
@@ -231,19 +231,24 @@ msgstr "Pagina iniziale"
 msgid "About"
 msgstr "Info"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 msgid "For&ward"
 msgstr "A&vanti"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:45
 msgid "&Back"
 msgstr "In&dietro"
 
-#: src/chmhtmlwindow.cpp:48
-msgid "&Copy selection"
+#: src/chmhtmlwindow.cpp:46
+#, fuzzy
+msgid "Copy &link location"
 msgstr "&Copia selezione"
 
 #: src/chmhtmlwindow.cpp:50
+msgid "&Copy selection"
+msgstr "&Copia selezione"
+
+#: src/chmhtmlwindow.cpp:52
 msgid "&Find in page.."
 msgstr "T&rova nella pagina..."
 

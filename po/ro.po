@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-26 16:55+0200\n"
+"POT-Creation-Date: 2005-02-18 18:16+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -231,19 +231,23 @@ msgstr "Start"
 msgid "About"
 msgstr "Despre"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 msgid "For&ward"
 msgstr "Inainte"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:45
 msgid "&Back"
 msgstr "Inapoi"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:46
+msgid "Copy &link location"
+msgstr "&Copiaza link-ul"
+
+#: src/chmhtmlwindow.cpp:50
 msgid "&Copy selection"
 msgstr "&Copiaza selectia"
 
-#: src/chmhtmlwindow.cpp:50
+#: src/chmhtmlwindow.cpp:52
 msgid "&Find in page.."
 msgstr "&Gaseste in pagina.."
 

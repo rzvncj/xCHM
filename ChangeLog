@@ -177,4 +177,6 @@
 		<dragosiulian@users.sourceforge.net>
 		+ now the index list is being sorted.
 
-
+	* 0.9.8 Minor feature enhancements:
+		+ fixed the German translation.
+		+ added 'Copy link location' to the right-click menu.

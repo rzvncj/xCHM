@@ -42,6 +42,9 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 			tmp.Replace(wxT(".."), wxString(wxT("file:")) + 
 				    chmf->ArchiveName() + wxT("#chm:") +
 				    GetPrefix().BeforeLast(wxT('/')));
+	
+	} else if(tmp.StartsWith(wxT("javascript:fullSize"))) {
+		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 	}
 
 	if(_syncTree && 

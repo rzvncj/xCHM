@@ -529,7 +529,7 @@ void CHMFrame::LoadBookmarks()
 
 	wxConfig config(wxT("xchm"));
 	wxString bookname = chmf->ArchiveName();
-	bookname.Replace(wxT("/"), wxT("|"), TRUE);
+	bookname.Replace(wxT("/"), wxT("."), TRUE);
 
 	bookname = wxString(wxT("/Bookmarks/")) + bookname;
 	long noEntries;
@@ -566,7 +566,7 @@ void CHMFrame::SaveBookmarks()
 
 	wxConfig config(wxT("xchm"));
 	wxString bookname = chmf->ArchiveName();
-	bookname.Replace(wxT("/"), wxT("|"), TRUE);
+	bookname.Replace(wxT("/"), wxT("."), TRUE);
 	bookname = wxString(wxT("/Bookmarks/")) + bookname;
 
 	if(_bookmarksDeleted) {

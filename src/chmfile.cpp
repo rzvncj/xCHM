@@ -690,9 +690,6 @@ bool CHMFile::InfoFromWindows()
 }
 
 
-#include <iostream>
-using namespace std;
-
 inline
 bool CHMFile::InfoFromSystem()
 {
@@ -700,8 +697,6 @@ bool CHMFile::InfoFromSystem()
 	chmUnitInfo ui;
 	
 	int index = 0;
-//	u_int16_t *cursor = NULL;
-
 	unsigned char* cursor = NULL;
 	u_int16_t value = 0;
 
@@ -727,10 +722,7 @@ bool CHMFile::InfoFromSystem()
 			break;
 
 		cursor = buffer + index;
-		//FIXENDIAN16(*cursor);
 		value = UINT16ARRAY(cursor);
-
-		cerr << "Cursor: " << value << endl;
 		
 		switch(value) {
 		case 0:
@@ -808,12 +800,8 @@ bool CHMFile::InfoFromSystem()
 			cursor = buffer + index;
 		}
 
-//		FIXENDIAN16(*cursor);
 		value = UINT16ARRAY(cursor);
 		index += value + 2;
-
-		cerr << "Cursor at end: " << value << endl;
-		cerr << "Index at end: " << index << endl;
 	}
 
 	return true;

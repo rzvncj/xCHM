@@ -440,8 +440,11 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
+
+#if !wxUSE_UNICODE
 	static bool noSpecialFont = true;
 	static wxFontEncoding enc = wxFont::GetDefaultEncoding();
+#endif
 
 	SaveBookmarks();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
@@ -471,7 +474,9 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		SetTitle(wxT("xCHM v. " VERSION));
 		_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	}
-	
+
+#if !wxUSE_UNICODE
+
 	wxString fontFace = chmf->DefaultFont();
 
 	if(!fontFace.IsEmpty()) {
@@ -518,6 +523,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		_html->SetFonts(_normalFont, _fixedFont, sizes);
 		noSpecialFont = true;
 	}
+#endif
 
 	// if we have contents..
 	if(_tcl->GetCount() > 1) {		

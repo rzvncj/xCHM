@@ -150,5 +150,8 @@
 		+ added Polish translation.
 		+ added Bulgarian translation.
 		+ fixed a Fonts dialog bug.
-		+ added sunos patch for correct #SYSTEM .chm info detection.
+		+ fixed a SunOS/sparc bug where reading info from the
+		#SYSTEM file crashed xCHM. Thanks go to the reporter of the
+		bug Markus Schwarzenberg, for helping solve a bug on a
+		platform I had no access to.
 

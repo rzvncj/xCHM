@@ -51,7 +51,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 
 {
 	wxString filename = file;
-	wxString path = archive.BeforeLast('/') + "/";
+	wxString path = archive.BeforeLast(wxT('/')) + wxT("/");
 
 	memset(&_ui, 0, sizeof(_ui));
 
@@ -63,10 +63,10 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 	}
 
 	// Somebody's looking for the homepage.
-	if(file.IsSameAs("/"))
+	if(file.IsSameAs(wxT("/")))
 		filename = _archiveCache->HomePage();
 
-	if(filename.StartsWith("/MS-ITS:")) {
+	if(filename.StartsWith(wxT("/MS-ITS:"))) {
 		// If this ever happens chances are Microsoft
 		// decided that even if we went through the
 		// trouble to open this archive and check out
@@ -76,9 +76,9 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		// Bill Gates.
 
 		wxString arch_link = 
-			filename.AfterFirst(':').BeforeFirst(':');
+			filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
-		filename = filename.AfterLast(':');
+		filename = filename.AfterLast(wxT(':'));
 
 		// Reset the cached chmFile* and all.
 		if(!Init(arch_link))

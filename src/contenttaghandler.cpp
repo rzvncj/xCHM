@@ -28,7 +28,7 @@ ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild)
 	if(!_treeCtrl)
 		return;
 
-	_parents[_level] = _treeCtrl->AddRoot("Contents");
+	_parents[_level] = _treeCtrl->AddRoot(wxT("Contents"));
 }
 
 
@@ -74,7 +74,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 			// _parents[-1].
 			int parentIndex = _level ? _level - 1 : 0;
 
-			_title = _url = "";
+			_title = _url = wxEmptyString;
 			ParseInner(tag);
 
 			_parents[_level] = 

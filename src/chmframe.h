@@ -78,8 +78,8 @@ public:
 	*/
 	CHMFrame(const wxString& title, const wxString& booksDir,
 		 const wxPoint& pos, const wxSize& size,
-		 const wxString& normalFont = "",
-		 const wxString& fixedFont = "",
+		 const wxString& normalFont = wxEmptyString,
+		 const wxString& fixedFont = wxEmptyString,
 		 const int fontSize = CHM_DEFAULT_FONT_SIZE);
 
 	//! Cleans up.

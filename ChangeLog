@@ -18,4 +18,7 @@
 		be a major feature as some (crappy) books display garbage
 		with the default font.
 
-	
+	* 0.6.1. Major bugfix:
+		+ fixed Unicode bug that prevented xCHM from compiling
+		properly on RedHat 9.
+

@@ -26,12 +26,12 @@
 
 
 CHMFile::CHMFile()
-	: _chmFile(NULL), _home("/")
+	: _chmFile(NULL), _home(wxT("/"))
 {}
 
 
 CHMFile::CHMFile(const wxString& archiveName)
-	: _chmFile(NULL), _home("/")
+	: _chmFile(NULL), _home(wxT("/"))
 {
 	LoadCHM(archiveName);
 }
@@ -71,8 +71,9 @@ void CHMFile::CloseCHM()
 	chm_close(_chmFile);
 	
 	_chmFile = NULL;
-	_home = "/";
-	_filename = _home = _topicsFile = _indexFile = _title = "";
+	_home = wxT("/");
+	_filename = _home = _topicsFile = _indexFile 
+		= _title = wxEmptyString;
 }
 
 
@@ -170,7 +171,7 @@ bool CHMFile::GetArchiveInfo()
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_topicsFile = wxString("/") 
+			_topicsFile = wxString(wxT("/")) 
 				+ (buffer + index + 2);
 			index += *cursor + 2;
 			break;
@@ -178,7 +179,7 @@ bool CHMFile::GetArchiveInfo()
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_indexFile = wxString("/")
+			_indexFile = wxString(wxT("/"))
 				+ (buffer + index + 2);
 			index += *cursor + 2;
 			break;
@@ -186,7 +187,7 @@ bool CHMFile::GetArchiveInfo()
 			index += 2;
 			cursor = (u_int16_t *)(buffer + index);
 			FIXENDIAN16(*cursor);			
-			_home = wxString("/")
+			_home = wxString(wxT("/"))
 				+ (buffer + index + 2);
 			index += *cursor + 2;
 			break;
@@ -203,16 +204,16 @@ bool CHMFile::GetArchiveInfo()
 			FIXENDIAN16(*cursor);
 
 			if(_topicsFile.IsEmpty()) {
-				wxString topicAttempt = "/", tmp;
+				wxString topicAttempt = wxT("/"), tmp;
 				topicAttempt += wxString(buffer + index + 2);
-				tmp = topicAttempt + ".hhc";
+				tmp = topicAttempt + wxT(".hhc");
 				
 				if(chm_resolve_object(_chmFile,
 						      tmp.c_str(), &ui)
 				   == CHM_RESOLVE_SUCCESS)
 					_topicsFile = tmp;
 
-				tmp = topicAttempt + ".hhk";
+				tmp = topicAttempt + wxT(".hhk");
 				
 				if(chm_resolve_object(_chmFile,
 						      tmp.c_str(), &ui)
@@ -254,11 +255,11 @@ bool CHMFile::GetArchiveInfo()
 			chunk = buffer + index;
 			
 			if(chunk.Right(4).Lower() == wxT(".hhc")) {
-				_topicsFile = wxString("/") + chunk;
+				_topicsFile = wxString(wxT("/")) + chunk;
 				return true;
 
 			} else if(chunk.Right(4).Lower() == wxT(".hhk")) {
-				_indexFile = wxString("/") + chunk;
+				_indexFile = wxString(wxT("/")) + chunk;
 				return true;
 			}
 

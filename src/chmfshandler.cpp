@@ -52,7 +52,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 	CHMInputStream *s;
 	
 	// HTML code for space is %20
-	right.Replace("%20", " ", TRUE);
+	right.Replace(wxT("%20"), wxT(" "), TRUE);
 
 	if (GetProtocol(left) != wxT("file"))
 		return NULL;
@@ -62,16 +62,16 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 
 	if (s && s->IsOk()) {
 		
-		if(right.IsSameAs("/"))
+		if(right.IsSameAs(wxT("/")))
 			right = s->GetCache()->HomePage();
 
 		// The dreaded links to files in other archives.
 		// Talk about too much enthusiasm.
-		if(right.StartsWith("/MS-ITS:"))
-			right = right.AfterLast(':');
+		if(right.StartsWith(wxT("/MS-ITS:")))
+			right = right.AfterLast(wxT(':'));
 
 		return new wxFSFile(s,
-				    wxString("file:") +
+				    wxString(wxT("file:")) +
 				    s->GetCache()->ArchiveName() + 
 				    wxT("#chm:") + right,
 				    GetMimeTypeFromExt(right),

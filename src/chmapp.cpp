@@ -34,18 +34,20 @@ bool CHMApp::OnInit()
 	wxInitAllImageHandlers();
 	wxFileSystem::AddHandler(new CHMFSHandler);
 
-	wxConfig config("xchm");
-	if(config.Read("/Position/xOrig", &xorig)) {
-		config.Read("/Position/yOrig", &yorig);
-		config.Read("/Position/width", &width);
-		config.Read("/Position/height", &height);
-		config.Read("/Paths/lastOpenedDir", &lastOpenedDir);
-		config.Read("/Fonts/normalFontFace", &normalFont);
-		config.Read("/Fonts/fixedFontFace", &fixedFont);
-		config.Read("/Fonts/size", &fontSize);
+	wxConfig config(wxT("xchm"));
+	if(config.Read(wxT("/Position/xOrig"), &xorig)) {
+		config.Read(wxT("/Position/yOrig"), &yorig);
+		config.Read(wxT("/Position/width"), &width);
+		config.Read(wxT("/Position/height"), &height);
+		config.Read(wxT("/Paths/lastOpenedDir"), 
+			    &lastOpenedDir);
+		config.Read(wxT("/Fonts/normalFontFace"), 
+			    &normalFont);
+		config.Read(wxT("/Fonts/fixedFontFace"), &fixedFont);
+		config.Read(wxT("/Fonts/size"), &fontSize);
 	}
 	
-	CHMFrame *frame = new CHMFrame("xCHM v. " VERSION,
+	CHMFrame *frame = new CHMFrame(wxT("xCHM v. " VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
 				       fixedFont, static_cast<int>(fontSize));

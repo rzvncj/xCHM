@@ -723,7 +723,7 @@ bool CHMFile::InfoFromSystem()
 
 		cursor = buffer + index;
 		value = UINT16ARRAY(cursor);
-		
+
 		switch(value) {
 		case 0:
 			index += 2;

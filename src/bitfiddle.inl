@@ -23,9 +23,7 @@
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 #define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
-#define UINT16ARRAY(x) (wxBYTE_ORDER == wxBIG_ENDIAN ? \
-			((unsigned char)x[1] | ((u_int16_t)x[0] << 8)) : \
-			((unsigned char)x[0] | ((u_int16_t)x[1] << 8)))
+#define UINT16ARRAY(x) ((unsigned char)x[0] | ((u_int16_t)x[1] << 8))
 
 
 inline u_int64_t be_encint(unsigned char* buffer, size_t& length)

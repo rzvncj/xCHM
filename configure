@@ -1285,9 +1285,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
           ac_config_headers="$ac_config_headers config.h"
 
 
-CXXFLAGS="$CXXFLAGS -W -Wall"
-
-
 
 
 # Check whether --with-wx-prefix or --without-wx-prefix was given.
@@ -1496,16 +1493,18 @@ echo "${ECHO_T}no (version $WX_VERSION is not new enough)" >&6
 
 
 if test "$wxWin" != 1; then
-	{ { echo "$as_me:$LINENO: error: wxWindows must be installed on your system
-     	   but wx-config script couldn't be found.
+	{ { echo "$as_me:$LINENO: error:
+           wxWindows must be installed on your system
+           but the wx-config script couldn't be found.
 
      	   Please check that wx-config is in path, the directory
      	   where wxWindows libraries are installed (returned by
      	   'wx-config --libs' command) is in LD_LIBRARY_PATH or
      	   equivalent variable and wxWindows version is 2.3.4 or above.
         " >&5
-echo "$as_me: error: wxWindows must be installed on your system
-     	   but wx-config script couldn't be found.
+echo "$as_me: error:
+           wxWindows must be installed on your system
+           but the wx-config script couldn't be found.
 
      	   Please check that wx-config is in path, the directory
      	   where wxWindows libraries are installed (returned by
@@ -1813,7 +1812,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xchm
- VERSION=0.6.2
+ VERSION=0.6.3
 
 
 cat >>confdefs.h <<_ACEOF

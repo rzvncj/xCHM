@@ -1,39 +1,40 @@
-# xCHM .pot file.
+# LANGUAGE translation of xCHM.
 # Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
-# Copyright (C) 2004 Alan Kelon O Moraes <kelon@pop.com.br>
 # This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <kelon@pop.com.br>, 2004.
-#
+# gabriel <EMAIL@ADDRESS>, 2004.
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: xCHM\n"
-"POT-Creation-Date: 2004-03-16 17:50+0200\n"
-"PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
-"Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
-"Language-Team: Brazilian Portuguese \n"
+"Project-Id-Version: xCHM 0.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-24 17:18+0200\n"
+"PO-Revision-Date: 2004-04-06 21:43+0200\n"
+"Last-Translator: gabriel <fgabriel.munoz@andaluciajunta.es>\n"
+"Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: src/chmfile.cpp:509
 msgid "Untitled in index"
-msgstr "Sem título"
+msgstr "Indice sin nombre"
 
 #: src/chmfinddialog.cpp:35
 msgid "Find in page.."
-msgstr "Procurar na página.."
+msgstr "Buscar en página.."
 
 #: src/chmfinddialog.cpp:44
 msgid "Whole words only"
-msgstr "Palavra completa apenas"
+msgstr "Sólo palabras completas"
 
 #: src/chmfinddialog.cpp:45
 msgid "Case sensitive"
-msgstr "Diferir maiúsculas de minúsculas"
+msgstr "Sensible a mayúsculas"
 
 #: src/chmfinddialog.cpp:52
 msgid "Find next"
-msgstr "Procurar próximo"
+msgstr "Buscar siguiente"
 
 #: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:91
 msgid "Cancel"
@@ -41,23 +42,23 @@ msgstr "Cancelar"
 
 #: src/chmfontdialog.cpp:53
 msgid "Change fonts.."
-msgstr "Mudar fontes.."
+msgstr "Cambiar fuentes.."
 
 #: src/chmfontdialog.cpp:60
 msgid "Normal font:"
-msgstr "Fonte normal:"
+msgstr "Fuente normal:"
 
 #: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
-msgstr "Fonte proporcional:"
+msgstr "Fuente fija:"
 
 #: src/chmfontdialog.cpp:62
 msgid "Font size:"
-msgstr "Tamanho da fonte:"
+msgstr "Tamaño de fuente:"
 
 #: src/chmfontdialog.cpp:79
 msgid "Preview:"
-msgstr "Visualizar:"
+msgstr "Vista previa:"
 
 #: src/chmfontdialog.cpp:89
 msgid "OK"
@@ -65,123 +66,123 @@ msgstr "OK"
 
 #: src/chmframe.cpp:35
 msgid "Open a CHM book."
-msgstr "Abrir um livro CHM."
+msgstr "Abrir un libro CHM."
 
 #: src/chmframe.cpp:36
 msgid "Change fonts."
-msgstr "Mudar as fontes."
+msgstr "Cambiar fuentes."
 
 #: src/chmframe.cpp:37
 msgid "Print the page currently displayed."
-msgstr "Imprimir página atual."
+msgstr "Imprimir la pagina actual."
 
 #: src/chmframe.cpp:38
 msgid "On or off?"
-msgstr "Ativar ou desatuvar?"
+msgstr "Activar o desactivar"
 
 #: src/chmframe.cpp:39
 msgid "Go to the book's start page."
-msgstr "Ir para a página inicial do livro."
+msgstr "Ir a la pagina inicial del libro."
 
 #: src/chmframe.cpp:40
 msgid "Go forward in history. Per book."
-msgstr "Avançar no histórico. Por livro."
+msgstr "Adelante en el historial. Por libro."
 
 #: src/chmframe.cpp:41
 msgid "Back to the last visited page. Per book."
-msgstr "Voltar para a última página visitada. Por livro."
+msgstr "Atras a la ultima pagina visitada. Por libro."
 
 #: src/chmframe.cpp:42
 msgid "About the program."
-msgstr "Sobre o programa."
+msgstr "Acerca del programa."
 
 #: src/chmframe.cpp:121
 msgid "Ready."
-msgstr "Pronto."
+msgstr "Listo."
 
 #: src/chmframe.cpp:145 src/chmframe.cpp:765
 msgid "Contents"
-msgstr "Conteúdo"
+msgstr "Contenido"
 
 #: src/chmframe.cpp:146
 msgid "Index"
-msgstr "Index"
+msgstr "Índice"
 
 #: src/chmframe.cpp:147 src/chmsearchpanel.cpp:49
 msgid "Search"
-msgstr "Procurar"
+msgstr "Buscar"
 
 #: src/chmframe.cpp:170
 msgid "About xCHM"
-msgstr "Sobre xCHM"
+msgstr "Acerca de xCHM"
 
 #: src/chmframe.cpp:178
 msgid "Choose a file.."
-msgstr "Escolha um arquivo.."
+msgstr "Elija un archivo.."
 
 #: src/chmframe.cpp:288
 msgid "Couldn't extract the book contents tree."
-msgstr "Não foi possível abrir os tópicos do livro."
+msgstr "No se pudo obtener el árbol de contenidos del libro."
 
 #: src/chmframe.cpp:290
 msgid "No contents.."
-msgstr "Sem conteúdo.."
+msgstr "Sin contenidos.."
 
 #: src/chmframe.cpp:573
 msgid "&Open..\tCtrl-O"
-msgstr "Abrir..\tCtrl-O"
+msgstr "&Abrir..\tCtrl-O"
 
 #: src/chmframe.cpp:574
 msgid "&Print page..\tCtrl-P"
-msgstr "Imprimir a página...\tCtrl-P"
+msgstr "Im&primir pagina..\tCtrl-P"
 
 #: src/chmframe.cpp:575
 msgid "Fon&ts..\tCtrl-T"
-msgstr "Fontes..\tCtrl-T"
+msgstr "Fuen&tes..\tCtrl-T"
 
 #: src/chmframe.cpp:578
 msgid "&Show contents tree\tCtrl-S"
-msgstr "Exibir a lista de tópicos\tCtrl-S"
+msgstr "&Mostrar árbol de contenidos\tCtrl-S"
 
 #: src/chmframe.cpp:583
 msgid "&Recent files"
-msgstr "Arquivos recentes"
+msgstr "Archivos &recientes"
 
 #: src/chmframe.cpp:599
 msgid "E&xit\tCtrl-X"
-msgstr "Sair\tCtrl-X"
+msgstr "&Salir\tCtrl-X"
 
 #: src/chmframe.cpp:600
 msgid "Quit the application."
-msgstr "Sair do programa."
+msgstr "Cerrar la aplicación."
 
 #: src/chmframe.cpp:604
 msgid "&Home\tCtrl-H"
-msgstr "Início\tCtrl-H"
+msgstr "&Inicio\tCtrl-H"
 
 #: src/chmframe.cpp:605
 msgid "For&ward\tCtrl-W"
-msgstr "Avançar\tCtrl-W"
+msgstr "&Adelante\tCtrl-W"
 
 #: src/chmframe.cpp:606
 msgid "&Back\tCtrl-B"
-msgstr "Voltar\tCtrl-B"
+msgstr "A&trás\tCtrl-B"
 
 #: src/chmframe.cpp:609
 msgid "&About ..\tF1"
-msgstr "Sobre ..\tF1"
+msgstr "&Acerca ..\tF1"
 
 #: src/chmframe.cpp:612
 msgid "&File"
-msgstr "Arquivo"
+msgstr "&Archivo"
 
 #: src/chmframe.cpp:613
 msgid "Hi&story"
-msgstr "Histórico"
+msgstr "Hi&storial"
 
 #: src/chmframe.cpp:614
 msgid "&Help"
-msgstr "Ajuda"
+msgstr "A&yuda"
 
 #: src/chmframe.cpp:625
 msgid "Bookmarks"
@@ -189,19 +190,19 @@ msgstr "Favoritos"
 
 #: src/chmframe.cpp:647
 msgid "Add"
-msgstr "Adicionar"
+msgstr "Añadir"
 
 #: src/chmframe.cpp:648
 msgid "Remove"
-msgstr "Remover"
+msgstr "Eliminar"
 
 #: src/chmframe.cpp:651
 msgid "Add displayed page to bookmarks."
-msgstr "Adicionar a página atual aos favoritos."
+msgstr "Añadir página actual a favoritos"
 
 #: src/chmframe.cpp:652
 msgid "Remove selected bookmark."
-msgstr "Remover o favorito selecionado."
+msgstr "Eliminar favorito seleccionado."
 
 #: src/chmframe.cpp:759
 msgid "Open .."
@@ -213,60 +214,61 @@ msgstr "Imprimir .."
 
 #: src/chmframe.cpp:763
 msgid "Fonts .."
-msgstr "Fontes .."
+msgstr "Fuentes .."
 
 #: src/chmframe.cpp:770
 msgid "Back"
-msgstr "Voltar"
+msgstr "Atrás"
 
 #: src/chmframe.cpp:771
 msgid "Forward"
-msgstr "Avançar"
+msgstr "Adelante"
 
 #: src/chmframe.cpp:773
 msgid "Home"
-msgstr "Início"
+msgstr "Inicio"
 
 #: src/chmframe.cpp:776
 msgid "About"
-msgstr "Sobre"
+msgstr "Acerca"
 
 #: src/chmhtmlwindow.cpp:41
 msgid "For&ward"
-msgstr "Avançar"
+msgstr "&Adelante"
 
 #: src/chmhtmlwindow.cpp:42
 msgid "&Back"
-msgstr "Voltar"
+msgstr "A&trás"
 
 #: src/chmhtmlwindow.cpp:46
 msgid "&Copy selection"
-msgstr "Copiar seleção"
+msgstr "&Copiar selección"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Find in page.."
-msgstr "Procurar na página.."
+msgstr "&Encontrar en página.."
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"
-msgstr "Obter resultados parciais"
+msgstr "Obtener coincidencias parciales"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Search titles only"
-msgstr "Procurar somente nos títulos"
+msgstr "Buscar sólo títulos"
 
 #: src/chmsearchpanel.cpp:52
 msgid "Allow partial matches."
-msgstr "Permitir resultados parciais."
+msgstr "Permitir coincidencias parciales."
 
 #: src/chmsearchpanel.cpp:53
 msgid "Only search in the contents' titles."
-msgstr "Procurar somente nos títulos dos conteúdos."
+msgstr "Buscar sólo en la tabla de contenidos."
 
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
-msgstr "Procurar nos tópicos por ocorrências do texto especificado."
+msgstr "Buscar ocurrencias del texto indicado en el índice."
 
 #: src/contenttaghandler.cpp:37
 msgid "Topics"
-msgstr "Tópicos"
+msgstr "Temas"
+

@@ -264,7 +264,7 @@ bool CHMFile::GetArchiveInfo()
 
 		// There's that 9 again :).
 		for(int i=0; i<9; ++i) {
-			chunk = buffer + index;
+			chunk = CURRENT_CHAR_TYPE(buffer + index);
 			
 			if(chunk.Right(4).Lower() == wxT(".hhc")) {
 				_topicsFile = wxString(wxT("/")) + chunk;

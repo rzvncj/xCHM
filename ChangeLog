@@ -20,5 +20,6 @@
 
 	* 0.6.1. Major bugfix:
 		+ fixed Unicode bug that prevented xCHM from compiling
-		properly on RedHat 9.
+		properly on RedHat 9. Many thanks go to Stefano Caselli
+		for his aid and patience in testing the release candidates.
 

@@ -1277,7 +1277,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
           ac_config_headers="$ac_config_headers config.h"
 
 
-CXXFLAGS="-W -Wall -DwxUSE_UNICODE"
+CXXFLAGS="-W -Wall"
 
 # Check whether --enable-static or --disable-static was given.
 if test "${enable_static+set}" = set; then

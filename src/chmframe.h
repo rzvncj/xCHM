@@ -19,8 +19,8 @@
 */
 
 
-#ifndef __CHMFRAME_HPP_
-#define __CHMFRAME_HPP_
+#ifndef __CHMFRAME_H_
+#define __CHMFRAME_H_
 
 #include <wx/wx.h>
 #include <wx/html/htmprint.h>
@@ -201,4 +201,4 @@ private:
 };
 
 
-#endif // __CHMFRAME_HPP_
+#endif // __CHMFRAME_H_

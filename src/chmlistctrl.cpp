@@ -79,6 +79,35 @@ void CHMListCtrl::UpdateUI()
 }
 
 
+
+void CHMListCtrl::FindBestMatch(const wxString& title)
+{
+	wxListItem info;
+	info.m_col = 0;
+
+	long sz = GetItemCount();
+	int tl = title.length();
+
+	for(long i = 0; i < sz; ++i) {
+
+		info.m_itemId = i;
+		GetItem(info);
+
+		if(!info.m_text.Left(tl).CmpNoCase(title)) {
+
+			EnsureVisible(i);
+			SetItemState(i, wxLIST_STATE_SELECTED,
+				     wxLIST_STATE_SELECTED);
+			break;
+		}
+	}
+
+	Refresh();
+	wxWindow::Update();
+}
+
+
+
 void CHMListCtrl::OnSize(wxSizeEvent& event)
 {
 	UpdateUI();

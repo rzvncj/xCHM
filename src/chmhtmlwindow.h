@@ -83,6 +83,13 @@ public:
 	*/
 	bool IsCaller() const { return _found; }
 
+	/*!
+	  \brief If this is called, it means that the next filename
+	  passed to LoadPage() will be an absolute path (i.e. beginning
+	  with a '/'). Called rarely.
+	  \param abs Boolean value: true, an absolute path follows,
+	  false if a relative one follows.
+	 */
 	void AbsoluteFollows(bool abs) { _absPathFollows = abs; }
 
 #ifdef _ENABLE_COPY_AND_FIND

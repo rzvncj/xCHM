@@ -57,18 +57,25 @@ public:
 	void Reset();
 
 	/*!
-	  \brief Adds a title to the list. The title is what you see as
-	  a list item, and the URL is the hidden info used to locate the
-	  page associated with the title. Again, at all times a title is
-	  being added, an associated URL must also be added.
+	  \brief Adds a title:url pair to the list. The title is the part
+	  that gets displayed, the url is tha page where the HTML window
+	  should go when the item is being clicked.
 	  \param title The title to add.
+	  \param url The title's associated url.
 	 */
 	void AddPairItem(const wxString& title, const wxString& url);
 	
 	//! Loads the page that corresponds to the item currently selected.
 	void LoadSelected();
 
+	//! Should be called each time the list control's state changes.
 	void UpdateUI();
+
+	/*! 
+	  \brief Finds the list item that is the best match.
+	  \param title The string to match against.
+	*/
+	void FindBestMatch(const wxString& title);
 
 protected:
 	//! Gets called when the widget is being resized.

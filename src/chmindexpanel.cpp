@@ -65,28 +65,9 @@ void CHMIndexPanel::OnIndexSel(wxCommandEvent& WXUNUSED(event))
 
 void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 {
-	wxListItem info;
-	info.m_col = 0;
-
-	long sz = _lc->GetItemCount();
-	wxString typedText = _text->GetLineText(0);
-	int tl = typedText.length();
-
-	for(long i = 0; i < sz; ++i) {
-
-		info.m_itemId = i;
-		_lc->GetItem(info);
-
-		if(!info.m_text.Left(tl).CmpNoCase(typedText)) {
-
-			_navigate = false;
-			_lc->SetItemState(i, wxLIST_STATE_SELECTED,
-					  wxLIST_STATE_SELECTED);
-			_navigate = true;
-			_lc->EnsureVisible(i);
-			break;
-		}
-	}
+	_navigate = false;
+	_lc->FindBestMatch(_text->GetLineText(0));
+	_navigate = true;
 }
 
 

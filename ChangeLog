@@ -168,4 +168,6 @@
 
 	* Minor feature enhancements:
 		+ added Latvian translation.
+		+ Eamon Millman fixed the way xCHM treated '&' characters in
+		URLs.
 

@@ -58,7 +58,6 @@ void CHMListCtrl::LoadSelected()
         if(item == -1 || item > (long)_urls.GetCount() - 1)
 		return;
 
-	_html->AbsoluteFollows(true);
 	_html->LoadPage(_urls[(size_t)item]);	
 }
 

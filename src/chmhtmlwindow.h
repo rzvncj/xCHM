@@ -83,14 +83,11 @@ public:
 	*/
 	bool IsCaller() const { return _found; }
 
-	/*!
-	  \brief If this is called, it means that the next filename
-	  passed to LoadPage() will be an absolute path (i.e. beginning
-	  with a '/'). Called rarely.
-	  \param abs Boolean value: true, an absolute path follows,
-	  false if a relative one follows.
-	 */
-	void AbsoluteFollows(bool abs) { _absPathFollows = abs; }
+	/*! 
+	  \brief Let the htmlWindow know the next param to LoadPage() will 
+	  be an absolute path.
+	*/
+	void AbsoluteFollows() { _absolute = true; }
 
 #ifdef _ENABLE_COPY_AND_FIND
 public:
@@ -140,7 +137,6 @@ protected:
 	void OnRightClick(wxMouseEvent& event);
 
 	//! Overridden to correct relative images paths.
-	virtual 
 	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type,
 					 const wxString& url,
 					 wxString *redirect) const;
@@ -161,7 +157,7 @@ private:
 	bool _found;
 	wxMenu *_menu;
 	wxString _prefix;
-	bool _absPathFollows;
+	bool _absolute;
 
 #ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;

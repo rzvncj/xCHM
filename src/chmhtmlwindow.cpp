@@ -28,8 +28,8 @@
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL),
-	  _absPathFollows(false)
+	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
+	  _absolute(false)
 #ifdef _ENABLE_COPY_AND_FIND
 	, _fdlg(NULL)
 #endif
@@ -61,12 +61,12 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	wxLogNull log;
 	wxString tmp = location;
 
-	if(!_absPathFollows)
-		FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
-	else {
+	// Path is already absolute.
+	if(_absolute) {
 		FixRelativePath(tmp, wxEmptyString);
-		_absPathFollows = false;
-	}
+		_absolute = false;
+	} else
+		FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
 
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));

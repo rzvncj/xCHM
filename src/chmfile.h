@@ -41,7 +41,7 @@ WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
 class CHMFile {
 public:
-	//! Default constructor. Doesn't do anthing except some initializations.
+	//! Default constructor.
 	CHMFile();
 	
 	/*!

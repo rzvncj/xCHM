@@ -41,7 +41,11 @@ const wxChar *greeting = wxT(
 	" could check out <a href=\"http://www.speakeasy.org/~russotto"
 	"/chm/\">Matthew Russoto's CHM page</a> or <a"
 	" href=\"http://bonedaddy.net/pabs3/hhm/\">Pabs' CHM"
-	" Specification page</a>.<br><br>If you'd like to use the code in"
+	" Specification page</a>.<br>Pabs has contributed time and"
+	" knowledge to the development of <B>xCHM</B>, and features"
+	" such as the fast index search would not have been implemented"
+	" without his help."
+	"<br><br>If you'd like to use the code in"
 	" your own stuff please figure <TT>GPL</TT> out first. Far too"
 	" many people think <TT>GPL</TT>"
 	" is bad out of utter ignorance.<br><br>Enjoy.</body></html>");

@@ -168,14 +168,15 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 				continue;
 			 			
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+			while(buf[i + j] == text[(size_t)j] && j < wrd) 
 				++j;
 
-			if (j == wrd && (HTML_WHITESPACE(buf[i + j]) ||
-					 i+j == lng)) { 
-				found = TRUE; 
-				break; 
-			}
+			if (j == wrd && 
+			    (HTML_WHITESPACE(buf[i + j]) || i+j == lng)) 
+				if(i == 0 || HTML_WHITESPACE(buf[i - 1])) {
+					found = TRUE; 
+					break; 
+				}
 		}
 	} else {
 		for (i = 0; i < lng - wrd + 1; ++i) {
@@ -227,14 +228,16 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 				continue;
 			 			
 			j = 0;
-			while ((j < wrd) && (buf[i + j] == text[(size_t)j])) 
+			while(buf[i + j] == text[(size_t)j] && j < wrd) 
 				++j;
 
 			if (j == wrd && (WHITESPACE(buf[i + j]) || 
-					 i+j == lng)) { 
-				found = TRUE; 
-				break; 
-			}
+					 i+j == lng))
+				if(i == 0 || WHITESPACE(buf[i - 1])) {
+					found = TRUE; 
+					break; 
+				}
+			
 		}
 	} else {
 		for (i = 0; i < lng - wrd + 1; ++i) {

@@ -29,10 +29,13 @@
 
 CHMFile *CHMInputStream::_archiveCache = NULL;
 wxString CHMInputStream::_path;
+wxMutex CHMInputStream::_mutex;
 
 
 void CHMInputStream::Cleanup()
 {
+	wxMutexLocker lock(_mutex);
+
 	if(_archiveCache != NULL) {
 		delete _archiveCache;
 		_archiveCache = NULL;
@@ -50,10 +53,14 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 {
 	wxString filename = file;
 
+	_mutex.Lock();
+
 	if(!archive.IsEmpty())
 		_path = archive.BeforeLast(wxT('/')) + wxT("/");
 
 	memset(&_ui, 0, sizeof(_ui));
+
+	_mutex.Unlock();
 
 	// Maybe the cached chmFile* isn't valid anymore,
 	// or maybe there is no chached chmFile* yet.
@@ -62,6 +69,8 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		return;
 	}
 
+	_mutex.Lock();
+	
 	// Somebody's looking for the homepage.
 	if(file.IsSameAs(wxT("/")))
 		filename = _archiveCache->HomePage();
@@ -72,13 +81,13 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		// trouble to open this archive and check out
 		// the index file, the index file is just a
 		// link to a file in another archive.
-		// I love it in South Park when they kill
-		// Bill Gates.
 
 		wxString arch_link = 
 			filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
 		filename = filename.AfterLast(wxT(':'));
+
+		_mutex.Unlock();
 
 		// Reset the cached chmFile* and all.
 		if(!Init(arch_link))
@@ -86,6 +95,8 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 				m_lasterror = wxSTREAM_READ_ERROR;
 				return;
 			}
+
+		_mutex.Lock();
 	}
 
 	assert(_archiveCache != NULL);
@@ -93,25 +104,32 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 	// See if the file really is in the archive.
 	if(!_archiveCache->ResolveObject(filename, &_ui)) {
 		m_lasterror = wxSTREAM_READ_ERROR;
+		_mutex.Unlock();
 		return;
 	}
+
+	_mutex.Unlock();
 }
 
 
 size_t CHMInputStream::GetSize() const
 {
+	wxMutexLocker lock(_mutex);
 	return _ui.length;
 }
 
 
 bool CHMInputStream::Eof() const
 {
+	wxMutexLocker lock(_mutex);
 	return _currPos >= (off_t)_ui.length;
 }
 
 
 size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 {	
+	wxMutexLocker lock(_mutex);
+
 	if(_currPos >= (off_t)_ui.length) {
 		m_lasterror = wxSTREAM_EOF;
 		return 0;
@@ -136,6 +154,8 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 
 off_t CHMInputStream::OnSysSeek(off_t seek, wxSeekMode mode)
 {
+	wxMutexLocker lock(_mutex);
+
 	switch(mode) {
 	case wxFromCurrent:
 		_currPos += seek;
@@ -156,17 +176,25 @@ off_t CHMInputStream::OnSysSeek(off_t seek, wxSeekMode mode)
 
 bool CHMInputStream::Init(const wxString& archive)
 {
+	_mutex.Lock();
+
 	if(_archiveCache == NULL || 
 	   !_archiveCache->ArchiveName().IsSameAs(archive)) {
-	   
+	 
+		_mutex.Unlock();
 		Cleanup();
+		_mutex.Lock();
+
 		_archiveCache = new CHMFile(archive);
 
 		if(!_archiveCache->IsOk()) {
+			_mutex.Unlock();
 			Cleanup();
 			return false;
 		}
 	}
+
+	_mutex.Unlock();
 
 	return true;
 }

@@ -23,6 +23,7 @@
 #define __CHMINPUTSTREAM_H_
 
 #include <wx/stream.h>
+#include <wx/thread.h>
 #include <chmfile.h>
 
 
@@ -97,11 +98,11 @@ private:
 
 
 private:
-	//! Obviously thread-unsafe. :)
 	static CHMFile *_archiveCache;
 	off_t _currPos;
 	chmUnitInfo _ui;
 	static wxString _path;
+	static wxMutex _mutex;
 };
 
 #endif // __CHMINPUTSTREAM_H_

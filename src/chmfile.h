@@ -190,9 +190,7 @@ public:
 	  \brief Have the context-IDs been loaded into memory or not.
 	  \return true if they have, false if not.
 	 */
-	bool AreContextIDsLoaded() const { return _cidLoaded; } 
-
-
+	bool AreContextIDsLoaded() const { return !_cidMap.empty(); } 
 
 	/*!
 	  \brief Fast search using the $FIftiMain file in the .chm.
@@ -273,10 +271,7 @@ private:
 	wxString _title;
 	wxString _font;
 	wxFontEncoding _enc;
-
 	CHMIDMap _cidMap;
-	bool     _cidLoaded;
-
 
 private:
 	//! No copy construction allowed.

@@ -87,14 +87,12 @@ private:
 CHMFile::CHMFile()
 	: _chmFile(NULL), _home(wxT("/"))
 {
-	_cidLoaded = FALSE;
 }
 
 
 CHMFile::CHMFile(const wxString& archiveName)
 	: _chmFile(NULL), _home(wxT("/"))
 {
-	_cidLoaded = FALSE;
 	LoadCHM(archiveName);
 }
 
@@ -133,7 +131,6 @@ void CHMFile::CloseCHM()
 
 	chm_close(_chmFile);
 	
-	_cidLoaded = FALSE;
 	_cidMap.clear();
 	_chmFile = NULL;
 	_home = wxT("/");
@@ -209,8 +206,6 @@ bool CHMFile::LoadContextIDs()
 {
 	chmUnitInfo ivb_ui, strs_ui;
 
-	// initialize the list
-	_cidLoaded = FALSE;
 	_cidMap.clear();
 
 	// make sure what we need is there. 
@@ -224,8 +219,9 @@ bool CHMFile::LoadContextIDs()
 	UCharPtr ivb_buf(new unsigned char[ivb_ui.length]);
 	u_int64_t ivb_len = 0;
 
-	if( (ivb_len = chm_retrieve_object(_chmFile, &ivb_ui, 
-					   ivb_buf.get(), 0, ivb_ui.length)) == 0 )
+	if((ivb_len = chm_retrieve_object(_chmFile, &ivb_ui, 
+					  ivb_buf.get(), 0, 
+					  ivb_ui.length)) == 0 )
 		return false; // failed to retrieve data
 
 	// always odd (DWORD + 2(n)*DWORD, so make even
@@ -241,14 +237,16 @@ bool CHMFile::LoadContextIDs()
 	for( unsigned int i = 0; i < ivb_len; i++ )
 	{
 		ivbs[i] = 
-		  FIXENDIAN32(*(reinterpret_cast<u_int32_t *>(ivb_buf.get()+j)));
+			FIXENDIAN32(*(reinterpret_cast<u_int32_t *>
+				      (ivb_buf.get() + j)));
 		j+=4; // step to the next DWORD
 	}
 
 	UCharPtr strs_buf(new unsigned char[strs_ui.length]);
 	u_int64_t strs_len = 0;
 
-	if( (strs_len = chm_retrieve_object(_chmFile, &strs_ui, strs_buf.get(), 
+	if( (strs_len = chm_retrieve_object(_chmFile, &strs_ui, 
+					    strs_buf.get(), 
 					    0, strs_ui.length)) == 0 ) {
 		delete[] ivbs;
 		return false; // failed to retrieve data
@@ -257,11 +255,10 @@ bool CHMFile::LoadContextIDs()
 	for( unsigned int i = 0; i < ivb_len; i+=2 )
 	{	// context-IDs as KEY, fileName from #STRINGS as VALUE
 		_cidMap[ivbs[i]] = CURRENT_CHAR_STRING(
-					strs_buf.get() + ivbs[i+1]);
+			strs_buf.get() + ivbs[i+1]);
 	}
 
 	delete[] ivbs;
-	_cidLoaded = TRUE;
 	
 	// everything went well!
 	return true;
@@ -270,9 +267,9 @@ bool CHMFile::LoadContextIDs()
 
 wxString CHMFile::GetPageByCID( const int contextID )
 {
-	if(!_cidLoaded)
+	if(_cidMap.empty())
 		return wxT("/");
-	
+
 	CHMIDMap::iterator itr = _cidMap.find( contextID );
 	// make sure the key/value pair is valid
 	if(itr == _cidMap.end() ) 

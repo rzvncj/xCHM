@@ -23,6 +23,7 @@
 #include <contenttaghandler.h>
 #include <wx/wx.h>
 #include <wx/fontmap.h>
+#include <string.h>
 
 
 ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
@@ -33,6 +34,8 @@ ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
 	if(!_treeCtrl && !_listCtrl)
 		return;
 
+	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
+	
 	if(_treeCtrl)
 		_parents[_level] = _treeCtrl->AddRoot(_("Topics"));
 }
@@ -47,10 +50,15 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 	{
 		if(_treeCtrl && _level >= TREE_BUF_SIZE)
 			return FALSE;
+
+		bool inc = _level >= 0 && _parents[_level] != 0;
 		
-		++_level;
+		if(inc)
+			++_level;
 		ParseInner(tag);
-		--_level;
+		
+		if(inc)
+			--_level;
 
 		return TRUE;
 

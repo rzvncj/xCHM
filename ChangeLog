@@ -141,4 +141,8 @@
 		+ added Romanian and French translations of xCHM's interface.
 		+ no more warnings on wxWidgets 2.5.1 compilations.
 
+	* 0.9.1 Minor bugfixes:
+		+ fixed an index bug.
+		+ added translations for Italian, German and Russian
 		
+

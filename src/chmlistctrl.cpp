@@ -69,18 +69,14 @@ void CHMListCtrl::LoadSelected()
 
 void CHMListCtrl::UpdateUI()
 {
-	SetColumnWidth(0, -1);
-	int currSize = GetColumnWidth(0);
 	int newSize = GetClientSize().GetWidth() - 1;
 	int cpp = GetCountPerPage();
 
-#ifdef __WXGTK__
 	// If there's a scrollbar extract the width from the client area.
-	if(cpp > 0 && GetItemCount() > GetCountPerPage())
+	if(cpp >= 0 && GetItemCount() > cpp)
 		newSize -= wxSystemSettings::GetSystemMetric(wxSYS_VSCROLL_X);
-#endif
-		
-	SetColumnWidth(0, currSize >= newSize ? currSize : newSize);
+
+	SetColumnWidth(0, newSize);
 }
 
 

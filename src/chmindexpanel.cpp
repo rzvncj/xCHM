@@ -56,13 +56,11 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
 }
 
 
-
 void CHMIndexPanel::OnIndexSel(wxCommandEvent& WXUNUSED(event))
 {
 	if(_navigate)
 		_lc->LoadSelected();
 }
-
 
 
 void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
@@ -86,10 +84,11 @@ void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 					  wxLIST_STATE_SELECTED);
 			_navigate = true;
 			_lc->EnsureVisible(i);
-
 			break;
 		}
 	}
+
+	_lc->Refresh();		
 }
 
 

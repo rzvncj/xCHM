@@ -55,8 +55,8 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 #endif
 	_results = new CHMListCtrl(this, html, ID_Results);
 
-        sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
-        sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
+        sizer->Add(_text, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, 2);
+        sizer->Add(_partial, 0, wxLEFT | wxRIGHT | wxTOP, 10);
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);
 	sizer->Add(_search, 0, wxALL, 10);
         sizer->Add(_results, 1, wxALL | wxEXPAND, 2);
@@ -132,6 +132,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	if(_titles->IsChecked() && h1.empty()) {
 		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
 		_results->UpdateUI();
+		_results->Refresh(); // Are these both necessary?
 		return;
 	}
 
@@ -144,6 +145,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			_results->AddUrl(full_url);
 		}
 	_results->UpdateUI();
+	_results->Refresh(); // ?
 }
 
 

@@ -23,6 +23,7 @@
 #define __CHMAPP_H_
 
 #include <wx/wx.h>
+#include <wx/intl.h>
 
 
 // Forward declaration.
@@ -47,6 +48,7 @@ class CHMApp : public wxApp {
 
 private:
 	CHMFrame* _frame;
+	wxLocale _loc;
 };
 
 

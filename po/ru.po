@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "POT-Creation-Date: 2004-02-24 17:18+0200\n"
-"PO-Revision-Date: 2004-03-21 04:16+0200\n"
+"PO-Revision-Date: 2004-03-21 20:26+0200\n"
 "Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/chmfile.cpp:509
 msgid "Untitled in index"
-msgstr ""
+msgstr "Без заголовка"
 
 #: src/chmfinddialog.cpp:35
 msgid "Find in page.."
@@ -85,11 +85,11 @@ msgstr "Перейти к начальной странице."
 
 #: src/chmframe.cpp:40
 msgid "Go forward in history. Per book."
-msgstr "Вперед по истории"
+msgstr "Вперед по истории."
 
 #: src/chmframe.cpp:41
 msgid "Back to the last visited page. Per book."
-msgstr "Вернуться к последней посещенной странице. "
+msgstr "Назад к последней посещенной странице."
 
 #: src/chmframe.cpp:42
 msgid "About the program."
@@ -249,7 +249,7 @@ msgstr "&Найти на этой странице"
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"
-msgstr "Частичное совпадение"
+msgstr "Получать частично совпадающие"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Search titles only"
@@ -265,7 +265,7 @@ msgstr "Искать только в заголовках содежания."
 
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
-msgstr ""
+msgstr "Поиск фраз, где встречается введенный текст."
 
 #: src/contenttaghandler.cpp:37
 msgid "Topics"

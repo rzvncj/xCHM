@@ -166,9 +166,6 @@ bool KR(const wxChar *x, int m, const wxChar *y, int n)
 }
 
 
-#include <iostream>
-using namespace std;
-
 // The following two functions should be changed with faster ones.
 
 bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,

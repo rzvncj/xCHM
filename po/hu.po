@@ -1,273 +1,272 @@
-# translation of ru.po to Russian
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>, 2004.
-# Andy Shevchenko <andy@smile.org.ua>, 2004.
-#
+# xCHM .pot file.
+# Copyright (C) 2004 Aron Novak <aaron@szentimre.hu>
+# This file is distributed under the same license as the xCHM package.
+# Lars Brand <altow@users.sourceforge.net>, 2004.
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-23 13:58+0300\n"
-"PO-Revision-Date: 2004-03-21 20:26+0200\n"
-"Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"Project-Id-Version: xCHM\n"
+"POT-Creation-Date: 2004-07-14 16:10+0300\n"
+"PO-Revision-Date: 2004-07-24 09:39+0000\n"
+"Last-Translator: Aron Novak <aaron@szentimre.hu>\n"
+"Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
 
 #: src/chmfile.cpp:509
 msgid "Untitled in index"
-msgstr "Без заголовка"
+msgstr "N�vtelen"
 
 #: src/chmfinddialog.cpp:35
 msgid "Find in page.."
-msgstr "Найти на этой странице..."
+msgstr "Keres�s a lapon..."
 
 #: src/chmfinddialog.cpp:44
 msgid "Whole words only"
-msgstr "Только полные слова"
+msgstr "Csak teljes sz�"
 
 #: src/chmfinddialog.cpp:45
 msgid "Case sensitive"
-msgstr "Регистрозависимый"
+msgstr "Kis/nagybet� �rz�keny"
 
 #: src/chmfinddialog.cpp:52
 msgid "Find next"
-msgstr "Продолжить поиск"
+msgstr "K�vetkez� keres�se"
 
 #: src/chmfinddialog.cpp:55 src/chmfontdialog.cpp:92
 msgid "Cancel"
-msgstr "Отмена"
+msgstr "M�gsem"
 
 #: src/chmfontdialog.cpp:53
 msgid "Change fonts.."
-msgstr "Параметры шрифтов.."
+msgstr "Bet�t�pus megad�sa..."
 
 #: src/chmfontdialog.cpp:60
 msgid "Normal font:"
-msgstr "Нормальный шрифт:"
+msgstr "Alap bet�t�pusok:"
 
 #: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
-msgstr "Фиксированный шрифт:"
+msgstr "Fix bet�t�pusok:"
 
 #: src/chmfontdialog.cpp:62
 msgid "Font size:"
-msgstr "Размер:"
+msgstr "Bet�t�pus m�rete:"
 
 #: src/chmfontdialog.cpp:80
 msgid "Preview:"
-msgstr "Просмотр:"
+msgstr "El�n�zet:"
 
 #: src/chmfontdialog.cpp:90
 msgid "OK"
-msgstr "ОК"
+msgstr "OK"
 
 #: src/chmframe.cpp:35
 msgid "Open a CHM book."
-msgstr "Открыть CHM книгу."
+msgstr "Egy CHM k�nyv megnyit�sa"
 
 #: src/chmframe.cpp:36
 msgid "Change fonts."
-msgstr "Параметры шрифтов."
+msgstr "Bet�t�pus megv�ltoztat�sa."
 
 #: src/chmframe.cpp:37
 msgid "Print the page currently displayed."
-msgstr "Печать текущей страницы."
+msgstr "Az aktu�lis oldal nyomtat�sa"
 
 #: src/chmframe.cpp:38
 msgid "On or off?"
-msgstr "Включить или выключить?"
+msgstr "Ki vagy be?"
 
 #: src/chmframe.cpp:39
 msgid "Go to the book's start page."
-msgstr "Перейти к начальной странице."
+msgstr "Ugr�s a kezd�lapra"
 
 #: src/chmframe.cpp:40
 msgid "Go forward in history. Per book."
-msgstr "Вперед по истории."
+msgstr "El�re az el�zm�nyekben"
 
 #: src/chmframe.cpp:41
 msgid "Back to the last visited page. Per book."
-msgstr "Назад к последней посещенной странице."
+msgstr "Vissza a legut�bbi oldalra."
 
 #: src/chmframe.cpp:42
 msgid "About the program."
-msgstr "О программе."
+msgstr "Megjelen�ti a program n�vjegy�t."
 
 #: src/chmframe.cpp:121
 msgid "Ready."
-msgstr "Готово."
+msgstr "K�sz."
 
 #: src/chmframe.cpp:145 src/chmframe.cpp:769
 msgid "Contents"
-msgstr "Содержание"
+msgstr "Tartalom"
 
 #: src/chmframe.cpp:146
 msgid "Index"
-msgstr "Индекс"
+msgstr "Tartalomjegyz�k"
 
 #: src/chmframe.cpp:147 src/chmsearchpanel.cpp:49
 msgid "Search"
-msgstr "Поиск"
+msgstr "Keres�s"
 
 #: src/chmframe.cpp:170
 msgid "About xCHM"
-msgstr "О программе xCHM"
+msgstr "Az xCHM n�vjegye"
 
 #: src/chmframe.cpp:178
 msgid "Choose a file.."
-msgstr "Открыть файл .."
+msgstr "F�jl kiv�laszt�sa.."
 
 #: src/chmframe.cpp:288
 msgid "Couldn't extract the book contents tree."
-msgstr "Невозможно развернуть содержание книги."
+msgstr "Nem lehet a tartalomjegyz�ket kibontani."
 
 #: src/chmframe.cpp:290
 msgid "No contents.."
-msgstr "Без содержания.."
+msgstr "Nincs tartalom.."
 
 #: src/chmframe.cpp:577
 msgid "&Open..\tCtrl-O"
-msgstr "&Открыть..\tCtrl-O"
+msgstr "&Megnyit�s..\tCtrl-O"
 
 #: src/chmframe.cpp:578
 msgid "&Print page..\tCtrl-P"
-msgstr "&Печать..\tCtrl-P"
+msgstr "&Oldal nyomtat�sa..\tCtrl-D"
 
 #: src/chmframe.cpp:579
 msgid "Fon&ts..\tCtrl-T"
-msgstr "&Шрифты..\tCtrl-T"
+msgstr "&Bet�t�pusok..\tCtrl-F"
 
 #: src/chmframe.cpp:582
 msgid "&Show contents tree\tCtrl-S"
-msgstr "О&тобразить содержание\tCtrl-S"
+msgstr "&Tartalomjegyz�k mutat�sa\tCtrl-S"
 
 #: src/chmframe.cpp:587
 msgid "&Recent files"
-msgstr "Открыть &недавние"
+msgstr "&Legut�bbi f�jlok"
 
 #: src/chmframe.cpp:603
 msgid "E&xit\tCtrl-X"
-msgstr "В&ыход\tCtrl-X"
+msgstr "&Kil�p�s\tCtrl-X"
 
 #: src/chmframe.cpp:604
 msgid "Quit the application."
-msgstr "Выход из приложения."
+msgstr "Kil�p�s a programb�l."
 
 #: src/chmframe.cpp:608
 msgid "&Home\tCtrl-H"
-msgstr "&Домой\tCtrl-H"
+msgstr "&Kezd�lap\tCtrl-H"
 
 #: src/chmframe.cpp:609
 msgid "For&ward\tCtrl-W"
-msgstr "&Вперед\tCtrl-W"
+msgstr "&El�re\tCtrl-W"
 
 #: src/chmframe.cpp:610
 msgid "&Back\tCtrl-B"
-msgstr "&Назад\tCtrl-B"
+msgstr "&Vissza\tCtrl-B"
 
 #: src/chmframe.cpp:613
 msgid "&About ..\tF1"
-msgstr "&О программе ..\tF1"
+msgstr "&N�vjegy ..\tF1"
 
 #: src/chmframe.cpp:616
 msgid "&File"
-msgstr "&Файл"
+msgstr "&F�jl"
 
 #: src/chmframe.cpp:617
 msgid "Hi&story"
-msgstr "&История"
+msgstr "El&�zm�nyek"
 
 #: src/chmframe.cpp:618
 msgid "&Help"
-msgstr "Помо&щь"
+msgstr "&S�g�"
 
 #: src/chmframe.cpp:629
 msgid "Bookmarks"
-msgstr "Закладки"
+msgstr "K�nyvjelz�k"
 
 #: src/chmframe.cpp:651
 msgid "Add"
-msgstr "Добавить"
+msgstr "Hozz�ad�s"
 
 #: src/chmframe.cpp:652
 msgid "Remove"
-msgstr "Удалить"
+msgstr "Elt�volit�s"
 
 #: src/chmframe.cpp:655
 msgid "Add displayed page to bookmarks."
-msgstr "Добавить отображаемую страницу к закладкам."
+msgstr "Aktu�lis oldal a k�nyvjelz�kh�z"
 
 #: src/chmframe.cpp:656
 msgid "Remove selected bookmark."
-msgstr "Удалить выбранную закладку."
+msgstr "Kijel�lt k�nyvjelz� t�rl�se."
 
 #: src/chmframe.cpp:763
 msgid "Open .."
-msgstr "Открыть .."
+msgstr "Megnyit�s .."
 
 #: src/chmframe.cpp:765
 msgid "Print .."
-msgstr "Печать .."
+msgstr "Nyomtat�s .."
 
 #: src/chmframe.cpp:767
 msgid "Fonts .."
-msgstr "Шрифты .."
+msgstr "Bet�t�pusok .."
 
 #: src/chmframe.cpp:774
 msgid "Back"
-msgstr "Назад"
+msgstr "Vissza"
 
 #: src/chmframe.cpp:775
 msgid "Forward"
-msgstr "Вперед"
+msgstr "El�re"
 
 #: src/chmframe.cpp:777
 msgid "Home"
-msgstr "Домой"
+msgstr "Kezd�lap"
 
 #: src/chmframe.cpp:780
 msgid "About"
-msgstr "О программе"
+msgstr "N�vjegy"
 
 #: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
-msgstr "&Вперед"
+msgstr "El�re"
 
 #: src/chmhtmlwindow.cpp:44
 msgid "&Back"
-msgstr "&Назад"
+msgstr "Vissza"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
-msgstr "&Копировать выделение "
+msgstr "Kijel�l�s m�sol�sa"
 
 #: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
-msgstr "&Найти на этой странице"
+msgstr "&Keres�s az oldalon"
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"
-msgstr "Получать частично совпадающие"
+msgstr "R�szleges tal�latok"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Search titles only"
-msgstr "Искать только в заголовках"
+msgstr "Keres�s csak a c�mekben"
 
 #: src/chmsearchpanel.cpp:52
 msgid "Allow partial matches."
-msgstr "Разрешить частичное совпадение."
+msgstr "R�szleges tal�latok enged�lyez�se."
 
 #: src/chmsearchpanel.cpp:53
 msgid "Only search in the contents' titles."
-msgstr "Искать только в заголовках содежания."
+msgstr "Csak a c�mekben keres."
 
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
-msgstr "Поиск фраз, где встречается введенный текст."
+msgstr "Az el�fordul�sok keres�se a megadott sz�vegben."
 
 #: src/contenttaghandler.cpp:37
 msgid "Topics"
-msgstr "Темы"
+msgstr "T�m�k"
+

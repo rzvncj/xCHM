@@ -22,6 +22,7 @@
 #ifndef __CHMFILE_H_
 #define __CHMFILE_H_
 
+#include <config.h>
 #include <chm_lib.h>
 #include <wx/filefn.h>
 #include <wx/string.h>

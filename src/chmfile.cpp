@@ -19,7 +19,6 @@
 */
 
 
-#include <config.h>
 #include <chmfile.h>
 #include <contenttaghandler.h>
 #include <chmlistctrl.h>

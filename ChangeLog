@@ -108,3 +108,4 @@
 		element addition and visualization.
 		+ added real-time searchable index support via a new 'Index'
 		panel (status / selected index word changes as you type).
+		+ suppressed unhelpful error messages while loading a page.

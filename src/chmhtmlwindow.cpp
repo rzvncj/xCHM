@@ -22,6 +22,7 @@
 #include <chmhtmlwindow.h>
 #include <contenttaghandler.h>
 #include <chminputstream.h>
+#include <wx/log.h>
 
 
 
@@ -57,6 +58,7 @@ CHMHtmlWindow::~CHMHtmlWindow()
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
+	wxLogNull log;
 	wxString tmp = location;
 
 	if(!_absPathFollows)

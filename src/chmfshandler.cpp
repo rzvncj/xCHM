@@ -79,12 +79,18 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 		if(right.StartsWith(wxT("/MS-ITS:")))
 			right = right.AfterLast(wxT(':'));
 
+		wxString mimeType = GetMimeTypeFromExt(right);
+		if(mimeType.IsEmpty()) {
+			if(!right.AfterLast(wxT('.')).Left(3).
+			   CmpNoCase(wxT("htm")))
+				mimeType = wxString(wxT("text/html"));
+		}
+
 		return new wxFSFile(s,
 				    wxString(wxT("file:")) +
 				    s->GetCache()->ArchiveName() + 
 				    wxT("#chm:") + right,
-				    GetMimeTypeFromExt(right),
-				    GetAnchor(location),
+				    mimeType, GetAnchor(location),
 				    wxDateTime(wxFileModificationTime(left)));
 	}
     

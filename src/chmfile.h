@@ -171,7 +171,7 @@ private:
 			unsigned char cr, unsigned char ls,
 			unsigned char lr, chmUnitInfo *uifmain,
 			chmUnitInfo* uitbl, chmUnitInfo *uistrings,
-			chmUnitInfo* topics);
+			chmUnitInfo* topics, chmUnitInfo *urlstr);
 
 private:
 	chmFile* _chmFile;

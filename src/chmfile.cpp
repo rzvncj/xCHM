@@ -173,7 +173,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 	if(text.IsEmpty())
 		return false;
 
-	chmUnitInfo ui, uitopics, uiurltbl, uistrings;
+	chmUnitInfo ui, uitopics, uiurltbl, uistrings, uiurlstr;
 	if(::chm_resolve_object(_chmFile, "/$FIftiMain", &ui) !=
 	   CHM_RESOLVE_SUCCESS || 
 	   ::chm_resolve_object(_chmFile, "/#TOPICS", &uitopics) !=
@@ -181,6 +181,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 	   ::chm_resolve_object(_chmFile, "/#STRINGS", &uistrings) !=
 	   CHM_RESOLVE_SUCCESS ||
 	   ::chm_resolve_object(_chmFile, "/#URLTBL", &uiurltbl) !=
+	   CHM_RESOLVE_SUCCESS ||
+	   ::chm_resolve_object(_chmFile, "/#URLSTR", &uiurlstr) !=
 	   CHM_RESOLVE_SUCCESS)
 		return false;
 
@@ -280,7 +282,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 					  doc_index_s, doc_index_r,
 					  code_count_s, code_count_r,
 					  loc_codes_s, loc_codes_r, &ui,
-					  &uiurltbl, &uistrings, &uitopics);
+					  &uiurltbl, &uistrings, &uitopics,
+					  &uiurlstr);
 	}
 
 	return false;
@@ -514,7 +517,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 			 unsigned char cr, unsigned char ls,
 			 unsigned char lr, chmUnitInfo *uimain,
 			 chmUnitInfo* uitbl, chmUnitInfo *uistrings,
-			 chmUnitInfo* topics)
+			 chmUnitInfo* topics, chmUnitInfo *urlstr)
 {
 	int wlc_bit = 7;
 	u_int64_t index = 0, count;
@@ -526,8 +529,8 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 #define TOPICS_HEADER_LEN 0xe
 	unsigned char header[TOPICS_HEADER_LEN];
 
-#define STRINGS_BUF_LEN 512
-	unsigned char strbuf[STRINGS_BUF_LEN];
+#define COMMON_BUF_LEN 1025
+	unsigned char combuf[COMMON_BUF_LEN];
 
 	if(::chm_retrieve_object(_chmFile, uimain, buffer.get(), 
 				 wlc_offset, wlc_size) == 0)
@@ -544,28 +547,44 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		off += length;
 
 		if(::chm_retrieve_object(_chmFile, topics, header, 
-					 index, TOPICS_HEADER_LEN) == 0)
+					 index * 16, TOPICS_HEADER_LEN) == 0)
 			return false;
 
 		cursor32 = reinterpret_cast<u_int32_t *>(header + 4);
+		combuf[COMMON_BUF_LEN - 1] = 0;
 		stroff = *cursor32;
 		FIXENDIAN32(stroff);
 
-/*		if(::chm_retrieve_object(_chmFile, uistrings, strbuf, 
-					 stroff, STRINGS_BUF_LEN - 1) == 0)
+		if(::chm_retrieve_object(_chmFile, uistrings, combuf, 
+					 stroff, COMMON_BUF_LEN - 1) == 0)
 			return false;
-		strbuf[STRINGS_BUF_LEN - 1] = 0;
-*/
 
-		wxString topic;// = CURRENT_CHAR_STRING(strbuf);
+		combuf[COMMON_BUF_LEN - 1] = 0;
+		wxString topic = CURRENT_CHAR_STRING(combuf);
 	      
 		cursor32 = reinterpret_cast<u_int32_t *>(header + 8);
 		urloff = *cursor32;
 		FIXENDIAN32(urloff);
 
+		if(::chm_retrieve_object(_chmFile, uitbl, combuf, 
+					 urloff, 10) == 0)
+			return false;
+
+/*
+		cursor32 = reinterpret_cast<u_int32_t*>(combuf + 8);
+		urloff = *cursor32;
+		FIXENDIAN32(urloff);
+
+		if(::chm_retrieve_object(_chmFile, urlstr, combuf, 
+					 urloff, COMMON_BUF_LEN - 1) == 0)
+			return false;
+		combuf[COMMON_BUF_LEN - 1] = 0;
+*/
+		wxString url; // = CURRENT_CHAR_STRING(combuf);
+
 		cerr << "Index: " << index 
 		     << ", file: " << topic.mb_str() 
-		     << ", stroff: " << stroff << endl;
+		     << ", url: " << url.mb_str() << endl;
 
 		count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
 		off += length;

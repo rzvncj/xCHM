@@ -1,0 +1,24 @@
+XmlRpc interface documentation
+
+
+Calls
+param 1
+0 - Shuts down xCHM
+
+1 - Loads a chmfile specified by param 2, and an optional contextID as param 3
+
+2 - Loads a specified contextID within the file as param 2
+
+Results
+0 - The request was not completed, this indicates a failure in the command. For
+    example if the call (1,file,id) is made with a valid file, but invalid id
+    the correct file will be loaded but the id will not be. Thus it will report
+    that the request was not completed.
+
+1 - The request was completed successfully.
+
+
+Notes:
+
+File paths are relative to the xCHM executable, thus full path names are  the 
+recommended method for opening files via XmlRpc.

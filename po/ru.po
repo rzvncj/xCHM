@@ -6,17 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2004-09-09 19:37+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-17 23:20+0300\n"
 "PO-Revision-Date: 2004-03-21 20:26+0200\n"
 "Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: src/chmfile.cpp:585
+#: src/chmfile.cpp:567
 msgid "Untitled in index"
 msgstr "Без заголовка"
 
@@ -64,171 +64,171 @@ msgstr "Просмотр:"
 msgid "OK"
 msgstr "ОК"
 
-#: src/chmframe.cpp:35
+#: src/chmframe.cpp:37
 msgid "Open a CHM book."
 msgstr "Открыть CHM книгу."
 
-#: src/chmframe.cpp:36
+#: src/chmframe.cpp:38
 msgid "Change fonts."
 msgstr "Параметры шрифтов."
 
-#: src/chmframe.cpp:37
+#: src/chmframe.cpp:39
 msgid "Print the page currently displayed."
 msgstr "Печать текущей страницы."
 
-#: src/chmframe.cpp:38
+#: src/chmframe.cpp:40
 msgid "On or off?"
 msgstr "Включить или выключить?"
 
-#: src/chmframe.cpp:39
+#: src/chmframe.cpp:41
 msgid "Go to the book's start page."
 msgstr "Перейти к начальной странице."
 
-#: src/chmframe.cpp:40
+#: src/chmframe.cpp:42
 msgid "Go forward in history. Per book."
 msgstr "Вперед по истории."
 
-#: src/chmframe.cpp:41
+#: src/chmframe.cpp:43
 msgid "Back to the last visited page. Per book."
 msgstr "Назад к последней посещенной странице."
 
-#: src/chmframe.cpp:42
+#: src/chmframe.cpp:44
 msgid "About the program."
 msgstr "О программе."
 
-#: src/chmframe.cpp:121
+#: src/chmframe.cpp:123
 msgid "Ready."
 msgstr "Готово."
 
-#: src/chmframe.cpp:145 src/chmframe.cpp:799
+#: src/chmframe.cpp:147 src/chmframe.cpp:806
 msgid "Contents"
 msgstr "Содержание"
 
-#: src/chmframe.cpp:146
+#: src/chmframe.cpp:148
 msgid "Index"
 msgstr "Индекс"
 
-#: src/chmframe.cpp:147 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:149 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Поиск"
 
-#: src/chmframe.cpp:170
+#: src/chmframe.cpp:172
 msgid "About xCHM"
 msgstr "О программе xCHM"
 
-#: src/chmframe.cpp:178
+#: src/chmframe.cpp:180
 msgid "Choose a file.."
 msgstr "Открыть файл .."
 
-#: src/chmframe.cpp:288
+#: src/chmframe.cpp:290
 msgid "Couldn't extract the book contents tree."
 msgstr "Невозможно развернуть содержание книги."
 
-#: src/chmframe.cpp:290
+#: src/chmframe.cpp:292
 msgid "No contents.."
 msgstr "Без содержания.."
 
-#: src/chmframe.cpp:607
+#: src/chmframe.cpp:614
 msgid "&Open..\tCtrl-O"
 msgstr "&Открыть..\tCtrl-O"
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:615
 msgid "&Print page..\tCtrl-P"
 msgstr "&Печать..\tCtrl-P"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:616
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Шрифты..\tCtrl-T"
 
-#: src/chmframe.cpp:612
+#: src/chmframe.cpp:619
 msgid "&Show contents tree\tCtrl-S"
 msgstr "О&тобразить содержание\tCtrl-S"
 
-#: src/chmframe.cpp:617
+#: src/chmframe.cpp:624
 msgid "&Recent files"
 msgstr "Открыть &недавние"
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:640
 msgid "E&xit\tCtrl-X"
 msgstr "В&ыход\tCtrl-X"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:641
 msgid "Quit the application."
 msgstr "Выход из приложения."
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:645
 msgid "&Home\tCtrl-H"
 msgstr "&Домой\tCtrl-H"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:646
 msgid "For&ward\tCtrl-W"
 msgstr "&Вперед\tCtrl-W"
 
-#: src/chmframe.cpp:640
+#: src/chmframe.cpp:647
 msgid "&Back\tCtrl-B"
 msgstr "&Назад\tCtrl-B"
 
-#: src/chmframe.cpp:643
+#: src/chmframe.cpp:650
 msgid "&About ..\tF1"
 msgstr "&О программе ..\tF1"
 
-#: src/chmframe.cpp:646
+#: src/chmframe.cpp:653
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:654
 msgid "Hi&story"
 msgstr "&История"
 
-#: src/chmframe.cpp:648
+#: src/chmframe.cpp:655
 msgid "&Help"
 msgstr "Помо&щь"
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:666
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/chmframe.cpp:681
+#: src/chmframe.cpp:688
 msgid "Add"
 msgstr "Добавить"
 
-#: src/chmframe.cpp:682
+#: src/chmframe.cpp:689
 msgid "Remove"
 msgstr "Удалить"
 
-#: src/chmframe.cpp:685
+#: src/chmframe.cpp:692
 msgid "Add displayed page to bookmarks."
 msgstr "Добавить отображаемую страницу к закладкам."
 
-#: src/chmframe.cpp:686
+#: src/chmframe.cpp:693
 msgid "Remove selected bookmark."
 msgstr "Удалить выбранную закладку."
 
-#: src/chmframe.cpp:793
+#: src/chmframe.cpp:800
 msgid "Open .."
 msgstr "Открыть .."
 
-#: src/chmframe.cpp:795
+#: src/chmframe.cpp:802
 msgid "Print .."
 msgstr "Печать .."
 
-#: src/chmframe.cpp:797
+#: src/chmframe.cpp:804
 msgid "Fonts .."
 msgstr "Шрифты .."
 
-#: src/chmframe.cpp:804
+#: src/chmframe.cpp:811
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:805
+#: src/chmframe.cpp:812
 msgid "Forward"
 msgstr "Вперед"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:814
 msgid "Home"
 msgstr "Домой"
 
-#: src/chmframe.cpp:810
+#: src/chmframe.cpp:817
 msgid "About"
 msgstr "О программе"
 

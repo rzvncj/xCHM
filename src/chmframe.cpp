@@ -26,6 +26,7 @@
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
 #include <wx/accel.h>
+#include <wx/settings.h>
 
 
 namespace {
@@ -126,10 +127,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetPage(greeting);
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
-
-	int pointSize = (_tcl->GetFont()).GetPointSize();
-	_tcl->SetFont(wxFont(pointSize, wxDEFAULT, wxNORMAL, wxNORMAL, 
-			     FALSE, wxEmptyString, wxFONTENCODING_SYSTEM));
+	_tcl->SetFont(wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE, 
+			     wxEmptyString, wxFONTENCODING_SYSTEM));
 
 	_nb->AddPage(temp, wxT("Contents"));
 	_nb->AddPage(_csp, wxT("Search"));

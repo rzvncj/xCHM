@@ -56,6 +56,10 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 				 wxDefaultPosition, wxDefaultSize, 
 				 0, NULL, wxLB_SINGLE);
 
+	_results->SetFont(wxFont(-1, wxDEFAULT, wxNORMAL, wxNORMAL,
+				 FALSE, wxEmptyString, wxFONTENCODING_SYSTEM));
+
+
         sizer->Add(_text, 0, wxEXPAND | wxALL, 10);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT, 10);
         sizer->Add(_titles, 0, wxLEFT | wxRIGHT, 10);

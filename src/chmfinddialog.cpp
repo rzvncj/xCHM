@@ -28,6 +28,7 @@
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/tokenzr.h>
+#include <wx/wx.h>
 
 
 CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)

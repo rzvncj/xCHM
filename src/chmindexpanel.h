@@ -25,6 +25,7 @@
 
 #include <wx/panel.h>
 #include <wx/textctrl.h>
+#include <wx/listctrl.h>
 
 
 class CHMHtmlWindow;
@@ -68,7 +69,14 @@ public:
 
 protected:
 	//! This gets called when the user clicks on a list item.
+#ifndef _ENABLE_COPY_AND_FIND
 	void OnIndexSel(wxCommandEvent& event);
+#else
+	void OnIndexSel(wxListEvent& event);
+#endif
+
+	//! This gets called when the user presses enter on a list item.
+	void OnIndexSelRet(wxCommandEvent& event);
 
 	//! Called whenever the user types a letter in the textbox.
 	void OnText(wxCommandEvent& event);

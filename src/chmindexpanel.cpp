@@ -56,7 +56,20 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
 }
 
 
+void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
+{
+	if(_navigate) {
+		_html->AbsoluteFollows();
+		_lc->LoadSelected();
+	}
+}
+
+
+#ifndef _ENABLE_COPY_AND_FIND
 void CHMIndexPanel::OnIndexSel(wxCommandEvent& WXUNUSED(event))
+#else
+void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
+#endif
 {
 	if(_navigate) {
 		_html->AbsoluteFollows();
@@ -75,7 +88,7 @@ void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 
 BEGIN_EVENT_TABLE(CHMIndexPanel, wxPanel)
 	EVT_TEXT(ID_SearchIndex, CHMIndexPanel::OnText)
-	EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSel)
+	EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSelRet)
 	EVT_LIST_ITEM_SELECTED(ID_IndexClicked, CHMIndexPanel::OnIndexSel)
 END_EVENT_TABLE()
 

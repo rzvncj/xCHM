@@ -248,8 +248,11 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 	return found;
 }
 
-
+#ifdef _ENABLE_COPY_AND_FIND 
+void CHMSearchPanel::OnSearchSel(wxListEvent& WXUNUSED(event))
+#else
 void CHMSearchPanel::OnSearchSel(wxCommandEvent& WXUNUSED(event))
+#endif
 {
 	_results->LoadSelected();
 }

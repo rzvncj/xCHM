@@ -26,6 +26,7 @@
 #include <wx/panel.h>
 #include <wx/treectrl.h>
 #include <wx/textctrl.h>
+#include <wx/listctrl.h>
 #include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/listbox.h>
@@ -86,7 +87,11 @@ protected:
 	void OnSearch(wxCommandEvent& event);
 
 	//! This gets called when the user clicks on a result.
+#ifndef _ENABLE_COPY_AND_FIND
 	void OnSearchSel(wxCommandEvent& event);
+#else
+	void OnSearchSel(wxListEvent& event);
+#endif
 
 private:
 	//! Helper. Searches through the tree recursively.

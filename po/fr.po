@@ -1,62 +1,62 @@
 # xCHM .pot file.
 # Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
 # This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <razvanco@gmx.net>, 2004.
+# FIRST AUTHOR <cvsofts@altern.org>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "POT-Creation-Date: 2004-02-10 11:12+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
-"Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
-"Language-Team: Romanian\n"
+"Last-Translator: Vonlanthen Cédric <cvsofts@altern.org>\n"
+"Language-Team: French\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=us-ascii\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/chmfile.cpp:509
 msgid "Untitled in index"
-msgstr "Fara titlu in index"
+msgstr "Index SansTitre"
 
 #: src/chmfinddialog.cpp:34
 msgid "Find in page.."
-msgstr "Gaseste in pagina.."
+msgstr "Rechercher dans la page.."
 
 #: src/chmfinddialog.cpp:43
 msgid "Whole words only"
-msgstr "Numai cuvinte intregi"
+msgstr "Mots entiers seulement"
 
 #: src/chmfinddialog.cpp:44
 msgid "Case sensitive"
-msgstr "Conteaza majuscule/minuscule"
+msgstr "Respecter la casse"
 
 #: src/chmfinddialog.cpp:51
 msgid "Find next"
-msgstr "Gaseste urmatorul"
+msgstr "Rechercher le suivant"
 
 #: src/chmfinddialog.cpp:54 src/chmfontdialog.cpp:91
 msgid "Cancel"
-msgstr "Anuleaza"
+msgstr "Annuler"
 
 #: src/chmfontdialog.cpp:53
 msgid "Change fonts.."
-msgstr "Schimba fonturile.."
+msgstr "Changer de polices.."
 
 #: src/chmfontdialog.cpp:60
 msgid "Normal font:"
-msgstr "Font normal:"
+msgstr "Police normale:"
 
 #: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
-msgstr "Font fixed"
+msgstr "Police fixe"
 
 #: src/chmfontdialog.cpp:62
 msgid "Font size:"
-msgstr "Marimea fontului:"
+msgstr "Taille de police:"
 
 #: src/chmfontdialog.cpp:79
 msgid "Preview:"
-msgstr "Vizualizare:"
+msgstr "Aperçu:"
 
 #: src/chmfontdialog.cpp:89
 msgid "OK"
@@ -64,43 +64,43 @@ msgstr "OK"
 
 #: src/chmframe.cpp:35
 msgid "Open a CHM book."
-msgstr "Deschide un document CHM."
+msgstr "Ouvrir un livre CHM."
 
 #: src/chmframe.cpp:36
 msgid "Change fonts."
-msgstr "Schimba fonturile."
+msgstr "Changer de polices."
 
 #: src/chmframe.cpp:37
 msgid "Print the page currently displayed."
-msgstr "Tipareste pagina afisata."
+msgstr "Imprimer la page courante."
 
 #: src/chmframe.cpp:38
 msgid "On or off?"
-msgstr "Activat sau nu?"
+msgstr "Enclenché ou éteint?"
 
 #: src/chmframe.cpp:39
 msgid "Go to the book's start page."
-msgstr "Mergi la pagina de start a cartii."
+msgstr "Aller à la page de démarrage."
 
 #: src/chmframe.cpp:40
 msgid "Go forward in history. Per book."
-msgstr "Mergi inainte in paginile vizitate. Per carte."
+msgstr "Aller au suivant dans l'historique. Par livre."
 
 #: src/chmframe.cpp:41
 msgid "Back to the last visited page. Per book."
-msgstr "Inapoi la ultima pagina vizitata. Per carte."
+msgstr "Aller à la dernière page visitée. Par livre."
 
 #: src/chmframe.cpp:42
 msgid "About the program."
-msgstr "Despre program."
+msgstr "A propos du programme."
 
 #: src/chmframe.cpp:121
 msgid "Ready."
-msgstr "Pregatit."
+msgstr "Prêt."
 
 #: src/chmframe.cpp:145 src/chmframe.cpp:761
 msgid "Contents"
-msgstr "Cuprins"
+msgstr "Contenu"
 
 #: src/chmframe.cpp:146
 msgid "Index"
@@ -108,164 +108,164 @@ msgstr "Index"
 
 #: src/chmframe.cpp:147 src/chmsearchpanel.cpp:49
 msgid "Search"
-msgstr "Cauta"
+msgstr "Rechercher"
 
 #: src/chmframe.cpp:170
 msgid "About xCHM"
-msgstr "Despre xCHM"
+msgstr "A propos de xCHM"
 
 #: src/chmframe.cpp:178
 msgid "Choose a file.."
-msgstr "Alege un fisier.."
+msgstr "Choisir un fichier.."
 
 #: src/chmframe.cpp:288
 msgid "Couldn't extract the book contents tree."
-msgstr "Nu am putut extrage cuprinsul cartii."
+msgstr "Ne peut extraire la table des matières."
 
 #: src/chmframe.cpp:290
 msgid "No contents.."
-msgstr "Nu exista cuprins.."
+msgstr "Pas de contenu.."
 
 #: src/chmframe.cpp:573
 msgid "&Open..\tCtrl-O"
-msgstr "&Deschide..\tCtrl-O"
+msgstr "&Ouvrir..\tCtrl-O"
 
 #: src/chmframe.cpp:574
 msgid "&Print page..\tCtrl-P"
-msgstr "&Tipareste pagina...\tCtrl-P"
+msgstr "&Imprimer la page...\tCtrl-P"
 
 #: src/chmframe.cpp:575
 msgid "Fon&ts..\tCtrl-T"
-msgstr "&Fonturi..\tCtrl-T"
+msgstr "&Polices..\tCtrl-T"
 
 #: src/chmframe.cpp:578
 msgid "&Show contents tree\tCtrl-S"
-msgstr "&Arata cuprinsul\tCtrl-S"
+msgstr "&Voir la table des matières\tCtrl-S"
 
 #: src/chmframe.cpp:583
 msgid "&Recent files"
-msgstr "F&isiere recente"
+msgstr "F&ichiers récents"
 
 #: src/chmframe.cpp:595
 msgid "E&xit\tCtrl-X"
-msgstr "E&xit\tCtrl-X"
+msgstr "&Quitter\tCtrl-X"
 
 #: src/chmframe.cpp:596
 msgid "Quit the application."
-msgstr "Inchide aplicatia."
+msgstr "Quitter l'application."
 
 #: src/chmframe.cpp:600
 msgid "&Home\tCtrl-H"
-msgstr "&Start\tCtrl-H"
+msgstr "&Page d'acceuil\tCtrl-H"
 
 #: src/chmframe.cpp:601
 msgid "For&ward\tCtrl-W"
-msgstr "&Inainte\tCtrl-W"
+msgstr "&Suivant\tCtrl-W"
 
 #: src/chmframe.cpp:602
 msgid "&Back\tCtrl-B"
-msgstr "I&napoi\tCtrl-B"
+msgstr "&Précédent\tCtrl-B"
 
 #: src/chmframe.cpp:605
 msgid "&About ..\tF1"
-msgstr "&Despre ..\tF1"
+msgstr "&A propos ..\tF1"
 
 #: src/chmframe.cpp:608
 msgid "&File"
-msgstr "&Fisiere"
+msgstr "&Fichier"
 
 #: src/chmframe.cpp:609
 msgid "Hi&story"
-msgstr "&Istorie"
+msgstr "&Historique"
 
 #: src/chmframe.cpp:610
 msgid "&Help"
-msgstr "&Ajutor"
+msgstr "&Aide"
 
 #: src/chmframe.cpp:621
 msgid "Bookmarks"
-msgstr "Semne de carte"
+msgstr "Signets"
 
 #: src/chmframe.cpp:643
 msgid "Add"
-msgstr "Adauga"
+msgstr "Ajouter"
 
 #: src/chmframe.cpp:644
 msgid "Remove"
-msgstr "Sterge"
+msgstr "Supprimer"
 
 #: src/chmframe.cpp:647
 msgid "Add displayed page to bookmarks."
-msgstr "Adauga pagina afisata la semnele de carte."
+msgstr "Ajouter la page affichée dans les signets."
 
 #: src/chmframe.cpp:648
 msgid "Remove selected bookmark."
-msgstr "Sterge semnul de carte selectat."
+msgstr "Supprimer la page sélectionner des signets."
 
 #: src/chmframe.cpp:755
 msgid "Open .."
-msgstr "Deschide .."
+msgstr "Ouvrir .."
 
 #: src/chmframe.cpp:757
 msgid "Print .."
-msgstr "Tipareste .."
+msgstr "Imprimer .."
 
 #: src/chmframe.cpp:759
 msgid "Fonts .."
-msgstr "Fonturi .."
+msgstr "Polices .."
 
 #: src/chmframe.cpp:766
 msgid "Back"
-msgstr "Inapoi"
+msgstr "Précédent"
 
 #: src/chmframe.cpp:767
 msgid "Forward"
-msgstr "Inainte"
+msgstr "Suivant"
 
 #: src/chmframe.cpp:769
 msgid "Home"
-msgstr "Start"
+msgstr "Page d'accueil"
 
 #: src/chmframe.cpp:772
 msgid "About"
-msgstr "Despre"
+msgstr "A propos"
 
 #: src/chmhtmlwindow.cpp:41
 msgid "For&ward"
-msgstr "Inainte"
+msgstr "&Suivant"
 
 #: src/chmhtmlwindow.cpp:42
 msgid "&Back"
-msgstr "Inapoi"
+msgstr "&Précédent"
 
 #: src/chmhtmlwindow.cpp:46
 msgid "&Copy selection"
-msgstr "&Copiaza selectia"
+msgstr "&Copier la sélection"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Find in page.."
-msgstr "&Gaseste in pagina.."
+msgstr "&Rechercher dans la page.."
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"
-msgstr "Rezultate partiale"
+msgstr "Resultats partiels"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Search titles only"
-msgstr "Cauta doar in titluri"
+msgstr "Rechercher dans les titres uniquement"
 
 #: src/chmsearchpanel.cpp:52
 msgid "Allow partial matches."
-msgstr "Permite rezultate partiale."
+msgstr "Permettre les résultats partiels."
 
 #: src/chmsearchpanel.cpp:53
 msgid "Only search in the contents' titles."
-msgstr "Cauta doar in titlurile din cuprins."
+msgstr "Rechercher seulement dans les titres."
 
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
-msgstr "Cauta in carte pagini care contin aparitii ale textului specificat."
+msgstr "Rechercher dans le contenu les occurences du texte indiqué."
 
 #: src/contenttaghandler.cpp:37
 msgid "Topics"
-msgstr "Cuprins"
+msgstr "Contenu"

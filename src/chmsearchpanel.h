@@ -46,7 +46,7 @@ enum {
 };
 
 
-//! \brief Custom built search panel.
+//! Custom built search panel.
 class CHMSearchPanel : public wxPanel {
 
 public:

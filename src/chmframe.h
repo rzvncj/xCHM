@@ -28,6 +28,10 @@
 #include <wx/splitter.h>
 
 
+//! Default font size for the wxHtmlWindow.
+#define CHM_DEFAULT_FONT_SIZE 14
+
+
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
 #else
@@ -67,10 +71,16 @@ public:
 	  a book was sucessfully opened. For the current working
 	  directory just pass the empty string.
 	  \param pos The upper left corner of the frame.
+	  \param normalFont Name of the font face to use for normal text.
+	  \param fixedFont Name of the font face to use for fixed text (<TT>).
+	  \param fontSize The font size.
 	  \param size The size of the frame.
 	*/
 	CHMFrame(const wxString& title, const wxString& booksDir,
-		 const wxPoint& pos, const wxSize& size);
+		 const wxPoint& pos, const wxSize& size,
+		 const wxString& normalFont = "",
+		 const wxString& fixedFont = "",
+		 const int fontSize = CHM_DEFAULT_FONT_SIZE);
 
 	//! Cleans up.
 	~CHMFrame();
@@ -137,6 +147,9 @@ private:
 	wxString _openPath;
 	wxArrayString *_normalFonts;
 	wxArrayString *_fixedFonts;
+	wxString _normalFont;
+	wxString _fixedFont;
+	int _fontSize;
 
 private:
 	DECLARE_EVENT_TABLE()	

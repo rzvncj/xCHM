@@ -24,14 +24,12 @@
 #include <wx/combobox.h>
 
 
-#define CHM_DEFAULT_FONT_SIZE 14
-
-
 class CHMFontDialog : public wxDialog
 {
 public:
 	CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
-		      wxArrayString *fixedFonts);
+		      wxArrayString *fixedFonts, const wxString& normalFont,
+		      const wxString& fixedFont, const int fontSize);
 
 	const wxString& FixedFont() { return _fixedFont; }
 	const wxString& NormalFont() { return _normalFont; }
@@ -47,12 +45,13 @@ private:
 	
 private:
 	wxHtmlWindow *_test;
-	wxString _fixedFont;
-	wxString _normalFont;
-
-	wxSpinCtrl *_fontSize;
+	wxSpinCtrl *_fontSizeControl;
 	wxComboBox *_normalFControl;
 	wxComboBox *_fixedFControl;
+
+	wxString _normalFont;
+	wxString _fixedFont;
+	int _fontSize;
 	int _sizes[7];
 
 	DECLARE_EVENT_TABLE();

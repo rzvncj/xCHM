@@ -22,8 +22,8 @@
 #include <chmframe.h>
 #include <chminputstream.h>
 #include <contenttaghandler.h>
-#include <chmfontdialog.h>
 #include <wx/fontenum.h>
+#include <chmfontdialog.h>
 
 
 namespace {
@@ -58,15 +58,18 @@ const char *about_txt =
 
 
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
-		   const wxPoint& pos, const wxSize& size)
+		   const wxPoint& pos, const wxSize& size,
+		   const wxString& normalFont, const wxString& fixedFont,
+		   const int fontSize)
 	: wxFrame((wxFrame *)NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _openPath(booksDir), _normalFonts(NULL), _fixedFonts(NULL)
+	  _openPath(booksDir), _normalFonts(NULL), _fixedFonts(NULL),
+	  _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	int sizes[7];
 
 	for(int i = -3; i <= 3; ++i)
-		sizes[i+3] = CHM_DEFAULT_FONT_SIZE + i * 2;	
+		sizes[i+3] = _fontSize + i * 2;
 
 	SetIcon(wxIcon(htmbook_xpm));
 	SetMenuBar(CreateMenu());
@@ -87,7 +90,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetRelatedFrame(this, wxString("xCHM v. ") + VERSION);
 	_html->SetRelatedStatusBar(0);
 
-	_html->SetFonts("", "", sizes);
+	_html->SetFonts(_normalFont, _fixedFont, sizes);
 	_html->SetPage(greeting);
 
 	_tcl = new wxTreeCtrl(_sw, ID_TreeCtrl);
@@ -164,17 +167,24 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 	assert(_normalFonts != NULL);
 	assert(_fixedFonts != NULL);
 
-	CHMFontDialog cfd(this, _normalFonts, _fixedFonts);
+	CHMFontDialog cfd(this, _normalFonts, _fixedFonts, _normalFont,
+			  _fixedFont, _fontSize);
 
-	cfd.ShowModal();
+	if(cfd.ShowModal() == wxID_OK) {
+		
+		wxBusyCursor bc;
 
-	_html->SetFonts(cfd.NormalFont(), cfd.FixedFont(),
-			cfd.Sizes());
+		_html->SetFonts(_normalFont = cfd.NormalFont(), 
+				_fixedFont = cfd.FixedFont(),
+				cfd.Sizes());
 
-	wxString page = _html->GetOpenedPage();
+		_fontSize = *(cfd.Sizes() + 3);
 
-	if(page.IsEmpty())
-		_html->SetPage(greeting); 
+		wxString page = _html->GetOpenedPage();
+
+		if(page.IsEmpty())
+			_html->SetPage(greeting); 
+	}
 }
 
 
@@ -279,6 +289,9 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 	config.Write("/Position/width", width);
 	config.Write("/Position/height", height);
 	config.Write("/Paths/lastOpenedDir", _openPath);
+	config.Write("/Fonts/normalFontFace", _normalFont);
+	config.Write("/Fonts/fixedFontFace", _fixedFont);
+	config.Write("/Fonts/size", _fontSize);
 
 	Destroy();
 }
@@ -286,6 +299,8 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 
 void CHMFrame::LoadCHM(const wxString& archive)
 {
+	wxBusyCursor bc;
+
 	_html->HistoryClear();
 	_html->LoadPage(wxString("file:") + archive +
 		      wxString("#chm:/"));

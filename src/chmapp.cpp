@@ -27,8 +27,9 @@
 
 bool CHMApp::OnInit()
 {
-	long xorig = 50, yorig = 50, width = 600, height = 450; 
-	wxString lastOpenedDir;
+	long xorig = 50, yorig = 50, width = 600, height = 450;
+	long fontSize = CHM_DEFAULT_FONT_SIZE;
+	wxString lastOpenedDir, normalFont, fixedFont;
 
 	wxInitAllImageHandlers();
 	wxFileSystem::AddHandler(new CHMFSHandler);
@@ -38,13 +39,16 @@ bool CHMApp::OnInit()
 		config.Read("/Position/yOrig", &yorig);
 		config.Read("/Position/width", &width);
 		config.Read("/Position/height", &height);
-		config.Read("/Paths/lastOpenedDir",&lastOpenedDir);
+		config.Read("/Paths/lastOpenedDir", &lastOpenedDir);
+		config.Read("/Fonts/normalFontFace", &normalFont);
+		config.Read("/Fonts/fixedFontFace", &fixedFont);
+		config.Read("/Fonts/size", &fontSize);
 	}
 	
 	CHMFrame *frame = new CHMFrame("xCHM v. " VERSION,
-				       lastOpenedDir,
-				       wxPoint(xorig, yorig), 
-				       wxSize(width, height));
+				       lastOpenedDir, wxPoint(xorig, yorig), 
+				       wxSize(width, height), normalFont,
+				       fixedFont, static_cast<int>(fontSize));
 
 	frame->SetSizeHints(200, 200);
 	frame->Show(TRUE);

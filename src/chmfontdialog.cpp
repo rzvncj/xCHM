@@ -24,9 +24,6 @@
 #include <wx/stattext.h>
 #include <wx/button.h>
 
-#include <iostream>
-using namespace std;
-
 
 namespace {
 
@@ -48,9 +45,12 @@ const char* test_page = "<html><body><table><tr><td>Normal face<br>"
 
 
 CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
-			     wxArrayString *fixedFonts)
+			     wxArrayString *fixedFonts,
+			     const wxString& normalFont,
+			     const wxString& fixedFont, const int fontSize)
 	: wxDialog(parent, -1, "Choose fonts"), _test(NULL),
-	  _fontSize(NULL), _normalFControl(NULL), _fixedFControl(NULL)
+	  _fontSizeControl(NULL), _normalFControl(NULL), _fixedFControl(NULL),
+	  _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
 	wxFlexGridSizer *sizer = new wxFlexGridSizer(2, 3, 2, 5);
@@ -69,8 +69,8 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 				  wxSize(200, 200),
 				  0, NULL, wxCB_DROPDOWN | wxCB_READONLY));
 
-	sizer->Add(_fontSize = new wxSpinCtrl(this, -1));
-	_fontSize->SetRange(2, 100);
+	sizer->Add(_fontSizeControl = new wxSpinCtrl(this, -1));
+	_fontSizeControl->SetRange(2, 100);
 	
 	topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
 
@@ -105,7 +105,7 @@ void CHMFontDialog::UpdatePreview()
 	_normalFont = _normalFControl->GetStringSelection();
 	_fixedFont = _fixedFControl->GetStringSelection();
 
-	int size = _fontSize->GetValue();
+	int size = _fontSizeControl->GetValue();
 
 	for(int i = -3; i <= 3; ++i)
 		_sizes[i+3] = size + i * 2;
@@ -132,18 +132,13 @@ void CHMFontDialog::InitDialog(wxArrayString *normalFonts,
 {
 	assert(normalFonts && fixedFonts);
 
-	wxString normalFace = 
-		wxFont(CHM_DEFAULT_FONT_SIZE, wxSWISS, wxNORMAL, 
-		       wxNORMAL, FALSE).GetFaceName();
+	if(_normalFont.IsEmpty()) 
+		_normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, 
+				     wxNORMAL, FALSE).GetFaceName();
 
-	cerr << "Normal face: " << normalFace.c_str() << endl;
-
-	wxString fixedFace =
-		wxFont(CHM_DEFAULT_FONT_SIZE, wxMODERN, wxNORMAL, 
-		       wxNORMAL, FALSE).GetFaceName();
-
-	cerr << "Fixed face: " << fixedFace.c_str() << endl;
-		
+	if(_fixedFont.IsEmpty())
+		_fixedFont = wxFont(_fontSize, wxMODERN, wxNORMAL, 
+				    wxNORMAL, FALSE).GetFaceName();		
 
 	for (unsigned int i = 0; i < normalFonts->GetCount(); i++)
 		_normalFControl->Append((*normalFonts)[i]);
@@ -151,17 +146,17 @@ void CHMFontDialog::InitDialog(wxArrayString *normalFonts,
 	for (unsigned int i = 0; i < fixedFonts->GetCount(); i++)
 		_fixedFControl->Append((*fixedFonts)[i]);
 
-	if (!normalFace.empty())
-		_normalFControl->SetStringSelection(normalFace);
+	if (!_normalFont.empty())
+		_normalFControl->SetStringSelection(_normalFont);
 	else
 		_normalFControl->SetSelection(0);
 
-	if (!fixedFace.empty())
-		_fixedFControl->SetStringSelection(fixedFace);
+	if (!_fixedFont.empty())
+		_fixedFControl->SetStringSelection(_fixedFont);
 	else
 		_fixedFControl->SetSelection(0);
 
-	_fontSize->SetValue(CHM_DEFAULT_FONT_SIZE);
+	_fontSizeControl->SetValue(_fontSize);
 	UpdatePreview();
 }
 

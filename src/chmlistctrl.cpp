@@ -63,7 +63,7 @@ void CHMListCtrl::LoadSelected()
 }
 
 
-void CHMListCtrl::OnSize(wxSizeEvent& event)
+void CHMListCtrl::UpdateUI()
 {
 	int newSize = GetClientSize().GetWidth() - 1;
 	int cpp = GetCountPerPage();
@@ -76,7 +76,12 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
 		newSize -= wxSystemSettings::GetSystemMetric(wxSYS_VSCROLL_X);
 
 	SetColumnWidth(0, newSize >= currSize ? newSize : currSize);
+}
 
+
+void CHMListCtrl::OnSize(wxSizeEvent& event)
+{
+	UpdateUI();
 	event.Skip();
 }
 

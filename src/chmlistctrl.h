@@ -68,6 +68,8 @@ public:
 	//! Loads the page that corresponds to the item currently selected.
 	void LoadSelected();
 
+	void UpdateUI();
+
 protected:
 	//! Gets called when the widget is being resized.
 	void OnSize(wxSizeEvent& event);

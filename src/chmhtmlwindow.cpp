@@ -1,6 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  Mac OS specific patches contributed by Chanler White 
+  <cawhite@nwrails.com>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -352,6 +354,53 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	PopupMenu(_menu, event.GetPosition());
 }
 
+#ifdef __WXMAC__
+/* This is a hack, consisting of copying the relevent event handler from
+   the wxWindows src/generic/scrlwing.cpp file to make up for the fact that for
+   some reason, compiling wxWindows with scroll wheel support is exposing a 
+   crashing bug on OS X.
+   When this gets fixed in wxWindows, this should prob be just removed.. */
+void CHMHtmlWindow::HandleOnMouseWheel(wxMouseEvent& event)
+{
+    int m_wheelRotation = 0;
+    m_wheelRotation += event.GetWheelRotation();
+    int lines = m_wheelRotation / event.GetWheelDelta();
+    m_wheelRotation -= lines * event.GetWheelDelta();
+
+    if (lines != 0)
+    {
+
+        wxScrollWinEvent newEvent;
+
+        newEvent.SetPosition(0);
+        newEvent.SetOrientation(wxVERTICAL);
+        newEvent.m_eventObject = m_win;
+
+        if (event.IsPageScroll())
+        {
+            if (lines > 0)
+                newEvent.m_eventType = wxEVT_SCROLLWIN_PAGEUP;
+            else
+                newEvent.m_eventType = wxEVT_SCROLLWIN_PAGEDOWN;
+
+            m_win->GetEventHandler()->ProcessEvent(newEvent);
+        }
+        else
+        {
+            lines *= event.GetLinesPerAction();
+            if (lines > 0)
+                newEvent.m_eventType = wxEVT_SCROLLWIN_LINEUP;
+            else
+                newEvent.m_eventType = wxEVT_SCROLLWIN_LINEDOWN;
+
+            int times = abs(lines);
+            for (; times > 0; times--)
+                m_win->GetEventHandler()->ProcessEvent(newEvent);
+        }
+    }
+}
+#endif
+
 
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
@@ -362,7 +411,9 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
+#ifdef __WXMAC__
+	EVT_MOUSEWHEEL(CHMHtmlWindow::HandleOnMouseWheel)
+#endif
 END_EVENT_TABLE()
-
 
 

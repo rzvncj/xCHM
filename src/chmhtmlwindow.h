@@ -135,7 +135,10 @@ protected:
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
-
+#ifdef __WXMAC__
+	//! Handles scrollwheel support.
+	void HandleOnMouseWheel(wxMouseEvent& event);
+#endif 
 	//! Overridden to correct relative images paths.
 	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type,
 					 const wxString& url,

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-24 13:23+0300\n"
+"POT-Creation-Date: 2004-11-26 16:55+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Vonlanthen Cédric <cvsofts@altern.org>\n"
 "Language-Team: French\n"
@@ -99,7 +99,7 @@ msgstr "A propos du programme."
 msgid "Ready."
 msgstr "Prêt."
 
-#: src/chmframe.cpp:149 src/chmframe.cpp:792
+#: src/chmframe.cpp:149 src/chmframe.cpp:795
 msgid "Contents"
 msgstr "Contenu"
 
@@ -127,107 +127,107 @@ msgstr "Ne peut extraire la table des matières."
 msgid "No contents.."
 msgstr "Pas de contenu.."
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:603
 msgid "&Open..\tCtrl-O"
 msgstr "&Ouvrir..\tCtrl-O"
 
-#: src/chmframe.cpp:601
+#: src/chmframe.cpp:604
 msgid "&Print page..\tCtrl-P"
 msgstr "&Imprimer la page...\tCtrl-P"
 
-#: src/chmframe.cpp:602
+#: src/chmframe.cpp:605
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Polices..\tCtrl-T"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:608
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Voir la table des matières\tCtrl-S"
 
-#: src/chmframe.cpp:610
+#: src/chmframe.cpp:613
 msgid "&Recent files"
 msgstr "F&ichiers récents"
 
-#: src/chmframe.cpp:626
+#: src/chmframe.cpp:629
 msgid "E&xit\tCtrl-X"
 msgstr "&Quitter\tCtrl-X"
 
-#: src/chmframe.cpp:627
+#: src/chmframe.cpp:630
 msgid "Quit the application."
 msgstr "Quitter l'application."
 
-#: src/chmframe.cpp:631
+#: src/chmframe.cpp:634
 msgid "&Home\tCtrl-H"
 msgstr "&Page d'acceuil\tCtrl-H"
 
-#: src/chmframe.cpp:632
+#: src/chmframe.cpp:635
 msgid "For&ward\tCtrl-W"
 msgstr "&Suivant\tCtrl-W"
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:636
 msgid "&Back\tCtrl-B"
 msgstr "&Précédent\tCtrl-B"
 
-#: src/chmframe.cpp:636
+#: src/chmframe.cpp:639
 msgid "&About ..\tF1"
 msgstr "&A propos ..\tF1"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:642
 msgid "&File"
 msgstr "&Fichier"
 
-#: src/chmframe.cpp:640
+#: src/chmframe.cpp:643
 msgid "Hi&story"
 msgstr "&Historique"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:644
 msgid "&Help"
 msgstr "&Aide"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:655
 msgid "Bookmarks"
 msgstr "Signets"
 
-#: src/chmframe.cpp:674
+#: src/chmframe.cpp:677
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/chmframe.cpp:675
+#: src/chmframe.cpp:678
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:681
 msgid "Add displayed page to bookmarks."
 msgstr "Ajouter la page affichée dans les signets."
 
-#: src/chmframe.cpp:679
+#: src/chmframe.cpp:682
 msgid "Remove selected bookmark."
 msgstr "Supprimer la page sélectionner des signets."
 
-#: src/chmframe.cpp:786
+#: src/chmframe.cpp:789
 msgid "Open .."
 msgstr "Ouvrir .."
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:791
 msgid "Print .."
 msgstr "Imprimer .."
 
-#: src/chmframe.cpp:790
+#: src/chmframe.cpp:793
 msgid "Fonts .."
 msgstr "Polices .."
 
-#: src/chmframe.cpp:797
+#: src/chmframe.cpp:800
 msgid "Back"
 msgstr "Précédent"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:801
 msgid "Forward"
 msgstr "Suivant"
 
-#: src/chmframe.cpp:800
+#: src/chmframe.cpp:803
 msgid "Home"
 msgstr "Page d'accueil"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:806
 msgid "About"
 msgstr "A propos"
 

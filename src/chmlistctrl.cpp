@@ -30,7 +30,7 @@ CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
 			 wxWindowID id)
 	: wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
 		     wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | 
-		     wxSUNKEN_BORDER), _html(html)
+		     wxLC_SORT_ASCENDING | wxSUNKEN_BORDER), _html(html)
 {
 	InsertColumn(0, wxEmptyString);
 }
@@ -45,9 +45,18 @@ void CHMListCtrl::Reset()
 
 
 void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
-{ 
-	InsertItem(GetItemCount(), title);
-	_urls.Add(url);
+{
+//	int size = GetItemCount();
+
+	int i = 0;
+	for(i = 0; i < GetItemCount(); ++i) {
+		if(title.CmpNoCase(GetItemText(i)) <= 0)
+			break;
+	}
+
+	long item = InsertItem(i, title);
+	size_t index = _urls.Add(url);
+	SetItemData(item, index);
 }
 
 
@@ -61,7 +70,7 @@ void CHMListCtrl::LoadSelected()
         if(item == -1 || item > (long)_urls.GetCount() - 1)
 		return;
 
-	_html->LoadPage(_urls[(size_t)item]);	
+	_html->LoadPage(_urls[(size_t)GetItemData(item)]);	
 }
 
 
@@ -69,9 +78,6 @@ void CHMListCtrl::UpdateUI()
 {
 	int newSize = GetClientSize().GetWidth() - 1;
 	int cpp = GetCountPerPage();
-	
-	//	SetColumnWidth(0, wxLIST_AUTOSIZE);
-	//	int currSize = GetColumnWidth(0);
 	int currSize = _currentSize;
 
 	// If there's a scrollbar extract the width from the client area.

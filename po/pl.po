@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-24 13:23+0300\n"
+"POT-Creation-Date: 2004-11-26 16:55+0200\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -100,7 +100,7 @@ msgstr "O programie."
 msgid "Ready."
 msgstr "Gotowy."
 
-#: src/chmframe.cpp:149 src/chmframe.cpp:792
+#: src/chmframe.cpp:149 src/chmframe.cpp:795
 msgid "Contents"
 msgstr "Zawartość"
 
@@ -128,107 +128,107 @@ msgstr "Nie można rozpakować drzewa zawartości książki."
 msgid "No contents.."
 msgstr "Brak zawartości.."
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:603
 msgid "&Open..\tCtrl-O"
 msgstr "&Otwórz..\tCtrl-O"
 
-#: src/chmframe.cpp:601
+#: src/chmframe.cpp:604
 msgid "&Print page..\tCtrl-P"
 msgstr "Wy&drukuj stronę..\tCtrl-P"
 
-#: src/chmframe.cpp:602
+#: src/chmframe.cpp:605
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Fon&ty..\tCtrl-T"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:608
 msgid "&Show contents tree\tCtrl-S"
 msgstr "W&yświetlaj drzewo zawartości\tCtrl-S"
 
-#: src/chmframe.cpp:610
+#: src/chmframe.cpp:613
 msgid "&Recent files"
 msgstr "&Ostatnio otwierane pliki"
 
-#: src/chmframe.cpp:626
+#: src/chmframe.cpp:629
 msgid "E&xit\tCtrl-X"
 msgstr "&Wyjście\tCtrl-X"
 
-#: src/chmframe.cpp:627
+#: src/chmframe.cpp:630
 msgid "Quit the application."
 msgstr "Wyjście z aplikacji."
 
-#: src/chmframe.cpp:631
+#: src/chmframe.cpp:634
 msgid "&Home\tCtrl-H"
 msgstr "&Początek\tCtrl-H"
 
-#: src/chmframe.cpp:632
+#: src/chmframe.cpp:635
 msgid "For&ward\tCtrl-W"
 msgstr "&W przód\tCtrl-W"
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:636
 msgid "&Back\tCtrl-B"
 msgstr "W &tył\tCtrl-B"
 
-#: src/chmframe.cpp:636
+#: src/chmframe.cpp:639
 msgid "&About ..\tF1"
 msgstr "&O programie ..\tF1"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:642
 msgid "&File"
 msgstr "&Plik"
 
-#: src/chmframe.cpp:640
+#: src/chmframe.cpp:643
 msgid "Hi&story"
 msgstr "Hi&storia"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:644
 msgid "&Help"
 msgstr "&Pomoc"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:655
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-#: src/chmframe.cpp:674
+#: src/chmframe.cpp:677
 msgid "Add"
 msgstr "Dodaj"
 
-#: src/chmframe.cpp:675
+#: src/chmframe.cpp:678
 msgid "Remove"
 msgstr "Usuń"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:681
 msgid "Add displayed page to bookmarks."
 msgstr "Dodanie wyświetlanej strony do zakładek."
 
-#: src/chmframe.cpp:679
+#: src/chmframe.cpp:682
 msgid "Remove selected bookmark."
 msgstr "Usunięcie wybranej zakładki."
 
-#: src/chmframe.cpp:786
+#: src/chmframe.cpp:789
 msgid "Open .."
 msgstr "Otwórz .."
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:791
 msgid "Print .."
 msgstr "Wydrukuj .."
 
-#: src/chmframe.cpp:790
+#: src/chmframe.cpp:793
 msgid "Fonts .."
 msgstr "Fonty .."
 
-#: src/chmframe.cpp:797
+#: src/chmframe.cpp:800
 msgid "Back"
 msgstr "W tył"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:801
 msgid "Forward"
 msgstr "W przód"
 
-#: src/chmframe.cpp:800
+#: src/chmframe.cpp:803
 msgid "Home"
 msgstr "Początek"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:806
 msgid "About"
 msgstr "O programie"
 

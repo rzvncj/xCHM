@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-24 13:23+0300\n"
+"POT-Creation-Date: 2004-11-26 16:55+0200\n"
 "PO-Revision-Date: 2004-02-25 00:33+0100\n"
 "Last-Translator: Fabio Vescarelli <faber@faberbox.com>\n"
 "Language-Team: Italian <faber@faberbox.com>\n"
@@ -99,7 +99,7 @@ msgstr "Informazioni sul programma"
 msgid "Ready."
 msgstr "Pronto"
 
-#: src/chmframe.cpp:149 src/chmframe.cpp:792
+#: src/chmframe.cpp:149 src/chmframe.cpp:795
 msgid "Contents"
 msgstr "Sommario"
 
@@ -127,107 +127,107 @@ msgstr "Impossibile estrarre l'albero del contenuto del file"
 msgid "No contents.."
 msgstr "Nessun contenuto..."
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:603
 msgid "&Open..\tCtrl-O"
 msgstr "&Apri...\tCtrl-O"
 
-#: src/chmframe.cpp:601
+#: src/chmframe.cpp:604
 msgid "&Print page..\tCtrl-P"
 msgstr "S&tampa pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:602
+#: src/chmframe.cpp:605
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Cara&tteri...\tCtrl-T"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:608
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Mo&stra l'albero dei contenuti\tCtrl-S"
 
-#: src/chmframe.cpp:610
+#: src/chmframe.cpp:613
 msgid "&Recent files"
 msgstr "File &recenti"
 
-#: src/chmframe.cpp:626
+#: src/chmframe.cpp:629
 msgid "E&xit\tCtrl-X"
 msgstr "Es&ci\tCtrl-X"
 
-#: src/chmframe.cpp:627
+#: src/chmframe.cpp:630
 msgid "Quit the application."
 msgstr "Chiude il programma"
 
-#: src/chmframe.cpp:631
+#: src/chmframe.cpp:634
 msgid "&Home\tCtrl-H"
 msgstr "P&agina iniziale\tCtrl-H"
 
-#: src/chmframe.cpp:632
+#: src/chmframe.cpp:635
 msgid "For&ward\tCtrl-W"
 msgstr "A&vanti\tCtrl-W"
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:636
 msgid "&Back\tCtrl-B"
 msgstr "In&dietro\tCtrl-B"
 
-#: src/chmframe.cpp:636
+#: src/chmframe.cpp:639
 msgid "&About ..\tF1"
 msgstr "In&fo...\tF1"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:642
 msgid "&File"
 msgstr "&File"
 
-#: src/chmframe.cpp:640
+#: src/chmframe.cpp:643
 msgid "Hi&story"
 msgstr "C&ronologia"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:644
 msgid "&Help"
 msgstr "&Aiuto"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:655
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/chmframe.cpp:674
+#: src/chmframe.cpp:677
 msgid "Add"
 msgstr "Aggiungi"
 
-#: src/chmframe.cpp:675
+#: src/chmframe.cpp:678
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:681
 msgid "Add displayed page to bookmarks."
 msgstr "Aggiungi la pagina selezionata ai segnalibri"
 
-#: src/chmframe.cpp:679
+#: src/chmframe.cpp:682
 msgid "Remove selected bookmark."
 msgstr "Rimuovi il segnalibro selezionato"
 
-#: src/chmframe.cpp:786
+#: src/chmframe.cpp:789
 msgid "Open .."
 msgstr "Apri"
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:791
 msgid "Print .."
 msgstr "Stampa"
 
-#: src/chmframe.cpp:790
+#: src/chmframe.cpp:793
 msgid "Fonts .."
 msgstr "Caratteri"
 
-#: src/chmframe.cpp:797
+#: src/chmframe.cpp:800
 msgid "Back"
 msgstr "Indietro"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:801
 msgid "Forward"
 msgstr "Avanti"
 
-#: src/chmframe.cpp:800
+#: src/chmframe.cpp:803
 msgid "Home"
 msgstr "Pagina iniziale"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:806
 msgid "About"
 msgstr "Info"
 

@@ -104,8 +104,7 @@
 
 	* 0.8.8 Major feature enhancements:
 		+ all the wxListBox widgets have been replaced with
-		wxListCtrl derived virtual controls thus speeding up
-		element addition and visualization.
+		wxListCtrl derived controls.
 		+ added real-time searchable index support via a new 'Index'
 		panel (status / selected index word changes as you type).
 		+ suppressed unhelpful error messages while loading a page.
@@ -113,3 +112,4 @@
 		GetMimeTypeFromExt() couldn't figure out that pages that
 		ended in ".HTM" (as opposed to lowercase ".htm") are of
 		"text/html" MIME type.
+	

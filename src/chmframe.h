@@ -176,8 +176,6 @@ protected:
 	//! Cleanup code. This saves the window position and last open dir.
 	void OnCloseWindow(wxCloseEvent& event);
  	
-	void OnPageChanged(wxNotebookEvent& event);
-
 private:
 	//! Helper. Creates the menu.
 	wxMenuBar *CreateMenu();

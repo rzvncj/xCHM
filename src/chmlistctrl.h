@@ -57,36 +57,22 @@ public:
 	void Reset();
 
 	/*!
-	  \brief Adds an URL to the list. For every URL, you should
-	  also add a title.
-	  \param url The URL to add to the list.
-	 */
-	void AddUrl(const wxString& url) { _urls.Add(url); }
-
-	/*!
 	  \brief Adds a title to the list. The title is what you see as
 	  a list item, and the URL is the hidden info used to locate the
 	  page associated with the title. Again, at all times a title is
 	  being added, an associated URL must also be added.
 	  \param title The title to add.
 	 */
-	void AddTitle(const wxString& title);
+	void AddPairItem(const wxString& title, const wxString& url);
 	
 	//! Loads the page that corresponds to the item currently selected.
 	void LoadSelected();
-
-	//! Should be called every time after all the elements have been added.
-	void UpdateUI();
 
 protected:
 	//! Gets called when the widget is being resized.
 	void OnSize(wxSizeEvent& event);
 	
-	//! Implements functionality for the virtual wxWindows list control.
-	wxString OnGetItemText(long item, long column) const;
-
 private:
-	wxArrayString _titles;
 	wxArrayString _urls;
 	CHMHtmlWindow *_html;
 

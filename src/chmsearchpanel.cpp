@@ -131,8 +131,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(_titles->IsChecked() && h1.empty()) {
 		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
-		_results->UpdateUI();
-		_results->Refresh(); // Are these both necessary?
 		return;
 	}
 
@@ -141,11 +139,8 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			wxString full_url = wxString(wxT("file:")) + 
 				chmf->ArchiveName() + wxT("#chm:/") + i->first;
 
-			_results->AddTitle(i->second);
-			_results->AddUrl(full_url);
+			_results->AddPairItem(i->second, full_url);
 		}
-	_results->UpdateUI();
-	_results->Refresh(); // ?
 }
 
 
@@ -166,10 +161,8 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 			chmf->ArchiveName() + wxT("#chm:/") + data->_url;
 		wxString title = _tcl->GetItemText(root);
 
-		if(TitleSearch(title, text, false, wholeWords)) {
-			_results->AddTitle(title);
-			_results->AddUrl(url);
-		}
+		if(TitleSearch(title, text, false, wholeWords))
+			_results->AddPairItem(title, url);
 	}	
 
 	long cookie;

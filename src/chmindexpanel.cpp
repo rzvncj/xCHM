@@ -88,7 +88,7 @@ void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 		}
 	}
 
-	_lc->Refresh();		
+	_lc->Refresh();
 }
 
 

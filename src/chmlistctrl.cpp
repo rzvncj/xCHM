@@ -28,27 +28,23 @@ CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
 			 wxWindowID id)
 	: wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
 		     wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | 
-		     wxLC_VIRTUAL | wxSUNKEN_BORDER), _html(html)
+		     /*wxLC_VIRTUAL |*/ wxSUNKEN_BORDER), _html(html)
 {
 	InsertColumn(0, wxEmptyString);
-	SetItemCount(0);
 }
 
 
 void CHMListCtrl::Reset()
 {
 	DeleteAllItems();
-	SetItemCount(0); // Is this really needed?
-
-	_titles.Clear();
 	_urls.Clear();
 }
 
 
-void CHMListCtrl::AddTitle(const wxString& title)
+void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 { 
-	_titles.Add(title);
-	SetItemCount(_titles.GetCount());
+	InsertItem(GetItemCount(), title);
+	_urls.Add(url);
 }
 
 
@@ -67,32 +63,21 @@ void CHMListCtrl::LoadSelected()
 }
 
 
-void CHMListCtrl::UpdateUI()
+void CHMListCtrl::OnSize(wxSizeEvent& event)
 {
 	int newSize = GetClientSize().GetWidth() - 1;
 	int cpp = GetCountPerPage();
+	
+	SetColumnWidth(0, wxLIST_AUTOSIZE);
+	int currSize = GetColumnWidth(0);
 
 	// If there's a scrollbar extract the width from the client area.
 	if(cpp >= 0 && GetItemCount() > cpp)
 		newSize -= wxSystemSettings::GetSystemMetric(wxSYS_VSCROLL_X);
 
-	SetColumnWidth(0, newSize);
-}
+	SetColumnWidth(0, newSize >= currSize ? newSize : currSize);
 
-
-void CHMListCtrl::OnSize(wxSizeEvent& event)
-{
-	UpdateUI();
 	event.Skip();
-}
-
-
-wxString CHMListCtrl::OnGetItemText(long item, long column) const
-{
-	if(column || item > (long)_titles.GetCount() - 1)
-		return wxEmptyString;
-
-	return _titles[item];
 }
 
 

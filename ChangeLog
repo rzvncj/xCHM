@@ -112,4 +112,10 @@
 		GetMimeTypeFromExt() couldn't figure out that pages that
 		ended in ".HTM" (as opposed to lowercase ".htm") are of
 		"text/html" MIME type.
+
+	* 0.8.9 Bugfix release:
+		+ checking for the u_intXX_t types with autoconf.
+		+ the detection of the book title, home page, index
+		and contents files is reliable.
+		+ applied FreeBSD port patch.
 	

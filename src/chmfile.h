@@ -218,6 +218,12 @@ private:
 	//! Puts in the str parameter the contents of the file referred by ui.
 	void GetFileAsString(wxString& str, chmUnitInfo *ui);
 
+	//! Looks up as much information as possible from #WINDOWS/#STRINGS.
+	bool InfoFromWindows();
+
+	//! Looks up as much information as possible from #SYSTEM.
+	bool InfoFromSystem();
+
 private:
 	chmFile* _chmFile;
 	wxString _filename;

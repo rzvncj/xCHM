@@ -64,6 +64,9 @@ private:
 
 #endif
 
+// Big-enough buffer size for use with various routines.
+#define BUF_SIZE 4096
+
 
 // Thanks to Vadim Zeitlin.
 #define ANSI_CHARSET            0
@@ -377,154 +380,10 @@ size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 
 bool CHMFile::GetArchiveInfo()
 {
-#define BUF_SIZE 4096
-	unsigned char buffer[BUF_SIZE];
-	chmUnitInfo ui;
-	
-	int index = 0;
-	u_int16_t *cursor = NULL;
-	long size = 0;
-	long cs = -1;
+	bool retw = InfoFromWindows();
+	bool rets = InfoFromSystem();
 
-	// Do we have the #SYSTEM file in the archive?
-	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
-	   CHM_RESOLVE_SUCCESS)
-		return false;
-
-	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-	if((size = ::chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE))
-	   == 0)
-		return false;
-
-	buffer[size - 1] = 0;
-
-	for(;;) {
-		// This condition won't hold if I process anything
-		// except NUL-terminated strings!
-		if(index > size - 1 - (long)sizeof(u_int16_t))
-			break;
-
-		cursor = (u_int16_t *)(buffer + index);
-		FIXENDIAN16(*cursor);
-		
-		switch(*cursor) {
-		case 0:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			_topicsFile = wxString(wxT("/")) 
-				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			break;
-		case 1:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			_indexFile = wxString(wxT("/"))
-				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			break;
-		case 2:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			_home = wxString(wxT("/"))
-				+ CURRENT_CHAR_STRING(buffer + index + 2);
-			break;
-		case 3:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			_title = CURRENT_CHAR_STRING(buffer + index + 2);
-			break;
-		case 6:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			if(_topicsFile.IsEmpty()) {
-				wxString topicAttempt = wxT("/"), tmp;
-				topicAttempt += 
-					CURRENT_CHAR_STRING(buffer +index +2);
-
-				tmp = topicAttempt + wxT(".hhc");
-				
-				if(chm_resolve_object(_chmFile,
-						      tmp.mb_str(), &ui)
-				   == CHM_RESOLVE_SUCCESS)
-					_topicsFile = tmp;
-
-				tmp = topicAttempt + wxT(".hhk");
-				
-				if(chm_resolve_object(_chmFile,
-						      tmp.mb_str(), &ui)
-				   == CHM_RESOLVE_SUCCESS)
-					_indexFile = tmp;
-			}
-
-			break;
-
-		case 16:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-
-			_font = CURRENT_CHAR_STRING(buffer + index + 2);
-			_font.AfterLast(wxT(',')).ToLong(&cs);
-			_enc = GetFontEncFromCharSet(cs);
-			
-			break;
-		default:
-			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
-		}
-
-		index += *cursor + 2;
-	}
-
-	// one last try to see if we can get contents from "/#STRINGS"
-	if(_topicsFile.IsEmpty() && _indexFile.IsEmpty()) {
-
-		index = 0;
-		wxString chunk;
-
-		if(::chm_resolve_object(_chmFile, "/#STRINGS", &ui) !=
-		   CHM_RESOLVE_SUCCESS)
-			// no /#STRINGS, but we did get some info.
-			return true;
-
-		// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-		if((size = ::chm_retrieve_object(_chmFile, &ui,
-						  buffer, 1, BUF_SIZE)) == 0)
-			// this should never happen, the specs say
-			// the least the file can be is 4096 bytes.
-			return true;
-
-		buffer[size - 1] = 0;
-
-		for(;;) {
-			if(index > size - 1)
-				break;
-
-			chunk = CURRENT_CHAR_STRING(buffer + index);
-			
-			if(chunk.Right(4).Lower() == wxT(".hhc")) {
-				_topicsFile = wxString(wxT("/")) + chunk;
-				return true;
-
-			} else if(chunk.Right(4).Lower() == wxT(".hhk")) {
-				_indexFile = wxString(wxT("/")) + chunk;
-				return true;
-			}
-
-			index += chunk.size() + 1;
-		}		
-	}
-
-	return true;
+	return (retw || rets);
 }
 
 
@@ -718,6 +577,203 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
+}
+
+
+inline
+bool CHMFile::InfoFromWindows()
+{
+	unsigned char buffer[BUF_SIZE];
+	chmUnitInfo ui;
+	long size = 0;
+
+	if(::chm_resolve_object(_chmFile, "/#WINDOWS", &ui) == 
+	   CHM_RESOLVE_SUCCESS) {
+		if(::chm_retrieve_object(_chmFile, &ui, 
+					 buffer, 0, BUF_SIZE) < 0x78)
+			return false;
+
+		u_int32_t off_title = *(u_int32_t *)(buffer + 0x1c);
+		FIXENDIAN32(off_title);
+		u_int32_t off_home = *(u_int32_t *)(buffer + 0x70);
+		FIXENDIAN32(off_home);
+		u_int32_t off_hhc = *(u_int32_t *)(buffer + 0x68);
+		FIXENDIAN32(off_hhc);
+		u_int32_t off_hhk = *(u_int32_t *)(buffer + 0x6c);
+		FIXENDIAN32(off_hhk);
+
+		if(::chm_resolve_object(_chmFile, "/#STRINGS", &ui) != 
+		   CHM_RESOLVE_SUCCESS)
+			return false;
+
+		unsigned int factor = off_title / 4096;
+
+		if((size = ::chm_retrieve_object(_chmFile, &ui, 
+						 buffer, factor * 4096, 
+						 BUF_SIZE)) != 0)
+			_title = CURRENT_CHAR_STRING(buffer + off_title 
+						     % 4096);
+
+		if(factor != off_home / 4096) {
+			factor = off_home / 4096;
+			
+			size = ::chm_retrieve_object(_chmFile, &ui, 
+						     buffer, factor * 4096, 
+						     BUF_SIZE);
+		}
+			
+		if(size)
+			_home = wxString(wxT("/")) +
+				CURRENT_CHAR_STRING(buffer + off_home % 4096);
+	       
+
+		if(factor != off_hhc / 4096) {
+			factor = off_hhc / 4096;			
+			size = ::chm_retrieve_object(_chmFile, &ui, 
+						     buffer, factor * 4096, 
+						     BUF_SIZE);
+		}
+		
+		if(size)
+			_topicsFile = wxString(wxT("/")) + 
+				CURRENT_CHAR_STRING(buffer + off_hhc % 4096);
+
+		if(factor != off_hhk / 4096) {
+			factor = off_hhk / 4096;			
+			size = ::chm_retrieve_object(_chmFile, &ui, 
+						     buffer, factor * 4096, 
+						     BUF_SIZE);
+		}
+
+		if(size)
+			_indexFile = wxString(wxT("/")) + 
+				CURRENT_CHAR_STRING(buffer + off_hhk 
+						    % 4096);
+	}
+
+	return true;
+}
+
+
+inline
+bool CHMFile::InfoFromSystem()
+{
+	unsigned char buffer[BUF_SIZE];
+	chmUnitInfo ui;
+	
+	int index = 0;
+	u_int16_t *cursor = NULL;
+	long size = 0;
+	long cs = -1;
+
+	// Do we have the #SYSTEM file in the archive?
+	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
+	   CHM_RESOLVE_SUCCESS)
+		return false;
+
+	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
+	if((size = ::chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE))
+	   == 0)
+		return false;
+
+	buffer[size - 1] = 0;
+
+	for(;;) {
+		// This condition won't hold if I process anything
+		// except NUL-terminated strings!
+		if(index > size - 1 - (long)sizeof(u_int16_t))
+			break;
+
+		cursor = (u_int16_t *)(buffer + index);
+		FIXENDIAN16(*cursor);
+		
+		switch(*cursor) {
+		case 0:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+			
+			if(_topicsFile.IsEmpty())
+				_topicsFile = wxString(wxT("/")) 
+					+ CURRENT_CHAR_STRING(buffer + 
+							      index + 2);
+			break;
+		case 1:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			if(_indexFile.IsEmpty())
+				_indexFile = wxString(wxT("/"))
+					+ CURRENT_CHAR_STRING(buffer + 
+							      index + 2);
+			break;
+		case 2:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			if(_home.IsEmpty() || _home == wxString(wxT("/")))
+				_home = wxString(wxT("/"))
+					+ CURRENT_CHAR_STRING(buffer + 
+							      index + 2);
+			break;
+		case 3:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			if(_title.IsEmpty())
+				_title = CURRENT_CHAR_STRING(buffer + 
+							     index + 2);
+			break;
+		case 6:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			if(_topicsFile.IsEmpty()) {
+				wxString topicAttempt = wxT("/"), tmp;
+				topicAttempt += 
+					CURRENT_CHAR_STRING(buffer +index +2);
+
+				tmp = topicAttempt + wxT(".hhc");
+				
+				if(chm_resolve_object(_chmFile,
+						      tmp.mb_str(), &ui)
+				   == CHM_RESOLVE_SUCCESS)
+					_topicsFile = tmp;
+
+				tmp = topicAttempt + wxT(".hhk");
+				
+				if(chm_resolve_object(_chmFile,
+						      tmp.mb_str(), &ui)
+				   == CHM_RESOLVE_SUCCESS)
+					_indexFile = tmp;
+			}
+
+			break;
+
+		case 16:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+
+			_font = CURRENT_CHAR_STRING(buffer + index + 2);
+			_font.AfterLast(wxT(',')).ToLong(&cs);
+			_enc = GetFontEncFromCharSet(cs);
+			
+			break;
+		default:
+			index += 2;
+			cursor = (u_int16_t *)(buffer + index);
+			FIXENDIAN16(*cursor);			
+		}
+
+		index += *cursor + 2;
+	}
+
+	return true;
 }
 
 

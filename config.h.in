@@ -60,5 +60,5 @@
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef u_int32_t
 
-/* Define to `unsigned long' if <sys/types.h> does not define. */
+/* Define to `unsigned long long' if <sys/types.h> does not define. */
 #undef u_int64_t

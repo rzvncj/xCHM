@@ -173,8 +173,14 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 	if(text.IsEmpty())
 		return false;
 
-	chmUnitInfo ui;       
+	chmUnitInfo ui, uitopics, uiurltbl, uistrings;
 	if(::chm_resolve_object(_chmFile, "/$FIftiMain", &ui) !=
+	   CHM_RESOLVE_SUCCESS || 
+	   ::chm_resolve_object(_chmFile, "/#TOPICS", &uitopics) !=
+	   CHM_RESOLVE_SUCCESS ||
+	   ::chm_resolve_object(_chmFile, "/#STRINGS", &uistrings) !=
+	   CHM_RESOLVE_SUCCESS ||
+	   ::chm_resolve_object(_chmFile, "/#URLTBL", &uiurltbl) !=
 	   CHM_RESOLVE_SUCCESS)
 		return false;
 
@@ -207,60 +213,18 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 	u_int16_t tree_depth = *cursor16;
 	FIXENDIAN16(tree_depth);
 
-	UCharPtr buffer(new unsigned char[node_len]);
-	
-	if(!buffer.get())
-		return false;
-
 	unsigned char word_len, pos;
-	u_int32_t test_offset = 0;
 	wxString word;
 	u_int32_t i = sizeof(u_int16_t);
 	u_int16_t free_space;
 
-	while(--tree_depth) {
-		if(node_offset == test_offset)
-			return false;
+	UCharPtr buffer(new unsigned char[node_len]);
 
-		test_offset = node_offset;
-		if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
-					 node_offset, node_len) == 0)
-			return false;
-
-		cursor16 = reinterpret_cast<u_int16_t*>(buffer.get());
-		free_space = *cursor16;
-		FIXENDIAN16(free_space);
-
-		while(i < node_len - free_space) {			
-
-			word_len = *(buffer.get() + i);
-			pos = *(buffer.get() + i + 1);
-
-			if(pos == 0)
-				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
-							       + i + 2, 
-							       word_len - 1);
-			else
-				word = word.Mid(0, pos) +
-					CURRENT_CHAR_STRING_LEN(buffer.get() 
-								+ i + 2,
-								word_len - 1);
-
-			cerr << "Word: " << word.mb_str() << endl;
-
-			if(text.CmpNoCase(word) < 0) {
-				cursor32 = reinterpret_cast<u_int32_t*>(
-					buffer.get() + i + word_len + 1);
-				node_offset = *cursor32;
-				FIXENDIAN32(node_offset);
-				break;
-			}
-
-			i += word_len + sizeof(unsigned char) +
-				+ sizeof(u_int32_t) + sizeof(u_int16_t);
-		}
-	}
-
+	node_offset = GetLeafNodeOffset(text, node_offset, node_len,
+					tree_depth, &ui);
+	if(!node_offset)
+		return false;
+		
 	// got a leaf node here.
 	if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
 				 node_offset, node_len) == 0)
@@ -269,6 +233,10 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 	cursor16 = reinterpret_cast<u_int16_t *>(buffer.get() + 6);
 	free_space = *cursor16;
 	FIXENDIAN16(free_space);
+
+	cursor16 = reinterpret_cast<u_int16_t *>(buffer.get());
+	u_int16_t next_chunk = *cursor16; // 0 if last
+	FIXENDIAN16(next_chunk);
 
 	i = sizeof(u_int32_t) + sizeof(u_int16_t) + sizeof(u_int16_t);
 	u_int64_t wlc_count, wlc_size;
@@ -286,10 +254,11 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 				CURRENT_CHAR_STRING_LEN(buffer.get() + i + 2,
 							word_len - 1);
 
-		cerr << "Leaf word: " << word.mb_str() << endl;
 		i += 2 + word_len;
 
 		unsigned char title = *(buffer.get() + i - 1);
+		cerr << "Leaf word: " << word.mb_str() 
+		     << "; title: " << (int)title << endl;
 
 		size_t encsz;
 		wlc_count = be_encint(buffer.get() + i, encsz);
@@ -302,14 +271,16 @@ bool CHMFile::IndexSearch(const wxString& text, bool WXUNUSED(wholeWords),
 		i += sizeof(u_int32_t) + sizeof(u_int16_t);
 		wlc_size =  be_encint(buffer.get() + i, encsz);
 		i += encsz;
-
+		
 		if(!title && titlesOnly)
 			continue;
 
-		if(!text.CmpNoCase(word)) {
-			// process WLC data here
-			return true;
-		}
+		if(!text.CmpNoCase(word))
+			return ProcessWLC(wlc_count, wlc_size, wlc_offset, 
+					  doc_index_s, doc_index_r,
+					  code_count_s, code_count_r,
+					  loc_codes_s, loc_codes_r, &ui,
+					  &uiurltbl, &uistrings, &uitopics);
 	}
 
 	return false;
@@ -466,4 +437,146 @@ bool CHMFile::GetArchiveInfo()
 
 	return true;
 }
+
+
+inline 
+u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
+				     u_int32_t initialOffset,
+				     u_int32_t buffSize,
+				     u_int16_t treeDepth,
+				     chmUnitInfo *ui)
+{
+	u_int32_t test_offset = 0;
+	u_int16_t* cursor16;
+	u_int32_t* cursor32;
+	unsigned char word_len, pos;
+	u_int32_t i = sizeof(u_int16_t);
+	UCharPtr buffer(new unsigned char[buffSize]);
+	wxString word;
+	
+	if(!buffer.get())
+		return 0;
+
+	while(--treeDepth) {
+		if(initialOffset == test_offset)
+			return 0;
+
+		test_offset = initialOffset;
+		if(::chm_retrieve_object(_chmFile, ui, buffer.get(), 
+					 initialOffset, buffSize) == 0)
+			return 0;
+
+		cursor16 = reinterpret_cast<u_int16_t*>(buffer.get());
+		u_int16_t free_space = *cursor16;
+		FIXENDIAN16(free_space);
+
+		while(i < buffSize - free_space) {			
+
+			word_len = *(buffer.get() + i);
+			pos = *(buffer.get() + i + 1);
+
+			if(pos == 0)
+				word = CURRENT_CHAR_STRING_LEN(buffer.get() 
+							       + i + 2, 
+							       word_len - 1);
+			else
+				word = word.Mid(0, pos) +
+					CURRENT_CHAR_STRING_LEN(buffer.get() 
+								+ i + 2,
+								word_len - 1);
+
+			cerr << "Word: " << word.mb_str() << endl;
+
+			if(text.CmpNoCase(word) < 0) {
+				cursor32 = reinterpret_cast<u_int32_t*>(
+					buffer.get() + i + word_len + 1);
+				initialOffset = *cursor32;
+				FIXENDIAN32(initialOffset);
+				break;
+			}
+
+			i += word_len + sizeof(unsigned char) +
+				+ sizeof(u_int32_t) + sizeof(u_int16_t);
+		}
+	}
+
+	if(initialOffset == test_offset)
+		return 0;
+
+	return initialOffset;
+}
+
+
+inline 
+bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
+			 u_int32_t wlc_offset, unsigned char ds,
+			 unsigned char dr, unsigned char cs,
+			 unsigned char cr, unsigned char ls,
+			 unsigned char lr, chmUnitInfo *uimain,
+			 chmUnitInfo* uitbl, chmUnitInfo *uistrings,
+			 chmUnitInfo* topics)
+{
+	int wlc_bit = 7;
+	u_int64_t index = 0, count;
+	size_t length, off = 0;
+	UCharPtr buffer(new unsigned char[wlc_size]);
+	u_int32_t *cursor32;
+	u_int32_t stroff, urloff;
+
+#define TOPICS_HEADER_LEN 0xe
+	unsigned char header[TOPICS_HEADER_LEN];
+
+#define STRINGS_BUF_LEN 512
+	unsigned char strbuf[STRINGS_BUF_LEN];
+
+	if(::chm_retrieve_object(_chmFile, uimain, buffer.get(), 
+				 wlc_offset, wlc_size) == 0)
+		return false;
+
+	for(u_int64_t i = 0; i < wlc_count; ++i) {
+		
+		if(wlc_bit != 7) {
+			++off;
+			wlc_bit = 7;
+		}
+
+		index += sr_int(buffer.get() + off, &wlc_bit, ds, dr, length);
+		off += length;
+
+		if(::chm_retrieve_object(_chmFile, topics, header, 
+					 index, TOPICS_HEADER_LEN) == 0)
+			return false;
+
+		cursor32 = reinterpret_cast<u_int32_t *>(header + 4);
+		stroff = *cursor32;
+		FIXENDIAN32(stroff);
+
+/*		if(::chm_retrieve_object(_chmFile, uistrings, strbuf, 
+					 stroff, STRINGS_BUF_LEN - 1) == 0)
+			return false;
+		strbuf[STRINGS_BUF_LEN - 1] = 0;
+*/
+
+		wxString topic;// = CURRENT_CHAR_STRING(strbuf);
+	      
+		cursor32 = reinterpret_cast<u_int32_t *>(header + 8);
+		urloff = *cursor32;
+		FIXENDIAN32(urloff);
+
+		cerr << "Index: " << index 
+		     << ", file: " << topic.mb_str() 
+		     << ", stroff: " << stroff << endl;
+
+		count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
+		off += length;
+
+		for(u_int64_t j = 0; j < count; ++j) {
+			sr_int(buffer.get() + off, &wlc_bit, ls, lr, length);
+			off += length;
+		}
+	}
+
+	return true;
+}
+
 

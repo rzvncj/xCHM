@@ -28,6 +28,7 @@
 #include <wx/listbox.h>
 
 
+
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
 class CHMFile {
 public:
@@ -154,7 +155,23 @@ public:
 
 private:
 	//! Helper. Initializes most of the private data members.
-	bool GetArchiveInfo();			    
+	bool GetArchiveInfo();
+
+	//! Helper. Returns the $FIftiMain offset of leaf node or 0.
+	u_int32_t GetLeafNodeOffset(const wxString& text,
+				    u_int32_t initalOffset,
+				    u_int32_t buffSize,
+				    u_int16_t treeDepth,
+				    chmUnitInfo *ui);
+
+	//! Helper. Processes the word location code entries while searching.
+	bool ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
+			u_int32_t wlc_offset, unsigned char ds,
+			unsigned char dr, unsigned char cs,
+			unsigned char cr, unsigned char ls,
+			unsigned char lr, chmUnitInfo *uifmain,
+			chmUnitInfo* uitbl, chmUnitInfo *uistrings,
+			chmUnitInfo* topics);
 
 private:
 	chmFile* _chmFile;

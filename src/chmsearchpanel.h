@@ -29,8 +29,16 @@
 #include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/listbox.h>
+#include <wx/html/htmlwin.h>
 
 
+/*!
+  \class wxPanel
+  \brief generic wxWindows panel widget class.
+*/
+
+
+//! IDs for various widget events.
 enum {
 	ID_SearchText = 1024,
 	ID_SearchButton,
@@ -38,12 +46,43 @@ enum {
 };
 
 
+//! \brief Custom built search panel.
 class CHMSearchPanel : public wxPanel {
 
 public:
-	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics);
+	/*!
+	  \brief Initialized the search panel.
+	  \param parent Parent widget.
+	  \param topics A wxTreeCtrl* that will be iterated over
+	  recursively in order to figure out which files from the
+	  archive to be searched.
+	  \param html The widget that can load a html page that
+	  has been found as a result of searching.
+	 */
+	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
+		       wxHtmlWindow* html);
 
+	//! Resets the panel (clears the result list, the checkboxes, etc.)
 	void Reset();
+
+protected:
+	/*! 
+	  This gets called when the user clicks the Search button or
+	  presses Enter in the textbox.
+	*/
+	void OnSearch(wxCommandEvent& event);
+
+	//! This gets called when the user clicks on a result.
+	void OnSearchSel(wxCommandEvent& event);
+
+private:
+	//! Helper. Searches through the tree recursively.
+	void PopulateList(wxTreeItemId root, wxString& text,
+			  bool caseSensitive, bool wholeWords);
+
+	//! Helper. Searches a HTML file for the given text.
+	bool SearchFile(const wxString& filename, wxString& text,
+			bool caseSensitive, bool wholeWords);
 
 private:
 	wxTreeCtrl* _tcl;
@@ -52,6 +91,10 @@ private:
 	wxCheckBox* _whole;
 	wxButton* _search;
 	wxListBox* _results;
+	wxHtmlWindow* _html;
+
+private:
+	DECLARE_EVENT_TABLE()
 };
 
 

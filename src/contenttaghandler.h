@@ -83,10 +83,8 @@ public:
 	  \brief Constructs the tag handler.
 	  \param toBuild The tree control to build. The control must be
 	  empty.
-	  \param bookTitle This is the text that will appear on the root
-	  of the contents tree.
 	 */
-	ContentTagHandler(wxTreeCtrl* toBuild, const wxString& bookTitle);
+	ContentTagHandler(wxTreeCtrl* toBuild);
 
 	//! What tags are we interested in?
         wxString GetSupportedTags() { return wxT("UL,OBJECT,PARAM"); }

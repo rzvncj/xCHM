@@ -36,4 +36,9 @@
 		+ changed the configure.in method to figure out where
 		wxWindows is from plain old `wx-config --cxxflags`, etc.,
 		to AM_PATH_WXCONFIG.
+
+	* 0.7 Major feature enhancements:
+		+ added a full search panel and changed the layout of the
+		contents panel. Now you can look for text in all the pages
+		of the loaded .chm file.
 	

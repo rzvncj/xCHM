@@ -22,8 +22,9 @@
 #include <chmframe.h>
 #include <chminputstream.h>
 #include <contenttaghandler.h>
-#include <wx/fontenum.h>
 #include <chmfontdialog.h>
+#include <wx/fontenum.h>
+#include <wx/panel.h>
 
 
 namespace {
@@ -55,6 +56,9 @@ const wxChar *about_txt = wxT(
 #include <htmbook.xpm>
 
 } // namespace
+
+
+#define CONTENTS_MARGIN 160
 
 
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
@@ -97,10 +101,20 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb = new wxNotebook(_sw, -1);
 	_nb->Show(FALSE);
 
-	_tcl = new wxTreeCtrl(_nb, ID_TreeCtrl);
-	_csp = new CHMSearchPanel(_nb, _tcl);
+	wxPanel *temp = new wxPanel(_nb);
+	wxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+	temp->SetAutoLayout(TRUE);
+        temp->SetSizer(sizer);
 
-	_nb->AddPage(_tcl, wxT("Contents"));
+	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
+			      wxDefaultSize, wxTR_HAS_BUTTONS |
+			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT |
+			      wxTR_SINGLE | wxTR_LINES_AT_ROOT);
+	sizer->Add(_tcl, 1, wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT, 0);
+
+	_csp = new CHMSearchPanel(_nb, _tcl, _html);
+
+	_nb->AddPage(temp, wxT("Contents"));
 	_nb->AddPage(_csp, wxT("Search"));
 
 	_sw->Initialize(_html);
@@ -234,7 +248,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_menuFile->Check(ID_Contents, TRUE);
 
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, 150);
+			_sw->SplitVertically(_nb, _html, CONTENTS_MARGIN);
 
 		} else {
 			_tb->ToggleTool(ID_Contents, FALSE);
@@ -268,7 +282,8 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(id == _tcl->GetRootItem() || !chmf)
 		return;
 
-	URLTreeItem *data = (URLTreeItem *)_tcl->GetItemData(id);
+	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
+		_tcl->GetItemData(id));
 
 	if(!data || data->_url.IsEmpty())
 		return;
@@ -330,7 +345,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	if(_tcl->GetCount() > 1) {		
 		if(!_sw->IsSplit()) {
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, 150);
+			_sw->SplitVertically(_nb, _html, CONTENTS_MARGIN);
 			_menuFile->Check(ID_Contents, TRUE);
 			_tb->ToggleTool(ID_Contents, TRUE);
 		}

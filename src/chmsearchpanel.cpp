@@ -272,10 +272,13 @@ void CHMSearchPanel::SetNewFont(const wxFont& font)
 void CHMSearchPanel::ResetFont(const wxFont& font)
 {
 	// wxWindows bug I have to get around.
-	_results->SetFont(wxFont(font.GetPointSize(), font.GetFamily(),
-				 font.GetStyle(), font.GetWeight(), 
-				 font.GetUnderlined(), font.GetFaceName(),
-				 _enc));
+	wxFont tmp(font.GetPointSize(), font.GetFamily(),
+		   font.GetStyle(), font.GetWeight(), 
+		   font.GetUnderlined(), font.GetFaceName(),
+		   _enc);
+
+	if(tmp.Ok())
+		_results->SetFont(tmp);
 }
 
 void CHMSearchPanel::SetConfig()

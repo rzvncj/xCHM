@@ -475,18 +475,22 @@ void CHMFrame::LoadCHM(const wxString& archive)
 		long cs = -1;
 		fontFace.AfterLast(wxT(',')).ToLong(&cs);
 
-		int sizes[7];
-		for(int i = -3; i <= 3; ++i)
-			sizes[i+3] = _fontSize + i * 2;
-
 		wxFont font(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
 			    wxEmptyString, GetFontEncFromCharSet((int)cs));
-		_tcl->SetFont(font);
-		_csp->SetNewFont(font);
-		_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
-				sizes);
 
-		noSpecialFont = false;
+		if(font.Ok()) {
+
+			int sizes[7];
+			for(int i = -3; i <= 3; ++i)
+				sizes[i+3] = _fontSize + i * 2;
+
+			_tcl->SetFont(font);
+			_csp->SetNewFont(font);
+			_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
+					sizes);
+			
+			noSpecialFont = false;
+		}
 
 	} else if(noSpecialFont == false) {
 

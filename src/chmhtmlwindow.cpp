@@ -134,7 +134,8 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 {
 	if(location.StartsWith(wxT("file:")) || 
 	   !location.Left(5).CmpNoCase(wxT("http:")) ||
-	   !location.Left(10).CmpNoCase(wxT("javascript")))
+	   !location.Left(10).CmpNoCase(wxT("javascript")) ||
+	   location.StartsWith(wxT("#")))
 		return false;
 	  
 	CHMFile *chmf = CHMInputStream::GetCache();

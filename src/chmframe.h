@@ -176,9 +176,6 @@ private:
 	//! Helper. Saves the bookmarks for the currently opened CHM file.
 	void SaveBookmarks();
 
-	//! Helper. Translates from Win32 encodings to generic wxWindows ones.
-	wxFontEncoding GetFontEncFromCharSet(int cs);
-
 private:
 	CHMHtmlWindow* _html;
 	wxTreeCtrl* _tcl;

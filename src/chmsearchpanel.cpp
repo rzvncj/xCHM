@@ -141,10 +141,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			wxString full_url = wxString(wxT("file:")) + 
 				chmf->ArchiveName() + wxT("#chm:/") + i->first;
 
-			// wxCSConv cv(wxT("koi8-r"));
-			//wxString tmp((const char *)(i->second).mb_str(cv),
-			//cv);
-
 			_results->Append(i->second, new wxString(full_url));
 		}
 }

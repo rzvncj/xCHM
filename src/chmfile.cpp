@@ -23,7 +23,7 @@
 #include <contenttaghandler.h>
 #include <wx/defs.h>
 #include <wx/strconv.h>
-#include <wx/tokenzr.h>
+#include <wx/fontmap.h>
 #include <assert.h>
 
 #include <bitfiddle.inl>
@@ -61,6 +61,29 @@ private:
 	wxString(reinterpret_cast<const char *>(x))
 
 #endif
+
+
+// Thanks to Vadim Zeitlin.
+#define ANSI_CHARSET            0
+#define DEFAULT_CHARSET         1
+#define SYMBOL_CHARSET          2
+#define SHIFTJIS_CHARSET        128
+#define HANGEUL_CHARSET         129
+#define HANGUL_CHARSET          129
+#define GB2312_CHARSET          134
+#define CHINESEBIG5_CHARSET     136
+#define OEM_CHARSET             255
+#define JOHAB_CHARSET           130
+#define HEBREW_CHARSET          177
+#define ARABIC_CHARSET          178
+#define GREEK_CHARSET           161
+#define TURKISH_CHARSET         162
+#define VIETNAMESE_CHARSET      163
+#define THAI_CHARSET            222
+#define EASTEUROPE_CHARSET      238
+#define RUSSIAN_CHARSET         204
+#define MAC_CHARSET             77
+#define BALTIC_CHARSET          186
 
 
 
@@ -112,7 +135,7 @@ void CHMFile::CloseCHM()
 	_chmFile = NULL;
 	_home = wxT("/");
 	_filename = _home = _topicsFile = _indexFile 
-		= _title = wxEmptyString;
+		= _title = _font = wxEmptyString;
 }
 
 
@@ -153,7 +176,13 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 		return false;
 
 	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(toBuild));
+	parser.AddTagHandler(new ContentTagHandler(toBuild, _enc,
+#ifdef wxUSE_UNICODE
+						   !_font.IsEmpty()
+#else
+						   false
+#endif						
+				     ));	
 	parser.Parse(src);
 
 	return true;
@@ -340,6 +369,7 @@ bool CHMFile::GetArchiveInfo()
 	int index = 0;
 	u_int16_t *cursor = NULL;
 	long size = 0;
+	long cs = -1;
 
 	// Do we have the #SYSTEM file in the archive?
 	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
@@ -427,6 +457,9 @@ bool CHMFile::GetArchiveInfo()
 			FIXENDIAN16(*cursor);			
 
 			_font = CURRENT_CHAR_STRING(buffer + index + 2);
+			_font.AfterLast(wxT(',')).ToLong(&cs);
+			_enc = GetFontEncFromCharSet(cs);
+			
 			break;
 		default:
 			index += 2;
@@ -473,8 +506,7 @@ bool CHMFile::GetArchiveInfo()
 			}
 
 			index += chunk.size() + 1;
-		}
-		
+		}		
 	}
 
 	return true;
@@ -603,7 +635,18 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		} else {
 			combuf[COMMON_BUF_LEN - 1] = 0;
-			topic = CURRENT_CHAR_STRING(combuf);
+
+#ifdef wxUSE_UNICODE
+			if(_font.IsEmpty())
+#endif
+				topic = CURRENT_CHAR_STRING(combuf);
+#ifdef wxUSE_UNICODE
+			else {
+				wxCSConv cv(wxFontMapper::Get()->
+					    GetEncodingName(_enc));
+				topic = wxString((const char *)combuf, cv);
+			}
+#endif
 		}
 	      
 		cursor32 = reinterpret_cast<u_int32_t *>(entry + 8);
@@ -641,6 +684,63 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	return true;
 }
 
+
+inline
+wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
+{
+    wxFontEncoding fontEncoding;
+            
+    switch(cs) {
+        case ANSI_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_1;
+            break;            
+        case EASTEUROPE_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_2;
+            break;        
+        case BALTIC_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_13;
+            break;    
+        case RUSSIAN_CHARSET:
+            fontEncoding = wxFONTENCODING_KOI8;
+            break;
+        case ARABIC_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_6;
+            break;
+        case GREEK_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_7;
+            break;
+        case HEBREW_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_8;
+            break;
+        case TURKISH_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_9;
+            break;
+        case THAI_CHARSET:
+            fontEncoding = wxFONTENCODING_ISO8859_11;
+            break;
+        case SHIFTJIS_CHARSET:
+            fontEncoding = wxFONTENCODING_CP932;
+            break;
+        case GB2312_CHARSET:
+            fontEncoding = wxFONTENCODING_CP936;
+            break;
+        case HANGUL_CHARSET:
+            fontEncoding = wxFONTENCODING_CP949;
+            break;
+        case CHINESEBIG5_CHARSET:
+            fontEncoding = wxFONTENCODING_CP950;
+            break;
+        case OEM_CHARSET:
+            fontEncoding = wxFONTENCODING_CP437;
+            break;
+        default:
+            // assume the system charset
+            fontEncoding = wxFONTENCODING_SYSTEM;
+            break;            
+    }
+    
+    return fontEncoding;
+}
 
 
 

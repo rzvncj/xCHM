@@ -27,6 +27,7 @@
 #include <wx/treectrl.h>
 #include <wx/listbox.h>
 #include <wx/hashmap.h>
+#include <wx/font.h>
 
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
@@ -108,6 +109,13 @@ public:
 
 
 	/*!
+	  \brief Determines the encoding that the CHM creator would like
+	  me to use. To be used in combination with DefaultFont().
+	  \return Desired encoding.
+	 */
+	wxFontEncoding DesiredEncoding() const { return _enc; }
+
+	/*!
 	  \brief Attempts to load a .chm file from disk.
 	  \param archiveName The .chm filename on disk.
 	  \return true on success, false on failure.
@@ -167,6 +175,9 @@ public:
 			      off_t fileOffset, size_t bufferSize);
 
 private:
+	//! Helper. Translates from Win32 encodings to generic wxWindows ones.
+	wxFontEncoding GetFontEncFromCharSet(int cs);
+
 	//! Helper. Initializes most of the private data members.
 	bool GetArchiveInfo();
 
@@ -195,6 +206,7 @@ private:
 	wxString _indexFile;
 	wxString _title;
 	wxString _font;
+	wxFontEncoding _enc;
 
 private:
 	//! No copy construction allowed.

@@ -26,30 +26,6 @@
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
 #include <wx/accel.h>
-#include <wx/settings.h>
-
-
-// Thanks to Vadim Zeitlin.
-#define ANSI_CHARSET            0
-#define DEFAULT_CHARSET         1
-#define SYMBOL_CHARSET          2
-#define SHIFTJIS_CHARSET        128
-#define HANGEUL_CHARSET         129
-#define HANGUL_CHARSET          129
-#define GB2312_CHARSET          134
-#define CHINESEBIG5_CHARSET     136
-#define OEM_CHARSET             255
-#define JOHAB_CHARSET           130
-#define HEBREW_CHARSET          177
-#define ARABIC_CHARSET          178
-#define GREEK_CHARSET           161
-#define TURKISH_CHARSET         162
-#define VIETNAMESE_CHARSET      163
-#define THAI_CHARSET            222
-#define EASTEUROPE_CHARSET      238
-#define RUSSIAN_CHARSET         204
-#define MAC_CHARSET             77
-#define BALTIC_CHARSET          186
 
 
 namespace {
@@ -476,15 +452,15 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	}
 
 #if !wxUSE_UNICODE
-
 	wxString fontFace = chmf->DefaultFont();
 
 	if(!fontFace.IsEmpty()) {
-		long cs = -1;
-		fontFace.AfterLast(wxT(',')).ToLong(&cs);
 
-		wxFont font(-1, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE,
-			    wxEmptyString, GetFontEncFromCharSet((int)cs));
+		long fs = -1;		
+		fontFace.BeforeLast(wxT(',')).AfterLast(wxT(',')).ToLong(&fs);
+
+		wxFont font((int)fs, wxDEFAULT, wxNORMAL, wxNORMAL, 
+			    FALSE, wxEmptyString, chmf->DesiredEncoding());
 
 		if(font.Ok()) {
 
@@ -716,63 +692,6 @@ void CHMFrame::SaveBookmarks()
 		if(url)
 			config.Write(wxString::Format(format2, i), *url);
 	}
-}
-
-
-wxFontEncoding CHMFrame::GetFontEncFromCharSet(int cs)
-{
-    wxFontEncoding fontEncoding;
-            
-    switch(cs) {
-        case ANSI_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_1;
-            break;            
-        case EASTEUROPE_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_2;
-            break;        
-        case BALTIC_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_13;
-            break;    
-        case RUSSIAN_CHARSET:
-            fontEncoding = wxFONTENCODING_KOI8;
-            break;
-        case ARABIC_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_6;
-            break;
-        case GREEK_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_7;
-            break;
-        case HEBREW_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_8;
-            break;
-        case TURKISH_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_9;
-            break;
-        case THAI_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_11;
-            break;
-        case SHIFTJIS_CHARSET:
-            fontEncoding = wxFONTENCODING_CP932;
-            break;
-        case GB2312_CHARSET:
-            fontEncoding = wxFONTENCODING_CP936;
-            break;
-        case HANGUL_CHARSET:
-            fontEncoding = wxFONTENCODING_CP949;
-            break;
-        case CHINESEBIG5_CHARSET:
-            fontEncoding = wxFONTENCODING_CP950;
-            break;
-        case OEM_CHARSET:
-            fontEncoding = wxFONTENCODING_CP437;
-            break;
-        default:
-            // assume the system charset
-            fontEncoding = wxFONTENCODING_SYSTEM;
-            break;            
-    }
-    
-    return fontEncoding;
 }
 
 

@@ -24,6 +24,7 @@
 
 #include <wx/html/htmlpars.h>
 #include <wx/treectrl.h>
+#include <wx/font.h>
 
 
 /*!
@@ -83,8 +84,12 @@ public:
 	  \brief Constructs the tag handler.
 	  \param toBuild The tree control to build. The control must be
 	  empty.
+	  \param enc Encoding to use. Only useful for Unicode builds.
+	  \param useEnc Actually use the information passed in enc or not?
 	 */
-	ContentTagHandler(wxTreeCtrl* toBuild);
+	ContentTagHandler(wxTreeCtrl* toBuild,
+			  wxFontEncoding enc,
+			  bool useEnc);
 
 	//! What tags are we interested in?
         wxString GetSupportedTags() { return wxT("UL,OBJECT,PARAM"); }
@@ -103,6 +108,9 @@ private:
 	
 	wxString _title;
 	wxString _url;
+
+	wxFontEncoding _enc;
+	bool _useEnc;
 };
 
 

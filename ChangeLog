@@ -85,3 +85,8 @@
 	* 0.8.4 Minor bugfix:
 		+ corrected a bug that crashed xchm if the user tried
 		to open a .chm file that is not present on disk.
+
+	* 0.8.5 Major bugfixes:
+		+ made xCHM properly handle weird charset languages 
+		(Russian, Chinese) properly even when xCHM is being linked
+		with the GTK2/Unicode version of wxWindows.

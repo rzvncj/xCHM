@@ -20,10 +20,13 @@
 
 
 #include <contenttaghandler.h>
+#include <wx/fontmap.h>
 
 
-ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild)
-	: _level(0), _treeCtrl(toBuild)
+ContentTagHandler::ContentTagHandler(wxTreeCtrl* toBuild,
+				     wxFontEncoding enc,
+				     bool useEnc)
+	: _level(0), _treeCtrl(toBuild), _enc(enc), _useEnc(useEnc)
 {
 	if(!_treeCtrl)
 		return;
@@ -90,8 +93,28 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		return FALSE;
 	} else { // "PARAM"
 
-		if (tag.GetParam(wxT("NAME")) == wxT("Name"))
-			_title = tag.GetParam(wxT("VALUE"));
+		if (tag.GetParam(wxT("NAME")) == wxT("Name")) {
+
+			if(_useEnc) {
+
+				wxCSConv cv(wxFontMapper::Get()->
+					    GetEncodingName(_enc));
+
+				const wxString s = tag.GetParam(wxT("VALUE"));
+				const size_t len = s.length();
+				wxCharBuffer buf(len);
+				char *p = buf.data();
+				
+				for ( size_t n = 0; n < len; n++ ) {
+					wxASSERT_MSG( s[n] < 0x100, 
+						      _T("non ASCII char?") );
+					*p++ = s[n];
+				}
+
+				_title = wxString(buf, cv);
+			} else 
+				_title = tag.GetParam(wxT("VALUE"));
+		}
 
 		if (tag.GetParam(wxT("NAME")) == wxT("Local"))
 			_url = tag.GetParam(wxT("VALUE"));

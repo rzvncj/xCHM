@@ -7,16 +7,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-23 13:58+0300\n"
+"POT-Creation-Date: 2004-09-09 19:37+0300\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
-#: src/chmfile.cpp:509
+#: src/chmfile.cpp:585
 msgid "Untitled in index"
 msgstr "Bez tytułu w indeksie"
 
@@ -100,7 +100,7 @@ msgstr "O programie."
 msgid "Ready."
 msgstr "Gotowy."
 
-#: src/chmframe.cpp:145 src/chmframe.cpp:769
+#: src/chmframe.cpp:145 src/chmframe.cpp:799
 msgid "Contents"
 msgstr "Zawartość"
 
@@ -128,107 +128,107 @@ msgstr "Nie można rozpakować drzewa zawartości książki."
 msgid "No contents.."
 msgstr "Brak zawartości.."
 
-#: src/chmframe.cpp:577
+#: src/chmframe.cpp:607
 msgid "&Open..\tCtrl-O"
 msgstr "&Otwórz..\tCtrl-O"
 
-#: src/chmframe.cpp:578
+#: src/chmframe.cpp:608
 msgid "&Print page..\tCtrl-P"
 msgstr "Wy&drukuj stronę..\tCtrl-P"
 
-#: src/chmframe.cpp:579
+#: src/chmframe.cpp:609
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Fon&ty..\tCtrl-T"
 
-#: src/chmframe.cpp:582
+#: src/chmframe.cpp:612
 msgid "&Show contents tree\tCtrl-S"
 msgstr "W&yświetlaj drzewo zawartości\tCtrl-S"
 
-#: src/chmframe.cpp:587
+#: src/chmframe.cpp:617
 msgid "&Recent files"
 msgstr "&Ostatnio otwierane pliki"
 
-#: src/chmframe.cpp:603
+#: src/chmframe.cpp:633
 msgid "E&xit\tCtrl-X"
 msgstr "&Wyjście\tCtrl-X"
 
-#: src/chmframe.cpp:604
+#: src/chmframe.cpp:634
 msgid "Quit the application."
 msgstr "Wyjście z aplikacji."
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:638
 msgid "&Home\tCtrl-H"
 msgstr "&Początek\tCtrl-H"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:639
 msgid "For&ward\tCtrl-W"
 msgstr "&W przód\tCtrl-W"
 
-#: src/chmframe.cpp:610
+#: src/chmframe.cpp:640
 msgid "&Back\tCtrl-B"
 msgstr "W &tył\tCtrl-B"
 
-#: src/chmframe.cpp:613
+#: src/chmframe.cpp:643
 msgid "&About ..\tF1"
 msgstr "&O programie ..\tF1"
 
-#: src/chmframe.cpp:616
+#: src/chmframe.cpp:646
 msgid "&File"
 msgstr "&Plik"
 
-#: src/chmframe.cpp:617
+#: src/chmframe.cpp:647
 msgid "Hi&story"
 msgstr "Hi&storia"
 
-#: src/chmframe.cpp:618
+#: src/chmframe.cpp:648
 msgid "&Help"
 msgstr "&Pomoc"
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:659
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-#: src/chmframe.cpp:651
+#: src/chmframe.cpp:681
 msgid "Add"
 msgstr "Dodaj"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:682
 msgid "Remove"
 msgstr "Usuń"
 
-#: src/chmframe.cpp:655
+#: src/chmframe.cpp:685
 msgid "Add displayed page to bookmarks."
 msgstr "Dodanie wyświetlanej strony do zakładek."
 
-#: src/chmframe.cpp:656
+#: src/chmframe.cpp:686
 msgid "Remove selected bookmark."
 msgstr "Usunięcie wybranej zakładki."
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:793
 msgid "Open .."
 msgstr "Otwórz .."
 
-#: src/chmframe.cpp:765
+#: src/chmframe.cpp:795
 msgid "Print .."
 msgstr "Wydrukuj .."
 
-#: src/chmframe.cpp:767
+#: src/chmframe.cpp:797
 msgid "Fonts .."
 msgstr "Fonty .."
 
-#: src/chmframe.cpp:774
+#: src/chmframe.cpp:804
 msgid "Back"
 msgstr "W tył"
 
-#: src/chmframe.cpp:775
+#: src/chmframe.cpp:805
 msgid "Forward"
 msgstr "W przód"
 
-#: src/chmframe.cpp:777
+#: src/chmframe.cpp:807
 msgid "Home"
 msgstr "Początek"
 
-#: src/chmframe.cpp:780
+#: src/chmframe.cpp:810
 msgid "About"
 msgstr "O programie"
 
@@ -268,6 +268,6 @@ msgstr "Szukanie tylko w tytułach."
 msgid "Search contents for occurences of the specified text."
 msgstr "Poszukiwanie w treści wystąpień podanego tekstu."
 
-#: src/contenttaghandler.cpp:37
+#: src/contenttaghandler.cpp:40
 msgid "Topics"
 msgstr "Tematy"

@@ -44,6 +44,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if you have the <XmlRpc.h> header file. */
+#undef HAVE_XMLRPC_H
+
 /* Name of package */
 #undef PACKAGE
 
@@ -67,6 +70,9 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Compile with XmlRpc functionality. */
+#undef WITH_LIBXMLRPC
 
 /* Define to `unsigned short' if <sys/types.h> does not define. */
 #undef u_int16_t

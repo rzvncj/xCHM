@@ -22,8 +22,16 @@
 #ifndef __CHMAPP_H_
 #define __CHMAPP_H_
 
+#include <config.h>
 #include <wx/wx.h>
 #include <wx/intl.h>
+#include <wx/cmdline.h>
+
+#ifdef WITH_LIBXMLRPC
+#	define TIMER_ID	wxID_HIGHEST + 1
+#	include <XmlRpc.h>
+using namespace XmlRpc;
+#endif
 
 
 // Forward declaration.
@@ -36,8 +44,17 @@ class CHMFrame;
 */
 
 //! This is the application class.
+#ifdef WITH_LIBXMLRPC
+class CHMApp : public wxApp, public XmlRpcServerMethod {
+#else
 class CHMApp : public wxApp {
+#endif
 
+#ifdef WITH_LIBXMLRPC
+public:
+	//! Default constructor, also links the XMLRPC method
+	CHMApp();
+#endif
 	//! Our entry point into the application.
 	virtual bool OnInit();
 
@@ -46,10 +63,27 @@ class CHMApp : public wxApp {
 	virtual void MacOpenFile(const wxString& filename);
 #endif
 
+protected:
+
+#ifdef WITH_LIBXMLRPC
+	//! Handles actual XMLRPC requests and parameter parsing.
+	void execute(XmlRpcValue& params, XmlRpcValue& result);
+
+	//! Watches for XMLRPC requests
+	void WatchForXMLRPC( wxTimerEvent& event );
+#endif
+
 private:
 	CHMFrame* _frame;
 	wxLocale _loc;
-};
 
+#ifdef WITH_LIBXMLRPC
+	wxTimer _timer;
+#endif
+	wxCmdLineParser _cmdLP;
+#ifdef WITH_LIBXMLRPC
+	DECLARE_EVENT_TABLE()
+#endif
+};
 
 #endif // __CHMAPP_H_

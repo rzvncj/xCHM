@@ -119,6 +119,21 @@ public:
 	  \param archive The .chm file name on disk.
 	 */
 	void LoadCHM(const wxString& archive);
+	
+
+	/*!
+	  \brief Attempts to load a .chm file and display the desired page.
+	  \param archive The .chm file name on disk.
+	  \param contextID The context-ID to load.
+	 */
+	void LoadCHM(const wxString& archive, const int contextID );
+
+	/*!
+	  \brief Attempts to load a context-ID from within the current chm file
+	  \param contextID the context-ID to load.
+	 */
+	void LoadContextID( const int contextID );
+
 
 	//! Fills the index and the contents tree.
 	void UpdateCHMInfo();

@@ -1,6 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
+  <millman@pcigeomatics.com>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -448,6 +450,41 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	SaveBookmarks();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
 		      wxT("#chm:/"));
+
+	UpdateCHMInfo();
+	LoadBookmarks();
+}
+
+
+void CHMFrame::LoadCHM(const wxString& archive, const int contextID )
+{
+	wxBusyCursor bc;
+
+	SaveBookmarks();
+
+	// there has to be a nicer way of doing this
+	_html->LoadPage(wxString(wxT("file:")) + archive + wxT("#chm:/") );
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return;
+	
+	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
+		+ wxT("#chm:") + chmf->GetPageByCID( contextID ) );
+
+	UpdateCHMInfo();
+	LoadBookmarks();
+}
+
+
+void CHMFrame::LoadContextID( const int contextID )
+{
+	wxBusyCursor bc;
+
+	SaveBookmarks();
+	CHMFile *chmf = CHMInputStream::GetCache();
+	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
+		+ wxT("#chm:") + chmf->GetPageByCID( contextID ) );
 
 	UpdateCHMInfo();
 	LoadBookmarks();

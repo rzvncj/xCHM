@@ -162,3 +162,7 @@
 	* 0.9.4 Minor bugfixes:
 		+ fixed contents parsing problem.
 
+	* 0.9.5 Major feature enhancements:
+		+ added support for context sensitive help; code contributed
+		by Eamon Millman from PCI Geomatics.
+

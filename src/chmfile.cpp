@@ -1,6 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
+  <millman@pcigeomatics.com>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -27,6 +29,7 @@
 #include <wx/strconv.h>
 #include <wx/fontmap.h>
 #include <wx/treectrl.h>
+
 #include <assert.h>
 
 #include <bitfiddle.inl>
@@ -52,18 +55,6 @@ private:
 
 } // namespace
 
-
-#ifdef wxUSE_UNICODE
-
-#	define CURRENT_CHAR_STRING(x) \
-	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
-
-#else
-
-#	define CURRENT_CHAR_STRING(x) \
-	wxString(reinterpret_cast<const char *>(x))
-
-#endif
 
 // Big-enough buffer size for use with various routines.
 #define BUF_SIZE 4096
@@ -95,12 +86,15 @@ private:
 
 CHMFile::CHMFile()
 	: _chmFile(NULL), _home(wxT("/"))
-{}
+{
+	_cidLoaded = FALSE;
+}
 
 
 CHMFile::CHMFile(const wxString& archiveName)
 	: _chmFile(NULL), _home(wxT("/"))
 {
+	_cidLoaded = FALSE;
 	LoadCHM(archiveName);
 }
 
@@ -125,6 +119,7 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 
 	_filename = archiveName;	
 	GetArchiveInfo();
+	LoadContextIDs();
 
 	return true;
 }
@@ -138,6 +133,8 @@ void CHMFile::CloseCHM()
 
 	chm_close(_chmFile);
 	
+	_cidLoaded = FALSE;
+	_cidMap.clear();
 	_chmFile = NULL;
 	_home = wxT("/");
 	_filename = _home = _topicsFile = _indexFile 
@@ -205,6 +202,83 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	toBuild->UpdateUI();
 
 	return true;
+}
+
+
+bool CHMFile::LoadContextIDs()
+{
+	chmUnitInfo ivb_ui, strs_ui;
+
+	// initialize the list
+	_cidLoaded = FALSE;
+	_cidMap.clear();
+
+	// make sure what we need is there. 
+	// #IVB has list of context ID's and #STRINGS offsets to file names.
+	if( chm_resolve_object(_chmFile, "/#IVB", &ivb_ui ) != 
+				CHM_RESOLVE_SUCCESS ||
+		chm_resolve_object(_chmFile, "/#STRINGS", &strs_ui) != 
+				CHM_RESOLVE_SUCCESS )
+		return false; // failed to find internal files
+	
+	UCharPtr ivb_buf(new unsigned char[ivb_ui.length]);
+	u_int64_t ivb_len = 0;
+
+	if( (ivb_len = chm_retrieve_object(_chmFile, &ivb_ui, 
+					   ivb_buf.get(), 0, ivb_ui.length)) == 0 )
+		return false; // failed to retrieve data
+
+	// always odd (DWORD + 2(n)*DWORD, so make even
+	ivb_len = ivb_len/sizeof(u_int32_t) - 1; 
+	
+	if( ivb_len % 2 != 0 )
+		return false; // we retrieved unexpected data from the file.
+
+	u_int32_t *ivbs = new u_int32_t[ivb_len];
+	int j = 4; // offset to exclude first DWORD
+	
+	// convert our DWORDs to numbers
+	for( unsigned int i = 0; i < ivb_len; i++ )
+	{
+		ivbs[i] = 
+		  FIXENDIAN32(*(reinterpret_cast<u_int32_t *>(ivb_buf.get()+j)));
+		j+=4; // step to the next DWORD
+	}
+
+	UCharPtr strs_buf(new unsigned char[strs_ui.length]);
+	u_int64_t strs_len = 0;
+
+	if( (strs_len = chm_retrieve_object(_chmFile, &strs_ui, strs_buf.get(), 
+					    0, strs_ui.length)) == 0 ) {
+		delete[] ivbs;
+		return false; // failed to retrieve data
+	}
+
+	for( unsigned int i = 0; i < ivb_len; i+=2 )
+	{	// context-IDs as KEY, fileName from #STRINGS as VALUE
+		_cidMap[ivbs[i]] = CURRENT_CHAR_STRING(
+					strs_buf.get() + ivbs[i+1]);
+	}
+
+	delete[] ivbs;
+	_cidLoaded = TRUE;
+	
+	// everything went well!
+	return true;
+}
+
+
+wxString CHMFile::GetPageByCID( const int contextID )
+{
+	if(!_cidLoaded)
+		return wxT("/");
+	
+	CHMIDMap::iterator itr = _cidMap.find( contextID );
+	// make sure the key/value pair is valid
+	if(itr == _cidMap.end() ) 
+		return wxT("/");
+	
+	return wxString(wxT("/")) + itr->second;
 }
 
 

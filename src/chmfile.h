@@ -38,6 +38,21 @@ class CHMListCtrl;
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
 WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
+//! Declares a class called CHMIDMap - < int, string> hashmap.
+WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
+
+
+#ifdef wxUSE_UNICODE
+
+#	define CURRENT_CHAR_STRING(x) \
+	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
+
+#else
+
+#	define CURRENT_CHAR_STRING(x) \
+	wxString(reinterpret_cast<const char *>(x))
+
+#endif
 
 
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
@@ -157,6 +172,29 @@ public:
 
 
 	/*!
+	  \brief Attempts to build an index of context-ID/page pairs 
+	   from the file.
+	  \return true if it's possible to buld the tree, false otherwise.
+	 */
+	bool LoadContextIDs();
+
+	/*!
+	 \brief Looks up the page referred to by the context-ID
+	 \param contextID The context-ID to look up
+	 \return the page referred to by the context-ID, 
+	  or blank if ID is invalid.
+	 */
+	wxString GetPageByCID( const int contextID );
+
+	/*!
+	  \brief Have the context-IDs been loaded into memory or not.
+	  \return true if they have, false if not.
+	 */
+	bool AreContextIDsLoaded() const { return _cidLoaded; } 
+
+
+
+	/*!
 	  \brief Fast search using the $FIftiMain file in the .chm.
 	  \param text The text we're looking for.
 	  \param wholeWords Are we looking for whole words only?
@@ -235,6 +273,10 @@ private:
 	wxString _title;
 	wxString _font;
 	wxFontEncoding _enc;
+
+	CHMIDMap _cidMap;
+	bool     _cidLoaded;
+
 
 private:
 	//! No copy construction allowed.

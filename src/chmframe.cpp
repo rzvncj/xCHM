@@ -273,7 +273,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 		_nb->Show(FALSE);
 	} else {		
 			
-		if(_tcl->GetCount() > 1) {
+		if(_tcl->GetCount() >= 1) {
 			
 			_tb->ToggleTool(ID_Contents, TRUE);
 			_menuFile->Check(ID_Contents, TRUE);
@@ -542,7 +542,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 #endif
 
 	// if we have contents..
-	if(_tcl->GetCount() > 1) {		
+	if(_tcl->GetCount() >= 1) {		
 		if(!_sw->IsSplit()) {
 			_nb->Show(TRUE);
 			_sw->SplitVertically(_nb, _html, _sashPos);

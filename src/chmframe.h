@@ -27,6 +27,8 @@
 #include <wx/splitter.h>
 #include <wx/notebook.h>
 #include <wx/treectrl.h>
+#include <wx/panel.h>
+#include <wx/combobox.h>
 #include <chmsearchpanel.h>
 #include <chmhtmlwindow.h>
 
@@ -55,6 +57,9 @@ enum
     ID_Forward,
     ID_Back,
     ID_Contents,
+    ID_Bookmarks,
+    ID_Add,
+    ID_Remove,
     ID_TreeCtrl = 1000,
 };
 
@@ -133,6 +138,15 @@ protected:
 	//! Called when the user wants to print the displayed page.
 	void OnPrint(wxCommandEvent& event);
 
+	//! Called when the user clicks on the Add button.
+	void OnAddBookmark(wxCommandEvent& event);
+
+	//! Called when the user clicks on the Remove button.
+	void OnRemoveBookmark(wxCommandEvent& event);
+
+	//! Called when the user chooses a bookmark from the wxChoice control.
+	void OnBookmarkSel(wxCommandEvent &event);
+
 	//! Called when an item in the contents tree is clicked.
 	void OnSelectionChanged(wxTreeEvent& event);
 
@@ -146,6 +160,15 @@ private:
 	//! Helper. Initializes the frame toolbar.
 	bool InitToolBar(wxToolBar *toolbar);
 
+	//! Helper. Creates the contents panel.
+	wxPanel* CreateContentsPanel();
+
+	//! Helper. Loads the bookmarks for the currently opened CHM file.
+	void LoadBookmarks();
+
+	//! Helper. Saves the bookmarks for the currently opened CHM file.
+	void SaveBookmarks();
+
 private:
 	CHMHtmlWindow* _html;
 	wxTreeCtrl* _tcl;
@@ -154,6 +177,7 @@ private:
 	wxToolBar* _tb;
 	wxHtmlEasyPrinting* _ep;
 	wxNotebook* _nb;
+	wxComboBox* _cb;
 	CHMSearchPanel* _csp;
 
 	wxString _openPath;
@@ -162,6 +186,8 @@ private:
 	wxString _normalFont;
 	wxString _fixedFont;
 	int _fontSize;
+	bool _bookmarkSel;
+	bool _bookmarksDeleted;
 
 private:
 	DECLARE_EVENT_TABLE()	

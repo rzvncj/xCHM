@@ -24,7 +24,7 @@
 #include <contenttaghandler.h>
 #include <chmfontdialog.h>
 #include <wx/fontenum.h>
-#include <wx/panel.h>
+#include <wx/statbox.h>
 
 
 namespace {
@@ -58,7 +58,7 @@ const wxChar *about_txt = wxT(
 } // namespace
 
 
-#define CONTENTS_MARGIN 160
+#define CONTENTS_MARGIN 170
 
 
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
@@ -67,9 +67,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const int fontSize)
 	: wxFrame((wxFrame *)NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _nb(NULL), _csp(NULL), _openPath(booksDir), _normalFonts(NULL), 
-	  _fixedFonts(NULL), _normalFont(normalFont), _fixedFont(fixedFont), 
-	  _fontSize(fontSize)
+	  _nb(NULL), _cb(NULL), _csp(NULL), _openPath(booksDir), 
+	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
+	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
+	  _bookmarksDeleted(false)
 {
 	int sizes[7];
 
@@ -89,21 +90,12 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 
 	_sw = new wxSplitterWindow(this);
-	_sw->SetMinimumPaneSize(120);
+	_sw->SetMinimumPaneSize(CONTENTS_MARGIN);
 
 	_nb = new wxNotebook(_sw, -1);
 	_nb->Show(FALSE);
 
-	wxPanel *temp = new wxPanel(_nb);
-	wxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
-	temp->SetAutoLayout(TRUE);
-        temp->SetSizer(sizer);
-
-	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
-			      wxDefaultSize, wxTR_HAS_BUTTONS |
-			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT |
-			      wxTR_SINGLE | wxTR_LINES_AT_ROOT);
-	sizer->Add(_tcl, 1, wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT, 0);
+	wxPanel* temp = CreateContentsPanel();
 
 	_html = new CHMHtmlWindow(_sw, _tcl);
 	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
@@ -274,6 +266,71 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
+{
+	wxTreeItemId id = _tcl->GetSelection();
+
+	if(!id.IsOk())
+		return;
+
+	wxString title = _tcl->GetItemText(id);
+
+ 	if(title.IsEmpty())
+		return;
+       
+	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
+		_tcl->GetItemData(id));
+
+	if(!data || (data->_url).IsEmpty())
+		return;
+
+	_cb->Append(title, new wxString(data->_url));
+
+	_bookmarkSel = false;
+	_cb->SetSelection(_cb->GetCount() - 1);
+	_bookmarkSel = true;		
+}
+
+
+void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
+{
+	if(!_cb->GetCount())
+		return;
+
+	_cb->Delete(_cb->GetSelection());
+	_bookmarksDeleted = true;
+
+	if(_cb->GetCount()) {
+		_bookmarkSel = false;
+		_cb->SetSelection(0);
+		_bookmarkSel = true;
+	} else {
+		_cb->SetValue(wxEmptyString);
+	}
+}
+
+
+void CHMFrame::OnBookmarkSel(wxCommandEvent& WXUNUSED(event))
+{
+	if(!_bookmarkSel)
+		return;
+
+	wxString *url = reinterpret_cast<wxString *>(
+		_cb->GetClientData(_cb->GetSelection()));
+
+	if(!url || url->IsEmpty())
+		return;
+
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return;
+
+	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
+			wxT("#chm:/") + *url);
+}
+
+
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
@@ -315,6 +372,7 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 	config.Write(wxT("/Fonts/fixedFontFace"), _fixedFont);
 	config.Write(wxT("/Fonts/size"), _fontSize);
 
+	SaveBookmarks();
 	Destroy();
 }
 
@@ -322,6 +380,8 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
+
+	SaveBookmarks();
 
 	_html->HistoryClear();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
@@ -366,6 +426,8 @@ void CHMFrame::LoadCHM(const wxString& archive)
 	// select Contents
 	_nb->SetSelection(0);
 	_csp->Reset();
+	
+	LoadBookmarks();
 }
 
 
@@ -412,6 +474,124 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuBar->Append(menuHelp, wxT("&Help"));
 
 	return menuBar;
+}
+
+
+wxPanel* CHMFrame::CreateContentsPanel()
+{
+	wxPanel *temp = new wxPanel(_nb);
+	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer *bmarks = new wxStaticBoxSizer(
+		new wxStaticBox(temp, -1, wxT("Bookmarks")), wxVERTICAL);
+	wxSizer *inner = new  wxBoxSizer(wxHORIZONTAL);
+
+	temp->SetAutoLayout(TRUE);
+        temp->SetSizer(sizer);
+
+	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
+			      wxDefaultSize, wxTR_HAS_BUTTONS |
+			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT |
+			      wxTR_SINGLE | wxTR_LINES_AT_ROOT);
+
+	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
+			     wxDefaultSize, 0, NULL, wxCB_DROPDOWN 
+			     | wxCB_READONLY);
+	sizer->Add(_tcl, 1, wxEXPAND, 0);
+	sizer->Add(bmarks, 0, wxEXPAND | wxALL, 0);
+
+	bmarks->Add(_cb, 0, wxEXPAND | wxBOTTOM, 5);
+	bmarks->Add(inner, 1, wxEXPAND, 0);
+
+	wxButton *badd = new wxButton(temp, ID_Add, wxT("Add"));
+	wxButton *bremove = new wxButton(temp, ID_Remove, wxT("Remove"));
+
+#if wxUSE_TOOLTIPS
+	badd->SetToolTip(wxT("Add displayed page to bookmarks."));
+	bremove->SetToolTip(wxT("Remove selected bookmark."));
+#endif
+
+	inner->Add(badd, 1, wxEXPAND | wxRIGHT, 2);
+	inner->Add(bremove, 1, wxEXPAND | wxLEFT, 2);
+
+	return temp;
+}
+
+
+void CHMFrame::LoadBookmarks()
+{
+	_cb->Clear();
+	_cb->SetValue(wxEmptyString);
+
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return;
+
+	wxConfig config(wxT("xchm"));
+	wxString bookname = chmf->ArchiveName();
+	bookname.Replace(wxT("/"), wxT("|"), TRUE);
+
+	bookname = wxString(wxT("/Bookmarks/")) + bookname;
+	long noEntries;
+
+	config.SetPath(bookname);
+	wxString title, url;
+
+	if(config.Read(wxT("noEntries"), &noEntries)) {
+		
+		const wxChar* format1 = wxT("bookmark_%ld_title");
+		const wxChar* format2 = wxT("bookmark_%ld_url");
+		
+		for(long i = 0; i < noEntries; ++i) {
+			config.Read(wxString::Format(format1, i), &title);
+			config.Read(wxString::Format(format2, i), &url);
+
+			_cb->Append(title, new wxString(url));
+		}
+	}
+}
+
+
+void CHMFrame::SaveBookmarks()
+{
+	long noEntries = _cb->GetCount();
+
+	if(!_bookmarksDeleted && noEntries == 0)
+		return;
+
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return;
+
+	wxConfig config(wxT("xchm"));
+	wxString bookname = chmf->ArchiveName();
+	bookname.Replace(wxT("/"), wxT("|"), TRUE);
+	bookname = wxString(wxT("/Bookmarks/")) + bookname;
+
+	if(_bookmarksDeleted) {
+		config.DeleteGroup(bookname);
+	}
+
+	if(noEntries == 0)
+		return;
+
+	config.SetPath(bookname);
+	config.Write(wxT("noEntries"), noEntries);
+
+	const wxChar* format1 = wxT("bookmark_%ld_title");
+	const wxChar* format2 = wxT("bookmark_%ld_url");
+
+	for(long i = 0; i < noEntries; ++i) {
+		wxString *url = reinterpret_cast<wxString *>(
+			_cb->GetClientData((int)i));
+
+		config.Write(wxString::Format(format1, i), 
+			     _cb->GetString((int)i));
+
+		if(url)
+			config.Write(wxString::Format(format2, i), *url);
+	}
 }
 
 
@@ -467,7 +647,10 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
+	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
+	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)
+	EVT_COMBOBOX(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 	EVT_CLOSE(CHMFrame::OnCloseWindow)
 END_EVENT_TABLE()
 

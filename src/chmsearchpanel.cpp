@@ -137,35 +137,6 @@ static inline bool HTML_WHITESPACE(wxChar c)
 }
 
 
-#define REHASH(a, b, h) ((((h) - (a)*d) << 1) + (b))
-
-bool KR(const wxChar *x, int m, const wxChar *y, int n) 
-{
-	int d, hx, hy, i, j;
-
-	/* Preprocessing */
-	/* computes d = 2^(m-1) with
-	   the left-shift operator */
-	for (d = i = 1; i < m; ++i)
-		d = (d<<1);
-	for (hy = hx = i = 0; i < m; ++i) {
-		hx = ((hx<<1) + x[i]);
-		hy = ((hy<<1) + y[i]);
-	}
-
-	/* Searching */
-	j = 0;
-	while (j <= n-m) {
-		if (hx == hy && memcmp(x, y + j, m * sizeof(wxChar)) == 0)
-			return true;
-		hy = REHASH(y[j], y[j + m], hy);
-		++j;
-	}
-
-	return false;
-}
-
-
 // The following two functions should be changed with faster ones.
 
 bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
@@ -196,9 +167,9 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 	if(wholeWords) {
 		for(i = 0; i < lng - wrd + 1; ++i) {
 
-			if(buf1[i] == '<')
+			if(buf1[i] == wxT('<'))
 				inTag = true;
-			else if(buf1[i] == '>')
+			else if(buf1[i] == wxT('>'))
 				inTag = false;
 
 			if(HTML_WHITESPACE(buf1[i]) || inTag) 
@@ -218,9 +189,9 @@ bool CHMSearchPanel::FileSearch(const wxString& filename, wxString& text,
 	} else {
 		for (i = 0; i < lng - wrd + 1; ++i) {
 
-  			if(buf1[i] == '<')
+  			if(buf1[i] == wxT('<'))
 				inTag = true;
-			else if(buf1[i] == '>') {
+			else if(buf1[i] == wxT('>')) {
 				inTag = false;
 				continue;
 			}

@@ -28,3 +28,12 @@
 		.chm files (more MS-style petty stuff).
 		+ applied PLD Linux configure patch and added
 		--enable-optimize to the set of configure flags.
+
+	* 0.6.3. Major bugfix:
+		+ thanks to Vadim Zeitlin of wxWindows.org, fixed an endianess
+		bug which prevented xCHM from working properly on big endian
+		machines.
+		+ changed the configure.in method to figure out where
+		wxWindows is from plain old `wx-config --cxxflags`, etc.,
+		to AM_PATH_WXCONFIG.
+	

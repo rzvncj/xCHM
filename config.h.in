@@ -53,3 +53,12 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define to `unsigned short' if <sys/types.h> does not define. */
+#undef u_int16_t
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef u_int32_t
+
+/* Define to `unsigned long' if <sys/types.h> does not define. */
+#undef u_int64_t

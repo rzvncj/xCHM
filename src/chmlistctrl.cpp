@@ -38,6 +38,7 @@ void CHMListCtrl::Reset()
 {
 	DeleteAllItems();
 	_urls.Clear();
+	UpdateUI();
 }
 
 

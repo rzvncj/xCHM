@@ -580,12 +580,16 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		stroff = *cursor32;
 		FIXENDIAN32(stroff);
 
-		if(::chm_retrieve_object(_chmFile, uistrings, combuf, 
-					 stroff, COMMON_BUF_LEN - 1) == 0)
-			return false;
+		wxString topic;
 
-		combuf[COMMON_BUF_LEN - 1] = 0;
-		wxString topic = CURRENT_CHAR_STRING(combuf);
+		if(::chm_retrieve_object(_chmFile, uistrings, combuf, 
+					 stroff, COMMON_BUF_LEN - 1) == 0) {
+			topic = wxString(wxT("Untitled in index"));
+
+		} else {
+			combuf[COMMON_BUF_LEN - 1] = 0;
+			topic = CURRENT_CHAR_STRING(combuf);
+		}
 	      
 		cursor32 = reinterpret_cast<u_int32_t *>(entry + 8);
 		urloff = *cursor32;
@@ -602,6 +606,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		if(::chm_retrieve_object(_chmFile, urlstr, combuf, 
 					 urloff + 8, COMMON_BUF_LEN - 1) == 0)
 			return false;
+	       
 		combuf[COMMON_BUF_LEN - 1] = 0;
 
 		wxString url = CURRENT_CHAR_STRING(combuf);

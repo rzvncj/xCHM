@@ -81,3 +81,7 @@
 		override wxHtmlWindow::OnOpeningURL()).
 		+ made the fonts change if necessary so that alternative
 		encodings can be used (such as Russian or Chinese).
+	
+	* 0.8.4 Minor bugfix:
+		+ corrected a bug that crashed xchm if the user tried
+		to open a .chm file that is not present on disk.

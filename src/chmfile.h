@@ -42,6 +42,10 @@ WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
 WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 
 
+//! Maximum allowed number of search-returned items.
+#define MAX_SEARCH_RESULTS 512
+
+
 #ifdef wxUSE_UNICODE
 
 #	define CURRENT_CHAR_STRING(x) \

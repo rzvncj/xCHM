@@ -348,7 +348,6 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 		return false;
 
 	do {
-		
 		// got a leaf node here.
 		if(::chm_retrieve_object(_chmFile, &ui, buffer.get(), 
 					 node_offset, node_len) == 0)
@@ -422,9 +421,10 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 						  word.Mid(0, text.Length()))
 					  < -1)
 					break;
-				   
-						  
 			}
+
+			if(results->size() >= MAX_SEARCH_RESULTS)
+				break;
 		}	
 	} while(!wholeWords && word.StartsWith(text.c_str()) && node_offset);
 
@@ -610,8 +610,11 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		wxString url = CURRENT_CHAR_STRING(combuf);
 
-		if(!url.IsEmpty() && !topic.IsEmpty())
+		if(!url.IsEmpty() && !topic.IsEmpty()) {
+			if(results->size() >= MAX_SEARCH_RESULTS)
+				return true;
 			(*results)[url] = topic;
+		}
 
 		count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
 		off += length;

@@ -132,6 +132,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(_titles->IsChecked() && h1.empty()) {
 		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
+		_results->ListDirty();
 		_results->UpdateUI();
 		return;
 	}

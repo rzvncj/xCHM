@@ -175,5 +175,6 @@
 	* 0.9.7 Minor bugfixes:
 		+ added ListDirty() optimization hack from Iulian Dragos
 		<dragosiulian@users.sourceforge.net>
+		+ now the index list is being sorted.
 
 

@@ -69,9 +69,6 @@ public:
 	//! Resets the panel (clears the result list and the textbox.)
 	void Reset();
 
-	//! Resets the font.
-	void ResetFont(const wxFont& font);
-
 	//! Sets the font.
 	void SetNewFont(const wxFont& font);
 
@@ -107,7 +104,6 @@ private:
 	wxButton* _search;
 	wxListBox* _results;
 	wxHtmlWindow* _html;
-	wxFontEncoding _enc;
 
 private:
 	DECLARE_EVENT_TABLE()

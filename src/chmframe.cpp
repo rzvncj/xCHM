@@ -441,6 +441,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
 	static bool noSpecialFont = true;
+	static wxFontEncoding enc = wxFont::GetDefaultEncoding();
 
 	SaveBookmarks();
 	_html->LoadPage(wxString(wxT("file:")) + archive +
@@ -488,6 +489,7 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 			_tcl->SetFont(font);
 			_csp->SetNewFont(font);
+			_cb->SetFont(font);
 			_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
 					sizes);
 			
@@ -501,9 +503,19 @@ void CHMFrame::LoadCHM(const wxString& archive)
 			sizes[i+3] = _fontSize + i * 2;
 
 		_tcl->SetFont(_font);
-		_csp->ResetFont(_font);
-		_html->SetFonts(_normalFont, _fixedFont, sizes);
 
+		wxFont tmp(_font.GetPointSize(), 
+			   _font.GetFamily(),
+			   _font.GetStyle(), _font.GetWeight(), 
+			   _font.GetUnderlined(), _font.GetFaceName(),
+			   enc);
+
+		if(tmp.Ok()) {
+			_cb->SetFont(tmp);
+			_csp->SetNewFont(tmp);
+		}
+
+		_html->SetFonts(_normalFont, _fixedFont, sizes);
 		noSpecialFont = true;
 	}
 

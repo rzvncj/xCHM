@@ -406,6 +406,8 @@ void CHMFrame::LoadCHM(const wxString& archive)
 
 			SetTitle(titleBarText);
 			_html->SetRelatedFrame(this, titleBarText);
+		} else {
+			SetTitle(wxT("xCHM v. " VERSION));
 		}
 	}
 

@@ -21,6 +21,7 @@
 
 #include <chmhtmlwindow.h>
 #include <contenttaghandler.h>
+#include <chminputstream.h>
 
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
@@ -31,6 +32,18 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc)
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
+	wxString tmp = location;
+
+	// handle relative paths
+	if(tmp.StartsWith(wxT(".."))) {
+		CHMFile *chmf = CHMInputStream::GetCache();
+
+		if(chmf)
+			tmp.Replace(wxT(".."), wxString(wxT("file:")) + 
+				    chmf->ArchiveName() + wxT("#chm:") +
+				    GetPrefix().BeforeLast(wxT('/')));
+	}
+
 	if(_syncTree && 
 	   // We should be looking for a valid page, not / (home).
 	   !location.AfterLast(wxT('/')).IsEmpty() && 
@@ -39,13 +52,13 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call
 		// LoadPage() with _syncTree set to false.
-		Sync(_tcl->GetRootItem(), location);
+		Sync(_tcl->GetRootItem(), tmp);
 
 		if(_found)
 			_found = false;
 	}
 
-	return wxHtmlWindow::LoadPage(location);
+	return wxHtmlWindow::LoadPage(tmp);
 }
 
 
@@ -57,9 +70,18 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
-	if(data && (data->_url).AfterLast(wxT('/')).BeforeFirst(
-		   wxT('#')).Lower() == 
-	   page.AfterLast(wxT('/')).BeforeFirst(wxT('#')).Lower()) {
+	wxString url, tmp;
+
+	if(page.StartsWith(wxT("/")) || page.StartsWith(wxT("file:")))
+		tmp = page.AfterLast(wxT(':')).AfterFirst(
+			wxT('/')).BeforeFirst(wxT('#')).Lower();
+	else
+		tmp = page.Lower();
+
+	if(data)
+		url = (data->_url).BeforeFirst(wxT('#')).Lower();
+
+	if(data && (url == tmp || url == GetPrefix() + wxT("/") + tmp)) {
 		// Order counts!
 		_found = true;
 		_tcl->SelectItem(root);
@@ -73,5 +95,13 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 		Sync(child, page);
 		child = _tcl->GetNextChild(root, cookie);
 	}
+}
+
+
+inline 
+wxString CHMHtmlWindow::GetPrefix()
+{
+	return GetOpenedPage().AfterLast(wxT(':')).AfterFirst(
+		wxT('/')).BeforeLast(wxT('/')).Lower();
 }
 

@@ -332,6 +332,7 @@ bool CHMFile::GetArchiveInfo()
 	
 	int index = 0;
 	u_int16_t *cursor = NULL;
+	long size = 0;
 
 	// Do we have the #SYSTEM file in the archive?
 	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
@@ -339,12 +340,14 @@ bool CHMFile::GetArchiveInfo()
 		return false;
 
 	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-	if(::chm_retrieve_object(_chmFile, &ui,
-				 buffer, 4, BUF_SIZE) == 0)
+	if((size = ::chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE))
+	   == 0)
 		return false;
 
-	// 9 is a good magic number :)
-	for(int i=0; i<9; ++i) {
+	for(;;) {
+
+		if(index > size - 1 - (long)sizeof(u_int16_t))
+			break;
 
 		cursor = (u_int16_t *)(buffer + index);
 		FIXENDIAN16(*cursor);
@@ -415,7 +418,6 @@ bool CHMFile::GetArchiveInfo()
 			index += *cursor + 2;
 		}
 	}
-
 
 	// one last try to see if we can get contents from "/#STRINGS"
 	if(_topicsFile.IsEmpty() && _indexFile.IsEmpty()) {

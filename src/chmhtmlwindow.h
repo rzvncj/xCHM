@@ -69,6 +69,9 @@ public:
 private:
 	//! Helper. Recursively looks for the opened page in the tree.
 	void Sync(wxTreeItemId root, const wxString& page);
+
+	//! Helper. Returns the prefix of the currently loaded page.
+	wxString GetPrefix();
 	
 private:
 	wxTreeCtrl* _tcl;

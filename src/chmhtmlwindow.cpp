@@ -59,9 +59,8 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	wxString tmp = location;
 	FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
 
-	if(tmp.StartsWith(wxT("javascript:fullSize"))) {
+	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
-	}
 
 	_prefix = GetPrefix(tmp);
 
@@ -134,7 +133,8 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 				    const wxString& prefix) const
 {
 	if(location.StartsWith(wxT("file:")) || 
-	   !location.Left(5).CmpNoCase(wxT("http:")))
+	   !location.Left(5).CmpNoCase(wxT("http:")) ||
+	   !location.Left(10).CmpNoCase(wxT("javascript")))
 		return false;
 	  
 	CHMFile *chmf = CHMInputStream::GetCache();

@@ -61,6 +61,9 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 	
 	// HTML code for space is %20
 	right.Replace(wxT("%20"), wxT(" "), TRUE);
+	right.Replace(wxT("%5F"), wxT("_"), TRUE);
+	right.Replace(wxT("%2E"), wxT("."), TRUE);
+	right.Replace(wxT("%2D"), wxT("-"), TRUE);
             
 	wxFileName filename = wxFileSystem::URLToFileName(left);
 	s = new CHMInputStream(left.IsEmpty() ? 

@@ -75,4 +75,3 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	}
 }
 
-

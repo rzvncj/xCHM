@@ -1,5 +1,5 @@
 /* XPM */
-static char *manual_xpm[] = {
+static char *xchm_32[] = {
 /* width height num_colors chars_per_pixel */
 "    32    32      232            2",
 /* colors */

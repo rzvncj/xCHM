@@ -262,6 +262,10 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 			i += sizeof(u_int32_t) + sizeof(u_int16_t);
 			wlc_size =  be_encint(buffer.get() + i, encsz);
 			i += encsz;
+
+			cursor32 = reinterpret_cast<u_int32_t*>(buffer.get());
+			node_offset = *cursor32;
+			FIXENDIAN32(node_offset);
 		
 			if(!title && titlesOnly)
 				continue;
@@ -294,10 +298,6 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 				   
 						  
 			}
-
-			cursor32 = reinterpret_cast<u_int32_t*>(buffer.get());
-			node_offset = *cursor32;
-			FIXENDIAN32(node_offset);
 		}	
 	} while(!wholeWords && word.StartsWith(text.c_str()) && node_offset);
 

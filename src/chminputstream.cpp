@@ -66,7 +66,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 	if(file.IsSameAs(wxT("/")))
 		filename = _archiveCache->HomePage();
 
-	if(filename.StartsWith(wxT("/MS-ITS:"))) {
+	if(!filename.Left(8).CmpNoCase(wxT("/MS-ITS:"))) {
 		// If this ever happens chances are Microsoft
 		// decided that even if we went through the
 		// trouble to open this archive and check out

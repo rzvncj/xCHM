@@ -41,7 +41,7 @@ bool CHMFSHandler::CanOpen(const wxString& location)
 	wxString p = GetProtocol(location);
 	return (p == wxT("chm") 
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
-		|| location.StartsWith(wxT("MS-ITS"));
+		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
 
 
@@ -52,7 +52,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 	wxString left = GetLeftLocation(location);
 	CHMInputStream *s = NULL;
 
-	if(location.StartsWith(wxT("MS-ITS"))) {
+	if(!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
 		right = wxString(wxT("/")) + location;
 		left = wxEmptyString;
 
@@ -76,7 +76,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 
 		// The dreaded links to files in other archives.
 		// Talk about too much enthusiasm.
-		if(right.StartsWith(wxT("/MS-ITS:")))
+		if(!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
 			right = right.AfterLast(wxT(':'));
 
 		return new wxFSFile(s,

@@ -28,7 +28,7 @@ CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
 			 wxWindowID id)
 	: wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
 		     wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | 
-		     /*wxLC_VIRTUAL |*/ wxSUNKEN_BORDER), _html(html)
+		     wxSUNKEN_BORDER), _html(html)
 {
 	InsertColumn(0, wxEmptyString);
 }

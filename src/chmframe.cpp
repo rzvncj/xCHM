@@ -588,7 +588,11 @@ wxMenuBar* CHMFrame::CreateMenu()
 	config.SetPath(wxT("/Recent"));
 	_fh.Load(config);
 
+#ifndef _ENABLE_COPY_AND_FIND	
 	if(_fh.GetNoHistoryFiles() == 0)
+#else
+	if(_fh.GetCount() == 0)
+#endif
 		_menuFile->Enable(ID_Recent, FALSE);
 
 	_menuFile->AppendSeparator();

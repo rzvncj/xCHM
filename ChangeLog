@@ -136,7 +136,9 @@
 		+ replaced the application icon with a much better one
 		contributed by Steven Chan.
 		
-	* 0.9 Major features enhancements:
+	* 0.9 Major feature enhancements:
 		+ added i18n support.
 		+ added Romanian and French translations of xCHM's interface.
+		+ no more warnings on wxWidgets 2.5.1 compilations.
+
 		

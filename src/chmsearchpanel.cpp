@@ -168,7 +168,12 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 			_results->AddPairItem(title, url);
 	}	
 
+#ifndef _ENABLE_COPY_AND_FIND
 	long cookie;
+#else
+	wxTreeItemIdValue cookie;
+#endif
+	
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
 
 	for(size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {

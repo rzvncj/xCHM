@@ -123,7 +123,11 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 		return;
 	}
 
+#ifndef _ENABLE_COPY_AND_FIND
 	long cookie;
+#else
+	wxTreeItemIdValue cookie;
+#endif
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
 
 	for(size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {

@@ -34,7 +34,7 @@
 
 
 /*! 
-  Custom HTML widget class. Needed for sychnronization between
+  \brief Custom HTML widget class. Needed for sychnronization between
   the topics tree control and the currently displayed page.
 */
 class CHMHtmlWindow : public wxHtmlWindow {

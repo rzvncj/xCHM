@@ -1527,7 +1527,12 @@ echo "$as_me: error:
    { (exit 1); exit 1; }; }
 fi
 
-REZ_COMMAND="`$WX_CONFIG_PATH --rezflags` xchm"
+REZ_FLAGS="`$WX_CONFIG_PATH --rezflags`"
+if test "x$REZ_FLAGS" == "x" -o "x$REZ_FLAGS" == "x#"; then
+	REZ_COMMAND=""
+else
+	REZ_COMMAND="$REZ_FLAGS xchm"
+fi
 
 
 wx_config_major_version=`echo $WX_VERSION | \

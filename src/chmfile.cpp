@@ -690,6 +690,9 @@ bool CHMFile::InfoFromWindows()
 }
 
 
+#include <iostream>
+using namespace std;
+
 inline
 bool CHMFile::InfoFromSystem()
 {
@@ -697,7 +700,11 @@ bool CHMFile::InfoFromSystem()
 	chmUnitInfo ui;
 	
 	int index = 0;
-	u_int16_t *cursor = NULL;
+//	u_int16_t *cursor = NULL;
+
+	unsigned char* cursor = NULL;
+	u_int16_t value = 0;
+
 	long size = 0;
 	long cs = -1;
 
@@ -719,14 +726,16 @@ bool CHMFile::InfoFromSystem()
 		if(index > size - 1 - (long)sizeof(u_int16_t))
 			break;
 
-		cursor = (u_int16_t *)(buffer + index);
-		FIXENDIAN16(*cursor);
+		cursor = buffer + index;
+		//FIXENDIAN16(*cursor);
+		value = UINT16ARRAY(cursor);
+
+		cerr << "Cursor: " << value << endl;
 		
-		switch(*cursor) {
+		switch(value) {
 		case 0:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 			
 			if(_topicsFile.IsEmpty())
 				_topicsFile = wxString(wxT("/")) 
@@ -735,8 +744,7 @@ bool CHMFile::InfoFromSystem()
 			break;
 		case 1:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 
 			if(_indexFile.IsEmpty())
 				_indexFile = wxString(wxT("/"))
@@ -745,8 +753,7 @@ bool CHMFile::InfoFromSystem()
 			break;
 		case 2:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 
 			if(_home.IsEmpty() || _home == wxString(wxT("/")))
 				_home = wxString(wxT("/"))
@@ -755,8 +762,7 @@ bool CHMFile::InfoFromSystem()
 			break;
 		case 3:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 
 			if(_title.IsEmpty())
 				_title = CURRENT_CHAR_STRING(buffer + 
@@ -764,8 +770,7 @@ bool CHMFile::InfoFromSystem()
 			break;
 		case 6:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 
 			if(_topicsFile.IsEmpty()) {
 				wxString topicAttempt = wxT("/"), tmp;
@@ -791,8 +796,7 @@ bool CHMFile::InfoFromSystem()
 
 		case 16:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 
 			_font = CURRENT_CHAR_STRING(buffer + index + 2);
 			_font.AfterLast(wxT(',')).ToLong(&cs);
@@ -801,11 +805,15 @@ bool CHMFile::InfoFromSystem()
 			break;
 		default:
 			index += 2;
-			cursor = (u_int16_t *)(buffer + index);
-			FIXENDIAN16(*cursor);			
+			cursor = buffer + index;
 		}
 
-		index += *cursor + 2;
+//		FIXENDIAN16(*cursor);
+		value = UINT16ARRAY(cursor);
+		index += value + 2;
+
+		cerr << "Cursor at end: " << value << endl;
+		cerr << "Index at end: " << index << endl;
 	}
 
 	return true;

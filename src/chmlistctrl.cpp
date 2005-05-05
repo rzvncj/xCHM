@@ -82,7 +82,7 @@ void CHMListCtrl::UpdateUI()
 
 	// If there's a scrollbar extract the width from the client area.
 	if(cpp >= 0 && GetItemCount() > cpp)
-		newSize -= wxSystemSettings::GetSystemMetric(wxSYS_VSCROLL_X);
+		newSize -= wxSystemSettings::GetMetric(wxSYS_VSCROLL_X);
 
 	SetColumnWidth(0, newSize >= currSize ? newSize : currSize);
 }

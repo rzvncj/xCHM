@@ -26,10 +26,7 @@
 #include <wx/html/htmlwin.h>
 #include <wx/treectrl.h>
 #include <wx/menu.h>
-
-#ifdef _ENABLE_COPY_AND_FIND
-#	include <chmfinddialog.h>
-#endif
+#include <chmfinddialog.h>
 
 
 //! Event IDs.
@@ -95,7 +92,6 @@ public:
 	*/
 	void AbsoluteFollows() { _absolute = true; }
 
-#ifdef _ENABLE_COPY_AND_FIND
 public:
 	/*!
 	  \brief Finds the first occurence of word in the displayed page.
@@ -131,7 +127,7 @@ public:
 protected:	
 	//! Called when the user selects 'Copy' from the popup menu.
 	void OnCopy(wxCommandEvent& event);
-#endif
+	
 	//! Called when the user selects 'Forward' from the popup menu.
 	void OnForward(wxCommandEvent& event);
 
@@ -175,10 +171,7 @@ private:
 	bool _absolute;
 	CHMFrame *_frame;
 	wxHtmlLinkInfo *_link;
-
-#ifdef _ENABLE_COPY_AND_FIND
 	CHMFindDialog* _fdlg;
-#endif
 
 private:
 	DECLARE_EVENT_TABLE()

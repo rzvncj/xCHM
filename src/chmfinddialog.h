@@ -19,7 +19,6 @@
 */
 
 
-#ifdef _ENABLE_COPY_AND_FIND
 #ifndef __CHMFINDDIALOG_H
 #define __CHMFINDDIALOG_H
 
@@ -71,4 +70,4 @@ private:
 
 
 #endif // __CHMFINDDIALOG_H
-#endif // _ENABLE_COPY_AND_FIND
+

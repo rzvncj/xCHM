@@ -101,14 +101,12 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition)
 {
-#ifdef _ENABLE_COPY_AND_FIND
 #	ifdef wxUSE_ACCEL
 	wxAcceleratorEntry entries[1];
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
 	wxAcceleratorTable accel(1, entries);
 	SetAcceleratorTable(accel);
 #	endif
-#endif
 
 	int sizes[7];
 	for(int i = -3; i <= 3; ++i)
@@ -317,12 +315,10 @@ void CHMFrame::OnHistFile(wxCommandEvent& event)
 }
 
 
-#ifdef _ENABLE_COPY_AND_FIND
 void CHMFrame::OnFind(wxCommandEvent& event)
 {
 	_html->OnFind(event);
 }
-#endif
 
 
 void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
@@ -618,11 +614,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 	config.SetPath(wxT("/Recent"));
 	_fh.Load(config);
 
-#ifndef _ENABLE_COPY_AND_FIND	
-	if(_fh.GetNoHistoryFiles() == 0)
-#else
 	if(_fh.GetCount() == 0)
-#endif
 		_menuFile->Enable(ID_Recent, FALSE);
 
 	_menuFile->AppendSeparator();
@@ -824,9 +816,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
 	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
-#ifdef _ENABLE_COPY_AND_FIND
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
-#endif
 	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)

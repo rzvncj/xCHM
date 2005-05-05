@@ -65,11 +65,7 @@ void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 }
 
 
-#ifndef _ENABLE_COPY_AND_FIND
-void CHMIndexPanel::OnIndexSel(wxCommandEvent& WXUNUSED(event))
-#else
 void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
-#endif
 {
 	if(_navigate) {
 		_html->AbsoluteFollows();

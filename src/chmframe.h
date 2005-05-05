@@ -168,10 +168,8 @@ protected:
 	//! Called when the user selects a file from the file history.
 	void CHMFrame::OnHistFile(wxCommandEvent& event);
 
-#ifdef _ENABLE_COPY_AND_FIND
 	//! Called when the user types Ctrl-F.
 	void OnFind(wxCommandEvent& event);
-#endif
 
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);

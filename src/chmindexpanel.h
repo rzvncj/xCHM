@@ -69,11 +69,7 @@ public:
 
 protected:
 	//! This gets called when the user clicks on a list item.
-#ifndef _ENABLE_COPY_AND_FIND
-	void OnIndexSel(wxCommandEvent& event);
-#else
 	void OnIndexSel(wxListEvent& event);
-#endif
 
 	//! This gets called when the user presses enter on a list item.
 	void OnIndexSelRet(wxCommandEvent& event);

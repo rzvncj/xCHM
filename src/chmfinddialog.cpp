@@ -19,9 +19,6 @@
 */
 
 
-#ifdef _ENABLE_COPY_AND_FIND
-
-
 #include <chmfinddialog.h>
 #include <chmhtmlwindow.h>
 #include <wx/checkbox.h>
@@ -128,6 +125,4 @@ BEGIN_EVENT_TABLE(CHMFindDialog, wxDialog)
     EVT_BUTTON(ID_FindNext, CHMFindDialog::OnFind)
 END_EVENT_TABLE()
 
-
-#endif // _ENABLE_COPY_AND_FIND
 

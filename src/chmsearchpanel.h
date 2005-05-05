@@ -87,11 +87,7 @@ protected:
 	void OnSearch(wxCommandEvent& event);
 
 	//! This gets called when the user clicks on a result.
-#ifndef _ENABLE_COPY_AND_FIND
-	void OnSearchSel(wxCommandEvent& event);
-#else
 	void OnSearchSel(wxListEvent& event);
-#endif
 
 private:
 	//! Helper. Searches through the tree recursively.

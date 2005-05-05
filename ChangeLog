@@ -180,3 +180,8 @@
 	* 0.9.8 Minor feature enhancements:
 		+ fixed the German translation.
 		+ added 'Copy link location' to the right-click menu.
+		
+	* 1.0 Finally 'the release':
+		+ now xCHM only compiles with wxWidgets 2.6.0.
+		+ text selection and copy/paste operations are available.
+		+ searching in page with Ctrl+F is possible.

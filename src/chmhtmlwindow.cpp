@@ -35,31 +35,24 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
-	  _absolute(false), _frame(frame), _link(NULL)
-#ifdef _ENABLE_COPY_AND_FIND
-	, _fdlg(NULL)
-#endif
+	  _absolute(false), _frame(frame), _link(NULL), _fdlg(NULL)
 {
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
 	_menu->Append(ID_PopupBack, _("&Back"));
 	_menu->Append(ID_CopyLink, _("Copy &link location"));
 
-#ifdef _ENABLE_COPY_AND_FIND
 	_menu->AppendSeparator();
 	_menu->Append(ID_CopySel, _("&Copy selection"));
 	_menu->AppendSeparator();
 	_menu->Append(ID_PopupFind, _("&Find in page.."));
-#endif
 }
 
 
 CHMHtmlWindow::~CHMHtmlWindow()
 {
 	delete _menu;
-#ifdef _ENABLE_COPY_AND_FIND
 	delete _fdlg;
-#endif
 }
 
 
@@ -127,11 +120,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 		return;
 	}
 
-#ifndef _ENABLE_COPY_AND_FIND
-	long cookie;
-#else
 	wxTreeItemIdValue cookie;
-#endif
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
 
 	for(size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {
@@ -223,8 +212,6 @@ void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 		_frame->UpdateCHMInfo();
 }
 
-
-#ifdef _ENABLE_COPY_AND_FIND
 
 wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 				     bool wholeWords, bool caseSensitive)
@@ -346,8 +333,6 @@ void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
 	_fdlg->Reset();
 }
 
-#endif // _ENABLE_COPY_AND_FIND
-
 
 void CHMHtmlWindow::OnForward(wxCommandEvent& WXUNUSED(event))
 {
@@ -373,10 +358,8 @@ void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
-#ifdef _ENABLE_COPY_AND_FIND
 	if(IsSelectionEnabled())
 		_menu->Enable(ID_CopySel, m_selection != NULL);
-#endif
 
 	_menu->Enable(ID_PopupForward, HistoryCanForward());
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
@@ -449,10 +432,8 @@ void CHMHtmlWindow::HandleOnMouseWheel(wxMouseEvent& event)
 
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
-#ifdef _ENABLE_COPY_AND_FIND
 	EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)
 	EVT_MENU(ID_PopupFind, CHMHtmlWindow::OnFind)
-#endif
 	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)

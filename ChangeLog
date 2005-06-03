@@ -185,3 +185,5 @@
 		+ now xCHM only compiles with wxWidgets 2.6.0.
 		+ text selection and copy/paste operations are available.
 		+ searching in page with Ctrl+F is possible.
+		+ changed the protocol prefix to 'xchm:' to avoid conflicts
+		with the wxWindows-integrated chm support.

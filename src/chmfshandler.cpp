@@ -39,7 +39,7 @@ CHMFSHandler::~CHMFSHandler()
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
 	wxString p = GetProtocol(location);
-	return (p == wxT("chm") 
+	return (p == wxT("xchm") 
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
@@ -83,7 +83,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 		return new wxFSFile(s,
 				    wxString(wxT("file:")) +
 				    s->GetCache()->ArchiveName() + 
-				    wxT("#chm:") + right,
+				    wxT("#xchm:") + right,
 				    GetMimeTypeFromExt(right.Lower()),
 				    GetAnchor(location),
 				    wxDateTime(wxFileModificationTime(left)));

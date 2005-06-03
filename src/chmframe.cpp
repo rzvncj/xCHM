@@ -248,7 +248,7 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
 		return;
 
 	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
-		+ wxT("#chm:") + chmf->HomePage());
+		+ wxT("#xchm:") + chmf->HomePage());
 }
 
 
@@ -386,7 +386,7 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& WXUNUSED(event))
 		return;
 
 	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-			wxT("#chm:/") + *url);
+			wxT("#xchm:/") + *url);
 }
 
 
@@ -407,7 +407,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(!_html->IsCaller()) {
 		_html->SetSync(false);
 		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-				wxT("#chm:/") + data->_url);
+				wxT("#xchm:/") + data->_url);
 		_html->SetSync(true);
 	}
 }
@@ -447,7 +447,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	bool rtn;
 	SaveBookmarks();
 	rtn = _html->LoadPage(wxString(wxT("file:")) + archive +
-		      wxT("#chm:/"));
+		      wxT("#xchm:/"));
 
 	UpdateCHMInfo();
 	LoadBookmarks();
@@ -469,7 +469,7 @@ bool CHMFrame::LoadContextID( const int contextID )
 		return FALSE;
 
 	return _html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
-		+ wxT("#chm:") + chmf->GetPageByCID( contextID ) );
+		+ wxT("#xchm:") + chmf->GetPageByCID( contextID ) );
 }
 
 

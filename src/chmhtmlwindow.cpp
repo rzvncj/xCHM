@@ -173,10 +173,10 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 	// Handle absolute paths too (that start with /)
 	if(!location.StartsWith(wxT("/")))
 		location = wxString(wxT("file:")) + chmf->ArchiveName() + 
-			wxT("#chm:") + prf + wxT("/") + location;
+			wxT("#xchm:") + prf + wxT("/") + location;
 	else
 		location = wxString(wxT("file:")) + chmf->ArchiveName() + 
-			wxT("#chm:") + location;
+			wxT("#xchm:") + location;
 
 	// Don't redirect for simple relative paths that wxHTML can
 	// handle by itself.

@@ -49,7 +49,7 @@ public:
 	  \brief Checks if it can open the file passed in location.
 	  \param location File to open.
 	  \returns true if location is in the form 
-	  "file:filename.chm#chm:/file_inside_archive.extension", false
+	  "file:filename.chm#xchm:/file_inside_archive.extension", false
 	  otherwise. Does not attempt to actually open the file.
 	 */
         virtual bool CanOpen(const wxString& location);

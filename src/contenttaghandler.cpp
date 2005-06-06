@@ -28,7 +28,6 @@
 
 
 #define TIME_TO_YIELD 1024
-#define ALLOWED_ENTRIES_NO 1024
 
 
 ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
@@ -53,11 +52,10 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 
 	++_counter;
 
-//	if((_counter > ALLOWED_ENTRIES_NO))
-//		return FALSE;
-
-	if((_counter % TIME_TO_YIELD) == 0)
+	if((_counter % TIME_TO_YIELD) == 0) {
 		wxSafeYield();	
+		_counter = 0;
+	}
 
 	if (tag.GetName() == wxT("UL"))
 	{

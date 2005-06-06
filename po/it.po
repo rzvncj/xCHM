@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: 2004-02-25 00:33+0100\n"
 "Last-Translator: Fabio Vescarelli <faber@faberbox.com>\n"
 "Language-Team: Italian <faber@faberbox.com>\n"
@@ -272,6 +272,6 @@ msgstr "Cerca solamente nei titoli dei contenuti"
 msgid "Search contents for occurences of the specified text."
 msgstr "Cerca nei contenuti le occorrenze del testo specificato"
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Argomenti"

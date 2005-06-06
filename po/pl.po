@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -273,6 +273,6 @@ msgstr "Szukanie tylko w tytułach."
 msgid "Search contents for occurences of the specified text."
 msgstr "Poszukiwanie w treści wystąpień podanego tekstu."
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Tematy"

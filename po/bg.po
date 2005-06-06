@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: 2004-06-05 23:36+0300\n"
 "Last-Translator: Атанас Мавров <bugar@developer.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -274,6 +274,6 @@ msgstr "Търсене само в заглавията"
 msgid "Search contents for occurences of the specified text."
 msgstr "Търси в определения текст."
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Теми"

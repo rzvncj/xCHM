@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XChm Latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: 2004-10-13 13:32+0300\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
@@ -270,6 +270,6 @@ msgstr "Meklēt tikai virsrakstos."
 msgid "Search contents for occurences of the specified text."
 msgstr "Meklēt frāzes, kas satur tekstu."
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Tēmas"

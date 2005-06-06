@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: 2004-03-21 20:26+0200\n"
 "Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -273,6 +273,6 @@ msgstr "Искать только в заголовках содежания."
 msgid "Search contents for occurences of the specified text."
 msgstr "Поиск фраз, где встречается введенный текст."
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Темы"

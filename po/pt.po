@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:00+0300\n"
+"POT-Creation-Date: 2005-06-06 13:26+0300\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
 "Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
 "Language-Team: Brazilian Portuguese \n"
@@ -273,6 +273,6 @@ msgstr "Procurar somente nos títulos dos conteúdos."
 msgid "Search contents for occurences of the specified text."
 msgstr "Procurar nos tópicos por ocorrências do texto especificado."
 
-#: src/contenttaghandler.cpp:45
+#: src/contenttaghandler.cpp:44
 msgid "Topics"
 msgstr "Tópicos"

@@ -96,8 +96,7 @@ void CHMListCtrl::LoadSelected()
 
 void CHMListCtrl::UpdateUI()
 {
-	SetColumnWidth(0, GetClientSize().GetWidth() - 3 -
-		       wxSystemSettings::GetMetric(wxSYS_VSCROLL_X));
+	SetColumnWidth(0, GetClientSize().GetWidth());
 }
 
 

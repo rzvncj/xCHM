@@ -27,10 +27,31 @@
 #include <wx/listbox.h>
 #include <wx/listctrl.h>
 #include <wx/string.h>
+#include <wx/dynarray.h>
 
 
 // Forward declarations.
 class CHMHtmlWindow;
+
+
+//! Item to store in the virtual list control
+struct CHMListPairItem {
+	//! Trivial constructor
+	CHMListPairItem(const wxString& title, const wxString& url)
+		: _title(title), _url(url) {}
+
+	//! This will show up in the list.
+	wxString _title;
+	//! This is what the title points to.
+	wxString _url;
+};
+
+
+//! Declare a wxWidgets sorted array
+WX_DEFINE_SORTED_ARRAY(CHMListPairItem *, ItemPairArray);
+
+//! Comparison function to use with the sorted array above.
+int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2);
 
 
 /*! 
@@ -54,6 +75,9 @@ public:
 	CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
 		    wxWindowID id = -1);
 
+	//! Cleanup.
+	~CHMListCtrl();
+
 public:
 	//! Cleans up and removes all the list items.
 	void Reset();
@@ -73,12 +97,6 @@ public:
 	//! Should be called each time the list control's state changes.
 	void UpdateUI();
   
-	/*!
-	  Called by ContentHandler to allow the list to perform (expensive)
-	  size computation.
-	*/
-	void ListDirty();
-
 	/*! 
 	  \brief Finds the list item that is the best match.
 	  \param title The string to match against.
@@ -88,9 +106,16 @@ public:
 protected:
 	//! Gets called when the widget is being resized.
 	void OnSize(wxSizeEvent& event);
+
+	//! Gets called when an item needs to be displayed.
+	wxString OnGetItemText(long item, long column) const;
+
+private:
+	//! Delete/empty the items in the item array.
+	void ResetItems();
 	
 private:
-	wxArrayString _urls;
+	ItemPairArray _items;
 	CHMHtmlWindow *_html;
 	int _currentSize;
 

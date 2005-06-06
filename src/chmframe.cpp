@@ -446,6 +446,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	wxBusyCursor bc;
 	bool rtn;
 	SaveBookmarks();
+	_nb->SetSelection(0);
 	rtn = _html->LoadPage(wxString(wxT("file:")) + archive +
 		      wxT("#xchm:/"));
 
@@ -503,9 +504,6 @@ void CHMFrame::UpdateCHMInfo()
 	chmf->GetTopicsTree(_tcl);
 	chmf->GetIndex(_cip->GetResultsList());
  
-	// call the dirty method
-	_cip->GetResultsList()->ListDirty();
-
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
 			wxString(wxT("xCHM v. " VERSION ": ")) + title;

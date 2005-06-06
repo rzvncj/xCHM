@@ -26,37 +26,56 @@
 #include <wx/settings.h>
 
 
+#define INDEX_HINT_SIZE 2048
+
+
+// Helper
+
+int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2)
+{
+	return (item1->_title).CmpNoCase(item2->_title);
+}
+
+
+
+// CHMListCtrl implementation
+
 CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
 			 wxWindowID id)
 	: wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
+		     wxLC_VIRTUAL |
 		     wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | 
-		     wxLC_SORT_ASCENDING | wxSUNKEN_BORDER), _html(html)
+		     wxLC_SORT_ASCENDING | wxSUNKEN_BORDER), 
+	  _items(CompareItemPairs),
+	  _html(html)
 {
 	InsertColumn(0, wxEmptyString);
+	SetItemCount(0);
+
+	_items.Alloc(INDEX_HINT_SIZE);
 }
+
+
+CHMListCtrl::~CHMListCtrl()
+{
+	// Clean the items up.
+	ResetItems();
+}
+
 
 
 void CHMListCtrl::Reset()
 {
+	ResetItems();
 	DeleteAllItems();
-	_urls.Clear();
 	UpdateUI();
 }
 
 
 void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 {
-//	int size = GetItemCount();
-
-	int i = 0;
-	for(i = 0; i < GetItemCount(); ++i) {
-		if(title.CmpNoCase(GetItemText(i)) <= 0)
-			break;
-	}
-
-	long item = InsertItem(i, title);
-	size_t index = _urls.Add(url);
-	SetItemData(item, index);
+	_items.Add(new CHMListPairItem(title, url));
+	SetItemCount(_items.GetCount());
 }
 
 
@@ -67,26 +86,19 @@ void CHMListCtrl::LoadSelected()
 			   wxLIST_NEXT_ALL,
 			   wxLIST_STATE_SELECTED);
 
-        if(item == -1 || item > (long)_urls.GetCount() - 1)
+        if(item == -1 || item > (long)_items.GetCount() - 1)
 		return;
 
-	_html->LoadPage(_urls[(size_t)GetItemData(item)]);	
+	_html->LoadPage(_items[item]->_url);
 }
+
 
 
 void CHMListCtrl::UpdateUI()
 {
-	int newSize = GetClientSize().GetWidth() - 1;
-	int cpp = GetCountPerPage();
-	int currSize = _currentSize;
-
-	// If there's a scrollbar extract the width from the client area.
-	if(cpp >= 0 && GetItemCount() > cpp)
-		newSize -= wxSystemSettings::GetMetric(wxSYS_VSCROLL_X);
-
-	SetColumnWidth(0, newSize >= currSize ? newSize : currSize);
+	SetColumnWidth(0, GetClientSize().GetWidth() - 3 -
+		       wxSystemSettings::GetMetric(wxSYS_VSCROLL_X));
 }
-
 
 
 void CHMListCtrl::FindBestMatch(const wxString& title)
@@ -116,6 +128,15 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
 }
 
 
+void CHMListCtrl::ResetItems()
+{
+	for(long i = 0; i < (long)_items.GetCount(); ++i) {
+		if(_items[i] != NULL)
+			delete _items[i];
+	}
+	_items.Empty();
+}
+
 
 void CHMListCtrl::OnSize(wxSizeEvent& event)
 {
@@ -123,10 +144,15 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
 	event.Skip();
 }
 
-void CHMListCtrl::ListDirty() 
+
+
+wxString CHMListCtrl::OnGetItemText(long item, long column) const
 {
-	SetColumnWidth(0, wxLIST_AUTOSIZE);
-	_currentSize = GetColumnWidth(0);  
+	// Is this even possible? item == -1 or item > size - 1?
+	if(column != 0 || item == -1 || item > (long)_items.GetCount() - 1)
+		return wxT("");
+
+	return _items[item]->_title;
 }
 
 

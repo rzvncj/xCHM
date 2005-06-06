@@ -118,6 +118,7 @@ private:
 
 	wxFontEncoding _enc;
 	bool _useEnc;
+	int _counter;
 };
 
 

@@ -24,12 +24,17 @@
 #include <wx/wx.h>
 #include <wx/fontmap.h>
 #include <string.h>
+#include <wx/utils.h>
+
+
+#define TIME_TO_YIELD 1024
+#define ALLOWED_ENTRIES_NO 1024
 
 
 ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
 				     wxTreeCtrl* tree, CHMListCtrl *list)
 	: _level(0), _treeCtrl(tree), _listCtrl(list), _enc(enc), 
-	  _useEnc(useEnc)
+	  _useEnc(useEnc), _counter(0)
 {
 	if(!_treeCtrl && !_listCtrl)
 		return;
@@ -45,6 +50,14 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 {
 	if(!_treeCtrl && !_listCtrl)
 		return FALSE;
+
+	++_counter;
+
+//	if((_counter > ALLOWED_ENTRIES_NO))
+//		return FALSE;
+
+	if((_counter % TIME_TO_YIELD) == 0)
+		wxSafeYield();	
 
 	if (tag.GetName() == wxT("UL"))
 	{

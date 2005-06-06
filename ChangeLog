@@ -187,3 +187,5 @@
 		+ searching in page with Ctrl+F is possible.
 		+ changed the protocol prefix to 'xchm:' to avoid conflicts
 		with the wxWindows-integrated chm support.
+		+ improved CHM load times and UI usability during loading.
+

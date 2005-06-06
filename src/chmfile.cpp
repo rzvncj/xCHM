@@ -195,6 +195,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 						   false,
 #endif						
 						   NULL, toBuild));
+
 	parser.Parse(src);
 	toBuild->UpdateUI();
 

@@ -132,7 +132,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(_titles->IsChecked() && h1.empty()) {
 		PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
-		_results->ListDirty();
 		_results->UpdateUI();
 		return;
 	}
@@ -140,12 +139,12 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	if(!h1.empty())
 		for(i = h1.begin(); i != h1.end(); ++i) {
 			wxString full_url = wxString(wxT("file:")) + 
-				chmf->ArchiveName() + wxT("#xchm:/") + i->first;
+				chmf->ArchiveName() + wxT("#xchm:/") + 
+				i->first;
 
 			_results->AddPairItem(i->second, full_url);
 		}
     
-    _results->ListDirty();
 	_results->UpdateUI();
 }
 

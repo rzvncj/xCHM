@@ -117,7 +117,7 @@ WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/
 WX_CXXFLAGS_ONLY = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
 WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2u_xrc-2.6 -lwx_gtk2u_qa-2.6 -lwx_gtk2u_html-2.6 -lwx_gtk2u_adv-2.6 -lwx_gtk2u_core-2.6 -lwx_baseu_xml-2.6 -lwx_baseu_net-2.6 -lwx_baseu-2.6 
 WX_LIBS_STATIC = -L/usr/local/lib -pthread    /usr/local/lib/libwx_gtk-2.4.a -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lgthread -lglib -lpthread -ldl -lXext -lX11 -lm -lpng -ljpeg -ltiff -lz -ldl -lm 
-WX_VERSION = 2.6.0
+WX_VERSION = 2.6.1
 XGETTEXT = /usr/bin/xgettext
 ac_ct_CC = gcc
 ac_ct_CXX = g++

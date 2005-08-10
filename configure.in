@@ -75,7 +75,7 @@ if test "x$enable_xmlrpc" = "xyes" ; then
 	AC_CHECK_HEADERS(XmlRpc.h,,
 	  AC_MSG_ERROR([Can't find the XmlRpc++ header.]))
 
-	LIBS="$LIBS -lXmlRpc"	
+	LIBS="$LIBS -lXmlRpc -lssl"	
 	AC_TRY_LINK([#include<XmlRpc.h> ],
 		[XmlRpc::XmlRpcServer svr;],
     	  [AC_DEFINE(WITH_LIBXMLRPC,1,[Compile with XmlRpc functionality.])],

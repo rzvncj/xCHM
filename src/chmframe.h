@@ -202,6 +202,9 @@ private:
 	//! Helper. Saves the bookmarks for the currently opened CHM file.
 	void SaveBookmarks();
 
+	//! Helper. Saves exit information (size, history, etc.)
+	void SaveExitInfo();
+
 private:
 	CHMHtmlWindow* _html;
 	wxTreeCtrl* _tcl;

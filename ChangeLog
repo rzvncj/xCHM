@@ -189,6 +189,7 @@
 		with the wxWindows-integrated chm support.
 		+ improved CHM load times and UI usability during loading.
 
-	* ?
+	* 1.1
 		+ tw translation added.
+		* fixed (wxWidgets bug?) wxConfig bookmarks save on exit bug
 

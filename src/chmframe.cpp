@@ -415,27 +415,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 
 void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 {
-	int xorig, yorig, width, height;
-	int sashPos = _sw->IsSplit() ? _sw->GetSashPosition() : _sashPos;
-
-	GetPosition(&xorig, &yorig);
-	GetSize(&width, &height);
-
-	wxConfig config(wxT("xchm"));
-	
-	config.Write(wxT("/Position/xOrig"), xorig);
-	config.Write(wxT("/Position/yOrig"), yorig);
-	config.Write(wxT("/Position/width"), width);
-	config.Write(wxT("/Position/height"), height);
-	config.Write(wxT("/Paths/lastOpenedDir"), _openPath);
-	config.Write(wxT("/Fonts/normalFontFace"), _normalFont);
-	config.Write(wxT("/Fonts/fixedFontFace"), _fixedFont);
-	config.Write(wxT("/Fonts/size"), _fontSize);
-	config.Write(wxT("/Sash/leftMargin"), sashPos);
-
-	config.SetPath(wxT("/Recent"));
-	_fh.Save(config);
-
+	SaveExitInfo();
 	SaveBookmarks();
 	Destroy();
 }
@@ -757,6 +737,31 @@ void CHMFrame::SaveBookmarks()
 		if(url)
 			config.Write(wxString::Format(format2, i), *url);
 	}
+}
+
+
+void CHMFrame::SaveExitInfo()
+{
+	int xorig, yorig, width, height;
+	int sashPos = _sw->IsSplit() ? _sw->GetSashPosition() : _sashPos;
+
+	GetPosition(&xorig, &yorig);
+	GetSize(&width, &height);
+
+	wxConfig config(wxT("xchm"));
+	
+	config.Write(wxT("/Position/xOrig"), xorig);
+	config.Write(wxT("/Position/yOrig"), yorig);
+	config.Write(wxT("/Position/width"), width);
+	config.Write(wxT("/Position/height"), height);
+	config.Write(wxT("/Paths/lastOpenedDir"), _openPath);
+	config.Write(wxT("/Fonts/normalFontFace"), _normalFont);
+	config.Write(wxT("/Fonts/fixedFontFace"), _fixedFont);
+	config.Write(wxT("/Fonts/size"), _fontSize);
+	config.Write(wxT("/Sash/leftMargin"), sashPos);
+
+	config.SetPath(wxT("/Recent"));
+	_fh.Save(config);
 }
 
 

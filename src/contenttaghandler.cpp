@@ -108,10 +108,14 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 				_parents[_level] = 
 					_treeCtrl->AppendItem(
 						_parents[parentIndex],
-						_title, -1, -1,
+						_title, 0, 0,
 						new URLTreeItem(_url));
 				if(!_level)
 					_parents[0] = _treeCtrl->GetRootItem();
+				else {
+					_treeCtrl->SetItemImage(_parents[parentIndex], -1, wxTreeItemIcon_Normal);
+					_treeCtrl->SetItemImage(_parents[parentIndex], -1, wxTreeItemIcon_Selected);
+				}
 			}
 
 			return TRUE;

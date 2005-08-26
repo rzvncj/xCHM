@@ -4,7 +4,7 @@ bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
 	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp \
 	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
-	chmindexpanel.cpp chmlistctrl.cpp
+	chmindexpanel.cpp chmlistctrl.cpp spantag.cpp
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h contenttaghandler.h chmfontdialog.h \

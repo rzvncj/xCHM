@@ -3,6 +3,8 @@
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
    XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
+  Tree control icons code (and the icons) contributed by Fritz Elfert
+  <felfert@users.sourceforge.net>.
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -81,6 +83,8 @@ const wxChar *about_txt = wxT(
 	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n"
 	"XMLRPC code for context sensitive help contributed by\n"
 	"Eamon Millman <millman@pcigeomatics.com>.\n"
+	"<SPAN> tag support and contents tree icons contributed by\n"
+	"Fritz Elfert <felfert@users.sourceforge.net>.\n"
 	"Written with wxWidgets (http://www.wxwidgets.org).\n\n"
 	"This program is (proudly) under the GPL.");
 

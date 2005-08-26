@@ -191,5 +191,6 @@
 
 	* 1.1
 		+ tw translation added.
-		* fixed (wxWidgets bug?) wxConfig bookmarks save on exit bug
-
+		* fixed (wxWidgets bug?) bookmarks save on exit bug.
+		* applied patch from Fritz Elfert for <SPAN> tag support and
+		better icons for the contents tree control items.

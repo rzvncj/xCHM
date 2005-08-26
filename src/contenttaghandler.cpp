@@ -1,6 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  Tree control icons code (and the icons) contributed by Fritz Elfert
+  <felfert@users.sourceforge.net>.
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -113,8 +115,13 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 				if(!_level)
 					_parents[0] = _treeCtrl->GetRootItem();
 				else {
-					_treeCtrl->SetItemImage(_parents[parentIndex], -1, wxTreeItemIcon_Normal);
-					_treeCtrl->SetItemImage(_parents[parentIndex], -1, wxTreeItemIcon_Selected);
+					_treeCtrl->SetItemImage(
+						_parents[parentIndex], 
+						-1, wxTreeItemIcon_Normal);
+
+					_treeCtrl->SetItemImage(
+						_parents[parentIndex], 
+						-1, wxTreeItemIcon_Selected);
 				}
 			}
 

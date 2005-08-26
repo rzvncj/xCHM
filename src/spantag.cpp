@@ -1,3 +1,25 @@
+/*
+
+  This file has been received as a patch from Fritz Elfert
+  <felfert@users.sourceforge.net>.
+ 
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+*/
+
+
 #if defined(__GNUG__) && !defined(NO_GCC_PRAGMA)
 #pragma implementation
 #endif
@@ -43,10 +65,12 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
             wxStringTokenizer tk(tag.GetParam(wxT("STYLE")), wxT(";"));
             while (tk.HasMoreTokens()) {
                 wxString attr = tk.GetNextToken().Strip(wxString::both);
-                wxString aname = attr.BeforeFirst(wxT(':')).Strip(wxString::both);
+                wxString aname = 
+			attr.BeforeFirst(wxT(':')).Strip(wxString::both);
 
                 if (aname.IsSameAs(wxT("font-size"), false)) {
-                    wxString avalue = attr.AfterFirst(wxT(':')).Strip(wxString::both);
+                    wxString avalue = 
+			    attr.AfterFirst(wxT(':')).Strip(wxString::both);
                     bool punit = false;
                     int n = oldsize;
                     long tmp;
@@ -58,12 +82,16 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
                         punit = true;
                         avalue.Truncate(avalue.Length() - 2);
                     }
-                    bool rel = (avalue.StartsWith(wxT("+")) || avalue.StartsWith(wxT("-")));
+                    bool rel = (avalue.StartsWith(wxT("+")) 
+				|| avalue.StartsWith(wxT("-")));
                     if (avalue.ToLong(&tmp, 10)) {
                         if (punit) {
                             if (m_sztab[0] == 0) {
                                 // Calculate font-size-table from current font;
-                                int sz = (double)m_WParser->CreateCurrentFont()->GetPointSize() / m_WParser->GetPixelScale();
+				    int sz = static_cast<int>(
+					    m_WParser->CreateCurrentFont()
+					    ->GetPointSize() / 
+					    m_WParser->GetPixelScale());
                                 switch (oldsize) {
                                     case 1:
                                         sz += 6;
@@ -118,7 +146,8 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
                         }
                         m_WParser->SetFontSize(n);
                         m_WParser->GetContainer()->InsertCell(
-                                new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
+                                new wxHtmlFontCell(
+					m_WParser->CreateCurrentFont()));
                     }
                 }
 
@@ -130,57 +159,66 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
                         if (faces)
                             m_Faces = *faces;
                     }
-                    wxStringTokenizer tk(attr.AfterFirst(wxT(':')).Strip(wxString::both), wxT(","));
+                    wxStringTokenizer tk(
+			    attr.AfterFirst(wxT(':')).Strip(wxString::both), 
+			    wxT(","));
+
                     int index;
                     while (tk.HasMoreTokens()) {
                         wxString fn = tk.GetNextToken().Strip(wxString::both);
                         unquote(fn);
                         if (fn.IsSameAs(wxT("Andale Sans UI")))
                             fn = wxT("Andale Sans");
-                        if ((index = m_Faces.Index(fn, false)) != wxNOT_FOUND) {
+                        if((index = m_Faces.Index(fn, false)) != wxNOT_FOUND) {
                             m_WParser->SetFontFace(m_Faces[index]);
-                            m_WParser->GetContainer()->InsertCell(new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
+                            m_WParser->GetContainer()->InsertCell(
+				    new wxHtmlFontCell(
+					    m_WParser->CreateCurrentFont()));
                             break;
                         }
                     }
                 }
 
                 if (aname.IsSameAs(wxT("color"), false)) {
-                    wxString avalue = attr.AfterFirst(wxT(':')).Strip(wxString::both);
+                    wxString avalue = 
+			    attr.AfterFirst(wxT(':')).Strip(wxString::both);
                     unquote(avalue);
                     wxColour clr = oldclr;
                     if (avalue.GetChar(0) == wxT('#')) {
                         unsigned long tmp;
                         if (avalue.Mid(1).ToULong(&tmp, 16)) {
-                            clr = wxColour((unsigned char)((tmp & 0xFF0000) >> 16),
-                                    (unsigned char)((tmp & 0x00FF00) >> 8),
-                                    (unsigned char)(tmp & 0x0000FF));
+				clr = wxColour((unsigned char)(
+						       (tmp & 0xFF0000) >> 16),
+				       (unsigned char)((tmp & 0x00FF00) >> 8),
+				       (unsigned char)(tmp & 0x0000FF));
                         }
                     } else {
-                        // Handle colours defined in HTML 4.0:
-                        #define HTML_COLOUR(name,r,g,b) \
-                            if (avalue.IsSameAs(wxT(name), false)) \
-                            { clr = wxColour(r,g,b); }
-                        HTML_COLOUR("black",   0x00,0x00,0x00)
-                        HTML_COLOUR("silver",  0xC0,0xC0,0xC0)
-                        HTML_COLOUR("gray",    0x80,0x80,0x80)
-                        HTML_COLOUR("white",   0xFF,0xFF,0xFF)
-                        HTML_COLOUR("maroon",  0x80,0x00,0x00)
-                        HTML_COLOUR("red",     0xFF,0x00,0x00)
-                        HTML_COLOUR("purple",  0x80,0x00,0x80)
-                        HTML_COLOUR("fuchsia", 0xFF,0x00,0xFF)
-                        HTML_COLOUR("green",   0x00,0x80,0x00)
-                        HTML_COLOUR("lime",    0x00,0xFF,0x00)
-                        HTML_COLOUR("olive",   0x80,0x80,0x00)
-                        HTML_COLOUR("yellow",  0xFF,0xFF,0x00)
-                        HTML_COLOUR("navy",    0x00,0x00,0x80)
-                        HTML_COLOUR("blue",    0x00,0x00,0xFF)
-                        HTML_COLOUR("teal",    0x00,0x80,0x80)
-                        HTML_COLOUR("aqua",    0x00,0xFF,0xFF)
-                        #undef HTML_COLOUR
+
+// Handle colours defined in HTML 4.0:
+#define HTML_COLOUR(name,r,g,b)		\
+if (avalue.IsSameAs(wxT(name), false))	\
+{ clr = wxColour(r,g,b); }
+			    HTML_COLOUR("black",   0x00,0x00,0x00);
+			    HTML_COLOUR("silver",  0xC0,0xC0,0xC0);
+			    HTML_COLOUR("gray",    0x80,0x80,0x80);
+			    HTML_COLOUR("white",   0xFF,0xFF,0xFF);
+			    HTML_COLOUR("maroon",  0x80,0x00,0x00);
+			    HTML_COLOUR("red",     0xFF,0x00,0x00);
+			    HTML_COLOUR("purple",  0x80,0x00,0x80);
+			    HTML_COLOUR("fuchsia", 0xFF,0x00,0xFF);
+			    HTML_COLOUR("green",   0x00,0x80,0x00);
+			    HTML_COLOUR("lime",    0x00,0xFF,0x00);
+			    HTML_COLOUR("olive",   0x80,0x80,0x00);
+			    HTML_COLOUR("yellow",  0xFF,0xFF,0x00);
+			    HTML_COLOUR("navy",    0x00,0x00,0x80);
+			    HTML_COLOUR("blue",    0x00,0x00,0xFF);
+			    HTML_COLOUR("teal",    0x00,0x80,0x80);
+			    HTML_COLOUR("aqua",    0x00,0xFF,0xFF);
+#undef HTML_COLOUR
                     }
                     m_WParser->SetActualColor(clr);
-                    m_WParser->GetContainer()->InsertCell(new wxHtmlColourCell(clr));
+                    m_WParser->GetContainer()->InsertCell(
+			    new wxHtmlColourCell(clr));
                 }
 
             }
@@ -190,13 +228,16 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
 
         if (oldface != m_WParser->GetFontFace()) {
             m_WParser->SetFontFace(oldface);
-            m_WParser->GetContainer()->InsertCell(new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
+            m_WParser->GetContainer()->InsertCell(
+		    new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
         }
         m_WParser->SetFontSize(oldsize);
-        m_WParser->GetContainer()->InsertCell(new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
+        m_WParser->GetContainer()->InsertCell(
+		new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
         if (oldclr != m_WParser->GetActualColor()) {
             m_WParser->SetActualColor(oldclr);
-            m_WParser->GetContainer()->InsertCell(new wxHtmlColourCell(oldclr));
+            m_WParser->GetContainer()->InsertCell(
+		    new wxHtmlColourCell(oldclr));
         }
 
         return true;

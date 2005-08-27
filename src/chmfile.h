@@ -51,10 +51,17 @@ WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
 
+#	define CURRENT_CHAR_STRING_CV(x, cv) \
+	wxString(reinterpret_cast<const char *>(x), cv)
+
 #else
 
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x))
+
+#	define CURRENT_CHAR_STRING_CV(x, cv) \
+	wxString(reinterpret_cast<const char *>(x))
+
 
 #endif
 
@@ -118,13 +125,6 @@ public:
 	wxString Title() const { return _title; }
 
 	/*!
-	  \brief Gets the name of the default font.
-	  \return The name of the default font or the empty string if
-	  no default font was selected.
-	*/
-	wxString DefaultFont() const { return _font; }
-
-	/*!
 	  \brief Checks if the last attempt to load a .chm file was
 	  succesful.
 	  \return true, if the last attempt to load a .chm file was
@@ -141,6 +141,12 @@ public:
 	  \return Desired encoding.
 	 */
 	wxFontEncoding DesiredEncoding() const { return _enc; }
+
+	/*!
+	  \brief Determines the font to use for special charsets.
+	  \return Detected font recommendation.
+	 */	
+	wxString DefaultFont() const { return _font; }
 
 	/*!
 	  \brief Attempts to load a .chm file from disk.
@@ -244,6 +250,9 @@ public:
 private:
 	//! Helper. Translates from Win32 encodings to generic wxWidgets ones.
 	wxFontEncoding GetFontEncFromCharSet(int cs);
+
+	//! Helper. Translates from MS-specific LCID.
+	wxFontEncoding GetFontEncFromLCID(u_int32_t lcid);
 
 	//! Helper. Initializes most of the private data members.
 	bool GetArchiveInfo();

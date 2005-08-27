@@ -29,13 +29,13 @@
 #include <wx/utils.h>
 
 
-#define TIME_TO_YIELD 1024
+#define TIME_TO_YIELD	1024
+#define BUF_SIZE	1024
 
 
-ContentTagHandler::ContentTagHandler(wxFontEncoding enc, bool useEnc,
-				     wxTreeCtrl* tree, CHMListCtrl *list)
-	: _level(0), _treeCtrl(tree), _listCtrl(list), _enc(enc), 
-	  _useEnc(useEnc), _counter(0)
+ContentTagHandler::ContentTagHandler(wxFontEncoding enc, wxTreeCtrl* tree, 
+				     CHMListCtrl *list)
+	: _level(0), _treeCtrl(tree), _listCtrl(list), _enc(enc), _counter(0)
 {
 	if(!_treeCtrl && !_listCtrl)
 		return;
@@ -134,25 +134,24 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Name"))) {
 
 			if(_title.IsEmpty()) {
-				if(_useEnc) {
-					wxCSConv cv(wxFontMapper::Get()->
-						    GetEncodingName(_enc));
+#ifdef wxUSE_UNICODE
+				if(_enc != wxFONTENCODING_SYSTEM) {
+					wxCSConv cv(_enc);
 
 					const wxString s = 
 						tag.GetParam(wxT("VALUE"));
-					const size_t len = s.length();
-					wxCharBuffer buf(len);
-					char *p = buf.data();
-				
-					for ( size_t n = 0; n < len; n++ ) {
-						wxASSERT_MSG(s[n] < 0x100, 
-							     wxT("non ASCII"
-								 " char?") );
-						*p++ = s[n];
-					}
 
-					_title = wxString(buf, cv);
+					wchar_t buf2[BUF_SIZE];
+					size_t len =
+						(s.length() < BUF_SIZE) ?
+						s.length() : BUF_SIZE;
+
+					size_t ret = cv.MB2WC(buf2, s.mb_str(),
+							      len);
+					if(ret)
+						_title = wxString(buf2, ret);
 				} else 
+#endif
 					_title = tag.GetParam(wxT("VALUE"));
 			}
 		}

@@ -58,7 +58,7 @@ CHMHtmlWindow::~CHMHtmlWindow()
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
-	wxLogNull log;
+	//wxLogNull log;
 	wxString tmp = location;
 
 	// Path is already absolute.

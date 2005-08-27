@@ -83,6 +83,84 @@ private:
 #define BALTIC_CHARSET          186
 
 
+// Hello, Microsoft
+#define LANG_NEUTRAL		0x00 // check
+#define LANG_ARABIC		0x01 // check
+#define LANG_BULGARIAN		0x02 // check
+#define LANG_CATALAN		0x03
+#define LANG_CHINESE		0x04 // check
+#define LANG_CZECH		0x05
+#define LANG_DANISH		0x06
+#define LANG_GERMAN		0x07
+#define LANG_GREEK		0x08 // check
+#define LANG_ENGLISH		0x09
+#define LANG_SPANISH		0x0a
+#define LANG_FINNISH		0x0b
+#define LANG_FRENCH		0x0c
+#define LANG_HEBREW		0x0d // check
+#define LANG_HUNGARIAN		0x0e
+#define LANG_ICELANDIC		0x0f
+#define LANG_ITALIAN		0x10
+#define LANG_JAPANESE		0x11 // check
+#define LANG_KOREAN		0x12 // check
+#define LANG_DUTCH		0x13
+#define LANG_NORWEGIAN		0x14
+#define LANG_POLISH		0x15
+#define LANG_PORTUGUESE		0x16
+#define LANG_ROMANIAN		0x18
+#define LANG_RUSSIAN		0x19 // check
+#define LANG_CROATIAN		0x1a
+#define LANG_SERBIAN		0x1a
+#define LANG_SLOVAK		0x1b
+#define LANG_ALBANIAN		0x1c
+#define LANG_SWEDISH		0x1d
+#define LANG_THAI		0x1e // check
+#define LANG_TURKISH		0x1f // check
+#define LANG_URDU		0x20
+#define LANG_INDONESIAN		0x21
+#define LANG_UKRAINIAN		0x22 // check
+#define LANG_BELARUSIAN		0x23
+#define LANG_SLOVENIAN		0x24
+#define LANG_ESTONIAN		0x25
+#define LANG_LATVIAN		0x26
+#define LANG_LITHUANIAN		0x27
+#define LANG_FARSI		0x29
+#define LANG_VIETNAMESE		0x2a
+#define LANG_ARMENIAN		0x2b
+#define LANG_AZERI		0x2c
+#define LANG_BASQUE		0x2d
+#define LANG_MACEDONIAN		0x2f
+#define LANG_AFRIKAANS		0x36
+#define LANG_GEORGIAN		0x37
+#define LANG_FAEROESE		0x38
+#define LANG_HINDI		0x39
+#define LANG_MALAY		0x3e
+#define LANG_KAZAK		0x3f
+#define LANG_KYRGYZ		0x40
+#define LANG_SWAHILI		0x41
+#define LANG_UZBEK		0x43
+#define LANG_TATAR		0x44
+#define LANG_BENGALI		0x45
+#define LANG_PUNJABI		0x46
+#define LANG_GUJARATI		0x47
+#define LANG_ORIYA		0x48
+#define LANG_TAMIL		0x49
+#define LANG_TELUGU		0x4a
+#define LANG_KANNADA		0x4b
+#define LANG_MALAYALAM		0x4c
+#define LANG_ASSAMESE		0x4d
+#define LANG_MARATHI		0x4e
+#define LANG_SANSKRIT		0x4f
+#define LANG_MONGOLIAN		0x50
+#define LANG_GALICIAN		0x56
+#define LANG_KONKANI		0x57
+#define LANG_MANIPURI		0x58
+#define LANG_SINDHI		0x59
+#define LANG_SYRIAC		0x5a
+#define LANG_KASHMIRI		0x60
+#define LANG_NEPALI		0x61
+#define LANG_DIVEHI		0x65
+
 
 CHMFile::CHMFile()
 	: _chmFile(NULL), _home(wxT("/"))
@@ -115,9 +193,24 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	if(_chmFile == NULL)
 		return false;
 
+	_enc = wxFONTENCODING_SYSTEM;
 	_filename = archiveName;	
 	GetArchiveInfo();
 	LoadContextIDs();
+
+#ifdef wxUSE_UNICODE
+	// Fix the title
+	if(_enc != wxFONTENCODING_SYSTEM) {
+		wxCSConv cv(_enc);
+		wchar_t buf2[BUF_SIZE];
+		size_t len = (_title.length() < BUF_SIZE) ? 
+			_title.length() : BUF_SIZE;
+
+		size_t ret = cv.MB2WC(buf2, _title.mb_str(), len);
+		if(ret)
+			_title = wxString(buf2, ret);
+	}
+#endif
 
 	return true;
 }
@@ -134,8 +227,8 @@ void CHMFile::CloseCHM()
 	_cidMap.clear();
 	_chmFile = NULL;
 	_home = wxT("/");
-	_filename = _home = _topicsFile = _indexFile 
-		= _title = _font = wxEmptyString;
+	_filename = _home = _topicsFile = _indexFile = _title 
+		= _font = wxEmptyString;
 }
 
 
@@ -157,13 +250,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 		return false;
 
 	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(_enc,
-#ifdef wxUSE_UNICODE
-						   !_font.IsEmpty(),
-#else
-						   false,
-#endif						
-						   toBuild));	
+	parser.AddTagHandler(new ContentTagHandler(_enc, toBuild));	
 	parser.Parse(src);
 
 	return true;
@@ -188,13 +275,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 		return false;
 
 	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(_enc,
-#ifdef wxUSE_UNICODE
-						   !_font.IsEmpty(),
-#else
-						   false,
-#endif						
-						   NULL, toBuild));
+	parser.AddTagHandler(new ContentTagHandler(_enc, NULL, toBuild));
 
 	parser.Parse(src);
 	toBuild->UpdateUI();
@@ -273,6 +354,7 @@ bool CHMFile::IsValidCID( const int contextID )
 
 	return TRUE;
 }
+
 
 wxString CHMFile::GetPageByCID( const int contextID )
 {
@@ -581,7 +663,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 			combuf[COMMON_BUF_LEN - 1] = 0;
 
 #ifdef wxUSE_UNICODE
-			if(_font.IsEmpty())
+			if(_enc == wxFONTENCODING_SYSTEM)
 #endif
 				topic = CURRENT_CHAR_STRING(combuf);
 #ifdef wxUSE_UNICODE
@@ -769,6 +851,7 @@ bool CHMFile::InfoFromSystem()
 	int index = 0;
 	unsigned char* cursor = NULL;
 	u_int16_t value = 0;
+	u_int32_t lcid = 0;
 
 	long size = 0;
 	long cs = -1;
@@ -830,6 +913,15 @@ bool CHMFile::InfoFromSystem()
 				_title = CURRENT_CHAR_STRING(buffer + 
 							     index + 2);
 			break;
+
+		case 4: // LCID stuff
+			index += 2;
+			cursor = buffer + index;
+
+			lcid = UINT32ARRAY(buffer + index + 2);
+			_enc = GetFontEncFromLCID(lcid);
+			break;
+
 		case 6:
 			index += 2;
 			cursor = buffer + index;
@@ -862,9 +954,12 @@ bool CHMFile::InfoFromSystem()
 
 			_font = CURRENT_CHAR_STRING(buffer + index + 2);
 			_font.AfterLast(wxT(',')).ToLong(&cs);
+
+			if(_enc != wxFONTENCODING_SYSTEM)
+				break;
 			_enc = GetFontEncFromCharSet(cs);
-			
 			break;
+
 		default:
 			index += 2;
 			cursor = buffer + index;
@@ -881,61 +976,108 @@ bool CHMFile::InfoFromSystem()
 inline
 wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
 {
-    wxFontEncoding fontEncoding;
-            
-    switch(cs) {
+	wxFontEncoding fontEncoding;
+
+	switch(cs) {
         case ANSI_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_1;
-            break;            
+		fontEncoding = wxFONTENCODING_ISO8859_1;
+		break;
         case EASTEUROPE_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_2;
-            break;        
+		fontEncoding = wxFONTENCODING_ISO8859_2;
+		break;
         case BALTIC_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_13;
-            break;    
+		fontEncoding = wxFONTENCODING_ISO8859_13;
+		break;
         case RUSSIAN_CHARSET:
-            fontEncoding = wxFONTENCODING_KOI8;
-            break;
+		fontEncoding = wxFONTENCODING_CP1251;
+		break;
         case ARABIC_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_6;
-            break;
+		fontEncoding = wxFONTENCODING_ISO8859_6;
+		break;
         case GREEK_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_7;
-            break;
+		fontEncoding = wxFONTENCODING_ISO8859_7;
+		break;
         case HEBREW_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_8;
-            break;
+		fontEncoding = wxFONTENCODING_ISO8859_8;
+		break;
         case TURKISH_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_9;
-            break;
+		fontEncoding = wxFONTENCODING_ISO8859_9;
+		break;
         case THAI_CHARSET:
-            fontEncoding = wxFONTENCODING_ISO8859_11;
-            break;
+		fontEncoding = wxFONTENCODING_ISO8859_11;
+		break;
         case SHIFTJIS_CHARSET:
-            fontEncoding = wxFONTENCODING_CP932;
-            break;
+		fontEncoding = wxFONTENCODING_CP932;
+		break;
         case GB2312_CHARSET:
-            fontEncoding = wxFONTENCODING_CP936;
-            break;
+		fontEncoding = wxFONTENCODING_CP936;
+		break;
         case HANGUL_CHARSET:
-            fontEncoding = wxFONTENCODING_CP949;
-            break;
+		fontEncoding = wxFONTENCODING_CP949;
+		break;
         case CHINESEBIG5_CHARSET:
-            fontEncoding = wxFONTENCODING_CP950;
-            break;
+		fontEncoding = wxFONTENCODING_CP950;
+		break;
         case OEM_CHARSET:
-            fontEncoding = wxFONTENCODING_CP437;
-            break;
+		fontEncoding = wxFONTENCODING_CP437;
+		break;
         default:
-            // assume the system charset
-            fontEncoding = wxFONTENCODING_SYSTEM;
-            break;            
-    }
+		// assume the system charset
+		fontEncoding = wxFONTENCODING_SYSTEM;
+		break;            
+	}
     
-    return fontEncoding;
+	return fontEncoding;
 }
 
 
+inline 
+wxFontEncoding CHMFile::GetFontEncFromLCID(u_int32_t lcid)
+{
+	wxFontEncoding fontEncoding;	
+	u_int32_t lid = lcid & 0xff;
+	
+	switch(lid) {
+	case LANG_ARABIC:
+		fontEncoding = wxFONTENCODING_ISO8859_6;
+		break;
+	case LANG_RUSSIAN:
+		fontEncoding = wxFONTENCODING_CP1251;
+		break;
+	case LANG_UKRAINIAN:
+		fontEncoding = wxFONTENCODING_KOI8_U;
+		break;
+	case LANG_BULGARIAN:
+		fontEncoding = wxFONTENCODING_BULGARIAN;
+		break;
+	case LANG_GREEK:
+		fontEncoding = wxFONTENCODING_ISO8859_7;
+		break;
+	case LANG_HEBREW:
+		fontEncoding = wxFONTENCODING_ISO8859_8;
+		break;
+        case LANG_THAI:
+		fontEncoding = wxFONTENCODING_ISO8859_11;
+		break;
+        case LANG_TURKISH:
+		fontEncoding = wxFONTENCODING_ISO8859_9;
+		break;
+        case LANG_CHINESE:
+		fontEncoding = wxFONTENCODING_CP950;
+		break;
+        case LANG_KOREAN:
+		fontEncoding = wxFONTENCODING_CP949;
+		break;
+        case LANG_JAPANESE:
+		fontEncoding = wxFONTENCODING_CP932;
+		break;
+	case LANG_NEUTRAL:
+	default:
+		fontEncoding = wxFONTENCODING_SYSTEM;
+		break;
+	}
 
+	return fontEncoding;
+}
 
 

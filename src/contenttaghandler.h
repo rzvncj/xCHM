@@ -87,14 +87,12 @@ public:
 	/*!
 	  \brief Constructs the tag handler.
 	  \param enc Encoding to use. Only useful for Unicode builds.
-	  \param useEnc Actually use the information passed in enc or not?
 	  \param tree Tree control to fill. The control must be
 	  empty. Used for the content tree.
 	  \param list Alternatively (or simultaneously), fill this custom
 	  list control (used for the index).
 	 */
-	ContentTagHandler(wxFontEncoding enc, bool useEnc,
-			  wxTreeCtrl* tree = NULL, 
+	ContentTagHandler(wxFontEncoding enc, wxTreeCtrl* tree = NULL, 
 			  CHMListCtrl *list = NULL);
 
 	//! What tags are we interested in?

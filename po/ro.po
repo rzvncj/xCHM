@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-26 11:19+0300\n"
+"POT-Creation-Date: 2005-08-26 23:39+0300\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -63,171 +63,171 @@ msgstr "Vizualizare:"
 msgid "OK"
 msgstr "OK"
 
-#: src/chmframe.cpp:37
+#: src/chmframe.cpp:39
 msgid "Open a CHM book."
 msgstr "Deschide un document CHM."
 
-#: src/chmframe.cpp:38
+#: src/chmframe.cpp:40
 msgid "Change fonts."
 msgstr "Schimba fonturile."
 
-#: src/chmframe.cpp:39
+#: src/chmframe.cpp:41
 msgid "Print the page currently displayed."
 msgstr "Tipareste pagina afisata."
 
-#: src/chmframe.cpp:40
+#: src/chmframe.cpp:42
 msgid "On or off?"
 msgstr "Activat sau nu?"
 
-#: src/chmframe.cpp:41
+#: src/chmframe.cpp:43
 msgid "Go to the book's start page."
 msgstr "Mergi la pagina de start a cartii."
 
-#: src/chmframe.cpp:42
+#: src/chmframe.cpp:44
 msgid "Go forward in history. Per book."
 msgstr "Mergi inainte in paginile vizitate. Per carte."
 
-#: src/chmframe.cpp:43
+#: src/chmframe.cpp:45
 msgid "Back to the last visited page. Per book."
 msgstr "Inapoi la ultima pagina vizitata. Per carte."
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:46
 msgid "About the program."
 msgstr "Despre program."
 
-#: src/chmframe.cpp:123
+#: src/chmframe.cpp:127
 msgid "Ready."
 msgstr "Pregatit."
 
-#: src/chmframe.cpp:147 src/chmframe.cpp:806
+#: src/chmframe.cpp:151 src/chmframe.cpp:810
 msgid "Contents"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:148
+#: src/chmframe.cpp:152
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:149 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:153 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Cauta"
 
-#: src/chmframe.cpp:172
+#: src/chmframe.cpp:176
 msgid "About xCHM"
 msgstr "Despre xCHM"
 
-#: src/chmframe.cpp:180
+#: src/chmframe.cpp:184
 msgid "Choose a file.."
 msgstr "Alege un fisier.."
 
-#: src/chmframe.cpp:290
+#: src/chmframe.cpp:294
 msgid "Couldn't extract the book contents tree."
 msgstr "Nu am putut extrage cuprinsul cartii."
 
-#: src/chmframe.cpp:292
+#: src/chmframe.cpp:296
 msgid "No contents.."
 msgstr "Nu exista cuprins.."
 
-#: src/chmframe.cpp:577
+#: src/chmframe.cpp:581
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide..\tCtrl-O"
 
-#: src/chmframe.cpp:578
+#: src/chmframe.cpp:582
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipareste pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:579
+#: src/chmframe.cpp:583
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Fonturi..\tCtrl-T"
 
-#: src/chmframe.cpp:582
+#: src/chmframe.cpp:586
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arata cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:587
+#: src/chmframe.cpp:591
 msgid "&Recent files"
 msgstr "F&isiere recente"
 
-#: src/chmframe.cpp:599
+#: src/chmframe.cpp:603
 msgid "E&xit\tCtrl-X"
 msgstr "E&xit\tCtrl-X"
 
-#: src/chmframe.cpp:600
+#: src/chmframe.cpp:604
 msgid "Quit the application."
 msgstr "Inchide aplicatia."
 
-#: src/chmframe.cpp:604
+#: src/chmframe.cpp:608
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:609
 msgid "For&ward\tCtrl-W"
 msgstr "&Inainte\tCtrl-W"
 
-#: src/chmframe.cpp:606
+#: src/chmframe.cpp:610
 msgid "&Back\tCtrl-B"
 msgstr "I&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:613
 msgid "&About ..\tF1"
 msgstr "&Despre ..\tF1"
 
-#: src/chmframe.cpp:612
+#: src/chmframe.cpp:616
 msgid "&File"
 msgstr "&Fisiere"
 
-#: src/chmframe.cpp:613
+#: src/chmframe.cpp:617
 msgid "Hi&story"
 msgstr "&Istorie"
 
-#: src/chmframe.cpp:614
+#: src/chmframe.cpp:618
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:638
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:663
+#: src/chmframe.cpp:667
 msgid "Add"
 msgstr "Adauga"
 
-#: src/chmframe.cpp:664
+#: src/chmframe.cpp:668
 msgid "Remove"
 msgstr "Sterge"
 
-#: src/chmframe.cpp:667
+#: src/chmframe.cpp:671
 msgid "Add displayed page to bookmarks."
 msgstr "Adauga pagina afisata la semnele de carte."
 
-#: src/chmframe.cpp:668
+#: src/chmframe.cpp:672
 msgid "Remove selected bookmark."
 msgstr "Sterge semnul de carte selectat."
 
-#: src/chmframe.cpp:800
+#: src/chmframe.cpp:804
 msgid "Open .."
 msgstr "Deschide .."
 
-#: src/chmframe.cpp:802
+#: src/chmframe.cpp:806
 msgid "Print .."
 msgstr "Tipareste .."
 
-#: src/chmframe.cpp:804
+#: src/chmframe.cpp:808
 msgid "Fonts .."
 msgstr "Fonturi .."
 
-#: src/chmframe.cpp:811
+#: src/chmframe.cpp:815
 msgid "Back"
 msgstr "Inapoi"
 
-#: src/chmframe.cpp:812
+#: src/chmframe.cpp:816
 msgid "Forward"
 msgstr "Inainte"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:818
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:817
+#: src/chmframe.cpp:821
 msgid "About"
 msgstr "Despre"
 
@@ -271,6 +271,6 @@ msgstr "Cauta doar in titlurile din cuprins."
 msgid "Search contents for occurences of the specified text."
 msgstr "Cauta in carte pagini care contin aparitii ale textului specificat."
 
-#: src/contenttaghandler.cpp:44
+#: src/contenttaghandler.cpp:46
 msgid "Topics"
 msgstr "Cuprins"

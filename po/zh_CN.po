@@ -1,278 +1,276 @@
-# xCHM .pot file.
-# Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
-# Copyright (C) 2004 Alan Kelon O Moraes <kelon@pop.com.br>
-# This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <kelon@pop.com.br>, 2004.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xCHM\n"
+"Project-Id-Version: xCHM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-26 23:39+0300\n"
-"PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
-"Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
-"Language-Team: Brazilian Portuguese \n"
+"PO-Revision-Date: 2005-08-27 14:37+0800\n"
+"Last-Translator: sejishikong <sejishikong@263.net>\n"
+"Language-Team: zh_CN <sejishikong@linuxfans.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/chmfile.cpp:578
 msgid "Untitled in index"
-msgstr "Sem t�tulo"
+msgstr "在索引中无标题"
 
 #: src/chmfinddialog.cpp:32
 msgid "Find in page.."
-msgstr "Procurar na p�gina.."
+msgstr "在页面中查找.."
 
 #: src/chmfinddialog.cpp:41
 msgid "Whole words only"
-msgstr "Palavra completa apenas"
+msgstr "仅整个单词"
 
 #: src/chmfinddialog.cpp:42
 msgid "Case sensitive"
-msgstr "Diferir mai�sculas de min�sculas"
+msgstr "区分大小写"
 
 #: src/chmfinddialog.cpp:49
 msgid "Find next"
-msgstr "Procurar pr�ximo"
+msgstr "查找下一个"
 
 #: src/chmfinddialog.cpp:52 src/chmfontdialog.cpp:92
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "取消"
 
 #: src/chmfontdialog.cpp:53
 msgid "Change fonts.."
-msgstr "Mudar fontes.."
+msgstr "更改字体.."
 
 #: src/chmfontdialog.cpp:60
 msgid "Normal font:"
-msgstr "Fonte normal:"
+msgstr "普通字体："
 
 #: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
-msgstr "Fonte proporcional:"
+msgstr "固定字体："
 
 #: src/chmfontdialog.cpp:62
 msgid "Font size:"
-msgstr "Tamanho da fonte:"
+msgstr "字体大小："
 
 #: src/chmfontdialog.cpp:80
 msgid "Preview:"
-msgstr "Visualizar:"
+msgstr "预览"
 
 #: src/chmfontdialog.cpp:90
 msgid "OK"
-msgstr "OK"
+msgstr "好"
 
 #: src/chmframe.cpp:39
 msgid "Open a CHM book."
-msgstr "Abrir um livro CHM."
+msgstr "打开CHM书籍"
 
 #: src/chmframe.cpp:40
 msgid "Change fonts."
-msgstr "Mudar as fontes."
+msgstr "更改字体。"
 
 #: src/chmframe.cpp:41
 msgid "Print the page currently displayed."
-msgstr "Imprimir p�gina atual."
+msgstr "打印当前显示的页面"
 
 #: src/chmframe.cpp:42
 msgid "On or off?"
-msgstr "Ativar ou desatuvar?"
+msgstr "打开还是关闭？"
 
 #: src/chmframe.cpp:43
 msgid "Go to the book's start page."
-msgstr "Ir para a p�gina inicial do livro."
+msgstr "到书籍的起始页。"
 
 #: src/chmframe.cpp:44
 msgid "Go forward in history. Per book."
-msgstr "Avan�ar no hist�rico. Por livro."
+msgstr "在历史中向前，每一书籍。"
 
 #: src/chmframe.cpp:45
 msgid "Back to the last visited page. Per book."
-msgstr "Voltar para a �ltima p�gina visitada. Por livro."
+msgstr "回到最近访问的页面，每一书籍。"
 
 #: src/chmframe.cpp:46
 msgid "About the program."
-msgstr "Sobre o programa."
+msgstr "关于此程序。"
 
 #: src/chmframe.cpp:127
 msgid "Ready."
-msgstr "Pronto."
+msgstr "准备。"
 
 #: src/chmframe.cpp:151 src/chmframe.cpp:810
 msgid "Contents"
-msgstr "Conte�do"
+msgstr "目录"
 
 #: src/chmframe.cpp:152
 msgid "Index"
-msgstr "Index"
+msgstr "索引"
 
 #: src/chmframe.cpp:153 src/chmsearchpanel.cpp:49
 msgid "Search"
-msgstr "Procurar"
+msgstr "查找"
 
 #: src/chmframe.cpp:176
 msgid "About xCHM"
-msgstr "Sobre xCHM"
+msgstr "关于xCHM"
 
 #: src/chmframe.cpp:184
 msgid "Choose a file.."
-msgstr "Escolha um arquivo.."
+msgstr "选择一个文件.."
 
 #: src/chmframe.cpp:294
 msgid "Couldn't extract the book contents tree."
-msgstr "N�o foi poss�vel abrir os t�picos do livro."
+msgstr "不能展开此书的目录树。"
 
 #: src/chmframe.cpp:296
 msgid "No contents.."
-msgstr "Sem conte�do.."
+msgstr "没有目录.."
 
 #: src/chmframe.cpp:581
 msgid "&Open..\tCtrl-O"
-msgstr "Abrir..\tCtrl-O"
+msgstr "打开(&O)..\tCtrl-O"
 
 #: src/chmframe.cpp:582
 msgid "&Print page..\tCtrl-P"
-msgstr "Imprimir a p�gina...\tCtrl-P"
+msgstr "打印页面(&P)..\tCtrl-P"
 
 #: src/chmframe.cpp:583
 msgid "Fon&ts..\tCtrl-T"
-msgstr "Fontes..\tCtrl-T"
+msgstr "字体(&T)..\tCtrl-T"
 
 #: src/chmframe.cpp:586
 msgid "&Show contents tree\tCtrl-S"
-msgstr "Exibir a lista de t�picos\tCtrl-S"
+msgstr "显示目录树(&S)\tCtrl-S"
 
 #: src/chmframe.cpp:591
 msgid "&Recent files"
-msgstr "Arquivos recentes"
+msgstr "最近的文件(&R)"
 
 #: src/chmframe.cpp:603
 msgid "E&xit\tCtrl-X"
-msgstr "Sair\tCtrl-X"
+msgstr "退出(&X)\tCtrl-X"
 
 #: src/chmframe.cpp:604
 msgid "Quit the application."
-msgstr "Sair do programa."
+msgstr "退出应用程序"
 
 #: src/chmframe.cpp:608
 msgid "&Home\tCtrl-H"
-msgstr "In�cio\tCtrl-H"
+msgstr "主页(&H)\tCtrl-H"
 
 #: src/chmframe.cpp:609
 msgid "For&ward\tCtrl-W"
-msgstr "Avan�ar\tCtrl-W"
+msgstr "向前(&W)\tCtrl-W"
 
 #: src/chmframe.cpp:610
 msgid "&Back\tCtrl-B"
-msgstr "Voltar\tCtrl-B"
+msgstr "向后(&B)\tCtrl-B"
 
 #: src/chmframe.cpp:613
 msgid "&About ..\tF1"
-msgstr "Sobre ..\tF1"
+msgstr "关于(&A)..\tF1"
 
 #: src/chmframe.cpp:616
 msgid "&File"
-msgstr "Arquivo"
+msgstr "文件(&F)"
 
 #: src/chmframe.cpp:617
 msgid "Hi&story"
-msgstr "Hist�rico"
+msgstr "历史(&S)"
 
 #: src/chmframe.cpp:618
 msgid "&Help"
-msgstr "Ajuda"
+msgstr "帮助(&H)"
 
 #: src/chmframe.cpp:638
 msgid "Bookmarks"
-msgstr "Favoritos"
+msgstr "书签"
 
 #: src/chmframe.cpp:667
 msgid "Add"
-msgstr "Adicionar"
+msgstr "添加"
 
 #: src/chmframe.cpp:668
 msgid "Remove"
-msgstr "Remover"
+msgstr "移除"
 
 #: src/chmframe.cpp:671
 msgid "Add displayed page to bookmarks."
-msgstr "Adicionar a p�gina atual aos favoritos."
+msgstr "添加显示的页面到书签。"
 
 #: src/chmframe.cpp:672
 msgid "Remove selected bookmark."
-msgstr "Remover o favorito selecionado."
+msgstr "移除选定的书签。"
 
 #: src/chmframe.cpp:804
 msgid "Open .."
-msgstr "Abrir .."
+msgstr "打开 .."
 
 #: src/chmframe.cpp:806
 msgid "Print .."
-msgstr "Imprimir .."
+msgstr "打印 .."
 
 #: src/chmframe.cpp:808
 msgid "Fonts .."
-msgstr "Fontes .."
+msgstr "字体 .."
 
 #: src/chmframe.cpp:815
 msgid "Back"
-msgstr "Voltar"
+msgstr "后退"
 
 #: src/chmframe.cpp:816
 msgid "Forward"
-msgstr "Avan�ar"
+msgstr "前进"
 
 #: src/chmframe.cpp:818
 msgid "Home"
-msgstr "In�cio"
+msgstr "主页"
 
 #: src/chmframe.cpp:821
 msgid "About"
-msgstr "Sobre"
+msgstr "关于"
 
 #: src/chmhtmlwindow.cpp:41
 msgid "For&ward"
-msgstr "Avan�ar"
+msgstr "向前(&W)"
 
 #: src/chmhtmlwindow.cpp:42
 msgid "&Back"
-msgstr "Voltar"
+msgstr "向后(&B)"
 
 #: src/chmhtmlwindow.cpp:43
-#, fuzzy
 msgid "Copy &link location"
-msgstr "Copiar sele��o"
+msgstr "复制链接地址(&L)"
 
 #: src/chmhtmlwindow.cpp:46
 msgid "&Copy selection"
-msgstr "Copiar sele��o"
+msgstr "复制选定(&C)"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Find in page.."
-msgstr "Procurar na p�gina.."
+msgstr "在页面中查找(F).."
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"
-msgstr "Obter resultados parciais"
+msgstr "获取部分匹配"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Search titles only"
-msgstr "Procurar somente nos t�tulos"
+msgstr "只查找标题"
 
 #: src/chmsearchpanel.cpp:52
 msgid "Allow partial matches."
-msgstr "Permitir resultados parciais."
+msgstr "允许部分匹配"
 
 #: src/chmsearchpanel.cpp:53
 msgid "Only search in the contents' titles."
-msgstr "Procurar somente nos t�tulos dos conte�dos."
+msgstr "只在目录标题中查找"
 
 #: src/chmsearchpanel.cpp:54
 msgid "Search contents for occurences of the specified text."
-msgstr "Procurar nos t�picos por ocorr�ncias do texto especificado."
+msgstr "在目录中查找指定的文本"
 
 #: src/contenttaghandler.cpp:46
 msgid "Topics"
-msgstr "T�picos"
+msgstr "主题"

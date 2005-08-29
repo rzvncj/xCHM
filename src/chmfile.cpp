@@ -198,7 +198,7 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	GetArchiveInfo();
 	LoadContextIDs();
 
-#ifdef wxUSE_UNICODE
+#if wxUSE_UNICODE
 	// Fix the title
 	if(_enc != wxFONTENCODING_SYSTEM) {
 		wxCSConv cv(_enc);
@@ -343,6 +343,7 @@ bool CHMFile::LoadContextIDs()
 	// everything went well!
 	return true;
 }
+
 
 bool CHMFile::IsValidCID( const int contextID )
 {
@@ -662,14 +663,13 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 		} else {
 			combuf[COMMON_BUF_LEN - 1] = 0;
 
-#ifdef wxUSE_UNICODE
+#if wxUSE_UNICODE
 			if(_enc == wxFONTENCODING_SYSTEM)
 #endif
 				topic = CURRENT_CHAR_STRING(combuf);
-#ifdef wxUSE_UNICODE
+#if wxUSE_UNICODE
 			else {
-				wxCSConv cv(wxFontMapper::Get()->
-					    GetEncodingName(_enc));
+				wxCSConv cv(_enc);
 				topic = wxString((const char *)combuf, cv);
 			}
 #endif

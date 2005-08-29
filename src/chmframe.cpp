@@ -105,7 +105,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition)
 {
-#	ifdef wxUSE_ACCEL
+#	if wxUSE_ACCEL
 	wxAcceleratorEntry entries[1];
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
 	wxAcceleratorTable accel(1, entries);
@@ -508,7 +508,8 @@ void CHMFrame::UpdateCHMInfo()
 		fontFace.BeforeLast(wxT(',')).AfterLast(wxT(',')).ToLong(&fs);
 
 		wxFont font((int)fs, wxDEFAULT, wxNORMAL, wxNORMAL, 
-			    FALSE, wxEmptyString, chmf->DesiredEncoding());
+			    FALSE, fontFace.BeforeFirst(wxT(',')), 
+			    chmf->DesiredEncoding());
 
 		if(font.Ok()) {
 

@@ -46,7 +46,7 @@ WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 #define MAX_SEARCH_RESULTS 512
 
 
-#ifdef wxUSE_UNICODE
+#if wxUSE_UNICODE
 
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)

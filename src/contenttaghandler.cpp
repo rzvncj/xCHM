@@ -134,12 +134,15 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 		if(!tag.GetParam(wxT("NAME")).CmpNoCase(wxT("Name"))) {
 
 			if(_title.IsEmpty()) {
-#ifdef wxUSE_UNICODE
+#if wxUSE_UNICODE
 				if(_enc != wxFONTENCODING_SYSTEM) {
 					wxCSConv cv(_enc);
 
-					const wxString s = 
+					wxString s = 
 						tag.GetParam(wxT("VALUE"));
+					
+					s.Replace(wxT("&Dstrok;"),
+						  wxT("\320"), TRUE);
 
 					wchar_t buf2[BUF_SIZE];
 					size_t len =
@@ -150,7 +153,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 							      len);
 					if(ret)
 						_title = wxString(buf2, ret);
-				} else 
+				} else
 #endif
 					_title = tag.GetParam(wxT("VALUE"));
 			}

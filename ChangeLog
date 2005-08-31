@@ -200,3 +200,5 @@
 		+ improved CHM language detection support.
 		+ fixed Cyrillic character mapping in Unicode builds.
 		 
+	* 1.3:
+		+ added Czech translation.

@@ -202,3 +202,4 @@
 		 
 	* 1.3:
 		+ added Czech translation.
+		+ added anchor handling patch contributed by Markus Schwarzenberg

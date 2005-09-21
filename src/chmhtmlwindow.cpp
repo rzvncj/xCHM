@@ -94,20 +94,7 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 			_found = false;
 	}
 
-	bool ok = true;
-	wxString anchor = tmp.AfterLast('#');
-	if(anchor.Length() != 0 && anchor != tmp.AfterFirst('#')) {
-	      	wxString page = tmp.BeforeLast('#');
-		if(page != GetOpenedPage()) {
-			ok = wxHtmlWindow::LoadPage(tmp);  
-		}
-		if(ok) {
-			ok = ScrollToAnchor(anchor);
-		}
-	} else {
-	    	ok = wxHtmlWindow::LoadPage(tmp);
-	}
-	return ok;
+	return wxHtmlWindow::LoadPage(tmp);
 }
 
 

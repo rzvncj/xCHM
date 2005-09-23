@@ -1,0 +1,278 @@
+# Slovak translation for xchm.
+# This file is distributed under the same license as the xchm package.
+# Vladimir Vasil <vvasil@post.sk>, 2005.
+#
+# vi:encoding=utf-8
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xchm 0.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-29 12:15+0300\n"
+"PO-Revision-Date: 2004-03-01 22:50+0100\n"
+"Last-Translator: Vladimir Vasil <vvasil@post.sk>\n"
+"Language-Team: Slovak <vvasil@post.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/chmfile.cpp:661
+msgid "Untitled in index"
+msgstr "Bez tytulku v indexe"
+
+#: src/chmfinddialog.cpp:32
+msgid "Find in page.."
+msgstr "Nájdi na strane..."
+
+#: src/chmfinddialog.cpp:41
+msgid "Whole words only"
+msgstr "Iba celé slová"
+
+#: src/chmfinddialog.cpp:42
+msgid "Case sensitive"
+msgstr "Rozlišuj veľké a malé písmená"
+
+#: src/chmfinddialog.cpp:49
+msgid "Find next"
+msgstr "Nájdi nasledujúci"
+
+#: src/chmfinddialog.cpp:52 src/chmfontdialog.cpp:92
+msgid "Cancel"
+msgstr "Zruš"
+
+#: src/chmfontdialog.cpp:53
+msgid "Change fonts.."
+msgstr "Zmeň fonty.."
+
+#: src/chmfontdialog.cpp:60
+msgid "Normal font:"
+msgstr "Normálny font:"
+
+#: src/chmfontdialog.cpp:61
+msgid "Fixed font:"
+msgstr "Font s rovnakou veľkosťou:"
+
+#: src/chmfontdialog.cpp:62
+msgid "Font size:"
+msgstr "Veľkosť písma:"
+
+#: src/chmfontdialog.cpp:80
+msgid "Preview:"
+msgstr "Náhľad:"
+
+#: src/chmfontdialog.cpp:90
+msgid "OK"
+msgstr "OK"
+
+#: src/chmframe.cpp:39
+msgid "Open a CHM book."
+msgstr "Otvor knihu CHM."
+
+#: src/chmframe.cpp:40
+msgid "Change fonts."
+msgstr "Zmena písma."
+
+#: src/chmframe.cpp:41
+msgid "Print the page currently displayed."
+msgstr "Vytlač aktuálne zobrazené strany."
+
+#: src/chmframe.cpp:42
+msgid "On or off?"
+msgstr "Zapnuť alebo vypnuť?"
+
+#: src/chmframe.cpp:43
+msgid "Go to the book's start page."
+msgstr "Skok na prvú stranu knihy."
+
+#: src/chmframe.cpp:44
+msgid "Go forward in history. Per book."
+msgstr "Vpred v histórií. Podľa knihy."
+
+#: src/chmframe.cpp:45
+msgid "Back to the last visited page. Per book."
+msgstr "Späť na poslednú navštívenú stranu. Podľa knihy."
+
+#: src/chmframe.cpp:46
+msgid "About the program."
+msgstr "O programe."
+
+#: src/chmframe.cpp:127
+msgid "Ready."
+msgstr "Pripravený."
+
+#: src/chmframe.cpp:151 src/chmframe.cpp:811
+msgid "Contents"
+msgstr "Obsah"
+
+#: src/chmframe.cpp:152
+msgid "Index"
+msgstr "Kľúč"
+
+#: src/chmframe.cpp:153 src/chmsearchpanel.cpp:49
+msgid "Search"
+msgstr "Hľadaj"
+
+#: src/chmframe.cpp:176
+msgid "About xCHM"
+msgstr "O xCHM"
+
+#: src/chmframe.cpp:184
+msgid "Choose a file.."
+msgstr "Zvoľ súbor.."
+
+#: src/chmframe.cpp:294
+msgid "Couldn't extract the book contents tree."
+msgstr "Nemôžem rozbaliť obsah stromu knihy."
+
+#: src/chmframe.cpp:296
+msgid "No contents.."
+msgstr "Bez obsahu.."
+
+#: src/chmframe.cpp:582
+msgid "&Open..\tCtrl-O"
+msgstr "&Otvor..\tCtrl-O"
+
+#: src/chmframe.cpp:583
+msgid "&Print page..\tCtrl-P"
+msgstr "T&lač stranu..\tCtrl-P"
+
+#: src/chmframe.cpp:584
+msgid "Fon&ts..\tCtrl-T"
+msgstr "&Písma..\tCtrl-T"
+
+#: src/chmframe.cpp:587
+msgid "&Show contents tree\tCtrl-S"
+msgstr "Z&obraz obsah stromu\tCtrl-S"
+
+#: src/chmframe.cpp:592
+msgid "&Recent files"
+msgstr "&Nedávno otvorené súbory"
+
+#: src/chmframe.cpp:604
+msgid "E&xit\tCtrl-X"
+msgstr "&Koniec\tCtrl-X"
+
+#: src/chmframe.cpp:605
+msgid "Quit the application."
+msgstr "Ukončenie programu."
+
+#: src/chmframe.cpp:609
+msgid "&Home\tCtrl-H"
+msgstr "&Začiatok\tCtrl-H"
+
+#: src/chmframe.cpp:610
+msgid "For&ward\tCtrl-W"
+msgstr "&Vpred\tCtrl-W"
+
+#: src/chmframe.cpp:611
+msgid "&Back\tCtrl-B"
+msgstr "&Späť\tCtrl-B"
+
+#: src/chmframe.cpp:614
+msgid "&About ..\tF1"
+msgstr "&O programe ..\tF1"
+
+#: src/chmframe.cpp:617
+msgid "&File"
+msgstr "&Súbor"
+
+#: src/chmframe.cpp:618
+msgid "Hi&story"
+msgstr "Hi&stória"
+
+#: src/chmframe.cpp:619
+msgid "&Help"
+msgstr "&Pomoc"
+
+#: src/chmframe.cpp:639
+msgid "Bookmarks"
+msgstr "Zakladač"
+
+#: src/chmframe.cpp:668
+msgid "Add"
+msgstr "Pridaj"
+
+#: src/chmframe.cpp:669
+msgid "Remove"
+msgstr "Odstráň"
+
+#: src/chmframe.cpp:672
+msgid "Add displayed page to bookmarks."
+msgstr "Vlož zobrazovanú stranu do zakladača."
+
+#: src/chmframe.cpp:673
+msgid "Remove selected bookmark."
+msgstr "Odstráň označený zakladač."
+
+#: src/chmframe.cpp:805
+msgid "Open .."
+msgstr "Otvor .."
+
+#: src/chmframe.cpp:807
+msgid "Print .."
+msgstr "Vytlač .."
+
+#: src/chmframe.cpp:809
+msgid "Fonts .."
+msgstr "Fonty .."
+
+#: src/chmframe.cpp:816
+msgid "Back"
+msgstr "Späť"
+
+#: src/chmframe.cpp:817
+msgid "Forward"
+msgstr "Vpred"
+
+#: src/chmframe.cpp:819
+msgid "Home"
+msgstr "Domov"
+
+#: src/chmframe.cpp:822
+msgid "About"
+msgstr "O programe"
+
+#: src/chmhtmlwindow.cpp:41
+msgid "For&ward"
+msgstr "&Vpred"
+
+#: src/chmhtmlwindow.cpp:42
+msgid "&Back"
+msgstr "&Späť"
+
+#: src/chmhtmlwindow.cpp:43
+#, fuzzy
+msgid "Copy &link location"
+msgstr "&Kopiuj zaznaczenie"
+
+#: src/chmhtmlwindow.cpp:46
+msgid "&Copy selection"
+msgstr "&Kopíruj označené"
+
+#: src/chmhtmlwindow.cpp:48
+msgid "&Find in page.."
+msgstr "&Nájdi na strane.."
+
+#: src/chmsearchpanel.cpp:47
+msgid "Get partial matches"
+msgstr "Vziať čiastočné rovnaké"
+
+#: src/chmsearchpanel.cpp:48
+msgid "Search titles only"
+msgstr "Hľadaj len v názvoch"
+
+#: src/chmsearchpanel.cpp:52
+msgid "Allow partial matches."
+msgstr "Dovoliť čiastočne rovnaké."
+
+#: src/chmsearchpanel.cpp:53
+msgid "Only search in the contents' titles."
+msgstr "Hľadaj iba v obsahu."
+
+#: src/chmsearchpanel.cpp:54
+msgid "Search contents for occurences of the specified text."
+msgstr "Nájdi obsah pre náhodný výskit zvoleného textu."
+
+#: src/contenttaghandler.cpp:46
+msgid "Topics"
+msgstr "Témy"

@@ -1,20 +1,20 @@
 # translation of ru.po to Russian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>, 2004.
-# Andy Shevchenko <andy@smile.org.ua>, 2004.
+# Andy Shevchenko <andy@smile.org.ua>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-31 11:34+0300\n"
-"PO-Revision-Date: 2004-03-21 20:26+0200\n"
+"POT-Creation-Date: 2005-08-29 12:15+0300\n"
+"PO-Revision-Date: 2005-11-16 13:18+0200\n"
 "Last-Translator: Andy Shevchenko <andy@smile.org.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: src/chmfile.cpp:661
 msgid "Untitled in index"
@@ -26,7 +26,7 @@ msgstr "Найти на этой странице..."
 
 #: src/chmfinddialog.cpp:41
 msgid "Whole words only"
-msgstr "Только полные слова"
+msgstr "Только целые слова"
 
 #: src/chmfinddialog.cpp:42
 msgid "Case sensitive"
@@ -46,11 +46,11 @@ msgstr "Параметры шрифтов.."
 
 #: src/chmfontdialog.cpp:60
 msgid "Normal font:"
-msgstr "Нормальный шрифт:"
+msgstr "Обычный:"
 
 #: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
-msgstr "Фиксированный шрифт:"
+msgstr "Моноширный:"
 
 #: src/chmfontdialog.cpp:62
 msgid "Font size:"
@@ -74,7 +74,7 @@ msgstr "Параметры шрифтов."
 
 #: src/chmframe.cpp:41
 msgid "Print the page currently displayed."
-msgstr "Печать текущей страницы."
+msgstr "Печать отображаемой страницы."
 
 #: src/chmframe.cpp:42
 msgid "On or off?"
@@ -122,7 +122,7 @@ msgstr "Открыть файл .."
 
 #: src/chmframe.cpp:294
 msgid "Couldn't extract the book contents tree."
-msgstr "Невозможно развернуть содержание книги."
+msgstr "Невозможно извлечь содержание."
 
 #: src/chmframe.cpp:296
 msgid "No contents.."
@@ -241,13 +241,12 @@ msgid "&Back"
 msgstr "&Назад"
 
 #: src/chmhtmlwindow.cpp:43
-#, fuzzy
 msgid "Copy &link location"
-msgstr "&Копировать выделение "
+msgstr "Копировать &ссылку"
 
 #: src/chmhtmlwindow.cpp:46
 msgid "&Copy selection"
-msgstr "&Копировать выделение "
+msgstr "&Копировать выделение"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Find in page.."
@@ -276,3 +275,4 @@ msgstr "Поиск фраз, где встречается введенный т
 #: src/contenttaghandler.cpp:46
 msgid "Topics"
 msgstr "Темы"
+

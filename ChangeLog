@@ -204,4 +204,6 @@
 		+ added Czech translation.
 		+ added Slovak translation.
 		+ updated Russian translation.
+		+ removed useless mouse scroll patch for Mac OS X.
+		+ fixed the About dialog on Mac OS X.
 

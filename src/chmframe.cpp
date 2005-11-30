@@ -112,6 +112,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	SetAcceleratorTable(accel);
 #	endif
 
+#ifdef __WXMAC__	
+	wxApp::s_macAboutMenuItemId = ID_About;
+#endif
+
 	int sizes[7];
 	for(int i = -3; i <= 3; ++i)
 		sizes[i+3] = _fontSize + i * 2;

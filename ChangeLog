@@ -206,4 +206,6 @@
 		+ updated Russian translation.
 		+ removed useless mouse scroll patch for Mac OS X.
 		+ fixed the About dialog on Mac OS X.
+		+ fixed the HTML link to Pabs' chmspec page.
+		+ now allowing the 'back' button to get to the welcome page.
 

@@ -57,10 +57,10 @@ const wxChar *greeting = wxT(
 	"wxwidgets.org\">wxWidgets</a>.<br><br>If you'd like to know more"
 	" about CHM, you could check out <a href=\"http://www.speakeasy."
 	"org/~russotto/chm/\">Matthew Russoto's CHM page</a> or <a"
-	" href=\"http://bonedaddy.net/pabs3/hhm/\">Pabs' CHM Specification"
-	" page</a>.<br>Pabs has contributed time and knowledge to the"
-	" development of <B>xCHM</B>, and features such as the fast index"
-	" search would not have been implemented without his help."
+	" href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
+	" Specification page</a>.<br>Pabs has contributed time and knowledge"
+	" to the development of <B>xCHM</B>, and features such as the fast"
+	" index search would not have been implemented without his help."
 	" Portions of the fast index search are modified versions of"
 	" Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code.<br><br>If"
 	" you'd like to use the code in your own stuff please figure"
@@ -268,7 +268,10 @@ void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
-	_html->HistoryBack();
+	if(_html->HistoryCanBack())
+		_html->HistoryBack();
+	else
+		_html->SetPage(greeting);
 }
 
 

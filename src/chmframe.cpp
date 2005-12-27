@@ -628,7 +628,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 	return menuBar;
 }
 
-
+#ifndef __WXMSW__
 namespace {
 
 #include <hbook_open.xpm>
@@ -636,6 +636,7 @@ namespace {
 #include <hpage.xpm>
 
 } // namespace
+#endif
 
 
 wxPanel* CHMFrame::CreateContentsPanel()
@@ -649,6 +650,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	temp->SetAutoLayout(TRUE);
         temp->SetSizer(sizer);
 
+#ifndef __WXMSW__
 	wxImageList *tclBL = new wxImageList(16, 16);
 	tclBL->Add(wxIcon(hbook_closed_xpm));
 	tclBL->Add(wxIcon(hbook_closed_xpm));
@@ -656,12 +658,17 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	tclBL->Add(wxIcon(hbook_open_xpm));
 	wxImageList *tclIL = new wxImageList(16, 16);
 	tclIL->Add(wxIcon(hpage_xpm));
+#endif
+
 	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
-			      wxDefaultSize, wxTR_HAS_BUTTONS
+			      wxDefaultSize, wxTR_HAS_BUTTONS 
 			      | wxSUNKEN_BORDER | wxTR_HIDE_ROOT
 			      | wxTR_LINES_AT_ROOT);
+
+#ifndef __WXMSW__
 	_tcl->AssignButtonsImageList(tclBL);
 	_tcl->AssignImageList(tclIL);
+#endif
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
 			     wxDefaultSize, 0, NULL, wxCB_DROPDOWN 

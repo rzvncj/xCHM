@@ -210,4 +210,5 @@
 		+ fixed the HTML link to Pabs' chmspec page.
 		+ now allowing the 'back' button to get to the welcome page.
 		+ the code compiles on Win32 with MinGW without patches
+		+ added Win32 resource and icon files
 

@@ -199,6 +199,10 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 	if(selection.IsEmpty() || !_tcl)
 		return;
 
+#ifdef __WXMSW__
+	selection.Replace(wxT("\\"), wxT("/"), TRUE);
+#endif
+
 	_openPath = selection.BeforeLast(wxT('/'));
 	LoadCHM(selection);
 }

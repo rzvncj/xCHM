@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-29 12:15+0300\n"
+"POT-Creation-Date: 2005-12-29 11:58+0200\n"
 "PO-Revision-Date: 2005-12-10 19:26+0100\n"
 "Last-Translator: Yann Verley <yann.verley@free.fr>\n"
 "Language-Team: français <kde-francophone@kde.org>\n"
@@ -98,139 +98,139 @@ msgstr "Aller à la dernière page visitée. Par livre."
 msgid "About the program."
 msgstr "A propos du programme."
 
-#: src/chmframe.cpp:127
+#: src/chmframe.cpp:131
 msgid "Ready."
 msgstr "Prêt."
 
-#: src/chmframe.cpp:151 src/chmframe.cpp:811
+#: src/chmframe.cpp:155 src/chmframe.cpp:829
 msgid "Contents"
 msgstr "Contenu"
 
-#: src/chmframe.cpp:152
+#: src/chmframe.cpp:156
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:153 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:157 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Rechercher"
 
-#: src/chmframe.cpp:176
+#: src/chmframe.cpp:180
 msgid "About xCHM"
 msgstr "À propos de xCHM"
 
-#: src/chmframe.cpp:184
+#: src/chmframe.cpp:188
 msgid "Choose a file.."
 msgstr "Choisir un fichier.."
 
-#: src/chmframe.cpp:294
+#: src/chmframe.cpp:305
 msgid "Couldn't extract the book contents tree."
 msgstr "Impossible d'extraire la table des matières."
 
-#: src/chmframe.cpp:296
+#: src/chmframe.cpp:307
 msgid "No contents.."
 msgstr "Pas de contenu.."
 
-#: src/chmframe.cpp:582
+#: src/chmframe.cpp:593
 msgid "&Open..\tCtrl-O"
 msgstr "&Ouvrir..\tCtrl-O"
 
-#: src/chmframe.cpp:583
+#: src/chmframe.cpp:594
 msgid "&Print page..\tCtrl-P"
 msgstr "&Imprimer la page...\tCtrl-P"
 
-#: src/chmframe.cpp:584
+#: src/chmframe.cpp:595
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Polices..\tCtrl-T"
 
-#: src/chmframe.cpp:587
+#: src/chmframe.cpp:598
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Voir la table des matières\tCtrl-S"
 
-#: src/chmframe.cpp:592
+#: src/chmframe.cpp:603
 msgid "&Recent files"
 msgstr "F&ichiers récents"
 
-#: src/chmframe.cpp:604
+#: src/chmframe.cpp:615
 msgid "E&xit\tCtrl-X"
 msgstr "&Quitter\tCtrl-X"
 
-#: src/chmframe.cpp:605
+#: src/chmframe.cpp:616
 msgid "Quit the application."
 msgstr "Quitter l'application."
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:620
 msgid "&Home\tCtrl-H"
 msgstr "Page d'&accueil\tCtrl-H"
 
-#: src/chmframe.cpp:610
+#: src/chmframe.cpp:621
 msgid "For&ward\tCtrl-W"
 msgstr "&Suivant\tCtrl-W"
 
-#: src/chmframe.cpp:611
+#: src/chmframe.cpp:622
 msgid "&Back\tCtrl-B"
 msgstr "&Précédent\tCtrl-B"
 
-#: src/chmframe.cpp:614
+#: src/chmframe.cpp:625
 msgid "&About ..\tF1"
 msgstr "À &propos ..\tF1"
 
-#: src/chmframe.cpp:617
+#: src/chmframe.cpp:628
 msgid "&File"
 msgstr "&Fichier"
 
-#: src/chmframe.cpp:618
+#: src/chmframe.cpp:629
 msgid "Hi&story"
 msgstr "&Historique"
 
-#: src/chmframe.cpp:619
+#: src/chmframe.cpp:630
 msgid "&Help"
 msgstr "&Aide"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:651
 msgid "Bookmarks"
 msgstr "Signets"
 
-#: src/chmframe.cpp:668
+#: src/chmframe.cpp:686
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/chmframe.cpp:669
+#: src/chmframe.cpp:687
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:690
 msgid "Add displayed page to bookmarks."
 msgstr "Ajouter la page affichée dans les signets."
 
-#: src/chmframe.cpp:673
+#: src/chmframe.cpp:691
 msgid "Remove selected bookmark."
 msgstr "Supprimer la page sélectionnée des signets."
 
-#: src/chmframe.cpp:805
+#: src/chmframe.cpp:823
 msgid "Open .."
 msgstr "Ouvrir .."
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:825
 msgid "Print .."
 msgstr "Imprimer .."
 
-#: src/chmframe.cpp:809
+#: src/chmframe.cpp:827
 msgid "Fonts .."
 msgstr "Polices .."
 
-#: src/chmframe.cpp:816
+#: src/chmframe.cpp:834
 msgid "Back"
 msgstr "Précédent"
 
-#: src/chmframe.cpp:817
+#: src/chmframe.cpp:835
 msgid "Forward"
 msgstr "Suivant"
 
-#: src/chmframe.cpp:819
+#: src/chmframe.cpp:837
 msgid "Home"
 msgstr "Page d'accueil"
 
-#: src/chmframe.cpp:822
+#: src/chmframe.cpp:840
 msgid "About"
 msgstr "À propos"
 
@@ -277,4 +277,3 @@ msgstr "Rechercher dans le contenu les occurrences du texte indiqué."
 #: src/contenttaghandler.cpp:46
 msgid "Topics"
 msgstr "Contenu"
-

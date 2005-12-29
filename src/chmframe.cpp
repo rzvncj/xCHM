@@ -270,8 +270,12 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
 	if(_html->HistoryCanBack())
 		_html->HistoryBack();
-	else
+	else {
+		if(CHMInputStream::GetCache())
+			return;
+		
 		_html->SetPage(greeting);
+	}
 }
 
 

@@ -205,7 +205,7 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 {
 	wxString url = link.GetHref();
-
+	
 	LoadPage(url);
 
 	if(!url.Left(7).CmpNoCase(wxT("MS-ITS:")))

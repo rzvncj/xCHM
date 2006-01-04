@@ -200,7 +200,7 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 		return;
 
 #ifdef __WXMSW__
-	selection.Replace(wxT("\\"), wxT("/"), TRUE);
+//	selection.Replace(wxT("\\"), wxT("/"), TRUE);
 #endif
 
 	_openPath = selection.BeforeLast(wxT('/'));

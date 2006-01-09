@@ -211,4 +211,5 @@
 		+ now allowing the 'back' button to get to the welcome page.
 		+ the code compiles on Win32 with MinGW without patches
 		+ added Win32 resource and icon files
+		+ applied GCC 4.1 related patch
 

@@ -166,7 +166,7 @@ protected:
 	void OnPrint(wxCommandEvent& event);
 
 	//! Called when the user selects a file from the file history.
-	void CHMFrame::OnHistFile(wxCommandEvent& event);
+	void OnHistFile(wxCommandEvent& event);
 
 	//! Called when the user types Ctrl-F.
 	void OnFind(wxCommandEvent& event);

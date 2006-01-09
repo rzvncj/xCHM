@@ -228,7 +228,6 @@ private:
 	int _sashPos;	
 	wxFont _font;
 	wxFileHistory _fh;
-	wxMutex _mutex;
 
 private:
 	DECLARE_EVENT_TABLE()	

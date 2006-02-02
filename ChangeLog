@@ -213,3 +213,6 @@
 		+ added Win32 resource and icon files
 		+ applied GCC 4.1 related patch
 
+	* :
+		+ fixed Polish translation
+

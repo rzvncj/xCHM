@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-29 11:58+0200\n"
+"POT-Creation-Date: 2006-01-25 17:41+0200\n"
 "PO-Revision-Date: 2005-08-30 09:34+0200\n"
 "Last-Translator: Luboš Staněk <lubek@users.sourceforge.net>\n"
 "Language-Team: čeština <cs@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "O programu."
 msgid "Ready."
 msgstr "Připraven."
 
-#: src/chmframe.cpp:155 src/chmframe.cpp:829
+#: src/chmframe.cpp:155 src/chmframe.cpp:833
 msgid "Contents"
 msgstr "Obsah"
 
@@ -122,115 +122,115 @@ msgstr "O aplikaci xCHM"
 msgid "Choose a file.."
 msgstr "Vybrat soubor.."
 
-#: src/chmframe.cpp:305
+#: src/chmframe.cpp:309
 msgid "Couldn't extract the book contents tree."
 msgstr "Nelze extrahovat strom obsahu knihy."
 
-#: src/chmframe.cpp:307
+#: src/chmframe.cpp:311
 msgid "No contents.."
 msgstr "Žádný obsah.."
 
-#: src/chmframe.cpp:593
+#: src/chmframe.cpp:597
 msgid "&Open..\tCtrl-O"
 msgstr "&Otevřít..\tCtrl-O"
 
-#: src/chmframe.cpp:594
+#: src/chmframe.cpp:598
 msgid "&Print page..\tCtrl-P"
 msgstr "Vy&tisknout stránku..\tCtrl-P"
 
-#: src/chmframe.cpp:595
+#: src/chmframe.cpp:599
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Písma..\tCtrl-T"
 
-#: src/chmframe.cpp:598
+#: src/chmframe.cpp:602
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Zobrazit &strom obsahu\tCtrl-S"
 
-#: src/chmframe.cpp:603
+#: src/chmframe.cpp:607
 msgid "&Recent files"
 msgstr "Nedávné soubo&ry"
 
-#: src/chmframe.cpp:615
+#: src/chmframe.cpp:619
 msgid "E&xit\tCtrl-X"
 msgstr "&Konect\tCtrl-X"
 
-#: src/chmframe.cpp:616
+#: src/chmframe.cpp:620
 msgid "Quit the application."
 msgstr "Ukončit aplikaci."
 
-#: src/chmframe.cpp:620
+#: src/chmframe.cpp:624
 msgid "&Home\tCtrl-H"
 msgstr "&Domů\tCtrl-H"
 
-#: src/chmframe.cpp:621
+#: src/chmframe.cpp:625
 msgid "For&ward\tCtrl-W"
 msgstr "Vpře&d\tCtrl-W"
 
-#: src/chmframe.cpp:622
+#: src/chmframe.cpp:626
 msgid "&Back\tCtrl-B"
 msgstr "&Zpět\tCtrl-B"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:629
 msgid "&About ..\tF1"
 msgstr "&O aplikaci ..\tF1"
 
-#: src/chmframe.cpp:628
+#: src/chmframe.cpp:632
 msgid "&File"
 msgstr "&Soubor"
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:633
 msgid "Hi&story"
 msgstr "&Historie"
 
-#: src/chmframe.cpp:630
+#: src/chmframe.cpp:634
 msgid "&Help"
 msgstr "&Nápověda"
 
-#: src/chmframe.cpp:651
+#: src/chmframe.cpp:655
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/chmframe.cpp:686
+#: src/chmframe.cpp:690
 msgid "Add"
 msgstr "Přidat"
 
-#: src/chmframe.cpp:687
+#: src/chmframe.cpp:691
 msgid "Remove"
 msgstr "Odstranit"
 
-#: src/chmframe.cpp:690
+#: src/chmframe.cpp:694
 msgid "Add displayed page to bookmarks."
 msgstr "Přidat zobrazenou stránku do záložek."
 
-#: src/chmframe.cpp:691
+#: src/chmframe.cpp:695
 msgid "Remove selected bookmark."
 msgstr "Odstranit zvolenou záložku."
 
-#: src/chmframe.cpp:823
+#: src/chmframe.cpp:827
 msgid "Open .."
 msgstr "Otevřít .."
 
-#: src/chmframe.cpp:825
+#: src/chmframe.cpp:829
 msgid "Print .."
 msgstr "Vytisknout .."
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:831
 msgid "Fonts .."
 msgstr "Písma .."
 
-#: src/chmframe.cpp:834
+#: src/chmframe.cpp:838
 msgid "Back"
 msgstr "Zpět"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:839
 msgid "Forward"
 msgstr "Vpřed"
 
-#: src/chmframe.cpp:837
+#: src/chmframe.cpp:841
 msgid "Home"
 msgstr "Domů"
 
-#: src/chmframe.cpp:840
+#: src/chmframe.cpp:844
 msgid "About"
 msgstr "O aplikaci"
 

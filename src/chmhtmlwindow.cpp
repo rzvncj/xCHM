@@ -28,7 +28,7 @@
 #include <wx/wx.h>
 #include <wx/log.h>
 #include <wx/clipbrd.h>
-
+#include <wx/filename.h>
 
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
@@ -141,8 +141,7 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 bool CHMHtmlWindow::FixRelativePath(wxString &location,
 				    const wxString& prefix) const
 {
-	if(!location.Left(5).CmpNoCase(wxT("file:")) || 
-	   !location.Left(5).CmpNoCase(wxT("http:")) ||
+	if(!location.Left(5).CmpNoCase(wxT("http:")) ||
 	   !location.Left(6).CmpNoCase(wxT("https:")) ||
 	   !location.Left(4).CmpNoCase(wxT("ftp:")) ||
 	   !location.Left(7).CmpNoCase(wxT("mailto:")) ||
@@ -150,6 +149,22 @@ bool CHMHtmlWindow::FixRelativePath(wxString &location,
 	   !location.Left(10).CmpNoCase(wxT("javascript")) ||
 	   location.StartsWith(wxT("#")))
 		return false;
+
+	if(!location.Left(5).CmpNoCase(wxT("file:"))) {
+		wxString arch = location.BeforeFirst(wxT('#')).Mid(5);
+		
+		wxFileName wfn(arch);
+		if(wfn.IsRelative()) {
+			wfn.MakeAbsolute();
+			
+			wxString file = location.AfterFirst(wxT('#'));
+
+			location = wxString(wxT("file:")) + 
+				wfn.GetFullPath() +
+				wxString(wxT("#")) + file;
+		} else
+			return false;
+	}
 	  
 	CHMFile *chmf = CHMInputStream::GetCache();
 

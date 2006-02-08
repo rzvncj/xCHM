@@ -215,4 +215,5 @@
 
 	* :
 		+ fixed Polish translation
+		+ fixed command line relative path problem
 

@@ -137,11 +137,10 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 }
 
 #ifdef __WXMSW__
-wxFileOffset
+wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 #else
-off_t 
+off_t CHMInputStream::OnSysSeek(off_t seek, wxSeekMode mode)
 #endif
-CHMInputStream::OnSysSeek(off_t seek, wxSeekMode mode)
 {
 	switch(mode) {
 	case wxFromCurrent:

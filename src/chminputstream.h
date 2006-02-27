@@ -83,7 +83,7 @@ protected:
 	  \return Position in the file.
 	 */
 #ifdef __WXMSW__
-	virtual wxFileOffset OnSysSeek(off_t seek, wxSeekMode mode);
+	virtual wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode);
 #else
 	virtual off_t OnSysSeek(off_t seek, wxSeekMode mode);
 #endif

@@ -213,7 +213,9 @@
 		+ added Win32 resource and icon files
 		+ applied GCC 4.1 related patch
 
-	* :
-		+ fixed Polish translation
-		+ fixed command line relative path problem
+	* 1.4:
+		+ fixed Polish translation.
+		+ fixed command line relative path problem.
+		+ the build scripts are MinGW32-friendly.
+		+ fixed Windows CHM input stream bug.
 

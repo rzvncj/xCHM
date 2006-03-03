@@ -219,3 +219,7 @@
 		+ the build scripts are MinGW32-friendly.
 		+ fixed Windows CHM input stream bug.
 
+	* 1.5:
+		+ fixed booksmark selection bug.
+
+

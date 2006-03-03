@@ -384,16 +384,16 @@ void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
 }
 
 
-void CHMFrame::OnBookmarkSel(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 {
 	if(!_bookmarkSel)
 		return;
 
 	wxString *url = reinterpret_cast<wxString *>(
 #ifdef __WXGTK__
-		_cb->GetClientData(_cb->GetSelection()));
+		_cb->GetClientData(event.GetSelection()));
 #else
-		_cb->wxItemContainer::GetClientData(_cb->GetSelection()));
+		_cb->wxItemContainer::GetClientData(event.GetSelection()));
 #endif
 
 	if(!url || url->IsEmpty())

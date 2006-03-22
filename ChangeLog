@@ -223,4 +223,7 @@
 		+ fixed booksmark selection bug.
 		+ fixed Mac OS X locale warning.
 		+ now text can be copied with ctrl(or cmd, on Mac)-C.
+		+ added Copy toolbar button.
+		+ added Edit menu bar.
+
 

@@ -44,6 +44,7 @@
 #define FORWARD_HELP _("Go forward in history. Per book.")
 #define BACK_HELP _("Back to the last visited page. Per book.")
 #define ABOUT_HELP _("About the program.")
+#define COPY_HELP _("Copy selection")
 
 
 namespace {
@@ -74,7 +75,8 @@ const wxChar *greeting = wxT(
 	" for \'ans 4\' (quotes not included) will find pages that"
 	" contain the sentence \'The answer is 42.\'.</li><li>Right"
 	" clicking on the displayed page brings out a popup menu with"
-	" common options.</li></ul><br><br>Enjoy.</body></html>");
+	" common options.</li></ul><br><br>Ctrl(cmd)-C is copy,"
+	" Crtrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
 
 
 const wxChar *about_txt = wxT(
@@ -109,7 +111,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	wxAcceleratorEntry entries[2];
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
 	entries[1].Set(wxACCEL_CTRL, (int) 'C', ID_CopySelection);
-	wxAcceleratorTable accel(1, entries);
+	wxAcceleratorTable accel(2, entries);
 	SetAcceleratorTable(accel);
 #	endif
 
@@ -635,10 +637,15 @@ wxMenuBar* CHMFrame::CreateMenu()
 	wxMenu *menuHelp = new wxMenu;
 	menuHelp->Append(ID_About, _("&About ..\tF1"), ABOUT_HELP);
 
+	wxMenu *menuEdit = new wxMenu;
+	menuEdit->Append(ID_CopySelection, _("&Copy\tCtrl-C"), COPY_HELP);
+
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
+	menuBar->Append(menuEdit, _("&Edit"));
 	menuBar->Append(menuHistory, _("Hi&story"));
 	menuBar->Append(menuHelp, _("&Help"));
+
 
 	return menuBar;
 }
@@ -825,6 +832,7 @@ namespace {
 #include <helpicon.xpm>
 #include <htmsidep.xpm>
 #include <htmoptns.xpm>
+#include <copy.xpm>
 
 } // namespace
 
@@ -840,6 +848,11 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	toolbar->AddCheckTool(ID_Contents, _("Contents"),
 			      wxBitmap(htmsidep_xpm),
 			      wxBitmap(htmsidep_xpm), CONTENTS_HELP);
+	
+	toolbar->AddSeparator();
+	toolbar->AddTool(ID_CopySelection, _("Copy"), 
+			wxBitmap(copy_xpm), COPY_HELP);
+	
 	toolbar->AddSeparator();
 
 	toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);

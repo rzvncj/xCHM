@@ -221,5 +221,6 @@
 
 	* 1.5:
 		+ fixed booksmark selection bug.
-
+		+ fixed Mac OS X locale warning.
+		+ now text can be copied with ctrl(or cmd, on Mac)-C.
 

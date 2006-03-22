@@ -106,8 +106,9 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _bookmarksDeleted(false), _sashPos(sashPosition)
 {
 #	if wxUSE_ACCEL
-	wxAcceleratorEntry entries[1];
+	wxAcceleratorEntry entries[2];
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
+	entries[1].Set(wxACCEL_CTRL, (int) 'C', ID_CopySelection);
 	wxAcceleratorTable accel(1, entries);
 	SetAcceleratorTable(accel);
 #	endif
@@ -337,6 +338,12 @@ void CHMFrame::OnHistFile(wxCommandEvent& event)
 void CHMFrame::OnFind(wxCommandEvent& event)
 {
 	_html->OnFind(event);
+}
+
+
+void CHMFrame::OnCopySelection(wxCommandEvent& event)
+{
+	_html->OnCopy(event);
 }
 
 
@@ -863,6 +870,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
 	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
+	EVT_MENU(ID_CopySelection, CHMFrame::OnCopySelection)
 	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)

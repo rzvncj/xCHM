@@ -124,10 +124,10 @@ public:
 	//! Called when the user selects 'Find' from the popup menu.
 	void OnFind(wxCommandEvent& event);
 
-protected:	
 	//! Called when the user selects 'Copy' from the popup menu.
 	void OnCopy(wxCommandEvent& event);
-	
+
+protected:	
 	//! Called when the user selects 'Forward' from the popup menu.
 	void OnForward(wxCommandEvent& event);
 

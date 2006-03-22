@@ -71,6 +71,7 @@ enum
 	ID_Add,
 	ID_Remove,
 	ID_FindInPage,
+	ID_CopySelection,
 	ID_Recent,
 	ID_Notebook,
 	ID_TreeCtrl = 1000,
@@ -170,6 +171,9 @@ protected:
 
 	//! Called when the user types Ctrl-F.
 	void OnFind(wxCommandEvent& event);
+
+	//! Called when the user types Ctrl-F.
+	void OnCopySelection(wxCommandEvent& event);
 
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);

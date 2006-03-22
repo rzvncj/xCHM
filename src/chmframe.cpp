@@ -44,7 +44,8 @@
 #define FORWARD_HELP _("Go forward in history. Per book.")
 #define BACK_HELP _("Back to the last visited page. Per book.")
 #define ABOUT_HELP _("About the program.")
-#define COPY_HELP _("Copy selection")
+#define COPY_HELP _("Copy selection.")
+#define FIND_HELP _("Find word in page.")
 
 
 namespace {
@@ -76,7 +77,7 @@ const wxChar *greeting = wxT(
 	" contain the sentence \'The answer is 42.\'.</li><li>Right"
 	" clicking on the displayed page brings out a popup menu with"
 	" common options.</li></ul><br><br>Ctrl(cmd)-C is copy,"
-	" Crtrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
+	" Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
 
 
 const wxChar *about_txt = wxT(
@@ -635,10 +636,11 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuHistory->Append(ID_Back, _("&Back\tCtrl-B"), BACK_HELP);
 	
 	wxMenu *menuHelp = new wxMenu;
-	menuHelp->Append(ID_About, _("&About ..\tF1"), ABOUT_HELP);
+	menuHelp->Append(ID_About, _("&About..\tF1"), ABOUT_HELP);
 
 	wxMenu *menuEdit = new wxMenu;
 	menuEdit->Append(ID_CopySelection, _("&Copy\tCtrl-C"), COPY_HELP);
+	menuEdit->Append(ID_FindInPage, _("&Find..\tCtrl-F"), FIND_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
@@ -833,6 +835,7 @@ namespace {
 #include <htmsidep.xpm>
 #include <htmoptns.xpm>
 #include <copy.xpm>
+#include <find.xpm>
 
 } // namespace
 
@@ -852,6 +855,8 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	toolbar->AddSeparator();
 	toolbar->AddTool(ID_CopySelection, _("Copy"), 
 			wxBitmap(copy_xpm), COPY_HELP);
+	toolbar->AddTool(ID_FindInPage, _("Find"), 
+			wxBitmap(find_xpm), FIND_HELP);
 	
 	toolbar->AddSeparator();
 

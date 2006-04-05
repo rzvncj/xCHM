@@ -1,0 +1,307 @@
+# Ukrainian translation of xchm.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Maxim Dziumanenko <mvd@mylinux.ua>, 2006
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xchm 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-05-16 00:14-0400\n"
+"PO-Revision-Date: 2006-04-01 18:30+0300\n"
+"Last-Translator: Maxim V. Dziumanenko <mvd@mylinux.ua>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/chmfile.cpp:661
+msgid "Untitled in index"
+msgstr "Без заголовку"
+
+#: ../src/chmfinddialog.cpp:32
+msgid "Find in page.."
+msgstr "Знайти на цій сторінці..."
+
+#: ../src/chmfinddialog.cpp:41
+msgid "Whole words only"
+msgstr "Тільки повні слова"
+
+#: ../src/chmfinddialog.cpp:42
+msgid "Case sensitive"
+msgstr "Збігається регістр"
+
+#: ../src/chmfinddialog.cpp:49
+msgid "Find next"
+msgstr "Знайти наступне"
+
+#: ../src/chmfinddialog.cpp:52
+#: ../src/chmfontdialog.cpp:92
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: ../src/chmfontdialog.cpp:53
+msgid "Change fonts.."
+msgstr "Шрифти..."
+
+#: ../src/chmfontdialog.cpp:60
+msgid "Normal font:"
+msgstr "Звичайний шрифт:"
+
+#: ../src/chmfontdialog.cpp:61
+msgid "Fixed font:"
+msgstr "Моноширинний шрифт:"
+
+#: ../src/chmfontdialog.cpp:62
+msgid "Font size:"
+msgstr "Розмір:"
+
+#: ../src/chmfontdialog.cpp:80
+msgid "Preview:"
+msgstr "Перегляд:"
+
+#: ../src/chmfontdialog.cpp:90
+msgid "OK"
+msgstr "Гаразд"
+
+#: ../src/chmframe.cpp:39
+msgid "Open a CHM book."
+msgstr "Відкрити книгу CHM."
+
+#: ../src/chmframe.cpp:40
+msgid "Change fonts."
+msgstr "Параметри шрифтів."
+
+#: ../src/chmframe.cpp:41
+msgid "Print the page currently displayed."
+msgstr "Друкувати поточну сторінку."
+
+#: ../src/chmframe.cpp:42
+msgid "On or off?"
+msgstr "Увімкнути чи вимкнути?"
+
+#: ../src/chmframe.cpp:43
+msgid "Go to the book's start page."
+msgstr "Перейти на початкову сторінку."
+
+#: ../src/chmframe.cpp:44
+msgid "Go forward in history. Per book."
+msgstr "Вперед по історії."
+
+#: ../src/chmframe.cpp:45
+msgid "Back to the last visited page. Per book."
+msgstr "Назад до останньої відвіданої сторінки."
+
+#: ../src/chmframe.cpp:46
+msgid "About the program."
+msgstr "Про програму."
+
+#: ../src/chmframe.cpp:47
+msgid "Copy selection."
+msgstr "Копіювати виділене."
+
+#: ../src/chmframe.cpp:48
+msgid "Find word in page."
+msgstr "Знайти на сторінці слово."
+
+#: ../src/chmframe.cpp:135
+msgid "Ready."
+msgstr "Завершено."
+
+#: ../src/chmframe.cpp:159
+#: ../src/chmframe.cpp:851
+msgid "Contents"
+msgstr "Зміст"
+
+#: ../src/chmframe.cpp:160
+msgid "Index"
+msgstr "Індекс"
+
+#: ../src/chmframe.cpp:161
+#: ../src/chmsearchpanel.cpp:49
+msgid "Search"
+msgstr "Пошук"
+
+#: ../src/chmframe.cpp:184
+msgid "About xCHM"
+msgstr "Про програму xCHM"
+
+#: ../src/chmframe.cpp:192
+msgid "Choose a file.."
+msgstr "Відкрити файл.."
+
+#: ../src/chmframe.cpp:313
+msgid "Couldn't extract the book contents tree."
+msgstr "Не вдається відкрити зміст."
+
+#: ../src/chmframe.cpp:315
+msgid "No contents.."
+msgstr "Без змісту.."
+
+#: ../src/chmframe.cpp:607
+msgid "&Open..\tCtrl-O"
+msgstr "&Відкрити...\tCtrl+O"
+
+#: ../src/chmframe.cpp:608
+msgid "&Print page..\tCtrl-P"
+msgstr "Д&рук..\tCtrl-P"
+
+#: ../src/chmframe.cpp:609
+msgid "Fon&ts..\tCtrl-T"
+msgstr "&Шрифти..\tCtrl-T"
+
+#: ../src/chmframe.cpp:612
+msgid "&Show contents tree\tCtrl-S"
+msgstr "Показати зміст\tCtrl-S"
+
+#: ../src/chmframe.cpp:617
+msgid "&Recent files"
+msgstr "Не&давні файли..."
+
+#: ../src/chmframe.cpp:629
+msgid "E&xit\tCtrl-X"
+msgstr "Ви&йти\tCtrl-X"
+
+#: ../src/chmframe.cpp:630
+msgid "Quit the application."
+msgstr "Вийти з програми."
+
+#: ../src/chmframe.cpp:634
+msgid "&Home\tCtrl-H"
+msgstr "&Додому\tCtrl-H"
+
+#: ../src/chmframe.cpp:635
+msgid "For&ward\tCtrl-W"
+msgstr "&Вперед\tCtrl-W"
+
+#: ../src/chmframe.cpp:636
+msgid "&Back\tCtrl-B"
+msgstr "&Назад\tCtrl-B"
+
+#: ../src/chmframe.cpp:639
+msgid "&About..\tF1"
+msgstr "&Про програму..\tF1"
+
+#: ../src/chmframe.cpp:642
+msgid "&Copy\tCtrl-C"
+msgstr "&Копіювати\tCtrl-C"
+
+#: ../src/chmframe.cpp:643
+msgid "&Find..\tCtrl-F"
+msgstr "З&найти..\tCtrl-F"
+
+#: ../src/chmframe.cpp:646
+msgid "&File"
+msgstr "&Файл"
+
+#: ../src/chmframe.cpp:647
+msgid "&Edit"
+msgstr "&Правка"
+
+#: ../src/chmframe.cpp:648
+msgid "Hi&story"
+msgstr "&Історія"
+
+#: ../src/chmframe.cpp:649
+msgid "&Help"
+msgstr "&Довідка"
+
+#: ../src/chmframe.cpp:671
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: ../src/chmframe.cpp:706
+msgid "Add"
+msgstr "Додати"
+
+#: ../src/chmframe.cpp:707
+msgid "Remove"
+msgstr "Видалити"
+
+#: ../src/chmframe.cpp:710
+msgid "Add displayed page to bookmarks."
+msgstr "Додати цю сторінку до закладок."
+
+#: ../src/chmframe.cpp:711
+msgid "Remove selected bookmark."
+msgstr "Видалити виділену закладку."
+
+#: ../src/chmframe.cpp:845
+msgid "Open .."
+msgstr "Відкрити..."
+
+#: ../src/chmframe.cpp:847
+msgid "Print .."
+msgstr "Друк..."
+
+#: ../src/chmframe.cpp:849
+msgid "Fonts .."
+msgstr "Шрифти..."
+
+#: ../src/chmframe.cpp:856
+msgid "Copy"
+msgstr "Копіювати"
+
+#: ../src/chmframe.cpp:858
+msgid "Find"
+msgstr "Знайти"
+
+#: ../src/chmframe.cpp:863
+msgid "Back"
+msgstr "Назад"
+
+#: ../src/chmframe.cpp:864
+msgid "Forward"
+msgstr "Вперед"
+
+#: ../src/chmframe.cpp:866
+msgid "Home"
+msgstr "Додому"
+
+#: ../src/chmframe.cpp:869
+msgid "About"
+msgstr "Про програму"
+
+#: ../src/chmhtmlwindow.cpp:41
+msgid "For&ward"
+msgstr "&Вперед"
+
+#: ../src/chmhtmlwindow.cpp:42
+msgid "&Back"
+msgstr "&Назад"
+
+#: ../src/chmhtmlwindow.cpp:43
+msgid "Copy &link location"
+msgstr "Копіювати &посилання"
+
+#: ../src/chmhtmlwindow.cpp:46
+msgid "&Copy selection"
+msgstr "&Копіювати виділене"
+
+#: ../src/chmhtmlwindow.cpp:48
+msgid "&Find in page.."
+msgstr "З&найти на цій сторінці.."
+
+#: ../src/chmsearchpanel.cpp:47
+msgid "Get partial matches"
+msgstr "Отримувати часткові відповідності"
+
+#: ../src/chmsearchpanel.cpp:48
+msgid "Search titles only"
+msgstr "Шукати лише у заголовках"
+
+#: ../src/chmsearchpanel.cpp:52
+msgid "Allow partial matches."
+msgstr "Дозволити часткові відповідностей."
+
+#: ../src/chmsearchpanel.cpp:53
+msgid "Only search in the contents' titles."
+msgstr "Шукати лише у заголовках змісту."
+
+#: ../src/chmsearchpanel.cpp:54
+msgid "Search contents for occurences of the specified text."
+msgstr "Шукати фрази, де зустрічається виділений текст."
+
+#: ../src/contenttaghandler.cpp:46
+msgid "Topics"
+msgstr "Теми"
+

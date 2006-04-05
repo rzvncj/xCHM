@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-22 17:58+0300\n"
+"POT-Creation-Date: 2006-03-23 12:51+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -97,155 +97,170 @@ msgstr "Despre program."
 
 #: src/chmframe.cpp:47
 #, fuzzy
-msgid "Copy selection"
+msgid "Copy selection."
 msgstr "&Copiaza selectia"
 
-#: src/chmframe.cpp:134
+#: src/chmframe.cpp:48
+#, fuzzy
+msgid "Find word in page."
+msgstr "Gaseste in pagina.."
+
+#: src/chmframe.cpp:135
 msgid "Ready."
 msgstr "Pregatit."
 
-#: src/chmframe.cpp:158 src/chmframe.cpp:848
+#: src/chmframe.cpp:159 src/chmframe.cpp:851
 msgid "Contents"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:159
+#: src/chmframe.cpp:160
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:160 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:161 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Cauta"
 
-#: src/chmframe.cpp:183
+#: src/chmframe.cpp:184
 msgid "About xCHM"
 msgstr "Despre xCHM"
 
-#: src/chmframe.cpp:191
+#: src/chmframe.cpp:192
 msgid "Choose a file.."
 msgstr "Alege un fisier.."
 
-#: src/chmframe.cpp:312
+#: src/chmframe.cpp:313
 msgid "Couldn't extract the book contents tree."
 msgstr "Nu am putut extrage cuprinsul cartii."
 
-#: src/chmframe.cpp:314
+#: src/chmframe.cpp:315
 msgid "No contents.."
 msgstr "Nu exista cuprins.."
 
-#: src/chmframe.cpp:606
+#: src/chmframe.cpp:607
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide..\tCtrl-O"
 
-#: src/chmframe.cpp:607
+#: src/chmframe.cpp:608
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipareste pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:609
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Fonturi..\tCtrl-T"
 
-#: src/chmframe.cpp:611
+#: src/chmframe.cpp:612
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arata cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:616
+#: src/chmframe.cpp:617
 msgid "&Recent files"
 msgstr "F&isiere recente"
 
-#: src/chmframe.cpp:628
+#: src/chmframe.cpp:629
 msgid "E&xit\tCtrl-X"
 msgstr "E&xit\tCtrl-X"
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:630
 msgid "Quit the application."
 msgstr "Inchide aplicatia."
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:634
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:635
 msgid "For&ward\tCtrl-W"
 msgstr "&Inainte\tCtrl-W"
 
-#: src/chmframe.cpp:635
+#: src/chmframe.cpp:636
 msgid "&Back\tCtrl-B"
 msgstr "I&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:639
 msgid "&About..\tF1"
 msgstr "&Despre..\tF1"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:642
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:644
+#: src/chmframe.cpp:643
+#, fuzzy
+msgid "&Find..\tCtrl-F"
+msgstr "&Deschide..\tCtrl-O"
+
+#: src/chmframe.cpp:646
 msgid "&File"
 msgstr "&Fisiere"
 
-#: src/chmframe.cpp:645
+#: src/chmframe.cpp:647
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:646
+#: src/chmframe.cpp:648
 msgid "Hi&story"
 msgstr "&Istorie"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:649
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:669
+#: src/chmframe.cpp:671
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:704
+#: src/chmframe.cpp:706
 msgid "Add"
 msgstr "Adauga"
 
-#: src/chmframe.cpp:705
+#: src/chmframe.cpp:707
 msgid "Remove"
 msgstr "Sterge"
 
-#: src/chmframe.cpp:708
+#: src/chmframe.cpp:710
 msgid "Add displayed page to bookmarks."
 msgstr "Adauga pagina afisata la semnele de carte."
 
-#: src/chmframe.cpp:709
+#: src/chmframe.cpp:711
 msgid "Remove selected bookmark."
 msgstr "Sterge semnul de carte selectat."
 
-#: src/chmframe.cpp:842
+#: src/chmframe.cpp:845
 msgid "Open .."
 msgstr "Deschide .."
 
-#: src/chmframe.cpp:844
+#: src/chmframe.cpp:847
 msgid "Print .."
 msgstr "Tipareste .."
 
-#: src/chmframe.cpp:846
+#: src/chmframe.cpp:849
 msgid "Fonts .."
 msgstr "Fonturi .."
 
-#: src/chmframe.cpp:853
+#: src/chmframe.cpp:856
 msgid "Copy"
 msgstr ""
 
 #: src/chmframe.cpp:858
+#, fuzzy
+msgid "Find"
+msgstr "Gaseste urmatorul"
+
+#: src/chmframe.cpp:863
 msgid "Back"
 msgstr "Inapoi"
 
-#: src/chmframe.cpp:859
+#: src/chmframe.cpp:864
 msgid "Forward"
 msgstr "Inainte"
 
-#: src/chmframe.cpp:861
+#: src/chmframe.cpp:866
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:864
+#: src/chmframe.cpp:869
 msgid "About"
 msgstr "Despre"
 

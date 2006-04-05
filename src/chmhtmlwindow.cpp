@@ -31,6 +31,10 @@
 #include <wx/filename.h>
 
 
+#include <iostream>
+using namespace std;
+
+
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
@@ -63,10 +67,10 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 
 	// Path is already absolute.
 	if(_absolute) {
-		FixRelativePath(tmp, wxEmptyString);
+		FixPath(tmp, wxT("/"));
 		_absolute = false;
 	} else
-		FixRelativePath(tmp, GetPrefix(GetOpenedPage()));
+		FixPath(tmp, GetPrefix(GetOpenedPage()));
 
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
@@ -130,72 +134,76 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 }
 
 
-inline 
 wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 {
 	return location.AfterLast(wxT(':')).AfterFirst(
-		wxT('/')).BeforeLast(wxT('/'));
+		           wxT('/')).BeforeLast(wxT('/'));
 }
 
 
-bool CHMHtmlWindow::FixRelativePath(wxString &location,
-				    const wxString& prefix) const
+bool CHMHtmlWindow::FixPath(wxString &location,
+			    const wxString& prefix) const
 {
-	if(!location.Left(5).CmpNoCase(wxT("http:")) ||
-	   !location.Left(6).CmpNoCase(wxT("https:")) ||
-	   !location.Left(4).CmpNoCase(wxT("ftp:")) ||
-	   !location.Left(7).CmpNoCase(wxT("mailto:")) ||
-	   !location.Left(7).CmpNoCase(wxT("ms-its:")) ||
-	   !location.Left(10).CmpNoCase(wxT("javascript")) ||
-	   location.StartsWith(wxT("#")))
-		return false;
+	if(location.Left(5).CmpNoCase(wxT("file:")) != 0
+	   && location.Find(wxT(':')) != -1)
+		return false;	
 
-	if(!location.Left(5).CmpNoCase(wxT("file:"))) {
-		wxString arch = location.BeforeFirst(wxT('#')).Mid(5);
-		
-		wxFileName wfn(arch);
-		if(wfn.IsRelative()) {
-			wfn.MakeAbsolute();
-			
-			wxString file = location.AfterFirst(wxT('#'));
-
-			location = wxString(wxT("file:")) + 
-				wfn.GetFullPath() +
-				wxString(wxT("#")) + file;
-		} else
-			return false;
-	}
-	  
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(!chmf)
 		return false;
 
-	bool result = location.StartsWith(wxT(".."));
-	wxString prf = prefix;
+	bool localFile = location.Find(wxT(':')) == -1;
 
-	while(location.StartsWith(wxT(".."))) {
-		location = location.AfterFirst(wxT('/'));
-		prf = prf.BeforeLast(wxT('/'));
+	wxString arch;
+	wxString file;
+
+	if(!localFile)
+		arch = location.BeforeFirst(wxT('#')).Mid(5);
+	else
+		arch = chmf->ArchiveName();
+
+	wxFileName awfn(arch);
+	
+	if(!localFile)	
+		file = location.AfterFirst(wxT('#')).AfterFirst(wxT(':'));
+	else 
+		file = location;
+
+	/*
+	cerr << "file before: " << file.mb_str() << endl;
+
+        wxString fpath = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
+
+	cerr << "path: " << fpath.mb_str() << endl;
+	
+	bool htmlmodified = false;
+        if(!fpath.IsSameAs(wxT('/')) && file.StartsWith(fpath)) {
+               file = file.Mid(fpath.Length());
+	       htmlmodified = true;
 	}
 
-	if(location.StartsWith(wxT("./")))
-		location = location.AfterFirst(wxT('/'));
-		
-	if(!prf.IsEmpty())
-		prf = wxString(wxT("/")) + prf;
+	cerr << "file after: " << file.mb_str() << endl;
+	*/
 
-	// Handle absolute paths too (that start with /)
-	if(!location.StartsWith(wxT("/")))
-		location = wxString(wxT("file:")) + chmf->ArchiveName() + 
-			wxT("#xchm:") + prf + wxT("/") + location;
-	else
-		location = wxString(wxT("file:")) + chmf->ArchiveName() + 
-			wxT("#xchm:") + location;
+	wxFileName fwfn(file);
+	awfn.Normalize();
 
-	// Don't redirect for simple relative paths that wxHTML can
-	// handle by itself.
-	return result;
+	if(!file.StartsWith(wxT("/"))) 
+		fwfn.AppendDir(prefix);
+	
+	fwfn.Normalize(wxPATH_NORM_DOTS);
+	
+	wxString ffp = fwfn.GetFullPath();
+	wxString afp = awfn.GetFullPath();
+	
+	if(/*!htmlmodified &&*/ !localFile && file == ffp && arch == afp)
+		return false;
+	
+	location = wxString(wxT("file:")) + afp +
+		wxString(wxT("#xchm:")) + ffp;
+
+	return true;
 }
 
 
@@ -208,7 +216,7 @@ wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
 
 	wxString tmp = url;
 
-	if(FixRelativePath(tmp, _prefix)) {
+	if(FixPath(tmp, _prefix)) {
 		*redirect = tmp;
 		return wxHTML_REDIRECT;
 	}

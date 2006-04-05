@@ -156,7 +156,7 @@ private:
 	wxString GetPrefix(const wxString& location) const;
 
 	//! Helper. Fixes ../dir/file locations.
-	bool FixRelativePath(wxString& location, const wxString& prefix) const;
+	bool FixPath(wxString& location, const wxString& prefix) const;
 	
 private:
 	wxTreeCtrl* _tcl;

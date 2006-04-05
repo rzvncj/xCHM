@@ -67,11 +67,12 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 	right.Replace(wxT("%26"), wxT("&"), TRUE);
             
 	wxFileName filename = wxFileSystem::URLToFileName(left);
+	filename.Normalize();
 	s = new CHMInputStream(left.IsEmpty() ? 
 			       left : filename.GetFullPath(), right);
 
 	if (s && s->IsOk()) {
-		
+
 		if(right.IsSameAs(wxT("/")))
 			right = s->GetCache()->HomePage();
 

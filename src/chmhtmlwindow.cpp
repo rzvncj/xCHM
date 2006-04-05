@@ -31,9 +31,6 @@
 #include <wx/filename.h>
 
 
-#include <iostream>
-using namespace std;
-
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
@@ -144,6 +141,8 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 bool CHMHtmlWindow::FixPath(wxString &location,
 			    const wxString& prefix) const
 {
+	wxLogNull wln;
+
 	if(location.Left(5).CmpNoCase(wxT("file:")) != 0
 	   && location.Find(wxT(':')) != -1)
 		return false;	
@@ -164,40 +163,35 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 		arch = chmf->ArchiveName();
 
 	wxFileName awfn(arch);
-	
+	awfn.Normalize();
+
 	if(!localFile)	
 		file = location.AfterFirst(wxT('#')).AfterFirst(wxT(':'));
 	else 
 		file = location;
-
-	/*
-	cerr << "file before: " << file.mb_str() << endl;
-
+	
         wxString fpath = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
 
-	cerr << "path: " << fpath.mb_str() << endl;
+	if(!fpath.IsEmpty())
+		fpath += fpath;
 	
 	bool htmlmodified = false;
-        if(!fpath.IsSameAs(wxT('/')) && file.StartsWith(fpath)) {
-               file = file.Mid(fpath.Length());
+        if(!fpath.IsEmpty() && !fpath.IsSameAs(wxT("//")) 
+	   && file.StartsWith(fpath)) {
+               file = file.Mid(fpath.Length() / 2);
 	       htmlmodified = true;
 	}
 
-	cerr << "file after: " << file.mb_str() << endl;
-	*/
+	if(!file.StartsWith(wxT("/"))) 
+		file = wxString(wxT("/")) + prefix + wxT("/") + file;
 
 	wxFileName fwfn(file);
-	awfn.Normalize();
-
-	if(!file.StartsWith(wxT("/"))) 
-		fwfn.AppendDir(prefix);
-	
 	fwfn.Normalize(wxPATH_NORM_DOTS);
 	
 	wxString ffp = fwfn.GetFullPath();
 	wxString afp = awfn.GetFullPath();
-	
-	if(/*!htmlmodified &&*/ !localFile && file == ffp && arch == afp)
+
+	if(!htmlmodified && !localFile && file == ffp && arch == afp)
 		return false;
 	
 	location = wxString(wxT("file:")) + afp +

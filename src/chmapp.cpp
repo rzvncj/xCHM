@@ -24,6 +24,7 @@
 #include <chmapp.h>
 #include <chmframe.h>
 #include <chmfshandler.h>
+#include <wx/fs_inet.h>
 #include <chmfile.h>
 #include <wx/image.h>
 #include <wx/config.h>
@@ -151,6 +152,7 @@ bool CHMApp::OnInit()
 
 	wxInitAllImageHandlers();
 	wxFileSystem::AddHandler(new CHMFSHandler);
+	wxFileSystem::AddHandler(new wxInternetFSHandler);
 
 	wxConfig config(wxT("xchm"));
 	if(config.Read(wxT("/Position/xOrig"), &xorig)) {

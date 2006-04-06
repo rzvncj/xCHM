@@ -144,8 +144,10 @@ bool CHMApp::OnInit()
 	long fontSize = CHM_DEFAULT_FONT_SIZE;
 	wxString lastOpenedDir, normalFont, fixedFont;
 
+#ifndef __WXMAC__
 	_loc.Init();
 	_loc.AddCatalog(wxT("xchm"));
+#endif
 
 	wxInitAllImageHandlers();
 	wxFileSystem::AddHandler(new CHMFSHandler);

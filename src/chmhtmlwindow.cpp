@@ -172,14 +172,15 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	
         wxString fpath = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
 
-	if(!fpath.IsEmpty())
-		fpath += fpath;
-	
+	// This is a horrible hack needed because wxHTML doesn't know
+	// how to handle absolute chm links.	
 	bool htmlmodified = false;
-        if(!fpath.IsEmpty() && !fpath.IsSameAs(wxT("//")) 
-	   && file.StartsWith(fpath)) {
-               file = file.Mid(fpath.Length() / 2);
-	       htmlmodified = true;
+        if(!fpath.IsEmpty() && !fpath.IsSameAs(wxT('/'))) {
+
+		if(file.Mid(fpath.Length()).StartsWith(wxT("/"))) {
+			file = file.Mid(fpath.Length());
+	       		htmlmodified = true;
+		}
 	}
 
 	if(!file.StartsWith(wxT("/"))) 
@@ -187,7 +188,7 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 
 	wxFileName fwfn(file);
 	fwfn.Normalize(wxPATH_NORM_DOTS);
-	
+
 	wxString ffp = fwfn.GetFullPath();
 	wxString afp = awfn.GetFullPath();
 

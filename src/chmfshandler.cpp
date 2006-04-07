@@ -81,10 +81,10 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 		if(!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
 			right = right.AfterLast(wxT(':'));
 
-		return new wxFSFile(s,
-				    wxString(wxT("file:")) +
+		return new wxFSFile(s, wxEmptyString, 
+				    /*wxString(wxT("file:")) +
 				    s->GetCache()->ArchiveName() + 
-				    wxT("#xchm:") + right,
+				    wxT("#xchm:") + right,*/
 				    GetMimeTypeFromExt(right.Lower()),
 				    GetAnchor(location),
 				    wxDateTime(wxFileModificationTime(left)));

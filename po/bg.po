@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-23 12:51+0200\n"
+"POT-Creation-Date: 2006-04-06 11:16+0300\n"
 "PO-Revision-Date: 2004-06-05 23:36+0300\n"
 "Last-Translator: Атанас Мавров <bugar@developer.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -266,24 +266,24 @@ msgstr "Стартова страница"
 msgid "About"
 msgstr "Относно"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "Нап&ред"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "&Назад"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 #, fuzzy
 msgid "Copy &link location"
 msgstr "&Копиране на избраното"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "&Копиране на избраното"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "&Търсене в страницата..."
 

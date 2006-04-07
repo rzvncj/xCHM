@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-23 12:51+0200\n"
+"POT-Creation-Date: 2006-04-06 11:16+0300\n"
 "PO-Revision-Date: 2005-08-27 14:37+0800\n"
 "Last-Translator: sejishikong <sejishikong@263.net>\n"
 "Language-Team: zh_CN <sejishikong@linuxfans.org>\n"
@@ -264,23 +264,23 @@ msgstr "主页"
 msgid "About"
 msgstr "关于"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "向前(&W)"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "向后(&B)"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 msgid "Copy &link location"
 msgstr "复制链接地址(&L)"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "复制选定(&C)"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "在页面中查找(F).."
 

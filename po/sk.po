@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-23 12:51+0200\n"
+"POT-Creation-Date: 2006-04-06 11:16+0300\n"
 "PO-Revision-Date: 2004-03-01 22:50+0100\n"
 "Last-Translator: Vladimir Vasil <vvasil@post.sk>\n"
 "Language-Team: Slovak <vvasil@post.sk>\n"
@@ -265,24 +265,24 @@ msgstr "Domov"
 msgid "About"
 msgstr "O programe"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "&Vpred"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "&Späť"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 #, fuzzy
 msgid "Copy &link location"
 msgstr "&Kopiuj zaznaczenie"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "&Kopíruj označené"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "&Nájdi na strane.."
 

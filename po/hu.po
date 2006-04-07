@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-23 12:51+0200\n"
+"POT-Creation-Date: 2006-04-06 11:16+0300\n"
 "PO-Revision-Date: 2004-07-24 09:39+0000\n"
 "Last-Translator: Aron Novak <aaron@szentimre.hu>\n"
 "Language-Team: Hungarian\n"
@@ -264,24 +264,24 @@ msgstr "Kezdõlap"
 msgid "About"
 msgstr "Névjegy"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "Elõre"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "Vissza"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 #, fuzzy
 msgid "Copy &link location"
 msgstr "Kijelölés másolása"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "Kijelölés másolása"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "&Keresés az oldalon"
 

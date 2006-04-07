@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-23 12:51+0200\n"
+"POT-Creation-Date: 2006-04-06 11:16+0300\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
 "Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
 "Language-Team: Brazilian Portuguese \n"
@@ -265,24 +265,24 @@ msgstr "Início"
 msgid "About"
 msgstr "Sobre"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "Avançar"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "Voltar"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:44
 #, fuzzy
 msgid "Copy &link location"
 msgstr "Copiar seleção"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "Copiar seleção"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "Procurar na página.."
 

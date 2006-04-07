@@ -31,6 +31,9 @@
 #include <wx/filename.h>
 
 
+#include <iostream>
+using namespace std;
+
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
@@ -143,16 +146,26 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 {
 	wxLogNull wln;
 
-	if(location.Left(5).CmpNoCase(wxT("file:")) != 0
-	   && location.Find(wxT(':')) != -1)
-		return false;	
+        if(!location.Left(5).CmpNoCase(wxT("http:")) ||                                                                                                         
+           !location.Left(6).CmpNoCase(wxT("https:")) ||                                                                                                        
+           !location.Left(4).CmpNoCase(wxT("ftp:")) ||                                                                                                          
+           !location.Left(7).CmpNoCase(wxT("mailto:")) ||                                                                                                       
+           !location.Left(7).CmpNoCase(wxT("ms-its:")) ||                                                                                                       
+           !location.Left(10).CmpNoCase(wxT("javascript")) ||                                                                                                   
+           location.StartsWith(wxT("#")))                                                                                                                       
+                return false;                          
 
 	CHMFile *chmf = CHMInputStream::GetCache();
 
 	if(!chmf)
 		return false;
 
-	bool localFile = location.Find(wxT(':')) == -1;
+	if(!location.Contains(wxT("./")))
+		return false;
+	
+	cerr << "location: " << location.mb_str() << endl;
+
+	bool localFile = location.StartsWith(wxT("file:"));
 
 	wxString arch;
 	wxString file;
@@ -169,19 +182,8 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 		file = location.AfterFirst(wxT('#')).AfterFirst(wxT(':'));
 	else 
 		file = location;
-	
-        wxString fpath = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
 
-	// This is a horrible hack needed because wxHTML doesn't know
-	// how to handle absolute chm links.	
-	bool htmlmodified = false;
-        if(!fpath.IsEmpty() && !fpath.IsSameAs(wxT('/'))) {
-
-		if(file.Mid(fpath.Length()).StartsWith(wxT("/"))) {
-			file = file.Mid(fpath.Length());
-	       		htmlmodified = true;
-		}
-	}
+	cerr << "file: " << file.mb_str() << endl;	
 
 	if(!file.StartsWith(wxT("/"))) 
 		file = wxString(wxT("/")) + prefix + wxT("/") + file;
@@ -192,9 +194,8 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	wxString ffp = fwfn.GetFullPath();
 	wxString afp = awfn.GetFullPath();
 
-	if(!htmlmodified && !localFile && file == ffp && arch == afp)
-		return false;
-	
+	cerr << "ffp: " << ffp.mb_str() << endl;
+
 	location = wxString(wxT("file:")) + afp +
 		wxString(wxT("#xchm:")) + ffp;
 

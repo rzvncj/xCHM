@@ -31,7 +31,6 @@
 #include <wx/filename.h>
 
 
-
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
@@ -143,14 +142,14 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 {
 	wxLogNull wln;
 
-        if(!location.Left(5).CmpNoCase(wxT("http:")) ||                                                                                                         
-           !location.Left(6).CmpNoCase(wxT("https:")) ||                                                                                                        
-           !location.Left(4).CmpNoCase(wxT("ftp:")) ||                                                                                                          
-           !location.Left(7).CmpNoCase(wxT("mailto:")) ||                                                                                                       
-           !location.Left(7).CmpNoCase(wxT("ms-its:")) ||                                                                                                       
-           !location.Left(10).CmpNoCase(wxT("javascript")) ||                                                                                                   
-           location.StartsWith(wxT("#")))                                                                                                                       
-                return false;                          
+        if(!location.Left(5).CmpNoCase(wxT("http:")) ||
+           !location.Left(6).CmpNoCase(wxT("https:")) ||
+           !location.Left(4).CmpNoCase(wxT("ftp:")) || 
+           !location.Left(7).CmpNoCase(wxT("mailto:")) ||
+           !location.Left(7).CmpNoCase(wxT("ms-its:")) ||
+           !location.Left(10).CmpNoCase(wxT("javascript")) ||
+           location.StartsWith(wxT("#")))
+                return false;
 
 	CHMFile *chmf = CHMInputStream::GetCache();
 
@@ -181,11 +180,11 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	if(!file.StartsWith(wxT("/"))) 
 		file = wxString(wxT("/")) + prefix + wxT("/") + file;
 
-	wxFileName fwfn(file);
+	wxFileName fwfn(file, wxPATH_UNIX);
 	fwfn.Normalize(wxPATH_NORM_DOTS);
 
 	location = wxString(wxT("file:")) + awfn.GetFullPath() +
-		wxString(wxT("#xchm:")) + fwfn.GetFullPath();
+		wxString(wxT("#xchm:")) + fwfn.GetFullPath(wxPATH_UNIX);
 
 	return true;
 }

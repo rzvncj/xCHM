@@ -31,9 +31,6 @@
 #include <wx/filename.h>
 
 
-#include <iostream>
-using namespace std;
-
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
@@ -70,7 +67,7 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 		FixPath(tmp, wxT("/"));
 		_absolute = false;
 	} else
-		FixPath(tmp, GetPrefix(GetOpenedPage()));
+		FixPath(tmp, _prefix);
 
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
@@ -160,17 +157,15 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	if(!chmf)
 		return false;
 
-	if(!location.Contains(wxT("./")))
+	bool full = location.StartsWith(wxT("file:"));
+
+	if(full && !location.Contains(wxT("./")))
 		return false;
 	
-	cerr << "location: " << location.mb_str() << endl;
-
-	bool localFile = location.StartsWith(wxT("file:"));
-
 	wxString arch;
 	wxString file;
 
-	if(!localFile)
+	if(full)
 		arch = location.BeforeFirst(wxT('#')).Mid(5);
 	else
 		arch = chmf->ArchiveName();
@@ -178,12 +173,10 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	wxFileName awfn(arch);
 	awfn.Normalize();
 
-	if(!localFile)	
+	if(full)	
 		file = location.AfterFirst(wxT('#')).AfterFirst(wxT(':'));
 	else 
 		file = location;
-
-	cerr << "file: " << file.mb_str() << endl;	
 
 	if(!file.StartsWith(wxT("/"))) 
 		file = wxString(wxT("/")) + prefix + wxT("/") + file;
@@ -191,13 +184,8 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	wxFileName fwfn(file);
 	fwfn.Normalize(wxPATH_NORM_DOTS);
 
-	wxString ffp = fwfn.GetFullPath();
-	wxString afp = awfn.GetFullPath();
-
-	cerr << "ffp: " << ffp.mb_str() << endl;
-
-	location = wxString(wxT("file:")) + afp +
-		wxString(wxT("#xchm:")) + ffp;
+	location = wxString(wxT("file:")) + awfn.GetFullPath() +
+		wxString(wxT("#xchm:")) + fwfn.GetFullPath();
 
 	return true;
 }

@@ -34,6 +34,7 @@
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
 #include <wx/accel.h>
+#include <wx/filesys.h>
 
 
 #define OPEN_HELP _("Open a CHM book.")
@@ -456,9 +457,21 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	bool rtn;
 	SaveBookmarks();
 	_nb->SetSelection(0);
-	rtn = _html->LoadPage(wxString(wxT("file:")) + archive +
-		      wxT("#xchm:/"));
 
+	wxFileSystem wfs;
+	wxFSFile *f = wfs.OpenFile(wxString(wxT("file:")) + archive +
+		      wxT("#xchm:/"));
+	delete f;
+	
+        CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(!chmf)
+		return false;
+	
+	rtn = _html->LoadPage(wxString(wxT("file:"))
+					+ chmf->ArchiveName()
+			                + wxT("#xchm:") 
+					+ chmf->HomePage());
 	UpdateCHMInfo();
 	LoadBookmarks();
 

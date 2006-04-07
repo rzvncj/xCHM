@@ -29,6 +29,7 @@
 #include <wx/image.h>
 #include <wx/config.h>
 
+
 #ifdef WITH_LIBXMLRPC
 
 using namespace XmlRpc;

@@ -31,6 +31,7 @@
 #include <wx/filename.h>
 
 
+
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
@@ -185,7 +186,7 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 
 	location = wxString(wxT("file:")) + awfn.GetFullPath() +
 		wxString(wxT("#xchm:")) + fwfn.GetFullPath(wxPATH_UNIX);
-
+	
 	return true;
 }
 

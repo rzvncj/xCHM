@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-06 11:16+0300\n"
+"POT-Creation-Date: 2006-04-07 15:20+0300\n"
 "PO-Revision-Date: 2005-08-27 14:37+0800\n"
 "Last-Translator: sejishikong <sejishikong@263.net>\n"
 "Language-Team: zh_CN <sejishikong@linuxfans.org>\n"
@@ -63,204 +63,204 @@ msgstr "预览"
 msgid "OK"
 msgstr "好"
 
-#: src/chmframe.cpp:39
+#: src/chmframe.cpp:40
 msgid "Open a CHM book."
 msgstr "打开CHM书籍"
 
-#: src/chmframe.cpp:40
+#: src/chmframe.cpp:41
 msgid "Change fonts."
 msgstr "更改字体。"
 
-#: src/chmframe.cpp:41
+#: src/chmframe.cpp:42
 msgid "Print the page currently displayed."
 msgstr "打印当前显示的页面"
 
-#: src/chmframe.cpp:42
+#: src/chmframe.cpp:43
 msgid "On or off?"
 msgstr "打开还是关闭？"
 
-#: src/chmframe.cpp:43
+#: src/chmframe.cpp:44
 msgid "Go to the book's start page."
 msgstr "到书籍的起始页。"
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:45
 msgid "Go forward in history. Per book."
 msgstr "在历史中向前，每一书籍。"
 
-#: src/chmframe.cpp:45
+#: src/chmframe.cpp:46
 msgid "Back to the last visited page. Per book."
 msgstr "回到最近访问的页面，每一书籍。"
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:47
 msgid "About the program."
 msgstr "关于此程序。"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:48
 #, fuzzy
 msgid "Copy selection."
 msgstr "复制选定(&C)"
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:49
 #, fuzzy
 msgid "Find word in page."
 msgstr "在页面中查找.."
 
-#: src/chmframe.cpp:135
+#: src/chmframe.cpp:136
 msgid "Ready."
 msgstr "准备。"
 
-#: src/chmframe.cpp:159 src/chmframe.cpp:851
+#: src/chmframe.cpp:160 src/chmframe.cpp:864
 msgid "Contents"
 msgstr "目录"
 
-#: src/chmframe.cpp:160
+#: src/chmframe.cpp:161
 msgid "Index"
 msgstr "索引"
 
-#: src/chmframe.cpp:161 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:162 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "查找"
 
-#: src/chmframe.cpp:184
+#: src/chmframe.cpp:185
 msgid "About xCHM"
 msgstr "关于xCHM"
 
-#: src/chmframe.cpp:192
+#: src/chmframe.cpp:193
 msgid "Choose a file.."
 msgstr "选择一个文件.."
 
-#: src/chmframe.cpp:313
+#: src/chmframe.cpp:314
 msgid "Couldn't extract the book contents tree."
 msgstr "不能展开此书的目录树。"
 
-#: src/chmframe.cpp:315
+#: src/chmframe.cpp:316
 msgid "No contents.."
 msgstr "没有目录.."
 
-#: src/chmframe.cpp:607
+#: src/chmframe.cpp:620
 msgid "&Open..\tCtrl-O"
 msgstr "打开(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:608
+#: src/chmframe.cpp:621
 msgid "&Print page..\tCtrl-P"
 msgstr "打印页面(&P)..\tCtrl-P"
 
-#: src/chmframe.cpp:609
+#: src/chmframe.cpp:622
 msgid "Fon&ts..\tCtrl-T"
 msgstr "字体(&T)..\tCtrl-T"
 
-#: src/chmframe.cpp:612
+#: src/chmframe.cpp:625
 msgid "&Show contents tree\tCtrl-S"
 msgstr "显示目录树(&S)\tCtrl-S"
 
-#: src/chmframe.cpp:617
+#: src/chmframe.cpp:630
 msgid "&Recent files"
 msgstr "最近的文件(&R)"
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:642
 msgid "E&xit\tCtrl-X"
 msgstr "退出(&X)\tCtrl-X"
 
-#: src/chmframe.cpp:630
+#: src/chmframe.cpp:643
 msgid "Quit the application."
 msgstr "退出应用程序"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:647
 msgid "&Home\tCtrl-H"
 msgstr "主页(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:635
+#: src/chmframe.cpp:648
 msgid "For&ward\tCtrl-W"
 msgstr "向前(&W)\tCtrl-W"
 
-#: src/chmframe.cpp:636
+#: src/chmframe.cpp:649
 msgid "&Back\tCtrl-B"
 msgstr "向后(&B)\tCtrl-B"
 
-#: src/chmframe.cpp:639
+#: src/chmframe.cpp:652
 msgid "&About..\tF1"
 msgstr "关于(&A)..\tF1"
 
-#: src/chmframe.cpp:642
+#: src/chmframe.cpp:655
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "主页(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:643
+#: src/chmframe.cpp:656
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "打开(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:646
+#: src/chmframe.cpp:659
 msgid "&File"
 msgstr "文件(&F)"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:660
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:648
+#: src/chmframe.cpp:661
 msgid "Hi&story"
 msgstr "历史(&S)"
 
-#: src/chmframe.cpp:649
+#: src/chmframe.cpp:662
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: src/chmframe.cpp:671
+#: src/chmframe.cpp:684
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/chmframe.cpp:706
+#: src/chmframe.cpp:719
 msgid "Add"
 msgstr "添加"
 
-#: src/chmframe.cpp:707
+#: src/chmframe.cpp:720
 msgid "Remove"
 msgstr "移除"
 
-#: src/chmframe.cpp:710
+#: src/chmframe.cpp:723
 msgid "Add displayed page to bookmarks."
 msgstr "添加显示的页面到书签。"
 
-#: src/chmframe.cpp:711
+#: src/chmframe.cpp:724
 msgid "Remove selected bookmark."
 msgstr "移除选定的书签。"
 
-#: src/chmframe.cpp:845
+#: src/chmframe.cpp:858
 msgid "Open .."
 msgstr "打开 .."
 
-#: src/chmframe.cpp:847
+#: src/chmframe.cpp:860
 msgid "Print .."
 msgstr "打印 .."
 
-#: src/chmframe.cpp:849
+#: src/chmframe.cpp:862
 msgid "Fonts .."
 msgstr "字体 .."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:869
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:858
+#: src/chmframe.cpp:871
 #, fuzzy
 msgid "Find"
 msgstr "查找下一个"
 
-#: src/chmframe.cpp:863
+#: src/chmframe.cpp:876
 msgid "Back"
 msgstr "后退"
 
-#: src/chmframe.cpp:864
+#: src/chmframe.cpp:877
 msgid "Forward"
 msgstr "前进"
 
-#: src/chmframe.cpp:866
+#: src/chmframe.cpp:879
 msgid "Home"
 msgstr "主页"
 
-#: src/chmframe.cpp:869
+#: src/chmframe.cpp:882
 msgid "About"
 msgstr "关于"
 

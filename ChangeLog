@@ -235,4 +235,7 @@
 		+ the Ukrainian translation should have been in uk.po not
 		ua.po
 
+	* 1.7.1:
+		+ the history and font dialog were broken.
+
 

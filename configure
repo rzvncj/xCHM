@@ -4582,7 +4582,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xchm
- VERSION=1.7
+ VERSION=1.7.1
 
 
 cat >>confdefs.h <<_ACEOF

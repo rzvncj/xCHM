@@ -230,3 +230,9 @@
 		+ added Ukrainian translation.
 		+ fixed nasty wxHTML-related bug with absolute .chm links.
 
+	* 1.7:
+		+ fixed the fix :-)
+		+ the Ukrainian translation should have been in uk.po not
+		ua.po
+
+

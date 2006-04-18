@@ -238,4 +238,7 @@
 	* 1.7.1:
 		+ the history and font dialog were broken.
 
+	* 1.8:
+		+ fixed the copy link location code.
+
 

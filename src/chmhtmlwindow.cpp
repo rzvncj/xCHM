@@ -36,7 +36,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
 			     CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
-	  _absolute(false), _frame(frame), _link(NULL), _fdlg(NULL)
+	  _absolute(false), _frame(frame), _fdlg(NULL)
 {
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
@@ -357,7 +357,7 @@ void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 {
 	if(wxTheClipboard->Open()) {
 		wxTheClipboard->SetData(
-			new wxTextDataObject(_link->GetHref()));
+			new wxTextDataObject(_link));
 		wxTheClipboard->Close();
 	}
 }
@@ -372,15 +372,20 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
 	_menu->Enable(ID_CopyLink, false);
 
-	wxHtmlCell *cell = 
-		m_Cell->FindCellByPos(event.m_x, event.m_y);
+        int x, y;
+        CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
 
-	if(cell) {
-		_link = cell->GetLink();
+	wxHtmlCell *cell = GetInternalRepresentation()->
+		FindCellByPos(x, y);
 
-		if(_link) {
-			_menu->Enable(ID_CopyLink, true);
-		}
+	wxHtmlLinkInfo* linfo = NULL;
+
+	if(cell)
+		linfo = cell->GetLink();
+
+	if(linfo) {
+		_link = linfo->GetHref();
+		_menu->Enable(ID_CopyLink, true);
 	}
 
 	PopupMenu(_menu, event.GetPosition());

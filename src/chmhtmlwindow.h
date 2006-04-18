@@ -166,7 +166,7 @@ private:
 	wxString _prefix;
 	bool _absolute;
 	CHMFrame *_frame;
-	wxHtmlLinkInfo *_link;
+	wxString _link;
 	CHMFindDialog* _fdlg;
 
 private:

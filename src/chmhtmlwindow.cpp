@@ -392,6 +392,17 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 }
 
 
+void CHMHtmlWindow::OnChar(wxKeyEvent& event)
+{
+	if(event.GetKeyCode() == WXK_SPACE) {
+		event.m_keyCode = WXK_PAGEDOWN;
+
+	} else if(event.GetKeyCode() == WXK_BACK) {
+		event.m_keyCode = WXK_PAGEUP;
+	}
+
+	event.Skip();
+}
 
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
@@ -400,6 +411,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
+	EVT_CHAR(CHMHtmlWindow::OnChar)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
 END_EVENT_TABLE()
 

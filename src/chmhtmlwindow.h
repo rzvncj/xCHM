@@ -137,6 +137,9 @@ protected:
 	//! Called when the user selects 'Copy link' from the popup menu.
 	void OnCopyLink(wxCommandEvent& event);
 
+	//! Called when the user presses a key
+	void OnChar(wxKeyEvent &event);
+
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);

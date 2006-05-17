@@ -241,5 +241,7 @@
 	* 1.8:
 		+ fixed the copy link location code.
 		+ updated Polish translation.
+		+ now SPACE and BACKSPACE work like PAGEUP and PAGEDOWN
+		in the HTML display window.
 
 

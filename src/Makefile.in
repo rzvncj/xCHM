@@ -62,7 +62,7 @@ am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) \
 	chmfontdialog.$(OBJEXT) chmsearchpanel.$(OBJEXT) \
 	chmhtmlwindow.$(OBJEXT) chmfinddialog.$(OBJEXT) \
 	chmindexpanel.$(OBJEXT) chmlistctrl.$(OBJEXT) \
-	spantag.$(OBJEXT)
+	spantag.$(OBJEXT) hhcparser.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -192,12 +192,12 @@ INCLUDES = -I$(top_srcdir)/art
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
 	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp \
 	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
-	chmindexpanel.cpp chmlistctrl.cpp spantag.cpp
+	chmindexpanel.cpp chmlistctrl.cpp spantag.cpp hhcparser.cpp
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h contenttaghandler.h chmfontdialog.h \
 	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
-	chmfinddialog.h chmindexpanel.h chmlistctrl.h
+	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
 
 xchm_LDADD = @LINKOPT@ 
 all: all-am
@@ -278,6 +278,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmlistctrl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmsearchpanel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contenttaghandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hhcparser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/spantag.Po@am__quote@
 
 .cpp.o:

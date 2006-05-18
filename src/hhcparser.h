@@ -19,57 +19,41 @@
 */
 
 
-#ifndef __CHMFINDDIALOG_H
-#define __CHMFINDDIALOG_H
+#ifndef __HHCPARSER_H_
+#define __HHCPARSER_H_
 
 
-#include <wx/dialog.h>
-#include <wx/textctrl.h>
-#include <wx/html/htmlcell.h>
+#include <string>
 
 
-// Forward declarations.
-class wxCheckBox;
-class CHMHtmlWindow;
+//! Fast index/contents file parser
+class HHCParser {
 
-
-//! Event IDs.
-enum {
-	ID_TextFind = 1408,
-	ID_FindNext,
-};
-
-
-//! Dialog for finding a word in the currently displayed page.
-class CHMFindDialog : public wxDialog {
 public:
-	//! Initializes the dialog.
-	CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch);
+	//! Constructor
+	HHCParser();
 
-	//! Sets the focus to the textbox.
-	void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
-
-	//! Resets the word to be found, so 'Find next' will start over.
-	void Reset() { _cell = NULL; }
-
-protected:
-	//! Called when the user clicks the 'Find next' button.
-	void OnFind(wxCommandEvent& event);
+public:
+	//! Parse a chunk of data.
+	void parse(const char* chunk);
 
 private:
-	CHMHtmlWindow* _html;
-	wxTextCtrl* _text;	
-	wxCheckBox* _whole;
-	wxCheckBox* _case;
-	wxString _currWord;
-	wxHtmlCell *_cell;
+	//! Handle a retrieved tag. I'm only interested in very few tags.
+	void handleTag(const std::string& tag);
+
+	//! Retrieve a parameter name.
+	std::string getParameter(const char* input, const char* name);
 
 private:
-	DECLARE_EVENT_TABLE();
+	int _level;
+	bool _inquote;
+	bool _intag;
+	bool _inobject;
+	std::string _tag;
 };
 
 
-#endif // __CHMFINDDIALOG_H
+#endif // __HHCPARSER_H_
 
 
 /*

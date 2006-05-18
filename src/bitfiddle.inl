@@ -163,3 +163,5 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
   End:
 */
 
+// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

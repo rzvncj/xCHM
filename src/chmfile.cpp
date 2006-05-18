@@ -1092,3 +1092,5 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(u_int32_t lcid)
   End:
 */
 
+// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

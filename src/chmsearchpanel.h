@@ -131,3 +131,5 @@ private:
   End:
 */
 
+// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

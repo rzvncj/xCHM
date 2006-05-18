@@ -259,3 +259,6 @@ TAGS_MODULE_END(XCHM)
   indent-tabs-mode: t
   End:
 */
+
+// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

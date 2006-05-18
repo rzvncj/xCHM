@@ -235,6 +235,33 @@ void CHMFile::CloseCHM()
 
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
+#define BUF_SIZE2 1025
+	chmUnitInfo ui;
+	char buffer[BUF_SIZE2];
+	size_t ret = BUF_SIZE2 - 1, curr = 0;
+
+	if(!toBuild)
+		return false;
+
+	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui))
+		return false;
+
+	buffer[0] = '\0';
+
+	HHCParser p(_enc, toBuild, NULL);
+
+	do {
+		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
+					     buffer), curr, BUF_SIZE2 - 1);
+		buffer[ret] = '\0';
+
+		p.parse(buffer);
+		curr += ret;
+
+	} while(ret == BUF_SIZE2 - 1);
+
+
+/*
 	chmUnitInfo ui;
 
 	if(!toBuild)
@@ -253,6 +280,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	ContentParser parser;
 	parser.AddTagHandler(new ContentTagHandler(_enc, toBuild));	
 	parser.Parse(src);
+*/
 
 	return true;
 }
@@ -260,7 +288,32 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
+#define BUF_SIZE2 1025
 	chmUnitInfo ui;
+	char buffer[BUF_SIZE2];
+	size_t ret = BUF_SIZE2 - 1, curr = 0;
+
+	if(!toBuild)
+		return false;
+
+	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
+		return false;
+
+	buffer[0] = '\0';
+
+	HHCParser p(_enc, NULL, toBuild);
+
+	do {
+		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
+					     buffer), curr, BUF_SIZE2 - 1);
+		buffer[ret] = '\0';
+
+		p.parse(buffer);
+		curr += ret;
+
+	} while(ret == BUF_SIZE2 - 1);
+
+/*	chmUnitInfo ui;
 
 	if(!toBuild)
 		return false;
@@ -279,7 +332,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	parser.AddTagHandler(new ContentTagHandler(_enc, NULL, toBuild));
 
 	parser.Parse(src);
-	toBuild->UpdateUI();
+	toBuild->UpdateUI(); */
 
 	return true;
 }
@@ -712,7 +765,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	return true;
 }
 
-
+/*
 inline
 void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 {
@@ -722,20 +775,17 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 
 	buffer[0] = '\0';
 
-	HHCParser p;
-
 	do {
 		ret = RetrieveObject(ui, reinterpret_cast<unsigned char *>(
 					     buffer), curr, BUF_SIZE2 - 1);
 		buffer[ret] = '\0';
-
-		p.parse(buffer);
 
 		str.Append(CURRENT_CHAR_STRING(buffer));
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
 }
+*/
 
 
 inline

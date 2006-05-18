@@ -46,25 +46,6 @@ WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 #define MAX_SEARCH_RESULTS 512
 
 
-#if wxUSE_UNICODE
-
-#	define CURRENT_CHAR_STRING(x) \
-	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
-
-#	define CURRENT_CHAR_STRING_CV(x, cv) \
-	wxString(reinterpret_cast<const char *>(x), cv)
-
-#else
-
-#	define CURRENT_CHAR_STRING(x) \
-	wxString(reinterpret_cast<const char *>(x))
-
-#	define CURRENT_CHAR_STRING_CV(x, cv) \
-	wxString(reinterpret_cast<const char *>(x))
-
-
-#endif
-
 
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
 class CHMFile {

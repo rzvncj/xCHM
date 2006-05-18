@@ -19,17 +19,26 @@
 */
 
 
+#include <chmlistctrl.h>
 #include <hhcparser.h>
 #include <ctype.h>
+#include <wx/wx.h>
+#include <bitfiddle.inl>
 
 
 #include <iostream>
 using namespace std;
 
 
-HHCParser::HHCParser()
-	: _level(0), _inquote(false), _intag(false), _inobject(false)
-{}
+HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
+	: _level(0), _inquote(false), _intag(false), _inobject(false),
+	  _tree(tree), _list(list), _enc(enc)
+{
+	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
+	
+	if(_tree)
+		_parents[_level] = _tree->AddRoot(_("Topics"));
+}
 
 
 void HHCParser::parse(const char* chunk)
@@ -39,8 +48,7 @@ void HHCParser::parse(const char* chunk)
 		switch(*chunk) {
 		case '\"':
 			_inquote = !_inquote;
-			++chunk;
-			continue;
+			break;
 
 		case '<':
 			if(!_inquote) {
@@ -91,29 +99,28 @@ void HHCParser::handleTag(const std::string& tag)
 			break;
 	}
 
-	cerr << "TagName: " << tagName << endl;
+//	cerr << "TagName: " << tagName << endl;
 	
 	if(_inobject) {
 		if(tagName == "/object") {
 			_inobject = false;
 
+			wxString name = makeWxString(_name);
+			wxString value = CURRENT_CHAR_STRING(_value.c_str());
+
+			addToTree(name, value);
+			addToList(name, value);
+
+
 		} else if(tagName == "param") {
 
-			std::string name = getParameter(tag.c_str() + i, 
-							"name", true);
-
-			cerr << "::::name::::" << name << endl;
-			if(name == "name") {
-				if(_name.empty())
-					_name = getParameter(tag.c_str() + i, 
-							     "value", false);
-				cerr << "_name: " << _name << endl;
-			} else if(name == "local") {
-				if(_value.empty())
-					_value = getParameter(tag.c_str() + i, 
-							      "value", false);
-				cerr << "_value: " << _value << endl;
-			}
+			std::string name, value;
+			getParameters(tag.c_str() + i, name, value);
+			
+			if(name == "name" && _name.empty()) 
+				_name = value;
+			else if(name == "local" && _value.empty())
+				_value = value;
 		}
 	
 	} else {		
@@ -126,9 +133,7 @@ void HHCParser::handleTag(const std::string& tag)
 
 		} else if(tagName == "object") {
 			_name = _value = "";
-			if(getParameter(tag.c_str() + i, "type") 
-			   == "text/sitemap")
-				_inobject = true;
+			_inobject = true;
 		}
 	}
 
@@ -136,10 +141,11 @@ void HHCParser::handleTag(const std::string& tag)
 }
 
 
-std::string HHCParser::getParameter(const char* input, const char* name,
-				    bool lower)
+void HHCParser::getParameters(const char* input, std::string& name,
+			      std::string& value)
 {
-	cerr << "Input: " << input << endl;
+	bool lower = false;
+	name = value = "";
 
 	while(*input) {
 		std::string tmpstr;
@@ -155,37 +161,122 @@ std::string HHCParser::getParameter(const char* input, const char* name,
 		while(*input && isspace(*input))
 			++input;
 
-		if(*input && *input == '=')
-			++input;
+		if(*input) {
+			if(*input != '=')
+				return;
+			else
+				++input;
+		}
 
-		if(tmpstr != name)
+		if(tmpstr == "name") {
+			lower = true;
+		} else if(tmpstr == "value") {
+			lower = false;		
+		} else {
+			// now skip value.
+			while(*input && isspace(*input))
+				++input;
+				
+			if(*input && *input == '\"') {
+				++input;
+				while(*input && *input != '\"')
+					++input;
+				if(*input && *input == '\"')
+					++input;
+			} else {
+				while(*input && !isspace(*input))
+					++input;
+			}
 			continue;
+		}
 
 		while(*input && isspace(*input))
 			++input;
-
-		tmpstr = "";
 
 		if(*input && *input == '\"') {
 			++input;
 			while(*input && *input != '\"') {
 				if(lower)
-					tmpstr += tolower(*input++);
+					name += tolower(*input++);
 				else 
-					tmpstr += *input++;
+					value += *input++;
 			}
+			
+			if(*input && *input == '\"')
+				++input;
 		} else {
 			while(*input && !isspace(*input))
 				if(lower)
-					tmpstr += tolower(*input++);
+					name += tolower(*input++);
 				else 
-					tmpstr += *input++;
+					value += *input++;
 		}
-
-		return tmpstr;
 	}
+}
 
-	return "";
+
+wxString HHCParser::makeWxString(const std::string& input)
+{
+#define BUF_SIZE 1024
+	
+	if(input.empty())
+		return wxEmptyString;
+
+	wxString s = CURRENT_CHAR_STRING(input.c_str());
+
+#if wxUSE_UNICODE
+	if(_enc != wxFONTENCODING_SYSTEM) {
+		wxCSConv cv(_enc);
+		
+		s.Replace(wxT("&Dstrok;"), wxT("\320"), TRUE);
+
+		wchar_t buf2[BUF_SIZE];
+		size_t len = (s.length() < BUF_SIZE) ?
+			s.length() : BUF_SIZE;
+
+		size_t ret = cv.MB2WC(buf2, s.mb_str(), len);
+		if(ret)
+			return wxString(buf2, ret);
+	} else
+#endif
+		return s;	
+		
+	return wxEmptyString;
+}
+
+
+void HHCParser::addToTree(const wxString& name, const wxString& value)
+{
+	if(!_tree)
+		return;
+
+	if(!_name.empty()) {
+		
+		int parentIndex = _level ? _level - 1 : 0;
+
+		_parents[_level] = 
+			_tree->AppendItem(_parents[parentIndex], name, 0, 0,
+					  new URLTreeItem(value));
+		if(!_level)
+			_parents[0] = _tree->GetRootItem();
+		else {
+			_tree->SetItemImage(_parents[_level], -1,
+					    wxTreeItemIcon_Normal);
+			
+			_tree->SetItemImage(_parents[_level], -1, 
+					    wxTreeItemIcon_Selected);
+		}
+	}
+}
+
+
+void HHCParser::addToList(const wxString& name, const wxString& value)
+{
+	if(!_list)
+		return;
+
+	if(!name.IsEmpty() && !value.IsEmpty())
+		_list->AddPairItem(name, value);
 }
 
 

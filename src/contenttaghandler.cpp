@@ -21,6 +21,7 @@
 */
 
 
+#include <hhcparser.h>
 #include <chmlistctrl.h>
 #include <contenttaghandler.h>
 #include <wx/wx.h>

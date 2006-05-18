@@ -57,9 +57,10 @@ protected:
 
 /*! 
   \brief Objects of this class will be used as opaque data to be used with
-  a tree item, to that when the user select a tree item it will be easy
+  a tree item, so that when the user selects a tree item it will be easy
   to retrieve the filename associated with the item.
 */
+/*
 struct URLTreeItem : public wxTreeItemData {
 
 	//! Sets the data to str.
@@ -68,6 +69,7 @@ struct URLTreeItem : public wxTreeItemData {
 	//! Useful data.
 	wxString _url;
 };
+*/
 
 
 /*!
@@ -115,7 +117,7 @@ private:
 	wxString _url;
 
 	wxFontEncoding _enc;
-	bool _useEnc;
+//	bool _useEnc;
 	int _counter;
 };
 

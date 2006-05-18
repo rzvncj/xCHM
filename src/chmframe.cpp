@@ -31,6 +31,7 @@
 #include <chmsearchpanel.h>
 #include <chmindexpanel.h>
 #include <chmlistctrl.h>
+#include <hhcparser.h>
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
 #include <wx/accel.h>

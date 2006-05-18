@@ -23,7 +23,33 @@
 #define __HHCPARSER_H_
 
 
+#include <wx/font.h>
+#include <wx/treectrl.h>
 #include <string>
+
+
+// Forward declarations.
+class CHMListCtrl;
+
+
+//! Maximum number of tree levels.
+#define TREE_BUF_SIZE 128
+
+
+
+/*! 
+  \brief Objects of this class will be used as opaque data to be used with
+  a tree item, so that when the user selects a tree item it will be easy
+  to retrieve the filename associated with the item.
+*/
+struct URLTreeItem : public wxTreeItemData {
+
+	//! Sets the data to str.
+	URLTreeItem(const wxString& str) : _url(str) {}
+
+	//! Useful data.
+	wxString _url;
+};
 
 
 //! Fast index/contents file parser
@@ -31,7 +57,7 @@ class HHCParser {
 
 public:
 	//! Constructor
-	HHCParser();
+	HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list);
 
 public:
 	//! Parse a chunk of data.
@@ -42,8 +68,14 @@ private:
 	void handleTag(const std::string& tag);
 
 	//! Retrieve a parameter name.
-	std::string getParameter(const char* input, const char* name,
-				 bool lower = false);
+	void getParameters(const char* input, std::string& name,
+			   std::string& value);
+
+	wxString makeWxString(const std::string& input);
+
+	void addToTree(const wxString& name, const wxString& value);
+
+	void addToList(const wxString& name, const wxString& value);
 
 private:
 	int _level;
@@ -53,6 +85,10 @@ private:
 	std::string _tag;
 	std::string _name;
 	std::string _value;
+	wxTreeCtrl *_tree;
+	CHMListCtrl *_list;
+	wxTreeItemId _parents[TREE_BUF_SIZE];
+	wxFontEncoding _enc;
 };
 
 

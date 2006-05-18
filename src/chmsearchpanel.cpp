@@ -19,6 +19,7 @@
 */
 
 #include <chmsearchpanel.h>
+#include <hhcparser.h>
 #include <contenttaghandler.h>
 #include <chminputstream.h>
 #include <chmlistctrl.h>

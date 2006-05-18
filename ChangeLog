@@ -243,5 +243,7 @@
 		+ updated Polish translation.
 		+ now SPACE and BACKSPACE work like PAGEUP and PAGEDOWN
 		in the HTML display window.
+		+ added (X)Emacs indertation meta-comments to the source
+		files.
 
 

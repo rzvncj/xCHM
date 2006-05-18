@@ -33,6 +33,7 @@
 #include <assert.h>
 
 #include <bitfiddle.inl>
+#include <hhcparser.h>
 
 
 namespace {
@@ -721,10 +722,14 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 
 	buffer[0] = '\0';
 
+	HHCParser p;
+
 	do {
 		ret = RetrieveObject(ui, reinterpret_cast<unsigned char *>(
 					     buffer), curr, BUF_SIZE2 - 1);
 		buffer[ret] = '\0';
+
+		p.parse(buffer);
 
 		str.Append(CURRENT_CHAR_STRING(buffer));
 		curr += ret;

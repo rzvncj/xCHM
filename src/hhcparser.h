@@ -42,7 +42,8 @@ private:
 	void handleTag(const std::string& tag);
 
 	//! Retrieve a parameter name.
-	std::string getParameter(const char* input, const char* name);
+	std::string getParameter(const char* input, const char* name,
+				 bool lower = false);
 
 private:
 	int _level;
@@ -50,6 +51,8 @@ private:
 	bool _intag;
 	bool _inobject;
 	std::string _tag;
+	std::string _name;
+	std::string _value;
 };
 
 

@@ -89,6 +89,7 @@ private:
 	CHMListCtrl *_list;
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	wxFontEncoding _enc;
+	int _counter;
 };
 
 

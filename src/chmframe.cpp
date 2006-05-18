@@ -521,12 +521,12 @@ void CHMFrame::UpdateCHMInfo()
 	_cip->Reset();
 
 	wxString title = chmf->Title();
-	
+
 	if(_tcl->GetCount())
 		_tcl->DeleteAllItems();
 	chmf->GetTopicsTree(_tcl);
 	chmf->GetIndex(_cip->GetResultsList());
- 
+	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
 			wxString(wxT("xCHM v. " VERSION ": ")) + title;

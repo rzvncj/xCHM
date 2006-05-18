@@ -30,9 +30,12 @@
 using namespace std;
 
 
+#define TIME_TO_YIELD	1024
+
+
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	: _level(0), _inquote(false), _intag(false), _inobject(false),
-	  _tree(tree), _list(list), _enc(enc)
+	  _tree(tree), _list(list), _enc(enc), _counter(0)
 {
 	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
 	
@@ -77,7 +80,14 @@ void HHCParser::parse(const char* chunk)
 void HHCParser::handleTag(const std::string& tag)
 {
 	if(tag.empty())
-		return;
+		return;	
+
+	++_counter;
+
+	if((_counter % TIME_TO_YIELD) == 0) {
+		wxSafeYield();	
+		_counter = 0;
+	}
 
 	size_t i;
 	for(i = 0; i < tag.length(); ++i) {
@@ -260,10 +270,10 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 		if(!_level)
 			_parents[0] = _tree->GetRootItem();
 		else {
-			_tree->SetItemImage(_parents[_level], -1,
+			_tree->SetItemImage(_parents[parentIndex], -1,
 					    wxTreeItemIcon_Normal);
 			
-			_tree->SetItemImage(_parents[_level], -1, 
+			_tree->SetItemImage(_parents[parentIndex], -1, 
 					    wxTreeItemIcon_Selected);
 		}
 	}

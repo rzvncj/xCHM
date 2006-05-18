@@ -159,3 +159,15 @@ BEGIN_EVENT_TABLE(CHMListCtrl, wxListCtrl)
 	EVT_SIZE(CHMListCtrl::OnSize)
 END_EVENT_TABLE()
 
+
+/*
+  Local Variables:
+  mode: c++
+  c-basic-offset: 8
+  tab-width: 8
+  c-indent-comments-syntactically-p: t
+  c-tab-always-indent: t
+  indent-tabs-mode: t
+  End:
+*/
+

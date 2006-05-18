@@ -247,3 +247,15 @@ TAG_HANDLER_END(SPAN)
 TAGS_MODULE_BEGIN(XCHM)
     TAGS_MODULE_ADD(SPAN) 
 TAGS_MODULE_END(XCHM)
+
+
+/*
+  Local Variables:
+  mode: c++
+  c-basic-offset: 8
+  tab-width: 8
+  c-indent-comments-syntactically-p: t
+  c-tab-always-indent: t
+  indent-tabs-mode: t
+  End:
+*/

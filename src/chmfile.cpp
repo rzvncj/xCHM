@@ -1081,3 +1081,14 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(u_int32_t lcid)
 }
 
 
+/*
+  Local Variables:
+  mode: c++
+  c-basic-offset: 8
+  tab-width: 8
+  c-indent-comments-syntactically-p: t
+  c-tab-always-indent: t
+  indent-tabs-mode: t
+  End:
+*/
+

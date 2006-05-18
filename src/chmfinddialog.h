@@ -71,3 +71,16 @@ private:
 
 #endif // __CHMFINDDIALOG_H
 
+
+/*
+  Local Variables:
+  mode: c++
+  c-basic-offset: 8
+  tab-width: 8
+  c-indent-comments-syntactically-p: t
+  c-tab-always-indent: t
+  indent-tabs-mode: t
+  End:
+*/
+
+

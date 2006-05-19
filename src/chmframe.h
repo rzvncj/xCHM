@@ -38,6 +38,7 @@
 class CHMHtmlWindow;
 class CHMSearchPanel;
 class CHMIndexPanel;
+class wxFileType;
 
 
 //! Default font size for the wxHtmlWindow.
@@ -238,6 +239,7 @@ private:
 	int _sashPos;	
 	wxFont _font;
 	wxFileHistory _fh;
+	wxFileType* _ft;
 
 private:
 	DECLARE_EVENT_TABLE()	

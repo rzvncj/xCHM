@@ -110,7 +110,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false), _sashPos(sashPosition)
+	  _bookmarksDeleted(false), _sashPos(sashPosition), _ft(NULL)
 {
 #	if wxUSE_ACCEL
 	wxAcceleratorEntry entries[2];
@@ -332,10 +332,12 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& event)
 				   wxT("Compiled HTML help files"),
 				   wxT("chm"), NULL);
 
-		wxTheMimeTypesManager->Associate(fti);
+		_ft = wxTheMimeTypesManager->Associate(fti);
 
 	} else {
-//		wxTheMimeTypesManager->Unassociate(&fti);
+		if(_ft != NULL)
+			wxTheMimeTypesManager->Unassociate(_ft);
+		_ft = NULL;
 	}
 }
 //#endif// __WXMSW__

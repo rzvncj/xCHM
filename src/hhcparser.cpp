@@ -23,6 +23,11 @@
 #include <hhcparser.h>
 #include <ctype.h>
 #include <wx/wx.h>
+
+#ifdef HAVE_CONFIG_H
+#	include <config.h>
+#endif
+
 #include <bitfiddle.inl>
 
 

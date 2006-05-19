@@ -36,6 +36,7 @@
 #include <wx/statbox.h>
 #include <wx/accel.h>
 #include <wx/filesys.h>
+#include <wx/mimetype.h>
 
 
 #define OPEN_HELP _("Open a CHM book.")
@@ -48,6 +49,7 @@
 #define ABOUT_HELP _("About the program.")
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
+#define REGISTER_EXTENSION_HELP _("Associate the .chm extension with xCHM.")
 
 
 namespace {
@@ -319,6 +321,25 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 		}
 	}
 }
+
+//#ifdef __WXMSW__
+void CHMFrame::OnRegisterExtension(wxCommandEvent& event)
+{
+
+	if(event.IsChecked()) {
+		wxFileTypeInfo fti(wxT("application/chm"), wxT("xchm %s"),
+				   wxT("xchm %s"), 
+				   wxT("Compiled HTML help files"),
+				   wxT("chm"), NULL);
+
+		wxTheMimeTypesManager->Associate(fti);
+
+	} else {
+//		wxTheMimeTypesManager->Unassociate(&fti);
+	}
+}
+//#endif// __WXMSW__
+
 
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
@@ -627,6 +648,11 @@ wxMenuBar* CHMFrame::CreateMenu()
 				   CONTENTS_HELP);
 	_menuFile->AppendSeparator();
 
+	_menuFile->AppendCheckItem(ID_RegisterExtension, 
+				   _("&Register the .chm extension"),
+				   REGISTER_EXTENSION_HELP);
+	_menuFile->AppendSeparator();
+
 	wxMenu *recent = new wxMenu;
 	_menuFile->Append(ID_Recent, _("&Recent files"), recent);
 	_fh.UseMenu(recent);
@@ -899,6 +925,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Forward, CHMFrame::OnHistoryForward)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
+	EVT_MENU(ID_RegisterExtension, CHMFrame::OnRegisterExtension)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
 	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)

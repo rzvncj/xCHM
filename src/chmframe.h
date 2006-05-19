@@ -74,6 +74,7 @@ enum
 	ID_CopySelection,
 	ID_Recent,
 	ID_Notebook,
+	ID_RegisterExtension,
 	ID_TreeCtrl = 1000,
 };
 
@@ -177,6 +178,11 @@ protected:
 
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);
+
+//#ifdef __WXMSW__
+	//! Called when the user selects Register extension
+	void OnRegisterExtension(wxCommandEvent& event);	
+//#endif// __WXMSW__
 
 	//! Called when the user clicks on the Remove button.
 	void OnRemoveBookmark(wxCommandEvent& event);

@@ -66,7 +66,7 @@ CPPFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/in
 CXX = g++
 CXXCPP = 
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall
+CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall -g
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps

@@ -51,7 +51,8 @@ using namespace std;
 #define ABOUT_HELP _("About the program.")
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
-#define REGISTER_EXTENSION_HELP _("Associate the .chm extension with xCHM.")
+#define REGISTER_EXTENSION_HELP _("Associate the .chm file " \
+				  "extension with xCHM.")
 
 
 namespace {
@@ -112,7 +113,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false), _sashPos(sashPosition), _ft(NULL),
+	  _bookmarksDeleted(false), _sashPos(sashPosition),
 	  _fullAppPath(fullAppPath)
 {
 #	if wxUSE_ACCEL
@@ -325,31 +326,34 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
-//#ifdef __WXMSW__
-void CHMFrame::OnRegisterExtension(wxCommandEvent& event)
-{
-	if(event.IsChecked()) {
-		wxString command = _fullAppPath;
 
-		cerr << "app: " << _fullAppPath.mb_str() << endl;
-		
-		wxFileTypeInfo fti(wxT("application/x-chm"), command,
-				   command, wxT("Compiled HTML help"),
+#if defined(__WXMSW__) || defined(__WXMAC__)
+void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
+{
+	int answer = wxMessageBox(_("This is experimental code, and "
+				    "associating the .chm\nfile extension "
+				    "with xCHM will overwrite any previously\n"
+				    "registered .chm viewer associations.\n\n"
+				    "Are you sure you know what"
+				    " you're doing?"), 
+				  _("Confirm"),
+				  wxOK | wxCANCEL, this);
+
+	if(answer == wxOK) {
+		wxFileTypeInfo fti(wxT("application/x-chm"), _fullAppPath,
+				   wxEmptyString, wxT("Compiled HTML help"),
 				   wxT("chm"), NULL);
 
-		_ft = wxTheMimeTypesManager->Associate(fti);
+		wxFileType *ft = wxTheMimeTypesManager->Associate(fti);
 
-		if(_ft)
-			_ft->SetDefaultIcon(_fullAppPath);
-
-	} else {
-		if(_ft != NULL)
-			wxTheMimeTypesManager->Unassociate(_ft);
-		_ft = NULL;
+		if(ft) {
+			ft->SetDefaultIcon(_fullAppPath);
+			wxMessageBox(_("Registration successful"), 
+				     _("Done"), wxOK, this);
+		}
 	}
 }
-//#endif// __WXMSW__
-
+#endif// __WXMSW__
 
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
@@ -658,10 +662,12 @@ wxMenuBar* CHMFrame::CreateMenu()
 				   CONTENTS_HELP);
 	_menuFile->AppendSeparator();
 
-	_menuFile->AppendCheckItem(ID_RegisterExtension, 
-				   _("&Register the .chm extension"),
-				   REGISTER_EXTENSION_HELP);
+#if defined(__WXMSW__) || defined(__WXMAC__)
+	_menuFile->Append(ID_RegisterExtension, 
+			  _("&Make xCHM the default viewer"),
+			  REGISTER_EXTENSION_HELP);
 	_menuFile->AppendSeparator();
+#endif
 
 	wxMenu *recent = new wxMenu;
 	_menuFile->Append(ID_Recent, _("&Recent files"), recent);
@@ -935,7 +941,9 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Forward, CHMFrame::OnHistoryForward)
 	EVT_MENU(ID_Back, CHMFrame::OnHistoryBack)
 	EVT_MENU(ID_Contents, CHMFrame::OnShowContents)
+#if defined(__WXMSW__) || defined(__WXMAC__)
 	EVT_MENU(ID_RegisterExtension, CHMFrame::OnRegisterExtension)
+#endif
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
 	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)

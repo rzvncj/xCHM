@@ -181,10 +181,10 @@ protected:
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);
 
-//#ifdef __WXMSW__
+#if defined(__WXMSW__) || defined(__WXMAC__)
 	//! Called when the user selects Register extension
 	void OnRegisterExtension(wxCommandEvent& event);	
-//#endif// __WXMSW__
+#endif// __WXMSW__
 
 	//! Called when the user clicks on the Remove button.
 	void OnRemoveBookmark(wxCommandEvent& event);
@@ -240,9 +240,6 @@ private:
 	int _sashPos;	
 	wxFont _font;
 	wxFileHistory _fh;
-#ifdef __WXMSW__
-	wxFileType* _ft;
-#endif
 	wxString _fullAppPath;
 
 private:

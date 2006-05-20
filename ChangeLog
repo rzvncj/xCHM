@@ -245,5 +245,7 @@
 		in the HTML display window.
 		+ added (X)Emacs indertation meta-comments to the source
 		files.
+		+ fixed Win32 MB2WC() bug.
+		+ re-wrote the HHC/HHK parsing code from scratch.
 
 

@@ -208,10 +208,6 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 	if(selection.IsEmpty() || !_tcl)
 		return;
 
-#ifdef __WXMSW__
-//	selection.Replace(wxT("\\"), wxT("/"), TRUE);
-#endif
-
 	_openPath = selection.BeforeLast(wxT('/'));
 	LoadCHM(selection);
 }
@@ -704,7 +700,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 	return menuBar;
 }
 
-#ifndef __WXMSW__
+//#ifndef __WXMSW__
 namespace {
 
 #include <hbook_open.xpm>
@@ -712,7 +708,7 @@ namespace {
 #include <hpage.xpm>
 
 } // namespace
-#endif
+//#endif
 
 
 wxPanel* CHMFrame::CreateContentsPanel()
@@ -734,16 +730,26 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	tclBL->Add(wxIcon(hbook_open_xpm));
 	wxImageList *tclIL = new wxImageList(16, 16);
 	tclIL->Add(wxIcon(hpage_xpm));
+#else
+	wxImageList *il = new wxImageList(16, 16);
+	il->Add(wxIcon(hbook_closed_xpm));
+	il->Add(wxIcon(hbook_open_xpm));
+	il->Add(wxIcon(hpage_xpm));
 #endif
 
 	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
-			      wxDefaultSize, wxTR_HAS_BUTTONS 
-			      | wxSUNKEN_BORDER | wxTR_HIDE_ROOT
+			      wxDefaultSize, 
+#ifndef __WXMSW__
+			      wxTR_HAS_BUTTONS |
+#endif
+			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT
 			      | wxTR_LINES_AT_ROOT);
 
 #ifndef __WXMSW__
 	_tcl->AssignButtonsImageList(tclBL);
 	_tcl->AssignImageList(tclIL);
+#else
+	_tcl->AssignImageList(il);	
 #endif
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,

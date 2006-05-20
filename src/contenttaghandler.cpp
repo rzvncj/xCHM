@@ -106,7 +106,7 @@ bool ContentTagHandler::HandleTag(const wxHtmlTag& tag)
 			_title = _url = wxEmptyString;
 			ParseInner(tag);
 
-			if(_treeCtrl && !_title.IsEmpty()) {
+			if(_treeCtrl /*&& !_title.IsEmpty()*/) {
 
 				_parents[_level] = 
 					_treeCtrl->AppendItem(

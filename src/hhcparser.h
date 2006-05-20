@@ -68,14 +68,26 @@ private:
 	void handleTag(const std::string& tag);
 
 	//! Retrieve a parameter name.
-	void getParameters(const char* input, std::string& name,
+	bool getParameters(const char* input, std::string& name,
 			   std::string& value);
 
-	wxString makeWxString(const std::string& input);
-
+	//! Add the information to the contents tree
 	void addToTree(const wxString& name, const wxString& value);
 
+	//! Add the information to the index list.
 	void addToList(const wxString& name, const wxString& value);
+
+	//! Replace special HTML strings (&string;) with correct code.
+	wxString replaceHTMLChars(const wxString& input);
+
+	//! Convert to proper character encoding.
+	wxString translateEncoding(const wxString& input);
+
+	//! HTML code for given name (if available)
+	unsigned getHTMLCode(const wxString& name);
+
+	//! Get the char that code stands for
+	wxChar charForCode(unsigned code);
 
 private:
 	int _level;
@@ -90,6 +102,7 @@ private:
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	wxFontEncoding _enc;
 	int _counter;
+	wxCSConv _cv;
 };
 
 

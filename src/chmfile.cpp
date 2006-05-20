@@ -260,7 +260,6 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 	} while(ret == BUF_SIZE2 - 1);
 
-
 /*
 	chmUnitInfo ui;
 
@@ -765,11 +764,11 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 	return true;
 }
 
-/*
+
 inline
 void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 {
-#define BUF_SIZE2 1025
+//#define BUF_SIZE2 1025
 	char buffer[BUF_SIZE2];
 	size_t ret = BUF_SIZE2 - 1, curr = 0;
 
@@ -785,7 +784,7 @@ void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
 
 	} while(ret == BUF_SIZE2 - 1);
 }
-*/
+
 
 
 inline

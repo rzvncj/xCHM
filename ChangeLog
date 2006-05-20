@@ -247,5 +247,6 @@
 		files.
 		+ fixed Win32 MB2WC() bug.
 		+ re-wrote the HHC/HHK parsing code from scratch.
+		+ added pretty book icons to the Win32 content tree too.
 
 

@@ -37,6 +37,9 @@
 #include <wx/filesys.h>
 #include <wx/mimetype.h>
 
+#include <iostream>
+using namespace std;
+
 
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
@@ -99,17 +102,18 @@ const wxChar *about_txt = wxT(
 } // namespace
 
 
-
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, 
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
-		   const int fontSize, const int sashPosition)
+		   const int fontSize, const int sashPosition,
+		   const wxString& fullAppPath)
 	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false), _sashPos(sashPosition), _ft(NULL)
+	  _bookmarksDeleted(false), _sashPos(sashPosition), _ft(NULL),
+	  _fullAppPath(fullAppPath)
 {
 #	if wxUSE_ACCEL
 	wxAcceleratorEntry entries[2];
@@ -324,14 +328,19 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 //#ifdef __WXMSW__
 void CHMFrame::OnRegisterExtension(wxCommandEvent& event)
 {
-
 	if(event.IsChecked()) {
-		wxFileTypeInfo fti(wxT("application/chm"), wxT("xchm %s"),
-				   wxT("xchm %s"), 
-				   wxT("Compiled HTML help files"),
+		wxString command = _fullAppPath;
+
+		cerr << "app: " << _fullAppPath.mb_str() << endl;
+		
+		wxFileTypeInfo fti(wxT("application/x-chm"), command,
+				   command, wxT("Compiled HTML help"),
 				   wxT("chm"), NULL);
 
 		_ft = wxTheMimeTypesManager->Associate(fti);
+
+		if(_ft)
+			_ft->SetDefaultIcon(_fullAppPath);
 
 	} else {
 		if(_ft != NULL)

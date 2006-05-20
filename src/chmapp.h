@@ -74,6 +74,10 @@ protected:
 #endif
 
 private:
+	// Try to figure out the absolute file path of the executable.
+	wxString getAppPath(const wxString& argv0, const wxString& cwd);
+
+private:
 	CHMFrame* _frame;
 	wxLocale _loc;
 

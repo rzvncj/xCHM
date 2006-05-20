@@ -28,6 +28,7 @@
 #include <chmfile.h>
 #include <wx/image.h>
 #include <wx/config.h>
+#include <wx/filefn.h>
 
 
 #ifdef WITH_LIBXMLRPC
@@ -145,6 +146,9 @@ bool CHMApp::OnInit()
 	long sashPos = CONTENTS_MARGIN;
 	long fontSize = CHM_DEFAULT_FONT_SIZE;
 	wxString lastOpenedDir, normalFont, fixedFont;
+#ifdef __WXMSW__
+	bool extreg = false;
+#endif
 
 #ifndef __WXMAC__
 	_loc.Init();
@@ -160,6 +164,9 @@ bool CHMApp::OnInit()
 		config.Read(wxT("/Position/yOrig"), &yorig);
 		config.Read(wxT("/Position/width"), &width);
 		config.Read(wxT("/Position/height"), &height);
+#ifdef __WXMSW__
+		config.Read(wxT("/Extensions/registered"), &extreg);
+#endif
 		config.Read(wxT("/Paths/lastOpenedDir"), 
 			    &lastOpenedDir);
 		config.Read(wxT("/Fonts/normalFontFace"), 
@@ -169,11 +176,16 @@ bool CHMApp::OnInit()
 		config.Read(wxT("/Sash/leftMargin"), &sashPos);
 	}
 
+	wxString fullAppPath;
+
+	if(argv > 0)
+		fullAppPath = getAppPath(argv[0], wxGetCwd());
+
 	_frame = new CHMFrame(wxT("xCHM v. " VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
 				       fixedFont, static_cast<int>(fontSize),
-				       static_cast<int>(sashPos));
+				       static_cast<int>(sashPos), fullAppPath);
 
 	_frame->SetSizeHints(200, 200);
 	_frame->Show(TRUE);
@@ -200,6 +212,33 @@ bool CHMApp::OnInit()
 
 	return TRUE;
 }
+
+
+wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
+{
+	if(wxIsAbsolutePath(argv0))
+		return argv0;
+
+	wxString cwdtmp(cwd), apppath;
+
+	if(cwdtmp.Last() != wxFILE_SEP_PATH)
+		cwdtmp += wxFILE_SEP_PATH;
+
+	apppath = cwdtmp + apppath;
+
+	if(wxFileExists(apppath))
+		return apppath;
+
+	wxPathList pathList;
+	pathList.AddEnvList(wxT("PATH"));
+	apppath = pathList.FindAbsoluteValidPath(argv0);
+	
+	if(!apppath.IsEmpty())
+		return wxPathOnly(apppath);
+
+	return wxEmptyString;
+}
+
 
 #ifdef __WXMAC__
 void CHMApp::MacOpenFile(const wxString& filename)

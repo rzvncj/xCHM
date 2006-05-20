@@ -113,7 +113,8 @@ public:
 		 const wxString& normalFont = wxEmptyString,
 		 const wxString& fixedFont = wxEmptyString,
 		 const int fontSize = CHM_DEFAULT_FONT_SIZE,
-		 const int sashPosition = CONTENTS_MARGIN);
+		 const int sashPosition = CONTENTS_MARGIN,
+		 const wxString& fullAppPath = wxEmptyString);
 
 	//! Cleans up.
 	~CHMFrame();
@@ -239,7 +240,10 @@ private:
 	int _sashPos;	
 	wxFont _font;
 	wxFileHistory _fh;
+#ifdef __WXMSW__
 	wxFileType* _ft;
+#endif
+	wxString _fullAppPath;
 
 private:
 	DECLARE_EVENT_TABLE()	

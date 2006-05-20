@@ -234,10 +234,9 @@ void CHMFile::CloseCHM()
 
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
-#define BUF_SIZE2 1025
 	chmUnitInfo ui;
-	char buffer[BUF_SIZE2];
-	size_t ret = BUF_SIZE2 - 1, curr = 0;
+	char buffer[BUF_SIZE];
+	size_t ret = BUF_SIZE - 1, curr = 0;
 
 	if(!toBuild)
 		return false;
@@ -251,13 +250,13 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 	do {
 		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
-					     buffer), curr, BUF_SIZE2 - 1);
+					     buffer), curr, BUF_SIZE - 1);
 		buffer[ret] = '\0';
 
 		p.parse(buffer);
 		curr += ret;
 
-	} while(ret == BUF_SIZE2 - 1);
+	} while(ret == BUF_SIZE - 1);
 
 	return true;
 }
@@ -266,8 +265,8 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
 	chmUnitInfo ui;
-	char buffer[BUF_SIZE2];
-	size_t ret = BUF_SIZE2 - 1, curr = 0;
+	char buffer[BUF_SIZE];
+	size_t ret = BUF_SIZE - 1, curr = 0;
 
 	if(!toBuild)
 		return false;
@@ -281,13 +280,13 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 
 	do {
 		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
-					     buffer), curr, BUF_SIZE2 - 1);
+					     buffer), curr, BUF_SIZE - 1);
 		buffer[ret] = '\0';
 
 		p.parse(buffer);
 		curr += ret;
 
-	} while(ret == BUF_SIZE2 - 1);
+	} while(ret == BUF_SIZE - 1);
 
 	return true;
 }

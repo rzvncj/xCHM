@@ -255,9 +255,6 @@ private:
 			chmUnitInfo* topics, chmUnitInfo *urlstr,
 			CHMSearchResults *results);
 
-	//! Puts in the str parameter the contents of the file referred by ui.
-	void GetFileAsString(wxString& str, chmUnitInfo *ui);
-
 	//! Looks up as much information as possible from #WINDOWS/#STRINGS.
 	bool InfoFromWindows();
 

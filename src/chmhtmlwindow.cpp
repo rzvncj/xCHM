@@ -22,7 +22,6 @@
 
 
 #include <chmhtmlwindow.h>
-#include <contenttaghandler.h>
 #include <hhcparser.h>
 #include <chminputstream.h>
 #include <chmframe.h>

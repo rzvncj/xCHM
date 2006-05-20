@@ -58,11 +58,10 @@ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) \
 	chmframe.$(OBJEXT) chmfshandler.$(OBJEXT) \
-	chminputstream.$(OBJEXT) contenttaghandler.$(OBJEXT) \
-	chmfontdialog.$(OBJEXT) chmsearchpanel.$(OBJEXT) \
-	chmhtmlwindow.$(OBJEXT) chmfinddialog.$(OBJEXT) \
-	chmindexpanel.$(OBJEXT) chmlistctrl.$(OBJEXT) \
-	spantag.$(OBJEXT) hhcparser.$(OBJEXT)
+	chminputstream.$(OBJEXT) chmfontdialog.$(OBJEXT) \
+	chmsearchpanel.$(OBJEXT) chmhtmlwindow.$(OBJEXT) \
+	chmfinddialog.$(OBJEXT) chmindexpanel.$(OBJEXT) \
+	chmlistctrl.$(OBJEXT) spantag.$(OBJEXT) hhcparser.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -190,12 +189,12 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 INCLUDES = -I$(top_srcdir)/art
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-	chminputstream.cpp contenttaghandler.cpp chmfontdialog.cpp \
+	chminputstream.cpp chmfontdialog.cpp \
 	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
 	chmindexpanel.cpp chmlistctrl.cpp spantag.cpp hhcparser.cpp
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-	chminputstream.h contenttaghandler.h chmfontdialog.h \
+	chminputstream.h chmfontdialog.h \
 	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
 	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
 
@@ -277,7 +276,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chminputstream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmlistctrl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmsearchpanel.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contenttaghandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hhcparser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/spantag.Po@am__quote@
 

@@ -103,6 +103,7 @@ private:
 	wxFontEncoding _enc;
 	int _counter;
 	wxCSConv _cv;
+	bool _htmlChars;
 };
 
 

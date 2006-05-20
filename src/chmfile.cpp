@@ -22,7 +22,6 @@
 
 
 #include <chmfile.h>
-#include <contenttaghandler.h>
 #include <chmlistctrl.h>
 #include <wx/wx.h>
 #include <wx/defs.h>
@@ -260,34 +259,12 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 	} while(ret == BUF_SIZE2 - 1);
 
-/*
-	chmUnitInfo ui;
-
-	if(!toBuild)
-		return false;
-
-	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui))
-		return false;
-
-	wxString src;
-	src.Alloc(ui.length);
-	GetFileAsString(src, &ui);
-
-	if(src.IsEmpty())
-		return false;
-
-	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(_enc, toBuild));	
-	parser.Parse(src);
-*/
-
 	return true;
 }
 
 
 bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
-#define BUF_SIZE2 1025
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE2];
 	size_t ret = BUF_SIZE2 - 1, curr = 0;
@@ -311,27 +288,6 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 		curr += ret;
 
 	} while(ret == BUF_SIZE2 - 1);
-
-/*	chmUnitInfo ui;
-
-	if(!toBuild)
-		return false;
-
-	if(_indexFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
-		return false;
-
-	wxString src;
-	src.Alloc(ui.length);
-	GetFileAsString(src, &ui);
-
-	if(src.IsEmpty())
-		return false;
-
-	ContentParser parser;
-	parser.AddTagHandler(new ContentTagHandler(_enc, NULL, toBuild));
-
-	parser.Parse(src);
-	toBuild->UpdateUI(); */
 
 	return true;
 }
@@ -763,28 +719,6 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 	return true;
 }
-
-
-inline
-void CHMFile::GetFileAsString(wxString& str, chmUnitInfo *ui)
-{
-//#define BUF_SIZE2 1025
-	char buffer[BUF_SIZE2];
-	size_t ret = BUF_SIZE2 - 1, curr = 0;
-
-	buffer[0] = '\0';
-
-	do {
-		ret = RetrieveObject(ui, reinterpret_cast<unsigned char *>(
-					     buffer), curr, BUF_SIZE2 - 1);
-		buffer[ret] = '\0';
-
-		str.Append(CURRENT_CHAR_STRING(buffer));
-		curr += ret;
-
-	} while(ret == BUF_SIZE2 - 1);
-}
-
 
 
 inline

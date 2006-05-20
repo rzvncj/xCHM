@@ -149,7 +149,8 @@ HTMLChar substitutions[] = {
 
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	: _level(0), _inquote(false), _intag(false), _inobject(false),
-	  _tree(tree), _list(list), _enc(enc), _counter(0), _cv(enc)
+	  _tree(tree), _list(list), _enc(enc), _counter(0), _cv(enc),
+	  _htmlChars(false)
 {
 	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
 	
@@ -215,7 +216,6 @@ void HHCParser::handleTag(const std::string& tag)
 		return;
 	
 	std::string tagName;
-	bool specialChars = false;
 
 	for( ; i != tag.length(); ++i) {
 		if(!isspace(tag[i]))
@@ -231,8 +231,11 @@ void HHCParser::handleTag(const std::string& tag)
 			wxString name = CURRENT_CHAR_STRING(_name.c_str());
 			wxString value = CURRENT_CHAR_STRING(_value.c_str());
 
-			//if(specialChars)
-			name = replaceHTMLChars(name);
+			if(_htmlChars) {
+				name = replaceHTMLChars(name);
+				_htmlChars = false;
+			}
+ 
 			name = translateEncoding(name);
 
 			addToTree(name, value);
@@ -247,7 +250,8 @@ void HHCParser::handleTag(const std::string& tag)
 			
 			if(name == "name" && _name.empty()) {
 				_name = value;
-				specialChars = special;
+				_htmlChars = special;
+
 			} else if(name == "local" && _value.empty())
 				_value = value;
 		}

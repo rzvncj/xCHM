@@ -25,7 +25,6 @@
 
 #include <chmframe.h>
 #include <chminputstream.h>
-#include <contenttaghandler.h>
 #include <chmhtmlwindow.h>
 #include <chmfontdialog.h>
 #include <chmsearchpanel.h>

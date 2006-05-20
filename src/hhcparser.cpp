@@ -33,10 +33,6 @@
 #include <bitfiddle.inl>
 
 
-#include <iostream>
-using namespace std;
-
-
 namespace {
 
 struct HTMLChar {
@@ -372,9 +368,12 @@ wxString HHCParser::translateEncoding(const wxString& input)
 
 		size_t ret = _cv.MB2WC(buf2, input.mb_str(), len);
 
-		if(ret) 
+		if(ret) { 
+			if(ret == (size_t)(-1)) // morons
+				return wxString(buf2, input.Length());
+
 			return wxString(buf2, ret);
-		else
+		} else
 			return wxEmptyString;
 	}
 #endif

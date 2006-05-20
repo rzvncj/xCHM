@@ -37,9 +37,6 @@
 #include <wx/filesys.h>
 #include <wx/mimetype.h>
 
-#include <iostream>
-using namespace std;
-
 
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
@@ -331,11 +328,10 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 {
 	int answer = wxMessageBox(_("This is experimental code, and "
-				    "associating the .chm\nfile extension "
-				    "with xCHM will overwrite any previously\n"
-				    "registered .chm viewer associations.\n\n"
-				    "Are you sure you know what"
-				    " you're doing?"), 
+				    "doing this will overwrite\nany "
+				    "previously registered CHM viewer "
+				    "associations.\n\n Are you sure "
+				    "you know what you're doing?"),
 				  _("Confirm"),
 				  wxOK | wxCANCEL, this);
 
@@ -348,7 +344,7 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 
 		if(ft) {
 			ft->SetDefaultIcon(_fullAppPath);
-			wxMessageBox(_("Registration successful"), 
+			wxMessageBox(_("Registration successful!"), 
 				     _("Done"), wxOK, this);
 		}
 	}
@@ -664,7 +660,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
 	_menuFile->Append(ID_RegisterExtension, 
-			  _("&Make xCHM the default viewer"),
+			  _("&Make xCHM the default CHM viewer"),
 			  REGISTER_EXTENSION_HELP);
 	_menuFile->AppendSeparator();
 #endif

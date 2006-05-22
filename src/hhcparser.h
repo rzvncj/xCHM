@@ -77,7 +77,7 @@ private:
 	//! Add the information to the index list.
 	void addToList(const wxString& name, const wxString& value);
 
-	//! Replace special HTML strings (&string;) with correct code.
+	//! Replace special HTML strings with correct code.
 	wxString replaceHTMLChars(const wxString& input);
 
 	//! Convert to proper character encoding.

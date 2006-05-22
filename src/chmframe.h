@@ -106,6 +106,7 @@ public:
 	  \param fixedFont Name of the font face to use for fixed text.
 	  \param fontSize The font size.
 	  \param sashPosition Distance from the left of the frame to
+	  \param fullAppPath The absolute path to the executable of the process
 	  the end of the contents / search panel.
 	*/
 	CHMFrame(const wxString& title, const wxString& booksDir,

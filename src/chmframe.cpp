@@ -324,9 +324,9 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 {
 	int answer = wxMessageBox(_("This is experimental code, and "
-				    "doing this will overwrite\nany "
+				    "doing this will overwrite any "
 				    "previously registered CHM viewer "
-				    "associations.\n\n Are you sure "
+				    "associations.\n\nAre you sure "
 				    "you know what you're doing?"),
 				  _("Confirm"),
 				  wxOK | wxCANCEL, this);

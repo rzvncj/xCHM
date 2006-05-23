@@ -62,11 +62,11 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 
 CPP = gcc -E
-CPPFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
+CPPFLAGS =  -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
 CXX = g++
 CXXCPP = 
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall -g
+CXXFLAGS =  -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -86,7 +86,7 @@ LIBICONV = -liconv
 LIBINTL = 
 LIBOBJS = 
 LIBS = -lchm 
-LINKOPT = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2u_xrc-2.6 -lwx_gtk2u_qa-2.6 -lwx_gtk2u_html-2.6 -lwx_gtk2u_adv-2.6 -lwx_gtk2u_core-2.6 -lwx_baseu_xml-2.6 -lwx_baseu_net-2.6 -lwx_baseu-2.6 
+LINKOPT = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk_xrc-2.6 -lwx_gtk_qa-2.6 -lwx_gtk_html-2.6 -lwx_gtk_adv-2.6 -lwx_gtk_core-2.6 -lwx_base_xml-2.6 -lwx_base_net-2.6 -lwx_base-2.6 
 LTLIBICONV = -liconv
 LTLIBINTL = 
 LTLIBOBJS = 
@@ -108,14 +108,14 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 USE_NLS = yes
-VERSION = 1.8
-WX_CFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 
+VERSION = 1.9
+WX_CFLAGS = -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 
 WX_CFLAGS_ONLY = 
 WX_CONFIG_PATH = /usr/local/bin/wx-config
-WX_CPPFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
-WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1  
-WX_CXXFLAGS_ONLY = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
-WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2u_xrc-2.6 -lwx_gtk2u_qa-2.6 -lwx_gtk2u_html-2.6 -lwx_gtk2u_adv-2.6 -lwx_gtk2u_core-2.6 -lwx_baseu_xml-2.6 -lwx_baseu_net-2.6 -lwx_baseu-2.6 
+WX_CPPFLAGS = -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
+WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1  
+WX_CXXFLAGS_ONLY = -I/usr/local/lib/wx/include/gtk-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
+WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk_xrc-2.6 -lwx_gtk_qa-2.6 -lwx_gtk_html-2.6 -lwx_gtk_adv-2.6 -lwx_gtk_core-2.6 -lwx_base_xml-2.6 -lwx_base_net-2.6 -lwx_base-2.6 
 WX_LIBS_STATIC = 
 WX_VERSION = 2.6.3
 XGETTEXT = /usr/bin/xgettext

@@ -249,4 +249,8 @@
 		+ re-wrote the HHC/HHK parsing code from scratch.
 		+ added pretty book icons to the Win32 content tree too.
 
+	* 1.9:
+		+ it is now possible to search in the pages of books without
+		a contents tree.
+
 

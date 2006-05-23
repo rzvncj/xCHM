@@ -299,7 +299,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 		_nb->Show(FALSE);
 	} else {		
 			
-		if(_tcl->GetCount() >= 1) {
+		//if(_tcl->GetCount() >= 1) {
 			
 			_tb->ToggleTool(ID_Contents, TRUE);
 			_menuFile->Check(ID_Contents, TRUE);
@@ -307,7 +307,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_nb->Show(TRUE);
 			_sw->SplitVertically(_nb, _html, _sashPos);
 
-		} else {
+		/*} else {
 			_tb->ToggleTool(ID_Contents, FALSE);
 			_menuFile->Check(ID_Contents, FALSE);
 			
@@ -315,7 +315,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 				       " contents tree."), 
 				       _("No contents.."), 
 				       wxOK | wxICON_WARNING, this );
-		}
+	       }*/
 	}
 }
 

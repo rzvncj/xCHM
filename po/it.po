@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 15:20+0300\n"
+"POT-Creation-Date: 2006-05-22 12:53+0300\n"
 "PO-Revision-Date: 2004-02-25 00:33+0100\n"
 "Last-Translator: Fabio Vescarelli <faber@faberbox.com>\n"
 "Language-Team: Italian <faber@faberbox.com>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:661
+#: src/chmfile.cpp:669
 msgid "Untitled in index"
 msgstr "Indice senza Titolo"
 
@@ -63,69 +63,73 @@ msgstr "Anteprima"
 msgid "OK"
 msgstr "Ok"
 
-#: src/chmframe.cpp:40
+#: src/chmframe.cpp:41
 msgid "Open a CHM book."
 msgstr "Apri un file CHM"
 
-#: src/chmframe.cpp:41
+#: src/chmframe.cpp:42
 msgid "Change fonts."
 msgstr "Modifica i tipi di carattere"
 
-#: src/chmframe.cpp:42
+#: src/chmframe.cpp:43
 msgid "Print the page currently displayed."
 msgstr "Stampa la pagina attualmente visualizzata"
 
-#: src/chmframe.cpp:43
+#: src/chmframe.cpp:44
 msgid "On or off?"
 msgstr "Visualizza il sommario"
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:45
 msgid "Go to the book's start page."
 msgstr "Vai alla pagina iniziale"
 
-#: src/chmframe.cpp:45
+#: src/chmframe.cpp:46
 msgid "Go forward in history. Per book."
 msgstr "Vai alla pagina successiva"
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:47
 msgid "Back to the last visited page. Per book."
 msgstr "Vai alla pagina precedente"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:48
 msgid "About the program."
 msgstr "Informazioni sul programma"
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:49
 #, fuzzy
 msgid "Copy selection."
 msgstr "&Copia selezione"
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:50
 #, fuzzy
 msgid "Find word in page."
 msgstr "Trova nella pagina..."
 
-#: src/chmframe.cpp:136
+#: src/chmframe.cpp:51
+msgid "Associate the .chm file extension with xCHM."
+msgstr ""
+
+#: src/chmframe.cpp:140
 msgid "Ready."
 msgstr "Pronto"
 
-#: src/chmframe.cpp:160 src/chmframe.cpp:864
+#: src/chmframe.cpp:164 src/chmframe.cpp:909
 msgid "Contents"
 msgstr "Sommario"
 
-#: src/chmframe.cpp:161
+#: src/chmframe.cpp:165
 msgid "Index"
 msgstr "Indice"
 
-#: src/chmframe.cpp:162 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:166 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Cerca"
 
-#: src/chmframe.cpp:185
+#: src/chmframe.cpp:189
 msgid "About xCHM"
 msgstr "Informazioni su xCHM"
 
-#: src/chmframe.cpp:193
+#: src/chmframe.cpp:197
 msgid "Choose a file.."
 msgstr "Seleziona un file..."
 
@@ -137,130 +141,154 @@ msgstr "Impossibile estrarre l'albero del contenuto del file"
 msgid "No contents.."
 msgstr "Nessun contenuto..."
 
-#: src/chmframe.cpp:620
+#: src/chmframe.cpp:326
+msgid ""
+"This is experimental code, and doing this will overwrite any previously "
+"registered CHM viewer associations.\n"
+"\n"
+"Are you sure you know what you're doing?"
+msgstr ""
+
+#: src/chmframe.cpp:331
+msgid "Confirm"
+msgstr ""
+
+#: src/chmframe.cpp:343
+msgid "Registration successful!"
+msgstr ""
+
+#: src/chmframe.cpp:344
+msgid "Done"
+msgstr ""
+
+#: src/chmframe.cpp:648
 msgid "&Open..\tCtrl-O"
 msgstr "&Apri...\tCtrl-O"
 
-#: src/chmframe.cpp:621
+#: src/chmframe.cpp:649
 msgid "&Print page..\tCtrl-P"
 msgstr "S&tampa pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:622
+#: src/chmframe.cpp:650
 msgid "Fon&ts..\tCtrl-T"
 msgstr "Cara&tteri...\tCtrl-T"
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:653
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Mo&stra l'albero dei contenuti\tCtrl-S"
 
-#: src/chmframe.cpp:630
+#: src/chmframe.cpp:659
+msgid "&Make xCHM the default CHM viewer"
+msgstr ""
+
+#: src/chmframe.cpp:665
 msgid "&Recent files"
 msgstr "File &recenti"
 
-#: src/chmframe.cpp:642
+#: src/chmframe.cpp:677
 msgid "E&xit\tCtrl-X"
 msgstr "Es&ci\tCtrl-X"
 
-#: src/chmframe.cpp:643
+#: src/chmframe.cpp:678
 msgid "Quit the application."
 msgstr "Chiude il programma"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:682
 msgid "&Home\tCtrl-H"
 msgstr "P&agina iniziale\tCtrl-H"
 
-#: src/chmframe.cpp:648
+#: src/chmframe.cpp:683
 msgid "For&ward\tCtrl-W"
 msgstr "A&vanti\tCtrl-W"
 
-#: src/chmframe.cpp:649
+#: src/chmframe.cpp:684
 msgid "&Back\tCtrl-B"
 msgstr "In&dietro\tCtrl-B"
 
-#: src/chmframe.cpp:652
+#: src/chmframe.cpp:687
 msgid "&About..\tF1"
 msgstr "In&fo..\tF1"
 
-#: src/chmframe.cpp:655
+#: src/chmframe.cpp:690
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "P&agina iniziale\tCtrl-H"
 
-#: src/chmframe.cpp:656
+#: src/chmframe.cpp:691
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "&Apri...\tCtrl-O"
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:694
 msgid "&File"
 msgstr "&File"
 
-#: src/chmframe.cpp:660
+#: src/chmframe.cpp:695
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:661
+#: src/chmframe.cpp:696
 msgid "Hi&story"
 msgstr "C&ronologia"
 
-#: src/chmframe.cpp:662
+#: src/chmframe.cpp:697
 msgid "&Help"
 msgstr "&Aiuto"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:719
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: src/chmframe.cpp:719
+#: src/chmframe.cpp:764
 msgid "Add"
 msgstr "Aggiungi"
 
-#: src/chmframe.cpp:720
+#: src/chmframe.cpp:765
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/chmframe.cpp:723
+#: src/chmframe.cpp:768
 msgid "Add displayed page to bookmarks."
 msgstr "Aggiungi la pagina selezionata ai segnalibri"
 
-#: src/chmframe.cpp:724
+#: src/chmframe.cpp:769
 msgid "Remove selected bookmark."
 msgstr "Rimuovi il segnalibro selezionato"
 
-#: src/chmframe.cpp:858
+#: src/chmframe.cpp:903
 msgid "Open .."
 msgstr "Apri"
 
-#: src/chmframe.cpp:860
+#: src/chmframe.cpp:905
 msgid "Print .."
 msgstr "Stampa"
 
-#: src/chmframe.cpp:862
+#: src/chmframe.cpp:907
 msgid "Fonts .."
 msgstr "Caratteri"
 
-#: src/chmframe.cpp:869
+#: src/chmframe.cpp:914
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:871
+#: src/chmframe.cpp:916
 #, fuzzy
 msgid "Find"
 msgstr "Trova successivo"
 
-#: src/chmframe.cpp:876
+#: src/chmframe.cpp:921
 msgid "Back"
 msgstr "Indietro"
 
-#: src/chmframe.cpp:877
+#: src/chmframe.cpp:922
 msgid "Forward"
 msgstr "Avanti"
 
-#: src/chmframe.cpp:879
+#: src/chmframe.cpp:924
 msgid "Home"
 msgstr "Pagina iniziale"
 
-#: src/chmframe.cpp:882
+#: src/chmframe.cpp:927
 msgid "About"
 msgstr "Info"
 
@@ -305,6 +333,6 @@ msgstr "Cerca solamente nei titoli dei contenuti"
 msgid "Search contents for occurences of the specified text."
 msgstr "Cerca nei contenuti le occorrenze del testo specificato"
 
-#: src/contenttaghandler.cpp:46
+#: src/hhcparser.cpp:154
 msgid "Topics"
 msgstr "Argomenti"

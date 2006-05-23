@@ -4,4 +4,4 @@ src/chmfontdialog.cpp
 src/chmframe.cpp
 src/chmhtmlwindow.cpp
 src/chmsearchpanel.cpp
-src/contenttaghandler.cpp
+src/hhcparser.cpp

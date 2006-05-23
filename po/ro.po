@@ -96,18 +96,16 @@ msgid "About the program."
 msgstr "Despre program."
 
 #: src/chmframe.cpp:49
-#, fuzzy
 msgid "Copy selection."
 msgstr "&Copiaza selectia"
 
 #: src/chmframe.cpp:50
-#, fuzzy
 msgid "Find word in page."
 msgstr "Gaseste in pagina.."
 
 #: src/chmframe.cpp:51
 msgid "Associate the .chm file extension with xCHM."
-msgstr ""
+msgstr "Asociaza extensia .chm cu xCHM."
 
 #: src/chmframe.cpp:140
 msgid "Ready."
@@ -147,19 +145,22 @@ msgid ""
 "registered CHM viewer associations.\n"
 "\n"
 "Are you sure you know what you're doing?"
-msgstr ""
+msgstr "Acesta este cod experimental. Continuand, vei suprascrie orice "
+"asociatii anterioare facute de alte viewere CHM.\n"
+"\n"
+"Esti sigur ca stii ce faci?"
 
 #: src/chmframe.cpp:331
 msgid "Confirm"
-msgstr ""
+msgstr "Confirm"
 
 #: src/chmframe.cpp:343
 msgid "Registration successful!"
-msgstr ""
+msgstr "Inregistrare reusita!"
 
 #: src/chmframe.cpp:344
 msgid "Done"
-msgstr ""
+msgstr "Gata"
 
 #: src/chmframe.cpp:648
 msgid "&Open..\tCtrl-O"
@@ -179,7 +180,7 @@ msgstr "&Arata cuprinsul\tCtrl-S"
 
 #: src/chmframe.cpp:659
 msgid "&Make xCHM the default CHM viewer"
-msgstr ""
+msgstr "Fa xCH&M viewer implicit de CHM"
 
 #: src/chmframe.cpp:665
 msgid "&Recent files"
@@ -210,14 +211,12 @@ msgid "&About..\tF1"
 msgstr "&Despre..\tF1"
 
 #: src/chmframe.cpp:690
-#, fuzzy
 msgid "&Copy\tCtrl-C"
-msgstr "&Start\tCtrl-H"
+msgstr "&Copiaza\tCtrl-C"
 
 #: src/chmframe.cpp:691
-#, fuzzy
 msgid "&Find..\tCtrl-F"
-msgstr "&Deschide..\tCtrl-O"
+msgstr "&Gaseste..\tCtrl-F"
 
 #: src/chmframe.cpp:694
 msgid "&File"
@@ -225,7 +224,7 @@ msgstr "&Fisiere"
 
 #: src/chmframe.cpp:695
 msgid "&Edit"
-msgstr ""
+msgstr "&Edit"
 
 #: src/chmframe.cpp:696
 msgid "Hi&story"
@@ -269,12 +268,11 @@ msgstr "Fonturi .."
 
 #: src/chmframe.cpp:914
 msgid "Copy"
-msgstr ""
+msgstr "Copiaza"
 
 #: src/chmframe.cpp:916
-#, fuzzy
 msgid "Find"
-msgstr "Gaseste urmatorul"
+msgstr "Gaseste"
 
 #: src/chmframe.cpp:921
 msgid "Back"

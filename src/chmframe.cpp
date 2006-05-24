@@ -84,6 +84,10 @@ const wxChar *greeting = wxT(
 	" Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
 
 
+const wxChar *error_page = wxT(
+	"<html><body>Error loading CHM file!</body></html>");
+
+
 const wxChar *about_txt = wxT(
 	"xCHM v. " VERSION "\nby Razvan Cojocaru <razvanco@gmx.net>\n\n"
 	"With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n"
@@ -502,6 +506,9 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 					+ chmf->HomePage());
 	UpdateCHMInfo();
 	LoadBookmarks();
+
+	if(!rtn)
+		_html->SetPage(error_page);
 
 	return rtn;
 }

@@ -29,11 +29,12 @@
 #include <wx/log.h>
 #include <wx/clipbrd.h>
 #include <wx/filename.h>
+#include <wx/uri.h>
 
 
 
-CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc,
-			     CHMFrame *frame)
+
+CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
 	  _absolute(false), _frame(frame), _fdlg(NULL)
@@ -158,8 +159,19 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 		return false;
 
 	bool full = location.StartsWith(wxT("file:"));
+	bool repairWX = false;
+	size_t len = 0;
 
-	if(full && !location.Contains(wxT("./")))
+	if(full) {
+		wxString basepath = GetParser()->GetFS()->GetPath();
+		len = basepath.Length();
+		
+		repairWX = location.StartsWith(basepath)
+			&& len < location.Length()
+			&& location[len] == wxT('/');
+	}
+
+	if(!repairWX && full && !location.Contains(wxT("./")))
 		return false;
 	
 	wxString arch;
@@ -168,14 +180,18 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	if(full)
 		arch = location.BeforeFirst(wxT('#')).Mid(5);
 	else
-		arch = chmf->ArchiveName();
+		arch = chmf->ArchiveName();			
 
 	wxFileName awfn(arch);
 	awfn.Normalize();
 
-	if(full)	
-		file = location.AfterFirst(wxT('#')).AfterFirst(wxT(':'));
-	else 
+	if(full) {
+		if(!repairWX)
+			file = location.AfterFirst(wxT('#')).
+				AfterFirst(wxT(':'));
+		else 
+			file = location.Mid(len);
+	} else 
 		file = location;
 
 	if(!file.StartsWith(wxT("/"))) 

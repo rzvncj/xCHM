@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xchm 1.7.1\n"
+"Project-Id-Version: xchm 1.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-22 12:53+0300\n"
-"PO-Revision-Date: 2006-04-16 11:30+0200\n"
+"PO-Revision-Date: 2006-05-27 18:50+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Znajdź słowo na stronie."
 
 #: src/chmframe.cpp:51
 msgid "Associate the .chm file extension with xCHM."
-msgstr ""
+msgstr "Powiąż rozszerzenie pliku .chm z programem xCHM."
 
 #: src/chmframe.cpp:140
 msgid "Ready."
@@ -147,18 +147,21 @@ msgid ""
 "\n"
 "Are you sure you know what you're doing?"
 msgstr ""
+"Ten kod jest eksperymentalny i wykonanie go nadpisze wszystkie poprzednio zarejestrowane powiązania przeglądarek CHM.\n"
+"\n"
+"Na pewno wiesz co robisz?"
 
 #: src/chmframe.cpp:331
 msgid "Confirm"
-msgstr ""
+msgstr "Potwierdź"
 
 #: src/chmframe.cpp:343
 msgid "Registration successful!"
-msgstr ""
+msgstr "Rejestrowanie pomyślne!"
 
 #: src/chmframe.cpp:344
 msgid "Done"
-msgstr ""
+msgstr "Gotowe"
 
 #: src/chmframe.cpp:648
 msgid "&Open..\tCtrl-O"
@@ -178,7 +181,7 @@ msgstr "W&yświetlaj drzewo zawartości\tCtrl-S"
 
 #: src/chmframe.cpp:659
 msgid "&Make xCHM the default CHM viewer"
-msgstr ""
+msgstr "&Uczyń xCHM domyślną przeglądarką CHM"
 
 #: src/chmframe.cpp:665
 msgid "&Recent files"

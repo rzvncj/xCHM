@@ -146,9 +146,6 @@ bool CHMApp::OnInit()
 	long sashPos = CONTENTS_MARGIN;
 	long fontSize = CHM_DEFAULT_FONT_SIZE;
 	wxString lastOpenedDir, normalFont, fixedFont;
-#ifdef __WXMSW__
-	bool extreg = false;
-#endif
 
 #ifndef __WXMAC__
 	_loc.Init();
@@ -164,9 +161,6 @@ bool CHMApp::OnInit()
 		config.Read(wxT("/Position/yOrig"), &yorig);
 		config.Read(wxT("/Position/width"), &width);
 		config.Read(wxT("/Position/height"), &height);
-#ifdef __WXMSW__
-		config.Read(wxT("/Extensions/registered"), &extreg);
-#endif
 		config.Read(wxT("/Paths/lastOpenedDir"), 
 			    &lastOpenedDir);
 		config.Read(wxT("/Fonts/normalFontFace"), 

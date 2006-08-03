@@ -4582,7 +4582,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xchm
- VERSION=1.9
+ VERSION=1.10
 
 
 cat >>confdefs.h <<_ACEOF
@@ -6737,6 +6737,7 @@ fi
 case "$host" in
 	*-*-mingw*)
 	LINKOPT="$LINKOPT -lwxjpeg-2.6 -lwxpng-2.6 -lwxtiff-2.6 -lwxzlib-2.6"
+    WINDRES="windres.exe $(top_srcdir)/"
 	;;
 esac
 

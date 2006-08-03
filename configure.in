@@ -56,7 +56,7 @@ AC_ARG_ENABLE(xmlrpc,
 
 	      [ enable_xmlrpc=yes ])
 
-AM_INIT_AUTOMAKE(xchm, 1.9)
+AM_INIT_AUTOMAKE(xchm, 1.10)
 AC_PROG_CXX
 AC_PROG_INSTALL
 
@@ -87,6 +87,7 @@ fi
 case "$host" in
 	*-*-mingw*)
 	LINKOPT="$LINKOPT -lwxjpeg-2.6 -lwxpng-2.6 -lwxtiff-2.6 -lwxzlib-2.6"
+    WINDRES="windres.exe $(top_srcdir)/"
 	;;
 esac
 

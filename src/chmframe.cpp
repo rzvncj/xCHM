@@ -493,20 +493,27 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	SaveBookmarks();
 	_nb->SetSelection(0);
 
-	wxFileSystem wfs;
-	wxFSFile *f = wfs.OpenFile(wxString(wxT("file:")) + archive +
-		      wxT("#xchm:/"));
-	delete f;
-	
-        CHMFile *chmf = CHMInputStream::GetCache();
+	if(!archive.StartsWith(wxT("file:")) || 
+	   !archive.Contains(wxT("#xchm:"))) {
 
-	if(!chmf)
-		return false;
+		wxFileSystem wfs;
+		wxFSFile *f = wfs.OpenFile(wxString(wxT("file:")) + archive +
+			      wxT("#xchm:/"));
+		delete f;
 	
-	rtn = _html->LoadPage(wxString(wxT("file:"))
-					+ chmf->ArchiveName()
-			                + wxT("#xchm:") 
-					+ chmf->HomePage());
+	        CHMFile *chmf = CHMInputStream::GetCache();
+
+		if(!chmf)
+			return false;
+	
+		rtn = _html->LoadPage(wxString(wxT("file:"))
+						+ chmf->ArchiveName()
+				                + wxT("#xchm:") 
+						+ chmf->HomePage());
+	} else {
+		rtn = _html->LoadPage(archive);
+	}
+	
 	UpdateCHMInfo();
 	LoadBookmarks();
 

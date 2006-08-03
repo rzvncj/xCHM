@@ -256,5 +256,6 @@
 		+ finally fixed CHM absolute links problem.
 		+ updated Polish translation.
 
-
+	* 1.10:
+		+ loading CHM files by topic.
 

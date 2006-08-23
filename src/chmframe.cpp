@@ -227,7 +227,12 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		wxFontEnumerator enu;
 		enu.EnumerateFacenames();
 		_normalFonts = new wxArrayString;
+
+#if wxMAJOR_VERSION == 2 && wxMINOR_VERSION == 7
+		*_normalFonts = enu.GetFacenames();
+#else
 		*_normalFonts = *enu.GetFacenames();
+#endif
 		_normalFonts->Sort();
 	}
 
@@ -235,7 +240,12 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		wxFontEnumerator enu;
 		enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, TRUE);
 		_fixedFonts = new wxArrayString;
+
+#if wxMAJOR_VERSION == 2 && wxMINOR_VERSION == 7
+		*_fixedFonts = enu.GetFacenames();
+#else
 		*_fixedFonts = *enu.GetFacenames();
+#endif
 		_fixedFonts->Sort();
 	}
 

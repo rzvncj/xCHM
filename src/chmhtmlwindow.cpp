@@ -369,6 +369,18 @@ void CHMHtmlWindow::OnBack(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void CHMHtmlWindow::OnSize(wxSizeEvent& event)
+{
+	int x, y;
+	GetViewStart(&x, &y);
+
+	wxHtmlWindow::OnSize(event);
+
+	Scroll(x, y);
+	event.Skip(false);      
+}
+
+
 void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 {
 	if(wxTheClipboard->Open()) {
@@ -429,6 +441,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
 	EVT_CHAR(CHMHtmlWindow::OnChar)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
+	EVT_SIZE(CHMHtmlWindow::OnSize)
 END_EVENT_TABLE()
 
 

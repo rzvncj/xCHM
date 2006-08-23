@@ -140,6 +140,9 @@ protected:
 	//! Called when the user presses a key
 	void OnChar(wxKeyEvent &event);
 
+	//! Called on widget resize.
+	void OnSize(wxSizeEvent& event);
+
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);

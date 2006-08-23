@@ -258,4 +258,6 @@
 
 	* 1.10:
 		+ loading CHM files by topic.
+		+ now keeping the scroll position between HTML window
+		resizes.
 

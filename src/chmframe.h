@@ -198,6 +198,9 @@ protected:
 
 	//! Cleanup code. This saves the window position and last open dir.
 	void OnCloseWindow(wxCloseEvent& event);
+
+	//! Called when the user presses a key
+	void OnChar(wxKeyEvent &event);
  	
 private:
 	//! Helper. Creates the menu.

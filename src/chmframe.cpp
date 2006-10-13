@@ -496,6 +496,17 @@ void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 }
 
 
+void CHMFrame::OnChar(wxKeyEvent& event)
+{
+	if(event.GetKeyCode() == WXK_F9) {
+		wxCommandEvent dummy;
+		OnShowContents(dummy);
+	}
+
+	event.Skip();
+}
+
+
 bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
@@ -982,6 +993,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)
 	EVT_COMBOBOX(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 	EVT_CLOSE(CHMFrame::OnCloseWindow)
+	EVT_CHAR(CHMFrame::OnChar)
 END_EVENT_TABLE()
 
 

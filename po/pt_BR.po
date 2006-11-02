@@ -13,7 +13,7 @@ msgstr ""
 "Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
 "Language-Team: Brazilian Portuguese \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=iso-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/chmfile.cpp:669
@@ -282,7 +282,7 @@ msgstr "Sobre"
 
 #: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
-msgstr "Avançar"
+msgstr "Avançar&"
 
 #: src/chmhtmlwindow.cpp:44
 msgid "&Back"

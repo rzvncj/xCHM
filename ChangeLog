@@ -265,4 +265,6 @@
 		+ added Swedish translation.
 		+ added Portuguese translation (in addition to the old - now
 		pt_BR - translation).
+		+ fixed the Portuguese translations (they were using the
+		wrong charset).
 

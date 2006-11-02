@@ -1,17 +1,17 @@
 # xCHM .pot file.
 # Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
-# Copyright (C) 2004 Alan Kelon O Moraes <kelon@pop.com.br>
+# Copyright (C) 2006 José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>
 # This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <kelon@pop.com.br>, 2004.
+# FIRST AUTHOR <matafomeoleiro@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 17:15+0300\n"
+"POT-Creation-Date: 2006-06-02 17:15+0300\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
-"Last-Translator: Alan Kelon O. Moraes <kelon@pop.com.br>\n"
-"Language-Team: Brazilian Portuguese \n"
+"Last-Translator: José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>\n"
+"Language-Team: Portuguese Team \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,7 +58,7 @@ msgstr "Tamanho da fonte:"
 
 #: src/chmfontdialog.cpp:80
 msgid "Preview:"
-msgstr "Visualizar:"
+msgstr "Pré-visualizar:"
 
 #: src/chmfontdialog.cpp:90
 msgid "OK"
@@ -74,11 +74,11 @@ msgstr "Mudar as fontes."
 
 #: src/chmframe.cpp:43
 msgid "Print the page currently displayed."
-msgstr "Imprimir página atual."
+msgstr "Imprimir página actual."
 
 #: src/chmframe.cpp:44
 msgid "On or off?"
-msgstr "Ativar ou desatuvar?"
+msgstr "Activar ou desactivar?"
 
 #: src/chmframe.cpp:45
 msgid "Go to the book's start page."
@@ -97,18 +97,16 @@ msgid "About the program."
 msgstr "Sobre o programa."
 
 #: src/chmframe.cpp:49
-#, fuzzy
 msgid "Copy selection."
-msgstr "Copiar seleção"
+msgstr "Copiar selecção"
 
 #: src/chmframe.cpp:50
-#, fuzzy
 msgid "Find word in page."
 msgstr "Procurar na página.."
 
 #: src/chmframe.cpp:51
 msgid "Associate the .chm file extension with xCHM."
-msgstr ""
+msgstr "Associar a extensão de ficheiro .chm com o xCHM"
 
 #: src/chmframe.cpp:144
 msgid "Ready."
@@ -120,7 +118,7 @@ msgstr "Conteúdo"
 
 #: src/chmframe.cpp:169
 msgid "Index"
-msgstr "Index"
+msgstr "Índice"
 
 #: src/chmframe.cpp:170 src/chmsearchpanel.cpp:49
 msgid "Search"
@@ -128,11 +126,11 @@ msgstr "Procurar"
 
 #: src/chmframe.cpp:193
 msgid "About xCHM"
-msgstr "Sobre xCHM"
+msgstr "Sobre o xCHM"
 
 #: src/chmframe.cpp:201
 msgid "Choose a file.."
-msgstr "Escolha um arquivo.."
+msgstr "Escolha um ficheiro.."
 
 #: src/chmframe.cpp:330
 msgid ""
@@ -140,19 +138,22 @@ msgid ""
 "registered CHM viewer associations.\n"
 "\n"
 "Are you sure you know what you're doing?"
-msgstr ""
+msgstr "Isto é um código experimental, e fazer isto vai substituir qualquer "
+"associação de visualizadores CHM.\n"
+"\n"
+"Tem a certeza que sabe o que está a fazer?"
 
 #: src/chmframe.cpp:335
 msgid "Confirm"
-msgstr ""
+msgstr "Confirma"
 
 #: src/chmframe.cpp:347
 msgid "Registration successful!"
-msgstr ""
+msgstr "Registo com sucesso!"
 
 #: src/chmframe.cpp:348
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #: src/chmframe.cpp:655
 msgid "&Open..\tCtrl-O"
@@ -164,23 +165,23 @@ msgstr "Imprimir a página...\tCtrl-P"
 
 #: src/chmframe.cpp:657
 msgid "Fon&ts..\tCtrl-T"
-msgstr "Fontes..\tCtrl-T"
+msgstr "Fon&tes..\tCtrl-T"
 
 #: src/chmframe.cpp:660
 msgid "&Show contents tree\tCtrl-S"
-msgstr "Exibir a lista de tópicos\tCtrl-S"
+msgstr "&Exibir a lista de tópicos\tCtrl-S"
 
 #: src/chmframe.cpp:666
 msgid "&Make xCHM the default CHM viewer"
-msgstr ""
+msgstr "&Tornar o xCHM o visualizador de CHM pré-definido"
 
 #: src/chmframe.cpp:672
 msgid "&Recent files"
-msgstr "Arquivos recentes"
+msgstr "&Ficheiros recentes"
 
 #: src/chmframe.cpp:684
 msgid "E&xit\tCtrl-X"
-msgstr "Sair\tCtrl-X"
+msgstr "S&air\tCtrl-X"
 
 #: src/chmframe.cpp:685
 msgid "Quit the application."
@@ -188,45 +189,43 @@ msgstr "Sair do programa."
 
 #: src/chmframe.cpp:689
 msgid "&Home\tCtrl-H"
-msgstr "Início\tCtrl-H"
+msgstr "&Início\tCtrl-H"
 
 #: src/chmframe.cpp:690
 msgid "For&ward\tCtrl-W"
-msgstr "Avançar\tCtrl-W"
+msgstr "Av&ançar\tCtrl-W"
 
 #: src/chmframe.cpp:691
 msgid "&Back\tCtrl-B"
-msgstr "Voltar\tCtrl-B"
+msgstr "&Voltar\tCtrl-B"
 
 #: src/chmframe.cpp:694
 msgid "&About..\tF1"
-msgstr "Sobre..\tF1"
+msgstr "&Sobre..\tF1"
 
 #: src/chmframe.cpp:697
-#, fuzzy
 msgid "&Copy\tCtrl-C"
-msgstr "Início\tCtrl-H"
+msgstr "&Copiar\tCtrl-C"
 
 #: src/chmframe.cpp:698
-#, fuzzy
 msgid "&Find..\tCtrl-F"
-msgstr "Abrir..\tCtrl-O"
+msgstr "&Procurar..\tCtrl-F"
 
 #: src/chmframe.cpp:701
 msgid "&File"
-msgstr "Arquivo"
+msgstr "&Ficheiro"
 
 #: src/chmframe.cpp:702
 msgid "&Edit"
-msgstr ""
+msgstr "&Editar"
 
 #: src/chmframe.cpp:703
 msgid "Hi&story"
-msgstr "Histórico"
+msgstr "Hi&stórico"
 
 #: src/chmframe.cpp:704
 msgid "&Help"
-msgstr "Ajuda"
+msgstr "&Ajuda"
 
 #: src/chmframe.cpp:726
 msgid "Bookmarks"
@@ -242,11 +241,11 @@ msgstr "Remover"
 
 #: src/chmframe.cpp:775
 msgid "Add displayed page to bookmarks."
-msgstr "Adicionar a página atual aos favoritos."
+msgstr "Adicionar a página actual aos favoritos."
 
 #: src/chmframe.cpp:776
 msgid "Remove selected bookmark."
-msgstr "Remover o favorito selecionado."
+msgstr "Remover o favorito seleccionado."
 
 #: src/chmframe.cpp:910
 msgid "Open .."
@@ -262,12 +261,11 @@ msgstr "Fontes .."
 
 #: src/chmframe.cpp:921
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/chmframe.cpp:923
-#, fuzzy
 msgid "Find"
-msgstr "Procurar próximo"
+msgstr "Procurar"
 
 #: src/chmframe.cpp:928
 msgid "Back"
@@ -287,24 +285,23 @@ msgstr "Sobre"
 
 #: src/chmhtmlwindow.cpp:43
 msgid "For&ward"
-msgstr "Avançar"
+msgstr "Av&ançar"
 
 #: src/chmhtmlwindow.cpp:44
 msgid "&Back"
-msgstr "Voltar"
+msgstr "&Voltar"
 
 #: src/chmhtmlwindow.cpp:45
-#, fuzzy
 msgid "Copy &link location"
-msgstr "Copiar seleção"
+msgstr "Copiar a &localização da ligação"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
-msgstr "Copiar seleção"
+msgstr "&Copiar selecção"
 
 #: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
-msgstr "Procurar na página.."
+msgstr "&Procurar na página.."
 
 #: src/chmsearchpanel.cpp:47
 msgid "Get partial matches"

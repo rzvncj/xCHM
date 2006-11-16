@@ -268,4 +268,5 @@
 		+ fixed the Portuguese translations (they were using the
 		wrong charset).
 		+ wxGTK 2.8.x friendly.
+		+ workaround to be able to print relative path CHM images.
 

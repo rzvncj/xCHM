@@ -22,8 +22,6 @@
 #include <chmfshandler.h>
 #include <chminputstream.h>
 
-#include <iostream>
-using namespace std;
 
 
 // only needs to be here because I killed the constructors
@@ -81,13 +79,9 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 			&& right[len] == wxT('/'))
 		right = right.Mid(len);
 
-	cerr << "right: " << right.mb_str() << endl;
-
         wxFileName fwfn(right, wxPATH_UNIX);
         fwfn.Normalize(wxPATH_NORM_DOTS, cwd);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
-
-	cerr << "new right: " << right.mb_str() << endl;
 
 	s = new CHMInputStream(left.IsEmpty() ? 
 			       left : filename.GetFullPath(), right);

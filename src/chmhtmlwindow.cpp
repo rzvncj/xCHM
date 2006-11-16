@@ -65,8 +65,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 
-	_prefix = GetPrefix(tmp);
-
 	if(_syncTree && 
 	   // We should be looking for a valid page, not / (home).
 	   !location.AfterLast(wxT('/')).IsEmpty() && 
@@ -104,8 +102,6 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 
 	if(data)
 		url = (data->_url).BeforeFirst(wxT('#'));
-
-	wxString gpf = GetPrefix(GetOpenedPage()) + wxT("/") + page;
 	
 	if(data && (!url.CmpNoCase(page) || 
 		    !url.CmpNoCase(GetPrefix(GetOpenedPage()) + wxT("/") 

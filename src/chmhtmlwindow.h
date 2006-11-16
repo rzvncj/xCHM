@@ -156,7 +156,6 @@ private:
 	bool _syncTree;
 	bool _found;
 	wxMenu *_menu;
-	wxString _prefix;
 	CHMFrame *_frame;
 	wxString _link;
 	CHMFindDialog* _fdlg;

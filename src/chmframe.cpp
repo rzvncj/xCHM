@@ -37,6 +37,7 @@
 #include <wx/filesys.h>
 #include <wx/mimetype.h>
 #include <wx/imaglist.h>
+#include <wx/fs_mem.h>
 
 
 #define OPEN_HELP _("Open a CHM book.")
@@ -56,7 +57,8 @@
 namespace {
 
 const wxChar *greeting = wxT(
-	"<html><body>Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
+	"<html><body><img src=\"memory:logo.xpm\" align=\"left\">"
+	"Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
 	"<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
 	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
 	"<B>xCHM</B> is based on Jed Wing's <a href=\"http://66.93.236.84/"
@@ -101,6 +103,7 @@ const wxChar *about_txt = wxT(
 	"This program is (proudly) under the GPL.");
 
 #include <xchm-32.xpm>
+#include <logo.xpm>
 
 } // namespace
 
@@ -146,6 +149,9 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 
 	CreateStatusBar();
 	SetStatusText(_("Ready."));
+
+	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), wxBITMAP(logo), 
+				   wxBITMAP_TYPE_XPM);
 
 	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 

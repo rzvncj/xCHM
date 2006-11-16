@@ -29,6 +29,8 @@
 #include <wx/image.h>
 #include <wx/config.h>
 #include <wx/filefn.h>
+#include <wx/fs_mem.h>
+
 
 
 #ifdef WITH_LIBXMLRPC
@@ -155,6 +157,7 @@ bool CHMApp::OnInit()
 	wxInitAllImageHandlers();
 	wxFileSystem::AddHandler(new CHMFSHandler);
 	wxFileSystem::AddHandler(new wxInternetFSHandler);
+	wxFileSystem::AddHandler(new wxMemoryFSHandler);
 
 	wxConfig config(wxT("xchm"));
 	if(config.Read(wxT("/Position/xOrig"), &xorig)) {

@@ -59,7 +59,7 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
 void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 {
 	if(_navigate) {
-		_html->AbsoluteFollows();
+		//_html->AbsoluteFollows();
 		_lc->LoadSelected();
 	}
 }
@@ -68,7 +68,7 @@ void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
 {
 	if(_navigate) {
-		_html->AbsoluteFollows();
+		//_html->AbsoluteFollows();
 		_lc->LoadSelected();
 	}
 }

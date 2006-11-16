@@ -86,12 +86,6 @@ public:
 	*/
 	bool IsCaller() const { return _found; }
 
-	/*! 
-	  \brief Let the htmlWindow know the next param to LoadPage() will 
-	  be an absolute path.
-	*/
-	void AbsoluteFollows() { _absolute = true; }
-
 public:
 	/*!
 	  \brief Finds the first occurence of word in the displayed page.
@@ -146,10 +140,6 @@ protected:
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
-	//! Overridden to correct relative images paths.
-	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type,
-					 const wxString& url,
-					 wxString *redirect) const;
 
 	//! Overridden. Called when the user clicks on a link.
 	void OnLinkClicked(const wxHtmlLinkInfo& link);
@@ -160,9 +150,6 @@ private:
 
 	//! Helper. Returns the prefix of the currently loaded page.
 	wxString GetPrefix(const wxString& location) const;
-
-	//! Helper. Fixes ../dir/file locations.
-	bool FixPath(wxString& location, const wxString& prefix) const;
 	
 private:
 	wxTreeCtrl* _tcl;
@@ -170,7 +157,6 @@ private:
 	bool _found;
 	wxMenu *_menu;
 	wxString _prefix;
-	bool _absolute;
 	CHMFrame *_frame;
 	wxString _link;
 	CHMFindDialog* _fdlg;

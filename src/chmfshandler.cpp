@@ -22,7 +22,6 @@
 #include <chmfshandler.h>
 #include <chminputstream.h>
 
-
 #include <iostream>
 using namespace std;
 
@@ -47,8 +46,6 @@ bool CHMFSHandler::CanOpen(const wxString& location)
 	bool ret =  (p == wxT("xchm") 
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
-
-	cerr << location.mb_str() << ", ret: " << ret << endl;
 
 	return ret;
 }
@@ -79,22 +76,19 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	wxFileName filename = wxFileSystem::URLToFileName(left);
 	filename.Normalize();
 
-	cerr << "right: " << right.mb_str() << ", cwd: " << cwd.mb_str() << endl;
-
 	size_t len = cwd.Length();
 	if(right.Length() > len && right.StartsWith(cwd)
 			&& right[len] == wxT('/'))
 		right = right.Mid(len);
-//	else if(right[len] != wxT('/'))
-//		right = cwd + right;
+
+	cerr << "right: " << right.mb_str() << endl;
 
         wxFileName fwfn(right, wxPATH_UNIX);
-//        fwfn.Normalize(wxPATH_NORM_DOTS, cwd);
-	fwfn.MakeAbsolute(wxEmptyString, wxPATH_UNIX);
+        fwfn.Normalize(wxPATH_NORM_DOTS, cwd);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
 
 	cerr << "new right: " << right.mb_str() << endl;
-	
+
 	s = new CHMInputStream(left.IsEmpty() ? 
 			       left : filename.GetFullPath(), right);
 

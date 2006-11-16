@@ -36,7 +36,7 @@
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
 	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
-	  _absolute(false), _frame(frame), _fdlg(NULL)
+	  _frame(frame), _fdlg(NULL)
 {
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
@@ -61,13 +61,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxLogNull log;
 	wxString tmp = location;
-
-	// Path is already absolute.
-	if(_absolute) {
-		FixPath(tmp, wxT("/"));
-		_absolute = false;
-	} else
-		FixPath(tmp, _prefix);
 
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
@@ -112,6 +105,8 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	if(data)
 		url = (data->_url).BeforeFirst(wxT('#'));
 
+	wxString gpf = GetPrefix(GetOpenedPage()) + wxT("/") + page;
+	
 	if(data && (!url.CmpNoCase(page) || 
 		    !url.CmpNoCase(GetPrefix(GetOpenedPage()) + wxT("/") 
 				   + page))) {
@@ -135,79 +130,6 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 {
 	return location.AfterLast(wxT(':')).AfterFirst(
 		           wxT('/')).BeforeLast(wxT('/'));
-}
-
-
-bool CHMHtmlWindow::FixPath(wxString &location,
-			    const wxString& prefix) const
-{
-	wxLogNull wln;
-
-        if(!location.Left(5).CmpNoCase(wxT("http:")) ||
-           !location.Left(6).CmpNoCase(wxT("https:")) ||
-           !location.Left(4).CmpNoCase(wxT("ftp:")) || 
-           !location.Left(7).CmpNoCase(wxT("mailto:")) ||
-           !location.Left(7).CmpNoCase(wxT("ms-its:")) ||
-           !location.Left(10).CmpNoCase(wxT("javascript")) ||
-           location.StartsWith(wxT("#")))
-                return false;
-
-	CHMFile *chmf = CHMInputStream::GetCache();
-
-	return false;
-
-
-	/*
-
-	if(!chmf)
-		return false;
-
-	bool full = location.StartsWith(wxT("file:"));
-	if(full && !location.Contains(wxT("./")))
-		return false;
-	
-	wxString arch;
-	wxString file;
-
-	if(full)
-		arch = location.BeforeFirst(wxT('#')).Mid(5);
-	else
-		arch = chmf->ArchiveName();			
-
-	wxFileName awfn(arch);
-	awfn.Normalize();
-
-	file = location;
-
-	if(!file.StartsWith(wxT("/"))) 
-		file = wxString(wxT("/")) + prefix + wxT("/") + file;
-
-	wxFileName fwfn(file, wxPATH_UNIX);
-	fwfn.Normalize(wxPATH_NORM_DOTS);
-
-	location = wxString(wxT("file:")) + awfn.GetFullPath() +
-		wxString(wxT("#xchm:")) + fwfn.GetFullPath(wxPATH_UNIX);
-	
-	return true;
-	*/
-}
-
-
-wxHtmlOpeningStatus CHMHtmlWindow::OnOpeningURL(wxHtmlURLType type,
-						const wxString& url, 
-						wxString *redirect) const
-{
-	if(type == wxHTML_URL_PAGE)
-		return wxHTML_OPEN;
-
-	wxString tmp = url;
-
-	if(FixPath(tmp, _prefix)) {
-		*redirect = tmp;
-		return wxHTML_REDIRECT;
-	}
-
-	return wxHTML_OPEN;
 }
 
 

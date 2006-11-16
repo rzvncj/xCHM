@@ -511,6 +511,7 @@ void CHMFrame::OnChar(wxKeyEvent& event)
 bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
+	wxLogNull wln;
 	bool rtn;
 	SaveBookmarks();
 	_nb->SetSelection(0);

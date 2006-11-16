@@ -267,4 +267,5 @@
 		pt_BR - translation).
 		+ fixed the Portuguese translations (they were using the
 		wrong charset).
+		+ wxGTK 2.8.x friendly.
 

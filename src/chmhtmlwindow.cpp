@@ -154,23 +154,16 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 
 	CHMFile *chmf = CHMInputStream::GetCache();
 
+	return false;
+
+
+	/*
+
 	if(!chmf)
 		return false;
 
 	bool full = location.StartsWith(wxT("file:"));
-	bool repairWX = false;
-	size_t len = 0;
-
-	if(full) {
-		wxString basepath = GetParser()->GetFS()->GetPath();
-		len = basepath.Length();
-		
-		repairWX = location.StartsWith(basepath)
-			&& len < location.Length()
-			&& location[len] == wxT('/');
-	}
-
-	if(!repairWX && full && !location.Contains(wxT("./")))
+	if(full && !location.Contains(wxT("./")))
 		return false;
 	
 	wxString arch;
@@ -184,14 +177,7 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 	wxFileName awfn(arch);
 	awfn.Normalize();
 
-	if(full) {
-		if(!repairWX)
-			file = location.AfterFirst(wxT('#')).
-				AfterFirst(wxT(':'));
-		else 
-			file = location.Mid(len);
-	} else 
-		file = location;
+	file = location;
 
 	if(!file.StartsWith(wxT("/"))) 
 		file = wxString(wxT("/")) + prefix + wxT("/") + file;
@@ -203,6 +189,7 @@ bool CHMHtmlWindow::FixPath(wxString &location,
 		wxString(wxT("#xchm:")) + fwfn.GetFullPath(wxPATH_UNIX);
 	
 	return true;
+	*/
 }
 
 

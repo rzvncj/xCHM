@@ -23,6 +23,10 @@
 #include <chminputstream.h>
 
 
+#include <iostream>
+using namespace std;
+
+
 // only needs to be here because I killed the constructors
 // by providing a private copy constructor
 CHMFSHandler::CHMFSHandler()
@@ -38,18 +42,24 @@ CHMFSHandler::~CHMFSHandler()
 
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
+
 	wxString p = GetProtocol(location);
-	return (p == wxT("xchm") 
+	bool ret =  (p == wxT("xchm") 
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
+
+	cerr << location.mb_str() << ", ret: " << ret << endl;
+
+	return ret;
 }
 
 
-wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), 
+wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, 
 				 const wxString& location)
 {
 	wxString right = GetRightLocation(location);
 	wxString left = GetLeftLocation(location);
+	wxString cwd = GetRightLocation(fs.GetPath());
 	CHMInputStream *s = NULL;
 
 	if(!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
@@ -58,7 +68,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 
 	} else if (GetProtocol(left) != wxT("file"))
 		return NULL;
-	
+
 	// HTML code for space is %20
 	right.Replace(wxT("%20"), wxT(" "), TRUE);
 	right.Replace(wxT("%5F"), wxT("_"), TRUE);
@@ -68,6 +78,23 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
             
 	wxFileName filename = wxFileSystem::URLToFileName(left);
 	filename.Normalize();
+
+	cerr << "right: " << right.mb_str() << ", cwd: " << cwd.mb_str() << endl;
+
+	size_t len = cwd.Length();
+	if(right.Length() > len && right.StartsWith(cwd)
+			&& right[len] == wxT('/'))
+		right = right.Mid(len);
+//	else if(right[len] != wxT('/'))
+//		right = cwd + right;
+
+        wxFileName fwfn(right, wxPATH_UNIX);
+//        fwfn.Normalize(wxPATH_NORM_DOTS, cwd);
+	fwfn.MakeAbsolute(wxEmptyString, wxPATH_UNIX);
+	right = fwfn.GetFullPath(wxPATH_UNIX);
+
+	cerr << "new right: " << right.mb_str() << endl;
+	
 	s = new CHMInputStream(left.IsEmpty() ? 
 			       left : filename.GetFullPath(), right);
 

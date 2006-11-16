@@ -155,7 +155,7 @@ TAG_HANDLER_BEGIN(SPAN, "SPAN")
                     if (m_Faces.GetCount() == 0) {
                         wxFontEnumerator enu;
                         enu.EnumerateFacenames();
-#if wxMAJOR_VERSION == 2 && wxMINOR_VERSION == 7
+#if wxMAJOR_VERSION == 2 && wxMINOR_VERSION > 7
 			m_Faces = enu.GetFacenames();
 #else
                         const wxArrayString *faces = enu.GetFacenames();

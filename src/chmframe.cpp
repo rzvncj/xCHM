@@ -520,7 +520,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
 	wxLogNull wln;
-	bool rtn;
+	bool rtn = false;
 	SaveBookmarks();
 	_nb->SetSelection(0);
 

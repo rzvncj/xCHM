@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-02 13:02+0200\n"
+"POT-Creation-Date: 2006-11-17 12:01+0200\n"
 "PO-Revision-Date: 2004-01-31 13:47+0200\n"
 "Last-Translator: Razvan Cojocaru <razvanco@gmx.net>\n"
 "Language-Team: Romanian\n"
@@ -63,75 +63,75 @@ msgstr "Vizualizare:"
 msgid "OK"
 msgstr "OK"
 
-#: src/chmframe.cpp:41
+#: src/chmframe.cpp:43
 msgid "Open a CHM book."
 msgstr "Deschide un document CHM."
 
-#: src/chmframe.cpp:42
+#: src/chmframe.cpp:44
 msgid "Change fonts."
 msgstr "Schimba fonturile."
 
-#: src/chmframe.cpp:43
+#: src/chmframe.cpp:45
 msgid "Print the page currently displayed."
 msgstr "Tipareste pagina afisata."
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:46
 msgid "On or off?"
 msgstr "Activat sau nu?"
 
-#: src/chmframe.cpp:45
+#: src/chmframe.cpp:47
 msgid "Go to the book's start page."
 msgstr "Mergi la pagina de start a cartii."
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:48
 msgid "Go forward in history. Per book."
 msgstr "Mergi inainte in paginile vizitate. Per carte."
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:49
 msgid "Back to the last visited page. Per book."
 msgstr "Inapoi la ultima pagina vizitata. Per carte."
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:50
 msgid "About the program."
 msgstr "Despre program."
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:51
 msgid "Copy selection."
 msgstr "&Copiaza selectia"
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:52
 msgid "Find word in page."
 msgstr "Gaseste in pagina.."
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:53
 msgid "Associate the .chm file extension with xCHM."
 msgstr "Asociaza extensia .chm cu xCHM."
 
-#: src/chmframe.cpp:147
+#: src/chmframe.cpp:153
 msgid "Ready."
 msgstr "Pregatit."
 
-#: src/chmframe.cpp:171 src/chmframe.cpp:947
+#: src/chmframe.cpp:182 src/chmframe.cpp:969
 msgid "Contents"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:172
+#: src/chmframe.cpp:183
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:173 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:184 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Cauta"
 
-#: src/chmframe.cpp:196
+#: src/chmframe.cpp:207
 msgid "About xCHM"
 msgstr "Despre xCHM"
 
-#: src/chmframe.cpp:204
+#: src/chmframe.cpp:215
 msgid "Choose a file.."
 msgstr "Alege un fisier.."
 
-#: src/chmframe.cpp:343
+#: src/chmframe.cpp:352
 msgid ""
 "This is experimental code, and doing this will overwrite any previously "
 "registered CHM viewer associations.\n"
@@ -143,163 +143,163 @@ msgstr ""
 "\n"
 "Esti sigur ca stii ce faci?"
 
-#: src/chmframe.cpp:348
+#: src/chmframe.cpp:357
 msgid "Confirm"
 msgstr "Confirm"
 
-#: src/chmframe.cpp:360
+#: src/chmframe.cpp:369
 msgid "Registration successful!"
 msgstr "Inregistrare reusita!"
 
-#: src/chmframe.cpp:361
+#: src/chmframe.cpp:370
 msgid "Done"
 msgstr "Gata"
 
-#: src/chmframe.cpp:686
+#: src/chmframe.cpp:708
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide..\tCtrl-O"
 
-#: src/chmframe.cpp:687
+#: src/chmframe.cpp:709
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipareste pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:688
+#: src/chmframe.cpp:710
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Fonturi..\tCtrl-T"
 
-#: src/chmframe.cpp:691
+#: src/chmframe.cpp:713
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arata cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:697
+#: src/chmframe.cpp:719
 msgid "&Make xCHM the default CHM viewer"
 msgstr "Fa xCH&M viewer implicit de CHM"
 
-#: src/chmframe.cpp:703
+#: src/chmframe.cpp:725
 msgid "&Recent files"
 msgstr "F&isiere recente"
 
-#: src/chmframe.cpp:715
+#: src/chmframe.cpp:737
 msgid "E&xit\tCtrl-X"
 msgstr "E&xit\tCtrl-X"
 
-#: src/chmframe.cpp:716
+#: src/chmframe.cpp:738
 msgid "Quit the application."
 msgstr "Inchide aplicatia."
 
-#: src/chmframe.cpp:720
+#: src/chmframe.cpp:742
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:721
+#: src/chmframe.cpp:743
 msgid "For&ward\tCtrl-W"
 msgstr "&Inainte\tCtrl-W"
 
-#: src/chmframe.cpp:722
+#: src/chmframe.cpp:744
 msgid "&Back\tCtrl-B"
 msgstr "I&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:725
+#: src/chmframe.cpp:747
 msgid "&About..\tF1"
 msgstr "&Despre..\tF1"
 
-#: src/chmframe.cpp:728
+#: src/chmframe.cpp:750
 msgid "&Copy\tCtrl-C"
 msgstr "&Copiaza\tCtrl-C"
 
-#: src/chmframe.cpp:729
+#: src/chmframe.cpp:751
 msgid "&Find..\tCtrl-F"
 msgstr "&Gaseste..\tCtrl-F"
 
-#: src/chmframe.cpp:732
+#: src/chmframe.cpp:754
 msgid "&File"
 msgstr "&Fisiere"
 
-#: src/chmframe.cpp:733
+#: src/chmframe.cpp:755
 msgid "&Edit"
 msgstr "&Edit"
 
-#: src/chmframe.cpp:734
+#: src/chmframe.cpp:756
 msgid "Hi&story"
 msgstr "&Istorie"
 
-#: src/chmframe.cpp:735
+#: src/chmframe.cpp:757
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:757
+#: src/chmframe.cpp:779
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:802
+#: src/chmframe.cpp:824
 msgid "Add"
 msgstr "Adauga"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:825
 msgid "Remove"
 msgstr "Sterge"
 
-#: src/chmframe.cpp:806
+#: src/chmframe.cpp:828
 msgid "Add displayed page to bookmarks."
 msgstr "Adauga pagina afisata la semnele de carte."
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:829
 msgid "Remove selected bookmark."
 msgstr "Sterge semnul de carte selectat."
 
-#: src/chmframe.cpp:941
+#: src/chmframe.cpp:963
 msgid "Open .."
 msgstr "Deschide .."
 
-#: src/chmframe.cpp:943
+#: src/chmframe.cpp:965
 msgid "Print .."
 msgstr "Tipareste .."
 
-#: src/chmframe.cpp:945
+#: src/chmframe.cpp:967
 msgid "Fonts .."
 msgstr "Fonturi .."
 
-#: src/chmframe.cpp:952
+#: src/chmframe.cpp:974
 msgid "Copy"
 msgstr "Copiaza"
 
-#: src/chmframe.cpp:954
+#: src/chmframe.cpp:976
 msgid "Find"
 msgstr "Gaseste"
 
-#: src/chmframe.cpp:959
+#: src/chmframe.cpp:981
 msgid "Back"
 msgstr "Inapoi"
 
-#: src/chmframe.cpp:960
+#: src/chmframe.cpp:982
 msgid "Forward"
 msgstr "Inainte"
 
-#: src/chmframe.cpp:962
+#: src/chmframe.cpp:984
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:965
+#: src/chmframe.cpp:987
 msgid "About"
 msgstr "Despre"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:42
 msgid "For&ward"
 msgstr "Inainte"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:43
 msgid "&Back"
 msgstr "Inapoi"
 
-#: src/chmhtmlwindow.cpp:45
+#: src/chmhtmlwindow.cpp:44
 msgid "Copy &link location"
 msgstr "&Copiaza link-ul"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:47
 msgid "&Copy selection"
 msgstr "&Copiaza selectia"
 
-#: src/chmhtmlwindow.cpp:50
+#: src/chmhtmlwindow.cpp:49
 msgid "&Find in page.."
 msgstr "&Gaseste in pagina.."
 

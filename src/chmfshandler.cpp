@@ -39,13 +39,10 @@ CHMFSHandler::~CHMFSHandler()
 
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
-
 	wxString p = GetProtocol(location);
-	bool ret =  (p == wxT("xchm") 
+	return (p == wxT("xchm") 
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
-
-	return ret;
 }
 
 

@@ -5,3 +5,9 @@ The compiler can be changed with:
 sudo gcc_select 3.3
 sudo gcc_select 4.0
 
+See also:
+
+http://developer.apple.com/technotes/tn2005/tn2137.html
+
+
+

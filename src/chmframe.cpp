@@ -57,10 +57,14 @@
 namespace {
 
 const wxChar *greeting = wxT(
-	"<html><body><img src=\"memory:logo.xpm\" align=\"left\">"
+	"<html><body>"
+
+	"<br><br><img src=\"memory:logo.xpm\" align=\"center\"><br>"
+
 	"Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
 	"<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
 	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
+
 	"<B>xCHM</B> is based on Jed Wing's <a href=\"http://66.93.236.84/"
 	"~jedwin/projects/chmlib/\">CHMLIB</a> and <a href=\"http://www."
 	"wxwidgets.org\">wxWidgets</a>.<br><br>If you'd like to know more"
@@ -152,6 +156,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 
 	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), wxBITMAP(logo), 
 				   wxBITMAP_TYPE_XPM);
+	wxMemoryFSHandler::AddFile(wxT("about.html"), greeting);
+	wxMemoryFSHandler::AddFile(wxT("error.html"), error_page);
 
 	_ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
 
@@ -168,7 +174,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetRelatedStatusBar(0);
 
 	_html->SetFonts(_normalFont, _fixedFont, sizes);	
-	_html->SetPage(greeting);
+	//_html->SetPage(greeting);
+	_html->LoadPage(wxT("memory:about.html"));
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
 	_font = _tcl->GetFont();
@@ -276,7 +283,8 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		wxString page = _html->GetOpenedPage();
 
 		if(page.IsEmpty())
-			_html->SetPage(greeting); 
+			//_html->SetPage(greeting); 
+			_html->LoadPage(wxT("memory:about.html"));
 	}
 }
 
@@ -306,8 +314,6 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 	else {
 		if(CHMInputStream::GetCache())
 			return;
-		
-		_html->SetPage(greeting);
 	}
 }
 
@@ -547,7 +553,8 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	LoadBookmarks();
 
 	if(!rtn)
-		_html->SetPage(error_page);
+		//_html->SetPage(error_page);
+		_html->LoadPage(wxT("memory:error.html"));
 
 	return rtn;
 }

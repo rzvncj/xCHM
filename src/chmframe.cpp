@@ -57,17 +57,15 @@
 namespace {
 
 const wxChar *greeting = wxT(
-	"<html><body>"
-
-	"<br><br><img src=\"memory:logo.xpm\" align=\"center\"><br>"
-
+	"<html><body><table border=0><tr><td align=\"left\">"
+	"<img src=\"memory:logo.xpm\"></td><td align=\"left\">"
 	"Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
 	"<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
 	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
-
 	"<B>xCHM</B> is based on Jed Wing's <a href=\"http://66.93.236.84/"
 	"~jedwin/projects/chmlib/\">CHMLIB</a> and <a href=\"http://www."
-	"wxwidgets.org\">wxWidgets</a>.<br><br>If you'd like to know more"
+	"wxwidgets.org\">wxWidgets</a>.</td></tr></table>"
+	"<br>If you'd like to know more"
 	" about CHM, you could check out <a href=\"http://www.speakeasy."
 	"org/~russotto/chm/\">Matthew Russoto's CHM page</a> or <a"
 	" href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
@@ -174,7 +172,6 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_html->SetRelatedStatusBar(0);
 
 	_html->SetFonts(_normalFont, _fixedFont, sizes);	
-	//_html->SetPage(greeting);
 	_html->LoadPage(wxT("memory:about.html"));
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _html);
@@ -283,7 +280,6 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		wxString page = _html->GetOpenedPage();
 
 		if(page.IsEmpty())
-			//_html->SetPage(greeting); 
 			_html->LoadPage(wxT("memory:about.html"));
 	}
 }
@@ -548,13 +544,24 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	} else {
 		rtn = _html->LoadPage(archive);
 	}
-	
-	UpdateCHMInfo();
-	LoadBookmarks();
 
-	if(!rtn)
-		//_html->SetPage(error_page);
+	if(!rtn) { // Error, could not load CHM file
+		if(_tcl->GetCount())
+			_tcl->DeleteAllItems();
+		if(_sw->IsSplit()) {
+			_sw->Unsplit(_nb);
+			_nb->Show(FALSE);
+		}
+		_menuFile->Check(ID_Contents, FALSE);
+		_tb->ToggleTool(ID_Contents, FALSE);
+		_cip->Reset();
+		_csp->Reset();
 		_html->LoadPage(wxT("memory:error.html"));
+
+	} else {
+		UpdateCHMInfo();
+		LoadBookmarks();
+	}
 
 	return rtn;
 }

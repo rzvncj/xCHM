@@ -1,0 +1,2 @@
+./configure --enable-optimize --disable-dependency-tracking --host=i386-apple-darwin8 --build=powerpc-apple-darwin8 CC="gcc -arch i386" CXX="g++ -arch i386" CXXFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk" CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk"
+

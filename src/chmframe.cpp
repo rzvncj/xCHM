@@ -376,12 +376,7 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 {
-	wxString page = _html->GetOpenedPage();
-
-	if(page.IsEmpty())
-		_ep->PrintText(greeting);
-	else
-		_ep->PrintFile(page);
+	_ep->PrintFile(_html->GetOpenedPage());
 }
 
 

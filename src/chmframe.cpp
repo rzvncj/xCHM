@@ -376,6 +376,11 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 {
+        int sizes[7];
+	        for(int i = -3; i <= 3; ++i)
+	                sizes[i+3] = _fontSize + i * 2;
+			
+	_ep->SetFonts(_normalFont, _fixedFont, sizes);
 	_ep->PrintFile(_html->GetOpenedPage());
 }
 

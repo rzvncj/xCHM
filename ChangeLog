@@ -271,5 +271,5 @@
 		+ workaround to be able to print relative path CHM images.
 
 	* 1.11:
-		+
+		+ fixed random printout font size problem.
 

@@ -37,6 +37,7 @@
 #include <wx/filesys.h>
 #include <wx/mimetype.h>
 #include <wx/imaglist.h>
+#include <wx/bitmap.h>
 #include <wx/fs_mem.h>
 
 
@@ -152,7 +153,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	CreateStatusBar();
 	SetStatusText(_("Ready."));
 
-	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), wxBITMAP(logo), 
+	wxBitmap bitmap(logo_xpm);
+	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), bitmap, //wxBITMAP(logo), 
 				   wxBITMAP_TYPE_XPM);
 	wxMemoryFSHandler::AddFile(wxT("about.html"), greeting);
 	wxMemoryFSHandler::AddFile(wxT("error.html"), error_page);

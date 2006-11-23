@@ -39,6 +39,7 @@
 #include <wx/imaglist.h>
 #include <wx/bitmap.h>
 #include <wx/fs_mem.h>
+#include <wx/busyinfo.h>
 
 
 #define OPEN_HELP _("Open a CHM book.")
@@ -522,6 +523,10 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
 	wxLogNull wln;
+
+	wxWindowDisabler disableAll;
+	wxBusyInfo info(_("Working, please wait.."), this);
+	
 	bool rtn = false;
 	SaveBookmarks();
 	_nb->SetSelection(0);

@@ -623,11 +623,8 @@ void CHMFrame::UpdateCHMInfo()
 			     | wxPD_AUTO_HIDE | wxPD_SMOOTH 
 			     | wxPD_ELAPSED_TIME | wxPD_ESTIMATED_TIME);
 
-	wpd.Update(15, _("Retrieving table of contents.."));
-	chmf->GetTopicsTree(_tcl);
-
-	wpd.Update(50, _("Retrieving index.."));
-	chmf->GetIndex(_cip->GetResultsList());
+	chmf->GetTopicsTree(_tcl, &wpd);
+	chmf->GetIndex(_cip->GetResultsList(), &wpd);
 	wpd.Update(100, _("Done."));
 	
 	if(!title.IsEmpty()) {

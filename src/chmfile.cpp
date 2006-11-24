@@ -28,6 +28,7 @@
 #include <wx/strconv.h>
 #include <wx/fontmap.h>
 #include <wx/treectrl.h>
+#include <wx/progdlg.h>
 
 #include <assert.h>
 
@@ -216,7 +217,6 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 }
 
 
-
 void CHMFile::CloseCHM()
 {
 	if(_chmFile == NULL)
@@ -232,7 +232,11 @@ void CHMFile::CloseCHM()
 }
 
 
-bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
+#define MSG_RETR_TOC _("Retrieving table of contents..")
+#define MSG_RETR_IDX _("Retrieving index..")
+
+
+bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 {
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE];
@@ -256,13 +260,19 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 		p.parse(buffer);
 		curr += ret;
 
+		if(pdlg)
+			pdlg->Update(curr*50/ui.length, MSG_RETR_TOC);
+
 	} while(ret == BUF_SIZE - 1);
+
+	if(pdlg)
+		pdlg->Update(50, MSG_RETR_TOC);
 
 	return true;
 }
 
 
-bool CHMFile::GetIndex(CHMListCtrl* toBuild)
+bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
 {
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE];
@@ -286,7 +296,13 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 		p.parse(buffer);
 		curr += ret;
 
+		if(pdlg)
+			pdlg->Update(50 + curr*50/ui.length, MSG_RETR_IDX);
+
 	} while(ret == BUF_SIZE - 1);
+	
+	if(pdlg)
+		pdlg->Update(100, MSG_RETR_IDX);
 
 	return true;
 }

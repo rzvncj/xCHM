@@ -196,7 +196,8 @@ void HHCParser::handleTag(const std::string& tag)
 	++_counter;
 
 	if((_counter % TIME_TO_YIELD) == 0) {
-		wxSafeYield();	
+		//wxSafeYield();
+		wxYield();
 		_counter = 0;
 	}
 

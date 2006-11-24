@@ -39,8 +39,9 @@
 #include <wx/imaglist.h>
 #include <wx/bitmap.h>
 #include <wx/fs_mem.h>
-#include <wx/busyinfo.h>
 
+#include <wx/busyinfo.h>
+#include <wx/progdlg.h>
 
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
@@ -523,9 +524,6 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 {
 	wxBusyCursor bc;
 	wxLogNull wln;
-
-	wxWindowDisabler disableAll;
-	wxBusyInfo info(_("Working, please wait.."), this);
 	
 	bool rtn = false;
 	SaveBookmarks();
@@ -601,7 +599,7 @@ void CHMFrame::UpdateCHMInfo()
 
 	if(!chmf)
 		return;
-
+	
 	wxString filename = chmf->ArchiveName();
 	if(!filename.IsEmpty()) {		
 		_fh.AddFileToHistory(filename);
@@ -618,8 +616,19 @@ void CHMFrame::UpdateCHMInfo()
 
 	if(_tcl->GetCount())
 		_tcl->DeleteAllItems();
+
+	wxProgressDialog wpd(_("Processing.."), 
+			     _("Retrieving data.."),
+			     100, this, wxPD_APP_MODAL 
+			     | wxPD_AUTO_HIDE | wxPD_SMOOTH 
+			     | wxPD_ELAPSED_TIME | wxPD_ESTIMATED_TIME);
+
+	wpd.Update(15, _("Retrieving table of contents.."));
 	chmf->GetTopicsTree(_tcl);
+
+	wpd.Update(50, _("Retrieving index.."));
 	chmf->GetIndex(_cip->GetResultsList());
+	wpd.Update(100, _("Done."));
 	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
@@ -684,7 +693,6 @@ void CHMFrame::UpdateCHMInfo()
 		noSpecialFont = true;
 	}
 #endif
-
 	// if we have contents..
 	if(_tcl->GetCount() >= 1) {		
 		if(!_sw->IsSplit()) {

@@ -272,4 +272,6 @@
 
 	* 1.11:
 		+ fixed random printout font size problem.
+		+ fixed Win32 logo loading problem.
+		+ added a progress bar for CHM loading.
 

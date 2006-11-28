@@ -29,6 +29,8 @@
 #define UINT16ARRAY(x) ((unsigned char)(x)[0] | ((u_int16_t)(x)[1] << 8))
 #define UINT32ARRAY(x) (UINT16ARRAY(x) | ((u_int32_t)(x)[2] << 16) \
 		| ((u_int32_t)(x)[3] << 24))
+#define INT32ARRAY(x) ((int32_t)UINT32ARRAY(x))
+
 
 
 #if wxUSE_UNICODE

@@ -74,6 +74,9 @@
 /* Compile with XmlRpc functionality. */
 #undef WITH_LIBXMLRPC
 
+/* Define to `int' if <sys/types.h> does not define. */
+#undef int32_t
+
 /* Define to `unsigned short' if <sys/types.h> does not define. */
 #undef u_int16_t
 

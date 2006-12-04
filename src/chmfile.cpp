@@ -235,6 +235,78 @@ void CHMFile::CloseCHM()
 #define MSG_RETR_TOC _("Retrieving table of contents..")
 #define MSG_RETR_IDX _("Retrieving index..")
 
+/*
+bool CHMFile::BinaryTOC()
+{
+	chmUnitInfo ti_ui, ts_ui, st_ui;
+	unsigned char buffer[4096]; // buffer's size MUST be a multiple of 16!
+	
+	if(::chm_resolve_object(_chmFile, "/#TOCIDX", &ti_ui ) != 
+	   CHM_RESOLVE_SUCCESS 
+	   || ::chm_resolve_object(_chmFile, "/#TOPICS", &ts_ui) != 
+	   CHM_RESOLVE_SUCCESS
+	   || ::chm_resolve_object(_chmFile, "/#STRINGS", &st_ui) != 
+	   CHM_RESOLVE_SUCCESS)
+		return false; // failed to find internal files
+	
+	if(::chm_retrieve_object(_chmFile, &ti_ui, buffer, 0, 16) == 0)
+		return false;
+
+	u_int32_t s16off = UINT32ARRAY(buffer + 4);
+	int32_t s16no    = INT32ARRAY(buffer + 8);
+	u_int32_t dwoff  = UINT32ARRAY(buffer + 12);
+
+	cerr << "Entries: " << s16no << endl;
+
+	while(s16no > 0) {
+		long size = 0;
+		if((size = ::chm_retrieve_object(_chmFile, &ti_ui, buffer,
+						 s16off, sizeof(buffer))) == 0)
+			return false;
+		
+		s16no -= (size / 16);
+		s16off += size;
+
+		unsigned char tmpbuff[4096];
+		for(long i = 0; i < size; i += 16) {
+
+			u_int32_t off = UINT32ARRAY(buffer + i + 8);
+			cerr << "topidx dword offset: " << off << endl;
+
+			if(::chm_retrieve_object(_chmFile, &ti_ui, tmpbuff,
+						 off, 4) == 0)
+				return false;
+			
+			off = UINT32ARRAY(tmpbuff);
+			cerr << "topics dword offset: " << off << endl;
+
+			if(::chm_retrieve_object(_chmFile, &ts_ui, tmpbuff,
+						 off, 16) == 0)
+				return false;
+
+			int32_t stroff = INT32ARRAY(tmpbuff + 4);
+
+			cerr << "strings offset: " << stroff << endl;
+
+			if(stroff == -1)
+				continue;
+
+			if(UINT16ARRAY(tmpbuff + 12) != 6) // not in topics
+				continue; 
+
+			if(::chm_retrieve_object(_chmFile, &st_ui, tmpbuff,
+						 stroff, sizeof(tmpbuff)) == 0)
+				return false;
+
+			tmpbuff[sizeof(tmpbuff) - 1] = '\0';
+			cerr << "Name: " << tmpbuff << endl;
+		}
+	}
+
+	return true;
+}
+*/
+
 
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 {
@@ -242,10 +314,12 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 	char buffer[BUF_SIZE];
 	size_t ret = BUF_SIZE - 1, curr = 0;
 
-	if(!toBuild)
+	//BinaryTOC();
+
+	if(!toBuild) 
 		return false;
 
-	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui))
+	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui)) 
 		return false;
 
 	buffer[0] = '\0';

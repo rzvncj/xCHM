@@ -552,7 +552,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 
 	if(!rtn) { // Error, could not load CHM file
 		if(_tcl->GetCount())
-			_tcl->DeleteAllItems();
+			_tcl->CollapseAndReset(_tcl->GetRootItem());
 		if(_sw->IsSplit()) {
 			_sw->Unsplit(_nb);
 			_nb->Show(FALSE);
@@ -599,7 +599,7 @@ void CHMFrame::UpdateCHMInfo()
 
 	if(!chmf)
 		return;
-	
+
 	wxString filename = chmf->ArchiveName();
 	if(!filename.IsEmpty()) {		
 		_fh.AddFileToHistory(filename);
@@ -615,7 +615,7 @@ void CHMFrame::UpdateCHMInfo()
 	wxString title = chmf->Title();
 
 	if(_tcl->GetCount())
-		_tcl->DeleteAllItems();
+		_tcl->CollapseAndReset(_tcl->GetRootItem());
 
 	wxProgressDialog wpd(_("Processing.."), 
 			     _("Retrieving data.."),
@@ -690,6 +690,7 @@ void CHMFrame::UpdateCHMInfo()
 		noSpecialFont = true;
 	}
 #endif
+	
 	// if we have contents..
 	if(_tcl->GetCount() >= 1) {		
 		if(!_sw->IsSplit()) {
@@ -823,6 +824,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 #else
 	_tcl->AssignImageList(il);	
 #endif
+	_tcl->AddRoot(_("Topics"));
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
 			     wxDefaultSize, 0, NULL, wxCB_DROPDOWN 

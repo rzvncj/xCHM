@@ -151,7 +151,7 @@ HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
 	
 	if(_tree)
-		_parents[_level] = _tree->AddRoot(_("Topics"));
+		_parents[_level] = _tree->GetRootItem();
 }
 
 

@@ -274,4 +274,4 @@
 		+ fixed random printout font size problem.
 		+ fixed Win32 logo loading problem.
 		+ added a progress bar for CHM loading.
-
+		+ fixed TOC tree append bug.

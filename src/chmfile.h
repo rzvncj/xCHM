@@ -265,6 +265,9 @@ private:
 	//! Looks up as much information as possible from #SYSTEM.
 	bool InfoFromSystem();
 
+	//! Load binary TOC
+	//bool BinaryTOC();
+
 private:
 	chmFile* _chmFile;
 	wxString _filename;

@@ -32,7 +32,6 @@
 #include <wx/fs_mem.h>
 
 
-
 #ifdef WITH_LIBXMLRPC
 
 using namespace XmlRpc;

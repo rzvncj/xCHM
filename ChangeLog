@@ -275,3 +275,5 @@
 		+ fixed Win32 logo loading problem.
 		+ added a progress bar for CHM loading.
 		+ fixed TOC tree append bug.
+		+ added "Save link as.." item to the context-sensitive 
+		right-click menu.

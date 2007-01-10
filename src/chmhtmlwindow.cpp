@@ -3,6 +3,8 @@
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
   Mac OS specific patches contributed by Chanler White 
   <cawhite@nwrails.com>
+  "Save link as" patch contributed by Joerg Wunsch
+  <joerg_wunsch@users.sourceforge.net>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -30,6 +32,8 @@
 #include <wx/clipbrd.h>
 #include <wx/filename.h>
 #include <wx/uri.h>
+#include <wx/wfstream.h>
+#include <memory>
 
 
 
@@ -42,6 +46,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	_menu->Append(ID_PopupForward, _("For&ward"));
 	_menu->Append(ID_PopupBack, _("&Back"));
 	_menu->Append(ID_CopyLink, _("Copy &link location"));
+	_menu->Append(ID_SaveLinkAs, _("&Save link as.."));
 
 	_menu->AppendSeparator();
 	_menu->Append(ID_CopySel, _("&Copy selection"));
@@ -294,6 +299,43 @@ void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
+void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
+{
+	std::auto_ptr<wxFSFile> f(m_FS->OpenFile(_link));
+
+	if (f.get() == NULL) {
+		::wxMessageBox(_("OpenFile(") + _link + _(") failed"),
+			       _("Error"), wxOK, this);
+		return;
+	}
+
+	wxFileName wfn(_link);
+	wxString filename = ::wxFileSelector(_("Save as"),
+					     wxT(""),
+					     wfn.GetFullName(),
+					     wxT(""),
+					     wxT("*.*"),
+					     wxSAVE | wxOVERWRITE_PROMPT,
+					     this);
+	if (!filename.empty()) {
+		wxInputStream *s = f->GetStream();
+		wxFileOutputStream out(filename);
+		if (!out.IsOk()) {
+			::wxMessageBox(_("Error creating file ") + filename,
+				       _("Error"), wxOK, this);
+		} else {
+			char buffer[4096];
+			while (!s->Eof()) {
+				s->Read(buffer, sizeof(buffer));
+				size_t nbytes = s->LastRead();
+				out.Write((void *)buffer, nbytes);
+			}
+			::wxMessageBox(_("Saved file ") + filename,
+				       _("Success"), wxOK, this);
+		}
+	}
+}
+
 
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
@@ -303,6 +345,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	_menu->Enable(ID_PopupForward, HistoryCanForward());
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
 	_menu->Enable(ID_CopyLink, false);
+	_menu->Enable(ID_SaveLinkAs, false);
 
         int x, y;
         CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
@@ -318,6 +361,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	if(linfo) {
 		_link = linfo->GetHref();
 		_menu->Enable(ID_CopyLink, true);
+		_menu->Enable(ID_SaveLinkAs, true);
 	}
 
 	PopupMenu(_menu, event.GetPosition());
@@ -343,6 +387,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
+	EVT_MENU(ID_SaveLinkAs, CHMHtmlWindow::OnSaveLinkAs)
 	EVT_CHAR(CHMHtmlWindow::OnChar)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
 	EVT_SIZE(CHMHtmlWindow::OnSize)

@@ -33,6 +33,7 @@
 enum {
 	ID_CopySel = 1216,
 	ID_CopyLink,
+	ID_SaveLinkAs,
 	ID_PopupForward,
 	ID_PopupBack,
 	ID_PopupFind,
@@ -130,6 +131,9 @@ protected:
 	
 	//! Called when the user selects 'Copy link' from the popup menu.
 	void OnCopyLink(wxCommandEvent& event);
+
+	//! Called when the user selects 'Save link as' from the popup menu.
+	void OnSaveLinkAs(wxCommandEvent& event);
 
 	//! Called when the user presses a key
 	void OnChar(wxKeyEvent &event);

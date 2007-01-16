@@ -310,9 +310,14 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 	}
 
 	wxFileName wfn(_link);
+	wxString suggestedName = wfn.GetFullName();
+
+	if(suggestedName.IsEmpty())
+		suggestedName = wxT("index.html");
+	
 	wxString filename = ::wxFileSelector(_("Save as"),
 					     wxT(""),
-					     wfn.GetFullName(),
+					     suggestedName,
 					     wxT(""),
 					     wxT("*.*"),
 					     wxSAVE | wxOVERWRITE_PROMPT,

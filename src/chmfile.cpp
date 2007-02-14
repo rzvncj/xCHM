@@ -36,15 +36,14 @@
 #include <hhcparser.h>
 
 
-namespace {
-
 // damn wxWidgets and it's scoped ptr.
 class UCharPtr {
 public:
-	UCharPtr(unsigned char *p) : _p(p) {}
+	UCharPtr(unsigned char *p, size_t size = 0) : _p(p), _size(size) {}
 	~UCharPtr() { delete[] _p; }
 
 	unsigned char *get() { return _p; }
+	size_t size() const { return _size; }
 
 private:
 	UCharPtr(const UCharPtr&);
@@ -52,9 +51,8 @@ private:
 
 private:
 	unsigned char *_p;
+	size_t _size;
 };
-
-} // namespace
 
 
 // Big-enough buffer size for use with various routines.
@@ -239,7 +237,6 @@ void CHMFile::CloseCHM()
 bool CHMFile::BinaryTOC()
 {
 	chmUnitInfo ti_ui, ts_ui, st_ui;
-	unsigned char buffer[4096]; // buffer's size MUST be a multiple of 16!
 	
 	if(::chm_resolve_object(_chmFile, "/#TOCIDX", &ti_ui ) != 
 	   CHM_RESOLVE_SUCCESS 
@@ -248,60 +245,82 @@ bool CHMFile::BinaryTOC()
 	   || ::chm_resolve_object(_chmFile, "/#STRINGS", &st_ui) != 
 	   CHM_RESOLVE_SUCCESS)
 		return false; // failed to find internal files
-	
-	if(::chm_retrieve_object(_chmFile, &ti_ui, buffer, 0, 16) == 0)
+
+	if(ti_ui.length < 4) // just make sure
 		return false;
 
-	u_int32_t s16off = UINT32ARRAY(buffer + 4);
-	int32_t s16no    = INT32ARRAY(buffer + 8);
-	u_int32_t dwoff  = UINT32ARRAY(buffer + 12);
+	UCharPtr  topidx(new unsigned char[ti_ui.length], ti_ui.length);
+	UCharPtr  topics(new unsigned char[ts_ui.length], ts_ui.length);
+	UCharPtr strings(new unsigned char[st_ui.length], st_ui.length);
+	
+	if(::chm_retrieve_object(_chmFile, &ti_ui, topidx.get(), 
+				 0, ti_ui.length) != (size_t)ti_ui.length)
+		return false;
 
-	cerr << "Entries: " << s16no << endl;
+	if(::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 
+				 0, ts_ui.length) != (size_t)ts_ui.length)
+		return false;
 
-	while(s16no > 0) {
-		long size = 0;
-		if((size = ::chm_retrieve_object(_chmFile, &ti_ui, buffer,
-						 s16off, sizeof(buffer))) == 0)
+	if(::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 
+				 0, st_ui.length) != (size_t)st_ui.length)
+				 return false;
+
+
+	u_int32_t off = UINT32ARRAY(topidx.get());
+	return RecurseLoadBTOC(topidx, topics, strings, off);
+}
+
+
+bool CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
+			      UCharPtr& strings, u_int32_t offset)
+{
+	while(offset) {
+		if(topidx.size() < offset + 20)
 			return false;
-		
-		s16no -= (size / 16);
-		s16off += size;
 
-		unsigned char tmpbuff[4096];
-		for(long i = 0; i < size; i += 16) {
+		u_int32_t flags = UINT32ARRAY(topidx.get() + offset + 4);
+		u_int32_t index = UINT32ARRAY(topidx.get() + offset + 8);
 
-			u_int32_t off = UINT32ARRAY(buffer + i + 8);
-			cerr << "topidx dword offset: " << off << endl;
+		if((flags & 0x4) || (flags & 0x8)) // book or local
+			GetTOCItem(topics, strings, index);
 
-			if(::chm_retrieve_object(_chmFile, &ti_ui, tmpbuff,
-						 off, 4) == 0)
-				return false;
-			
-			off = UINT32ARRAY(tmpbuff);
-			cerr << "topics dword offset: " << off << endl;
+		if(flags & 0x4) { // book
 
-			if(::chm_retrieve_object(_chmFile, &ts_ui, tmpbuff,
-						 off, 16) == 0)
+			if(topidx.size() < offset + 24)
 				return false;
 
-			int32_t stroff = INT32ARRAY(tmpbuff + 4);
+			u_int32_t child = UINT32ARRAY(topidx.get() + offset
+						      + 20);
 
-			cerr << "strings offset: " << stroff << endl;
-
-			if(stroff == -1)
-				continue;
-
-			if(UINT16ARRAY(tmpbuff + 12) != 6) // not in topics
-				continue; 
-
-			if(::chm_retrieve_object(_chmFile, &st_ui, tmpbuff,
-						 stroff, sizeof(tmpbuff)) == 0)
-				return false;
-
-			tmpbuff[sizeof(tmpbuff) - 1] = '\0';
-			cerr << "Name: " << tmpbuff << endl;
+			if(child) {
+				RecurseLoadBTOC(topidx, topics, strings, 
+						child); 
+			}
 		}
+
+		offset = UINT32ARRAY(topidx.get() + offset + 0x10);
 	}
+
+	return true;
+}
+
+
+bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, u_int32_t index)
+{
+	if(topics.size() < (index * 16) + 8)
+		return false;
+
+	u_int32_t offset = UINT32ARRAY(topics.get() + (index * 16) + 4);
+	long test = (long)offset;
+
+	if(test == -1) {
+		cerr << "-1!!!!!!!!!!!!!!!!!!!!!!" << endl;
+	}
+
+	if(strings.size() < offset)
+		return false;
+
+	cerr << strings.get() + offset << endl;
 
 	return true;
 }
@@ -642,7 +661,6 @@ bool CHMFile::GetArchiveInfo()
 }
 
 
-inline 
 u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 				     u_int32_t initialOffset,
 				     u_int32_t buffSize,
@@ -707,7 +725,6 @@ u_int32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 }
 
 
-inline 
 bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 			 u_int32_t wlc_offset, unsigned char ds,
 			 unsigned char dr, unsigned char cs,
@@ -810,7 +827,6 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 }
 
 
-inline
 bool CHMFile::InfoFromWindows()
 {
 #define WIN_HEADER_LEN 0x08
@@ -919,7 +935,6 @@ bool CHMFile::InfoFromWindows()
 }
 
 
-inline
 bool CHMFile::InfoFromSystem()
 {
 	unsigned char buffer[BUF_SIZE];

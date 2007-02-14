@@ -35,6 +35,7 @@
 class wxTreeCtrl;
 class wxProgressDialog;
 class CHMListCtrl;
+//class UCharPtr;
 
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
@@ -267,6 +268,11 @@ private:
 
 	//! Load binary TOC
 	//bool BinaryTOC();
+
+	//bool RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
+	//		     UCharPtr& strings, u_int32_t offset);
+
+	//bool GetTOCItem(UCharPtr& topics, UCharPtr& strings, u_int32_t index);
 
 private:
 	chmFile* _chmFile;

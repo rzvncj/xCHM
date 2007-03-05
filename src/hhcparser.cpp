@@ -230,9 +230,10 @@ void HHCParser::handleTag(const std::string& tag)
 
 			if(_htmlChars) {
 				name = replaceHTMLChars(name);
+				value = replaceHTMLChars(value);
 				_htmlChars = false;
 			}
- 
+
 			name = translateEncoding(name);
 
 			addToTree(name, value);
@@ -248,10 +249,12 @@ void HHCParser::handleTag(const std::string& tag)
 			if(name == "name" && _name.empty()) {
 				_name = value;
 				_htmlChars = special;
-
 			} else if(name == "local" && _value.empty()) {
 				_value = value;
+				_htmlChars = special;
 			}
+
+
 		}
 	
 	} else {		
@@ -456,6 +459,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 				inSpecial = false;
 
 				unsigned code = getHTMLCode(special);
+	
 				if(code)
 					result.Append(charForCode(code));
 
@@ -483,6 +487,7 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 					  substitutions_cnt,
 					  sizeof(HTMLChar),
 					  HTMLCharCompare);	
+
 	if(hc)
 		return hc->code;
 

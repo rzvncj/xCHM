@@ -225,6 +225,9 @@ void HHCParser::handleTag(const std::string& tag)
 		if(tagName == "/object") {
 			_inobject = false;
 
+			if(!_value.empty() && _value[0] != '/')
+				_value = std::string("/") + _value;
+
 			wxString name = CURRENT_CHAR_STRING(_name.c_str());
 			wxString value = CURRENT_CHAR_STRING(_value.c_str());
 
@@ -238,7 +241,6 @@ void HHCParser::handleTag(const std::string& tag)
 
 			addToTree(name, value);
 			addToList(name, value);
-
 
 		} else if(tagName == "param") {
 

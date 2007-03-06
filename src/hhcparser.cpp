@@ -248,13 +248,11 @@ void HHCParser::handleTag(const std::string& tag)
 			
 			if(name == "name" && _name.empty()) {
 				_name = value;
-				_htmlChars = special;
+				_htmlChars = _htmlChars || special;
 			} else if(name == "local" && _value.empty()) {
 				_value = value;
-				_htmlChars = special;
+				_htmlChars = _htmlChars || special;
 			}
-
-
 		}
 	
 	} else {		

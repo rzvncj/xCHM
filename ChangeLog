@@ -278,3 +278,4 @@
 		+ added "Save link as.." item to the context-sensitive 
 		right-click menu.
 		+ fixed special HTML characters in TOC/index links bug.
+		+ fixed relative links in TOC/index bug.

@@ -396,31 +396,35 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 		int parentIndex = _level ? _level - 1 : 0;
 
 		_parents[_level] = 
-#ifndef __WXMSW__
+/*#ifndef __WXMSW__
 			_tree->AppendItem(_parents[parentIndex], name, 0, 0,
 					  new URLTreeItem(value));
-#else
+#else*/
 			_tree->AppendItem(_parents[parentIndex], name, 2, 2,
 					  new URLTreeItem(value));
-#endif
+//#endif
 		if(!_level)
 			_parents[0] = _tree->GetRootItem();
 		else {
+			/*
 #ifndef __WXMSW__
 			_tree->SetItemImage(_parents[parentIndex], -1,
 					    wxTreeItemIcon_Normal);
 			
 			_tree->SetItemImage(_parents[parentIndex], -1, 
 					    wxTreeItemIcon_Selected);
-#else
+#else */
 			if(_tree->GetItemImage(_parents[parentIndex]) != 0) {
 				_tree->SetItemImage(_parents[parentIndex], 0,
 						wxTreeItemIcon_Normal);
 
+				_tree->SetItemImage(_parents[parentIndex], 0,
+						wxTreeItemIcon_Selected);
+
 				_tree->SetItemImage(_parents[parentIndex], 1,
 						wxTreeItemIcon_Expanded);
 			}	
-#endif
+//#endif
 		}
 	}
 }

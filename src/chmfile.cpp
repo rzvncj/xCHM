@@ -341,6 +341,8 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 	if(_topicsFile.IsEmpty() || !ResolveObject(_topicsFile, &ui)) 
 		return false;
 
+	toBuild->Freeze();
+
 	buffer[0] = '\0';
 
 	HHCParser p(_enc, toBuild, NULL);
@@ -361,6 +363,8 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 	if(pdlg)
 		pdlg->Update(50, MSG_RETR_TOC);
 
+	toBuild->Thaw();
+
 	return true;
 }
 
@@ -376,6 +380,8 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
 
 	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;
+
+	toBuild->Freeze();
 
 	buffer[0] = '\0';
 
@@ -396,6 +402,8 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
 	
 	if(pdlg)
 		pdlg->Update(100, MSG_RETR_IDX);
+
+	toBuild->Thaw();
 
 	return true;
 }

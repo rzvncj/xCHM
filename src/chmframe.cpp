@@ -617,15 +617,15 @@ void CHMFrame::UpdateCHMInfo()
 	if(_tcl->GetCount())
 		_tcl->CollapseAndReset(_tcl->GetRootItem());
 
-	wxProgressDialog wpd(_("Processing.."), 
+	/*wxProgressDialog wpd(_("Processing.."), 
 			     _("Retrieving data.."),
 			     100, this, wxPD_APP_MODAL 
 			     | wxPD_AUTO_HIDE | wxPD_SMOOTH 
-			     | wxPD_ELAPSED_TIME | wxPD_ESTIMATED_TIME);
+			     | wxPD_ELAPSED_TIME | wxPD_ESTIMATED_TIME);*/
 
-	chmf->GetTopicsTree(_tcl, &wpd);
-	chmf->GetIndex(_cip->GetResultsList(), &wpd);
-	wpd.Update(100, _("Done."));
+	chmf->GetTopicsTree(_tcl, NULL);
+	chmf->GetIndex(_cip->GetResultsList(), NULL);
+	//wpd.Update(100, _("Done."));
 	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 

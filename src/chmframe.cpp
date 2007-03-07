@@ -795,35 +795,17 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	temp->SetAutoLayout(TRUE);
         temp->SetSizer(sizer);
 
-/*#ifndef __WXMSW__
-	wxImageList *tclBL = new wxImageList(16, 16);
-	tclBL->Add(wxIcon(hbook_closed_xpm));
-	tclBL->Add(wxIcon(hbook_closed_xpm));
-	tclBL->Add(wxIcon(hbook_open_xpm));
-	tclBL->Add(wxIcon(hbook_open_xpm));
-	wxImageList *tclIL = new wxImageList(16, 16);
-	tclIL->Add(wxIcon(hpage_xpm));
-#else */
 	wxImageList *il = new wxImageList(16, 16);
 	il->Add(wxIcon(hbook_closed_xpm));
 	il->Add(wxIcon(hbook_open_xpm));
 	il->Add(wxIcon(hpage_xpm));
-//#endif
 
 	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, 
 			      wxDefaultSize, 
-//#ifndef __WXMSW__
-//			      wxTR_HAS_BUTTONS |
-//#endif
 			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT
 			      | wxTR_LINES_AT_ROOT);
 
-/*#ifndef __WXMSW__
-	_tcl->AssignButtonsImageList(tclBL);
-	_tcl->AssignImageList(tclIL);
-#else*/
 	_tcl->AssignImageList(il);	
-//#endif
 	_tcl->AddRoot(_("Topics"));
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,

@@ -33,7 +33,6 @@
 
 // Forward declarations.
 class wxTreeCtrl;
-class wxProgressDialog;
 class CHMListCtrl;
 class UCharPtr;
 
@@ -148,10 +147,9 @@ public:
 	  If the topics file is not available, the
 	  tree is unmodified. The tree must be empty before passing it
 	  to this function.
-	  \param pdlg A progress dialog to update. Can be NULL.
 	  \return true if it's possible to build the tree, false otherwise.
 	 */
-	bool GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg);
+	bool GetTopicsTree(wxTreeCtrl *toBuild);
 
 
 	/*!
@@ -161,10 +159,9 @@ public:
 	  If the index file is not available, the list control
 	  is unmodified. The lost must be empty before passing it
 	  to this function.
-	  \param pdlg A progress dialog to update. Can be NULL.
 	  \return true if it's possible to build the tree, false otherwise.
 	 */
-	bool GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg);
+	bool GetIndex(CHMListCtrl* toBuild);
 
 
 	/*!

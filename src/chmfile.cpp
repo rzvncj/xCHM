@@ -295,6 +295,15 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			      UCharPtr& urlstr, u_int32_t offset,
 			      wxTreeCtrl *toBuild, int level)
 {
+	static int calls = 0;
+	static const int yieldTime = 256;
+
+	++calls;
+	if(calls % yieldTime) {
+		calls = 0;
+		wxYield();
+	}
+
 	while(offset) {
 		if(topidx.size() < offset + 20)
 			return;
@@ -400,7 +409,7 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 
 
 
-bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
+bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE];
@@ -434,13 +443,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild, wxProgressDialog *pdlg)
 		p.parse(buffer);
 		curr += ret;
 
-		if(pdlg)
-			pdlg->Update(curr*50/ui.length, MSG_RETR_TOC);
-
 	} while(ret == BUF_SIZE - 1);
-
-	if(pdlg)
-		pdlg->Update(50, MSG_RETR_TOC);
 
 	toBuild->Thaw();
 
@@ -452,40 +455,24 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 {
 	if(!toBuild)
 		return false;
-/*	
-	if(::chm_resolve_object(_chmFile, "/#TOCIDX", &ti_ui ) != 
-	   CHM_RESOLVE_SUCCESS 
-	   || ::chm_resolve_object(_chmFile, "/#TOPICS", &ts_ui) != 
-	   CHM_RESOLVE_SUCCESS
-	   || ::chm_resolve_object(_chmFile, "/#STRINGS", &st_ui) != 
-	   CHM_RESOLVE_SUCCESS
-	   || ::chm_resolve_object(_chmFile, "/#URLTBL", &st_urltbl) != 
-	   CHM_RESOLVE_SUCCESS
-	   || ::chm_resolve_object(_chmFile, "/#URLSTR", &st_urlstr) != 
-	   CHM_RESOLVE_SUCCESS)
+
+	chmUnitInfo bt_ui;
+		
+	if(::chm_resolve_object(_chmFile, "/$WWKeywordLinks/BTree",
+				&bt_ui ) != CHM_RESOLVE_SUCCESS)
 		return false; // failed to find internal files
 
-	if(ti_ui.length < 4) // just make sure
-		return false;
+	UCharPtr  btree(new unsigned char[bt_ui.length], bt_ui.length);
 
-	UCharPtr  topidx(new unsigned char[ti_ui.length], ti_ui.length);
-	UCharPtr  topics(new unsigned char[ts_ui.length], ts_ui.length);
-	UCharPtr strings(new unsigned char[st_ui.length], st_ui.length);
-	UCharPtr  urltbl(new unsigned char[st_urltbl.length], 
-			 st_urltbl.length);
-	UCharPtr  urlstr(new unsigned char[st_urlstr.length], 
-			 st_urlstr.length);
-	
-	if(::chm_retrieve_object(_chmFile, &ti_ui, topidx.get(), 
-				 0, ti_ui.length) != (size_t)ti_ui.length)
-				 return false;
-	return true; */
+	if(::chm_retrieve_object(_chmFile, &bt_ui, btree.get(), 
+				 0, bt_ui.length) != (size_t)bt_ui.length)
+		return false;  	        
 
-	return false;
+	return true;
 }
 
 
-bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
+bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
 	chmUnitInfo ui;
 	char buffer[BUF_SIZE];
@@ -493,13 +480,14 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
 
 	if(!toBuild)
 		return false;
-
+/*
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild);
 	toBuild->Thaw();
-
+       
 	if(bindex)
 		return true;
+*/
 
 	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;
@@ -518,16 +506,9 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild, wxProgressDialog *pdlg)
 		p.parse(buffer);
 		curr += ret;
 
-		if(pdlg)
-			pdlg->Update(50 + curr*50/ui.length, MSG_RETR_IDX);
-
 	} while(ret == BUF_SIZE - 1);
 	
-	if(pdlg)
-		pdlg->Update(100, MSG_RETR_IDX);
-
 	toBuild->Thaw();
-
 	return true;
 }
 

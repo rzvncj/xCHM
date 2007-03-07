@@ -39,9 +39,10 @@
 #include <wx/imaglist.h>
 #include <wx/bitmap.h>
 #include <wx/fs_mem.h>
+#include <wx/utils.h>
 
 #include <wx/busyinfo.h>
-#include <wx/progdlg.h>
+
 
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
@@ -600,6 +601,9 @@ void CHMFrame::UpdateCHMInfo()
 	if(!chmf)
 		return;
 
+	wxWindowDisabler wwd;
+	wxBusyInfo wait(_("Loading, please wait.."));
+
 	wxString filename = chmf->ArchiveName();
 	if(!filename.IsEmpty()) {		
 		_fh.AddFileToHistory(filename);
@@ -617,15 +621,8 @@ void CHMFrame::UpdateCHMInfo()
 	if(_tcl->GetCount())
 		_tcl->CollapseAndReset(_tcl->GetRootItem());
 
-	/*wxProgressDialog wpd(_("Processing.."), 
-			     _("Retrieving data.."),
-			     100, this, wxPD_APP_MODAL 
-			     | wxPD_AUTO_HIDE | wxPD_SMOOTH 
-			     | wxPD_ELAPSED_TIME | wxPD_ESTIMATED_TIME);*/
-
-	chmf->GetTopicsTree(_tcl, NULL);
-	chmf->GetIndex(_cip->GetResultsList(), NULL);
-	//wpd.Update(100, _("Done."));
+	chmf->GetTopicsTree(_tcl);
+	chmf->GetIndex(_cip->GetResultsList());
 	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 

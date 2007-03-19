@@ -103,15 +103,18 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
+	wxString tmpPage = page;
+	if(!page.StartsWith(wxT("/")))
+		tmpPage = GetParser()->GetFS()->
+			GetPath().AfterLast(wxT(':'))
+				+ page;
+
 	wxString url;
 
 	if(data)
 		url = (data->_url).BeforeFirst(wxT('#'));
-	
-	if(data && (!url.CmpNoCase(page) || 
-		    !url.CmpNoCase(GetPrefix(GetOpenedPage()) + wxT("/") 
-				   + page))) {
-		// Order counts!
+
+	if(data && !url.CmpNoCase(tmpPage)) {
 		_found = true;
 		_tcl->SelectItem(root);
 		return;

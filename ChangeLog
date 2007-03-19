@@ -279,3 +279,4 @@
 		right-click menu.
 		+ fixed special HTML characters in TOC/index links bug.
 		+ fixed relative links in TOC/index bug.
+		+ Fixed TOC sync with the currently loaded page bug.

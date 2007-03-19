@@ -232,6 +232,7 @@ void CHMFile::CloseCHM()
 
 #define MSG_RETR_TOC _("Retrieving table of contents..")
 #define MSG_RETR_IDX _("Retrieving index..")
+#define EMPTY_INDEX _("Untitled in index")
 
 
 bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
@@ -313,7 +314,8 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
 			if(!GetTOCItem(topics, strings, urltbl, urlstr, index,
-				       toBuild, level, (flags & 0x8) == 0))
+				       toBuild, NULL, level, (flags & 0x8) 
+				       == 0))
 				return;
 		}
 
@@ -336,12 +338,20 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 }
 
 
+#include <iostream>
+using namespace std;
+
+
 bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 			 UCharPtr& urlstr, u_int32_t index, 
-			 wxTreeCtrl *toBuild, int level, bool local)
+			 wxTreeCtrl *tree, CHMListCtrl* list,
+			 int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
-	parents[0] = toBuild->GetRootItem();
+
+	if(tree)
+		parents[0] = tree->GetRootItem();
+
 	std::string name, value;
 
 	if(local) {
@@ -354,10 +364,8 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		if(topics.size() < (index * 16) + 12)
 			return false;
 
-		u_int32_t offset = UINT32ARRAY(topics.get() + 
-					       (index * 16) + 4);
+		u_int32_t offset = UINT32ARRAY(topics.get()+ (index * 16) + 4);
 		long test = (long)offset;
-
 
 		if(strings.size() < offset + 1)
 			return false;
@@ -381,27 +389,39 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		value = (char *)(urlstr.get() + offset + 8);
 	}
 
-	if(!name.empty()) {
+	wxString tname = CURRENT_CHAR_STRING(name.c_str());
+	wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
+
+	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
 
-		wxString tname = CURRENT_CHAR_STRING(name.c_str());
-		wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
-
 		parents[level] = 
-			toBuild->AppendItem(parents[parentIndex], tname, 2, 2,
+			tree->AppendItem(parents[parentIndex], tname, 2, 2,
 					    new URLTreeItem(tvalue));
 		if(level) {
-			if(toBuild->GetItemImage(parents[parentIndex]) != 0) {
-				toBuild->SetItemImage(parents[parentIndex], 0,
-						      wxTreeItemIcon_Normal);
+			if(tree->GetItemImage(parents[parentIndex]) != 0) {
+				tree->SetItemImage(parents[parentIndex], 0,
+						   wxTreeItemIcon_Normal);
 				
-				toBuild->SetItemImage(parents[parentIndex], 0,
-						      wxTreeItemIcon_Selected);
-
-				toBuild->SetItemImage(parents[parentIndex], 1,
-						      wxTreeItemIcon_Expanded);
+				tree->SetItemImage(parents[parentIndex], 0,
+						   wxTreeItemIcon_Selected);
+				
+				tree->SetItemImage(parents[parentIndex], 1,
+						   wxTreeItemIcon_Expanded);
 			}	
 		}
+	}
+
+	if(list) {
+
+		cerr << "name: " << name << "\nvalue: " << value << endl;
+
+		if(!value.empty()) {
+			if(tname.IsEmpty())
+				tname = EMPTY_INDEX;
+		}
+
+		list->AddPairItem(tname, tvalue);
 	}
 	
 	return true;
@@ -451,22 +471,136 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 }
 
 
+// This function is too long: prime candidate for refactoring someday
 bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 {
 	if(!toBuild)
 		return false;
 
-	chmUnitInfo bt_ui;
+	chmUnitInfo bt_ui, ts_ui, st_ui, ut_ui, us_ui;;
 		
 	if(::chm_resolve_object(_chmFile, "/$WWKeywordLinks/BTree",
-				&bt_ui ) != CHM_RESOLVE_SUCCESS)
+				&bt_ui ) != CHM_RESOLVE_SUCCESS
+	   || ::chm_resolve_object(_chmFile, "/#TOPICS", &ts_ui) != 
+	   CHM_RESOLVE_SUCCESS
+	   || ::chm_resolve_object(_chmFile, "/#STRINGS", &st_ui) != 
+	   CHM_RESOLVE_SUCCESS
+	   || ::chm_resolve_object(_chmFile, "/#URLTBL", &ut_ui) != 
+	   CHM_RESOLVE_SUCCESS
+	   || ::chm_resolve_object(_chmFile, "/#URLSTR", &us_ui) != 
+	   CHM_RESOLVE_SUCCESS)
 		return false; // failed to find internal files
 
 	UCharPtr  btree(new unsigned char[bt_ui.length], bt_ui.length);
+	UCharPtr  topics(new unsigned char[ts_ui.length], ts_ui.length);
+	UCharPtr strings(new unsigned char[st_ui.length], st_ui.length);
+	UCharPtr  urltbl(new unsigned char[ut_ui.length], ut_ui.length);
+	UCharPtr  urlstr(new unsigned char[us_ui.length], us_ui.length);
 
 	if(::chm_retrieve_object(_chmFile, &bt_ui, btree.get(), 
 				 0, bt_ui.length) != (size_t)bt_ui.length)
-		return false;  	        
+		return false;
+
+	if(::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 
+				 0, ts_ui.length) != (size_t)ts_ui.length)
+		return false;
+
+	if(::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 
+				 0, st_ui.length) != (size_t)st_ui.length)
+		return false;
+
+	if(::chm_retrieve_object(_chmFile, &ut_ui, urltbl.get(), 0, 
+				 ut_ui.length) != (size_t)ut_ui.length)
+		return false;
+
+	if(::chm_retrieve_object(_chmFile, &us_ui, urlstr.get(), 0, 
+				 us_ui.length) != (size_t)us_ui.length)
+		return false;
+
+
+	if(bt_ui.length < 0x4c + 12)
+		return false;
+
+	unsigned long offset = 0x4c;
+	int32_t next = -1;
+	int16_t freeSpace, spaceLeft;
+	const short blockSize = 2048;
+
+	do {
+		if(bt_ui.length < offset + 12)
+			return true; // end of buffer
+
+		next = INT32ARRAY(btree.get() + offset + 8);
+		freeSpace = UINT16ARRAY(btree.get() + offset);
+		spaceLeft = blockSize - 12;
+		offset += 12;
+
+		while(spaceLeft > freeSpace) {
+
+			u_int32_t tmp = 0;
+
+			do { // get over the Unicode string
+				if(bt_ui.length < offset + sizeof(u_int32_t))
+					return true;
+
+				tmp = UINT32ARRAY(btree.get() + offset);
+				offset += sizeof(u_int32_t);
+				spaceLeft -= sizeof(u_int32_t);
+
+			} while(tmp != 0);
+			
+			if(bt_ui.length < offset + 16)
+				return true;			
+			
+			u_int16_t seeAlso = UINT16ARRAY(btree.get() + offset);
+			u_int32_t numTopics = UINT32ARRAY(btree.get() + offset
+							  + 0xc);
+			offset += 16;
+			spaceLeft -= 16;
+
+			if(seeAlso) {
+				// Should refactor the following duplicated
+				// code.
+				do { // get over the Unicode string
+					if(bt_ui.length < offset 
+					   + sizeof(u_int32_t))
+						return true;
+
+					tmp = UINT32ARRAY(btree.get() 
+							  + offset);
+					offset += sizeof(u_int32_t);
+					spaceLeft -= sizeof(u_int32_t);
+
+				} while(tmp != 0);
+			} else {
+				for(u_int32_t i = 0; i < numTopics
+					    && spaceLeft > freeSpace; ++i) {
+					if(bt_ui.length < offset
+					   + sizeof(u_int32_t))
+						return true;
+
+					u_int32_t index = 
+						UINT32ARRAY(btree.get() 
+							    + offset);
+
+					GetTOCItem(topics, strings, urltbl,
+						   urlstr, index, NULL, 
+						   toBuild, 0, false);
+
+					offset += sizeof(u_int32_t);
+					spaceLeft -= sizeof(u_int32_t);
+				}
+			}
+
+			if(bt_ui.length < offset + 8)
+				return true;
+			offset += 8;
+			spaceLeft -= 8;
+		}
+		
+		offset += spaceLeft;
+
+	} while(next != -1);
 
 	return true;
 }
@@ -480,6 +614,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 
 	if(!toBuild)
 		return false;
+
 /*
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild);
@@ -885,7 +1020,7 @@ bool CHMFile::ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
 
 		if(::chm_retrieve_object(_chmFile, uistrings, combuf, 
 					 stroff, COMMON_BUF_LEN - 1) == 0) {
-			topic = wxString(_("Untitled in index"));
+			topic = EMPTY_INDEX;
 
 		} else {
 			combuf[COMMON_BUF_LEN - 1] = 0;

@@ -61,6 +61,7 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 
 AC_CHECK_TYPE(int32_t, int)
+AC_CHECK_TYPE(int16_t, short)
 AC_CHECK_TYPE(u_int16_t, unsigned short)
 AC_CHECK_TYPE(u_int32_t, unsigned int)
 AC_CHECK_TYPE(u_int64_t, unsigned long long)

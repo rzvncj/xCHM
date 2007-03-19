@@ -273,7 +273,7 @@ private:
 
 	bool GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 			UCharPtr& urlstr, u_int32_t index, wxTreeCtrl *toBuild,
-			int level, bool local);
+			CHMListCtrl* toBuild, int level, bool local);
 
 	bool BinaryIndex(CHMListCtrl* toBuild);
 

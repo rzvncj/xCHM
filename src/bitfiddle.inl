@@ -30,6 +30,7 @@
 #define UINT32ARRAY(x) (UINT16ARRAY(x) | ((u_int32_t)(x)[2] << 16) \
 		| ((u_int32_t)(x)[3] << 24))
 #define INT32ARRAY(x) ((int32_t)UINT32ARRAY(x))
+#define INT16ARRAY(x) ((int16_t)UINT16ARRAY(x))
 
 
 

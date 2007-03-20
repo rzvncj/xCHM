@@ -479,6 +479,10 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 }
 
 
+#include <iostream>
+using namespace std;
+
+
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
@@ -493,9 +497,12 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(!data || data->_url.IsEmpty())
 		return;
 
+	cerr << "url: " << data->_url.mb_str() << endl;
+
 	if(!_html->IsCaller()) {
 		_html->SetSync(false);
-		_html->LoadPage(data->_url);
+		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
+				wxT("#xchm:/") + data->_url);
 		_html->SetSync(true);
 	}
 }

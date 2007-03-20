@@ -501,7 +501,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
-	chmUnitInfo bt_ui, ts_ui, st_ui, ut_ui, us_ui;;
+	chmUnitInfo bt_ui, ts_ui, st_ui, ut_ui, us_ui;
+	unsigned long items = 0;
 		
 	if(::chm_resolve_object(_chmFile, "/$WWKeywordLinks/BTree",
 				&bt_ui ) != CHM_RESOLVE_SUCCESS
@@ -552,7 +553,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 
 	do {
 		if(bt_ui.length < offset + 12)
-			return true; // end of buffer
+			return (items != 0); // end of buffer
 
 		freeSpace = UINT16ARRAY(btree.get() + offset);
 		next = INT32ARRAY(btree.get() + offset + 8);
@@ -567,14 +568,14 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 			bool ret = ConvertFromUnicode(name, btree.get() 
 						      + offset, bt_ui.length 
 						      - offset);
-			if(!ret)
-				return true;
+			if(!ret) 
+				return (items != 0);
 
 			offset += (name.length() + 1) * 2;
 			spaceLeft -= (name.length() + 1) * 2;
-			
+
 			if(bt_ui.length < offset + 16)
-				return true;			
+				return (items != 0);
 			
 			u_int16_t seeAlso = UINT16ARRAY(btree.get() + offset);
 			u_int32_t numTopics = UINT32ARRAY(btree.get() + offset
@@ -586,7 +587,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 				do { // get over the Unicode string
 					if(bt_ui.length < offset 
 					   + sizeof(u_int16_t))
-						return true;
+						return items != 0;
 
 					tmp = UINT16ARRAY(btree.get() 
 							  + offset);
@@ -600,7 +601,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 					    && spaceLeft > freeSpace; ++i) {
 					if(bt_ui.length < offset
 					   + sizeof(u_int32_t))
-						return true;
+						return (items != 0);
 
 					u_int32_t index = 
 						UINT32ARRAY(btree.get() 
@@ -609,6 +610,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 					GetItem(topics, strings, urltbl,
 						urlstr, index, NULL, 
 						toBuild, name, 0, false);
+					++items;
 
 					offset += sizeof(u_int32_t);
 					spaceLeft -= sizeof(u_int32_t);
@@ -616,7 +618,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 			}
 
 			if(bt_ui.length < offset + 8)
-				return true;
+				return (items != 0);
+
 			offset += 8;
 			spaceLeft -= 8;
 		}
@@ -625,7 +628,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 
 	} while(next != -1);
 
-	return true;
+	return (items != 0);
 }
 
 
@@ -638,12 +641,15 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
+	/*
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild);
 	toBuild->Thaw();
        
 	if(bindex)
 		return true;
+
+	*/
 
 	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;

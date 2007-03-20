@@ -75,17 +75,17 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	   !location.AfterLast(wxT('/')).IsEmpty() && 
 	   _tcl->GetCount() > 1) {
 
-		wxString srch;
-		if(tmp.StartsWith(wxT("/")) || tmp.StartsWith(wxT("file:")))
-			srch = tmp.AfterLast(wxT(':')).AfterFirst(
-				wxT('/')).BeforeFirst(wxT('#'));
-		else
-			srch = tmp.BeforeFirst(wxT('#'));
+		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')), 
+				wxPATH_UNIX);
+
+		wxString cwd = GetParser()->GetFS()->
+			GetPath().AfterLast(wxT(':'));
+		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd);
 		
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call
 		// LoadPage() with _syncTree set to false.
-		Sync(_tcl->GetRootItem(), srch);
+		Sync(_tcl->GetRootItem(), fwfn.GetFullPath(wxPATH_UNIX));
 
 		if(_found)
 			_found = false;
@@ -103,18 +103,12 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(root));
 
-	wxString tmpPage = page;
-	if(!page.StartsWith(wxT("/")))
-		tmpPage = GetParser()->GetFS()->
-			GetPath().AfterLast(wxT(':'))
-				+ page.BeforeFirst(wxT('#'));
-
 	wxString url;
 
 	if(data)
 		url = (data->_url).BeforeFirst(wxT('#'));
 
-	if(data && !url.CmpNoCase(tmpPage)) {
+	if(data && !url.CmpNoCase(page)) {
 		_found = true;
 		_tcl->SelectItem(root);
 		return;

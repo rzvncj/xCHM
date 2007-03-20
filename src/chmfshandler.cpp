@@ -77,7 +77,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 		right = right.Mid(len);
 
         wxFileName fwfn(right, wxPATH_UNIX);
-        fwfn.Normalize(wxPATH_NORM_DOTS, cwd);
+        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
 
 	s = new CHMInputStream(left.IsEmpty() ? 

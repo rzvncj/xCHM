@@ -495,8 +495,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 
 	if(!_html->IsCaller()) {
 		_html->SetSync(false);
-		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-				wxT("#xchm:/") + data->_url);
+		_html->LoadPage(data->_url);
 		_html->SetSync(true);
 	}
 }

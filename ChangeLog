@@ -1,4 +1,3 @@
-
 	* 0.5 Initial release. 
 		+ can load CHM files and display the homepage, print the 
 		displayed page, go back and forward in the
@@ -271,6 +270,9 @@
 		+ workaround to be able to print relative path CHM images.
 
 	* 1.11:
+		+ now xCHM can parse binary TOC trees, if available.
+		+ now xCHM can retrieve data from the binary index, if
+		available.
 		+ fixed random printout font size problem.
 		+ fixed Win32 logo loading problem.
 		+ added a progress bar for CHM loading.
@@ -279,4 +281,5 @@
 		right-click menu.
 		+ fixed special HTML characters in TOC/index links bug.
 		+ fixed relative links in TOC/index bug.
-		+ Fixed TOC sync with the currently loaded page bug.
+		+ fixed TOC sync with the currently loaded page bug.
+

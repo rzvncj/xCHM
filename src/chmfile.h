@@ -263,19 +263,27 @@ private:
 	//! Looks up as much information as possible from #SYSTEM.
 	bool InfoFromSystem();
 
-	//! Load binary TOC
+	//! Load binary TOC (if available)
 	bool BinaryTOC(wxTreeCtrl *toBuild);
 
+	//! Try to recursively load the binary topics tree
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			     UCharPtr& strings, UCharPtr& urltbl,
 			     UCharPtr& urlstr, u_int32_t offset, 
 			     wxTreeCtrl *toBuild, int level);
 
-	bool GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
-			UCharPtr& urlstr, u_int32_t index, wxTreeCtrl *toBuild,
-			CHMListCtrl* toBuild, int level, bool local);
+	//! Retrieve the data (name/URL) for a single entry (TOC or index)
+	bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
+		     UCharPtr& urlstr, u_int32_t index, wxTreeCtrl *toBuild,
+		     CHMListCtrl* toBuild, const std::string& idxName,
+		     int level, bool local);
 
+	//! Get the binary index (if available)
 	bool BinaryIndex(CHMListCtrl* toBuild);
+
+	//! Get a regular string from a generic buffer of length bufferLength
+	bool ConvertFromUnicode(std::string& value, unsigned char* buffer,
+				size_t bufferLength);
 
 private:
 	chmFile* _chmFile;

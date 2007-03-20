@@ -41,6 +41,7 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/po.m4 \
 	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -66,7 +67,7 @@ CPPFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/in
 CXX = g++
 CXXCPP = 
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall
+CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1 -W -Wall -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -81,6 +82,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 INTLLIBS = 
+INTL_MACOSX_LIBS = 
 LDFLAGS = 
 LIBICONV = -liconv
 LIBINTL = 
@@ -91,7 +93,7 @@ LTLIBICONV = -liconv
 LTLIBINTL = 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/red/work/xchm/missing --run makeinfo
-MKINSTALLDIRS = ./mkinstalldirs
+MKINSTALLDIRS = $(top_builddir)/./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGMERGE = /usr/bin/msgmerge
 OBJEXT = o
@@ -116,7 +118,7 @@ WX_CPPFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/
 WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1  
 WX_CXXFLAGS_ONLY = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D_LARGEFILE_SOURCE=1
 WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2u_xrc-2.6 -lwx_gtk2u_qa-2.6 -lwx_gtk2u_html-2.6 -lwx_gtk2u_adv-2.6 -lwx_gtk2u_core-2.6 -lwx_baseu_xml-2.6 -lwx_baseu_net-2.6 -lwx_baseu-2.6 
-WX_LIBS_STATIC = 
+WX_LIBS_STATIC = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -pg /usr/local/lib/libwx_gtk2u_xrc-2.6.a /usr/local/lib/libwx_gtk2u_qa-2.6.a /usr/local/lib/libwx_gtk2u_html-2.6.a /usr/local/lib/libwx_gtk2u_adv-2.6.a /usr/local/lib/libwx_gtk2u_core-2.6.a /usr/local/lib/libwx_baseu_xml-2.6.a /usr/local/lib/libwx_baseu_net-2.6.a /usr/local/lib/libwx_baseu-2.6.a -pthread -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lglib-2.0 -lXinerama -lXxf86vm -lpng -ljpeg -ltiff -lexpat -lwxregexu-2.6 -lz -ldl -lm 
 WX_VERSION = 2.6.3
 XGETTEXT = /usr/bin/xgettext
 ac_ct_CC = gcc
@@ -159,7 +161,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-EXTRA_DIST = codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
+EXTRA_DIST = glibc2.m4 intmax.m4 longdouble.m4 longlong.m4 nls.m4 po.m4 printf-posix.m4 signed.m4 size_max.m4 wchar_t.m4 wint_t.m4 xsize.m4 codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
 all: all-am
 
 .SUFFIXES:

@@ -107,7 +107,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	if(!page.StartsWith(wxT("/")))
 		tmpPage = GetParser()->GetFS()->
 			GetPath().AfterLast(wxT(':'))
-				+ page;
+				+ page.BeforeFirst(wxT('#'));
 
 	wxString url;
 

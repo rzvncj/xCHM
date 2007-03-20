@@ -296,15 +296,6 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			      UCharPtr& urlstr, u_int32_t offset,
 			      wxTreeCtrl *toBuild, int level)
 {
-	static int calls = 0;
-	static const int yieldTime = 256;
-
-	++calls;
-	if(calls % yieldTime) {
-		calls = 0;
-		wxYield();
-	}
-
 	while(offset) {
 		if(topidx.size() < offset + 20)
 			return;
@@ -313,9 +304,9 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 		u_int32_t index = UINT32ARRAY(topidx.get() + offset + 8);
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
-			if(!GetTOCItem(topics, strings, urltbl, urlstr, index,
-				       toBuild, NULL, level, (flags & 0x8) 
-				       == 0))
+			if(!GetItem(topics, strings, urltbl, urlstr, index,
+				    toBuild, NULL, "", level, 
+				    (flags & 0x8) == 0))
 				return;
 		}
 
@@ -338,16 +329,22 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 }
 
 
-#include <iostream>
-using namespace std;
-
-
-bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
-			 UCharPtr& urlstr, u_int32_t index, 
-			 wxTreeCtrl *tree, CHMListCtrl* list,
-			 int level, bool local)
+bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
+		      UCharPtr& urlstr, u_int32_t index, 
+		      wxTreeCtrl *tree, CHMListCtrl* list, 
+		      const std::string& idxName,
+		      int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
+
+	static int calls = 0;
+	static const int yieldTime = 256;
+
+	++calls;
+	if(calls % yieldTime) {
+		calls = 0;
+		wxYield();
+	}
 
 	if(tree)
 		parents[0] = tree->GetRootItem();
@@ -373,7 +370,8 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		if(test == -1)
 			return false;
 
-		name = (char *)(strings.get() + offset);
+		if(!list)
+			name = (char *)(strings.get() + offset);
 
 		// #URLTBL index
 		offset = UINT32ARRAY(topics.get() + (index * 16) + 8);
@@ -389,6 +387,12 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		value = (char *)(urlstr.get() + offset + 8);
 	}
 
+	if(!value.empty() && value[0] != '/')
+		value = std::string("/") + value;
+
+	if(list)
+		name = idxName;
+	
 	wxString tname = CURRENT_CHAR_STRING(name.c_str());
 	wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
 
@@ -413,9 +417,6 @@ bool CHMFile::GetTOCItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 	}
 
 	if(list) {
-
-		cerr << "name: " << name << "\nvalue: " << value << endl;
-
 		if(!value.empty()) {
 			if(tname.IsEmpty())
 				tname = EMPTY_INDEX;
@@ -468,6 +469,29 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	toBuild->Thaw();
 
 	return true;
+}
+
+
+bool CHMFile::ConvertFromUnicode(std::string& value, unsigned char* buffer,
+				 size_t bufferLength)
+{
+	size_t offset = 0;
+	u_int16_t elem = 1;
+	value = "";
+
+	while(bufferLength >= offset + sizeof(elem)) {
+		elem = UINT16ARRAY(buffer + offset);
+
+		if(elem != 0) {
+			value += *((char *)(buffer + offset));
+		} else {
+			return true;
+		}
+
+		offset += sizeof(elem);
+	}
+
+	return false;
 }
 
 
@@ -530,24 +554,24 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 		if(bt_ui.length < offset + 12)
 			return true; // end of buffer
 
-		next = INT32ARRAY(btree.get() + offset + 8);
 		freeSpace = UINT16ARRAY(btree.get() + offset);
+		next = INT32ARRAY(btree.get() + offset + 8);
 		spaceLeft = blockSize - 12;
 		offset += 12;
 
 		while(spaceLeft > freeSpace) {
 
-			u_int32_t tmp = 0;
+			u_int16_t tmp = 0;
+			
+			std::string name;
+			bool ret = ConvertFromUnicode(name, btree.get() 
+						      + offset, bt_ui.length 
+						      - offset);
+			if(!ret)
+				return true;
 
-			do { // get over the Unicode string
-				if(bt_ui.length < offset + sizeof(u_int32_t))
-					return true;
-
-				tmp = UINT32ARRAY(btree.get() + offset);
-				offset += sizeof(u_int32_t);
-				spaceLeft -= sizeof(u_int32_t);
-
-			} while(tmp != 0);
+			offset += (name.length() + 1) * 2;
+			spaceLeft -= (name.length() + 1) * 2;
 			
 			if(bt_ui.length < offset + 16)
 				return true;			
@@ -559,20 +583,19 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 			spaceLeft -= 16;
 
 			if(seeAlso) {
-				// Should refactor the following duplicated
-				// code.
 				do { // get over the Unicode string
 					if(bt_ui.length < offset 
-					   + sizeof(u_int32_t))
+					   + sizeof(u_int16_t))
 						return true;
 
-					tmp = UINT32ARRAY(btree.get() 
+					tmp = UINT16ARRAY(btree.get() 
 							  + offset);
-					offset += sizeof(u_int32_t);
-					spaceLeft -= sizeof(u_int32_t);
-
+					offset += sizeof(u_int16_t);
+					spaceLeft -= sizeof(u_int16_t);
+					
 				} while(tmp != 0);
 			} else {
+
 				for(u_int32_t i = 0; i < numTopics
 					    && spaceLeft > freeSpace; ++i) {
 					if(bt_ui.length < offset
@@ -583,9 +606,9 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 						UINT32ARRAY(btree.get() 
 							    + offset);
 
-					GetTOCItem(topics, strings, urltbl,
-						   urlstr, index, NULL, 
-						   toBuild, 0, false);
+					GetItem(topics, strings, urltbl,
+						urlstr, index, NULL, 
+						toBuild, name, 0, false);
 
 					offset += sizeof(u_int32_t);
 					spaceLeft -= sizeof(u_int32_t);
@@ -615,14 +638,12 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
-/*
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild);
 	toBuild->Thaw();
        
 	if(bindex)
 		return true;
-*/
 
 	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;

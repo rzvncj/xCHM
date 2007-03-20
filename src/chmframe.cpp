@@ -479,10 +479,6 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 }
 
 
-#include <iostream>
-using namespace std;
-
-
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
@@ -496,8 +492,6 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 
 	if(!data || data->_url.IsEmpty())
 		return;
-
-	cerr << "url: " << data->_url.mb_str() << endl;
 
 	if(!_html->IsCaller()) {
 		_html->SetSync(false);

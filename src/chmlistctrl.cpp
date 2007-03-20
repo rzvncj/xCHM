@@ -23,6 +23,7 @@
 
 #include <chmlistctrl.h>
 #include <chmhtmlwindow.h>
+#include <chminputstream.h>
 #include <wx/settings.h>
 
 
@@ -89,7 +90,11 @@ void CHMListCtrl::LoadSelected()
         if(item == -1 || item > (long)_items.GetCount() - 1)
 		return;
 
-	_html->LoadPage(_items[item]->_url);
+	CHMFile *chmf = CHMInputStream::GetCache();
+
+	if(chmf)
+		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
+				wxT("#xchm:/") + _items[item]->_url);
 }
 
 

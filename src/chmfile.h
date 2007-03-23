@@ -29,6 +29,7 @@
 #include <wx/hashmap.h>
 #include <wx/font.h>
 #include <wx/string.h>
+#include <string>
 
 
 // Forward declarations.

@@ -641,15 +641,12 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
-	/*
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild);
 	toBuild->Thaw();
        
 	if(bindex)
 		return true;
-
-	*/
 
 	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;

@@ -283,3 +283,9 @@
 		+ fixed relative links in TOC/index bug.
 		+ fixed TOC sync with the currently loaded page bug.
 
+	* 1.12:
+		+ actually using the binary index code.
+		+ fixed the search results links.
+		+ fixed lost Unicode character translation for the TOC and
+		index entries.
+

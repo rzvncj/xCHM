@@ -400,6 +400,8 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
 
+		tname = translateEncoding(tname, _enc, cv);
+		
 		parents[level] = 
 			tree->AppendItem(parents[parentIndex], tname, 2, 2,
 					    new URLTreeItem(tvalue));
@@ -423,7 +425,9 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 				tname = EMPTY_INDEX;
 		}
 
-		list->AddPairItem(tname, translateEncoding(tvalue, _enc, cv));
+		list->AddPairItem(
+				translateEncoding(tname, _enc, cv),
+				tvalue);
 	}
 	
 	return true;

@@ -80,9 +80,6 @@ private:
 	//! Replace special HTML strings with correct code.
 	wxString replaceHTMLChars(const wxString& input);
 
-	//! Convert to proper character encoding.
-	wxString translateEncoding(const wxString& input);
-
 	//! HTML code for given name (if available)
 	unsigned getHTMLCode(const wxString& name);
 

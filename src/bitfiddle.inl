@@ -176,6 +176,32 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
 }
 
 
+inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
+				  const wxCSConv& cv)
+{
+        if(input.IsEmpty())
+                return wxEmptyString;
+
+#if wxUSE_UNICODE
+        if(enc != wxFONTENCODING_SYSTEM) {
+                wchar_t buf2[1024];
+                size_t len = (input.Length() < sizeof(buf2)) ?
+                        input.Length() : sizeof(buf2);
+
+                size_t ret = cv.MB2WC(buf2, input.mb_str(), len);
+
+                if(ret) {
+                        if(ret == (size_t)(-1)) // morons
+                                return wxString(buf2, input.Length());
+
+                        return wxString(buf2, ret);
+                } else
+                        return wxEmptyString;
+        }
+#endif
+        return input;
+}
+
 
 /*
   Local Variables:

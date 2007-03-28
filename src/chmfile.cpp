@@ -235,7 +235,7 @@ void CHMFile::CloseCHM()
 #define EMPTY_INDEX _("Untitled in index")
 
 
-bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
+bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv)
 {
 	if(!toBuild)
 		return false;
@@ -285,7 +285,7 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 
 	u_int32_t off = UINT32ARRAY(topidx.get());
 	RecurseLoadBTOC(topidx, topics, strings, urltbl, urlstr, off, 
-			toBuild, 1);
+			cv, toBuild, 1);
 
 	return true;
 }
@@ -294,6 +294,7 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			      UCharPtr& strings, UCharPtr& urltbl,
 			      UCharPtr& urlstr, u_int32_t offset,
+			      const wxCSConv& cv, 
 			      wxTreeCtrl *toBuild, int level)
 {
 	while(offset) {
@@ -305,7 +306,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
 			if(!GetItem(topics, strings, urltbl, urlstr, index,
-				    toBuild, NULL, "", level, 
+				    toBuild, NULL, "", cv, level, 
 				    (flags & 0x8) == 0))
 				return;
 		}
@@ -320,7 +321,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			if(child) {
 				RecurseLoadBTOC(topidx, topics, strings, 
 						urltbl, urlstr, child,
-						toBuild, level + 1); 
+						cv, toBuild, level + 1); 
 			}
 		}
 
@@ -332,7 +333,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		      UCharPtr& urlstr, u_int32_t index, 
 		      wxTreeCtrl *tree, CHMListCtrl* list, 
-		      const std::string& idxName,
+		      const std::string& idxName, const wxCSConv& cv,
 		      int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
@@ -422,7 +423,7 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 				tname = EMPTY_INDEX;
 		}
 
-		list->AddPairItem(tname, tvalue);
+		list->AddPairItem(tname, translateEncoding(tvalue, _enc, cv));
 	}
 	
 	return true;
@@ -438,9 +439,11 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
        
 	if(!toBuild) 
 		return false;
+
+	wxCSConv cv(_enc);
 	
 	toBuild->Freeze();
-	bool btoc = BinaryTOC(toBuild);
+	bool btoc = BinaryTOC(toBuild, cv);
 	toBuild->Thaw();
 
 	if(btoc)
@@ -496,7 +499,7 @@ bool CHMFile::ConvertFromUnicode(std::string& value, unsigned char* buffer,
 
 
 // This function is too long: prime candidate for refactoring someday
-bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
+bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 {
 	if(!toBuild)
 		return false;
@@ -609,7 +612,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild)
 
 					GetItem(topics, strings, urltbl,
 						urlstr, index, NULL, 
-						toBuild, name, 0, false);
+						toBuild, name, cv, 0, false);
 					++items;
 
 					offset += sizeof(u_int32_t);
@@ -641,8 +644,10 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
+	wxCSConv cv(_enc);
+	
 	toBuild->Freeze();
-	bool bindex = BinaryIndex(toBuild);
+	bool bindex = BinaryIndex(toBuild, cv);
 	toBuild->Thaw();
        
 	if(bindex)

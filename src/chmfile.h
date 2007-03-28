@@ -36,6 +36,7 @@
 class wxTreeCtrl;
 class CHMListCtrl;
 class UCharPtr;
+class wxCSConv;
 
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
@@ -265,22 +266,23 @@ private:
 	bool InfoFromSystem();
 
 	//! Load binary TOC (if available)
-	bool BinaryTOC(wxTreeCtrl *toBuild);
+	bool BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv);
 
 	//! Try to recursively load the binary topics tree
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			     UCharPtr& strings, UCharPtr& urltbl,
 			     UCharPtr& urlstr, u_int32_t offset, 
+			     const wxCSConv& cv,
 			     wxTreeCtrl *toBuild, int level);
 
 	//! Retrieve the data (name/URL) for a single entry (TOC or index)
 	bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		     UCharPtr& urlstr, u_int32_t index, wxTreeCtrl *toBuild,
 		     CHMListCtrl* toBuild, const std::string& idxName,
-		     int level, bool local);
+		     const wxCSConv& cv, int level, bool local);
 
 	//! Get the binary index (if available)
-	bool BinaryIndex(CHMListCtrl* toBuild);
+	bool BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv);
 
 	//! Get a regular string from a generic buffer of length bufferLength
 	bool ConvertFromUnicode(std::string& value, unsigned char* buffer,

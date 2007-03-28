@@ -237,7 +237,7 @@ void HHCParser::handleTag(const std::string& tag)
 				_htmlChars = false;
 			}
 
-			name = translateEncoding(name);
+			name = translateEncoding(name, _enc, _cv);
 
 			addToTree(name, value);
 			addToList(name, value);
@@ -354,35 +354,6 @@ bool HHCParser::getParameters(const char* input, std::string& name,
 	}
 
 	return modify;
-}
-
-
-inline
-wxString HHCParser::translateEncoding(const wxString& input)
-{
-	if(input.IsEmpty())
-		return wxEmptyString;
-
-#if wxUSE_UNICODE
-#	define BUF_SIZE 1024
-
-	if(_enc != wxFONTENCODING_SYSTEM) {
-		wchar_t buf2[BUF_SIZE];
-		size_t len = (input.Length() < BUF_SIZE) ?
-			input.Length() : BUF_SIZE;
-
-		size_t ret = _cv.MB2WC(buf2, input.mb_str(), len);
-
-		if(ret) { 
-			if(ret == (size_t)(-1)) // morons
-				return wxString(buf2, input.Length());
-
-			return wxString(buf2, ret);
-		} else
-			return wxEmptyString;
-	}
-#endif
-	return input;
 }
 
 

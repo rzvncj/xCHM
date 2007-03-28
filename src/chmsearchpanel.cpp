@@ -138,11 +138,12 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	if(!h1.empty())
 		for(i = h1.begin(); i != h1.end(); ++i) {
-			wxString full_url = wxString(wxT("file:")) + 
-				chmf->ArchiveName() + wxT("#xchm:/") + 
-				i->first;
 
-			_results->AddPairItem(i->second, full_url);
+			wxString url = (i->first.StartsWith(wxT("/")) 
+					? i->first : (wxString(wxT("/") 
+							+ i->first)));
+
+			_results->AddPairItem(i->second, url);
 		}
     
 	_results->UpdateUI();

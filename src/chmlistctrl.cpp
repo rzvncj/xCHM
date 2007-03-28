@@ -91,7 +91,9 @@ void CHMListCtrl::LoadSelected()
 		return;
 
 	CHMFile *chmf = CHMInputStream::GetCache();
-
+	
+	wxString fname = wxString(wxT("file:")) + chmf->ArchiveName() +
+		                                wxT("#xchm:/") + _items[item]->_url;
 	if(chmf)
 		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
 				wxT("#xchm:/") + _items[item]->_url);

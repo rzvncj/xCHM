@@ -398,7 +398,7 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		int parentIndex = level ? level - 1 : 0;
 
 		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()), 
-					  _enc, cv);		
+					  _enc, cv);
 		parents[level] = 
 			tree->AppendItem(parents[parentIndex], tname, 2, 2,
 					    new URLTreeItem(tvalue));
@@ -417,7 +417,7 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 	}
 
 	if(list) {
-		tname = idxName;
+		tname = translateEncoding(idxName, _enc, cv);
 		if(!value.empty()) {
 			if(tname.IsEmpty())
 				tname = EMPTY_INDEX;
@@ -578,8 +578,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 				offset += sizeof(u_int16_t);
 				spaceLeft -= sizeof(u_int16_t);
 
-				if(tmp)
-					name.Append(charForCode(tmp, cv));
+				name.Append(charForCode(tmp, cv, true));
 				
 			} while(tmp != 0);
 

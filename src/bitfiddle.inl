@@ -187,7 +187,12 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
                 wchar_t buf2[1024];
                 size_t len = (input.Length() < sizeof(buf2)) ?
                         input.Length() : sizeof(buf2);
+		
+		const char* cinput = input.mb_str();
 
+		if(!cinput)
+			return input;
+		
                 size_t ret = cv.MB2WC(buf2, input.mb_str(), len);
 
                 if(ret) {
@@ -206,21 +211,24 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
 #endif
 
 
-inline wxChar charForCode(unsigned code, const wxCSConv& cv)
+inline wxChar charForCode(unsigned code, const wxCSConv& cv, bool conv)
 {
 #if !wxUSE_UNICODE
 
 #	if wxUSE_WCHAR_T
 
-	char buf[2];
-	wchar_t wbuf[2];
-	wbuf[0] = (wchar_t)code;
-	wbuf[1] = 0;
+	if(conv) {
+		char buf[2];
+		wchar_t wbuf[2];
+		wbuf[0] = (wchar_t)code;
+		wbuf[1] = 0;
 
-	if (cv.WC2MB(buf, wbuf, 2) == (size_t)-1)
-		return '?';
+		if(cv.WC2MB(buf, wbuf, 2) == (size_t)-1)
+			return '?';
 
-	return buf[0];
+		return buf[0];
+	} else
+		return (wxChar)code;
 
 #	else
 	return (code < 256) ? (wxChar)code : '?';

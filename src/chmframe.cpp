@@ -79,10 +79,10 @@ const wxChar *greeting = wxT(
 	" Portions of the fast index search are modified versions of"
 	" Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code.<br><br>If"
 	" you'd like to use the code in your own stuff please figure"
-	" <TT>GPL</TT> out first. Far too many people think <TT>GPL</TT> is"
-	" bad out of utter ignorance.<br><br>"
+	" <TT>GPL</TT> out first. Far too many people think the <TT>GPL</TT> "
+	"is bad out of utter ignorance."
 #if !defined(wxUSE_UNICODE) || !wxUSE_UNICODE
-	"<B>WARNING</B>: your <B>xCHM</B> binary is linked against a "
+	"<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked against a "
 	"non-Unicode version of wxWidgets! While it will work with most "
 	"CHMs, it might not properly display special character languages."
 #endif
@@ -559,7 +559,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 
 	if(!rtn) { // Error, could not load CHM file
 		if(_tcl->GetCount())
-			_tcl->CollapseAndReset(_tcl->GetRootItem());
+			_tcl->DeleteChildren(_tcl->GetRootItem());
 		if(_sw->IsSplit()) {
 			_sw->Unsplit(_nb);
 			_nb->Show(FALSE);
@@ -625,7 +625,7 @@ void CHMFrame::UpdateCHMInfo()
 	wxString title = chmf->Title();
 
 	if(_tcl->GetCount())
-		_tcl->CollapseAndReset(_tcl->GetRootItem());
+		_tcl->DeleteChildren(_tcl->GetRootItem());
 
 	chmf->GetTopicsTree(_tcl);
 	chmf->GetIndex(_cip->GetResultsList());
@@ -648,6 +648,9 @@ void CHMFrame::UpdateCHMInfo()
 
 		long fs = -1;		
 		fontFace.BeforeLast(wxT(',')).AfterLast(wxT(',')).ToLong(&fs);
+
+		if(fs < 10)
+			fs = 10;
 
 		wxFont font((int)fs, wxDEFAULT, wxNORMAL, wxNORMAL, 
 			    FALSE, fontFace.BeforeFirst(wxT(',')), 

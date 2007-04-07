@@ -363,7 +363,7 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 		return;
 
 	if(!name.IsEmpty()) {
-		
+
 		int parentIndex = _level ? _level - 1 : 0;
 
 		_parents[_level] = 
@@ -420,10 +420,10 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 				inSpecial = false;
 
 				unsigned code = getHTMLCode(special);
-	
-				if(code)
-					result.Append(charForCode(code, _cv));
 
+				if(code)
+					result.Append(charForCode(code, _cv,
+								  false));
 				continue;
 			}
 		}

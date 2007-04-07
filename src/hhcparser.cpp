@@ -422,7 +422,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 				unsigned code = getHTMLCode(special);
 	
 				if(code)
-					result.Append(charForCode(code));
+					result.Append(charForCode(code, _cv));
 
 				continue;
 			}
@@ -455,33 +455,6 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 	return 0;
 }
 
-
-inline
-wxChar HHCParser::charForCode(unsigned code)
-{
-#if !wxUSE_UNICODE
-
-#	if wxUSE_WCHAR_T
-
-	char buf[2];
-	wchar_t wbuf[2];
-	wbuf[0] = (wchar_t)code;
-	wbuf[1] = 0;
-
-	if (_cv.WC2MB(buf, wbuf, 2) == (size_t)-1)
-		return '?';
-
-	return buf[0];
-
-#	else
-	return (code < 256) ? (wxChar)code : '?';
-
-#	endif                         
-
-#else
-	return (wxChar)code;
-#endif
-}
 
 
 /*

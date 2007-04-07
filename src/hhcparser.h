@@ -83,9 +83,6 @@ private:
 	//! HTML code for given name (if available)
 	unsigned getHTMLCode(const wxString& name);
 
-	//! Get the char that code stands for
-	wxChar charForCode(unsigned code);
-
 private:
 	int _level;
 	bool _inquote;

@@ -278,7 +278,7 @@ private:
 	//! Retrieve the data (name/URL) for a single entry (TOC or index)
 	bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		     UCharPtr& urlstr, u_int32_t index, wxTreeCtrl *toBuild,
-		     CHMListCtrl* toBuild, const std::string& idxName,
+		     CHMListCtrl* toBuild, const wxString& idxName,
 		     const wxCSConv& cv, int level, bool local);
 
 	//! Get the binary index (if available)

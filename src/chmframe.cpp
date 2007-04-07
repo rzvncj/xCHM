@@ -80,7 +80,13 @@ const wxChar *greeting = wxT(
 	" Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code.<br><br>If"
 	" you'd like to use the code in your own stuff please figure"
 	" <TT>GPL</TT> out first. Far too many people think <TT>GPL</TT> is"
-	" bad out of utter ignorance.<br><br>Tips:<br><ul><li>"
+	" bad out of utter ignorance.<br><br>"
+#if !defined(wxUSE_UNICODE) || !wxUSE_UNICODE
+	"<B>WARNING</B>: your <B>xCHM</B> binary is linked against a "
+	"non-Unicode version of wxWidgets! While it will work with most "
+	"CHMs, it might not properly display special character languages."
+#endif
+	"<br><br>Tips:<br><ul><li>"
 	"The global search is an \'AND\' search, i.e. searching for"
 	" \'word1 word2\' (quotes not included) will find all the pages"
 	" that contain both word1 and word2, in whatever order.</li>"

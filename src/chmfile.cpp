@@ -306,7 +306,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
 			if(!GetItem(topics, strings, urltbl, urlstr, index,
-				    toBuild, NULL, "", cv, level, 
+				    toBuild, NULL, wxEmptyString, cv, level, 
 				    (flags & 0x8) == 0))
 				return;
 		}
@@ -333,7 +333,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		      UCharPtr& urlstr, u_int32_t index, 
 		      wxTreeCtrl *tree, CHMListCtrl* list, 
-		      const std::string& idxName, const wxCSConv& cv,
+		      const wxString& idxName, const wxCSConv& cv,
 		      int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
@@ -390,18 +390,15 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 
 	if(!value.empty() && value[0] != '/')
 		value = std::string("/") + value;
-
-	if(list)
-		name = idxName;
 	
-	wxString tname = CURRENT_CHAR_STRING(name.c_str());
+	wxString tname;
 	wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
 
 	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
 
-		tname = translateEncoding(tname, _enc, cv);
-		
+		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()), 
+					  _enc, cv);		
 		parents[level] = 
 			tree->AppendItem(parents[parentIndex], tname, 2, 2,
 					    new URLTreeItem(tvalue));
@@ -415,19 +412,18 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 				
 				tree->SetItemImage(parents[parentIndex], 1,
 						   wxTreeItemIcon_Expanded);
-			}	
+			}
 		}
 	}
 
 	if(list) {
+		tname = idxName;
 		if(!value.empty()) {
 			if(tname.IsEmpty())
 				tname = EMPTY_INDEX;
 		}
 
-		list->AddPairItem(
-				translateEncoding(tname, _enc, cv),
-				tvalue);
+		list->AddPairItem(tname, tvalue);
 	}
 	
 	return true;
@@ -570,16 +566,22 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 		while(spaceLeft > freeSpace) {
 
 			u_int16_t tmp = 0;
-			
-			std::string name;
-			bool ret = ConvertFromUnicode(name, btree.get() 
-						      + offset, bt_ui.length 
-						      - offset);
-			if(!ret) 
-				return (items != 0);
+			wxString name;
 
-			offset += (name.length() + 1) * 2;
-			spaceLeft -= (name.length() + 1) * 2;
+			do { // accumulate the index name
+				if(bt_ui.length < offset 
+				   + sizeof(u_int16_t))
+					return items != 0;
+				
+				tmp = UINT16ARRAY(btree.get() 
+						  + offset);
+				offset += sizeof(u_int16_t);
+				spaceLeft -= sizeof(u_int16_t);
+
+				if(tmp)
+					name.Append(charForCode(tmp, cv));
+				
+			} while(tmp != 0);
 
 			if(bt_ui.length < offset + 16)
 				return (items != 0);
@@ -591,6 +593,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 			spaceLeft -= 16;
 
 			if(seeAlso) {
+
+				// TODO: something about this duplicated code
 				do { // get over the Unicode string
 					if(bt_ui.length < offset 
 					   + sizeof(u_int16_t))

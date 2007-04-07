@@ -289,4 +289,5 @@
 		+ fixed lost Unicode character translation for the TOC and
 		index entries.
 		+ updated Polish translation.
+		+ fixed index display for non ASCII encodings.
 

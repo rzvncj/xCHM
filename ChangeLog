@@ -290,4 +290,5 @@
 		index entries.
 		+ updated Polish translation.
 		+ fixed index display for non ASCII encodings.
+		+ CHM localization bugfixes.
 

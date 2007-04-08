@@ -178,8 +178,10 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
 
 #if wxUSE_UNICODE
 #	define UNICODE_PARAM(x) x
+#	define NON_UNICODE_PARAM(x)
 #else
 #	define UNICODE_PARAM(x)
+#	define NON_UNICODE_PARAM(x) x
 #endif
 
 
@@ -218,7 +220,9 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
 #endif
 
 
-inline wxChar charForCode(unsigned code, const wxCSConv& cv, bool conv)
+inline wxChar charForCode(unsigned code, 
+			  const wxCSConv& NON_UNICODE_PARAM(cv), 
+			  bool NON_UNICODE_PARAM(conv))
 {
 #if !wxUSE_UNICODE
 

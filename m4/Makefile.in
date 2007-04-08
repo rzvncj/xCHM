@@ -118,6 +118,7 @@ WX_CXXFLAGS = @WX_CXXFLAGS@
 WX_CXXFLAGS_ONLY = @WX_CXXFLAGS_ONLY@
 WX_LIBS = @WX_LIBS@
 WX_LIBS_STATIC = @WX_LIBS_STATIC@
+WX_RESCOMP = @WX_RESCOMP@
 WX_VERSION = @WX_VERSION@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
@@ -160,7 +161,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-EXTRA_DIST = glibc2.m4 intmax.m4 inttypes-h.m4 lock.m4 longdouble.m4 longlong.m4 nls.m4 po.m4 printf-posix.m4 signed.m4 size_max.m4 visibility.m4 wchar_t.m4 wint_t.m4 xsize.m4 glibc2.m4 intmax.m4 longdouble.m4 longlong.m4 nls.m4 po.m4 printf-posix.m4 signed.m4 size_max.m4 wchar_t.m4 wint_t.m4 xsize.m4 codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
+EXTRA_DIST = glibc21.m4 codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
 all: all-am
 
 .SUFFIXES:

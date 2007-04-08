@@ -118,6 +118,7 @@ WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/local/
 WX_CXXFLAGS_ONLY = 
 WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib   -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_qa-2.8 -lwx_gtk2u_html-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_baseu-2.8 
 WX_LIBS_STATIC = -L/usr/local/lib -pthread    /usr/local/lib/libwx_gtk-2.4.a -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lgthread -lglib -lpthread -ldl -lXext -lX11 -lm -lpng -ljpeg -ltiff -lz -ldl -lm 
+WX_RESCOMP = 
 WX_VERSION = 2.8.3
 XGETTEXT = /usr/bin/xgettext
 ac_ct_CC = gcc
@@ -160,7 +161,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-EXTRA_DIST = glibc2.m4 intmax.m4 inttypes-h.m4 lock.m4 longdouble.m4 longlong.m4 nls.m4 po.m4 printf-posix.m4 signed.m4 size_max.m4 visibility.m4 wchar_t.m4 wint_t.m4 xsize.m4 glibc2.m4 intmax.m4 longdouble.m4 longlong.m4 nls.m4 po.m4 printf-posix.m4 signed.m4 size_max.m4 wchar_t.m4 wint_t.m4 xsize.m4 codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
+EXTRA_DIST = glibc21.m4 codeset.m4 gettext.m4 glibc21.m4 iconv.m4 intdiv0.m4 inttypes.m4 inttypes_h.m4 inttypes-pri.m4 isc-posix.m4 lcmessage.m4 lib-ld.m4 lib-link.m4 lib-prefix.m4 progtest.m4 stdint_h.m4 uintmax_t.m4 ulonglong.m4
 all: all-am
 
 .SUFFIXES:

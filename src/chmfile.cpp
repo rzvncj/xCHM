@@ -36,6 +36,7 @@
 #include <hhcparser.h>
 
 
+
 // damn wxWidgets and it's scoped ptr.
 class UCharPtr {
 public:
@@ -198,17 +199,7 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	LoadContextIDs();
 
 #if wxUSE_UNICODE
-	// Fix the title
-	if(_enc != wxFONTENCODING_SYSTEM) {
-		wxCSConv cv(_enc);
-		wchar_t buf2[BUF_SIZE];
-		size_t len = (_title.length() < BUF_SIZE) ? 
-			_title.length() : BUF_SIZE;
-
-		size_t ret = cv.MB2WC(buf2, _title.mb_str(), len);
-		if(ret)
-			_title = wxString(buf2, ret);
-	}
+	_title = translateEncoding(_title, _enc, wxCSConv(_enc));
 #endif
 
 	return true;
@@ -333,7 +324,8 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		      UCharPtr& urlstr, u_int32_t index, 
 		      wxTreeCtrl *tree, CHMListCtrl* list, 
-		      const wxString& idxName, const wxCSConv& cv,
+		      const wxString& idxName, 
+		      const wxCSConv& UNICODE_PARAM(cv),
 		      int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
@@ -1170,7 +1162,7 @@ bool CHMFile::InfoFromWindows()
 
 			if(size && off_title)
 				_title = CURRENT_CHAR_STRING(buffer + 
-							     off_title % 4096);
+						     off_title % 4096);
 			
 			if(factor != off_home / 4096) {
 				factor = off_home / 4096;		

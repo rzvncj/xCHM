@@ -177,6 +177,13 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
 
 
 #if wxUSE_UNICODE
+#	define UNICODE_PARAM(x) x
+#else
+#	define UNICODE_PARAM(x)
+#endif
+
+
+#if wxUSE_UNICODE
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
 				  const wxCSConv& cv)
 {
@@ -217,11 +224,16 @@ inline wxChar charForCode(unsigned code, const wxCSConv& cv, bool conv)
 
 #	if wxUSE_WCHAR_T
 
+	if(code < 256)
+		return (wxChar)code;
+
 	if(conv) {
 		char buf[2];
 		wchar_t wbuf[2];
 		wbuf[0] = (wchar_t)code;
 		wbuf[1] = 0;
+
+		cv.WC2MB(buf, wbuf, 2);
 
 		if(cv.WC2MB(buf, wbuf, 2) == (size_t)-1)
 			return '?';

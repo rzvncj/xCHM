@@ -292,3 +292,6 @@
 		+ fixed index display for non ASCII encodings.
 		+ CHM localization bugfixes.
 
+	* 1.13:
+		+ fixed CHMLIB link in the splash page.
+

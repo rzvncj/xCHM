@@ -80,7 +80,8 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 
 		wxString cwd = GetParser()->GetFS()->
 			GetPath().AfterLast(wxT(':'));
-		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd);
+		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
+				wxPATH_UNIX);
 		
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call

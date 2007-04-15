@@ -23,7 +23,6 @@
 #include <chminputstream.h>
 
 
-
 // only needs to be here because I killed the constructors
 // by providing a private copy constructor
 CHMFSHandler::CHMFSHandler()
@@ -77,7 +76,8 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 		right = right.Mid(len);
 
         wxFileName fwfn(right, wxPATH_UNIX);
-        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd);
+        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, 
+			wxPATH_UNIX);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
 
 	s = new CHMInputStream(left.IsEmpty() ? 

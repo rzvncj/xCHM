@@ -304,3 +304,6 @@
 		+ fixed CHMLIB link in the splash page.
 		+ fixed special character languages index for wxGTK 2.6.
 
+	* 1.14:
+		+ fixed Normalize() code for Windows CHM files.
+

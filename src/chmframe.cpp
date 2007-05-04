@@ -145,6 +145,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	wxApp::s_macAboutMenuItemId = ID_About;
 #endif
 
+	wxLogNull wln;
 	int sizes[7];
 	for(int i = -3; i <= 3; ++i)
 		sizes[i+3] = _fontSize + i * 2;
@@ -244,6 +245,8 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 {
+	wxLogNull wln;
+
 	// First time initialization only.
 	if(_normalFonts == NULL) {
 		wxFontEnumerator enu;
@@ -387,6 +390,8 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 {
+	wxLogNull wln;
+
         int sizes[7];
 	        for(int i = -3; i <= 3; ++i)
 	                sizes[i+3] = _fontSize + i * 2;

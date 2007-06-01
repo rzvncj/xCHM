@@ -309,4 +309,5 @@
 		+ fixed "Cannot display document in <whatever> encoding"
 		error.
 		+ now allowing ENTER to work in the bookmarks list.
+		+ updated Romanian translation.
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-08 13:18+0300\n"
+"POT-Creation-Date: 2007-06-01 10:29+0300\n"
 "PO-Revision-Date: 2006-04-01 18:30+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <mvd@mylinux.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -115,31 +115,31 @@ msgstr "Знайти на сторінці слово."
 msgid "Associate the .chm file extension with xCHM."
 msgstr ""
 
-#: src/chmframe.cpp:163
+#: src/chmframe.cpp:164
 msgid "Ready."
 msgstr "Завершено."
 
-#: src/chmframe.cpp:193 src/chmframe.cpp:971
+#: src/chmframe.cpp:194 src/chmframe.cpp:976
 msgid "Contents"
 msgstr "Зміст"
 
-#: src/chmframe.cpp:194
+#: src/chmframe.cpp:195
 msgid "Index"
 msgstr "Індекс"
 
-#: src/chmframe.cpp:195 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:196 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "Пошук"
 
-#: src/chmframe.cpp:218
+#: src/chmframe.cpp:219
 msgid "About xCHM"
 msgstr "Про програму xCHM"
 
-#: src/chmframe.cpp:226
+#: src/chmframe.cpp:227
 msgid "Choose a file.."
 msgstr "Відкрити файл.."
 
-#: src/chmframe.cpp:363
+#: src/chmframe.cpp:366
 msgid ""
 "This is experimental code, and doing this will overwrite any previously "
 "registered CHM viewer associations.\n"
@@ -147,151 +147,151 @@ msgid ""
 "Are you sure you know what you're doing?"
 msgstr ""
 
-#: src/chmframe.cpp:368
+#: src/chmframe.cpp:371
 msgid "Confirm"
 msgstr ""
 
-#: src/chmframe.cpp:380
+#: src/chmframe.cpp:383
 msgid "Registration successful!"
 msgstr ""
 
-#: src/chmframe.cpp:381
+#: src/chmframe.cpp:384
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:611
+#: src/chmframe.cpp:616
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:727
+#: src/chmframe.cpp:732
 msgid "&Open..\tCtrl-O"
 msgstr "&Відкрити...\tCtrl+O"
 
-#: src/chmframe.cpp:728
+#: src/chmframe.cpp:733
 msgid "&Print page..\tCtrl-P"
 msgstr "Д&рук..\tCtrl-P"
 
-#: src/chmframe.cpp:729
+#: src/chmframe.cpp:734
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Шрифти..\tCtrl-T"
 
-#: src/chmframe.cpp:732
+#: src/chmframe.cpp:737
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Показати зміст\tCtrl-S"
 
-#: src/chmframe.cpp:738
+#: src/chmframe.cpp:743
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:744
+#: src/chmframe.cpp:749
 msgid "&Recent files"
 msgstr "Не&давні файли..."
 
-#: src/chmframe.cpp:756
+#: src/chmframe.cpp:761
 msgid "E&xit\tCtrl-X"
 msgstr "Ви&йти\tCtrl-X"
 
-#: src/chmframe.cpp:757
+#: src/chmframe.cpp:762
 msgid "Quit the application."
 msgstr "Вийти з програми."
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:766
 msgid "&Home\tCtrl-H"
 msgstr "&Додому\tCtrl-H"
 
-#: src/chmframe.cpp:762
+#: src/chmframe.cpp:767
 msgid "For&ward\tCtrl-W"
 msgstr "&Вперед\tCtrl-W"
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:768
 msgid "&Back\tCtrl-B"
 msgstr "&Назад\tCtrl-B"
 
-#: src/chmframe.cpp:766
+#: src/chmframe.cpp:771
 msgid "&About..\tF1"
 msgstr "&Про програму..\tF1"
 
-#: src/chmframe.cpp:769
+#: src/chmframe.cpp:774
 msgid "&Copy\tCtrl-C"
 msgstr "&Копіювати\tCtrl-C"
 
-#: src/chmframe.cpp:770
+#: src/chmframe.cpp:775
 msgid "&Find..\tCtrl-F"
 msgstr "З&найти..\tCtrl-F"
 
-#: src/chmframe.cpp:773
+#: src/chmframe.cpp:778
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:774
+#: src/chmframe.cpp:779
 msgid "&Edit"
 msgstr "&Правка"
 
-#: src/chmframe.cpp:775
+#: src/chmframe.cpp:780
 msgid "Hi&story"
 msgstr "&Історія"
 
-#: src/chmframe.cpp:776
+#: src/chmframe.cpp:781
 msgid "&Help"
 msgstr "&Довідка"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:803
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/chmframe.cpp:815
+#: src/chmframe.cpp:820
 msgid "Topics"
 msgstr "Теми"
 
-#: src/chmframe.cpp:826
+#: src/chmframe.cpp:831
 msgid "Add"
 msgstr "Додати"
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:832
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/chmframe.cpp:830
+#: src/chmframe.cpp:835
 msgid "Add displayed page to bookmarks."
 msgstr "Додати цю сторінку до закладок."
 
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:836
 msgid "Remove selected bookmark."
 msgstr "Видалити виділену закладку."
 
-#: src/chmframe.cpp:965
+#: src/chmframe.cpp:970
 msgid "Open .."
 msgstr "Відкрити..."
 
-#: src/chmframe.cpp:967
+#: src/chmframe.cpp:972
 msgid "Print .."
 msgstr "Друк..."
 
-#: src/chmframe.cpp:969
+#: src/chmframe.cpp:974
 msgid "Fonts .."
 msgstr "Шрифти..."
 
-#: src/chmframe.cpp:976
+#: src/chmframe.cpp:981
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/chmframe.cpp:978
+#: src/chmframe.cpp:983
 msgid "Find"
 msgstr "Знайти"
 
-#: src/chmframe.cpp:983
+#: src/chmframe.cpp:988
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:984
+#: src/chmframe.cpp:989
 msgid "Forward"
 msgstr "Вперед"
 
-#: src/chmframe.cpp:986
+#: src/chmframe.cpp:991
 msgid "Home"
 msgstr "Додому"
 
-#: src/chmframe.cpp:989
+#: src/chmframe.cpp:994
 msgid "About"
 msgstr "Про програму"
 
@@ -319,31 +319,31 @@ msgstr "&Копіювати виділене"
 msgid "&Find in page.."
 msgstr "З&найти на цій сторінці.."
 
-#: src/chmhtmlwindow.cpp:304
+#: src/chmhtmlwindow.cpp:305
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:304
+#: src/chmhtmlwindow.cpp:305
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:305 src/chmhtmlwindow.cpp:327
+#: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
 msgid "Error"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:315
+#: src/chmhtmlwindow.cpp:316
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:326
+#: src/chmhtmlwindow.cpp:327
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:335
+#: src/chmhtmlwindow.cpp:336
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:336
+#: src/chmhtmlwindow.cpp:337
 msgid "Success"
 msgstr ""
 

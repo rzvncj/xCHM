@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-08 13:18+0300\n"
+"POT-Creation-Date: 2007-06-01 10:29+0300\n"
 "PO-Revision-Date: 2005-08-27 14:37+0800\n"
 "Last-Translator: sejishikong <sejishikong@263.net>\n"
 "Language-Team: zh_CN <sejishikong@linuxfans.org>\n"
@@ -118,31 +118,31 @@ msgstr "在页面中查找.."
 msgid "Associate the .chm file extension with xCHM."
 msgstr ""
 
-#: src/chmframe.cpp:163
+#: src/chmframe.cpp:164
 msgid "Ready."
 msgstr "准备。"
 
-#: src/chmframe.cpp:193 src/chmframe.cpp:971
+#: src/chmframe.cpp:194 src/chmframe.cpp:976
 msgid "Contents"
 msgstr "目录"
 
-#: src/chmframe.cpp:194
+#: src/chmframe.cpp:195
 msgid "Index"
 msgstr "索引"
 
-#: src/chmframe.cpp:195 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:196 src/chmsearchpanel.cpp:49
 msgid "Search"
 msgstr "查找"
 
-#: src/chmframe.cpp:218
+#: src/chmframe.cpp:219
 msgid "About xCHM"
 msgstr "关于xCHM"
 
-#: src/chmframe.cpp:226
+#: src/chmframe.cpp:227
 msgid "Choose a file.."
 msgstr "选择一个文件.."
 
-#: src/chmframe.cpp:363
+#: src/chmframe.cpp:366
 msgid ""
 "This is experimental code, and doing this will overwrite any previously "
 "registered CHM viewer associations.\n"
@@ -150,154 +150,154 @@ msgid ""
 "Are you sure you know what you're doing?"
 msgstr ""
 
-#: src/chmframe.cpp:368
+#: src/chmframe.cpp:371
 msgid "Confirm"
 msgstr ""
 
-#: src/chmframe.cpp:380
+#: src/chmframe.cpp:383
 msgid "Registration successful!"
 msgstr ""
 
-#: src/chmframe.cpp:381
+#: src/chmframe.cpp:384
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:611
+#: src/chmframe.cpp:616
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:727
+#: src/chmframe.cpp:732
 msgid "&Open..\tCtrl-O"
 msgstr "打开(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:728
+#: src/chmframe.cpp:733
 msgid "&Print page..\tCtrl-P"
 msgstr "打印页面(&P)..\tCtrl-P"
 
-#: src/chmframe.cpp:729
+#: src/chmframe.cpp:734
 msgid "Fon&ts..\tCtrl-T"
 msgstr "字体(&T)..\tCtrl-T"
 
-#: src/chmframe.cpp:732
+#: src/chmframe.cpp:737
 msgid "&Show contents tree\tCtrl-S"
 msgstr "显示目录树(&S)\tCtrl-S"
 
-#: src/chmframe.cpp:738
+#: src/chmframe.cpp:743
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:744
+#: src/chmframe.cpp:749
 msgid "&Recent files"
 msgstr "最近的文件(&R)"
 
-#: src/chmframe.cpp:756
+#: src/chmframe.cpp:761
 msgid "E&xit\tCtrl-X"
 msgstr "退出(&X)\tCtrl-X"
 
-#: src/chmframe.cpp:757
+#: src/chmframe.cpp:762
 msgid "Quit the application."
 msgstr "退出应用程序"
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:766
 msgid "&Home\tCtrl-H"
 msgstr "主页(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:762
+#: src/chmframe.cpp:767
 msgid "For&ward\tCtrl-W"
 msgstr "向前(&W)\tCtrl-W"
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:768
 msgid "&Back\tCtrl-B"
 msgstr "向后(&B)\tCtrl-B"
 
-#: src/chmframe.cpp:766
+#: src/chmframe.cpp:771
 msgid "&About..\tF1"
 msgstr "关于(&A)..\tF1"
 
-#: src/chmframe.cpp:769
+#: src/chmframe.cpp:774
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "主页(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:770
+#: src/chmframe.cpp:775
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "打开(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:773
+#: src/chmframe.cpp:778
 msgid "&File"
 msgstr "文件(&F)"
 
-#: src/chmframe.cpp:774
+#: src/chmframe.cpp:779
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:775
+#: src/chmframe.cpp:780
 msgid "Hi&story"
 msgstr "历史(&S)"
 
-#: src/chmframe.cpp:776
+#: src/chmframe.cpp:781
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:803
 msgid "Bookmarks"
 msgstr "书签"
 
-#: src/chmframe.cpp:815
+#: src/chmframe.cpp:820
 msgid "Topics"
 msgstr "主题"
 
-#: src/chmframe.cpp:826
+#: src/chmframe.cpp:831
 msgid "Add"
 msgstr "添加"
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:832
 msgid "Remove"
 msgstr "移除"
 
-#: src/chmframe.cpp:830
+#: src/chmframe.cpp:835
 msgid "Add displayed page to bookmarks."
 msgstr "添加显示的页面到书签。"
 
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:836
 msgid "Remove selected bookmark."
 msgstr "移除选定的书签。"
 
-#: src/chmframe.cpp:965
+#: src/chmframe.cpp:970
 msgid "Open .."
 msgstr "打开 .."
 
-#: src/chmframe.cpp:967
+#: src/chmframe.cpp:972
 msgid "Print .."
 msgstr "打印 .."
 
-#: src/chmframe.cpp:969
+#: src/chmframe.cpp:974
 msgid "Fonts .."
 msgstr "字体 .."
 
-#: src/chmframe.cpp:976
+#: src/chmframe.cpp:981
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:978
+#: src/chmframe.cpp:983
 #, fuzzy
 msgid "Find"
 msgstr "查找下一个"
 
-#: src/chmframe.cpp:983
+#: src/chmframe.cpp:988
 msgid "Back"
 msgstr "后退"
 
-#: src/chmframe.cpp:984
+#: src/chmframe.cpp:989
 msgid "Forward"
 msgstr "前进"
 
-#: src/chmframe.cpp:986
+#: src/chmframe.cpp:991
 msgid "Home"
 msgstr "主页"
 
-#: src/chmframe.cpp:989
+#: src/chmframe.cpp:994
 msgid "About"
 msgstr "关于"
 
@@ -325,31 +325,31 @@ msgstr "复制选定(&C)"
 msgid "&Find in page.."
 msgstr "在页面中查找(F).."
 
-#: src/chmhtmlwindow.cpp:304
+#: src/chmhtmlwindow.cpp:305
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:304
+#: src/chmhtmlwindow.cpp:305
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:305 src/chmhtmlwindow.cpp:327
+#: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
 msgid "Error"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:315
+#: src/chmhtmlwindow.cpp:316
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:326
+#: src/chmhtmlwindow.cpp:327
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:335
+#: src/chmhtmlwindow.cpp:336
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:336
+#: src/chmhtmlwindow.cpp:337
 msgid "Success"
 msgstr ""
 

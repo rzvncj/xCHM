@@ -148,7 +148,7 @@ bool CHMApp::OnInit()
 	long fontSize = CHM_DEFAULT_FONT_SIZE;
 	wxString lastOpenedDir, normalFont, fixedFont;
 
-#ifndef __WXMAC__
+#if !defined(__WXMAC__) && !defined(__WXMSW__)
 	_loc.Init();
 	_loc.AddCatalog(wxT("xchm"));
 #endif

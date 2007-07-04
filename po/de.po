@@ -1,4 +1,4 @@
-# xCHM .pot file.
+# xCHM .po file.
 # Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
 # This file is distributed under the same license as the xCHM package.
 # FIRST AUTHOR <altow@users.sourceforge.net>, 2004.
@@ -188,7 +188,7 @@ msgstr ""
 
 #: src/chmframe.cpp:749
 msgid "&Recent files"
-msgstr "&Neue Dateien"
+msgstr "&Zuletzte geöffnete Dateien"
 
 #: src/chmframe.cpp:761
 msgid "E&xit\tCtrl-X"

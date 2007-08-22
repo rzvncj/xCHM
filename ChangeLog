@@ -303,4 +303,6 @@
 		+ now allowing ENTER to work in the bookmarks list.
 		+ updated Romanian translation.
 		+ don't initialize locale data on Windows (English-only)
+		+ fixed build problem with Unicode-detecting #ifdefs
+		inside wxT() macros.
 

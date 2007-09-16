@@ -301,7 +301,7 @@
 		+ fixed "Cannot display document in <whatever> encoding"
 		error.
 		+ now allowing ENTER to work in the bookmarks list.
-		+ updated Romanian translation.
+		+ updated Romanian, German translations.
 		+ don't initialize locale data on Windows (English-only)
 		+ fixed build problem with Unicode-detecting #ifdefs
 		inside wxT() macros.

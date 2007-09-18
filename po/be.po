@@ -1,0 +1,371 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xchm trunk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-10 16:44+0300\n"
+"PO-Revision-Date: 2007-09-17 23:17+0300\n"
+"Last-Translator: YOUR NAME <E-MAIL@ADDRESS>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/chmfile.cpp:224
+msgid "Retrieving table of contents.."
+msgstr "Атрыманьне зьместу..."
+
+#: src/chmfile.cpp:225
+msgid "Retrieving index.."
+msgstr "Атрыманьне індэксу"
+
+#: src/chmfile.cpp:226
+msgid "Untitled in index"
+msgstr "Безназоўны ў індэксе"
+
+#: src/chmfinddialog.cpp:32
+msgid "Find in page.."
+msgstr "Пошук на старонке..."
+
+#: src/chmfinddialog.cpp:41
+msgid "Whole words only"
+msgstr "Толькі цэльныя словы"
+
+#: src/chmfinddialog.cpp:42
+msgid "Case sensitive"
+msgstr "Адрозьніваць рэгістар"
+
+#: src/chmfinddialog.cpp:49
+msgid "Find next"
+msgstr "Шукаць далей"
+
+#: src/chmfinddialog.cpp:52 src/chmfontdialog.cpp:92
+msgid "Cancel"
+msgstr "Скасаваць"
+
+#: src/chmfontdialog.cpp:53
+msgid "Change fonts.."
+msgstr "Зьмена шрыфтоў..."
+
+#: src/chmfontdialog.cpp:60
+msgid "Normal font:"
+msgstr "Звычайны шрыфт:"
+
+#: src/chmfontdialog.cpp:61
+msgid "Fixed font:"
+msgstr "Монашырынёвы шрыфт:"
+
+#: src/chmfontdialog.cpp:62
+msgid "Font size:"
+msgstr "Памер шрыфту:"
+
+#: src/chmfontdialog.cpp:80
+msgid "Preview:"
+msgstr "Прыклад:"
+
+#: src/chmfontdialog.cpp:90
+msgid "OK"
+msgstr "Добра"
+
+#: src/chmframe.cpp:47
+msgid "Open a CHM book."
+msgstr "Разгарнуць CHM-кнігу."
+
+#: src/chmframe.cpp:48
+msgid "Change fonts."
+msgstr "Зьмяніць шрыфты."
+
+#: src/chmframe.cpp:49
+msgid "Print the page currently displayed."
+msgstr "Надрукаваць бягучую старонку."
+
+#: src/chmframe.cpp:50
+msgid "On or off?"
+msgstr "Уключана ці выключана?"
+
+#: src/chmframe.cpp:51
+msgid "Go to the book's start page."
+msgstr "Адгарнуць першую старонку."
+
+#: src/chmframe.cpp:52
+msgid "Go forward in history. Per book."
+msgstr "Крочыць наперад па гісторыі"
+
+#: src/chmframe.cpp:53
+msgid "Back to the last visited page. Per book."
+msgstr "Крочыць назад па гісторыі"
+
+#: src/chmframe.cpp:54
+msgid "About the program."
+msgstr "Пра праграму."
+
+#: src/chmframe.cpp:55
+msgid "Copy selection."
+msgstr "Скапіяваць вылучанае."
+
+#: src/chmframe.cpp:56
+msgid "Find word in page."
+msgstr "Пошук слоў на старонцы."
+
+#: src/chmframe.cpp:57
+msgid "Associate the .chm file extension with xCHM."
+msgstr "Зьвязаць файлы .chm з праграмай xCHM."
+
+#: src/chmframe.cpp:163
+msgid "Ready."
+msgstr "Гатовы."
+
+#: src/chmframe.cpp:193 src/chmframe.cpp:971
+msgid "Contents"
+msgstr "Зьмест"
+
+#: src/chmframe.cpp:194
+msgid "Index"
+msgstr "Індэкс"
+
+#: src/chmframe.cpp:195 src/chmsearchpanel.cpp:49
+msgid "Search"
+msgstr "Пошук"
+
+#: src/chmframe.cpp:218
+msgid "About xCHM"
+msgstr "Пра xCHM"
+
+#: src/chmframe.cpp:226
+msgid "Choose a file.."
+msgstr "Выбар файла..."
+
+#: src/chmframe.cpp:363
+msgid ""
+"This is experimental code, and doing this will overwrite any previously "
+"registered CHM viewer associations.\n"
+"\n"
+"Are you sure you know what you're doing?"
+msgstr ""
+"Гэта экспэрэмэнтальны коды, ваш выбар зьменіць дастасаваньне для прагляду CHM.\n"
+"\n"
+"Ці разумеце вы тое, што робіце?"
+
+#: src/chmframe.cpp:368
+msgid "Confirm"
+msgstr "Пацьвердзіць"
+
+#: src/chmframe.cpp:380
+msgid "Registration successful!"
+msgstr "Пасьпяховая рэгістрацыя!"
+
+#: src/chmframe.cpp:381
+msgid "Done"
+msgstr "Зроблена"
+
+#: src/chmframe.cpp:611
+msgid "Loading, please wait.."
+msgstr "Загрузка. калі ласка, пачакайце..."
+
+#: src/chmframe.cpp:727
+msgid "&Open..\tCtrl-O"
+msgstr "&Адкрыць..\tCtrl-O"
+
+#: src/chmframe.cpp:728
+msgid "&Print page..\tCtrl-P"
+msgstr "Над_рукаваць старонку..\tCtrl-P"
+
+#: src/chmframe.cpp:729
+msgid "Fon&ts..\tCtrl-T"
+msgstr "&Шрыфты..\tCtrl-T"
+
+#: src/chmframe.cpp:732
+msgid "&Show contents tree\tCtrl-S"
+msgstr "Паказаць &зьмест\tCtrl-S"
+
+#: src/chmframe.cpp:738
+msgid "&Make xCHM the default CHM viewer"
+msgstr "Зра&біць xCHM прадвызначаным гартачом CHM"
+
+#: src/chmframe.cpp:744
+msgid "&Recent files"
+msgstr "&Ранейшыя файлы"
+
+#: src/chmframe.cpp:756
+msgid "E&xit\tCtrl-X"
+msgstr "В&ыхад\tCtrl-X"
+
+#: src/chmframe.cpp:757
+msgid "Quit the application."
+msgstr "Выхад з дастасаваньня."
+
+#: src/chmframe.cpp:761
+msgid "&Home\tCtrl-H"
+msgstr "У па&чатак\tCtrl-H"
+
+#: src/chmframe.cpp:762
+msgid "For&ward\tCtrl-W"
+msgstr "На&перад\tCtrl-W"
+
+#: src/chmframe.cpp:763
+msgid "&Back\tCtrl-B"
+msgstr "На&зад\tCtrl-B"
+
+#: src/chmframe.cpp:766
+msgid "&About..\tF1"
+msgstr "&Пра..\tF1"
+
+#: src/chmframe.cpp:769
+msgid "&Copy\tCtrl-C"
+msgstr "Ска&піяваць\tCtrl-C"
+
+#: src/chmframe.cpp:770
+msgid "&Find..\tCtrl-F"
+msgstr "По&шук..\tCtrl-F"
+
+#: src/chmframe.cpp:773
+msgid "&File"
+msgstr "&Файл"
+
+#: src/chmframe.cpp:774
+msgid "&Edit"
+msgstr "&Рэдагаваньне"
+
+#: src/chmframe.cpp:775
+msgid "Hi&story"
+msgstr "&Гісторыя"
+
+#: src/chmframe.cpp:776
+msgid "&Help"
+msgstr "&Даведка"
+
+#: src/chmframe.cpp:798
+msgid "Bookmarks"
+msgstr "Закладкі"
+
+#: src/chmframe.cpp:815
+msgid "Topics"
+msgstr "Тэмы"
+
+#: src/chmframe.cpp:826
+msgid "Add"
+msgstr "Дадаць"
+
+#: src/chmframe.cpp:827
+msgid "Remove"
+msgstr "Выдаліць"
+
+#: src/chmframe.cpp:830
+msgid "Add displayed page to bookmarks."
+msgstr "Дадаць бягучую старонку ў закладкі."
+
+#: src/chmframe.cpp:831
+msgid "Remove selected bookmark."
+msgstr "Выдаліць вылучаную закладку."
+
+#: src/chmframe.cpp:965
+msgid "Open .."
+msgstr "Адкрыць .."
+
+#: src/chmframe.cpp:967
+msgid "Print .."
+msgstr "Друк .."
+
+#: src/chmframe.cpp:969
+msgid "Fonts .."
+msgstr "Шрыфты .."
+
+#: src/chmframe.cpp:976
+msgid "Copy"
+msgstr "Скапіяваць"
+
+#: src/chmframe.cpp:978
+msgid "Find"
+msgstr "Пошук"
+
+#: src/chmframe.cpp:983
+msgid "Back"
+msgstr "Назад"
+
+#: src/chmframe.cpp:984
+msgid "Forward"
+msgstr "Наперад"
+
+#: src/chmframe.cpp:986
+msgid "Home"
+msgstr "Пачатак"
+
+#: src/chmframe.cpp:989
+msgid "About"
+msgstr "Пра .."
+
+#: src/chmhtmlwindow.cpp:46
+msgid "For&ward"
+msgstr "На&перад"
+
+#: src/chmhtmlwindow.cpp:47
+msgid "&Back"
+msgstr "На&зад"
+
+#: src/chmhtmlwindow.cpp:48
+msgid "Copy &link location"
+msgstr "Скапіяваць &спасылку"
+
+#: src/chmhtmlwindow.cpp:49
+msgid "&Save link as.."
+msgstr "За&хаваць спасылку як.."
+
+#: src/chmhtmlwindow.cpp:52
+msgid "&Copy selection"
+msgstr "Ска&піяваць вылучанае"
+
+#: src/chmhtmlwindow.cpp:54
+msgid "&Find in page.."
+msgstr "По&шук на старонке..."
+
+#: src/chmhtmlwindow.cpp:304
+msgid "OpenFile("
+msgstr "OpenFile("
+
+#: src/chmhtmlwindow.cpp:304
+msgid ") failed"
+msgstr ") памылка"
+
+#: src/chmhtmlwindow.cpp:305 src/chmhtmlwindow.cpp:327
+msgid "Error"
+msgstr "Памылка"
+
+#: src/chmhtmlwindow.cpp:315
+msgid "Save as"
+msgstr "Захаваць як"
+
+#: src/chmhtmlwindow.cpp:326
+msgid "Error creating file "
+msgstr "Памылка стварэньня файла "
+
+#: src/chmhtmlwindow.cpp:335
+msgid "Saved file "
+msgstr "Захаваны файл "
+
+#: src/chmhtmlwindow.cpp:336
+msgid "Success"
+msgstr "Посьпех"
+
+#: src/chmsearchpanel.cpp:47
+msgid "Get partial matches"
+msgstr "Атрымаць частковыя супадзеньні"
+
+#: src/chmsearchpanel.cpp:48
+msgid "Search titles only"
+msgstr "Пошук толькі назваў"
+
+#: src/chmsearchpanel.cpp:52
+msgid "Allow partial matches."
+msgstr "Дазволіць частковыя супадзеньні."
+
+#: src/chmsearchpanel.cpp:53
+msgid "Only search in the contents' titles."
+msgstr "Шукаць толькі сярод назваў у зьмесьце."
+
+#: src/chmsearchpanel.cpp:54
+msgid "Search contents for occurences of the specified text."
+msgstr "Пошук зьмесьціва на ўваходзаньне зададзенага тэксту."

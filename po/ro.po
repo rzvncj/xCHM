@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 10:29+0300\n"
+"POT-Creation-Date: 2007-09-18 09:31+0300\n"
 "PO-Revision-Date: 2007-05-30 23:50+0300\n"
 "Last-Translator: Igor Știrbu <igor.stirbu@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -15,132 +15,132 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:224
+#: src/chmfile.cpp:225
 msgid "Retrieving table of contents.."
 msgstr "Se descarcă cuprinsul..."
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:226
 msgid "Retrieving index.."
 msgstr "Se descarcă indexul..."
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:227
 msgid "Untitled in index"
 msgstr "Fără titlu în index"
 
-#: src/chmfinddialog.cpp:32
+#: src/chmfinddialog.cpp:33
 msgid "Find in page.."
 msgstr "Căută în pagină..."
 
-#: src/chmfinddialog.cpp:41
+#: src/chmfinddialog.cpp:42
 msgid "Whole words only"
 msgstr "Numai cuvinte întregi"
 
-#: src/chmfinddialog.cpp:42
+#: src/chmfinddialog.cpp:43
 msgid "Case sensitive"
 msgstr "Majuscule nesemnificative"
 
-#: src/chmfinddialog.cpp:49
+#: src/chmfinddialog.cpp:50
 msgid "Find next"
 msgstr "Următoarea potrivire"
 
-#: src/chmfinddialog.cpp:52 src/chmfontdialog.cpp:92
+#: src/chmfinddialog.cpp:53 src/chmfontdialog.cpp:93
 msgid "Cancel"
 msgstr "Renunță"
 
-#: src/chmfontdialog.cpp:53
+#: src/chmfontdialog.cpp:54
 msgid "Change fonts.."
 msgstr "Schimbă fonturile..."
 
-#: src/chmfontdialog.cpp:60
+#: src/chmfontdialog.cpp:61
 msgid "Normal font:"
 msgstr "Font normal:"
 
-#: src/chmfontdialog.cpp:61
+#: src/chmfontdialog.cpp:62
 msgid "Fixed font:"
 msgstr "Font cu dimensiune fixă:"
 
-#: src/chmfontdialog.cpp:62
+#: src/chmfontdialog.cpp:63
 msgid "Font size:"
 msgstr "Mărimea fontului:"
 
-#: src/chmfontdialog.cpp:80
+#: src/chmfontdialog.cpp:81
 msgid "Preview:"
 msgstr "Vizualizare:"
 
-#: src/chmfontdialog.cpp:90
+#: src/chmfontdialog.cpp:91
 msgid "OK"
 msgstr "OK"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:48
 msgid "Open a CHM book."
 msgstr "Deschide un document CHM."
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:49
 msgid "Change fonts."
 msgstr "Schimbă fonturile."
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:50
 msgid "Print the page currently displayed."
 msgstr "Tipărește pagina afișată."
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:51
 msgid "On or off?"
 msgstr "Activat sau nu?"
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:52
 msgid "Go to the book's start page."
 msgstr "Mergi la pagina de start a carții."
 
-#: src/chmframe.cpp:52
+#: src/chmframe.cpp:53
 msgid "Go forward in history. Per book."
 msgstr "Mergi înainte în paginile vizitate. Per carte."
 
-#: src/chmframe.cpp:53
+#: src/chmframe.cpp:54
 msgid "Back to the last visited page. Per book."
 msgstr "Înapoi la ultima pagina vizitată. Per carte."
 
 # Despre aplicație?
-#: src/chmframe.cpp:54
+#: src/chmframe.cpp:55
 msgid "About the program."
 msgstr "Despre program."
 
-#: src/chmframe.cpp:55
+#: src/chmframe.cpp:56
 msgid "Copy selection."
 msgstr "Copiază selecția."
 
-#: src/chmframe.cpp:56
+#: src/chmframe.cpp:57
 msgid "Find word in page."
 msgstr "Caută cuvântul în pagină."
 
-#: src/chmframe.cpp:57
+#: src/chmframe.cpp:58
 msgid "Associate the .chm file extension with xCHM."
 msgstr "Asociază extensia .chm cu xCHM."
 
-#: src/chmframe.cpp:164
+#: src/chmframe.cpp:165
 msgid "Ready."
 msgstr "Gata."
 
-#: src/chmframe.cpp:194 src/chmframe.cpp:976
+#: src/chmframe.cpp:195 src/chmframe.cpp:977
 msgid "Contents"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:195
+#: src/chmframe.cpp:196
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:196 src/chmsearchpanel.cpp:49
+#: src/chmframe.cpp:197 src/chmsearchpanel.cpp:50
 msgid "Search"
 msgstr "Caută"
 
-#: src/chmframe.cpp:219
+#: src/chmframe.cpp:220
 msgid "About xCHM"
 msgstr "Despre xCHM"
 
-#: src/chmframe.cpp:227
+#: src/chmframe.cpp:228
 msgid "Choose a file.."
 msgstr "Alege un fișier..."
 
-#: src/chmframe.cpp:366
+#: src/chmframe.cpp:367
 msgid ""
 "This is experimental code, and doing this will overwrite any previously "
 "registered CHM viewer associations.\n"
@@ -152,225 +152,225 @@ msgstr ""
 "\n"
 "Sunteți sigur ca doriți să continuați?"
 
-#: src/chmframe.cpp:371
+#: src/chmframe.cpp:372
 msgid "Confirm"
 msgstr "Confirmă"
 
-#: src/chmframe.cpp:383
+#: src/chmframe.cpp:384
 msgid "Registration successful!"
 msgstr "Înregistrare reușită!"
 
-#: src/chmframe.cpp:384
+#: src/chmframe.cpp:385
 msgid "Done"
 msgstr "Gata"
 
-#: src/chmframe.cpp:616
+#: src/chmframe.cpp:617
 msgid "Loading, please wait.."
 msgstr "Așteptați, documentul se încarcă..."
 
-#: src/chmframe.cpp:732
+#: src/chmframe.cpp:733
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide...\tCtrl-O"
 
-#: src/chmframe.cpp:733
+#: src/chmframe.cpp:734
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipărește pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:734
+#: src/chmframe.cpp:735
 msgid "Fon&ts..\tCtrl-T"
 msgstr "&Fonturi...\tCtrl-T"
 
-#: src/chmframe.cpp:737
+#: src/chmframe.cpp:738
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arată arborescent cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:743
+#: src/chmframe.cpp:744
 msgid "&Make xCHM the default CHM viewer"
 msgstr "Fă xCH&M vizualizator implicit de CHM"
 
-#: src/chmframe.cpp:749
+#: src/chmframe.cpp:750
 msgid "&Recent files"
 msgstr "F&ișiere recente"
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:762
 msgid "E&xit\tCtrl-X"
 msgstr "Ieșire\tCtrl-X"
 
-#: src/chmframe.cpp:762
+#: src/chmframe.cpp:763
 msgid "Quit the application."
 msgstr "Închide aplicația."
 
-#: src/chmframe.cpp:766
+#: src/chmframe.cpp:767
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:767
+#: src/chmframe.cpp:768
 msgid "For&ward\tCtrl-W"
 msgstr "Îna&inte\tCtrl-W"
 
-#: src/chmframe.cpp:768
+#: src/chmframe.cpp:769
 msgid "&Back\tCtrl-B"
 msgstr "Î&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:771
+#: src/chmframe.cpp:772
 #, fuzzy
 msgid "&About..\tF1"
 msgstr "&Despre...\tF1"
 
-#: src/chmframe.cpp:774
+#: src/chmframe.cpp:775
 msgid "&Copy\tCtrl-C"
 msgstr "&Copiază\tCtrl-C"
 
-#: src/chmframe.cpp:775
+#: src/chmframe.cpp:776
 msgid "&Find..\tCtrl-F"
 msgstr "Caută...\tCtrl-F"
 
 # E ok forma plurală?
-#: src/chmframe.cpp:778
+#: src/chmframe.cpp:779
 msgid "&File"
 msgstr "&Fișier"
 
-#: src/chmframe.cpp:779
+#: src/chmframe.cpp:780
 msgid "&Edit"
 msgstr "&Editare"
 
-#: src/chmframe.cpp:780
+#: src/chmframe.cpp:781
 msgid "Hi&story"
 msgstr "&Istoric"
 
-#: src/chmframe.cpp:781
+#: src/chmframe.cpp:782
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:804
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:820
+#: src/chmframe.cpp:821
 msgid "Topics"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:832
 msgid "Add"
 msgstr "Adaugă"
 
-#: src/chmframe.cpp:832
+#: src/chmframe.cpp:833
 msgid "Remove"
 msgstr "Șterge"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:836
 msgid "Add displayed page to bookmarks."
 msgstr "Adaugă pagina afișată la semnele de carte."
 
-#: src/chmframe.cpp:836
+#: src/chmframe.cpp:837
 msgid "Remove selected bookmark."
 msgstr "Șterge semnul de carte selectat."
 
-#: src/chmframe.cpp:970
+#: src/chmframe.cpp:971
 msgid "Open .."
 msgstr "Deschide..."
 
-#: src/chmframe.cpp:972
+#: src/chmframe.cpp:973
 msgid "Print .."
 msgstr "Tipărește..."
 
-#: src/chmframe.cpp:974
+#: src/chmframe.cpp:975
 msgid "Fonts .."
 msgstr "Fonturi..."
 
-#: src/chmframe.cpp:981
+#: src/chmframe.cpp:982
 msgid "Copy"
 msgstr "Copiază"
 
-#: src/chmframe.cpp:983
+#: src/chmframe.cpp:984
 msgid "Find"
 msgstr "Caută"
 
-#: src/chmframe.cpp:988
+#: src/chmframe.cpp:989
 msgid "Back"
 msgstr "Înapoi"
 
-#: src/chmframe.cpp:989
+#: src/chmframe.cpp:990
 msgid "Forward"
 msgstr "Înainte"
 
-#: src/chmframe.cpp:991
+#: src/chmframe.cpp:992
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:994
+#: src/chmframe.cpp:995
 msgid "About"
 msgstr "Despre"
 
-#: src/chmhtmlwindow.cpp:46
+#: src/chmhtmlwindow.cpp:47
 msgid "For&ward"
 msgstr "Înai&nte"
 
-#: src/chmhtmlwindow.cpp:47
+#: src/chmhtmlwindow.cpp:48
 msgid "&Back"
 msgstr "Îna&poi"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:49
 msgid "Copy &link location"
 msgstr "&Copiază adresa"
 
-#: src/chmhtmlwindow.cpp:49
+#: src/chmhtmlwindow.cpp:50
 msgid "&Save link as.."
 msgstr "&Salvează adresa ca..."
 
-#: src/chmhtmlwindow.cpp:52
+#: src/chmhtmlwindow.cpp:53
 msgid "&Copy selection"
 msgstr "&Copiază selecția"
 
-#: src/chmhtmlwindow.cpp:54
+#: src/chmhtmlwindow.cpp:55
 msgid "&Find in page.."
 msgstr "&Caută în pagină..."
 
-#: src/chmhtmlwindow.cpp:305
+#: src/chmhtmlwindow.cpp:306
 msgid "OpenFile("
 msgstr "Eroare la deschiderea fișierului ("
 
-#: src/chmhtmlwindow.cpp:305
+#: src/chmhtmlwindow.cpp:306
 msgid ") failed"
 msgstr ")"
 
-#: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
+#: src/chmhtmlwindow.cpp:307 src/chmhtmlwindow.cpp:329
 msgid "Error"
 msgstr "Eroare"
 
-#: src/chmhtmlwindow.cpp:316
+#: src/chmhtmlwindow.cpp:317
 msgid "Save as"
 msgstr "Salvează ca"
 
-#: src/chmhtmlwindow.cpp:327
+#: src/chmhtmlwindow.cpp:328
 msgid "Error creating file "
 msgstr "Eroare la crearea fișierului "
 
-#: src/chmhtmlwindow.cpp:336
+#: src/chmhtmlwindow.cpp:337
 msgid "Saved file "
 msgstr "Fișierul salvat este "
 
-#: src/chmhtmlwindow.cpp:337
+#: src/chmhtmlwindow.cpp:338
 msgid "Success"
 msgstr "Succes"
 
-#: src/chmsearchpanel.cpp:47
+#: src/chmsearchpanel.cpp:48
 msgid "Get partial matches"
 msgstr "Rezultate parțiale"
 
-#: src/chmsearchpanel.cpp:48
+#: src/chmsearchpanel.cpp:49
 msgid "Search titles only"
 msgstr "Caută doar în titluri"
 
-#: src/chmsearchpanel.cpp:52
+#: src/chmsearchpanel.cpp:53
 msgid "Allow partial matches."
 msgstr "Permite rezultate parțiale."
 
-#: src/chmsearchpanel.cpp:53
+#: src/chmsearchpanel.cpp:54
 msgid "Only search in the contents' titles."
 msgstr "Caută doar în titlurile din cuprins."
 
-#: src/chmsearchpanel.cpp:54
+#: src/chmsearchpanel.cpp:55
 msgid "Search contents for occurences of the specified text."
 msgstr "Caută în carte pagini care conțin apariții ale textului precizat."
 

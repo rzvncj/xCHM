@@ -306,4 +306,6 @@
 		+ don't initialize locale data on Windows (English-only)
 		+ fixed build problem with Unicode-detecting #ifdefs
 		inside wxT() macros.
+		+ made the source code GCC 4.3 friendly (fixed duplicate
+		parameters issue in GetItem()).
 

@@ -31,6 +31,7 @@
 #include <wx/config.h>
 #include <wx/filefn.h>
 #include <wx/fs_mem.h>
+#include <bitfiddle.inl>
 
 
 #ifdef WITH_LIBXMLRPC

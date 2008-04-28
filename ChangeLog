@@ -309,3 +309,7 @@
 		+ made the source code GCC 4.3 friendly (fixed duplicate
 		parameters issue in GetItem()).
 
+	* 1.15:
+		+ #included <bitfiddle.inl> in chmapp.cpp (apparently it
+		did not compile without this on some platforms)
+

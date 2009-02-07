@@ -20,12 +20,11 @@ msgstr ""
 
 #: src/chmfile.cpp:225
 msgid "Retrieving table of contents.."
-msgstr ""
+msgstr "Récupération de la table des matières.."
 
 #: src/chmfile.cpp:226
-#, fuzzy
 msgid "Retrieving index.."
-msgstr "Index SansTitre"
+msgstr "Récupération de l'index"
 
 #: src/chmfile.cpp:227
 msgid "Untitled in index"
@@ -108,18 +107,16 @@ msgid "About the program."
 msgstr "A propos du programme."
 
 #: src/chmframe.cpp:56
-#, fuzzy
 msgid "Copy selection."
-msgstr "&Copier la sélection"
+msgstr "Copier la sélection"
 
 #: src/chmframe.cpp:57
-#, fuzzy
 msgid "Find word in page."
-msgstr "Rechercher dans la page.."
+msgstr "Rechercher dans la page."
 
 #: src/chmframe.cpp:58
 msgid "Associate the .chm file extension with xCHM."
-msgstr ""
+msgstr "Associer l'extension .chm avec xCHM"
 
 #: src/chmframe.cpp:165
 msgid "Ready."
@@ -152,22 +149,26 @@ msgid ""
 "\n"
 "Are you sure you know what you're doing?"
 msgstr ""
+"Ce programme est experimental, ceci va écraser toute précédente association "
+"avec un afficheur CHM.\n"
+"\n"
+"Etes-vous sur de savoir ce que vous faites?"
 
 #: src/chmframe.cpp:372
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmation"
 
 #: src/chmframe.cpp:384
 msgid "Registration successful!"
-msgstr ""
+msgstr "Enregistrement réussi"
 
 #: src/chmframe.cpp:385
 msgid "Done"
-msgstr ""
+msgstr "Fait"
 
 #: src/chmframe.cpp:617
 msgid "Loading, please wait.."
-msgstr ""
+msgstr "Chargement en cours.."
 
 #: src/chmframe.cpp:733
 msgid "&Open..\tCtrl-O"
@@ -187,7 +188,7 @@ msgstr "&Voir la table des matières\tCtrl-S"
 
 #: src/chmframe.cpp:744
 msgid "&Make xCHM the default CHM viewer"
-msgstr ""
+msgstr "Faire de xCHM l'afficheur CHM par défaut"
 
 #: src/chmframe.cpp:750
 msgid "&Recent files"
@@ -218,14 +219,12 @@ msgid "&About..\tF1"
 msgstr "À &propos..\tF1"
 
 #: src/chmframe.cpp:775
-#, fuzzy
 msgid "&Copy\tCtrl-C"
-msgstr "Page d'&accueil\tCtrl-H"
+msgstr "&Copier\tCtrl-C"
 
 #: src/chmframe.cpp:776
-#, fuzzy
 msgid "&Find..\tCtrl-F"
-msgstr "&Ouvrir..\tCtrl-O"
+msgstr "&Chercher..\tCtrl-F"
 
 #: src/chmframe.cpp:779
 msgid "&File"
@@ -233,7 +232,7 @@ msgstr "&Fichier"
 
 #: src/chmframe.cpp:780
 msgid "&Edit"
-msgstr ""
+msgstr "&Editer"
 
 #: src/chmframe.cpp:781
 msgid "Hi&story"
@@ -281,12 +280,11 @@ msgstr "Polices .."
 
 #: src/chmframe.cpp:982
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: src/chmframe.cpp:984
-#, fuzzy
 msgid "Find"
-msgstr "Rechercher le suivant"
+msgstr "Trouver"
 
 #: src/chmframe.cpp:989
 msgid "Back"
@@ -318,7 +316,7 @@ msgstr "Copier le &lien"
 
 #: src/chmhtmlwindow.cpp:50
 msgid "&Save link as.."
-msgstr ""
+msgstr "&Enregistrer le lien sous.."
 
 #: src/chmhtmlwindow.cpp:53
 msgid "&Copy selection"
@@ -330,31 +328,31 @@ msgstr "&Rechercher dans la page.."
 
 #: src/chmhtmlwindow.cpp:306
 msgid "OpenFile("
-msgstr ""
+msgstr "Ouverture("
 
 #: src/chmhtmlwindow.cpp:306
 msgid ") failed"
-msgstr ""
+msgstr ") échouée"
 
 #: src/chmhtmlwindow.cpp:307 src/chmhtmlwindow.cpp:329
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: src/chmhtmlwindow.cpp:317
 msgid "Save as"
-msgstr ""
+msgstr "Enregistrer sous"
 
 #: src/chmhtmlwindow.cpp:328
 msgid "Error creating file "
-msgstr ""
+msgstr "Erreur lors de la création du fichier"
 
 #: src/chmhtmlwindow.cpp:337
 msgid "Saved file "
-msgstr ""
+msgstr "Fichier sauvegardé "
 
 #: src/chmhtmlwindow.cpp:338
 msgid "Success"
-msgstr ""
+msgstr "Succès"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Get partial matches"

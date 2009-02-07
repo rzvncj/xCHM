@@ -312,4 +312,5 @@
 	* 1.15:
 		+ #included <bitfiddle.inl> in chmapp.cpp (apparently it
 		did not compile without this on some platforms)
+		+ updated French translation.
 

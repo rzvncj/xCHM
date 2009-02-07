@@ -1,6 +1,6 @@
 # XChm LatvianGatis Kalnins <gatis.kalnins@metatrons.org>, 2004.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: XChm Latvian\n"

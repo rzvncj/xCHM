@@ -2,7 +2,7 @@
 # Copyright (C) 2004 Aron Novak <aaron@szentimre.hu>
 # This file is distributed under the same license as the xCHM package.
 # Lars Brand <altow@users.sourceforge.net>, 2004.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"

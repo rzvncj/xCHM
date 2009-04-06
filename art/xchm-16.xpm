@@ -1,5 +1,5 @@
 /* XPM */
-static char * xchm_16_xpm[] = {
+static const char * xchm_16_xpm[] = {
 "16 16 175 2",
 "  	c None",
 ". 	c #A3AACC",

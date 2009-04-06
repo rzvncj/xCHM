@@ -1,5 +1,5 @@
 /* XPM */
-static char * xchm_32_xpm[] = {
+static const char * xchm_32_xpm[] = {
 "32 32 560 2",
 "  	c None",
 ". 	c #C4CCE3",

@@ -1,5 +1,5 @@
 /* XPM */
-static char * xchmdoc_128_xpm[] = {
+static const char * xchmdoc_128_xpm[] = {
 "128 128 4273 2",
 "  	c None",
 ". 	c #E0E0E0",

@@ -1,5 +1,5 @@
 /* XPM */
-static char * xchmdoc_48_xpm[] = {
+static const char * xchmdoc_48_xpm[] = {
 "48 48 1020 2",
 "  	c None",
 ". 	c #C5C5C5",

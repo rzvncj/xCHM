@@ -1020,12 +1020,13 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	return TRUE;
 }
 
-void CHMFrame::AddHtmlView(wxString const& location) 
+
+void CHMFrame::AddHtmlView(const wxString& path, const wxString& link)
 {
-	_nbhtml->AddHtmlView(location);
+	_nbhtml->AddHtmlView(path, link);
 }
 
-// They say this needs to be in the implementation file.
+
 BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Quit,  CHMFrame::OnQuit)
 	EVT_MENU(ID_About, CHMFrame::OnAbout)

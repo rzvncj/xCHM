@@ -39,7 +39,7 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 	wxAcceleratorTable accel(2, entries);
 	this->SetAcceleratorTable(accel);
 	SetTabCtrlHeight(0);
-	AddHtmlView(wxT("memory:about.html"));
+	AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
 
 
@@ -56,12 +56,16 @@ CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 }
 
 
-void CHMHtmlNotebook::AddHtmlView(const wxString& location)
+void CHMHtmlNotebook::AddHtmlView(const wxString& path,
+				  const wxString& link)
 {
-	CHMHtmlWindow * htmlWin = CreateView();
+	CHMHtmlWindow* htmlWin = CreateView();
+	
 
-	if(htmlWin)
-		htmlWin->LoadPage(location);
+	if(htmlWin) {
+		htmlWin->GetParser()->GetFS()->ChangePathTo(path);
+		htmlWin->LoadPage(link);
+	}
 }
 
 
@@ -120,7 +124,7 @@ void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlNotebook::OnNewTab(wxCommandEvent& WXUNUSED(event))
 {
-	AddHtmlView(wxT(""));
+	AddHtmlView(wxEmptyString, wxEmptyString);
 }
 
 

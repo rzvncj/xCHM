@@ -371,23 +371,13 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 	PopupMenu(_menu, event.GetPosition());
 }
+
+
 void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 {
-	//we have to determine the location absolute location
-	if(_link.StartsWith(wxT("#")))
-	{	//destination is an anchor inside the same page
-		_frame->AddHtmlView(GetOpenedPage()+_link);
-	}
-	else if(_link.StartsWith(wxT("http://")) || _link.StartsWith(wxT("file://")) )
-	{	//destination is external
-		_frame->AddHtmlView(_link);
-	}
-	else
-	{	//destination must be to another page inside the same file or site
-		wxString completeLink = GetOpenedPage().BeforeLast(wxT('/'))+wxT("/")+_link;
-		_frame->AddHtmlView(completeLink);
-	}
+	_frame->AddHtmlView(GetParser()->GetFS()->GetPath(), _link);
 }
+
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
@@ -401,12 +391,19 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 	event.Skip();
 }
 
+
 void CHMHtmlWindow::OnSetTitle(const wxString& title)
 {
-	//direct access to the notebook, TODO : design a new event type
-	(static_cast<CHMHtmlNotebook*>(GetParent()))->OnChildrenTitleChanged(title);
+	// Direct access to the notebook
+	// TODO: design a new event type
+	CHMHtmlNotebook* parent = dynamic_cast<CHMHtmlNotebook*>(GetParent());
+
+	if(parent)
+		parent->OnChildrenTitleChanged(title);
+
 	wxHtmlWindow::OnSetTitle(title);
 }
+
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)

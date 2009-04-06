@@ -53,7 +53,8 @@ public:
 	CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc, CHMFrame* frame);
 
 	//! Add a notebook tab and display the specified URL
-	void AddHtmlView(const wxString& location);
+	void AddHtmlView(const wxString& path,
+			 const wxString& link);
 
 	//! Displays the URL in the current tab
 	bool LoadPageInCurrentView(const wxString& location);

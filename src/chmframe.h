@@ -143,7 +143,7 @@ public:
 	void UpdateCHMInfo();
 
 	//!Add html view
-	void AddHtmlView(const wxString& location);
+	void AddHtmlView(const wxString& path, const wxString& link);
 
 protected:
 	//! Called when the user closes the window.

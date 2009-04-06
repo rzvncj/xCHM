@@ -240,12 +240,12 @@ msgstr "CautÄƒ...\tCtrl-F"
 #: src/chmframe.cpp:802
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
-msgstr "&Start\tCtrl-H"
+msgstr "Inchide tabƒ\tCtrl-W"
 
 #: src/chmframe.cpp:803
 #, fuzzy
 msgid "&New tab\tCtrl-T"
-msgstr "&Fonturi...\tCtrl-T"
+msgstr "Tab nouƒ\tCtrl-T"
 
 # E ok forma pluralÄƒ?
 #: src/chmframe.cpp:806
@@ -342,7 +342,7 @@ msgstr "&SalveazÄƒ adresa ca..."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "Deschide in tab nou"
 
 #: src/chmhtmlwindow.cpp:55
 msgid "&Copy selection"

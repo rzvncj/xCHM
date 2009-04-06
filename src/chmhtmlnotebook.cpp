@@ -180,7 +180,7 @@ bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 }
 
 
-void CHMHtmlNotebook::OnPageClosed(wxAuiNotebookEvent&)
+void CHMHtmlNotebook::OnPageChanged(wxAuiNotebookEvent&)
 {
 	if(GetPageCount() == 1)
 		SetTabCtrlHeight(0);
@@ -190,7 +190,7 @@ void CHMHtmlNotebook::OnPageClosed(wxAuiNotebookEvent&)
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
 	EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
 	EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
-	EVT_AUINOTEBOOK_PAGE_CLOSED(wxID_ANY, CHMHtmlNotebook::OnPageClosed)
+	EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, CHMHtmlNotebook::OnPageChanged)
 END_EVENT_TABLE()
 
 

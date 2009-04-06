@@ -76,9 +76,6 @@ public:
 	//! Called when user asks for a tab to close
 	void OnCloseTab(wxCommandEvent&);
 
-	//! Called when a page has been closed
-	void OnPageClosed(wxAuiNotebookEvent&);
-
 	//! Called when user ask for a new tab
 	void OnNewTab(wxCommandEvent& event);
 
@@ -94,6 +91,9 @@ protected:
 
 	//! Called when user asks for prior notebook page
 	void OnGoToPriorPage(wxCommandEvent&);
+
+	//! Callback for the page changed wxWidgets event
+	void OnPageChanged(wxAuiNotebookEvent&);
 
 private:
 	wxTreeCtrl* _tcl;

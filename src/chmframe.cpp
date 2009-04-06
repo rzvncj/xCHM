@@ -142,10 +142,16 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _fullAppPath(fullAppPath)
 {
 #	if wxUSE_ACCEL
-	wxAcceleratorEntry entries[2];
+	const int NO_ACCELERATOR_ENTRIES = 5;
+	wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
+
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
 	entries[1].Set(wxACCEL_CTRL, (int) 'C', ID_CopySelection);
-	wxAcceleratorTable accel(2, entries);
+	entries[2].Set(wxACCEL_CTRL, (int) ']', ID_Forward);
+	entries[3].Set(wxACCEL_CTRL, (int) '[', ID_Back);
+	entries[4].Set(wxACCEL_CTRL, WXK_F4, ID_CloseTab);
+
+	wxAcceleratorTable accel(NO_ACCELERATOR_ENTRIES, entries);
 	SetAcceleratorTable(accel);
 #	endif
 
@@ -749,7 +755,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 
 	_menuFile->Append(ID_Open, _("&Open..\tCtrl-O"), OPEN_HELP);
 	_menuFile->Append(ID_Print, _("&Print page..\tCtrl-P"), PRINT_HELP);
-	_menuFile->Append(ID_Fonts, _("Fon&ts..\tCtrl-T"), FONTS_HELP);
+	_menuFile->Append(ID_Fonts, _("Fon&ts.."), FONTS_HELP);
 	_menuFile->AppendSeparator();
 	_menuFile->AppendCheckItem(ID_Contents, 
 				   _("&Show contents tree\tCtrl-S"),
@@ -782,8 +788,9 @@ wxMenuBar* CHMFrame::CreateMenu()
 	wxMenu *menuHistory = new wxMenu;
 
 	menuHistory->Append(ID_Home, _("&Home\tCtrl-H"), HOME_HELP);
-	menuHistory->Append(ID_Forward, _("For&ward\tCtrl-W"), FORWARD_HELP);
-	menuHistory->Append(ID_Back, _("&Back\tCtrl-B"), BACK_HELP);
+	menuHistory->Append(ID_Forward, _("For&ward\tAlt-RIGHT"), 
+			    FORWARD_HELP);
+	menuHistory->Append(ID_Back, _("&Back\tAlt-LEFT"), BACK_HELP);
 	
 	wxMenu *menuHelp = new wxMenu;
 	menuHelp->Append(ID_About, _("&About..\tF1"), ABOUT_HELP);
@@ -792,15 +799,14 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuEdit->Append(ID_CopySelection, _("&Copy\tCtrl-C"), COPY_HELP);
 	menuEdit->Append(ID_FindInPage, _("&Find..\tCtrl-F"), FIND_HELP);
 	menuEdit->AppendSeparator();
-	menuEdit->Append(ID_CloseTab, _("&Close tab\tCtrl-F4"), CLOSETAB_HELP);
-	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-N"), NEWTAB_HELP);
+	menuEdit->Append(ID_CloseTab, _("&Close tab\tCtrl-W"), CLOSETAB_HELP);
+	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-T"), NEWTAB_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
 	menuBar->Append(menuEdit, _("&Edit"));
 	menuBar->Append(menuHistory, _("Hi&story"));
 	menuBar->Append(menuHelp, _("&Help"));
-
 
 	return menuBar;
 }

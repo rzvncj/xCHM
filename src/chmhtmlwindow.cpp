@@ -375,7 +375,12 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 {
-	_frame->AddHtmlView(GetParser()->GetFS()->GetPath(), _link);
+	wxString link = _link;
+
+	if(link.StartsWith(wxT("#"))) // anchor
+		link = GetOpenedPage() + _link;
+
+	_frame->AddHtmlView(GetParser()->GetFS()->GetPath(), link);
 }
 
 

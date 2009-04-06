@@ -89,9 +89,6 @@ public:
 	virtual bool AddPage(wxWindow* page, const wxString& title);
 
 protected:
-	//! Navigate trough the notebook pages
-	void GoToNextPage(int incr);
-
 	//! Called when user asks for next notebook page
 	void OnGoToNextPage(wxCommandEvent&);
 

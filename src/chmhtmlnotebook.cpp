@@ -30,7 +30,8 @@
 CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc, 
 				 CHMFrame* frame)
 	: wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize,
-			wxAUI_NB_DEFAULT_STYLE),_tcl(tc), _frame(frame)
+			wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
+	  _tcl(tc), _frame(frame)
 {
 	wxAcceleratorEntry entries[2];  
 	entries[0].Set(wxACCEL_CTRL,   WXK_PRIOR,     ID_PriorPage);
@@ -61,7 +62,6 @@ void CHMHtmlNotebook::AddHtmlView(const wxString& path,
 {
 	CHMHtmlWindow* htmlWin = CreateView();
 	
-
 	if(htmlWin) {
 		htmlWin->GetParser()->GetFS()->ChangePathTo(path);
 		htmlWin->LoadPage(link);
@@ -75,6 +75,7 @@ bool CHMHtmlNotebook::LoadPageInCurrentView(const wxString& location)
 }
 
 
+// TODO: this is a misleading named function with side effects. It's a no-no.
 CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
 {
 	int selection = GetSelection();
@@ -87,29 +88,25 @@ CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
 }
 
 
-void CHMHtmlNotebook::GoToNextPage(int incr)
+void CHMHtmlNotebook::OnGoToNextPage(wxCommandEvent&)
 {
 	int selection = GetSelection();
 
-	selection += incr;
-	if(selection < 0)
-		selection = GetPageCount() - 1;
-	else if(selection > (int)GetPageCount() - 1)
-		selection = 0;
+	if(selection >= static_cast<int>(GetPageCount() - 1))
+		return;
 
-	SetSelection(selection);
-}
-
-
-void CHMHtmlNotebook::OnGoToNextPage(wxCommandEvent&)
-{
-	GoToNextPage(1);
+	SetSelection(selection + 1);
 }
 
 
 void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
 {
-	GoToNextPage(-1);
+	int selection = GetSelection();
+
+	if(selection <= 0)
+		return;
+
+	SetSelection(selection - 1);
 }
 
 
@@ -176,7 +173,7 @@ bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 
 	bool st = wxAuiNotebook::AddPage(page, title);
 
-	if(GetPageCount() > 1)
+	if(GetPageCount() == 2)
 		SetTabCtrlHeight(-1);
 
 	return st;
@@ -185,7 +182,7 @@ bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 
 void CHMHtmlNotebook::OnPageClosed(wxAuiNotebookEvent&)
 {
-	if(GetPageCount() <= 1)
+	if(GetPageCount() == 1)
 		SetTabCtrlHeight(0);
 }
 

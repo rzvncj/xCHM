@@ -313,4 +313,7 @@
 		+ #included <bitfiddle.inl> in chmapp.cpp (apparently it
 		did not compile without this on some platforms)
 		+ updated French translation.
+		+ fixed XPM compile-time warnings for GCC 4.3
+		+ bumped minimum accepted wxWidgets version to 2.8.
+		+ added tabbed browsing support.
 

@@ -28,7 +28,7 @@
 
 namespace {
 
-wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal "
+const wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal "
 	"face<br>(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face."
 	"</b> <b><i>Bold italic face.</i></b><br><font size=-2>font size -2"
 	"</font><br><font size=-1>font size -1</font><br><font size=+0>font"

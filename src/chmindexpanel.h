@@ -29,7 +29,7 @@
 #include <wx/listctrl.h>
 
 
-class CHMHtmlWindow;
+class CHMHtmlNotebook;
 class CHMListCtrl;
 
 
@@ -56,7 +56,7 @@ public:
 	  \param html HTML-capable widget used for displaying pages
 	  from the index.
 	 */
-	CHMIndexPanel(wxWindow *parent, CHMHtmlWindow* html);
+	CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook* nbhtml);
 
 public:
 	//! Accesor for the CHMListCtrl used by this panel.
@@ -79,7 +79,7 @@ protected:
 	void OnText(wxCommandEvent& event);
 
 private:
-	CHMHtmlWindow* _html;
+	CHMHtmlNotebook* _nbhtml;
 	wxTextCtrl* _text;
 	CHMListCtrl* _lc;
 	bool _navigate;

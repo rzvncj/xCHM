@@ -23,7 +23,7 @@
 #include <hhcparser.h>
 #include <chminputstream.h>
 #include <chmlistctrl.h>
-#include <chmhtmlwindow.h>
+#include <chmhtmlnotebook.h>
 #include <wx/wx.h>
 #include <wx/sizer.h>
 #include <wx/utils.h>
@@ -33,9 +33,9 @@
 
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
-			       CHMHtmlWindow *html)
+			       CHMHtmlNotebook *nbhtml)
 	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL), 
-	  _titles(NULL), _search(NULL), _results(NULL), _html(html)
+	  _titles(NULL), _search(NULL), _results(NULL), _nbhtml(nbhtml)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
@@ -55,7 +55,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 	_search->SetToolTip(_("Search contents for occurences of"
 			      " the specified text."));
 #endif
-	_results = new CHMListCtrl(this, html, ID_Results);
+	_results = new CHMListCtrl(this, nbhtml, ID_Results);
 
         sizer->Add(_text, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, 2);
         sizer->Add(_partial, 0, wxLEFT | wxRIGHT | wxTOP, 10);

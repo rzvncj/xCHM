@@ -58,9 +58,10 @@ PROGRAMS = $(bin_PROGRAMS)
 am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) \
 	chmframe.$(OBJEXT) chmfshandler.$(OBJEXT) \
 	chminputstream.$(OBJEXT) chmfontdialog.$(OBJEXT) \
-	chmsearchpanel.$(OBJEXT) chmhtmlwindow.$(OBJEXT) \
-	chmfinddialog.$(OBJEXT) chmindexpanel.$(OBJEXT) \
-	chmlistctrl.$(OBJEXT) spantag.$(OBJEXT) hhcparser.$(OBJEXT)
+	chmhtmlnotebook.$(OBJEXT) chmsearchpanel.$(OBJEXT) \
+	chmhtmlwindow.$(OBJEXT) chmfinddialog.$(OBJEXT) \
+	chmindexpanel.$(OBJEXT) chmlistctrl.$(OBJEXT) \
+	spantag.$(OBJEXT) hhcparser.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -146,6 +147,7 @@ WX_CXXFLAGS = @WX_CXXFLAGS@
 WX_CXXFLAGS_ONLY = @WX_CXXFLAGS_ONLY@
 WX_LIBS = @WX_LIBS@
 WX_LIBS_STATIC = @WX_LIBS_STATIC@
+WX_RESCOMP = @WX_RESCOMP@
 WX_VERSION = @WX_VERSION@
 XGETTEXT = @XGETTEXT@
 ac_ct_CC = @ac_ct_CC@
@@ -196,12 +198,12 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 INCLUDES = -I$(top_srcdir)/art
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-	chminputstream.cpp chmfontdialog.cpp \
+	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
 	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
 	chmindexpanel.cpp chmlistctrl.cpp spantag.cpp hhcparser.cpp
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-	chminputstream.h chmfontdialog.h \
+	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
 	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
 	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
 
@@ -278,6 +280,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfontdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmframe.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfshandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmhtmlnotebook.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmhtmlwindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmindexpanel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chminputstream.Po@am__quote@

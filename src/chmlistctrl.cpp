@@ -23,7 +23,7 @@
 
 
 #include <chmlistctrl.h>
-#include <chmhtmlwindow.h>
+#include <chmhtmlnotebook.h>
 #include <chminputstream.h>
 #include <wx/settings.h>
 
@@ -42,14 +42,14 @@ int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2)
 
 // CHMListCtrl implementation
 
-CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
+CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlNotebook *nbhtml,
 			 wxWindowID id)
 	: wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
 		     wxLC_VIRTUAL |
 		     wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | 
 		     wxLC_SORT_ASCENDING | wxSUNKEN_BORDER), 
 	  _items(CompareItemPairs),
-	  _html(html)
+	  _nbhtml(nbhtml)
 {
 	InsertColumn(0, wxEmptyString);
 	SetItemCount(0);
@@ -96,7 +96,7 @@ void CHMListCtrl::LoadSelected()
 	wxString fname = wxString(wxT("file:")) + chmf->ArchiveName() +
 		                                wxT("#xchm:/") + _items[item]->_url;
 	if(chmf)
-		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
+		_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() +
 				wxT("#xchm:/") + _items[item]->_url);
 }
 

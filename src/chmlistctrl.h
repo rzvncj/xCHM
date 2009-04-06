@@ -32,7 +32,7 @@
 
 
 // Forward declarations.
-class CHMHtmlWindow;
+class CHMHtmlNotebook;
 
 
 //! Item to store in the virtual list control
@@ -73,7 +73,7 @@ public:
 	  the corresponding page in the HTML window.
 	  \param id Widget id.
 	 */
-	CHMListCtrl(wxWindow *parent, CHMHtmlWindow *html,
+	CHMListCtrl(wxWindow *parent, CHMHtmlNotebook *nbhtml,
 		    wxWindowID id = -1);
 
 	//! Cleanup.
@@ -117,7 +117,7 @@ private:
 	
 private:
 	ItemPairArray _items;
-	CHMHtmlWindow *_html;
+	CHMHtmlNotebook *_nbhtml;
 	int _currentSize;
 
 private:

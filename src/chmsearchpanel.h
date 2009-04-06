@@ -38,7 +38,7 @@
 
 // Forward declaration.
 class CHMListCtrl;
-class CHMHtmlWindow;
+class CHMHtmlNotebook;
 
 
 /*!
@@ -69,7 +69,7 @@ public:
 	  result of searching.
 	 */
 	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
-		       CHMHtmlWindow* html);
+		       CHMHtmlNotebook* nbhtml);
 
 	//! Calls SetConfig().
 	~CHMSearchPanel();
@@ -111,7 +111,7 @@ private:
 	wxCheckBox* _titles;
 	wxButton* _search;
 	CHMListCtrl* _results;
-	CHMHtmlWindow* _html;
+	CHMHtmlNotebook* _nbhtml;
 
 private:
 	DECLARE_EVENT_TABLE()

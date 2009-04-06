@@ -25,6 +25,7 @@
 
 
 #include <chmhtmlwindow.h>
+#include <chmhtmlnotebook.h>
 #include <hhcparser.h>
 #include <chminputstream.h>
 #include <chmframe.h>
@@ -40,7 +41,7 @@
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL), 
+	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL),
 	  _frame(frame), _fdlg(NULL)
 {
 	_menu = new wxMenu;
@@ -48,6 +49,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	_menu->Append(ID_PopupBack, _("&Back"));
 	_menu->Append(ID_CopyLink, _("Copy &link location"));
 	_menu->Append(ID_SaveLinkAs, _("&Save link as.."));
+	_menu->Append(ID_OpenInNewTab, _("&Open in a new tab"));
 
 	_menu->AppendSeparator();
 	_menu->Append(ID_CopySel, _("&Copy selection"));
@@ -67,7 +69,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxLogNull log;
 	wxString tmp = location;
-
 	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 
@@ -78,7 +79,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 
 		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')), 
 				wxPATH_UNIX);
-
 		wxString cwd = GetParser()->GetFS()->
 			GetPath().AfterLast(wxT(':'));
 		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
@@ -92,7 +92,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 		if(_found)
 			_found = false;
 	}
-
 	return wxHtmlWindow::LoadPage(tmp);
 }
 
@@ -350,6 +349,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
 	_menu->Enable(ID_CopyLink, false);
 	_menu->Enable(ID_SaveLinkAs, false);
+	_menu->Enable(ID_OpenInNewTab, false);
 
         int x, y;
         CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
@@ -366,11 +366,28 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 		_link = linfo->GetHref();
 		_menu->Enable(ID_CopyLink, true);
 		_menu->Enable(ID_SaveLinkAs, true);
+		_menu->Enable(ID_OpenInNewTab, true);
 	}
 
 	PopupMenu(_menu, event.GetPosition());
 }
-
+void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
+{
+	//we have to determine the location absolute location
+	if(_link.StartsWith(wxT("#")))
+	{	//destination is an anchor inside the same page
+		_frame->AddHtmlView(GetOpenedPage()+_link);
+	}
+	else if(_link.StartsWith(wxT("http://")) || _link.StartsWith(wxT("file://")) )
+	{	//destination is external
+		_frame->AddHtmlView(_link);
+	}
+	else
+	{	//destination must be to another page inside the same file or site
+		wxString completeLink = GetOpenedPage().BeforeLast(wxT('/'))+wxT("/")+_link;
+		_frame->AddHtmlView(completeLink);
+	}
+}
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
@@ -384,6 +401,12 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 	event.Skip();
 }
 
+void CHMHtmlWindow::OnSetTitle(const wxString& title)
+{
+	//direct access to the notebook, TODO : design a new event type
+	(static_cast<CHMHtmlNotebook*>(GetParent()))->OnChildrenTitleChanged(title);
+	wxHtmlWindow::OnSetTitle(title);
+}
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)
@@ -392,6 +415,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
 	EVT_MENU(ID_SaveLinkAs, CHMHtmlWindow::OnSaveLinkAs)
+	EVT_MENU(ID_OpenInNewTab, CHMHtmlWindow::OnOpenInNewTab)
 	EVT_CHAR(CHMHtmlWindow::OnChar)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
 	EVT_SIZE(CHMHtmlWindow::OnSize)

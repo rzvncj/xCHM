@@ -26,8 +26,8 @@
 #include <wx/sizer.h>
 
 
-CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlWindow *html)
-	: wxPanel(parent), _html(html), _lc(NULL), _navigate(true)
+CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook *nbhtml)
+	: wxPanel(parent), _nbhtml(nbhtml), _lc(NULL), _navigate(true)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
@@ -37,7 +37,7 @@ CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlWindow *html)
 			       wxDefaultPosition, wxDefaultSize, 
 			       wxTE_PROCESS_ENTER);
 
-	_lc = new CHMListCtrl(this, html, ID_IndexClicked);
+	_lc = new CHMListCtrl(this, nbhtml, ID_IndexClicked);
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
         sizer->Add(_lc, 1, wxALL | wxEXPAND, 2);

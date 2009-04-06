@@ -27,7 +27,9 @@
 #include <wx/html/htmlwin.h>
 #include <wx/treectrl.h>
 #include <wx/menu.h>
+#include <wx/notebook.h>
 #include <chmfinddialog.h>
+
 
 
 //! Event IDs.
@@ -38,6 +40,7 @@ enum {
 	ID_PopupForward,
 	ID_PopupBack,
 	ID_PopupFind,
+	ID_OpenInNewTab,
 };
 
 
@@ -69,7 +72,7 @@ public:
 
 	//! Destructor. Deletes heap objects allocated in the constructor.
 	~CHMHtmlWindow();
-
+    virtual void OnSetTitle(const wxString& title);
 	//! Override. Looks up the wanted page in the tree and selects it.
 	bool LoadPage(const wxString& location);
 
@@ -142,6 +145,8 @@ protected:
 	//! Called on widget resize.
 	void OnSize(wxSizeEvent& event);
 
+	//! Called when the user selects 'Save link as' from the popup menu.
+	void OnOpenInNewTab(wxCommandEvent& event);
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
@@ -168,6 +173,7 @@ private:
 private:
 	DECLARE_EVENT_TABLE()
 };
+
 
 
 #endif // __CHMHTMLWINDOW_H_

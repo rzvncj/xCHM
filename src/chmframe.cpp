@@ -31,6 +31,7 @@
 #include <chmsearchpanel.h>
 #include <chmindexpanel.h>
 #include <chmlistctrl.h>
+#include <chmhtmlnotebook.h>
 #include <hhcparser.h>
 #include <wx/fontenum.h>
 #include <wx/statbox.h>
@@ -55,6 +56,8 @@
 #define ABOUT_HELP _("About the program.")
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
+#define CLOSETAB_HELP _("Close the current tab")
+#define NEWTAB_HELP _("Open a new tab")
 #define REGISTER_EXTENSION_HELP _("Associate the .chm file " \
 				  "extension with xCHM.")
 
@@ -62,8 +65,9 @@
 namespace {
 
 const wxChar *greeting = wxT(
-	"<html><body><table border=0><tr><td align=\"left\">"
-	"<img src=\"memory:logo.xpm\"></td><td align=\"left\">"
+	"<html><head><title>About</title></head><body><table border=0>"
+	"<tr><td align=\"left\"><img src=\"memory:logo.xpm\"></td>"
+	"<td align=\"left\">"
 	"Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
 	"<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
 	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
@@ -83,9 +87,10 @@ const wxChar *greeting = wxT(
 	" <TT>GPL</TT> out first. Far too many people think the <TT>GPL</TT> "
 	"is bad out of utter ignorance.")
 #if !defined(wxUSE_UNICODE) || !wxUSE_UNICODE
-	wxT("<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked against a "
-	"non-Unicode version of wxWidgets! While it will work with most "
-	"CHMs, it might not properly display special character languages.")
+	wxT("<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked"
+	" against a non-Unicode version of wxWidgets! While it will"
+	" work with most CHMs, it might not properly display"
+	" special character languages.")
 #endif
 	wxT("<br><br>Tips:<br><ul><li>"
 	"The global search is an \'AND\' search, i.e. searching for"
@@ -126,7 +131,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const wxString& normalFont, const wxString& fixedFont,
 		   const int fontSize, const int sashPosition,
 		   const wxString& fullAppPath)
-	: wxFrame(NULL, -1, title, pos, size), _html(NULL),
+	: wxFrame(NULL, -1, title, pos, size),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
@@ -179,25 +184,19 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->Show(FALSE);
 
 	wxPanel* temp = CreateContentsPanel();
-
-	_html = new CHMHtmlWindow(_sw, _tcl, this);
-	_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
-	_html->SetRelatedStatusBar(0);
-
-	_html->SetFonts(_normalFont, _fixedFont, sizes);	
-	_html->LoadPage(wxT("memory:about.html"));
-
-	_csp = new CHMSearchPanel(_nb, _tcl, _html);
+	_nbhtml = new CHMHtmlNotebook(_sw, _tcl, this);
+	_nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
+	_csp = new CHMSearchPanel(_nb, _tcl, _nbhtml);
 	_font = _tcl->GetFont();
 
-	_cip = new CHMIndexPanel(_nb, _html);
+	_cip = new CHMIndexPanel(_nb, _nbhtml);
 
 	_nb->AddPage(temp, _("Contents"));
 	_nb->AddPage(_cip, _("Index"));
 	_nb->AddPage(_csp, _("Search"));
 
-	_sw->Initialize(_html);
-	_html->SetFocusFromKbd();
+	_sw->Initialize(_nbhtml);
+	_nbhtml->GetCurrentPage()->SetFocusFromKbd();
 }
 
 
@@ -286,16 +285,17 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		
 		wxBusyCursor bc;
 
-		_html->SetFonts(_normalFont = cfd.NormalFont(), 
+		_nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), 
 				_fixedFont = cfd.FixedFont(),
 				cfd.Sizes());
 
 		_fontSize = *(cfd.Sizes() + 3);
 
-		wxString page = _html->GetOpenedPage();
+		wxString page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 
 		if(page.IsEmpty())
-			_html->LoadPage(wxT("memory:about.html"));
+			_nbhtml->GetCurrentPage()
+				->LoadPage(wxT("memory:about.html"));
 	}
 }
 
@@ -307,21 +307,22 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
 	if(!chmf)
 		return;
 
-	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
-		+ wxT("#xchm:") + chmf->HomePage());
+	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) +
+				       chmf->ArchiveName()
+				       + wxT("#xchm:") + chmf->HomePage());
 }
 
 
 void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
 {
-	_html->HistoryForward();
+	_nbhtml->GetCurrentPage()->HistoryForward();
 }
 
 
 void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
-	if(_html->HistoryCanBack())
-		_html->HistoryBack();
+	if(_nbhtml->GetCurrentPage()->HistoryCanBack())
+		_nbhtml->GetCurrentPage()->HistoryBack();
 	else {
 		if(CHMInputStream::GetCache())
 			return;
@@ -346,7 +347,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 			_menuFile->Check(ID_Contents, TRUE);
 
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, _sashPos);
+			_sw->SplitVertically(_nb, _nbhtml, _sashPos);
 
 		/*} else {
 			_tb->ToggleTool(ID_Contents, FALSE);
@@ -398,7 +399,7 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 	                sizes[i+3] = _fontSize + i * 2;
 			
 	_ep->SetFonts(_normalFont, _fixedFont, sizes);
-	_ep->PrintFile(_html->GetOpenedPage());
+	_ep->PrintFile(_nbhtml->GetCurrentPage()->GetOpenedPage());
 }
 
 
@@ -412,13 +413,22 @@ void CHMFrame::OnHistFile(wxCommandEvent& event)
 
 void CHMFrame::OnFind(wxCommandEvent& event)
 {
-	_html->OnFind(event);
+	_nbhtml->GetCurrentPage()->OnFind(event);
 }
 
+void CHMFrame::OnCloseTab(wxCommandEvent& event)
+{
+	_nbhtml->OnCloseTab(event);
+}
+
+void CHMFrame::OnNewTab(wxCommandEvent& event)
+{
+	_nbhtml->OnNewTab(event);
+}
 
 void CHMFrame::OnCopySelection(wxCommandEvent& event)
 {
-	_html->OnCopy(event);
+	_nbhtml->GetCurrentPage()->OnCopy(event);
 }
 
 
@@ -486,8 +496,9 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 	if(!chmf)
 		return;
 
-	_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-			wxT("#xchm:/") + *url);
+	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + 
+				       chmf->ArchiveName() +
+				       wxT("#xchm:/") + *url);
 }
 
 
@@ -505,11 +516,12 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(!data || data->_url.IsEmpty())
 		return;
 
-	if(!_html->IsCaller()) {
-		_html->SetSync(false);
-		_html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName() +
-				wxT("#xchm:/") + data->_url);
-		_html->SetSync(true);
+	if(!_nbhtml->GetCurrentPage()->IsCaller()) {
+		_nbhtml->GetCurrentPage()->SetSync(false);
+		_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + 
+					       chmf->ArchiveName() +
+					       wxT("#xchm:/") + data->_url);
+		_nbhtml->GetCurrentPage()->SetSync(true);
 	}
 }
 
@@ -541,7 +553,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	bool rtn = false;
 	SaveBookmarks();
 	_nb->SetSelection(0);
-
+	_nbhtml->CloseAllPagesExceptFirst();
 	if(!archive.StartsWith(wxT("file:")) || 
 	   !archive.Contains(wxT("#xchm:"))) {
 
@@ -555,12 +567,12 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 		if(!chmf)
 			return false;
 	
-		rtn = _html->LoadPage(wxString(wxT("file:"))
+		rtn = _nbhtml->LoadPageInCurrentView(wxString(wxT("file:"))
 						+ chmf->ArchiveName()
 				                + wxT("#xchm:") 
 						+ chmf->HomePage());
 	} else {
-		rtn = _html->LoadPage(archive);
+		rtn = _nbhtml->LoadPageInCurrentView(archive);
 	}
 
 	if(!rtn) { // Error, could not load CHM file
@@ -574,7 +586,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 		_tb->ToggleTool(ID_Contents, FALSE);
 		_cip->Reset();
 		_csp->Reset();
-		_html->LoadPage(wxT("memory:error.html"));
+		_nbhtml->LoadPageInCurrentView(wxT("memory:error.html"));
 
 	} else {
 		UpdateCHMInfo();
@@ -597,8 +609,10 @@ bool CHMFrame::LoadContextID( const int contextID )
 	if( !chmf->IsValidCID( contextID ) )
 		return FALSE;
 
-	return _html->LoadPage(wxString(wxT("file:")) + chmf->ArchiveName()
-		+ wxT("#xchm:") + chmf->GetPageByCID( contextID ) );
+	return _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + 
+					      chmf->ArchiveName()
+					      + wxT("#xchm:") + 
+					      chmf->GetPageByCID(contextID));
 }
 
 
@@ -624,7 +638,7 @@ void CHMFrame::UpdateCHMInfo()
 			_menuFile->Enable(ID_Recent, TRUE);
 	}
 
-	_html->HistoryClear();
+	_nbhtml->GetCurrentPage()->HistoryClear();
 	_csp->Reset();
 	_cip->Reset();
 
@@ -641,10 +655,11 @@ void CHMFrame::UpdateCHMInfo()
 			wxString(wxT("xCHM v. " VERSION ": ")) + title;
 
 		SetTitle(titleBarText);
-		_html->SetRelatedFrame(this, titleBarText);
+		_nbhtml->GetCurrentPage()->SetRelatedFrame(this, titleBarText);
 	} else {
 		SetTitle(wxT("xCHM v. " VERSION));
-		_html->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
+		_nbhtml->GetCurrentPage()
+			->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
 	}
 
 #if !wxUSE_UNICODE
@@ -672,9 +687,9 @@ void CHMFrame::UpdateCHMInfo()
 			_csp->SetNewFont(font);
 			_cip->SetNewFont(font);
 			_cb->SetFont(font);
-			_html->SetFonts(font.GetFaceName(), font.GetFaceName(),
-					sizes);
-			
+			_nbhtml->SetChildrenFonts(font.GetFaceName(),
+						  font.GetFaceName(),
+						  sizes);
 			noSpecialFont = false;
 		}
 
@@ -698,7 +713,7 @@ void CHMFrame::UpdateCHMInfo()
 			_cip->SetNewFont(tmp);
 		}
 
-		_html->SetFonts(_normalFont, _fixedFont, sizes);
+		_nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
 		noSpecialFont = true;
 	}
 #endif
@@ -707,7 +722,7 @@ void CHMFrame::UpdateCHMInfo()
 	if(_tcl->GetCount() >= 1) {		
 		if(!_sw->IsSplit()) {
 			_nb->Show(TRUE);
-			_sw->SplitVertically(_nb, _html, _sashPos);
+			_sw->SplitVertically(_nb, _nbhtml, _sashPos);
 			_menuFile->Check(ID_Contents, TRUE);
 			_tb->ToggleTool(ID_Contents, TRUE);
 		}
@@ -774,6 +789,9 @@ wxMenuBar* CHMFrame::CreateMenu()
 	wxMenu *menuEdit = new wxMenu;
 	menuEdit->Append(ID_CopySelection, _("&Copy\tCtrl-C"), COPY_HELP);
 	menuEdit->Append(ID_FindInPage, _("&Find..\tCtrl-F"), FIND_HELP);
+	menuEdit->AppendSeparator();
+	menuEdit->Append(ID_CloseTab, _("&Close tab\tCtrl-F4"), CLOSETAB_HELP);
+	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-N"), NEWTAB_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
@@ -1000,6 +1018,10 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	return TRUE;
 }
 
+void CHMFrame::AddHtmlView(wxString const& location) 
+{
+	_nbhtml->AddHtmlView(location);
+}
 
 // They say this needs to be in the implementation file.
 BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
@@ -1017,6 +1039,8 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Print, CHMFrame::OnPrint)
 	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, CHMFrame::OnHistFile)
 	EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
+	EVT_MENU(ID_CloseTab, CHMFrame::OnCloseTab)
+	EVT_MENU(ID_NewTab, CHMFrame::OnNewTab)
 	EVT_MENU(ID_CopySelection, CHMFrame::OnCopySelection)
 	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)

@@ -40,7 +40,7 @@ class CHMHtmlWindow;
 class CHMSearchPanel;
 class CHMIndexPanel;
 class wxFileType;
-
+class CHMHtmlNotebook;
 
 //! Default font size for the wxHtmlWindow.
 #define CHM_DEFAULT_FONT_SIZE 12
@@ -77,6 +77,8 @@ enum
 	ID_Recent,
 	ID_Notebook,
 	ID_RegisterExtension,
+	ID_CloseTab,
+	ID_NewTab,
 	ID_TreeCtrl = 1000,
 };
 
@@ -140,6 +142,9 @@ public:
 	//! Fills the index and the contents tree.
 	void UpdateCHMInfo();
 
+	//!Add html view
+	void AddHtmlView(const wxString& location);
+
 protected:
 	//! Called when the user closes the window.
 	void OnQuit(wxCommandEvent& event);
@@ -202,7 +207,12 @@ protected:
 
 	//! Called when the user presses a key
 	void OnChar(wxKeyEvent &event);
- 	
+
+	//! Called when the user types Ctrl-F4.
+	void OnCloseTab(wxCommandEvent& event);
+
+	//! Called when the user types Ctrl-N.
+	void OnNewTab(wxCommandEvent& event);
 private:
 	//! Helper. Creates the menu.
 	wxMenuBar *CreateMenu();
@@ -223,7 +233,7 @@ private:
 	void SaveExitInfo();
 
 private:
-	CHMHtmlWindow* _html;
+	CHMHtmlNotebook * _nbhtml;
 	wxTreeCtrl* _tcl;
 	wxSplitterWindow* _sw;
 	wxMenu* _menuFile;

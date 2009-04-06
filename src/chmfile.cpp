@@ -649,11 +649,11 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild, cv);
 	toBuild->Thaw();
-       
+
 	if(bindex)
 		return true;
 
-	if(_topicsFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
+	if(_indexFile.IsEmpty() || !ResolveObject(_indexFile, &ui))
 		return false;
 
 	toBuild->Freeze();

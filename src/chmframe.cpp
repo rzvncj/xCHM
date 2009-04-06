@@ -117,6 +117,8 @@ const wxChar *about_txt = wxT(
 	"Eamon Millman <millman@pcigeomatics.com>.\n"
 	"<SPAN> tag support and contents tree icons contributed by\n"
 	"Fritz Elfert <felfert@users.sourceforge.net>.\n"
+	"Tabbed browsing support contributed by Ced Boudinet"
+	" <bouced@gmx.fr>.\n"
 	"Written with wxWidgets (http://www.wxwidgets.org).\n\n"
 	"This program is (proudly) under the GPL.");
 

@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-06 18:21+0300\n"
-"PO-Revision-Date: 2005-12-10 19:26+0100\n"
-"Last-Translator: Yann Verley <yann.verley@free.fr>\n"
-"Language-Team: français <kde-francophone@kde.org>\n"
+"POT-Creation-Date: 2009-04-07 20:40+0200\n"
+"PO-Revision-Date: 2009-04-07 20:40+0200\n"
+"Last-Translator: Cedric Boudinet <bouced@gmx.fr>\n"
+"Language-Team: français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -116,12 +116,11 @@ msgstr "Rechercher dans la page."
 
 #: src/chmframe.cpp:59
 msgid "Close the current tab"
-msgstr ""
+msgstr "Fermer l'onglet courant"
 
 #: src/chmframe.cpp:60
-#, fuzzy
 msgid "Open a new tab"
-msgstr "Ouvrir un livre CHM."
+msgstr "Ouvrir dans un nouvel onglet"
 
 #: src/chmframe.cpp:61
 msgid "Associate the .chm file extension with xCHM."
@@ -188,7 +187,6 @@ msgid "&Print page..\tCtrl-P"
 msgstr "&Imprimer la page...\tCtrl-P"
 
 #: src/chmframe.cpp:758
-#, fuzzy
 msgid "Fon&ts.."
 msgstr "Polices .."
 
@@ -217,14 +215,12 @@ msgid "&Home\tCtrl-H"
 msgstr "Page d'&accueil\tCtrl-H"
 
 #: src/chmframe.cpp:791
-#, fuzzy
 msgid "For&ward\tAlt-RIGHT"
-msgstr "&Suivant\tCtrl-W"
+msgstr "&Suivant\tAlt-RIGHT"
 
 #: src/chmframe.cpp:793
-#, fuzzy
 msgid "&Back\tAlt-LEFT"
-msgstr "&Précédent\tCtrl-B"
+msgstr "&Précédent\tAlt-LEFT"
 
 #: src/chmframe.cpp:796
 msgid "&About..\tF1"
@@ -239,14 +235,12 @@ msgid "&Find..\tCtrl-F"
 msgstr "&Chercher..\tCtrl-F"
 
 #: src/chmframe.cpp:802
-#, fuzzy
 msgid "&Close tab\tCtrl-W"
-msgstr "Page d'&accueil\tCtrl-H"
+msgstr "&Fermer l'onglet\tCtrl-W"
 
 #: src/chmframe.cpp:803
-#, fuzzy
 msgid "&New tab\tCtrl-T"
-msgstr "&Polices..\tCtrl-T"
+msgstr "&Nouvel onglet..\tCtrl-T"
 
 #: src/chmframe.cpp:806
 msgid "&File"
@@ -342,7 +336,7 @@ msgstr "&Enregistrer le lien sous.."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "&Ouvrir dans un nouvel onglet"
 
 #: src/chmhtmlwindow.cpp:55
 msgid "&Copy selection"

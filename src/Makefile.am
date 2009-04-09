@@ -14,5 +14,6 @@ noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 xchm_LDADD= @LINKOPT@ 
 #xchm_LDFLAGS=-pg
 
-all-local:
-	@REZ_COMMAND@
+#all-local:
+#	@REZ_COMMAND@
+

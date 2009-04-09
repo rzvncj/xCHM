@@ -185,7 +185,6 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
 #	define NON_UNICODE_PARAM(x) x
 #endif
 
-#include <iostream>
 
 #if wxUSE_UNICODE
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,

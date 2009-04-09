@@ -21,7 +21,7 @@ pkglibdir = $(libdir)/xchm
 pkgincludedir = $(includedir)/xchm
 top_builddir = ..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
-INSTALL = /usr/bin/ginstall -c
+INSTALL = /usr/bin/install -c
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
 install_sh_SCRIPT = $(install_sh) -c
@@ -51,33 +51,33 @@ CONFIG_CLEAN_FILES =
 SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/red/work/xchm/missing --run aclocal-1.9
+ACLOCAL = ${SHELL} /home/red/personal/work/xchm/missing --run aclocal-1.9
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /home/red/work/xchm/missing --run tar
-AUTOCONF = ${SHELL} /home/red/work/xchm/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/red/work/xchm/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/red/work/xchm/missing --run automake-1.9
+AMTAR = ${SHELL} /home/red/personal/work/xchm/missing --run tar
+AUTOCONF = ${SHELL} /home/red/personal/work/xchm/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/red/personal/work/xchm/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/red/personal/work/xchm/missing --run automake-1.9
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 
+CFLAGS = -g -O2 -pthread
 CPP = gcc -E
-CPPFLAGS =  -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA
+CPPFLAGS =  -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__
 CXX = g++
 CXXCPP = 
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =  -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA -W -Wall
+CXXFLAGS =   -W -Wall -g
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
-EGREP = /usr/bin/grep -E
+EGREP = /bin/grep -E
 EXEEXT = 
-GMSGFMT = /usr/bin/msgfmt
-GREP = /usr/bin/grep
+GMSGFMT = /usr/bin/gmsgfmt
+GREP = /bin/grep
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
@@ -89,11 +89,11 @@ LIBICONV = -liconv
 LIBINTL = 
 LIBOBJS = 
 LIBS = -lchm 
-LINKOPT = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2_xrc-2.6 -lwx_gtk2_qa-2.6 -lwx_gtk2_html-2.6 -lwx_gtk2_adv-2.6 -lwx_gtk2_core-2.6 -lwx_base_xml-2.6 -lwx_base_net-2.6 -lwx_base-2.6 
+LINKOPT = -pthread -Wl,-O1  -L/usr/X11R6/lib   -lwx_gtk2u_richtext-2.8 -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_qa-2.8 -lwx_gtk2u_html-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_baseu-2.8 
 LTLIBICONV = -liconv
 LTLIBINTL = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/red/work/xchm/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/red/personal/work/xchm/missing --run makeinfo
 MKINSTALLDIRS = $(top_builddir)/./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGMERGE = /usr/bin/msgmerge
@@ -106,21 +106,21 @@ PACKAGE_TARNAME =
 PACKAGE_VERSION = 
 PATH_SEPARATOR = :
 POSUB = po
-REZ_COMMAND = @true xchm
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
 USE_NLS = yes
 VERSION = 1.15
-WX_CFLAGS = -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA 
-WX_CFLAGS_ONLY = 
-WX_CONFIG_PATH = /usr/local/bin/wx-config
-WX_CPPFLAGS = -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA
-WX_CXXFLAGS = -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA  
-WX_CXXFLAGS_ONLY = -I/usr/local/lib/wx/include/gtk2-ansi-release-2.6 -I/usr/local/include/wx-2.6 -DGTK_NO_CHECK_CASTS -D__WXGTK__ -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -DNO_GCC_PRAGMA
-WX_LIBS = -L/usr/local/lib -pthread   -L/usr/X11R6/lib  -lwx_gtk2_xrc-2.6 -lwx_gtk2_qa-2.6 -lwx_gtk2_html-2.6 -lwx_gtk2_adv-2.6 -lwx_gtk2_core-2.6 -lwx_base_xml-2.6 -lwx_base_net-2.6 -lwx_base-2.6 
+WX_CFLAGS = -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
+WX_CFLAGS_ONLY = -pthread
+WX_CONFIG_PATH = /usr/bin/wx-config
+WX_CPPFLAGS = -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__
+WX_CXXFLAGS = -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
+WX_CXXFLAGS_ONLY = 
+WX_LIBS = -pthread -Wl,-O1  -L/usr/X11R6/lib   -lwx_gtk2u_richtext-2.8 -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_qa-2.8 -lwx_gtk2u_html-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_baseu-2.8 
 WX_LIBS_STATIC = 
-WX_VERSION = 2.6.4
+WX_RESCOMP = 
+WX_VERSION = 2.8.9
 XGETTEXT = /usr/bin/xgettext
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -152,7 +152,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = /home/red/work/xchm/install-sh
+install_sh = /home/red/personal/work/xchm/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale

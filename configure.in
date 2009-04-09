@@ -20,13 +20,13 @@ if test "$wxWin" != 1; then
         ])
 fi
 
-REZ_FLAGS="`$WX_CONFIG_PATH --rezflags`"
-if test "x$REZ_FLAGS" = "x" -o "x$REZ_FLAGS" = "x#"; then
-	REZ_COMMAND=""
-else
-	REZ_COMMAND="$REZ_FLAGS xchm"
-fi
-AC_SUBST(REZ_COMMAND)
+#REZ_FLAGS="`$WX_CONFIG_PATH --rezflags`"
+#if test "x$REZ_FLAGS" = "x" -o "x$REZ_FLAGS" = "x#"; then
+#	REZ_COMMAND=""
+#else
+#	REZ_COMMAND="$REZ_FLAGS xchm"
+#fi
+#AC_SUBST(REZ_COMMAND)
 
 wx_config_major_version=`echo $WX_VERSION | \
 	sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`

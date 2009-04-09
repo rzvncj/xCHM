@@ -1,8 +1,8 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
-  Tabbed browsing support developed by Ced Boudinet <bouced@gmx.fr>
-  (this file originally written by Ced Boudinet)
+  Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
+  (this file originally written by Cedric Boudinet)
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by

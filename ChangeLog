@@ -315,5 +315,6 @@
 		+ updated French translation.
 		+ fixed XPM compile-time warnings for GCC 4.3
 		+ bumped minimum accepted wxWidgets version to 2.8.
-		+ added tabbed browsing support.
+		+ added tabbed browsing support (from Cedric Boudinet).
+		+ Firefox-style shortcuts for navigation.
 

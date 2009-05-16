@@ -280,7 +280,7 @@ private:
 	bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		     UCharPtr& urlstr, u_int32_t index, wxTreeCtrl* tree,
 		     CHMListCtrl* list, const wxString& idxName,
-		     const wxCSConv& cv, int level, bool local);
+		     int level, bool local);
 
 	//! Get the binary index (if available)
 	bool BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv);

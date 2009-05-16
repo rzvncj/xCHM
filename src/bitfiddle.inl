@@ -187,36 +187,22 @@ inline u_int64_t sr_int(unsigned char* byte, int* bit,
 
 
 #if wxUSE_UNICODE
-inline wxString translateEncoding(const wxString& input, wxFontEncoding enc,
-				  const wxCSConv& cv)
+inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
         if(input.IsEmpty())
                 return wxEmptyString;
 
         if(enc != wxFONTENCODING_SYSTEM) {
-                wchar_t buf2[1024];
-                size_t len = (input.Length() < sizeof(buf2)) ?
-                        input.Length() : sizeof(buf2);
-		
-		const char* cinput = input.mb_str();
+		wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
+		wxCSConv convTo(enc);
 
-		if(!cinput)
-			return input;
-		
-                size_t ret = cv.MB2WC(buf2, input.mb_str(), len);
-
-                if(ret) {
-                        if(ret == (size_t)(-1)) // morons
-                                return wxString(buf2, input.Length());
-
-                        return wxString(buf2, ret);
-                } 
+		return wxString(input.mb_str(convFrom), convTo);
 	}
 
         return input;
 }
 #else
-#define translateEncoding(x, y, z) x
+#define translateEncoding(x, y) x
 #endif
 
 

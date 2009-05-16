@@ -200,9 +200,8 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	LoadContextIDs();
 
 #if wxUSE_UNICODE
-	_title = translateEncoding(_title, _enc, wxCSConv(_enc));
+	_title = translateEncoding(_title, _enc);
 #endif
-
 	return true;
 }
 
@@ -298,7 +297,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
 			if(!GetItem(topics, strings, urltbl, urlstr, index,
-				    toBuild, NULL, wxEmptyString, cv, level, 
+				    toBuild, NULL, wxEmptyString, level, 
 				    (flags & 0x8) == 0))
 				return;
 		}
@@ -326,7 +325,6 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		      UCharPtr& urlstr, u_int32_t index, 
 		      wxTreeCtrl *tree, CHMListCtrl* list, 
 		      const wxString& idxName, 
-		      const wxCSConv& UNICODE_PARAM(cv),
 		      int level, bool local)
 {
 	static wxTreeItemId parents[TREE_BUF_SIZE];
@@ -389,9 +387,8 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 
 	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
+		tname = CURRENT_CHAR_STRING(name.c_str());
 
-		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()), 
-					  _enc, cv);
 		parents[level] = 
 			tree->AppendItem(parents[parentIndex], tname, 2, 2,
 					    new URLTreeItem(tvalue));
@@ -410,7 +407,7 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 	}
 
 	if(list) {
-		tname = translateEncoding(idxName, _enc, cv);
+		tname = idxName;
 		if(!value.empty()) {
 			if(tname.IsEmpty())
 				tname = EMPTY_INDEX;
@@ -612,7 +609,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 
 					GetItem(topics, strings, urltbl,
 						urlstr, index, NULL, 
-						toBuild, name, cv, 0, false);
+						toBuild, name, 0, false);
 					++items;
 
 					offset += sizeof(u_int32_t);

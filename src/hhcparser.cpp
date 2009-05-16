@@ -238,7 +238,7 @@ void HHCParser::handleTag(const std::string& tag)
 				_htmlChars = false;
 			}
 
-			name = translateEncoding(name, _enc, _cv);
+			name = translateEncoding(name, _enc);
 
 			addToTree(name, value);
 			addToList(name, value);

@@ -1404,7 +1404,7 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 	
 	switch(lid) {
 	case LANG_ARABIC:
-		fontEncoding = wxFONTENCODING_ISO8859_6;
+		fontEncoding = wxFONTENCODING_CP1256; 
 		break;
 	case LANG_RUSSIAN:
 		fontEncoding = wxFONTENCODING_CP1251;
@@ -1416,16 +1416,16 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 		fontEncoding = wxFONTENCODING_BULGARIAN;
 		break;
 	case LANG_GREEK:
-		fontEncoding = wxFONTENCODING_ISO8859_7;
+		fontEncoding = wxFONTENCODING_CP1253;
 		break;
 	case LANG_HEBREW:
-		fontEncoding = wxFONTENCODING_ISO8859_8;
+		fontEncoding = wxFONTENCODING_CP1255;
 		break;
         case LANG_THAI:
-		fontEncoding = wxFONTENCODING_ISO8859_11;
+		fontEncoding = wxFONTENCODING_CP874;
 		break;
         case LANG_TURKISH:
-		fontEncoding = wxFONTENCODING_ISO8859_9;
+		fontEncoding = wxFONTENCODING_CP1254;
 		break;
         case LANG_CHINESE:
 		fontEncoding = wxFONTENCODING_CP950;

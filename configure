@@ -7309,12 +7309,12 @@ _ACEOF
 
 fi
 
-{ $as_echo "$as_me:$LINENO: checking for u_int16_t" >&5
-$as_echo_n "checking for u_int16_t... " >&6; }
-if test "${ac_cv_type_u_int16_t+set}" = set; then
+{ $as_echo "$as_me:$LINENO: checking for uint16_t" >&5
+$as_echo_n "checking for uint16_t... " >&6; }
+if test "${ac_cv_type_uint16_t+set}" = set; then
   $as_echo_n "(cached) " >&6
 else
-  ac_cv_type_u_int16_t=no
+  ac_cv_type_uint16_t=no
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -7325,7 +7325,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof (u_int16_t))
+if (sizeof (uint16_t))
        return 0;
   ;
   return 0;
@@ -7359,7 +7359,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof ((u_int16_t)))
+if (sizeof ((uint16_t)))
 	  return 0;
   ;
   return 0;
@@ -7388,7 +7388,7 @@ else
   $as_echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-	ac_cv_type_u_int16_t=yes
+	ac_cv_type_uint16_t=yes
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
@@ -7401,24 +7401,24 @@ fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 fi
-{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_u_int16_t" >&5
-$as_echo "$ac_cv_type_u_int16_t" >&6; }
-if test "x$ac_cv_type_u_int16_t" = x""yes; then
+{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_uint16_t" >&5
+$as_echo "$ac_cv_type_uint16_t" >&6; }
+if test "x$ac_cv_type_uint16_t" = x""yes; then
   :
 else
 
 cat >>confdefs.h <<_ACEOF
-#define u_int16_t unsigned short
+#define uint16_t unsigned short
 _ACEOF
 
 fi
 
-{ $as_echo "$as_me:$LINENO: checking for u_int32_t" >&5
-$as_echo_n "checking for u_int32_t... " >&6; }
-if test "${ac_cv_type_u_int32_t+set}" = set; then
+{ $as_echo "$as_me:$LINENO: checking for uint32_t" >&5
+$as_echo_n "checking for uint32_t... " >&6; }
+if test "${ac_cv_type_uint32_t+set}" = set; then
   $as_echo_n "(cached) " >&6
 else
-  ac_cv_type_u_int32_t=no
+  ac_cv_type_uint32_t=no
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -7429,7 +7429,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof (u_int32_t))
+if (sizeof (uint32_t))
        return 0;
   ;
   return 0;
@@ -7463,7 +7463,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof ((u_int32_t)))
+if (sizeof ((uint32_t)))
 	  return 0;
   ;
   return 0;
@@ -7492,7 +7492,7 @@ else
   $as_echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-	ac_cv_type_u_int32_t=yes
+	ac_cv_type_uint32_t=yes
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
@@ -7505,24 +7505,24 @@ fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 fi
-{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_u_int32_t" >&5
-$as_echo "$ac_cv_type_u_int32_t" >&6; }
-if test "x$ac_cv_type_u_int32_t" = x""yes; then
+{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_uint32_t" >&5
+$as_echo "$ac_cv_type_uint32_t" >&6; }
+if test "x$ac_cv_type_uint32_t" = x""yes; then
   :
 else
 
 cat >>confdefs.h <<_ACEOF
-#define u_int32_t unsigned int
+#define uint32_t unsigned int
 _ACEOF
 
 fi
 
-{ $as_echo "$as_me:$LINENO: checking for u_int64_t" >&5
-$as_echo_n "checking for u_int64_t... " >&6; }
-if test "${ac_cv_type_u_int64_t+set}" = set; then
+{ $as_echo "$as_me:$LINENO: checking for uint64_t" >&5
+$as_echo_n "checking for uint64_t... " >&6; }
+if test "${ac_cv_type_uint64_t+set}" = set; then
   $as_echo_n "(cached) " >&6
 else
-  ac_cv_type_u_int64_t=no
+  ac_cv_type_uint64_t=no
 cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -7533,7 +7533,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof (u_int64_t))
+if (sizeof (uint64_t))
        return 0;
   ;
   return 0;
@@ -7567,7 +7567,7 @@ $ac_includes_default
 int
 main ()
 {
-if (sizeof ((u_int64_t)))
+if (sizeof ((uint64_t)))
 	  return 0;
   ;
   return 0;
@@ -7596,7 +7596,7 @@ else
   $as_echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-	ac_cv_type_u_int64_t=yes
+	ac_cv_type_uint64_t=yes
 fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
@@ -7609,14 +7609,14 @@ fi
 
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 fi
-{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_u_int64_t" >&5
-$as_echo "$ac_cv_type_u_int64_t" >&6; }
-if test "x$ac_cv_type_u_int64_t" = x""yes; then
+{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_uint64_t" >&5
+$as_echo "$ac_cv_type_uint64_t" >&6; }
+if test "x$ac_cv_type_uint64_t" = x""yes; then
   :
 else
 
 cat >>confdefs.h <<_ACEOF
-#define u_int64_t unsigned long long
+#define uint64_t unsigned long long
 _ACEOF
 
 fi

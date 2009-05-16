@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XChm Latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-06 18:21+0300\n"
+"POT-Creation-Date: 2009-05-16 12:44+0300\n"
 "PO-Revision-Date: 2004-10-13 13:32+0300\n"
 "Last-Translator:  <>\n"
 "Language-Team: \n"
@@ -13,16 +13,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:224
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:225
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "Bez virsraksta"
 
-#: src/chmfile.cpp:227
+#: src/chmfile.cpp:226
 msgid "Untitled in index"
 msgstr "Bez virsraksta"
 

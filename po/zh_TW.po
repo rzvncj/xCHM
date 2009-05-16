@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-06 18:21+0300\n"
+"POT-Creation-Date: 2009-05-16 12:44+0300\n"
 "PO-Revision-Date: 2005-08-10 14:31+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:224
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:225
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "索引中不具標題"
 
-#: src/chmfile.cpp:227
+#: src/chmfile.cpp:226
 msgid "Untitled in index"
 msgstr "索引中不具標題"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-06 18:21+0300\n"
+"POT-Creation-Date: 2009-05-16 12:44+0300\n"
 "PO-Revision-Date: 2007-03-29 19:30+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:224
 msgid "Retrieving table of contents.."
 msgstr "Odtwarzanie spisu treści..."
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:225
 msgid "Retrieving index.."
 msgstr "Odtwarzanie indeksu..."
 
-#: src/chmfile.cpp:227
+#: src/chmfile.cpp:226
 msgid "Untitled in index"
 msgstr "Bez tytułu w indeksie"
 

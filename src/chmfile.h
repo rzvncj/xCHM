@@ -238,21 +238,21 @@ private:
 	wxFontEncoding GetFontEncFromCharSet(int cs);
 
 	//! Helper. Translates from MS-specific LCID.
-	wxFontEncoding GetFontEncFromLCID(u_int32_t lcid);
+	wxFontEncoding GetFontEncFromLCID(uint32_t lcid);
 
 	//! Helper. Initializes most of the private data members.
 	bool GetArchiveInfo();
 
 	//! Helper. Returns the $FIftiMain offset of leaf node or 0.
-	u_int32_t GetLeafNodeOffset(const wxString& text,
-				    u_int32_t initalOffset,
-				    u_int32_t buffSize,
-				    u_int16_t treeDepth,
+	uint32_t GetLeafNodeOffset(const wxString& text,
+				    uint32_t initalOffset,
+				    uint32_t buffSize,
+				    uint16_t treeDepth,
 				    chmUnitInfo *ui);
 
 	//! Helper. Processes the word location code entries while searching.
-	bool ProcessWLC(u_int64_t wlc_count, u_int64_t wlc_size,
-			u_int32_t wlc_offset, unsigned char ds,
+	bool ProcessWLC(uint64_t wlc_count, uint64_t wlc_size,
+			uint32_t wlc_offset, unsigned char ds,
 			unsigned char dr, unsigned char cs,
 			unsigned char cr, unsigned char ls,
 			unsigned char lr, chmUnitInfo *uifmain,
@@ -272,13 +272,13 @@ private:
 	//! Try to recursively load the binary topics tree
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			     UCharPtr& strings, UCharPtr& urltbl,
-			     UCharPtr& urlstr, u_int32_t offset, 
+			     UCharPtr& urlstr, uint32_t offset, 
 			     const wxCSConv& cv,
 			     wxTreeCtrl *toBuild, int level);
 
 	//! Retrieve the data (name/URL) for a single entry (TOC or index)
 	bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
-		     UCharPtr& urlstr, u_int32_t index, wxTreeCtrl* tree,
+		     UCharPtr& urlstr, uint32_t index, wxTreeCtrl* tree,
 		     CHMListCtrl* list, const wxString& idxName,
 		     int level, bool local);
 

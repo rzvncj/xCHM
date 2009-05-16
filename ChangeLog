@@ -320,5 +320,8 @@
 
 	* 1.16:
 		+ fixed font non-Latin encoding character set encoding
-		problem
+		problem.
+		+ replaced the checks for u_intXX_t with checks for the
+		more standard uintXX_t.
+		+ some refactoring.
 

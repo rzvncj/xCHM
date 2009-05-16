@@ -62,9 +62,9 @@ AC_PROG_INSTALL
 
 AC_CHECK_TYPE(int32_t, int)
 AC_CHECK_TYPE(int16_t, short)
-AC_CHECK_TYPE(u_int16_t, unsigned short)
-AC_CHECK_TYPE(u_int32_t, unsigned int)
-AC_CHECK_TYPE(u_int64_t, unsigned long long)
+AC_CHECK_TYPE(uint16_t, unsigned short)
+AC_CHECK_TYPE(uint32_t, unsigned int)
+AC_CHECK_TYPE(uint64_t, unsigned long long)
 
 AC_CHECK_HEADER(chm_lib.h,,AC_MSG_ERROR([Can't find the CHMLIB header.]))
 AC_CHECK_LIB(

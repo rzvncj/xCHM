@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-06 18:21+0300\n"
+"POT-Creation-Date: 2009-05-16 12:44+0300\n"
 "PO-Revision-Date: 2005-08-30 09:34+0200\n"
 "Last-Translator: Luboš Staněk <lubek@users.sourceforge.net>\n"
 "Language-Team: čeština <cs@li.org>\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:224
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:225
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "Nepojmenovaný v rejstříku"
 
-#: src/chmfile.cpp:227
+#: src/chmfile.cpp:226
 msgid "Untitled in index"
 msgstr "Nepojmenovaný v rejstříku"
 

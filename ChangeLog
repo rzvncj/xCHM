@@ -318,3 +318,7 @@
 		+ added tabbed browsing support (from Cedric Boudinet).
 		+ Firefox-style shortcuts for navigation.
 
+	* 1.16:
+		+ fixed font non-Latin encoding character set encoding
+		problem
+

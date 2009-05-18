@@ -325,3 +325,8 @@
 		more standard uintXX_t.
 		+ some refactoring.
 
+	* 1.17:
+		+ added #include <stdint.h> GCC 4.4 patch from the Gentoo
+		ebuild.
+
+

@@ -24,6 +24,7 @@
 #define __CHMFILE_H_
 
 #include <config.h>
+#include <stdint.h>
 #include <chm_lib.h>
 #include <wx/filefn.h>
 #include <wx/string.h>
@@ -31,7 +32,6 @@
 #include <wx/font.h>
 #include <wx/string.h>
 #include <string>
-#include <stdint.h>
 
 
 // Forward declarations.

@@ -23,6 +23,7 @@
 
 
 #include <wx/string.h>
+#include <stdint.h>
 
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))

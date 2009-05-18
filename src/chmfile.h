@@ -31,6 +31,7 @@
 #include <wx/font.h>
 #include <wx/string.h>
 #include <string>
+#include <stdint.h>
 
 
 // Forward declarations.

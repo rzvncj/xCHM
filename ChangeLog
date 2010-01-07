@@ -329,4 +329,5 @@
 		+ added #include <stdint.h> GCC 4.4 patch from the Gentoo
 		ebuild.
 
-
+	* 1.18:
+		+ updated PT translation.

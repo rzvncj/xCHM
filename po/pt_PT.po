@@ -1,6 +1,6 @@
 # xCHM .pot file.
 # Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
-# Copyright (C) 2006 José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>
+# Copyright (C) 2006-2010 José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>
 # This file is distributed under the same license as the xCHM package.
 # FIRST AUTHOR <matafomeoleiro@gmail.com>, 2006.
 #
@@ -115,7 +115,7 @@ msgstr "Procurar na página.."
 
 #: src/chmframe.cpp:59
 msgid "Close the current tab"
-msgstr ""
+msgstr "Fechar a aba actual"
 
 #: src/chmframe.cpp:60
 #, fuzzy
@@ -176,7 +176,7 @@ msgstr "Feito"
 
 #: src/chmframe.cpp:639
 msgid "Loading, please wait.."
-msgstr ""
+msgstr "Carregando, aguarda..."
 
 #: src/chmframe.cpp:756
 msgid "&Open..\tCtrl-O"
@@ -337,11 +337,11 @@ msgstr "Copiar a &localização da ligação"
 
 #: src/chmhtmlwindow.cpp:51
 msgid "&Save link as.."
-msgstr ""
+msgstr "&Guardar ligação como..."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "&Abrir numa nova aba"
 
 #: src/chmhtmlwindow.cpp:55
 msgid "&Copy selection"
@@ -353,11 +353,11 @@ msgstr "&Procurar na página.."
 
 #: src/chmhtmlwindow.cpp:305
 msgid "OpenFile("
-msgstr ""
+msgstr "AbrirFicheiro("
 
 #: src/chmhtmlwindow.cpp:305
 msgid ") failed"
-msgstr ""
+msgstr ") falhou"
 
 #: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
 msgid "Error"
@@ -365,19 +365,19 @@ msgstr ""
 
 #: src/chmhtmlwindow.cpp:316
 msgid "Save as"
-msgstr ""
+msgstr "Guardar como"
 
 #: src/chmhtmlwindow.cpp:327
 msgid "Error creating file "
-msgstr ""
+msgstr "Erro na criação do ficheiro"
 
 #: src/chmhtmlwindow.cpp:336
 msgid "Saved file "
-msgstr ""
+msgstr "Ficheiro guardado"
 
 #: src/chmhtmlwindow.cpp:337
 msgid "Success"
-msgstr ""
+msgstr "Sucesso"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Get partial matches"

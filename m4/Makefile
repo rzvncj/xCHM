@@ -110,7 +110,7 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 USE_NLS = yes
-VERSION = 1.17
+VERSION = 1.18
 WX_CFLAGS = -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
 WX_CFLAGS_ONLY = -pthread
 WX_CONFIG_PATH = /usr/bin/wx-config
@@ -120,7 +120,7 @@ WX_CXXFLAGS_ONLY =
 WX_LIBS = -pthread -Wl,-O1  -L/usr/X11R6/lib   -lwx_gtk2u_richtext-2.8 -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_qa-2.8 -lwx_gtk2u_html-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_baseu-2.8 
 WX_LIBS_STATIC = 
 WX_RESCOMP = 
-WX_VERSION = 2.8.9
+WX_VERSION = 2.8.10
 XGETTEXT = /usr/bin/xgettext
 ac_ct_CC = gcc
 ac_ct_CXX = g++

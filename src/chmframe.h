@@ -111,6 +111,8 @@ public:
 	  \param sashPosition Distance from the left of the frame to
 	  \param fullAppPath The absolute path to the executable of the process
 	  the end of the contents / search panel.
+	  \param loadTopics If set to false, don't try to load the topics tree.
+	  \param loadIndex If set to false, don't try to load the index list.
 	*/
 	CHMFrame(const wxString& title, const wxString& booksDir,
 		 const wxPoint& pos, const wxSize& size,
@@ -118,7 +120,8 @@ public:
 		 const wxString& fixedFont = wxEmptyString,
 		 const int fontSize = CHM_DEFAULT_FONT_SIZE,
 		 const int sashPosition = CONTENTS_MARGIN,
-		 const wxString& fullAppPath = wxEmptyString);
+		 const wxString& fullAppPath = wxEmptyString,
+		 bool loadTopics = true, bool loadIndex = true);
 
 	//! Cleans up.
 	~CHMFrame();
@@ -256,6 +259,8 @@ private:
 	wxFont _font;
 	wxFileHistory _fh;
 	wxString _fullAppPath;
+	bool _loadTopics;
+	bool _loadIndex;
 
 private:
 	DECLARE_EVENT_TABLE()	

@@ -132,14 +132,16 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const wxPoint& pos, const wxSize& size,
 		   const wxString& normalFont, const wxString& fixedFont,
 		   const int fontSize, const int sashPosition,
-		   const wxString& fullAppPath)
+		   const wxString& fullAppPath, bool loadTopics,
+		   bool loadIndex)
 	: wxFrame(NULL, -1, title, pos, size),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
 	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition),
-	  _fullAppPath(fullAppPath)
+	  _fullAppPath(fullAppPath), _loadTopics(loadTopics),
+	  _loadIndex(loadIndex)
 {
 #	if wxUSE_ACCEL
 	const int NO_ACCELERATOR_ENTRIES = 5;
@@ -655,8 +657,11 @@ void CHMFrame::UpdateCHMInfo()
 	if(_tcl->GetCount())
 		_tcl->DeleteChildren(_tcl->GetRootItem());
 
-	chmf->GetTopicsTree(_tcl);
-	chmf->GetIndex(_cip->GetResultsList());
+	if(_loadTopics)
+		chmf->GetTopicsTree(_tcl);
+	
+	if(_loadIndex)
+		chmf->GetIndex(_cip->GetResultsList());
 	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 

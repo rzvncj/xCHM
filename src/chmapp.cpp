@@ -119,31 +119,36 @@ bool CHMApp::OnInit()
 			  wxT("starts xCHM in XML-RPC server mode listening on port <num>"), 
 			  wxCMD_LINE_VAL_NUMBER );
 #endif
+
+	_cmdLP.AddSwitch( wxT("t"), wxT("notopics"), 
+			  wxT("don't load the topics tree"));
+
+	_cmdLP.AddSwitch( wxT("i"), wxT("noindex"), 
+			  wxT("don't load the index"));
+
 	_cmdLP.AddSwitch( wxT("h"), wxT("help"), 
 			  wxT("displays this message."), 
 			  wxCMD_LINE_OPTION_HELP );
 
-	if( _cmdLP.Parse() != 0 ) // 0 means everything is ok
-	{
+	if(_cmdLP.Parse() != 0) // 0 means everything is ok
 		return FALSE;
-	}
+
+	bool loadTopics = !_cmdLP.Found(wxT("notopics"));
+	bool loadIndex  = !_cmdLP.Found(wxT("noindex"));
+
 #ifdef WITH_LIBXMLRPC
 	// catch the xmlrpc setup if desired
-	_cmdLP.Found( wxT("xmlrpc"), &port );
+	_cmdLP.Found(wxT("xmlrpc"), &port);
 #endif
-	if( _cmdLP.GetParamCount() == 1 ) 
-	// catch the optional file to load
-	{
+	if(_cmdLP.GetParamCount() == 1) {
 		file = _cmdLP.GetParam(0);
 		_cmdLP.Found( wxT("contextid"), &id );
-	}
-	else if( _cmdLP.Found( wxT("contextid") ) ) 
-	// can't use a context-ID without a file!
-	{
+
+	} else if(_cmdLP.Found( wxT("contextid"))) {
+		// can't use a context-ID without a file!
 		_cmdLP.Usage();
 		return FALSE;
 	}
-
 
 	long xorig = 50, yorig = 50, width = 600, height = 450;
 	long sashPos = CONTENTS_MARGIN;
@@ -183,12 +188,12 @@ bool CHMApp::OnInit()
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
 				       fixedFont, static_cast<int>(fontSize),
-				       static_cast<int>(sashPos), fullAppPath);
+				       static_cast<int>(sashPos), fullAppPath,
+				       loadTopics, loadIndex);
 
 	_frame->SetSizeHints(200, 200);
 	_frame->Show(TRUE);
 	SetTopWindow(_frame);
-
 
 #ifdef WITH_LIBXMLRPC
 	if( port != -1 )
@@ -199,6 +204,7 @@ bool CHMApp::OnInit()
 		getXmlRpcServer().bindAndListen(port);
 	}
 #endif
+
 	if( _cmdLP.GetParamCount() == 1 )
 	{
 		_frame->LoadCHM( file );
@@ -206,7 +212,6 @@ bool CHMApp::OnInit()
 		if( id != -1 )
 			_frame->LoadContextID( id );
 	}
-
 
 	return TRUE;
 }

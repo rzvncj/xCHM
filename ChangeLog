@@ -331,3 +331,7 @@
 
 	* 1.18:
 		+ updated PT translation.
+		+ added --notopics and --noindex as command line parameters.
+		They inhibit loading the topics tree and the index list, 
+		respectively.
+

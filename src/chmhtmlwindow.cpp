@@ -386,11 +386,31 @@ void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
-	if(event.GetKeyCode() == WXK_SPACE) {
+	switch(event.GetKeyCode()) {
+	case WXK_SPACE:
 		event.m_keyCode = WXK_PAGEDOWN;
-
-	} else if(event.GetKeyCode() == WXK_BACK) {
+		break;
+	case WXK_BACK:
 		event.m_keyCode = WXK_PAGEUP;
+		break;
+	case 'j':
+		event.m_keyCode = WXK_DOWN;
+		break;
+	case 'k':
+		event.m_keyCode = WXK_UP;
+		break;
+	case 'h':
+		event.m_keyCode = WXK_LEFT;
+		break;
+	case 'l':
+		event.m_keyCode = WXK_RIGHT;
+		break;
+	case 'b':
+		if(event.GetModifiers() == wxMOD_CONTROL)
+			event.m_keyCode = WXK_PAGEUP;
+		break;
+	default:
+		break;
 	}
 
 	event.Skip();

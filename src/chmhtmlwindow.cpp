@@ -405,10 +405,6 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 	case 'l':
 		event.m_keyCode = WXK_RIGHT;
 		break;
-	case 'b':
-		if(event.GetModifiers() == wxMOD_CONTROL)
-			event.m_keyCode = WXK_PAGEUP;
-		break;
 	default:
 		break;
 	}

@@ -386,12 +386,25 @@ void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
+	int x = 0, y = 0;
+	int xUnit = 0, yUnit = 0;
+
 	switch(event.GetKeyCode()) {
 	case WXK_SPACE:
 		event.m_keyCode = WXK_PAGEDOWN;
 		break;
 	case WXK_BACK:
 		event.m_keyCode = WXK_PAGEUP;
+		break;
+	case 'g':
+	case WXK_HOME:
+		Scroll(0, 0);
+		break;
+	case WXK_END:
+	case 'G':
+		GetVirtualSize(&x, &y);
+		GetScrollPixelsPerUnit(&xUnit, &yUnit);
+		Scroll(0, y / yUnit);
 		break;
 	case 'j':
 		event.m_keyCode = WXK_DOWN;

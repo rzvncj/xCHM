@@ -334,4 +334,5 @@
 		+ added --notopics and --noindex as command line parameters.
 		They inhibit loading the topics tree and the index list, 
 		respectively.
+		+ added Vim-like document scrolling key bindings.
 

@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xCHM 0.9\n"
+"Project-Id-Version: xCHM 1.17\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-16 12:44+0300\n"
-"PO-Revision-Date: 2004-04-06 21:43+0200\n"
-"Last-Translator: gabriel <fgabriel.munoz@andaluciajunta.es>\n"
+"PO-Revision-Date: 2010-06-09 09:19+0100\n"
+"Last-Translator: Roberto C. Morano <rcmorano@emergya.es>\n"
 "Language-Team: Spanish/Spain <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -18,12 +18,11 @@ msgstr ""
 
 #: src/chmfile.cpp:224
 msgid "Retrieving table of contents.."
-msgstr ""
+msgstr "Adquiriendo tabla de contenidos..."
 
 #: src/chmfile.cpp:225
-#, fuzzy
 msgid "Retrieving index.."
-msgstr "Indice sin nombre"
+msgstr "Adquiriendo índice..."
 
 #: src/chmfile.cpp:226
 msgid "Untitled in index"
@@ -45,7 +44,8 @@ msgstr "Sensible a mayúsculas"
 msgid "Find next"
 msgstr "Buscar siguiente"
 
-#: src/chmfinddialog.cpp:53 src/chmfontdialog.cpp:93
+#: src/chmfinddialog.cpp:53
+#: src/chmfontdialog.cpp:93
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -106,33 +106,31 @@ msgid "About the program."
 msgstr "Acerca del programa."
 
 #: src/chmframe.cpp:57
-#, fuzzy
 msgid "Copy selection."
 msgstr "&Copiar selección"
 
 #: src/chmframe.cpp:58
-#, fuzzy
 msgid "Find word in page."
-msgstr "Buscar en página.."
+msgstr "Buscar en página..."
 
 #: src/chmframe.cpp:59
 msgid "Close the current tab"
-msgstr ""
+msgstr "Cerrar la pestaña actual"
 
 #: src/chmframe.cpp:60
-#, fuzzy
 msgid "Open a new tab"
-msgstr "Abrir un libro CHM."
+msgstr "Abrir nueva pestaña"
 
 #: src/chmframe.cpp:61
 msgid "Associate the .chm file extension with xCHM."
-msgstr ""
+msgstr "Asociar la extensión .chm con xCHM."
 
 #: src/chmframe.cpp:178
 msgid "Ready."
 msgstr "Listo."
 
-#: src/chmframe.cpp:202 src/chmframe.cpp:1003
+#: src/chmframe.cpp:202
+#: src/chmframe.cpp:1003
 msgid "Contents"
 msgstr "Contenido"
 
@@ -140,7 +138,8 @@ msgstr "Contenido"
 msgid "Index"
 msgstr "Índice"
 
-#: src/chmframe.cpp:204 src/chmsearchpanel.cpp:50
+#: src/chmframe.cpp:204
+#: src/chmsearchpanel.cpp:50
 msgid "Search"
 msgstr "Buscar"
 
@@ -154,27 +153,29 @@ msgstr "Elija un archivo.."
 
 #: src/chmframe.cpp:376
 msgid ""
-"This is experimental code, and doing this will overwrite any previously "
-"registered CHM viewer associations.\n"
+"This is experimental code, and doing this will overwrite any previously registered CHM viewer associations.\n"
 "\n"
 "Are you sure you know what you're doing?"
 msgstr ""
+"Este código es experimental, y haciendo esto podría sobreescribir cualquier asociación registrada con el visor CHM.\n"
+"\n"
+"¿Está seguro de que sabe lo que va a hacer?"
 
 #: src/chmframe.cpp:381
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: src/chmframe.cpp:393
 msgid "Registration successful!"
-msgstr ""
+msgstr "¡Registro éxistoso!"
 
 #: src/chmframe.cpp:394
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #: src/chmframe.cpp:639
 msgid "Loading, please wait.."
-msgstr ""
+msgstr "Cargando, por favor, espere..."
 
 #: src/chmframe.cpp:756
 msgid "&Open..\tCtrl-O"
@@ -185,9 +186,8 @@ msgid "&Print page..\tCtrl-P"
 msgstr "Im&primir pagina..\tCtrl-P"
 
 #: src/chmframe.cpp:758
-#, fuzzy
 msgid "Fon&ts.."
-msgstr "Fuentes .."
+msgstr "Fuentes..."
 
 #: src/chmframe.cpp:761
 msgid "&Show contents tree\tCtrl-S"
@@ -195,7 +195,7 @@ msgstr "&Mostrar árbol de contenidos\tCtrl-S"
 
 #: src/chmframe.cpp:767
 msgid "&Make xCHM the default CHM viewer"
-msgstr ""
+msgstr "&Hacer xCHM el visor de CHM por defecto"
 
 #: src/chmframe.cpp:773
 msgid "&Recent files"
@@ -214,38 +214,32 @@ msgid "&Home\tCtrl-H"
 msgstr "&Inicio\tCtrl-H"
 
 #: src/chmframe.cpp:791
-#, fuzzy
 msgid "For&ward\tAlt-RIGHT"
-msgstr "&Adelante\tCtrl-W"
+msgstr "&Adelante\tAlt+RIGHT"
 
 #: src/chmframe.cpp:793
-#, fuzzy
 msgid "&Back\tAlt-LEFT"
-msgstr "A&trás\tCtrl-B"
+msgstr "A&trás\tAlt+LEFT"
 
 #: src/chmframe.cpp:796
 msgid "&About..\tF1"
 msgstr "&Acerca..\tF1"
 
 #: src/chmframe.cpp:799
-#, fuzzy
 msgid "&Copy\tCtrl-C"
-msgstr "&Inicio\tCtrl-H"
+msgstr "&Copiar\tCtrl-C"
 
 #: src/chmframe.cpp:800
-#, fuzzy
 msgid "&Find..\tCtrl-F"
-msgstr "&Abrir..\tCtrl-O"
+msgstr "&Buscar...\tCtrl-F"
 
 #: src/chmframe.cpp:802
-#, fuzzy
 msgid "&Close tab\tCtrl-W"
-msgstr "&Inicio\tCtrl-H"
+msgstr "&Cerrar pestaña\tCtrl-W"
 
 #: src/chmframe.cpp:803
-#, fuzzy
 msgid "&New tab\tCtrl-T"
-msgstr "Fuen&tes..\tCtrl-T"
+msgstr "&Nueva pestaña...\tCtrl-T"
 
 #: src/chmframe.cpp:806
 msgid "&File"
@@ -253,7 +247,7 @@ msgstr "&Archivo"
 
 #: src/chmframe.cpp:807
 msgid "&Edit"
-msgstr ""
+msgstr "&Editar"
 
 #: src/chmframe.cpp:808
 msgid "Hi&story"
@@ -301,10 +295,9 @@ msgstr "Fuentes .."
 
 #: src/chmframe.cpp:1008
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/chmframe.cpp:1010
-#, fuzzy
 msgid "Find"
 msgstr "Buscar siguiente"
 
@@ -333,17 +326,16 @@ msgid "&Back"
 msgstr "A&trás"
 
 #: src/chmhtmlwindow.cpp:50
-#, fuzzy
 msgid "Copy &link location"
-msgstr "&Copiar selección"
+msgstr "Copiar dirección de &enlace"
 
 #: src/chmhtmlwindow.cpp:51
 msgid "&Save link as.."
-msgstr ""
+msgstr "&Guardar enlace como..."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "&Abrir en una nueva pestaña"
 
 #: src/chmhtmlwindow.cpp:55
 msgid "&Copy selection"
@@ -355,31 +347,32 @@ msgstr "&Encontrar en página.."
 
 #: src/chmhtmlwindow.cpp:305
 msgid "OpenFile("
-msgstr ""
+msgstr "AbrirArchivo("
 
 #: src/chmhtmlwindow.cpp:305
 msgid ") failed"
-msgstr ""
+msgstr ") fallo"
 
-#: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
+#: src/chmhtmlwindow.cpp:306
+#: src/chmhtmlwindow.cpp:328
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: src/chmhtmlwindow.cpp:316
 msgid "Save as"
-msgstr ""
+msgstr "Guardar como"
 
 #: src/chmhtmlwindow.cpp:327
 msgid "Error creating file "
-msgstr ""
+msgstr "Error creando archivo"
 
 #: src/chmhtmlwindow.cpp:336
 msgid "Saved file "
-msgstr ""
+msgstr "Archivo guardado"
 
 #: src/chmhtmlwindow.cpp:337
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Get partial matches"
@@ -403,6 +396,6 @@ msgstr "Buscar ocurrencias del texto indicado en el índice."
 
 #~ msgid "Couldn't extract the book contents tree."
 #~ msgstr "No se pudo obtener el árbol de contenidos del libro."
-
 #~ msgid "No contents.."
 #~ msgstr "Sin contenidos.."
+

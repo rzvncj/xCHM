@@ -318,7 +318,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 					     suggestedName,
 					     wxT(""),
 					     wxT("*.*"),
-					     wxSAVE | wxOVERWRITE_PROMPT,
+					     wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
 					     this);
 	if (!filename.empty()) {
 		wxInputStream *s = f->GetStream();

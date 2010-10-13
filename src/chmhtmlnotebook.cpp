@@ -34,8 +34,8 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 	  _tcl(tc), _frame(frame)
 {
 	wxAcceleratorEntry entries[2];  
-	entries[0].Set(wxACCEL_CTRL,   WXK_PRIOR,     ID_PriorPage);
-	entries[1].Set(wxACCEL_CTRL,   WXK_NEXT,      ID_NextPage);
+	entries[0].Set(wxACCEL_CTRL,   WXK_PAGEUP,     ID_PriorPage);
+	entries[1].Set(wxACCEL_CTRL,   WXK_PAGEDOWN,   ID_NextPage);
 
 	wxAcceleratorTable accel(2, entries);
 	this->SetAcceleratorTable(accel);

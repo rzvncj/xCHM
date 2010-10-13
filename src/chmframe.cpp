@@ -243,7 +243,7 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 #else
 				 wxT("All files (*.*)|*.*"),
 #endif
-				 wxOPEN | wxFILE_MUST_EXIST, this);
+				 wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
 	if(selection.IsEmpty() || !_tcl)
 		return;

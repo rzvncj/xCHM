@@ -411,7 +411,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 	size_t i;
 	for(i = 0; i < input.Length(); ++i) {
 
-		switch(input[i]) {
+		switch(wxChar(input[i])) {
 		case wxT('&'):
 			inSpecial = true;
 			special = wxEmptyString;

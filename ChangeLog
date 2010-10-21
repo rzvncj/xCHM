@@ -335,4 +335,5 @@
 		They inhibit loading the topics tree and the index list, 
 		respectively.
 		+ added Vim-like document scrolling key bindings.
+		+ made the source code wxWidgets 2.9 friendly.
 

@@ -1428,7 +1428,10 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 		fontEncoding = wxFONTENCODING_CP1254;
 		break;
         case LANG_CHINESE:
-		fontEncoding = wxFONTENCODING_CP950;
+		if(lcid == 0x0804) // Chinese simplified
+			fontEncoding = wxFONTENCODING_CP936;
+		else // Chinese traditional
+			fontEncoding = wxFONTENCODING_CP950;
 		break;
         case LANG_KOREAN:
 		fontEncoding = wxFONTENCODING_CP949;

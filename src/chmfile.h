@@ -23,7 +23,11 @@
 #ifndef __CHMFILE_H_
 #define __CHMFILE_H_
 
-#include <config.h>
+
+#ifdef HAVE_CONFIG_H
+#	include <config.h>
+#endif
+
 #include <stdint.h>
 #include <chm_lib.h>
 #include <wx/filefn.h>

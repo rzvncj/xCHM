@@ -23,7 +23,10 @@
 #ifndef __CHMAPP_H_
 #define __CHMAPP_H_
 
-#include <config.h>
+#ifdef HAVE_CONFIG_H
+#	include <config.h>
+#endif
+
 #include <wx/wx.h>
 #include <wx/intl.h>
 #include <wx/cmdline.h>

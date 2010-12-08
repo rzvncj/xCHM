@@ -1,0 +1,42 @@
+<?xml version="1.0" ?> 
+ 
+<!-- $Id$ --> 
+ 
+<makefile>
+    
+    <!-- Additional include paths (include tag) -->
+ 
+    <set var="EXTRAINCLUDE"></set>
+    <set var="WXWIN">../wxMSW-2.8.11</set>
+    <set var="CHMLIB">../chmlib-0.40</set> 
+ 
+    <include file="$(WXWIN)/build/bakefiles/wxpresets/presets/wx.bkl" />
+ 
+    <exe id="xchm" template="wx">
+        <app-type>gui</app-type>
+        <debug-info>off</debug-info> 
+        <runtime-libs>static</runtime-libs>
+        <threading>multi</threading>
+
+        <include>./art</include>
+        <include>./src</include>
+        <include>$(CHMLIB)/src</include>
+
+        <sources>
+            $(CHMLIB)/src/chm_lib.c $(CHMLIB)/src/lzx.c
+            src/chmapp.cpp src/chmfile.cpp src/chmfinddialog.cpp
+            src/chmfontdialog.cpp src/chmframe.cpp src/chmfshandler.cpp
+            src/chmhtmlnotebook.cpp src/chmhtmlwindow.cpp
+            src/chmindexpanel.cpp src/chminputstream.cpp
+            src/chmlistctrl.cpp src/chmsearchpanel.cpp src/hhcparser.cpp
+            src/spantag.cpp
+        </sources>
+        <wx-lib>adv</wx-lib>
+        <wx-lib>net</wx-lib>
+        <wx-lib>html</wx-lib>
+        <wx-lib>aui</wx-lib> 
+        <wx-lib>core</wx-lib> 
+        <wx-lib>base</wx-lib>
+        <win32-res>rc/xchm.rc</win32-res>
+	</exe>
+</makefile>

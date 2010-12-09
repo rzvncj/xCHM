@@ -339,6 +339,7 @@
 		+ documents using Chinese simplified now display properly.
 		+ fixed Windows application crash that happened when the
 		user clicked the "Fonts.." button.
-		+ made the source code wxMSW/MSVC friendly for Unicode
+		+ made the source code compatible with Unicode/MSVC
 		wxMSW builds.
+		+ fixed loading of search-in-titles results.
 

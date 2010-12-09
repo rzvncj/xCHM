@@ -93,11 +93,15 @@ void CHMListCtrl::LoadSelected()
 
 	CHMFile *chmf = CHMInputStream::GetCache();
 	
-	wxString fname = wxString(wxT("file:")) + chmf->ArchiveName() +
-		                                wxT("#xchm:/") + _items[item]->_url;
-	if(chmf)
-		_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() +
-				wxT("#xchm:/") + _items[item]->_url);
+	if(chmf) {
+		wxString fname = _items[item]->_url;
+
+		if(!fname.StartsWith(wxT("file:")))
+			fname = wxString(wxT("file:")) + chmf->ArchiveName()
+				+ wxT("#xchm:/") + _items[item]->_url;
+
+		_nbhtml->LoadPageInCurrentView(fname);
+	}
 }
 
 

@@ -162,13 +162,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 		_tcl->GetItemData(root));
 
 	if(data && (!data->_url.IsEmpty())) {
-
-		wxString url = wxString(wxT("file:")) + 
-			chmf->ArchiveName() + wxT("#xchm:/") + data->_url;
 		wxString title = _tcl->GetItemText(root);
-
 		if(TitleSearch(title, text, false, wholeWords))
-			_results->AddPairItem(title, url);
+			_results->AddPairItem(title, data->_url);
 	}	
 
 	wxTreeItemIdValue cookie;

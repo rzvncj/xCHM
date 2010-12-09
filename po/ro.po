@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-14 02:19+0300\n"
+"POT-Creation-Date: 2010-12-09 15:54+0200\n"
 "PO-Revision-Date: 2007-05-30 23:50+0300\n"
 "Last-Translator: Igor Știrbu <igor.stirbu@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -44,31 +44,31 @@ msgstr "Majuscule nesemnificative"
 msgid "Find next"
 msgstr "Următoarea potrivire"
 
-#: src/chmfinddialog.cpp:53 src/chmfontdialog.cpp:93
+#: src/chmfinddialog.cpp:53 src/chmfontdialog.cpp:92
 msgid "Cancel"
 msgstr "Renunță"
 
-#: src/chmfontdialog.cpp:54
+#: src/chmfontdialog.cpp:53
 msgid "Change fonts.."
 msgstr "Schimbă fonturile..."
 
-#: src/chmfontdialog.cpp:61
+#: src/chmfontdialog.cpp:60
 msgid "Normal font:"
 msgstr "Font normal:"
 
-#: src/chmfontdialog.cpp:62
+#: src/chmfontdialog.cpp:61
 msgid "Fixed font:"
 msgstr "Font cu dimensiune fixă:"
 
-#: src/chmfontdialog.cpp:63
+#: src/chmfontdialog.cpp:62
 msgid "Font size:"
 msgstr "Mărimea fontului:"
 
-#: src/chmfontdialog.cpp:81
+#: src/chmfontdialog.cpp:80
 msgid "Preview:"
 msgstr "Vizualizare:"
 
-#: src/chmfontdialog.cpp:91
+#: src/chmfontdialog.cpp:90
 msgid "OK"
 msgstr "OK"
 
@@ -126,202 +126,190 @@ msgstr "Deschide un document CHM."
 msgid "Associate the .chm file extension with xCHM."
 msgstr "Asociază extensia .chm cu xCHM."
 
-#: src/chmframe.cpp:180
+#: src/chmframe.cpp:175
 msgid "Ready."
 msgstr "Gata."
 
-#: src/chmframe.cpp:204 src/chmframe.cpp:1008
+#: src/chmframe.cpp:199 src/chmframe.cpp:1004
 msgid "Contents"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:205
+#: src/chmframe.cpp:200
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:206 src/chmsearchpanel.cpp:50
+#: src/chmframe.cpp:201 src/chmsearchpanel.cpp:50
 msgid "Search"
 msgstr "Caută"
 
-#: src/chmframe.cpp:229
+#: src/chmframe.cpp:224
 msgid "About xCHM"
 msgstr "Despre xCHM"
 
-#: src/chmframe.cpp:237
+#: src/chmframe.cpp:232
 msgid "Choose a file.."
 msgstr "Alege un fișier..."
 
 #: src/chmframe.cpp:378
-msgid ""
-"This is experimental code, and doing this will overwrite any previously "
-"registered CHM viewer associations.\n"
-"\n"
-"Are you sure you know what you're doing?"
-msgstr ""
-"Acesta este cod experimental. Continuând, veți suprascrie orice asociații "
-"anterioare făcute de alte vizualizatoare CHM.\n"
-"\n"
-"Sunteți sigur ca doriți să continuați?"
-
-#: src/chmframe.cpp:383
 msgid "Confirm"
 msgstr "Confirmă"
 
-#: src/chmframe.cpp:395
+#: src/chmframe.cpp:390
 msgid "Registration successful!"
 msgstr "Înregistrare reușită!"
 
-#: src/chmframe.cpp:396
+#: src/chmframe.cpp:391
 msgid "Done"
 msgstr "Gata"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:636
 msgid "Loading, please wait.."
 msgstr "Așteptați, documentul se încarcă..."
 
-#: src/chmframe.cpp:761
+#: src/chmframe.cpp:757
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide...\tCtrl-O"
 
-#: src/chmframe.cpp:762
+#: src/chmframe.cpp:758
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipărește pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:759
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Fonturi..."
 
-#: src/chmframe.cpp:766
+#: src/chmframe.cpp:762
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arată arborescent cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:772
+#: src/chmframe.cpp:768
 msgid "&Make xCHM the default CHM viewer"
 msgstr "Fă xCH&M vizualizator implicit de CHM"
 
-#: src/chmframe.cpp:778
+#: src/chmframe.cpp:774
 msgid "&Recent files"
 msgstr "F&ișiere recente"
 
-#: src/chmframe.cpp:790
+#: src/chmframe.cpp:786
 msgid "E&xit\tCtrl-X"
 msgstr "Ieșire\tCtrl-X"
 
-#: src/chmframe.cpp:791
+#: src/chmframe.cpp:787
 msgid "Quit the application."
 msgstr "Închide aplicația."
 
-#: src/chmframe.cpp:795
+#: src/chmframe.cpp:791
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:796
+#: src/chmframe.cpp:792
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Îna&inte\tCtrl-W"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:794
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "Î&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:801
+#: src/chmframe.cpp:797
 #, fuzzy
 msgid "&About..\tF1"
 msgstr "&Despre...\tF1"
 
-#: src/chmframe.cpp:804
+#: src/chmframe.cpp:800
 msgid "&Copy\tCtrl-C"
 msgstr "&Copiază\tCtrl-C"
 
-#: src/chmframe.cpp:805
+#: src/chmframe.cpp:801
 msgid "&Find..\tCtrl-F"
 msgstr "Caută...\tCtrl-F"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:803
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:808
+#: src/chmframe.cpp:804
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Fonturi...\tCtrl-T"
 
 # E ok forma plurală?
-#: src/chmframe.cpp:811
+#: src/chmframe.cpp:807
 msgid "&File"
 msgstr "&Fișier"
 
-#: src/chmframe.cpp:812
+#: src/chmframe.cpp:808
 msgid "&Edit"
 msgstr "&Editare"
 
-#: src/chmframe.cpp:813
+#: src/chmframe.cpp:809
 msgid "Hi&story"
 msgstr "&Istoric"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:810
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:831
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:852
+#: src/chmframe.cpp:848
 msgid "Topics"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:863
+#: src/chmframe.cpp:859
 msgid "Add"
 msgstr "Adaugă"
 
-#: src/chmframe.cpp:864
+#: src/chmframe.cpp:860
 msgid "Remove"
 msgstr "Șterge"
 
-#: src/chmframe.cpp:867
+#: src/chmframe.cpp:863
 msgid "Add displayed page to bookmarks."
 msgstr "Adaugă pagina afișată la semnele de carte."
 
-#: src/chmframe.cpp:868
+#: src/chmframe.cpp:864
 msgid "Remove selected bookmark."
 msgstr "Șterge semnul de carte selectat."
 
-#: src/chmframe.cpp:1002
+#: src/chmframe.cpp:998
 msgid "Open .."
 msgstr "Deschide..."
 
-#: src/chmframe.cpp:1004
+#: src/chmframe.cpp:1000
 msgid "Print .."
 msgstr "Tipărește..."
 
-#: src/chmframe.cpp:1006
+#: src/chmframe.cpp:1002
 msgid "Fonts .."
 msgstr "Fonturi..."
 
-#: src/chmframe.cpp:1013
+#: src/chmframe.cpp:1009
 msgid "Copy"
 msgstr "Copiază"
 
-#: src/chmframe.cpp:1015
+#: src/chmframe.cpp:1011
 msgid "Find"
 msgstr "Caută"
 
-#: src/chmframe.cpp:1020
+#: src/chmframe.cpp:1016
 msgid "Back"
 msgstr "Înapoi"
 
-#: src/chmframe.cpp:1021
+#: src/chmframe.cpp:1017
 msgid "Forward"
 msgstr "Înainte"
 
-#: src/chmframe.cpp:1023
+#: src/chmframe.cpp:1019
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:1026
+#: src/chmframe.cpp:1022
 msgid "About"
 msgstr "Despre"
 
@@ -400,6 +388,17 @@ msgstr "Caută doar în titlurile din cuprins."
 #: src/chmsearchpanel.cpp:55
 msgid "Search contents for occurences of the specified text."
 msgstr "Caută în carte pagini care conțin apariții ale textului precizat."
+
+#~ msgid ""
+#~ "This is experimental code, and doing this will overwrite any previously "
+#~ "registered CHM viewer associations.\n"
+#~ "\n"
+#~ "Are you sure you know what you're doing?"
+#~ msgstr ""
+#~ "Acesta este cod experimental. Continuând, veți suprascrie orice asociații "
+#~ "anterioare făcute de alte vizualizatoare CHM.\n"
+#~ "\n"
+#~ "Sunteți sigur ca doriți să continuați?"
 
 #~ msgid "Couldn't extract the book contents tree."
 #~ msgstr "Nu am putut extrage cuprinsul cartii."

@@ -337,4 +337,8 @@
 		+ added Vim-like document scrolling key bindings.
 		+ made the source code wxWidgets 2.9 friendly.
 		+ documents using Chinese simplified now display properly.
+		+ fixed Windows application crash that happened when the
+		user clicked the "Fonts.." button.
+		+ made the source code wxMSW/MSVC friendly for Unicode
+		wxMSW builds.
 

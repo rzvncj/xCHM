@@ -28,23 +28,22 @@
 
 namespace {
 
-const wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal "
-	"face<br>(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face."
-	"</b> <b><i>Bold italic face.</i></b><br><font size=-2>font size -2"
-	"</font><br><font size=-1>font size -1</font><br><font size=+0>font"
-	" size +0</font><br><font size=+1>font size +1</font><br><font "
-	"size=+2>font size +2</font><br><font size=+3>font size +3</font><br>"
-	"<font size=+4>font size +4</font></td><td valign=\"top\"><tt>Fixed"
-	" size face.<br> <b>bold</b> <i>italic</i> <b><i>bold italic <u>"
-	"underlined</u></i></b><br><font size=-2>font size -2</font><br>"
-	"<font size=-1>font size -1</font><br><font size=+0>font size +0"
-	"</font><br><font size=+1>font size +1</font><br><font size=+2>"
-	"font size +2</font><br><font size=+3>font size +3</font><br>"
-	"<font size=+4>font size +4</font></tt></td></tr></table></body>"
-	"</html>");
+const wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal ")
+	wxT("face<br>(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face.")
+	wxT("</b> <b><i>Bold italic face.</i></b><br><font size=-2>font size -2")
+	wxT("</font><br><font size=-1>font size -1</font><br><font size=+0>font")
+	wxT(" size +0</font><br><font size=+1>font size +1</font><br><font ")
+	wxT("size=+2>font size +2</font><br><font size=+3>font size +3</font><br>")
+	wxT("<font size=+4>font size +4</font></td><td valign=\"top\"><tt>Fixed")
+	wxT(" size face.<br> <b>bold</b> <i>italic</i> <b><i>bold italic <u>")
+	wxT("underlined</u></i></b><br><font size=-2>font size -2</font><br>")
+	wxT("<font size=-1>font size -1</font><br><font size=+0>font size +0")
+	wxT("</font><br><font size=+1>font size +1</font><br><font size=+2>")
+	wxT("font size +2</font><br><font size=+3>font size +3</font><br>")
+	wxT("<font size=+4>font size +4</font></tt></td></tr></table></body>")
+	wxT("</html>");
 
 }
-
 
 
 CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
@@ -105,6 +104,9 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 
 void CHMFontDialog::UpdatePreview()
 {
+	if(!_test) // this can happen with wxMSW
+		return;
+
 	wxBusyCursor bc;
 
 	_normalFont = _normalFControl->GetStringSelection();
@@ -117,6 +119,7 @@ void CHMFontDialog::UpdatePreview()
 
 	_test->SetFonts(_normalFont, _fixedFont, _sizes);
 	_test->SetPage(test_page);
+
 }
 
 

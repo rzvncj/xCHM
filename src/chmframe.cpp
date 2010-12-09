@@ -667,7 +667,7 @@ void CHMFrame::UpdateCHMInfo()
 		SetTitle(titleBarText);
 		_nbhtml->GetCurrentPage()->SetRelatedFrame(this, titleBarText);
 	} else {
-		SetTitle(wxT("xCHM v. " wxT(VERSION)));
+		SetTitle(wxT("xCHM v. ") wxT(VERSION));
 		_nbhtml->GetCurrentPage()
 			->SetRelatedFrame(this, wxT("xCHM v. ") wxT(VERSION));
 	}

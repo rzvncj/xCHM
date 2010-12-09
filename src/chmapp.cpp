@@ -184,7 +184,7 @@ bool CHMApp::OnInit()
 	if(argv > 0)
 		fullAppPath = getAppPath(argv[0], wxGetCwd());
 
-	_frame = new CHMFrame(wxT("xCHM v. " VERSION),
+	_frame = new CHMFrame(wxT("xCHM v. ") wxT(VERSION),
 				       lastOpenedDir, wxPoint(xorig, yorig), 
 				       wxSize(width, height), normalFont,
 				       fixedFont, static_cast<int>(fontSize),

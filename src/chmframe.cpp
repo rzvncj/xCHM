@@ -58,69 +58,64 @@
 #define FIND_HELP _("Find word in page.")
 #define CLOSETAB_HELP _("Close the current tab")
 #define NEWTAB_HELP _("Open a new tab")
-#define REGISTER_EXTENSION_HELP _("Associate the .chm file " \
-				  "extension with xCHM.")
+#define REGISTER_EXTENSION_HELP _("Associate the .chm file extension with xCHM.")
 
 
 namespace {
 
-const wxChar *greeting = wxT(
-	"<html><head><title>About</title></head><body><table border=0>"
-	"<tr><td align=\"left\"><img src=\"memory:logo.xpm\"></td>"
-	"<td align=\"left\">"
-	"Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
-	"<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
-	"(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>"
-	"<B>xCHM</B> is based on Jed Wing's <a href=\"http://www.jedrea.com/"
-	"chmlib/\">CHMLIB</a> and <a href=\"http://www."
-	"wxwidgets.org\">wxWidgets</a>.</td></tr></table>"
-	"<br>If you'd like to know more"
-	" about CHM, you could check out <a href=\"http://www.speakeasy."
-	"org/~russotto/chm/\">Matthew Russoto's CHM page</a> or <a"
-	" href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
-	" Specification page</a>.<br>Pabs has contributed time and knowledge"
-	" to the development of <B>xCHM</B>, and features such as the fast"
-	" index search would not have been implemented without his help."
-	" Portions of the fast index search are modified versions of"
-	" Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code.<br><br>If"
-	" you'd like to use the code in your own stuff please figure"
-	" <TT>GPL</TT> out first. Far too many people think the <TT>GPL</TT> "
-	"is bad out of utter ignorance.")
+const wxChar *greeting = wxT("<html><head><title>About</title></head>")
+        wxT("<body><table border=0><tr><td align=\"left\">")
+        wxT("<img src=\"memory:logo.xpm\"></td><td align=\"left\">")
+	wxT("Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer.")
+	wxT("<br><br><B>xCHM</B> has been written by Razvan Cojocaru ")
+	wxT("(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>")
+	wxT("<B>xCHM</B> is based on Jed Wing's <a href=\"http://www.jedrea.com/")
+	wxT("chmlib/\">CHMLIB</a> and <a href=\"http://www.")
+	wxT("wxwidgets.org\">wxWidgets</a>.</td></tr></table>")
+	wxT("<br>If you'd like to know more about CHM, go to")
+	wxT(" <a href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM")
+	wxT(" Specification page</a>.<br>Pabs has contributed time and knowledge")
+	wxT(" to the development of <B>xCHM</B>, and features such as the fast")
+	wxT(" index search would not have been implemented without his help.")
+	wxT(" Portions of the fast index search are modified versions of")
+	wxT(" Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code.<br><br>If")
+	wxT(" you'd like to use the code in your own stuff please figure")
+	wxT(" <TT>GPL</TT> out first.")
 #if !defined(wxUSE_UNICODE) || !wxUSE_UNICODE
-	wxT("<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked"
-	" against a non-Unicode version of wxWidgets! While it will"
-	" work with most CHMs, it might not properly display"
-	" special character languages.")
+	wxT("<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked")
+	wxT(" against a non-Unicode version of wxWidgets! While it will")
+	wxT(" work with most CHMs, it might not properly display")
+	wxT(" special character languages.")
 #endif
-	wxT("<br><br>Tips:<br><ul><li>"
-	"The global search is an \'AND\' search, i.e. searching for"
-	" \'word1 word2\' (quotes not included) will find all the pages"
-	" that contain both word1 and word2, in whatever order.</li>"
-	"<li>Allowing partial matches will find pages that contain"
-	" words that only start with the typed strings, i.e. searching"
-	" for \'ans 4\' (quotes not included) will find pages that"
-	" contain the sentence \'The answer is 42.\'.</li><li>Right"
-	" clicking on the displayed page brings out a popup menu with"
-	" common options.</li></ul><br><br>Ctrl(cmd)-C is copy,"
-	" Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
+	wxT("<br><br>Tips:<br><ul><li>")
+	wxT("The global search is an \'AND\' search, i.e. searching for")
+	wxT(" \'word1 word2\' (quotes not included) will find all the pages")
+	wxT(" that contain both word1 and word2, in whatever order.</li>")
+	wxT("<li>Allowing partial matches will find pages that contain")
+	wxT(" words that only start with the typed strings, i.e. searching")
+	wxT(" for \'ans 4\' (quotes not included) will find pages that")
+	wxT(" contain the sentence \'The answer is 42.\'.</li><li>Right")
+	wxT(" clicking on the displayed page brings out a popup menu with")
+	wxT(" common options.</li></ul><br><br>Ctrl(cmd)-C is copy,")
+	wxT(" Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
 
 
-const wxChar *error_page = wxT(
-	"<html><body>Error loading CHM file!</body></html>");
+const wxChar *error_page =
+	wxT("<html><body>Error loading CHM file!</body></html>");
 
 
-const wxChar *about_txt = wxT(
-	"xCHM v. " VERSION "\nby Razvan Cojocaru <razvanco@gmx.net>\n\n"
-	"With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n"
-	"Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n"
-	"XMLRPC code for context sensitive help contributed by\n"
-	"Eamon Millman <millman@pcigeomatics.com>.\n"
-	"<SPAN> tag support and contents tree icons contributed by\n"
-	"Fritz Elfert <felfert@users.sourceforge.net>.\n"
-	"Tabbed browsing support contributed by Cedric Boudinet"
-	" <bouced@gmx.fr>.\n"
-	"Written with wxWidgets (http://www.wxwidgets.org).\n\n"
-	"This program is (proudly) under the GPL.");
+const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION) 
+	wxT("\nby Razvan Cojocaru <razvanco@gmx.net>\n\n")
+	wxT("With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n")
+	wxT("Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n")
+	wxT("XMLRPC code for context sensitive help contributed by\n")
+	wxT("Eamon Millman <millman@pcigeomatics.com>.\n")
+	wxT("<SPAN> tag support and contents tree icons contributed by\n")
+	wxT("Fritz Elfert <felfert@users.sourceforge.net>.\n")
+	wxT("Tabbed browsing support contributed by Cedric Boudinet")
+	wxT(" <bouced@gmx.fr>.\n")
+	wxT("Written with wxWidgets (http://www.wxwidgets.org).\n\n")
+	wxT("This program is (proudly) under the GPL.");
 
 #include <xchm-32.xpm>
 #include <logo.xpm>
@@ -238,8 +233,8 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 				 wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
 				 // they say Motif can't handle the following.
-				 wxT("CHM files (*.chm)|*.chm;*.CHM|"
-				 "All files (*.*)|*.*"), 
+				 wxT("CHM files (*.chm)|*.chm;*.CHM|")
+				 wxT("All files (*.*)|*.*"), 
 #else
 				 wxT("All files (*.*)|*.*"),
 #endif
@@ -373,14 +368,15 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
+
+#	define EC_WARNING_MSG wxT("This is experimental code, and ") \
+		wxT("doing this will overwrite any previously registered ") \
+		wxT("CHM viewer associations.\n\nAre you sure ") \
+		wxT("you know what you're doing?")
+
 void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 {
-	int answer = wxMessageBox(_("This is experimental code, and "
-				    "doing this will overwrite any "
-				    "previously registered CHM viewer "
-				    "associations.\n\nAre you sure "
-				    "you know what you're doing?"),
-				  _("Confirm"),
+	int answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"),
 				  wxOK | wxCANCEL, this);
 
 	if(answer == wxOK) {
@@ -665,14 +661,15 @@ void CHMFrame::UpdateCHMInfo()
 	
 	if(!title.IsEmpty()) {
 		wxString titleBarText = 
-			wxString(wxT("xCHM v. " VERSION ": ")) + title;
+			wxString(wxT("xCHM v. " wxT(VERSION) wxT(": "))) 
+                        + title;
 
 		SetTitle(titleBarText);
 		_nbhtml->GetCurrentPage()->SetRelatedFrame(this, titleBarText);
 	} else {
-		SetTitle(wxT("xCHM v. " VERSION));
+		SetTitle(wxT("xCHM v. " wxT(VERSION)));
 		_nbhtml->GetCurrentPage()
-			->SetRelatedFrame(this, wxT("xCHM v. " VERSION));
+			->SetRelatedFrame(this, wxT("xCHM v. ") wxT(VERSION));
 	}
 
 #if !wxUSE_UNICODE

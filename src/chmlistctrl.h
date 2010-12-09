@@ -68,7 +68,7 @@ public:
 	/*!
 	  \brief Initializes the custom list control.
 	  \param parent The parent widget.
-	  \param html Pointer to a CHMHtmlWindow that I'll associate with
+	  \param nbhtml Pointer to a CHMHtmlWindow that I'll associate with
 	  this object so that selecting an item from the list will display
 	  the corresponding page in the HTML window.
 	  \param id Widget id.

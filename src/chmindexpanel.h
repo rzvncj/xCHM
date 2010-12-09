@@ -53,7 +53,7 @@ public:
 	/*!
 	  \brief Initializes the panel.
 	  \param parent Parent widget.
-	  \param html HTML-capable widget used for displaying pages
+	  \param nbhtml HTML-capable widget used for displaying pages
 	  from the index.
 	 */
 	CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook* nbhtml);

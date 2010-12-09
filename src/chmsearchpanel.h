@@ -65,7 +65,7 @@ public:
 	  \param topics A wxTreeCtrl* that will be iterated over
 	  recursively in order to figure out which files from the
 	  archive to be searched.
-	  \param html The widget that can load a html page found as a 
+	  \param nbhtml The widget that can load a html page found as a 
 	  result of searching.
 	 */
 	CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,

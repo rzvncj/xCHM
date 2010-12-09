@@ -369,10 +369,9 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
 
-#	define EC_WARNING_MSG wxT("This is experimental code, and ") \
-		wxT("doing this will overwrite any previously registered ") \
-		wxT("CHM viewer associations.\n\nAre you sure ") \
-		wxT("you know what you're doing?")
+#	define EC_WARNING_MSG "This is experimental code, and \
+doing this will overwrite any previously registered CHM viewer \
+associations.\n\nAre you sure you know what you're doing?"
 
 void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 {

@@ -343,3 +343,8 @@
 		wxMSW builds.
 		+ fixed loading of search-in-titles results.
 
+	* 1.19:
+		+ fixed the table of contents display for most non-Latin
+		character set documents (provided you get a Unicode
+		build).
+

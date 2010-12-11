@@ -276,7 +276,7 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv)
 
 	uint32_t off = UINT32ARRAY(topidx.get());
 	RecurseLoadBTOC(topidx, topics, strings, urltbl, urlstr, off, 
-			cv, toBuild, 1);
+			toBuild, 1);
 
 	return true;
 }
@@ -285,7 +285,6 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv)
 void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			      UCharPtr& strings, UCharPtr& urltbl,
 			      UCharPtr& urlstr, uint32_t offset,
-			      const wxCSConv& cv, 
 			      wxTreeCtrl *toBuild, int level)
 {
 	while(offset) {
@@ -312,7 +311,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			if(child) {
 				RecurseLoadBTOC(topidx, topics, strings, 
 						urltbl, urlstr, child,
-						cv, toBuild, level + 1); 
+						toBuild, level + 1); 
 			}
 		}
 
@@ -387,7 +386,8 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 
 	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
-		tname = CURRENT_CHAR_STRING(name.c_str());
+		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()),
+			_enc);
 
 		parents[level] = 
 			tree->AppendItem(parents[parentIndex], tname, 2, 2,

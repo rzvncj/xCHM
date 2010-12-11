@@ -278,7 +278,6 @@ private:
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			     UCharPtr& strings, UCharPtr& urltbl,
 			     UCharPtr& urlstr, uint32_t offset, 
-			     const wxCSConv& cv,
 			     wxTreeCtrl *toBuild, int level);
 
 	//! Retrieve the data (name/URL) for a single entry (TOC or index)

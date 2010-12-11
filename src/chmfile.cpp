@@ -226,7 +226,7 @@ void CHMFile::CloseCHM()
 #define EMPTY_INDEX _("Untitled in index")
 
 
-bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv)
+bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 {
 	if(!toBuild)
 		return false;
@@ -433,7 +433,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	wxCSConv cv(_enc);
 	
 	toBuild->Freeze();
-	bool btoc = BinaryTOC(toBuild, cv);
+	bool btoc = BinaryTOC(toBuild);
 	toBuild->Thaw();
 
 	if(btoc)

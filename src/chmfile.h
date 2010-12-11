@@ -272,7 +272,7 @@ private:
 	bool InfoFromSystem();
 
 	//! Load binary TOC (if available)
-	bool BinaryTOC(wxTreeCtrl *toBuild, const wxCSConv& cv);
+	bool BinaryTOC(wxTreeCtrl *toBuild);
 
 	//! Try to recursively load the binary topics tree
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,

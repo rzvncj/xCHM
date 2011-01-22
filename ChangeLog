@@ -347,4 +347,6 @@
 		+ fixed the table of contents display for most non-Latin
 		character set documents (provided you get a Unicode
 		build).
+		+ fixed linking issue for wxWidgets 2.9 (the AUI libraries
+		were not being pulled in).
 

@@ -1,8 +1,10 @@
 /*
 
   Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
-   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
-  <millman@pcigeomatics.com>
+  XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
+    <millman@pcigeomatics.com>
+  Bugfixes contributed by Kuang-che Wu 
+    https://sourceforge.net/users/kcwu/
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -927,8 +929,10 @@ size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 
 bool CHMFile::GetArchiveInfo()
 {
-	bool retw = InfoFromWindows();
+	// Order counts, parse #SYSTEM before #WINDOWS
+	// (thanks to Kuang-che Wu for pointing that out)
 	bool rets = InfoFromSystem();
+	bool retw = InfoFromWindows();
 
 	return (retw || rets);
 }

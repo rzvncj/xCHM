@@ -100,7 +100,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 				    wxT("#xchm:") + right, 
 				    GetMimeTypeFromExt(right.Lower()),
 				    GetAnchor(location),
-				    wxDateTime(wxFileModificationTime(left)));
+				    wxDateTime((time_t)-1));
 	}
     
 	delete s;

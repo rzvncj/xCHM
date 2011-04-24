@@ -515,6 +515,9 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	if(id == _tcl->GetRootItem() || !chmf)
 		return;
 
+	if(!id.IsOk())
+		return;
+
 	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
 		_tcl->GetItemData(id));
 

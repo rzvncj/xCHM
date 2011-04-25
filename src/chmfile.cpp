@@ -37,6 +37,7 @@
 
 #include <bitfiddle.inl>
 #include <hhcparser.h>
+#include <memory>
 
 
 
@@ -432,8 +433,6 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	if(!toBuild) 
 		return false;
 
-	wxCSConv cv(_enc);
-	
 	toBuild->Freeze();
 	bool btoc = BinaryTOC(toBuild);
 	toBuild->Thaw();

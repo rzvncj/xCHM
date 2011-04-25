@@ -1340,7 +1340,6 @@ bool CHMFile::InfoFromSystem()
 	return true;
 }
 
-
 inline
 wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
 {
@@ -1360,7 +1359,7 @@ wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
 		fontEncoding = wxFONTENCODING_CP1251;
 		break;
         case ARABIC_CHARSET:
-		fontEncoding = wxFONTENCODING_ISO8859_6;
+		fontEncoding = wxFONTENCODING_CP1256; 
 		break;
         case GREEK_CHARSET:
 		fontEncoding = wxFONTENCODING_ISO8859_7;
@@ -1407,16 +1406,43 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 	
 	switch(lid) {
 	case LANG_ARABIC:
+	case LANG_FARSI:
+	case LANG_URDU:
 		fontEncoding = wxFONTENCODING_CP1256; 
+		//fontEncoding = wxFONTENCODING_UTF8; 
 		break;
+	case LANG_AZERI:
+	case LANG_BELARUSIAN:
+	case LANG_BULGARIAN:
+	case LANG_KAZAK:
+	case LANG_KYRGYZ:
+	case LANG_MONGOLIAN:
+	case LANG_TATAR:
 	case LANG_RUSSIAN:
+	case LANG_UKRAINIAN:
+	case LANG_UZBEK:
 		fontEncoding = wxFONTENCODING_CP1251;
 		break;
-	case LANG_UKRAINIAN:
-		fontEncoding = wxFONTENCODING_KOI8_U;
-		break;
-	case LANG_BULGARIAN:
-		fontEncoding = wxFONTENCODING_BULGARIAN;
+	case LANG_AFRIKAANS:
+	case LANG_BASQUE:
+	case LANG_CATALAN:
+	case LANG_DANISH:
+	case LANG_DUTCH:
+	case LANG_ENGLISH:
+	case LANG_FINNISH:
+	case LANG_FRENCH:
+	case LANG_GALICIAN:
+	case LANG_GERMAN:
+	case LANG_ICELANDIC:
+	case LANG_INDONESIAN:
+	case LANG_ITALIAN:
+	case LANG_MALAY:
+	case LANG_NORWEGIAN:
+	case LANG_PORTUGUESE:
+	case LANG_SPANISH:
+	case LANG_SWAHILI:
+	case LANG_SWEDISH:
+		fontEncoding = wxFONTENCODING_CP1252;
 		break;
 	case LANG_GREEK:
 		fontEncoding = wxFONTENCODING_CP1253;
@@ -1441,6 +1467,16 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 		break;
         case LANG_JAPANESE:
 		fontEncoding = wxFONTENCODING_CP932;
+		break;
+	case LANG_ALBANIAN:
+	case LANG_CROATIAN:
+	case LANG_CZECH:
+	case LANG_HUNGARIAN:
+	case LANG_POLISH:
+	case LANG_ROMANIAN:
+	case LANG_SLOVAK:
+	case LANG_SLOVENIAN:
+		fontEncoding = wxFONTENCODING_CP1250;
 		break;
 	case LANG_NEUTRAL:
 	default:

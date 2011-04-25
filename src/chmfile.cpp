@@ -37,8 +37,6 @@
 
 #include <bitfiddle.inl>
 #include <hhcparser.h>
-#include <memory>
-
 
 
 // damn wxWidgets and it's scoped ptr.
@@ -642,10 +640,11 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
-	wxCSConv cv(_enc);
-	
+	std::auto_ptr<wxCSConv> cvPtr;
+	createCSConvPtr(cvPtr, _enc);
+
 	toBuild->Freeze();
-	bool bindex = BinaryIndex(toBuild, cv);
+	bool bindex = BinaryIndex(toBuild, *cvPtr);
 	toBuild->Thaw();
 
 	if(bindex)
@@ -1060,8 +1059,9 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size,
 				topic = CURRENT_CHAR_STRING(combuf);
 #if wxUSE_UNICODE
 			else {
-				wxCSConv cv(_enc);
-				topic = wxString((const char *)combuf, cv);
+				std::auto_ptr<wxCSConv> cvPtr;
+				createCSConvPtr(cvPtr, _enc);
+				topic = wxString((const char *)combuf, *cvPtr);
 			}
 #endif
 		}

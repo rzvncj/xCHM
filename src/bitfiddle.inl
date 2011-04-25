@@ -195,10 +195,17 @@ inline void createCSConvPtr(std::auto_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
 #ifdef __WXMSW__
 		cvPtr.reset(new wxCSConv(enc));
 #else
-		if(enc != wxFONTENCODING_BIG5)
+		switch(enc) {
+		case wxFONTENCODING_BIG5:
 			cvPtr.reset(new wxCSConv(enc));
-		else
+			break;
+		case wxFONTENCODING_SHIFT_JIS:
+			cvPtr.reset(new wxCSConv(wxT("SJIS")));
+			break;
+		default:
 			cvPtr.reset(new wxCSConv(wxT("BIG5")));
+			break;
+		}
 #endif
 }
 

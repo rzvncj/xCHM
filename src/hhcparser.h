@@ -27,6 +27,7 @@
 #include <wx/font.h>
 #include <wx/treectrl.h>
 #include <string>
+#include <memory>
 
 
 // Forward declarations.
@@ -85,6 +86,13 @@ private:
 	unsigned getHTMLCode(const wxString& name);
 
 private:
+	//! Prevent copying, we have an auto_ptr<> member
+	HHCParser(const HHCParser&);
+
+	//! Prevent copying, we have an auto_ptr<> member
+	HHCParser& operator=(const HHCParser&);
+
+private:
 	int _level;
 	bool _inquote;
 	bool _intag;
@@ -97,7 +105,7 @@ private:
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	wxFontEncoding _enc;
 	int _counter;
-	wxCSConv _cv;
+	std::auto_ptr<wxCSConv> _cvPtr;
 	bool _htmlChars;
 };
 

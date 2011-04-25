@@ -146,10 +146,11 @@ HTMLChar substitutions[] = {
 
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	: _level(0), _inquote(false), _intag(false), _inobject(false),
-	  _tree(tree), _list(list), _enc(enc), _counter(0), _cv(enc),
-	  _htmlChars(false)
+	  _tree(tree), _list(list), _enc(enc), _counter(0), _htmlChars(false)
 {
 	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
+
+	createCSConvPtr(_cvPtr, _enc);
 	
 	if(_tree)
 		_parents[_level] = _tree->GetRootItem();
@@ -423,7 +424,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 				unsigned code = getHTMLCode(special);
 
 				if(code)
-					result.Append(charForCode(code, _cv,
+					result.Append(charForCode(code, *_cvPtr,
 								  false));
 				continue;
 			}

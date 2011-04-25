@@ -349,4 +349,5 @@
 		build).
 		+ fixed linking issue for wxWidgets 2.9 (the AUI libraries
 		were not being pulled in).
+		+ fixed a bunch of minor bugs.
 

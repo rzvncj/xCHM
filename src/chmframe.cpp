@@ -569,9 +569,8 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	   !archive.Contains(wxT("#xchm:"))) {
 
 		wxFileSystem wfs;
-		wxFSFile *f = wfs.OpenFile(wxString(wxT("file:")) + archive +
-			      wxT("#xchm:/"));
-		delete f;
+		std::auto_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive +
+			      wxT("#xchm:/")));
 	
 	        CHMFile *chmf = CHMInputStream::GetCache();
 
@@ -627,7 +626,6 @@ bool CHMFrame::LoadContextID( const int contextID )
 					      chmf->GetPageByCID(contextID));
 }
 
-
 void CHMFrame::UpdateCHMInfo()
 {
 #if !wxUSE_UNICODE
@@ -659,25 +657,6 @@ void CHMFrame::UpdateCHMInfo()
 	if(_tcl->GetCount()) {
 		_tcl->Unselect();
 		_tcl->DeleteChildren(_tcl->GetRootItem());
-	}
-
-	if(_loadTopics)
-		chmf->GetTopicsTree(_tcl);
-	
-	if(_loadIndex)
-		chmf->GetIndex(_cip->GetResultsList());
-	
-	if(!title.IsEmpty()) {
-		wxString titleBarText = 
-			wxString(wxT("xCHM v. " wxT(VERSION) wxT(": "))) 
-                        + title;
-
-		SetTitle(titleBarText);
-		_nbhtml->GetCurrentPage()->SetRelatedFrame(this, titleBarText);
-	} else {
-		SetTitle(wxT("xCHM v. ") wxT(VERSION));
-		_nbhtml->GetCurrentPage()
-			->SetRelatedFrame(this, wxT("xCHM v. ") wxT(VERSION));
 	}
 
 #if !wxUSE_UNICODE
@@ -735,6 +714,24 @@ void CHMFrame::UpdateCHMInfo()
 		noSpecialFont = true;
 	}
 #endif
+	if(_loadTopics)
+		chmf->GetTopicsTree(_tcl);
+	
+	if(_loadIndex)
+		chmf->GetIndex(_cip->GetResultsList());
+	
+	if(!title.IsEmpty()) {
+		wxString titleBarText = 
+			wxString(wxT("xCHM v. " wxT(VERSION) wxT(": "))) 
+                        + title;
+
+		SetTitle(titleBarText);
+		_nbhtml->GetCurrentPage()->SetRelatedFrame(this, titleBarText);
+	} else {
+		SetTitle(wxT("xCHM v. ") wxT(VERSION));
+		_nbhtml->GetCurrentPage()
+			->SetRelatedFrame(this, wxT("xCHM v. ") wxT(VERSION));
+	}
 	
 	// if we have contents..
 	if(_tcl->GetCount() >= 1) {		

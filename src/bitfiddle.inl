@@ -188,6 +188,8 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 
 
 #if wxUSE_UNICODE
+#include <memory>
+
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
         if(input.IsEmpty())
@@ -195,9 +197,18 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 
         if(enc != wxFONTENCODING_SYSTEM) {
 		wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
-		wxCSConv convTo(enc);
 
-		return wxString(input.mb_str(convFrom), convTo);
+		std::auto_ptr<wxCSConv> convToPtr;
+#ifdef __WXMSW__
+		convToPtr.reset(new wxCSConv(enc));
+#else
+		if(enc != wxFONTENCODING_BIG5)
+			convToPtr.reset(new wxCSConv(enc));
+		else
+			convToPtr.reset(new wxCSConv(wxT("BIG5")));
+#endif
+
+		return wxString(input.mb_str(convFrom), *convToPtr);
 	}
 
         return input;

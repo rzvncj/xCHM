@@ -24,6 +24,7 @@
 
 #include <wx/string.h>
 #include <stdint.h>
+#include <memory>
 
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
@@ -187,9 +188,6 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 #endif
 
 
-#if wxUSE_UNICODE
-#include <memory>
-
 inline void createCSConvPtr(std::auto_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
 {
 #ifdef __WXMSW__
@@ -208,6 +206,9 @@ inline void createCSConvPtr(std::auto_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
 		}
 #endif
 }
+
+
+#if wxUSE_UNICODE
 
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {

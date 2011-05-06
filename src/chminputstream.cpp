@@ -110,7 +110,7 @@ size_t CHMInputStream::GetSize() const
 
 bool CHMInputStream::Eof() const
 {
-	return _currPos >= (off_t)_ui.length;
+	return (uint64_t)_currPos >= _ui.length;
 }
 
 

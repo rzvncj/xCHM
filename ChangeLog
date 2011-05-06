@@ -352,6 +352,9 @@
 		+ fixed a bunch of minor bugs.
 
 	* 1.20:
+		+ fixed a nasty bug that crashed the application with some
+		CHM files.
 		+ fixed strict-aliasing compile-time warning.
 		+ fixed a few signed/unsigned comparison warnings.
+	
 

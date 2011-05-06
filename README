@@ -1,6 +1,6 @@
 
  xCHM - the CHM viewer for UNIX
- (c) 2003 Razvan Cojocaru <razvanco@gmx.net>
+ (c) 2003-2011 Razvan Cojocaru <razvanco@gmx.net>
 
  
  * Prerequisites
@@ -17,7 +17,7 @@
 
  You can get CHMLIB from:
 
- http://66.93.236.84/~jedwin/projects/
+ http://www.jedrea.com/chmlib/
 
  After you've installed the above you're ready for the next phase.
 

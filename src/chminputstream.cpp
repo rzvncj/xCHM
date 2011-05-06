@@ -116,7 +116,7 @@ bool CHMInputStream::Eof() const
 
 size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 {	
-	if(_currPos >= (off_t)_ui.length) {
+	if((uint64_t)_currPos >= _ui.length) {
 		m_lasterror = wxSTREAM_EOF;
 		return 0;
 	}
@@ -124,7 +124,7 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 	if(!_archiveCache)
 		return 0;
 
-	if(_currPos + bufsize > (off_t)_ui.length)
+	if((uint64_t)(_currPos + bufsize) > _ui.length)
         bufsize = _ui.length - _currPos;
         
 	bufsize = 

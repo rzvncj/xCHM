@@ -256,23 +256,23 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 	UCharPtr  urlstr(new unsigned char[us_ui.length], us_ui.length);
 	
 	if(::chm_retrieve_object(_chmFile, &ti_ui, topidx.get(), 
-				 0, ti_ui.length) != (size_t)ti_ui.length)
+				 0, ti_ui.length) != (int64_t)ti_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 
-				 0, ts_ui.length) != (size_t)ts_ui.length)
+				 0, ts_ui.length) != (int64_t)ts_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 
-				 0, st_ui.length) != (size_t)st_ui.length)
+				 0, st_ui.length) != (int64_t)st_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &ut_ui, urltbl.get(), 0, 
-				 ut_ui.length) != (size_t)ut_ui.length)
+				 ut_ui.length) != (int64_t)ut_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &us_ui, urlstr.get(), 0, 
-				 us_ui.length) != (size_t)us_ui.length)
+				 us_ui.length) != (int64_t)us_ui.length)
 		return false;
 
 	uint32_t off = UINT32ARRAY(topidx.get());
@@ -354,7 +354,7 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 			return false;
 
 		uint32_t offset = UINT32ARRAY(topics.get()+ (index * 16) + 4);
-		long test = (long)offset;
+		int32_t test = (int32_t)offset;
 
 		if(strings.size() < offset + 1)
 			return false;
@@ -515,23 +515,23 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 	UCharPtr  urlstr(new unsigned char[us_ui.length], us_ui.length);
 
 	if(::chm_retrieve_object(_chmFile, &bt_ui, btree.get(), 
-				 0, bt_ui.length) != (size_t)bt_ui.length)
+				 0, bt_ui.length) != (int64_t)bt_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 
-				 0, ts_ui.length) != (size_t)ts_ui.length)
+				 0, ts_ui.length) != (int64_t)ts_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 
-				 0, st_ui.length) != (size_t)st_ui.length)
+				 0, st_ui.length) != (int64_t)st_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &ut_ui, urltbl.get(), 0, 
-				 ut_ui.length) != (size_t)ut_ui.length)
+				 ut_ui.length) != (int64_t)ut_ui.length)
 		return false;
 
 	if(::chm_retrieve_object(_chmFile, &us_ui, urlstr.get(), 0, 
-				 us_ui.length) != (size_t)us_ui.length)
+				 us_ui.length) != (int64_t)us_ui.length)
 		return false;
 
 
@@ -1117,10 +1117,8 @@ bool CHMFile::InfoFromWindows()
 		  			  buffer, 0, WIN_HEADER_LEN))
 			return false;
 
-		uint32_t entries = *(uint32_t *)(buffer);
-		FIXENDIAN32(entries);
-		uint32_t entry_size = *(uint32_t *)(buffer + 0x04);
-		FIXENDIAN32(entry_size);
+		uint32_t entries = UINT32ARRAY(buffer);
+		uint32_t entry_size = UINT32ARRAY(buffer + 0x04);
 		
 		UCharPtr uptr(new unsigned char[entries * entry_size]);
 		unsigned char* raw = uptr.get();
@@ -1138,20 +1136,16 @@ bool CHMFile::InfoFromWindows()
 			uint32_t offset = i * entry_size;
 
 			uint32_t off_title = 
-				*(uint32_t *)(raw + offset + 0x14);
-			FIXENDIAN32(off_title);
+				UINT32ARRAY(raw + offset + 0x14);
 
 			uint32_t off_home = 
-				*(uint32_t *)(raw + offset + 0x68);
-			FIXENDIAN32(off_home);
+				UINT32ARRAY(raw + offset + 0x68);
 
 			uint32_t off_hhc = 
-				*(uint32_t *)(raw + offset + 0x60);
-			FIXENDIAN32(off_hhc);
+				UINT32ARRAY(raw + offset + 0x60);
 			
 			uint32_t off_hhk = 
-				*(uint32_t *)(raw + offset + 0x64);
-			FIXENDIAN32(off_hhk);
+				UINT32ARRAY(raw + offset + 0x64);
 
 			factor = off_title / 4096;
 

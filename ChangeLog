@@ -357,4 +357,6 @@
 		+ fixed strict-aliasing compile-time warning.
 		+ fixed a few signed/unsigned comparison warnings.
 	
+	* 1.21:
+		+ updated Polish translation.
 

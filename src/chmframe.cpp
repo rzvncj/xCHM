@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  Copyright (C) 2003 - 2012  Razvan Cojocaru <razvanco@gmx.net>
    XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Tree control icons code (and the icons) contributed by Fritz Elfert

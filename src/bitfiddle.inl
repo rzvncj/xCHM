@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  Copyright (C) 2003 - 2012  Razvan Cojocaru <razvanco@gmx.net>
   Most of the code in this file is a modified version of code from
   Pabs' GPL chmdeco project, credits and thanks go to him.
  

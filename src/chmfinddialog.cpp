@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003  Razvan Cojocaru <razvanco@gmx.net>
+  Copyright (C) 2003 - 2012  Razvan Cojocaru <razvanco@gmx.net>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by

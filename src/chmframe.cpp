@@ -189,8 +189,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->Show(FALSE);
 
 	wxPanel* temp = CreateContentsPanel();
-	_nbhtml = new CHMHtmlNotebook(_sw, _tcl, this);
+	_nbhtml = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont,
+				      fontSize, this);
 	_nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
+
 	_csp = new CHMSearchPanel(_nb, _tcl, _nbhtml);
 	_font = _tcl->GetFont();
 

@@ -27,12 +27,18 @@
 #include <chmhtmlnotebook.h>
 
 
-CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc, 
-				 CHMFrame* frame)
+CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
+				 const wxString& normalFont,
+				 const wxString& fixedFont,
+				 const int fontSize, CHMFrame* frame)
 	: wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize,
 			wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
-	  _tcl(tc), _frame(frame)
+	  _tcl(tc), _frame(frame), _fonts_normal_face(normalFont),
+	  _fonts_fixed_face(fixedFont)
 {
+	for(int i = -3; i <= 3; ++i)
+		_fonts_sizes[i+3] = fontSize + i * 2;
+	
 	wxAcceleratorEntry entries[2];  
 	entries[0].Set(wxACCEL_CTRL,   WXK_PAGEUP,     ID_PriorPage);
 	entries[1].Set(wxACCEL_CTRL,   WXK_PAGEDOWN,   ID_NextPage);
@@ -40,6 +46,7 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 	wxAcceleratorTable accel(2, entries);
 	this->SetAcceleratorTable(accel);
 	SetTabCtrlHeight(0);
+
 	AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
 

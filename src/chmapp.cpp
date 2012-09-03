@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003 - 2012  Razvan Cojocaru <razvanco@gmx.net>
+  Copyright (C) 2003 - 2012  Razvan Cojocaru <rzvncj@gmail.com>
   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
  

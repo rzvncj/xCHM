@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003 - 2012  Razvan Cojocaru <razvanco@gmx.net>
+  Copyright (C) 2003 - 2012  Razvan Cojocaru <rzvncj@gmail.com>
    XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Tree control icons code (and the icons) contributed by Fritz Elfert
@@ -68,7 +68,7 @@ const wxChar *greeting = wxT("<html><head><title>About</title></head>")
         wxT("<img src=\"memory:logo.xpm\"></td><td align=\"left\">")
 	wxT("Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer.")
 	wxT("<br><br><B>xCHM</B> has been written by Razvan Cojocaru ")
-	wxT("(razvanco@gmx.net). It is licensed under the <TT>GPL</TT>.<br>")
+	wxT("(rzvncj@gmail.com). It is licensed under the <TT>GPL</TT>.<br>")
 	wxT("<B>xCHM</B> is based on Jed Wing's <a href=\"http://www.jedrea.com/")
 	wxT("chmlib/\">CHMLIB</a> and <a href=\"http://www.")
 	wxT("wxwidgets.org\">wxWidgets</a>.</td></tr></table>")

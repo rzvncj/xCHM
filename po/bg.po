@@ -1,7 +1,7 @@
 # translation of bg.po to Bulgarian
 # translation of xchm.po to Bulgarian
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR Razvan Cojocaru <razvanco@gmx.net>.
+# Copyright (C) YEAR Razvan Cojocaru <rzvncj@gmail.com>.
 # Атанас Мавров <bugar@developer.bg>, 2004.
 #
 msgid ""

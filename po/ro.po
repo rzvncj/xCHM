@@ -1,7 +1,7 @@
 # xCHM .pot file.
-# Copyright (C) 2004 Razvan Cojocaru <razvanco@gmx.net>
+# Copyright (C) 2004 Razvan Cojocaru <rzvncj@gmail.com>
 # This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <razvanco@gmx.net>, 2004.
+# FIRST AUTHOR <rzvncj@gmail.com>, 2004.
 # Igor Stirbu <igor.stirbu@gmail.com>, 2007.
 msgid ""
 msgstr ""

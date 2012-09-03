@@ -67,7 +67,7 @@ CPPFLAGS =  -I/usr/lib64/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2
 CXX = g++
 CXXCPP = 
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS =   -W -Wall -g -O2
+CXXFLAGS =   -W -Wall
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps

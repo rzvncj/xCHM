@@ -105,7 +105,7 @@ const wxChar *error_page =
 
 
 const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION) 
-	wxT("\nby Razvan Cojocaru <razvanco@gmx.net>\n\n")
+	wxT("\nby Razvan Cojocaru <rzvncj@gmail.com>\n\n")
 	wxT("With thanks to Pabs (http://bonedaddy.net/pabs3/hhm/).\n")
 	wxT("Based on Jed Wing's CHMLIB (http://66.93.236.84/~jedwin/projects/).\n")
 	wxT("XMLRPC code for context sensitive help contributed by\n")

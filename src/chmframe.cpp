@@ -1013,6 +1013,7 @@ namespace {
 #include <htmoptns.xpm>
 #include <copy.xpm>
 #include <find.xpm>
+#include <fullscreen.xpm>
 
 } // namespace
 
@@ -1035,6 +1036,11 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	toolbar->AddTool(ID_FindInPage, _("Find"), 
 			wxBitmap(find_xpm), FIND_HELP);
 	
+	toolbar->AddSeparator();
+	
+	toolbar->AddTool(ID_FullScreen, _("Fullscreen"),
+			 wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
+
 	toolbar->AddSeparator();
 
 	toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);

@@ -49,14 +49,14 @@
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
 #define PRINT_HELP _("Print the page currently displayed.")
-#define CONTENTS_HELP _("On or off?")
+#define CONTENTS_HELP _("Toggle table of contents.")
 #define HOME_HELP _("Go to the book's start page.")
 #define FORWARD_HELP _("Go forward in history. Per book.")
 #define BACK_HELP _("Back to the last visited page. Per book.")
 #define ABOUT_HELP _("About the program.")
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
-#define FULLSCREEN_HELP _("Toggles fullscreen mode.")
+#define FULLSCREEN_HELP _("Toggle fullscreen mode.")
 #define CLOSETAB_HELP _("Close the current tab")
 #define NEWTAB_HELP _("Open a new tab")
 #define REGISTER_EXTENSION_HELP _("Associate the .chm file extension with xCHM.")
@@ -140,7 +140,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	  _loadIndex(loadIndex), _fullScreen(false)
 {
 #	if wxUSE_ACCEL
-	const int NO_ACCELERATOR_ENTRIES = 5;
+	const int NO_ACCELERATOR_ENTRIES = 6;
 	wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
 
 	entries[0].Set(wxACCEL_CTRL, (int) 'F', ID_FindInPage);
@@ -148,6 +148,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	entries[2].Set(wxACCEL_CTRL, (int) ']', ID_Forward);
 	entries[3].Set(wxACCEL_CTRL, (int) '[', ID_Back);
 	entries[4].Set(wxACCEL_CTRL, WXK_F4, ID_CloseTab);
+	entries[5].Set(wxACCEL_CTRL, 'Q', ID_Quit);
 
 	wxAcceleratorTable accel(NO_ACCELERATOR_ENTRIES, entries);
 	SetAcceleratorTable(accel);
@@ -165,7 +166,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	SetIcon(wxIcon(xchm_32_xpm));
 	SetMenuBar(CreateMenu());
 
-	_tb = CreateToolBar(wxTB_HORIZONTAL | wxTB_TEXT
+	_tb = CreateToolBar(wxTB_HORIZONTAL // | wxTB_TEXT 
 #if defined __WXMSW__ || defined __WXGTK__			
 			   | wxTB_FLAT | wxTB_DOCKABLE
 #endif

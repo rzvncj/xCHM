@@ -40,6 +40,7 @@ enum {
 	ID_PopupForward,
 	ID_PopupBack,
 	ID_PopupFind,
+	ID_PopupFullScreen,
 	ID_OpenInNewTab,
 };
 
@@ -147,6 +148,10 @@ protected:
 
 	//! Called when the user selects 'Save link as' from the popup menu.
 	void OnOpenInNewTab(wxCommandEvent& event);
+
+	//! Called when the 'Toggle fullscreen' is selected from the popup menu.
+	void OnToggleFullScreen(wxCommandEvent& event);
+
 protected:	
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
@@ -162,7 +167,7 @@ private:
 	wxString GetPrefix(const wxString& location) const;
 	
 private:
-	wxTreeCtrl* _tcl;
+	wxTreeCtrl *_tcl;
 	bool _syncTree;
 	bool _found;
 	wxMenu *_menu;

@@ -56,6 +56,7 @@
 #define ABOUT_HELP _("About the program.")
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
+#define FULLSCREEN_HELP _("Toggles fullscreen mode.")
 #define CLOSETAB_HELP _("Close the current tab")
 #define NEWTAB_HELP _("Open a new tab")
 #define REGISTER_EXTENSION_HELP _("Associate the .chm file extension with xCHM.")
@@ -132,11 +133,11 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	: wxFrame(NULL, -1, title, pos, size),
 	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
 	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir), 
-	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont), 
+	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont),
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition),
 	  _fullAppPath(fullAppPath), _loadTopics(loadTopics),
-	  _loadIndex(loadIndex)
+	  _loadIndex(loadIndex), _fullScreen(false)
 {
 #	if wxUSE_ACCEL
 	const int NO_ACCELERATOR_ENTRIES = 5;
@@ -426,19 +427,29 @@ void CHMFrame::OnFind(wxCommandEvent& event)
 	_nbhtml->GetCurrentPage()->OnFind(event);
 }
 
+
 void CHMFrame::OnCloseTab(wxCommandEvent& event)
 {
 	_nbhtml->OnCloseTab(event);
 }
+
 
 void CHMFrame::OnNewTab(wxCommandEvent& event)
 {
 	_nbhtml->OnNewTab(event);
 }
 
+
 void CHMFrame::OnCopySelection(wxCommandEvent& event)
 {
 	_nbhtml->GetCurrentPage()->OnCopy(event);
+}
+
+
+void CHMFrame::OnFullScreen(wxCommandEvent& WXUNUSED(event))
+{
+	_fullScreen = !_fullScreen;
+	ShowFullScreen(_fullScreen, wxFULLSCREEN_ALL);
 }
 
 
@@ -811,8 +822,13 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuEdit->Append(ID_CloseTab, _("&Close tab\tCtrl-W"), CLOSETAB_HELP);
 	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-T"), NEWTAB_HELP);
 
+	wxMenu *menuView = new wxMenu;
+	menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tCtrl-F11"),
+			 FULLSCREEN_HELP);
+
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
+	menuBar->Append(menuView, _("&View"));
 	menuBar->Append(menuEdit, _("&Edit"));
 	menuBar->Append(menuHistory, _("Hi&story"));
 	menuBar->Append(menuHelp, _("&Help"));
@@ -1042,6 +1058,16 @@ void CHMFrame::AddHtmlView(const wxString& path, const wxString& link)
 }
 
 
+void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
+{
+	if(onlyIfFullScreenOn && !_fullScreen)
+		return;
+
+	wxCommandEvent dummy;
+	OnFullScreen(dummy);
+}
+
+
 BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Quit,  CHMFrame::OnQuit)
 	EVT_MENU(ID_About, CHMFrame::OnAbout)
@@ -1060,6 +1086,7 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_CloseTab, CHMFrame::OnCloseTab)
 	EVT_MENU(ID_NewTab, CHMFrame::OnNewTab)
 	EVT_MENU(ID_CopySelection, CHMFrame::OnCopySelection)
+	EVT_MENU(ID_FullScreen, CHMFrame::OnFullScreen)
 	EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 	EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 	EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)

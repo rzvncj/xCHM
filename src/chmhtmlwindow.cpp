@@ -55,6 +55,8 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	_menu->Append(ID_CopySel, _("&Copy selection"));
 	_menu->AppendSeparator();
 	_menu->Append(ID_PopupFind, _("&Find in page.."));
+	_menu->AppendSeparator();
+	_menu->Append(ID_PopupFullScreen, _("&Toggle fullscreen mode"));
 }
 
 
@@ -384,6 +386,12 @@ void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 }
 
 
+void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent& WXUNUSED(event))
+{
+	_frame->ToggleFullScreen();
+}
+
+
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
 	int x = 0, y = 0;
@@ -395,6 +403,9 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 		break;
 	case WXK_BACK:
 		event.m_keyCode = WXK_PAGEUP;
+		break;
+	case WXK_ESCAPE:
+		_frame->ToggleFullScreen(true);
 		break;
 	case 'g':
 	case WXK_HOME:
@@ -447,6 +458,7 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
 	EVT_MENU(ID_SaveLinkAs, CHMHtmlWindow::OnSaveLinkAs)
 	EVT_MENU(ID_OpenInNewTab, CHMHtmlWindow::OnOpenInNewTab)
+	EVT_MENU(ID_PopupFullScreen, CHMHtmlWindow::OnToggleFullScreen)
 	EVT_CHAR(CHMHtmlWindow::OnChar)
 	EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
 	EVT_SIZE(CHMHtmlWindow::OnSize)

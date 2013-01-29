@@ -79,6 +79,7 @@ enum
 	ID_RegisterExtension,
 	ID_CloseTab,
 	ID_NewTab,
+	ID_FullScreen,
 	ID_TreeCtrl = 1000,
 };
 
@@ -94,8 +95,8 @@ enum
   all the other nifty stuff. 
 */
 class CHMFrame : public wxFrame {
-public:
 
+public:
 	/*!
 	  \brief Brings the frame into existence.
 	  \param title The text that shows up on the titlebar.
@@ -133,7 +134,6 @@ public:
 	 */
 	bool LoadCHM(const wxString& archive);
 	
-
 	/*!
 	  \brief Attempts to load a context-ID from within the current chm file
 	  \param contextID the context-ID to load.
@@ -141,12 +141,14 @@ public:
 	 */
 	bool LoadContextID( const int contextID );
 
-
 	//! Fills the index and the contents tree.
 	void UpdateCHMInfo();
 
-	//!Add html view
+	//! Add html view
 	void AddHtmlView(const wxString& path, const wxString& link);
+
+	//! Toggles fullscreen mode
+	void ToggleFullScreen(bool onlyIfFullScreenOn = false);
 
 protected:
 	//! Called when the user closes the window.
@@ -187,6 +189,9 @@ protected:
 
 	//! Called when the user types Ctrl-F.
 	void OnCopySelection(wxCommandEvent& event);
+
+	//! Called when fullscreen mode is being toggled
+	void OnFullScreen(wxCommandEvent& event);
 
 	//! Called when the user clicks on the Add button.
 	void OnAddBookmark(wxCommandEvent& event);
@@ -261,6 +266,7 @@ private:
 	wxString _fullAppPath;
 	bool _loadTopics;
 	bool _loadIndex;
+	bool _fullScreen;
 
 private:
 	DECLARE_EVENT_TABLE()	

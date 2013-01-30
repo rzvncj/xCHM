@@ -824,7 +824,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-T"), NEWTAB_HELP);
 
 	wxMenu *menuView = new wxMenu;
-	menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tCtrl-F11"),
+	menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tF11"),
 			 FULLSCREEN_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;

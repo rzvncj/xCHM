@@ -166,7 +166,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	SetIcon(wxIcon(xchm_32_xpm));
 	SetMenuBar(CreateMenu());
 
-	_tb = CreateToolBar(wxTB_HORIZONTAL // | wxTB_TEXT 
+	_tb = CreateToolBar(wxTB_HORIZONTAL | wxTB_TEXT 
 #if defined __WXMSW__ || defined __WXGTK__			
 			   | wxTB_FLAT | wxTB_DOCKABLE
 #endif

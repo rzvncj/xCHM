@@ -56,7 +56,7 @@ AC_ARG_ENABLE(xmlrpc,
 
 	      [ enable_xmlrpc=yes ])
 
-AM_INIT_AUTOMAKE(xchm, 1.22)
+AM_INIT_AUTOMAKE(xchm, 2.0)
 AC_PROG_CXX
 AC_PROG_INSTALL
 

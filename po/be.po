@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-26 00:07+0300\n"
+"POT-Creation-Date: 2013-03-14 11:08+0200\n"
 "PO-Revision-Date: 2007-09-17 23:17+0300\n"
 "Last-Translator: YOUR NAME <E-MAIL@ADDRESS>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -85,8 +85,9 @@ msgid "Print the page currently displayed."
 msgstr "Надрукаваць бягучую старонку."
 
 #: src/chmframe.cpp:52
-msgid "On or off?"
-msgstr "Уключана ці выключана?"
+#, fuzzy
+msgid "Toggle table of contents."
+msgstr "Атрыманьне зьместу..."
 
 #: src/chmframe.cpp:53
 msgid "Go to the book's start page."
@@ -113,200 +114,216 @@ msgid "Find word in page."
 msgstr "Пошук слоў на старонцы."
 
 #: src/chmframe.cpp:59
-msgid "Close the current tab"
+msgid "Toggle fullscreen mode."
 msgstr ""
 
 #: src/chmframe.cpp:60
+msgid "Close the current tab"
+msgstr ""
+
+#: src/chmframe.cpp:61
 #, fuzzy
 msgid "Open a new tab"
 msgstr "Разгарнуць CHM-кнігу."
 
-#: src/chmframe.cpp:61
+#: src/chmframe.cpp:62
 msgid "Associate the .chm file extension with xCHM."
 msgstr "Зьвязаць файлы .chm з праграмай xCHM."
 
-#: src/chmframe.cpp:175
+#: src/chmframe.cpp:177
 msgid "Ready."
 msgstr "Гатовы."
 
-#: src/chmframe.cpp:199 src/chmframe.cpp:1010
+#: src/chmframe.cpp:203 src/chmframe.cpp:1030
 msgid "Contents"
 msgstr "Зьмест"
 
-#: src/chmframe.cpp:200
+#: src/chmframe.cpp:204
 msgid "Index"
 msgstr "Індэкс"
 
-#: src/chmframe.cpp:201 src/chmsearchpanel.cpp:50
+#: src/chmframe.cpp:205 src/chmsearchpanel.cpp:50
 msgid "Search"
 msgstr "Пошук"
 
-#: src/chmframe.cpp:227
+#: src/chmframe.cpp:231
 msgid "About xCHM"
 msgstr "Пра xCHM"
 
-#: src/chmframe.cpp:235
+#: src/chmframe.cpp:239
 msgid "Choose a file.."
 msgstr "Выбар файла..."
 
-#: src/chmframe.cpp:381
+#: src/chmframe.cpp:385
 msgid "Confirm"
 msgstr "Пацьвердзіць"
 
-#: src/chmframe.cpp:393
+#: src/chmframe.cpp:397
 msgid "Registration successful!"
 msgstr "Пасьпяховая рэгістрацыя!"
 
-#: src/chmframe.cpp:394
+#: src/chmframe.cpp:398
 msgid "Done"
 msgstr "Зроблена"
 
-#: src/chmframe.cpp:641
+#: src/chmframe.cpp:655
 msgid "Loading, please wait.."
 msgstr "Загрузка. калі ласка, пачакайце..."
 
-#: src/chmframe.cpp:763
+#: src/chmframe.cpp:777
 msgid "&Open..\tCtrl-O"
 msgstr "&Адкрыць..\tCtrl-O"
 
-#: src/chmframe.cpp:764
+#: src/chmframe.cpp:778
 msgid "&Print page..\tCtrl-P"
 msgstr "Над_рукаваць старонку..\tCtrl-P"
 
-#: src/chmframe.cpp:765
+#: src/chmframe.cpp:779
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Шрыфты .."
 
-#: src/chmframe.cpp:768
+#: src/chmframe.cpp:782
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Паказаць &зьмест\tCtrl-S"
 
-#: src/chmframe.cpp:774
+#: src/chmframe.cpp:788
 msgid "&Make xCHM the default CHM viewer"
 msgstr "Зра&біць xCHM прадвызначаным гартачом CHM"
 
-#: src/chmframe.cpp:780
+#: src/chmframe.cpp:794
 msgid "&Recent files"
 msgstr "&Ранейшыя файлы"
 
-#: src/chmframe.cpp:792
+#: src/chmframe.cpp:806
 msgid "E&xit\tCtrl-X"
 msgstr "В&ыхад\tCtrl-X"
 
-#: src/chmframe.cpp:793
+#: src/chmframe.cpp:807
 msgid "Quit the application."
 msgstr "Выхад з дастасаваньня."
 
-#: src/chmframe.cpp:797
+#: src/chmframe.cpp:811
 msgid "&Home\tCtrl-H"
 msgstr "У па&чатак\tCtrl-H"
 
-#: src/chmframe.cpp:798
+#: src/chmframe.cpp:812
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "На&перад\tCtrl-W"
 
-#: src/chmframe.cpp:800
+#: src/chmframe.cpp:814
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "На&зад\tCtrl-B"
 
-#: src/chmframe.cpp:803
+#: src/chmframe.cpp:817
 msgid "&About..\tF1"
 msgstr "&Пра..\tF1"
 
-#: src/chmframe.cpp:806
+#: src/chmframe.cpp:820
 msgid "&Copy\tCtrl-C"
 msgstr "Ска&піяваць\tCtrl-C"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:821
 msgid "&Find..\tCtrl-F"
 msgstr "По&шук..\tCtrl-F"
 
-#: src/chmframe.cpp:809
+#: src/chmframe.cpp:823
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "У па&чатак\tCtrl-H"
 
-#: src/chmframe.cpp:810
+#: src/chmframe.cpp:824
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Шрыфты..\tCtrl-T"
 
-#: src/chmframe.cpp:813
+#: src/chmframe.cpp:827
+msgid "Toggle &fullscreen\tF11"
+msgstr ""
+
+#: src/chmframe.cpp:831
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:832
+msgid "&View"
+msgstr ""
+
+#: src/chmframe.cpp:833
 msgid "&Edit"
 msgstr "&Рэдагаваньне"
 
-#: src/chmframe.cpp:815
+#: src/chmframe.cpp:834
 msgid "Hi&story"
 msgstr "&Гісторыя"
 
-#: src/chmframe.cpp:816
+#: src/chmframe.cpp:835
 msgid "&Help"
 msgstr "&Даведка"
 
-#: src/chmframe.cpp:837
+#: src/chmframe.cpp:856
 msgid "Bookmarks"
 msgstr "Закладкі"
 
-#: src/chmframe.cpp:854
+#: src/chmframe.cpp:873
 msgid "Topics"
 msgstr "Тэмы"
 
-#: src/chmframe.cpp:865
+#: src/chmframe.cpp:884
 msgid "Add"
 msgstr "Дадаць"
 
-#: src/chmframe.cpp:866
+#: src/chmframe.cpp:885
 msgid "Remove"
 msgstr "Выдаліць"
 
-#: src/chmframe.cpp:869
+#: src/chmframe.cpp:888
 msgid "Add displayed page to bookmarks."
 msgstr "Дадаць бягучую старонку ў закладкі."
 
-#: src/chmframe.cpp:870
+#: src/chmframe.cpp:889
 msgid "Remove selected bookmark."
 msgstr "Выдаліць вылучаную закладку."
 
-#: src/chmframe.cpp:1004
+#: src/chmframe.cpp:1024
 msgid "Open .."
 msgstr "Адкрыць .."
 
-#: src/chmframe.cpp:1006
+#: src/chmframe.cpp:1026
 msgid "Print .."
 msgstr "Друк .."
 
-#: src/chmframe.cpp:1008
+#: src/chmframe.cpp:1028
 msgid "Fonts .."
 msgstr "Шрыфты .."
 
-#: src/chmframe.cpp:1015
+#: src/chmframe.cpp:1035
 msgid "Copy"
 msgstr "Скапіяваць"
 
-#: src/chmframe.cpp:1017
+#: src/chmframe.cpp:1037
 msgid "Find"
 msgstr "Пошук"
 
-#: src/chmframe.cpp:1022
+#: src/chmframe.cpp:1042
+msgid "Fullscreen"
+msgstr ""
+
+#: src/chmframe.cpp:1047
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:1023
+#: src/chmframe.cpp:1048
 msgid "Forward"
 msgstr "Наперад"
 
-#: src/chmframe.cpp:1025
+#: src/chmframe.cpp:1050
 msgid "Home"
 msgstr "Пачатак"
 
-#: src/chmframe.cpp:1028
+#: src/chmframe.cpp:1053
 msgid "About"
 msgstr "Пра .."
 
@@ -338,31 +355,35 @@ msgstr "Ска&піяваць вылучанае"
 msgid "&Find in page.."
 msgstr "По&шук на старонке..."
 
-#: src/chmhtmlwindow.cpp:305
+#: src/chmhtmlwindow.cpp:59
+msgid "&Toggle fullscreen mode"
+msgstr ""
+
+#: src/chmhtmlwindow.cpp:307
 msgid "OpenFile("
 msgstr "OpenFile("
 
-#: src/chmhtmlwindow.cpp:305
+#: src/chmhtmlwindow.cpp:307
 msgid ") failed"
 msgstr ") памылка"
 
-#: src/chmhtmlwindow.cpp:306 src/chmhtmlwindow.cpp:328
+#: src/chmhtmlwindow.cpp:308 src/chmhtmlwindow.cpp:330
 msgid "Error"
 msgstr "Памылка"
 
-#: src/chmhtmlwindow.cpp:316
+#: src/chmhtmlwindow.cpp:318
 msgid "Save as"
 msgstr "Захаваць як"
 
-#: src/chmhtmlwindow.cpp:327
+#: src/chmhtmlwindow.cpp:329
 msgid "Error creating file "
 msgstr "Памылка стварэньня файла "
 
-#: src/chmhtmlwindow.cpp:336
+#: src/chmhtmlwindow.cpp:338
 msgid "Saved file "
 msgstr "Захаваны файл "
 
-#: src/chmhtmlwindow.cpp:337
+#: src/chmhtmlwindow.cpp:339
 msgid "Success"
 msgstr "Посьпех"
 
@@ -385,6 +406,9 @@ msgstr "Шукаць толькі сярод назваў у зьмесьце."
 #: src/chmsearchpanel.cpp:55
 msgid "Search contents for occurences of the specified text."
 msgstr "Пошук зьмесьціва на ўваходзаньне зададзенага тэксту."
+
+#~ msgid "On or off?"
+#~ msgstr "Уключана ці выключана?"
 
 #~ msgid ""
 #~ "This is experimental code, and doing this will overwrite any previously "

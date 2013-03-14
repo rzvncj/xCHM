@@ -367,3 +367,5 @@
 
 	* 2.0:
 		+ renamed configure.in to configure.ac
+		+ modernized autotools syntax
+

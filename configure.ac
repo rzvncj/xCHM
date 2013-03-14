@@ -1,6 +1,7 @@
 
-AC_INIT(src/chmfile.cpp)
-AM_CONFIG_HEADER(config.h)
+AC_INIT([xchm], [2.0])
+AC_CONFIG_SRCDIR(src/chmfile.cpp)
+AC_CONFIG_HEADERS(config.h)
 
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.14.3])
@@ -56,7 +57,7 @@ AC_ARG_ENABLE(xmlrpc,
 
 	      [ enable_xmlrpc=yes ])
 
-AM_INIT_AUTOMAKE(xchm, 2.0)
+AM_INIT_AUTOMAKE
 AC_PROG_CXX
 AC_PROG_INSTALL
 

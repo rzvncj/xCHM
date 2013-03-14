@@ -1,4 +1,4 @@
-INCLUDES = -I$(top_srcdir)/art
+AM_CPPFLAGS = -I$(top_srcdir)/art
 
 bin_PROGRAMS = xchm
 xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \

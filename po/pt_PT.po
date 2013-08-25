@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-14 11:08+0200\n"
+"POT-Creation-Date: 2013-08-25 23:06+0300\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
 "Last-Translator: José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>\n"
 "Language-Team: Portuguese Team \n"
@@ -135,7 +135,7 @@ msgstr "Associar a extensão de ficheiro .chm com o xCHM"
 msgid "Ready."
 msgstr "Pronto."
 
-#: src/chmframe.cpp:203 src/chmframe.cpp:1030
+#: src/chmframe.cpp:203 src/chmframe.cpp:1027
 msgid "Contents"
 msgstr "Conteúdo"
 
@@ -171,160 +171,160 @@ msgstr "Feito"
 msgid "Loading, please wait.."
 msgstr "Carregando, aguarda..."
 
-#: src/chmframe.cpp:777
+#: src/chmframe.cpp:774
 msgid "&Open..\tCtrl-O"
 msgstr "Abrir..\tCtrl-O"
 
-#: src/chmframe.cpp:778
+#: src/chmframe.cpp:775
 msgid "&Print page..\tCtrl-P"
 msgstr "Imprimir a página...\tCtrl-P"
 
-#: src/chmframe.cpp:779
+#: src/chmframe.cpp:776
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Fontes .."
 
-#: src/chmframe.cpp:782
+#: src/chmframe.cpp:779
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Exibir a lista de tópicos\tCtrl-S"
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:785
 msgid "&Make xCHM the default CHM viewer"
 msgstr "&Tornar o xCHM o visualizador de CHM pré-definido"
 
-#: src/chmframe.cpp:794
+#: src/chmframe.cpp:791
 msgid "&Recent files"
 msgstr "&Ficheiros recentes"
 
-#: src/chmframe.cpp:806
+#: src/chmframe.cpp:803
 msgid "E&xit\tCtrl-X"
 msgstr "S&air\tCtrl-X"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:804
 msgid "Quit the application."
 msgstr "Sair do programa."
 
-#: src/chmframe.cpp:811
+#: src/chmframe.cpp:808
 msgid "&Home\tCtrl-H"
 msgstr "&Início\tCtrl-H"
 
-#: src/chmframe.cpp:812
+#: src/chmframe.cpp:809
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Av&ançar\tCtrl-W"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:811
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "&Voltar\tCtrl-B"
 
-#: src/chmframe.cpp:817
+#: src/chmframe.cpp:814
 msgid "&About..\tF1"
 msgstr "&Sobre..\tF1"
 
-#: src/chmframe.cpp:820
+#: src/chmframe.cpp:817
 msgid "&Copy\tCtrl-C"
 msgstr "&Copiar\tCtrl-C"
 
-#: src/chmframe.cpp:821
+#: src/chmframe.cpp:818
 msgid "&Find..\tCtrl-F"
 msgstr "&Procurar..\tCtrl-F"
 
-#: src/chmframe.cpp:823
+#: src/chmframe.cpp:820
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Início\tCtrl-H"
 
-#: src/chmframe.cpp:824
+#: src/chmframe.cpp:821
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "Fon&tes..\tCtrl-T"
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:824
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:828
 msgid "&File"
 msgstr "&Ficheiro"
 
-#: src/chmframe.cpp:832
+#: src/chmframe.cpp:829
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:833
+#: src/chmframe.cpp:830
 msgid "&Edit"
 msgstr "&Editar"
 
-#: src/chmframe.cpp:834
+#: src/chmframe.cpp:831
 msgid "Hi&story"
 msgstr "Hi&stórico"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:832
 msgid "&Help"
 msgstr "&Ajuda"
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:853
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-#: src/chmframe.cpp:873
+#: src/chmframe.cpp:870
 msgid "Topics"
 msgstr "Tópicos"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:881
 msgid "Add"
 msgstr "Adicionar"
 
-#: src/chmframe.cpp:885
+#: src/chmframe.cpp:882
 msgid "Remove"
 msgstr "Remover"
 
-#: src/chmframe.cpp:888
+#: src/chmframe.cpp:885
 msgid "Add displayed page to bookmarks."
 msgstr "Adicionar a página actual aos favoritos."
 
-#: src/chmframe.cpp:889
+#: src/chmframe.cpp:886
 msgid "Remove selected bookmark."
 msgstr "Remover o favorito seleccionado."
 
-#: src/chmframe.cpp:1024
+#: src/chmframe.cpp:1021
 msgid "Open .."
 msgstr "Abrir .."
 
-#: src/chmframe.cpp:1026
+#: src/chmframe.cpp:1023
 msgid "Print .."
 msgstr "Imprimir .."
 
-#: src/chmframe.cpp:1028
+#: src/chmframe.cpp:1025
 msgid "Fonts .."
 msgstr "Fontes .."
 
-#: src/chmframe.cpp:1035
+#: src/chmframe.cpp:1032
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/chmframe.cpp:1037
+#: src/chmframe.cpp:1034
 msgid "Find"
 msgstr "Procurar"
 
-#: src/chmframe.cpp:1042
+#: src/chmframe.cpp:1039
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:1047
+#: src/chmframe.cpp:1044
 msgid "Back"
 msgstr "Voltar"
 
-#: src/chmframe.cpp:1048
+#: src/chmframe.cpp:1045
 msgid "Forward"
 msgstr "Avançar"
 
-#: src/chmframe.cpp:1050
+#: src/chmframe.cpp:1047
 msgid "Home"
 msgstr "Início"
 
-#: src/chmframe.cpp:1053
+#: src/chmframe.cpp:1050
 msgid "About"
 msgstr "Sobre"
 

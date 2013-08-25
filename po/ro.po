@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-14 11:08+0200\n"
+"POT-Creation-Date: 2013-08-25 23:06+0300\n"
 "PO-Revision-Date: 2007-05-30 23:50+0300\n"
 "Last-Translator: Igor Știrbu <igor.stirbu@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -135,7 +135,7 @@ msgstr "Asociază extensia .chm cu xCHM."
 msgid "Ready."
 msgstr "Gata."
 
-#: src/chmframe.cpp:203 src/chmframe.cpp:1030
+#: src/chmframe.cpp:203 src/chmframe.cpp:1027
 msgid "Contents"
 msgstr "Cuprins"
 
@@ -171,162 +171,162 @@ msgstr "Gata"
 msgid "Loading, please wait.."
 msgstr "Așteptați, documentul se încarcă..."
 
-#: src/chmframe.cpp:777
+#: src/chmframe.cpp:774
 msgid "&Open..\tCtrl-O"
 msgstr "&Deschide...\tCtrl-O"
 
-#: src/chmframe.cpp:778
+#: src/chmframe.cpp:775
 msgid "&Print page..\tCtrl-P"
 msgstr "&Tipărește pagina...\tCtrl-P"
 
-#: src/chmframe.cpp:779
+#: src/chmframe.cpp:776
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Fonturi..."
 
-#: src/chmframe.cpp:782
+#: src/chmframe.cpp:779
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Arată arborescent cuprinsul\tCtrl-S"
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:785
 msgid "&Make xCHM the default CHM viewer"
 msgstr "Fă xCH&M vizualizator implicit de CHM"
 
-#: src/chmframe.cpp:794
+#: src/chmframe.cpp:791
 msgid "&Recent files"
 msgstr "F&ișiere recente"
 
-#: src/chmframe.cpp:806
+#: src/chmframe.cpp:803
 msgid "E&xit\tCtrl-X"
 msgstr "Ieșire\tCtrl-X"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:804
 msgid "Quit the application."
 msgstr "Închide aplicația."
 
-#: src/chmframe.cpp:811
+#: src/chmframe.cpp:808
 msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:812
+#: src/chmframe.cpp:809
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Îna&inte\tCtrl-W"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:811
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "Î&napoi\tCtrl-B"
 
-#: src/chmframe.cpp:817
+#: src/chmframe.cpp:814
 #, fuzzy
 msgid "&About..\tF1"
 msgstr "&Despre...\tF1"
 
-#: src/chmframe.cpp:820
+#: src/chmframe.cpp:817
 msgid "&Copy\tCtrl-C"
 msgstr "&Copiază\tCtrl-C"
 
-#: src/chmframe.cpp:821
+#: src/chmframe.cpp:818
 msgid "&Find..\tCtrl-F"
 msgstr "Caută...\tCtrl-F"
 
-#: src/chmframe.cpp:823
+#: src/chmframe.cpp:820
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Start\tCtrl-H"
 
-#: src/chmframe.cpp:824
+#: src/chmframe.cpp:821
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Fonturi...\tCtrl-T"
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:824
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
 # E ok forma plurală?
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:828
 msgid "&File"
 msgstr "&Fișier"
 
-#: src/chmframe.cpp:832
+#: src/chmframe.cpp:829
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:833
+#: src/chmframe.cpp:830
 msgid "&Edit"
 msgstr "&Editare"
 
-#: src/chmframe.cpp:834
+#: src/chmframe.cpp:831
 msgid "Hi&story"
 msgstr "&Istoric"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:832
 msgid "&Help"
 msgstr "&Ajutor"
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:853
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: src/chmframe.cpp:873
+#: src/chmframe.cpp:870
 msgid "Topics"
 msgstr "Cuprins"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:881
 msgid "Add"
 msgstr "Adaugă"
 
-#: src/chmframe.cpp:885
+#: src/chmframe.cpp:882
 msgid "Remove"
 msgstr "Șterge"
 
-#: src/chmframe.cpp:888
+#: src/chmframe.cpp:885
 msgid "Add displayed page to bookmarks."
 msgstr "Adaugă pagina afișată la semnele de carte."
 
-#: src/chmframe.cpp:889
+#: src/chmframe.cpp:886
 msgid "Remove selected bookmark."
 msgstr "Șterge semnul de carte selectat."
 
-#: src/chmframe.cpp:1024
+#: src/chmframe.cpp:1021
 msgid "Open .."
 msgstr "Deschide..."
 
-#: src/chmframe.cpp:1026
+#: src/chmframe.cpp:1023
 msgid "Print .."
 msgstr "Tipărește..."
 
-#: src/chmframe.cpp:1028
+#: src/chmframe.cpp:1025
 msgid "Fonts .."
 msgstr "Fonturi..."
 
-#: src/chmframe.cpp:1035
+#: src/chmframe.cpp:1032
 msgid "Copy"
 msgstr "Copiază"
 
-#: src/chmframe.cpp:1037
+#: src/chmframe.cpp:1034
 msgid "Find"
 msgstr "Caută"
 
-#: src/chmframe.cpp:1042
+#: src/chmframe.cpp:1039
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:1047
+#: src/chmframe.cpp:1044
 msgid "Back"
 msgstr "Înapoi"
 
-#: src/chmframe.cpp:1048
+#: src/chmframe.cpp:1045
 msgid "Forward"
 msgstr "Înainte"
 
-#: src/chmframe.cpp:1050
+#: src/chmframe.cpp:1047
 msgid "Home"
 msgstr "Start"
 
-#: src/chmframe.cpp:1053
+#: src/chmframe.cpp:1050
 msgid "About"
 msgstr "Despre"
 

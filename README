@@ -53,8 +53,6 @@
  will be generated in the doc directory in HTML and LaTex format. The doc
  directory will be created in the process of creating the documentation so
  it's ok that it's not present by default in the tarball.
- Alternatively, you can just download the already generated docs from the
- Sourceforge project page.
 
 
  * Legal stuff

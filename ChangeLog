@@ -365,7 +365,7 @@
 		+ added Greek translation.
 		+ implemented fullscreen mode.
 
-	* 2.0:
+	* 1.23:
 		+ renamed configure.in to configure.ac
 		+ modernized autotools syntax
 

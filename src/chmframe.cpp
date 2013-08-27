@@ -652,7 +652,7 @@ void CHMFrame::UpdateCHMInfo()
 		return;
 
 	wxWindowDisabler wwd;
-	wxBusyInfo wait(_("Loading, please wait.."));
+	wxBusyInfo wait(_("Loading, please wait.."), this);
 
 	wxString filename = chmf->ArchiveName();
 	if(!filename.IsEmpty()) {		

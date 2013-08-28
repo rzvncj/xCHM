@@ -83,21 +83,13 @@ protected:
 	  \param mode Seek from the beginning, current position, etc.
 	  \return Position in the file.
 	 */
-#ifdef __WXMSW__
 	virtual wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode);
-#else
-	virtual off_t OnSysSeek(off_t seek, wxSeekMode mode);
-#endif
 
 	/*!
 	  \brief Asks what is the current position in the file.
 	  \return Current position.
 	 */
-#ifdef __WXMSW__
 	virtual wxFileOffset OnSysTell() const { return _currPos; }
-#else
-	virtual off_t OnSysTell() const { return _currPos; }
-#endif
 
 private:
 	//! Helper. Inits the cache.

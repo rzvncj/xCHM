@@ -54,7 +54,7 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 {
 	CHMHtmlWindow * htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
-	htmlWin->SetRelatedFrame(_frame, wxT("%s"));
+	htmlWin->SetRelatedFrame(_frame, wxT("xCHM v. ") wxT(VERSION) wxT(": %s"));
 	htmlWin->SetRelatedStatusBar(0);
 	htmlWin->SetFonts(_fonts_normal_face, _fonts_fixed_face, _fonts_sizes);
 

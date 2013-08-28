@@ -3,6 +3,7 @@
   Copyright (C) 2003 - 2013  Razvan Cojocaru <rzvncj@gmail.com>
   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
+  Mac OS patches contributed by Mojca Miklavec <mojca@macports.org>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -33,6 +34,9 @@
 #include <wx/fs_mem.h>
 #include <bitfiddle.inl>
 
+#ifdef __WXMAC__
+#include <ApplicationServices/ApplicationServices.h>
+#endif
 
 #ifdef WITH_LIBXMLRPC
 
@@ -99,6 +103,11 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 
 bool CHMApp::OnInit()
 {
+#ifdef __WXMAC__
+	ProcessSerialNumber PSN;
+	GetCurrentProcess(&PSN);
+	TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
+#endif
 
 #ifdef WITH_LIBXMLRPC
 	long port = -1;

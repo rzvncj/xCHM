@@ -666,6 +666,8 @@ VERSION
 PACKAGE
 CYGPATH_W
 am__isrc
+ENABLE_BUILTIN_CHMLIB_FALSE
+ENABLE_BUILTIN_CHMLIB_TRUE
 LINKOPT
 WX_RESCOMP
 WX_VERSION
@@ -760,6 +762,7 @@ with_wx_config
 with_wx_prefix
 with_wx_exec_prefix
 enable_static
+enable_builtin_chmlib
 enable_debug
 enable_optimize
 enable_xmlrpc
@@ -1400,9 +1403,10 @@ Optional Features:
   --disable-nls           do not use Native Language Support
   --disable-rpath         do not hardcode runtime library paths
   --enable-static         link statically to wxWidgets.
+  --enable-builtin-chmlib compile with included chmlib source.
   --enable-debug          compile with gdb debug information.
   --enable-optimize       optimize compiled code (-O2).
-  --enable-xmlrpc         Enable XmlRpc functionality in xchm.
+  --enable-xmlrpc         enable XmlRpc functionality in xchm.
   --enable-dependency-tracking
                           do not reject slow dependency extractors
   --disable-dependency-tracking
@@ -5582,6 +5586,26 @@ fi
 
 
 
+# Check whether --enable-builtin-chmlib was given.
+if test "${enable_builtin_chmlib+set}" = set; then :
+  enableval=$enable_builtin_chmlib; case "${enableval}" in
+                yes) builtin_chmlib=true ;;
+                no)  builtin_chmlib=false ;;
+                *) as_fn_error $? "bad value ${enableval} for --enable-builtin-chmlib" "$LINENO" 5 ;;
+              esac
+else
+  builtin_chmlib=false
+fi
+
+ if test x$builtin_chmlib = xtrue; then
+  ENABLE_BUILTIN_CHMLIB_TRUE=
+  ENABLE_BUILTIN_CHMLIB_FALSE='#'
+else
+  ENABLE_BUILTIN_CHMLIB_TRUE='#'
+  ENABLE_BUILTIN_CHMLIB_FALSE=
+fi
+
+
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
   enableval=$enable_debug; CXXFLAGS="$CXXFLAGS -g"
@@ -5592,6 +5616,7 @@ fi
 if test "${enable_optimize+set}" = set; then :
   enableval=$enable_optimize; CXXFLAGS="$CXXFLAGS -O2"
 fi
+
 
 # Check whether --enable-xmlrpc was given.
 if test "${enable_xmlrpc+set}" = set; then :
@@ -7081,6 +7106,7 @@ _ACEOF
 fi
 
 
+if test x$builtin_chmlib = xfalse ; then
 ac_fn_c_check_header_mongrel "$LINENO" "chm_lib.h" "ac_cv_header_chm_lib_h" "$ac_includes_default"
 if test "x$ac_cv_header_chm_lib_h" = xyes; then :
 
@@ -7137,6 +7163,7 @@ else
 
 fi
 
+fi
 
 if test "x$enable_xmlrpc" = "xyes" ; then
 	ac_ext=cpp
@@ -7443,6 +7470,10 @@ LIBOBJS=$ac_libobjs
 LTLIBOBJS=$ac_ltlibobjs
 
 
+if test -z "${ENABLE_BUILTIN_CHMLIB_TRUE}" && test -z "${ENABLE_BUILTIN_CHMLIB_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_BUILTIN_CHMLIB\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
 $as_echo_n "checking that generated files are newer than configure... " >&6; }
    if test -n "$am_sleep_pid"; then

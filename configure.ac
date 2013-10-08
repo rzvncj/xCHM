@@ -45,6 +45,15 @@ AC_ARG_ENABLE(static,
 	      LINKOPT="$WX_LIBS")
 AC_SUBST(LINKOPT)
 
+AC_ARG_ENABLE(builtin-chmlib, 
+              [  --enable-builtin-chmlib compile with included chmlib source.], 
+              [case "${enableval}" in
+                yes) builtin_chmlib=true ;;
+                no)  builtin_chmlib=false ;;
+                *) AC_MSG_ERROR([bad value ${enableval} for --enable-builtin-chmlib]) ;;
+              esac],[builtin_chmlib=false])
+AM_CONDITIONAL([ENABLE_BUILTIN_CHMLIB], [test x$builtin_chmlib = xtrue])
+
 AC_ARG_ENABLE(debug,
 	      [  --enable-debug          compile with gdb debug information.], 
 	      CXXFLAGS="$CXXFLAGS -g")
@@ -52,9 +61,9 @@ AC_ARG_ENABLE(debug,
 AC_ARG_ENABLE(optimize,
 	      [  --enable-optimize       optimize compiled code (-O2).], 
 	      CXXFLAGS="$CXXFLAGS -O2")
-AC_ARG_ENABLE(xmlrpc,
-	      [  --enable-xmlrpc         Enable XmlRpc functionality in xchm.],
 
+AC_ARG_ENABLE(xmlrpc,
+	      [  --enable-xmlrpc         enable XmlRpc functionality in xchm.],
 	      [ enable_xmlrpc=yes ])
 
 AM_INIT_AUTOMAKE
@@ -67,11 +76,13 @@ AC_CHECK_TYPE(uint16_t, unsigned short)
 AC_CHECK_TYPE(uint32_t, unsigned int)
 AC_CHECK_TYPE(uint64_t, unsigned long long)
 
+if test x$builtin_chmlib = xfalse ; then
 AC_CHECK_HEADER(chm_lib.h,,AC_MSG_ERROR([Can't find the CHMLIB header.]))
 AC_CHECK_LIB(
     chm, chm_open,,
     AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
 )
+fi
 
 if test "x$enable_xmlrpc" = "xyes" ; then
 	AC_LANG_PUSH(C++)

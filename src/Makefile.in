@@ -83,7 +83,7 @@ bin_PROGRAMS = xchm$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/mkinstalldirs $(top_srcdir)/depcomp \
-	$(noinst_HEADERS)
+	$(am__noinst_HEADERS_DIST)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
@@ -98,13 +98,38 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) \
-	chmframe.$(OBJEXT) chmfshandler.$(OBJEXT) \
-	chminputstream.$(OBJEXT) chmfontdialog.$(OBJEXT) \
-	chmhtmlnotebook.$(OBJEXT) chmsearchpanel.$(OBJEXT) \
-	chmhtmlwindow.$(OBJEXT) chmfinddialog.$(OBJEXT) \
-	chmindexpanel.$(OBJEXT) chmlistctrl.$(OBJEXT) \
-	hhcparser.$(OBJEXT)
+am__xchm_SOURCES_DIST = chmapp.cpp chmfile.cpp chmframe.cpp \
+	chmfshandler.cpp chminputstream.cpp chmfontdialog.cpp \
+	chmhtmlnotebook.cpp chmsearchpanel.cpp chmhtmlwindow.cpp \
+	chmfinddialog.cpp chmindexpanel.cpp chmlistctrl.cpp \
+	hhcparser.cpp chm_lib.c lzx.c
+@ENABLE_BUILTIN_CHMLIB_FALSE@am_xchm_OBJECTS = chmapp.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfile.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmframe.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfshandler.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfontdialog.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmhtmlnotebook.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmhtmlwindow.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfinddialog.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmindexpanel.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmlistctrl.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	hhcparser.$(OBJEXT)
+@ENABLE_BUILTIN_CHMLIB_TRUE@am_xchm_OBJECTS = chmapp.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfile.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmframe.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfshandler.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfontdialog.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmhtmlnotebook.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmhtmlwindow.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfinddialog.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmindexpanel.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmlistctrl.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	hhcparser.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chm_lib.$(OBJEXT) lzx.$(OBJEXT)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -123,6 +148,18 @@ DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_@AM_V@)
+am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_@AM_V@)
@@ -137,12 +174,16 @@ am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 SOURCES = $(xchm_SOURCES)
-DIST_SOURCES = $(xchm_SOURCES)
+DIST_SOURCES = $(am__xchm_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
+am__noinst_HEADERS_DIST = chmapp.h chmfile.h chmframe.h chmfshandler.h \
+	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
+	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl chmfinddialog.h \
+	chmindexpanel.h chmlistctrl.h hhcparser.h chm_lib.h lzx.h
 HEADERS = $(noinst_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -289,21 +330,33 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(top_srcdir)/art
-xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
-	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
-	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp
+@ENABLE_BUILTIN_CHMLIB_FALSE@xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp
 
-noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
-	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
-	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
+@ENABLE_BUILTIN_CHMLIB_TRUE@xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp \
+@ENABLE_BUILTIN_CHMLIB_TRUE@    chm_lib.c lzx.c
+
+@ENABLE_BUILTIN_CHMLIB_FALSE@noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
+@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
+
+@ENABLE_BUILTIN_CHMLIB_TRUE@noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h \
+@ENABLE_BUILTIN_CHMLIB_TRUE@    chm_lib.h lzx.h
 
 xchm_LDADD = @LINKOPT@ 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .o .obj
+.SUFFIXES: .c .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -387,6 +440,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chm_lib.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmapp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmfinddialog.Po@am__quote@
@@ -400,6 +454,21 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmlistctrl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chmsearchpanel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hhcparser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lzx.Po@am__quote@
+
+.c.o:
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
+
+.c.obj:
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

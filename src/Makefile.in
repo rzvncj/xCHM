@@ -89,7 +89,8 @@ am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
 	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
 	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/po.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/wxwin.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -277,6 +278,9 @@ WX_LIBS = @WX_LIBS@
 WX_LIBS_STATIC = @WX_LIBS_STATIC@
 WX_RESCOMP = @WX_RESCOMP@
 WX_VERSION = @WX_VERSION@
+WX_VERSION_MAJOR = @WX_VERSION_MAJOR@
+WX_VERSION_MICRO = @WX_VERSION_MICRO@
+WX_VERSION_MINOR = @WX_VERSION_MINOR@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@

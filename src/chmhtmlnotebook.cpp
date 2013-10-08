@@ -69,7 +69,7 @@ void CHMHtmlNotebook::AddHtmlView(const wxString& path,
 {
 	CHMHtmlWindow* htmlWin = CreateView();
 	
-	if(htmlWin) {
+	if(htmlWin && !link.IsEmpty()) {
 		htmlWin->GetParser()->GetFS()->ChangePathTo(path);
 		htmlWin->LoadPage(link);
 	}

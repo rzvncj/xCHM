@@ -54,6 +54,15 @@ AC_ARG_ENABLE(builtin-chmlib,
               esac],[builtin_chmlib=false])
 AM_CONDITIONAL([ENABLE_BUILTIN_CHMLIB], [test x$builtin_chmlib = xtrue])
 
+AC_ARG_ENABLE(app-install, 
+              [  --enable-app-install    install into app-dir.], 
+              [case "${enableval}" in
+                yes) app_install=true ;;
+                no)  app_install=false ;;
+                *) AC_MSG_ERROR([bad value ${enableval} for --enable-app-install]) ;;
+              esac],[app_install=false])
+AM_CONDITIONAL([ENABLE_APP_INSTALL], [test x$app_install = xtrue])
+
 AC_ARG_ENABLE(debug,
 	      [  --enable-debug          compile with gdb debug information.], 
 	      CXXFLAGS="$CXXFLAGS -g")

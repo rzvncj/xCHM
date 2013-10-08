@@ -666,6 +666,8 @@ VERSION
 PACKAGE
 CYGPATH_W
 am__isrc
+ENABLE_APP_INSTALL_FALSE
+ENABLE_APP_INSTALL_TRUE
 ENABLE_BUILTIN_CHMLIB_FALSE
 ENABLE_BUILTIN_CHMLIB_TRUE
 LINKOPT
@@ -766,6 +768,7 @@ with_wx_prefix
 with_wx_exec_prefix
 enable_static
 enable_builtin_chmlib
+enable_app_install
 enable_debug
 enable_optimize
 enable_xmlrpc
@@ -1407,6 +1410,7 @@ Optional Features:
   --disable-rpath         do not hardcode runtime library paths
   --enable-static         link statically to wxWidgets.
   --enable-builtin-chmlib compile with included chmlib source.
+  --enable-app-install    install into app-dir.
   --enable-debug          compile with gdb debug information.
   --enable-optimize       optimize compiled code (-O2).
   --enable-xmlrpc         enable XmlRpc functionality in xchm.
@@ -5642,6 +5646,26 @@ else
 fi
 
 
+# Check whether --enable-app-install was given.
+if test "${enable_app_install+set}" = set; then :
+  enableval=$enable_app_install; case "${enableval}" in
+                yes) app_install=true ;;
+                no)  app_install=false ;;
+                *) as_fn_error $? "bad value ${enableval} for --enable-app-install" "$LINENO" 5 ;;
+              esac
+else
+  app_install=false
+fi
+
+ if test x$app_install = xtrue; then
+  ENABLE_APP_INSTALL_TRUE=
+  ENABLE_APP_INSTALL_FALSE='#'
+else
+  ENABLE_APP_INSTALL_TRUE='#'
+  ENABLE_APP_INSTALL_FALSE=
+fi
+
+
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
   enableval=$enable_debug; CXXFLAGS="$CXXFLAGS -g"
@@ -7513,6 +7537,10 @@ LTLIBOBJS=$ac_ltlibobjs
 
 if test -z "${ENABLE_BUILTIN_CHMLIB_TRUE}" && test -z "${ENABLE_BUILTIN_CHMLIB_FALSE}"; then
   as_fn_error $? "conditional \"ENABLE_BUILTIN_CHMLIB\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_APP_INSTALL_TRUE}" && test -z "${ENABLE_APP_INSTALL_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_APP_INSTALL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5

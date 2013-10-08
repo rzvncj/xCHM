@@ -17,6 +17,14 @@ if ENABLE_BUILTIN_CHMLIB
 xchm_SOURCES += chm_lib.c lzx.c
 endif
 
+if ENABLE_APP_INSTALL
+install-exec-hook:
+	mkdir -p $(top_srcdir)/xCHM.app/Contents/MacOS
+	mkdir -p $(top_srcdir)/xCHM.app/Contents/Resources
+	cp -f $(top_srcdir)/mac/Info.plist $(top_srcdir)/xCHM.app/Contents/
+	cp -f $(top_srcdir)/mac/xCHM.icns $(top_srcdir)/xCHM.app/Contents/Resources
+endif
+
 xchm_LDADD = @LINKOPT@
 #xchm_LDFLAGS=-pg
 

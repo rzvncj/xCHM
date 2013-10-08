@@ -80,10 +80,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = xchm$(EXEEXT)
+@ENABLE_BUILTIN_CHMLIB_TRUE@am__append_1 = chm_lib.c lzx.c
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/mkinstalldirs $(top_srcdir)/depcomp \
-	$(am__noinst_HEADERS_DIST)
+	$(noinst_HEADERS)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
@@ -104,33 +105,15 @@ am__xchm_SOURCES_DIST = chmapp.cpp chmfile.cpp chmframe.cpp \
 	chmhtmlnotebook.cpp chmsearchpanel.cpp chmhtmlwindow.cpp \
 	chmfinddialog.cpp chmindexpanel.cpp chmlistctrl.cpp \
 	hhcparser.cpp chm_lib.c lzx.c
-@ENABLE_BUILTIN_CHMLIB_FALSE@am_xchm_OBJECTS = chmapp.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfile.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmframe.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfshandler.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfontdialog.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmhtmlnotebook.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmhtmlwindow.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfinddialog.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmindexpanel.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmlistctrl.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	hhcparser.$(OBJEXT)
-@ENABLE_BUILTIN_CHMLIB_TRUE@am_xchm_OBJECTS = chmapp.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfile.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmframe.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfshandler.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfontdialog.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmhtmlnotebook.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmhtmlwindow.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfinddialog.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmindexpanel.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmlistctrl.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	hhcparser.$(OBJEXT) \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chm_lib.$(OBJEXT) lzx.$(OBJEXT)
+@ENABLE_BUILTIN_CHMLIB_TRUE@am__objects_1 = chm_lib.$(OBJEXT) \
+@ENABLE_BUILTIN_CHMLIB_TRUE@	lzx.$(OBJEXT)
+am_xchm_OBJECTS = chmapp.$(OBJEXT) chmfile.$(OBJEXT) \
+	chmframe.$(OBJEXT) chmfshandler.$(OBJEXT) \
+	chminputstream.$(OBJEXT) chmfontdialog.$(OBJEXT) \
+	chmhtmlnotebook.$(OBJEXT) chmsearchpanel.$(OBJEXT) \
+	chmhtmlwindow.$(OBJEXT) chmfinddialog.$(OBJEXT) \
+	chmindexpanel.$(OBJEXT) chmlistctrl.$(OBJEXT) \
+	hhcparser.$(OBJEXT) $(am__objects_1)
 xchm_OBJECTS = $(am_xchm_OBJECTS)
 xchm_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -181,10 +164,6 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__noinst_HEADERS_DIST = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
-	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl chmfinddialog.h \
-	chmindexpanel.h chmlistctrl.h hhcparser.h chm_lib.h lzx.h
 HEADERS = $(noinst_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -334,29 +313,18 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(top_srcdir)/art
-@ENABLE_BUILTIN_CHMLIB_FALSE@xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp
+xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
+	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
+	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
+	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp \
+	$(am__append_1)
+noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
+	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
+	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
+	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h \
+    chm_lib.h lzx.h
 
-@ENABLE_BUILTIN_CHMLIB_TRUE@xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.cpp chmfontdialog.cpp chmhtmlnotebook.cpp \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.cpp chmhtmlwindow.cpp chmfinddialog.cpp \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmindexpanel.cpp chmlistctrl.cpp hhcparser.cpp \
-@ENABLE_BUILTIN_CHMLIB_TRUE@    chm_lib.c lzx.c
-
-@ENABLE_BUILTIN_CHMLIB_FALSE@noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
-@ENABLE_BUILTIN_CHMLIB_FALSE@	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h
-
-@ENABLE_BUILTIN_CHMLIB_TRUE@noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
-@ENABLE_BUILTIN_CHMLIB_TRUE@	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h \
-@ENABLE_BUILTIN_CHMLIB_TRUE@    chm_lib.h lzx.h
-
-xchm_LDADD = @LINKOPT@ 
+xchm_LDADD = @LINKOPT@
 all: all-am
 
 .SUFFIXES:

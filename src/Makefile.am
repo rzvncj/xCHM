@@ -11,7 +11,7 @@ noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
 	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
 	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h \
-    chm_lib.h lzx.h
+	xchm_chm_lib.h lzx.h
 
 if ENABLE_BUILTIN_CHMLIB
 xchm_SOURCES += chm_lib.c lzx.c

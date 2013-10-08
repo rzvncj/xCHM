@@ -48,7 +48,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "chm_lib.h"
+#include "xchm_chm_lib.h"
 
 #ifdef CHM_MT
 #define _REENTRANT

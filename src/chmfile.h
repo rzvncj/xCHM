@@ -29,7 +29,11 @@
 #endif
 
 #include <stdint.h>
+#ifdef ENABLE_BUILTIN_CHMLIB
+#include "xchm_chm_lib.h"
+#else
 #include <chm_lib.h>
+#endif
 #include <wx/filefn.h>
 #include <wx/string.h>
 #include <wx/hashmap.h>

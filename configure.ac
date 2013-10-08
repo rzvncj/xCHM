@@ -76,11 +76,14 @@ AC_CHECK_TYPE(uint16_t, unsigned short)
 AC_CHECK_TYPE(uint32_t, unsigned int)
 AC_CHECK_TYPE(uint64_t, unsigned long long)
 
-if test x$builtin_chmlib = xfalse ; then
-AC_CHECK_HEADER(chm_lib.h,,AC_MSG_ERROR([Can't find the CHMLIB header.]))
-AC_CHECK_LIB(
-    chm, chm_open,,
-    AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
+if test x$builtin_chmlib = xtrue ; then
+        AC_DEFINE(ENABLE_BUILTIN_CHMLIB, 1, [Compile with included chmlib source.])
+
+else
+        AC_CHECK_HEADER(chm_lib.h,,AC_MSG_ERROR([Can't find the CHMLIB header.]))
+        AC_CHECK_LIB(
+            chm, chm_open,,
+                AC_MSG_ERROR([Can't find/use -lchm. Please install CHMLIB first.])
 )
 fi
 
@@ -92,7 +95,7 @@ if test "x$enable_xmlrpc" = "xyes" ; then
 	LIBS="$LIBS -lXmlRpc -lssl"	
 	AC_TRY_LINK([#include<XmlRpc.h> ],
 		[XmlRpc::XmlRpcServer svr;],
-    	  [AC_DEFINE(WITH_LIBXMLRPC,1,[Compile with XmlRpc functionality.])],
+    	  [AC_DEFINE(WITH_LIBXMLRPC, 1, [Compile with XmlRpc functionality.])],
 	  AC_MSG_ERROR([Can't find/use -lXmlRpc. Please install XmlRpc++ first.])
 	  )
 	AC_LANG_POP()

@@ -7142,8 +7142,13 @@ _ACEOF
 fi
 
 
-if test x$builtin_chmlib = xfalse ; then
-ac_fn_c_check_header_mongrel "$LINENO" "chm_lib.h" "ac_cv_header_chm_lib_h" "$ac_includes_default"
+if test x$builtin_chmlib = xtrue ; then
+
+$as_echo "#define ENABLE_BUILTIN_CHMLIB 1" >>confdefs.h
+
+
+else
+        ac_fn_c_check_header_mongrel "$LINENO" "chm_lib.h" "ac_cv_header_chm_lib_h" "$ac_includes_default"
 if test "x$ac_cv_header_chm_lib_h" = xyes; then :
 
 else
@@ -7151,7 +7156,7 @@ else
 fi
 
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for chm_open in -lchm" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for chm_open in -lchm" >&5
 $as_echo_n "checking for chm_open in -lchm... " >&6; }
 if ${ac_cv_lib_chm_chm_open+:} false; then :
   $as_echo_n "(cached) " >&6

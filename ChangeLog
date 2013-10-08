@@ -369,3 +369,9 @@
 		+ renamed configure.in to configure.ac
 		+ modernized autotools syntax
 		+ minor fixes, code is now wxWidgets-2.9-friendly
+
+	* 1.24:
+		+ it is now possible to build xCHM without an external
+		chmlib library (by using ./configure --enable-builtin-chmlib)
+		+ added Mac icons and .plist
+

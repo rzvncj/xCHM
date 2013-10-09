@@ -115,6 +115,8 @@ const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION)
 	wxT("Fritz Elfert <felfert@users.sourceforge.net>.\n")
 	wxT("Tabbed browsing support contributed by Cedric Boudinet")
 	wxT(" <bouced@gmx.fr>.\n")
+	wxT("Mac builds, bug reports and fixes contributed by\n")
+	wxT("Mojca Miklavec <mmiklavec@users.sourceforge.net>.\n")
 	wxT("Written with wxWidgets (http://www.wxwidgets.org).\n\n")
 	wxT("This program is (proudly) under the GPL.");
 

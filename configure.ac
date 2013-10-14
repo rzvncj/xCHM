@@ -35,7 +35,7 @@ wx_config_minor_version=`echo $WX_VERSION | \
 	sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
 
 CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY -W -Wall"
+CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY -W -Wall -Wno-overloaded-virtual"
 CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
 
      

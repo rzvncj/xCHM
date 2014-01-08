@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003 - 2013  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
   ListDirty() patch contributed by Iulian Dragos
   <dragosiulian@users.sourceforge.net>
 

@@ -1,6 +1,6 @@
 /*
 
-  Copyright (C) 2003 - 2013  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
   Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
   (this file originally written by Cedric Boudinet)
  

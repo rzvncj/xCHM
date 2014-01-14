@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -34,19 +34,19 @@
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       CHMHtmlNotebook *nbhtml)
-	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL), 
+	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL),
 	  _titles(NULL), _search(NULL), _results(NULL), _nbhtml(nbhtml)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);
         SetSizer(sizer);
 
-	_text = new wxTextCtrl(this, ID_SearchText, wxEmptyString, 
-			       wxDefaultPosition, wxDefaultSize, 
+	_text = new wxTextCtrl(this, ID_SearchText, wxEmptyString,
+			       wxDefaultPosition, wxDefaultSize,
 			       wxTE_PROCESS_ENTER);
 
 	_partial = new wxCheckBox(this, -1, _("Get partial matches"));
-	_titles = new wxCheckBox(this, -1, _("Search titles only"));	
+	_titles = new wxCheckBox(this, -1, _("Search titles only"));
 	_search = new wxButton(this, ID_SearchButton, _("Search"));
 
 #if wxUSE_TOOLTIPS
@@ -90,7 +90,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
 	sr.MakeLower();
 	sr.Replace(wxT("+"), wxT(" "), TRUE);
-	sr.Replace(wxT("-"), wxT(" "), TRUE);	
+	sr.Replace(wxT("-"), wxT(" "), TRUE);
 	sr.Replace(wxT("#"), wxT(" "), TRUE);
 	sr.Replace(wxT("@"), wxT(" "), TRUE);
 	sr.Replace(wxT("^"), wxT(" "), TRUE);
@@ -106,7 +106,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	CHMSearchResults h1;
 	CHMSearchResults::iterator i;
 
-	chmf->IndexSearch(word, !_partial->IsChecked(), 
+	chmf->IndexSearch(word, !_partial->IsChecked(),
 			  _titles->IsChecked(), &h1);
 
 	while(tkz.HasMoreTokens()) {
@@ -116,13 +116,13 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 			continue;
 
 		CHMSearchResults h2, tmp;
-		chmf->IndexSearch(token, !_partial->IsChecked(), 
+		chmf->IndexSearch(token, !_partial->IsChecked(),
 				  _titles->IsChecked(), &h2);
 
 		if(!h2.empty()) {
 			for(i = h2.begin(); i != h2.end(); ++i)
 				if(h1.find(i->first) != h1.end())
-					tmp[i->first] = i->second;	
+					tmp[i->first] = i->second;
 			h1 = tmp;
 		} else {
 			h1.clear();
@@ -139,13 +139,13 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	if(!h1.empty())
 		for(i = h1.begin(); i != h1.end(); ++i) {
 
-			wxString url = (i->first.StartsWith(wxT("/")) 
-					? i->first : (wxString(wxT("/") 
+			wxString url = (i->first.StartsWith(wxT("/"))
+					? i->first : (wxString(wxT("/")
 							+ i->first)));
 
 			_results->AddPairItem(i->second, url);
 		}
-    
+
 	_results->UpdateUI();
 }
 
@@ -165,7 +165,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 		wxString title = _tcl->GetItemText(root);
 		if(TitleSearch(title, text, false, wholeWords))
 			_results->AddPairItem(title, data->_url);
-	}	
+	}
 
 	wxTreeItemIdValue cookie;
 	wxTreeItemId child = _tcl->GetFirstChild(root, cookie);
@@ -179,7 +179,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 
 static inline bool WHITESPACE(wxChar c)
 {
-	return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') 
+	return c == wxT(' ') || c == wxT('\n') || c == wxT('\r')
 		|| c == wxT('\t');
 }
 
@@ -199,7 +199,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 	wxStringTokenizer tkz(text, wxT(" \t\r\n"));
 
 	while(tkz.HasMoreTokens()) {
-		
+
 		found = FALSE;
 		wxString token = tkz.GetNextToken();
 		if(token.IsEmpty())
@@ -211,31 +211,31 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 		if(wholeWords) {
 			for(i = 0; i < lng - wrd + 1; ++i) {
 
-				if(WHITESPACE(buf1[i])) 
+				if(WHITESPACE(buf1[i]))
 					continue;
-			 			
+
 				j = 0;
-				while(buf1[i + j] == buf2[j] && j < wrd) 
+				while(buf1[i + j] == buf2[j] && j < wrd)
 					++j;
-				
-				if (j == wrd && (WHITESPACE(buf1[i + j]) || 
+
+				if (j == wrd && (WHITESPACE(buf1[i + j]) ||
 						 i+j == lng))
 					if(i == 0 || WHITESPACE(buf1[i - 1])) {
-						found = TRUE; 
-						break; 
-					}			
+						found = TRUE;
+						break;
+					}
 			}
 		} else {
 			for (i = 0; i < lng - wrd + 1; ++i) {
-				
+
 				j = 0;
-				while ((j < wrd) && 
-				       (buf1[i + j] == buf2[(size_t)j])) 
+				while ((j < wrd) &&
+				       (buf1[i + j] == buf2[(size_t)j]))
 					++j;
-				if (j == wrd && 
-				    (i == 0 || WHITESPACE(buf1[i - 1]))) { 
-					found = TRUE; 
-					break; 
+				if (j == wrd &&
+				    (i == 0 || WHITESPACE(buf1[i - 1]))) {
+					found = TRUE;
+					break;
 				}
 			}
 		}
@@ -268,7 +268,7 @@ void CHMSearchPanel::SetNewFont(const wxFont& font)
 
 void CHMSearchPanel::SetConfig()
 {
-	wxConfig config(wxT("xchm"));	
+	wxConfig config(wxT("xchm"));
 	config.Write(wxT("/Search/partialWords"), (long)_partial->GetValue());
 	config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
 }
@@ -306,5 +306,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

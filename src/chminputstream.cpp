@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -43,14 +43,14 @@ void CHMInputStream::Cleanup()
 
 CHMFile* CHMInputStream::GetCache()
 {
-	return _archiveCache; 
+	return _archiveCache;
 }
 
 /*----------------------------------------------------------------------
  * rest of class CHMInputStream implementation
  */
 
-CHMInputStream::CHMInputStream(const wxString& archive, 
+CHMInputStream::CHMInputStream(const wxString& archive,
 			       const wxString& file)
 	: _currPos(0)
 {
@@ -79,7 +79,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		// the index file, the index file is just a
 		// link to a file in another archive.
 
-		wxString arch_link = 
+		wxString arch_link =
 			filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
 		filename = filename.AfterLast(wxT(':'));
@@ -115,7 +115,7 @@ bool CHMInputStream::Eof() const
 
 
 size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
-{	
+{
 	if((uint64_t)_currPos >= _ui.length) {
 		m_lasterror = wxSTREAM_EOF;
 		return 0;
@@ -126,14 +126,14 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 
 	if((uint64_t)(_currPos + bufsize) > _ui.length)
         bufsize = _ui.length - _currPos;
-        
-	bufsize = 
+
+	bufsize =
 		_archiveCache->RetrieveObject(&_ui,
-					      (unsigned char *)buffer, 
+					      (unsigned char *)buffer,
 					      _currPos, bufsize);
-     
+
 	_currPos += bufsize;
-    
+
 	return bufsize;
 }
 
@@ -160,9 +160,9 @@ wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 
 bool CHMInputStream::Init(const wxString& archive)
 {
-	if(_archiveCache == NULL || 
+	if(_archiveCache == NULL ||
 	   !_archiveCache->ArchiveName().IsSameAs(archive)) {
-	 
+
 		Cleanup();
 
 		_archiveCache = new CHMFile(archive);

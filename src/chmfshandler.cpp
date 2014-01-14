@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -40,13 +40,13 @@ CHMFSHandler::~CHMFSHandler()
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
 	wxString p = GetProtocol(location);
-	return (p == wxT("xchm") 
+	return (p == wxT("xchm")
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
 
 
-wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, 
+wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 				 const wxString& location)
 {
 	wxString right = GetRightLocation(location);
@@ -67,7 +67,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	right.Replace(wxT("%2E"), wxT("."), TRUE);
 	right.Replace(wxT("%2D"), wxT("-"), TRUE);
 	right.Replace(wxT("%26"), wxT("&"), TRUE);
-            
+
 	wxFileName filename = wxFileSystem::URLToFileName(left);
 	filename.Normalize();
 
@@ -77,11 +77,11 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 		right = right.Mid(len);
 
         wxFileName fwfn(right, wxPATH_UNIX);
-        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, 
+        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
 			wxPATH_UNIX);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
 
-	s = new CHMInputStream(left.IsEmpty() ? 
+	s = new CHMInputStream(left.IsEmpty() ?
 			       left : filename.GetFullPath(), right);
 
 	if (s && s->IsOk()) {
@@ -94,15 +94,15 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 		if(!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
 			right = right.AfterLast(wxT(':'));
 
-		return new wxFSFile(s, 
+		return new wxFSFile(s,
 				    wxString(wxT("file:")) +
-				    s->GetCache()->ArchiveName() + 
-				    wxT("#xchm:") + right, 
+				    s->GetCache()->ArchiveName() +
+				    wxT("#xchm:") + right,
 				    GetMimeTypeFromExt(right.Lower()),
 				    GetAnchor(location),
 				    wxDateTime((time_t)-1));
 	}
-    
+
 	delete s;
 	return NULL;
 }

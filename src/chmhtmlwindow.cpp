@@ -1,24 +1,24 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
-  Mac OS specific patches contributed by Chanler White 
+  Mac OS specific patches contributed by Chanler White
   <cawhite@nwrails.com>
   "Save link as" patch contributed by Joerg Wunsch
   <joerg_wunsch@users.sourceforge.net>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -71,21 +71,21 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
 	wxLogNull log;
 	wxString tmp = location;
-	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize"))) 
+	if(!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize")))
 		tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 
-	if(_syncTree && 
+	if(_syncTree &&
 	   // We should be looking for a valid page, not / (home).
-	   !location.AfterLast(wxT('/')).IsEmpty() && 
+	   !location.AfterLast(wxT('/')).IsEmpty() &&
 	   _tcl->GetCount() > 1) {
 
-		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')), 
+		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')),
 				wxPATH_UNIX);
 		wxString cwd = GetParser()->GetFS()->
 			GetPath().AfterLast(wxT(':'));
 		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
 				wxPATH_UNIX);
-		
+
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call
 		// LoadPage() with _syncTree set to false.
@@ -137,7 +137,7 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 {
 	wxString url = link.GetHref();
-	
+
 	LoadPage(url);
 
 	if(!url.Left(7).CmpNoCase(wxT("MS-ITS:")))
@@ -149,18 +149,18 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 				     bool wholeWords, bool caseSensitive)
 {
 	wxString tmp = word;
-	
+
 	if(!parent)
 		return NULL;
- 
+
 	if(!caseSensitive)
 		tmp.MakeLower();
 
 	// If this cell is not a container, the for body will never happen
 	// (GetFirstChild() will return NULL).
-	for(wxHtmlCell *cell = parent->GetFirstChild(); cell; 
+	for(wxHtmlCell *cell = parent->GetFirstChild(); cell;
 	    cell = cell->GetNext()) {
-		
+
 		wxHtmlCell *result;
 		if((result = FindFirst(cell, word, wholeWords, caseSensitive)))
 			return result;
@@ -193,16 +193,16 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 		m_selection = new wxHtmlSelection();
 
 		// !! Must see if this works now. !!
-		m_selection->Set(parent, parent);		
+		m_selection->Set(parent, parent);
 
 		int y;
 		wxHtmlCell *cell = parent;
 
-		for (y = 0; cell != NULL; cell = cell->GetParent()) 
+		for (y = 0; cell != NULL; cell = cell->GetParent())
 			y += cell->GetPosY();
 		Scroll(-1, y / wxHTML_SCROLL_STEP);
 		Refresh();
-		
+
 		return parent;
 	}
 
@@ -210,7 +210,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 }
 
 
-wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word, 
+wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 				    bool wholeWords, bool caseSensitive)
 {
 	wxHtmlCell *cell;
@@ -225,7 +225,7 @@ wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 	}
 
 	cell = start->GetParent();
-	
+
 	while(cell && !cell->GetNext())
 		cell = cell->GetParent();
 
@@ -286,7 +286,7 @@ void CHMHtmlWindow::OnSize(wxSizeEvent& event)
 	wxHtmlWindow::OnSize(event);
 
 	Scroll(x, y);
-	event.Skip(false);      
+	event.Skip(false);
 }
 
 
@@ -314,7 +314,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 
 	if(suggestedName.IsEmpty())
 		suggestedName = wxT("index.html");
-	
+
 	wxString filename = ::wxFileSelector(_("Save as"),
 					     wxT(""),
 					     suggestedName,

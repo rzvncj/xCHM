@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -65,7 +65,7 @@ class CHMFile {
 public:
 	//! Default constructor.
 	CHMFile();
-	
+
 	/*!
 	  \brief This constructor attempts to open the .chm file passed as
 	  it's argument. If it fails, IsOk() will return false.
@@ -76,7 +76,7 @@ public:
 	//! Destructor. If a file has been succesfully opened, it closes it.
 	~CHMFile();
 
-	
+
 	/*!
 	  \brief Gets the name of the default page in the archive.
 	  \return The home page name, with a '/' added in front and
@@ -139,7 +139,7 @@ public:
 	/*!
 	  \brief Determines the font to use for special charsets.
 	  \return Detected font recommendation.
-	 */	
+	 */
 	wxString DefaultFont() const { return _font; }
 
 	/*!
@@ -177,7 +177,7 @@ public:
 
 
 	/*!
-	  \brief Attempts to build an index of context-ID/page pairs 
+	  \brief Attempts to build an index of context-ID/page pairs
 	   from the file.
 	  \return true if it's possible to buld the tree, false otherwise.
 	 */
@@ -194,7 +194,7 @@ public:
 	/*!
 	 \brief Looks up the page referred to by the context-ID
 	 \param contextID The context-ID to look up
-	 \return the page referred to by the context-ID, 
+	 \return the page referred to by the context-ID,
 	  or file root"/"  if ID is invalid.
 	 */
 	wxString GetPageByCID( const int contextID );
@@ -203,7 +203,7 @@ public:
 	  \brief Have the context-IDs been loaded into memory or not.
 	  \return true if they have, false if not.
 	 */
-	bool AreContextIDsLoaded() const { return !_cidMap.empty(); } 
+	bool AreContextIDsLoaded() const { return !_cidMap.empty(); }
 
 	/*!
 	  \brief Fast search using the $FIftiMain file in the .chm.
@@ -215,7 +215,7 @@ public:
 	  the URLs and the values are the page titles.
 	  \return true if the search succeeded, false otherwise.
 	 */
-	bool IndexSearch(const wxString& text, bool wholeWords, 
+	bool IndexSearch(const wxString& text, bool wholeWords,
 			 bool titlesOnly, CHMSearchResults *results);
 
 	/*!
@@ -224,7 +224,7 @@ public:
 	  qualified with '/' standing for the root of the archive
 	  filesystem.
 	  \param ui A pointer to CHMLIB specific data about the file.
-	  The parameter gets filled with useful data if the lookup 
+	  The parameter gets filled with useful data if the lookup
 	  was succesful.
 	  \return true if the file exists in the archive, false otherwise.
 	 */
@@ -281,7 +281,7 @@ private:
 	//! Try to recursively load the binary topics tree
 	void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			     UCharPtr& strings, UCharPtr& urltbl,
-			     UCharPtr& urlstr, uint32_t offset, 
+			     UCharPtr& urlstr, uint32_t offset,
 			     wxTreeCtrl *toBuild, int level);
 
 	//! Retrieve the data (name/URL) for a single entry (TOC or index)

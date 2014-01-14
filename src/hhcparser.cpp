@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -42,11 +42,11 @@ struct HTMLChar {
 };
 
 
-extern "C" 
+extern "C"
 int HTMLCharCompare(const void *key, const void *item)
-{                                          
+{
 	return wxStrcmp((wxChar*)key, ((HTMLChar*)item)->name);
-}   
+}
 
 
 HTMLChar substitutions[] = {
@@ -54,32 +54,32 @@ HTMLChar substitutions[] = {
 	{ wxT("Agrave"),192 }, { wxT("Alpha"),913 }, { wxT("Aring"),197 },
 	{ wxT("Atilde"),195 }, { wxT("Auml"),196 }, { wxT("Beta"),914 },
 	{ wxT("Ccedil"),199 }, { wxT("Chi"),935 }, { wxT("Dagger"),8225 },
-	{ wxT("Delta"),916 }, { wxT("Dstrok"),208 }, { wxT("ETH"),208 }, 
-	{ wxT("Eacute"),201 }, { wxT("Ecirc"),202 }, { wxT("Egrave"),200 }, 
-	{ wxT("Epsilon"),917 }, { wxT("Eta"),919 }, { wxT("Euml"),203 }, 
-	{ wxT("Gamma"),915 }, { wxT("Iacute"),205 }, { wxT("Icirc"),206 }, 
-	{ wxT("Igrave"),204 }, { wxT("Iota"),921 }, { wxT("Iuml"),207 }, 
-	{ wxT("Kappa"),922 }, { wxT("Lambda"),923 }, { wxT("Mu"),924 }, 
-	{ wxT("Ntilde"),209 }, { wxT("Nu"),925 }, { wxT("OElig"),338 }, 
-	{ wxT("Oacute"),211 }, { wxT("Ocirc"),212 }, { wxT("Ograve"),210 }, 
-	{ wxT("Omega"),937 }, { wxT("Omicron"),927 }, { wxT("Oslash"),216 }, 
-	{ wxT("Otilde"),213 }, { wxT("Ouml"),214 }, { wxT("Phi"),934 }, 
-	{ wxT("Pi"),928 }, { wxT("Prime"),8243 }, { wxT("Psi"),936 }, 
-	{ wxT("Rho"),929 }, { wxT("Scaron"),352 }, { wxT("Sigma"),931 }, 
-	{ wxT("THORN"),222 }, { wxT("Tau"),932 }, { wxT("Theta"),920 }, 
-	{ wxT("Uacute"),218 }, { wxT("Ucirc"),219 }, { wxT("Ugrave"),217 }, 
-	{ wxT("Upsilon"),933 }, { wxT("Uuml"),220 }, { wxT("Xi"),926 }, 
-	{ wxT("Yacute"),221 }, { wxT("Yuml"),376 }, { wxT("Zeta"),918 }, 
-	{ wxT("aacute"),225 }, { wxT("acirc"),226 }, { wxT("acute"),180 }, 
-	{ wxT("aelig"),230 }, { wxT("agrave"),224 }, { wxT("alefsym"),8501 }, 
-	{ wxT("alpha"),945 }, { wxT("amp"),38 }, { wxT("and"),8743 }, 
-	{ wxT("ang"),8736 }, { wxT("aring"),229 }, { wxT("asymp"),8776 }, 
-	{ wxT("atilde"),227 }, { wxT("auml"),228 }, { wxT("bdquo"),8222 }, 
-	{ wxT("beta"),946 }, { wxT("brvbar"),166 }, { wxT("bull"),8226 }, 
-	{ wxT("cap"),8745 }, { wxT("ccedil"),231 }, { wxT("cedil"),184 }, 
-	{ wxT("cent"),162 }, { wxT("chi"),967 }, { wxT("circ"),710 }, 
-	{ wxT("clubs"),9827 }, { wxT("cong"),8773 }, { wxT("copy"),169 }, 
-	{ wxT("crarr"),8629 }, { wxT("cup"),8746 }, { wxT("curren"),164 }, 
+	{ wxT("Delta"),916 }, { wxT("Dstrok"),208 }, { wxT("ETH"),208 },
+	{ wxT("Eacute"),201 }, { wxT("Ecirc"),202 }, { wxT("Egrave"),200 },
+	{ wxT("Epsilon"),917 }, { wxT("Eta"),919 }, { wxT("Euml"),203 },
+	{ wxT("Gamma"),915 }, { wxT("Iacute"),205 }, { wxT("Icirc"),206 },
+	{ wxT("Igrave"),204 }, { wxT("Iota"),921 }, { wxT("Iuml"),207 },
+	{ wxT("Kappa"),922 }, { wxT("Lambda"),923 }, { wxT("Mu"),924 },
+	{ wxT("Ntilde"),209 }, { wxT("Nu"),925 }, { wxT("OElig"),338 },
+	{ wxT("Oacute"),211 }, { wxT("Ocirc"),212 }, { wxT("Ograve"),210 },
+	{ wxT("Omega"),937 }, { wxT("Omicron"),927 }, { wxT("Oslash"),216 },
+	{ wxT("Otilde"),213 }, { wxT("Ouml"),214 }, { wxT("Phi"),934 },
+	{ wxT("Pi"),928 }, { wxT("Prime"),8243 }, { wxT("Psi"),936 },
+	{ wxT("Rho"),929 }, { wxT("Scaron"),352 }, { wxT("Sigma"),931 },
+	{ wxT("THORN"),222 }, { wxT("Tau"),932 }, { wxT("Theta"),920 },
+	{ wxT("Uacute"),218 }, { wxT("Ucirc"),219 }, { wxT("Ugrave"),217 },
+	{ wxT("Upsilon"),933 }, { wxT("Uuml"),220 }, { wxT("Xi"),926 },
+	{ wxT("Yacute"),221 }, { wxT("Yuml"),376 }, { wxT("Zeta"),918 },
+	{ wxT("aacute"),225 }, { wxT("acirc"),226 }, { wxT("acute"),180 },
+	{ wxT("aelig"),230 }, { wxT("agrave"),224 }, { wxT("alefsym"),8501 },
+	{ wxT("alpha"),945 }, { wxT("amp"),38 }, { wxT("and"),8743 },
+	{ wxT("ang"),8736 }, { wxT("aring"),229 }, { wxT("asymp"),8776 },
+	{ wxT("atilde"),227 }, { wxT("auml"),228 }, { wxT("bdquo"),8222 },
+	{ wxT("beta"),946 }, { wxT("brvbar"),166 }, { wxT("bull"),8226 },
+	{ wxT("cap"),8745 }, { wxT("ccedil"),231 }, { wxT("cedil"),184 },
+	{ wxT("cent"),162 }, { wxT("chi"),967 }, { wxT("circ"),710 },
+	{ wxT("clubs"),9827 }, { wxT("cong"),8773 }, { wxT("copy"),169 },
+	{ wxT("crarr"),8629 }, { wxT("cup"),8746 }, { wxT("curren"),164 },
 	{ wxT("dArr"),8659 }, { wxT("dagger"),8224 }, { wxT("darr"),8595 },
 	{ wxT("deg"),176 }, { wxT("delta"),948 }, { wxT("diams"),9830 },
 	{ wxT("divide"),247 }, { wxT("eacute"),233 }, { wxT("ecirc"),234 },
@@ -151,7 +151,7 @@ HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
 
 	createCSConvPtr(_cvPtr, _enc);
-	
+
 	if(_tree)
 		_parents[_level] = _tree->GetRootItem();
 }
@@ -182,7 +182,7 @@ void HHCParser::parse(const char* chunk)
 				continue;
 			}
 		}
-		
+
 		if(_intag)
 			_tag += *chunk;
 		++chunk;
@@ -193,7 +193,7 @@ void HHCParser::parse(const char* chunk)
 void HHCParser::handleTag(const std::string& tag)
 {
 	if(tag.empty())
-		return;	
+		return;
 
 	++_counter;
 
@@ -213,7 +213,7 @@ void HHCParser::handleTag(const std::string& tag)
 
 	if(i == tag.length())
 		return;
-	
+
 	std::string tagName;
 
 	for( ; i != tag.length(); ++i) {
@@ -247,9 +247,9 @@ void HHCParser::handleTag(const std::string& tag)
 		} else if(tagName == "param") {
 
 			std::string name, value;
-			bool special = 
+			bool special =
 				getParameters(tag.c_str() + i, name, value);
-			
+
 			if(name == "name" && _name.empty()) {
 				_name = value;
 				_htmlChars = _htmlChars || special;
@@ -258,11 +258,11 @@ void HHCParser::handleTag(const std::string& tag)
 				_htmlChars = _htmlChars || special;
 			}
 		}
-	
-	} else {		
+
+	} else {
 		if(tagName == "ul") {
 			++_level;
-			
+
 		} else if(tagName == "/ul") {
 			if(_level > 0)
 				--_level;
@@ -280,15 +280,15 @@ void HHCParser::handleTag(const std::string& tag)
 bool HHCParser::getParameters(const char* input, std::string& name,
 			      std::string& value)
 {
-	bool lower = false, modify = false;	
+	bool lower = false, modify = false;
 	name = value = "";
 
 	while(*input) {
 		std::string tmpstr;
-		
+
 		while(*input && isspace(*input))
 			++input;
-			
+
 		while(*input && !isspace(*input) && *input != '=') {
 			tmpstr += tolower(*input);
 			++input;
@@ -307,12 +307,12 @@ bool HHCParser::getParameters(const char* input, std::string& name,
 		if(tmpstr == "name") {
 			lower = true;
 		} else if(tmpstr == "value") {
-			lower = false;		
+			lower = false;
 		} else {
 			// now skip value.
 			while(*input && isspace(*input))
 				++input;
-				
+
 			if(*input && *input == '\"') {
 				++input;
 				while(*input && *input != '\"')
@@ -340,7 +340,7 @@ bool HHCParser::getParameters(const char* input, std::string& name,
 					value += *input++;
 				}
 			}
-			
+
 			if(*input && *input == '\"')
 				++input;
 		} else {
@@ -348,7 +348,7 @@ bool HHCParser::getParameters(const char* input, std::string& name,
 				if(lower)
 					name += tolower(*input++);
 				else {
-					if(*input == '&') 
+					if(*input == '&')
 						modify = true;
 					value += *input++;
 				}
@@ -368,7 +368,7 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 
 		int parentIndex = _level ? _level - 1 : 0;
 
-		_parents[_level] = 
+		_parents[_level] =
 			_tree->AppendItem(_parents[parentIndex], name, 2, 2,
 					  new URLTreeItem(value));
 		if(!_level)
@@ -383,7 +383,7 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 
 				_tree->SetItemImage(_parents[parentIndex], 1,
 						wxTreeItemIcon_Expanded);
-			}	
+			}
 		}
 	}
 }
@@ -437,7 +437,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 				result.Append(input[i]);
 		}
 	}
-	
+
 	return result;
 }
 
@@ -449,7 +449,7 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 	HTMLChar* hc = (HTMLChar*)bsearch(name.c_str(), substitutions,
 					  substitutions_cnt,
 					  sizeof(HTMLChar),
-					  HTMLCharCompare);	
+					  HTMLCharCompare);
 
 	if(hc)
 		return hc->code;
@@ -471,5 +471,4 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

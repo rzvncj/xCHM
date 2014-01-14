@@ -3,20 +3,20 @@
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
   Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
   (this file originally written by Cedric Boudinet)
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -38,12 +38,12 @@ class CHMFrame;
 class CHMHtmlWindow;
 
 
-/*! 
+/*!
   \class wxNotebook
   \brief wxWidgets application class.
 */
 
-/*! 
+/*!
   \brief Custom HTML notebook widget class. For tabbed viewing of a CHM file.
 */
 class CHMHtmlNotebook : public wxAuiNotebook {
@@ -53,7 +53,7 @@ public:
 	CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 			const wxString& normalFont, const wxString& fixedFont,
 			const int fontSize, CHMFrame* frame);
-	
+
 	//! Add a notebook tab and display the specified URL
 	void AddHtmlView(const wxString& path,
 			 const wxString& link);
@@ -71,8 +71,8 @@ public:
 	void CloseAllPagesExceptFirst();
 
 	//! Propagate font settings to the children
-	void SetChildrenFonts(const wxString& normal_face, 
-			      const wxString& fixed_face, 
+	void SetChildrenFonts(const wxString& normal_face,
+			      const wxString& fixed_face,
 			      const int *sizes = NULL);
 
 	//! Called when user asks for a tab to close

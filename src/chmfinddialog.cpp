@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -34,9 +34,9 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	  _html(toSearch), _cell(NULL)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	
-	_text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, 
-			       wxDefaultPosition, wxSize(200, -1), 
+
+	_text = new wxTextCtrl(this, ID_TextFind, wxEmptyString,
+			       wxDefaultPosition, wxSize(200, -1),
 			       wxTE_PROCESS_ENTER);
 
 	_whole = new wxCheckBox(this, -1, _("Whole words only"));
@@ -50,7 +50,7 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	wxButton *find = new wxButton(this, ID_FindNext, _("Find next"));
 
 	szButtons->Add(find, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
-	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 
+	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")),
 		       1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
 
 	wxSizer *topsizer = new wxBoxSizer(wxHORIZONTAL);
@@ -67,7 +67,7 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 
 
 void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
-{	
+{
 	_html->ClearSelection();
 
 	wxString sr = _text->GetLineText(0);
@@ -92,7 +92,7 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 
 	} else {
 
-		if(_cell && _cell->GetNext()) 
+		if(_cell && _cell->GetNext())
 			_cell = _cell->GetNext();
 	        else {
 			while(_cell && !_cell->GetNext())
@@ -105,7 +105,7 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 		if(!_cell)
 			return;
 
-		_cell = _html->FindNext(_cell, word, _whole->IsChecked(), 
+		_cell = _html->FindNext(_cell, word, _whole->IsChecked(),
 				       _case->IsChecked());
 
 		// Wrap around.

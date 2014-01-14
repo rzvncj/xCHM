@@ -3,20 +3,20 @@
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
   Most of the code in this file is a modified version of code from
   Pabs' GPL chmdeco project, credits and thanks go to him.
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -68,12 +68,12 @@ inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 		++length;
 
 	} while (*(buffer++) & 0x80);
-	
+
 	return result;
 }
 
 
-/* 
+/*
    Finds the first unset bit in memory. Returns the number of set bits found.
    Returns -1 if the buffer runs out before we find an unset bit.
 */
@@ -83,23 +83,23 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 	length = 0;
 
 	while(*byte & (1 << *bit)){
-		if(*bit) 
+		if(*bit)
 			--(*bit);
-		else { 
+		else {
 			++byte;
 			++length;
-			*bit = 7; 
+			*bit = 7;
 		}
 		++bits;
 	}
 
-	if(*bit) 
+	if(*bit)
 		--(*bit);
-	else { 
+	else {
 		++length;
-		*bit = 7; 
+		*bit = 7;
 	}
-	
+
 	return bits;
 }
 
@@ -107,7 +107,7 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 inline uint64_t sr_int(unsigned char* byte, int* bit,
 			unsigned char s, unsigned char r, size_t& length)
 {
-	uint64_t ret; 
+	uint64_t ret;
 	unsigned char mask;
 	int n, n_bits, num_bits, base, count;
 	length = 0;
@@ -126,31 +126,31 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 	while(n > 0) {
 		num_bits = n > *bit ? *bit : n-1;
 		base = n > *bit ? 0 : *bit - (n-1);
-		
+
 		switch(num_bits){
-			case 0: 
-				mask = 1; 
+			case 0:
+				mask = 1;
 				break;
-			case 1: 
-				mask = 3; 
+			case 1:
+				mask = 3;
 				break;
-			case 2: 
-				mask = 7; 
+			case 2:
+				mask = 7;
 				break;
-			case 3: 
-				mask = 0xf; 
+			case 3:
+				mask = 0xf;
 				break;
-			case 4: 
-				mask = 0x1f; 
+			case 4:
+				mask = 0x1f;
 				break;
-			case 5: 
-				mask = 0x3f; 
+			case 5:
+				mask = 0x3f;
 				break;
-			case 6: 
-				mask = 0x7f; 
+			case 6:
+				mask = 0x7f;
 				break;
-			case 7: 
-				mask = 0xff; 
+			case 7:
+				mask = 0xff;
 				break;
                         default:
                                 mask = 0xff;
@@ -158,9 +158,9 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 		}
 
 		mask <<= base;
-		ret = (ret << (num_bits+1)) | 
+		ret = (ret << (num_bits+1)) |
 			(uint64_t)((*byte & mask) >> base);
-		
+
 		if( n > *bit ){
 			++byte;
 			++length;
@@ -172,7 +172,7 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 		}
 	}
 
-	if(count) 
+	if(count)
 		ret |= (uint64_t)1 << n_bits;
 
 	return ret;
@@ -231,8 +231,8 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 #endif
 
 
-inline wxChar charForCode(unsigned code, 
-			  const wxCSConv& NON_UNICODE_PARAM(cv), 
+inline wxChar charForCode(unsigned code,
+			  const wxCSConv& NON_UNICODE_PARAM(cv),
 			  bool NON_UNICODE_PARAM(conv))
 {
 #if !wxUSE_UNICODE
@@ -260,7 +260,7 @@ inline wxChar charForCode(unsigned code,
 #	else
 	return (code < 256) ? (wxChar)code : '?';
 
-#	endif                         
+#	endif
 
 #else
 	return (wxChar)code;

@@ -3,20 +3,20 @@
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
   ListDirty() patch contributed by Iulian Dragos
   <dragosiulian@users.sourceforge.net>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -55,7 +55,7 @@ WX_DEFINE_SORTED_ARRAY(CHMListPairItem *, ItemPairArray);
 int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2);
 
 
-/*! 
+/*!
   \class wxListCtrl
   \brief wxWidgets list control class.
 */
@@ -91,14 +91,14 @@ public:
 	  \param url The title's associated url.
 	 */
 	void AddPairItem(const wxString& title, const wxString& url);
-	
+
 	//! Loads the page that corresponds to the item currently selected.
 	void LoadSelected();
 
 	//! Should be called each time the list control's state changes.
 	void UpdateUI();
-  
-	/*! 
+
+	/*!
 	  \brief Finds the list item that is the best match.
 	  \param title The string to match against.
 	*/
@@ -114,7 +114,7 @@ protected:
 private:
 	//! Delete/empty the items in the item array.
 	void ResetItems();
-	
+
 private:
 	ItemPairArray _items;
 	CHMHtmlNotebook *_nbhtml;

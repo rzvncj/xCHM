@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -90,9 +90,9 @@ enum
 */
 
 
-/*! 
+/*!
   \brief The frame, owner of the wxHtmlWindow, contents tree control and
-  all the other nifty stuff. 
+  all the other nifty stuff.
 */
 class CHMFrame : public wxFrame {
 
@@ -133,7 +133,7 @@ public:
 	  \return TRUE if the operation was successful.
 	 */
 	bool LoadCHM(const wxString& archive);
-	
+
 	/*!
 	  \brief Attempts to load a context-ID from within the current chm file
 	  \param contextID the context-ID to load.
@@ -170,13 +170,13 @@ protected:
 	void OnHistoryForward(wxCommandEvent& event);
 
 	//! Called when the user wants to go back in the history.
-	void OnHistoryBack(wxCommandEvent& event);	
+	void OnHistoryBack(wxCommandEvent& event);
 
-	/*! 
+	/*!
 	  \brief Called when the user wants to either disable or enable
 	  the contents tree panel on the left.
 	*/
-	void OnShowContents(wxCommandEvent& event);	
+	void OnShowContents(wxCommandEvent& event);
 
 	//! Called when the user wants to print the displayed page.
 	void OnPrint(wxCommandEvent& event);
@@ -198,7 +198,7 @@ protected:
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
 	//! Called when the user selects Register extension
-	void OnRegisterExtension(wxCommandEvent& event);	
+	void OnRegisterExtension(wxCommandEvent& event);
 #endif// __WXMSW__
 
 	//! Called when the user clicks on the Remove button.
@@ -260,7 +260,7 @@ private:
 	int _fontSize;
 	bool _bookmarkSel;
 	bool _bookmarksDeleted;
-	int _sashPos;	
+	int _sashPos;
 	wxFont _font;
 	wxFileHistory _fh;
 	wxString _fullAppPath;
@@ -269,7 +269,7 @@ private:
 	bool _fullScreen;
 
 private:
-	DECLARE_EVENT_TABLE()	
+	DECLARE_EVENT_TABLE()
 };
 
 

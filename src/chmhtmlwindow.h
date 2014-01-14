@@ -1,20 +1,20 @@
 /*
 
   Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
- 
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
 
 */
@@ -55,7 +55,7 @@ class CHMFrame;
 */
 
 
-/*! 
+/*!
   \brief Custom HTML widget class. Needed for sychnronization between
   the topics tree control and the currently displayed page.
 */
@@ -84,7 +84,7 @@ public:
 	  \param value Synchronize the tree widget on load?
 	 */
 	void SetSync(bool value) { _syncTree = value; }
-	
+
 	/*!
 	  Returns true if the tree control's EVT_TREE_SEL_CHANGED
 	  event happened as a result of the CHMHtmlWindow calling
@@ -106,20 +106,20 @@ public:
 	  case sensitive.
 	  \return A valid cell if the result was found, NULL otherwise.
 	 */
-	wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word, 
+	wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word,
 			      bool wholeWords, bool caseSensitive);
-	
-	/*! 
+
+	/*!
 	  \brief Same as FindFirst(), but continues the search from start
 	  (start is considered in the search process).
 	*/
-	wxHtmlCell* FindNext(wxHtmlCell *start, 
+	wxHtmlCell* FindNext(wxHtmlCell *start,
 			     const wxString& word, bool wholeWords,
 			     bool caseSensitive);
 
 	//! Clears the current selection.
 	void ClearSelection();
-	
+
 	// Needs to be public, cause I call it from CHMHtmlFrame.
 	//! Called when the user selects 'Find' from the popup menu.
 	void OnFind(wxCommandEvent& event);
@@ -127,13 +127,13 @@ public:
 	//! Called when the user selects 'Copy' from the popup menu.
 	void OnCopy(wxCommandEvent& event);
 
-protected:	
+protected:
 	//! Called when the user selects 'Forward' from the popup menu.
 	void OnForward(wxCommandEvent& event);
 
 	//! Called when the user selects 'Back' from the popup menu.
 	void OnBack(wxCommandEvent& event);
-	
+
 	//! Called when the user selects 'Copy link' from the popup menu.
 	void OnCopyLink(wxCommandEvent& event);
 
@@ -152,7 +152,7 @@ protected:
 	//! Called when the 'Toggle fullscreen' is selected from the popup menu.
 	void OnToggleFullScreen(wxCommandEvent& event);
 
-protected:	
+protected:
 	//! Called when the user right clicks the HTML window.
 	void OnRightClick(wxMouseEvent& event);
 
@@ -165,7 +165,7 @@ private:
 
 	//! Helper. Returns the prefix of the currently loaded page.
 	wxString GetPrefix(const wxString& location) const;
-	
+
 private:
 	wxTreeCtrl *_tcl;
 	bool _syncTree;

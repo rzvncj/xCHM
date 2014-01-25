@@ -1,15 +1,15 @@
 # Polish translation for xchm.
 # This file is distributed under the same license as the xchm package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2004-2011.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2004-2014.
 #
 # vi:encoding=utf-8
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xchm 1.20\n"
+"Project-Id-Version: xchm 1.23\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 10:53+0300\n"
-"PO-Revision-Date: 2011-05-20 16:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:32+0300\n"
+"PO-Revision-Date: 2014-01-25 15:58+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "Language: pl\n"
@@ -86,9 +86,8 @@ msgid "Print the page currently displayed."
 msgstr "Wydruk aktualnie wyświetlanej strony."
 
 #: src/chmframe.cpp:52
-#, fuzzy
 msgid "Toggle table of contents."
-msgstr "Odtwarzanie spisu treści..."
+msgstr "Przełączenie spisu treści."
 
 #: src/chmframe.cpp:53
 msgid "Go to the book's start page."
@@ -116,7 +115,7 @@ msgstr "Znalezienie słowa na stronie."
 
 #: src/chmframe.cpp:59
 msgid "Toggle fullscreen mode."
-msgstr ""
+msgstr "Przełączenie trybu pełnoekranowego."
 
 #: src/chmframe.cpp:60
 msgid "Close the current tab"
@@ -236,7 +235,7 @@ msgstr "&Nowa zakładka\tCtrl-T"
 
 #: src/chmframe.cpp:824
 msgid "Toggle &fullscreen\tF11"
-msgstr ""
+msgstr "Pełny &ekran\tF11"
 
 #: src/chmframe.cpp:828
 msgid "&File"
@@ -244,7 +243,7 @@ msgstr "&Plik"
 
 #: src/chmframe.cpp:829
 msgid "&View"
-msgstr ""
+msgstr "&Widok"
 
 #: src/chmframe.cpp:830
 msgid "&Edit"
@@ -304,7 +303,7 @@ msgstr "Znajdź"
 
 #: src/chmframe.cpp:1039
 msgid "Fullscreen"
-msgstr ""
+msgstr "Pełny ekran"
 
 #: src/chmframe.cpp:1044
 msgid "Back"
@@ -352,7 +351,7 @@ msgstr "&Szukaj na stronie..."
 
 #: src/chmhtmlwindow.cpp:59
 msgid "&Toggle fullscreen mode"
-msgstr ""
+msgstr "&Przełącz tryb pełnoekranowy"
 
 #: src/chmhtmlwindow.cpp:307
 msgid "OpenFile("
@@ -401,6 +400,3 @@ msgstr "Szukanie tylko w tytułach."
 #: src/chmsearchpanel.cpp:55
 msgid "Search contents for occurences of the specified text."
 msgstr "Poszukiwanie w treści wystąpień podanego tekstu."
-
-#~ msgid "On or off?"
-#~ msgstr "Włączone czy wyłączone?"

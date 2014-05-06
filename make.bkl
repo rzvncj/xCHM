@@ -7,7 +7,7 @@
     <!-- Additional include paths (include tag) -->
  
     <set var="EXTRAINCLUDE"></set>
-    <set var="WXWIN">../wxMSW-2.8.11</set>
+    <set var="WXWIN">../wxWidgets-3.0.0</set>
     <set var="CHMLIB">../chmlib-0.40</set> 
  
     <include file="$(WXWIN)/build/bakefiles/wxpresets/presets/wx.bkl" />
@@ -29,7 +29,6 @@
             src/chmhtmlnotebook.cpp src/chmhtmlwindow.cpp
             src/chmindexpanel.cpp src/chminputstream.cpp
             src/chmlistctrl.cpp src/chmsearchpanel.cpp src/hhcparser.cpp
-            src/spantag.cpp
         </sources>
         <wx-lib>adv</wx-lib>
         <wx-lib>net</wx-lib>

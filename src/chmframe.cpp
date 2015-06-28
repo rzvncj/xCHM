@@ -377,21 +377,33 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 				  wxOK | wxCANCEL, this);
 
 	if(answer == wxOK) {
-		wxFileTypeInfo fti(wxT("application/x-chm"), _fullAppPath,
-				   wxEmptyString, wxT("Compiled HTML help"),
-				   wxT("chm"), NULL);
+		wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath,
+					wxEmptyString,
+					wxT("Compiled HTML help"),
+					wxT("chm"), NULL);
 
-		wxFileType *ft = wxTheMimeTypesManager->Associate(fti);
+		wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"),
+				       _fullAppPath,
+				       wxEmptyString,
+				       wxT("Compiled HTML help"),
+				       wxT("chm"), NULL);
 
-		if(ft) {
-			ft->SetDefaultIcon(_fullAppPath);
+		wxFileType *ft_xchm =
+			wxTheMimeTypesManager->Associate(fti_xchm);
+
+		wxFileType *ft_msh =
+			wxTheMimeTypesManager->Associate(fti_msh);
+
+		if(ft_xchm && ft_msh) {
+			ft_xchm->SetDefaultIcon(_fullAppPath);
+			ft_msh->SetDefaultIcon(_fullAppPath);
 			wxMessageBox(_("Registration successful!"),
 				     _("Done"), wxOK, this);
 		}
 	}
 }
-#endif// __WXMSW__
 
+#endif// __WXMSW__
 
 void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 {

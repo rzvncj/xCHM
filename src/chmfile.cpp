@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
     <millman@pcigeomatics.com>
   Bugfixes contributed by Kuang-che Wu
@@ -20,10 +19,9 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
 
-
+#include <assert.h>
 #include <chmfile.h>
 #include <chmlistctrl.h>
 #include <wx/wx.h>
@@ -32,12 +30,8 @@
 #include <wx/fontmap.h>
 #include <wx/treectrl.h>
 #include <wx/progdlg.h>
-
-#include <assert.h>
-
 #include <bitfiddle.inl>
 #include <hhcparser.h>
-
 
 // damn wxWidgets and it's scoped ptr.
 class UCharPtr {
@@ -57,10 +51,8 @@ private:
 	size_t _size;
 };
 
-
 // Big-enough buffer size for use with various routines.
 #define BUF_SIZE 4096
-
 
 // Thanks to Vadim Zeitlin.
 #define ANSI_CHARSET            0
@@ -83,7 +75,6 @@ private:
 #define RUSSIAN_CHARSET         204
 #define MAC_CHARSET             77
 #define BALTIC_CHARSET          186
-
 
 // Hello, Microsoft
 #define LANG_NEUTRAL		0x00 // check
@@ -163,12 +154,10 @@ private:
 #define LANG_NEPALI		0x61
 #define LANG_DIVEHI		0x65
 
-
 CHMFile::CHMFile()
 	: _chmFile(NULL), _home(wxT("/"))
 {
 }
-
 
 CHMFile::CHMFile(const wxString& archiveName)
 	: _chmFile(NULL), _home(wxT("/"))
@@ -176,12 +165,10 @@ CHMFile::CHMFile(const wxString& archiveName)
 	LoadCHM(archiveName);
 }
 
-
 CHMFile::~CHMFile()
 {
 	CloseCHM();
 }
-
 
 bool CHMFile::LoadCHM(const wxString&  archiveName)
 {
@@ -206,7 +193,6 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	return true;
 }
 
-
 void CHMFile::CloseCHM()
 {
 	if(_chmFile == NULL)
@@ -221,11 +207,9 @@ void CHMFile::CloseCHM()
 		= _font = wxEmptyString;
 }
 
-
 #define MSG_RETR_TOC _("Retrieving table of contents..")
 #define MSG_RETR_IDX _("Retrieving index..")
 #define EMPTY_INDEX _("Untitled in index")
-
 
 bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 {
@@ -282,7 +266,6 @@ bool CHMFile::BinaryTOC(wxTreeCtrl *toBuild)
 	return true;
 }
 
-
 void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 			      UCharPtr& strings, UCharPtr& urltbl,
 			      UCharPtr& urlstr, uint32_t offset,
@@ -319,7 +302,6 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 		offset = UINT32ARRAY(topidx.get() + offset + 0x10);
 	}
 }
-
 
 bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 		      UCharPtr& urlstr, uint32_t index,
@@ -420,8 +402,6 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 	return true;
 }
 
-
-
 bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 {
 	chmUnitInfo ui;
@@ -463,7 +443,6 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 	return true;
 }
 
-
 bool CHMFile::ConvertFromUnicode(std::string& value, unsigned char* buffer,
 				 size_t bufferLength)
 {
@@ -485,7 +464,6 @@ bool CHMFile::ConvertFromUnicode(std::string& value, unsigned char* buffer,
 
 	return false;
 }
-
 
 // This function is too long: prime candidate for refactoring someday
 bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
@@ -630,7 +608,6 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 	return (items != 0);
 }
 
-
 bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 {
 	chmUnitInfo ui;
@@ -671,7 +648,6 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	toBuild->Thaw();
 	return true;
 }
-
 
 bool CHMFile::LoadContextIDs()
 {
@@ -733,18 +709,17 @@ bool CHMFile::LoadContextIDs()
 	return true;
 }
 
-
 bool CHMFile::IsValidCID( const int contextID )
 {
 	if(_cidMap.empty())
-		return FALSE;
+		return false;
+
 	CHMIDMap::iterator itr = _cidMap.find( contextID );
 	if( itr == _cidMap.end() )
-		return FALSE;
+		return false;
 
-	return TRUE;
+	return true;
 }
-
 
 wxString CHMFile::GetPageByCID( const int contextID )
 {
@@ -758,7 +733,6 @@ wxString CHMFile::GetPageByCID( const int contextID )
 
 	return wxString(wxT("/")) + itr->second;
 }
-
 
 bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 			  bool titlesOnly, CHMSearchResults *results)
@@ -904,7 +878,6 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 	return partial;
 }
 
-
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 {
 	return _chmFile != NULL &&
@@ -915,14 +888,12 @@ bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 		== CHM_RESOLVE_SUCCESS;
 }
 
-
 size_t CHMFile::RetrieveObject(chmUnitInfo *ui, unsigned char *buffer,
 			       off_t fileOffset, size_t bufferSize)
 {
 	return ::chm_retrieve_object(_chmFile, ui, buffer, fileOffset,
 				     bufferSize);
 }
-
 
 bool CHMFile::GetArchiveInfo()
 {
@@ -933,7 +904,6 @@ bool CHMFile::GetArchiveInfo()
 
 	return (retw || rets);
 }
-
 
 uint32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 				     uint32_t initialOffset,
@@ -997,7 +967,6 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text,
 
 	return initialOffset;
 }
-
 
 bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size,
 			 uint32_t wlc_offset, unsigned char ds,
@@ -1100,7 +1069,6 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size,
 	return true;
 }
 
-
 bool CHMFile::InfoFromWindows()
 {
 #define WIN_HEADER_LEN 0x08
@@ -1201,7 +1169,6 @@ bool CHMFile::InfoFromWindows()
 
 	return true;
 }
-
 
 bool CHMFile::InfoFromSystem()
 {
@@ -1389,7 +1356,6 @@ wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
 	return fontEncoding;
 }
 
-
 inline
 wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 {
@@ -1478,7 +1444,6 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 
 	return fontEncoding;
 }
-
 
 /*
   Local Variables:

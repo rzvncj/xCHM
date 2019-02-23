@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,13 +15,10 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMFILE_H_
 #define __CHMFILE_H_
-
 
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
@@ -41,24 +37,19 @@
 #include <wx/string.h>
 #include <string>
 
-
 // Forward declarations.
 class wxTreeCtrl;
 class CHMListCtrl;
 class UCharPtr;
 class wxCSConv;
 
-
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
 WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
 //! Declares a class called CHMIDMap - < int, string> hashmap.
 WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 
-
 //! Maximum allowed number of search-returned items.
 #define MAX_SEARCH_RESULTS 512
-
-
 
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
 class CHMFile {
@@ -75,7 +66,6 @@ public:
 
 	//! Destructor. If a file has been succesfully opened, it closes it.
 	~CHMFile();
-
 
 	/*!
 	  \brief Gets the name of the default page in the archive.
@@ -163,7 +153,6 @@ public:
 	 */
 	bool GetTopicsTree(wxTreeCtrl *toBuild);
 
-
 	/*!
 	  \brief Attempts to fill a CHMListCtrl by parsing the index
 	  file.
@@ -174,7 +163,6 @@ public:
 	  \return true if it's possible to build the tree, false otherwise.
 	 */
 	bool GetIndex(CHMListCtrl* toBuild);
-
 
 	/*!
 	  \brief Attempts to build an index of context-ID/page pairs
@@ -316,9 +304,7 @@ private:
 	CHMFile& operator=(const CHMFile&);
 };
 
-
 #endif // __CHMFILE_H_
-
 
 /*
   Local Variables:

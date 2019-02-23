@@ -586,7 +586,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	   !archive.Contains(wxT("#xchm:"))) {
 
 		wxFileSystem wfs;
-		std::auto_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive +
+		std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive +
 			      wxT("#xchm:/")));
 
 	        CHMFile *chmf = CHMInputStream::GetCache();

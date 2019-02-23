@@ -301,7 +301,7 @@ void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 
 void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 {
-	std::auto_ptr<wxFSFile> f(m_FS->OpenFile(_link));
+	std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
 	if (f.get() == NULL) {
 		::wxMessageBox(_("OpenFile(") + _link + _(") failed"),

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
   (this file originally written by Cedric Boudinet)
 
@@ -18,14 +17,11 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmframe.h>
 #include <chmhtmlwindow.h>
 #include <chmhtmlnotebook.h>
-
 
 CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 				 const wxString& normalFont,
@@ -50,7 +46,6 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
 	AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
 
-
 CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 {
 	CHMHtmlWindow * htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
@@ -63,7 +58,6 @@ CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 	return htmlWin;
 }
 
-
 void CHMHtmlNotebook::AddHtmlView(const wxString& path,
 				  const wxString& link)
 {
@@ -75,12 +69,10 @@ void CHMHtmlNotebook::AddHtmlView(const wxString& path,
 	}
 }
 
-
 bool CHMHtmlNotebook::LoadPageInCurrentView(const wxString& location)
 {
 	return GetCurrentPage()->LoadPage(location);
 }
-
 
 // TODO: this is a misleading named function with side effects. It's a no-no.
 CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
@@ -94,7 +86,6 @@ CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
 		wxAuiNotebook::GetPage(selection));
 }
 
-
 void CHMHtmlNotebook::OnGoToNextPage(wxCommandEvent&)
 {
 	int selection = GetSelection();
@@ -104,7 +95,6 @@ void CHMHtmlNotebook::OnGoToNextPage(wxCommandEvent&)
 
 	SetSelection(selection + 1);
 }
-
 
 void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
 {
@@ -116,7 +106,6 @@ void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
 	SetSelection(selection - 1);
 }
 
-
 void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
 {
 	DeletePage(GetSelection());
@@ -125,12 +114,10 @@ void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
 		SetTabCtrlHeight(0);
 }
 
-
 void CHMHtmlNotebook::OnNewTab(wxCommandEvent& WXUNUSED(event))
 {
 	AddHtmlView(wxEmptyString, wxEmptyString);
 }
-
 
 void CHMHtmlNotebook::OnChildrenTitleChanged(const wxString& title)
 {
@@ -138,7 +125,6 @@ void CHMHtmlNotebook::OnChildrenTitleChanged(const wxString& title)
 	// TODO: detect in which page the change occured.
 	SetPageText(GetSelection(), title);
 }
-
 
 void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 {
@@ -149,7 +135,6 @@ void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 
 	SetTabCtrlHeight(0);
 }
-
 
 void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face,
 				       const wxString& fixed_face,
@@ -172,7 +157,6 @@ void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face,
 	}
 }
 
-
 bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 {
 	if(!page)
@@ -186,20 +170,17 @@ bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 	return st;
 }
 
-
 void CHMHtmlNotebook::OnPageChanged(wxAuiNotebookEvent&)
 {
 	if(GetPageCount() == 1)
 		SetTabCtrlHeight(0);
 }
 
-
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
 	EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
 	EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
 	EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, CHMHtmlNotebook::OnPageChanged)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:
@@ -213,5 +194,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

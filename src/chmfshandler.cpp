@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,26 +15,15 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmfshandler.h>
 #include <chminputstream.h>
-
-
-// only needs to be here because I killed the constructors
-// by providing a private copy constructor
-CHMFSHandler::CHMFSHandler()
-{
-}
-
 
 CHMFSHandler::~CHMFSHandler()
 {
 	CHMInputStream::Cleanup();
 }
-
 
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
@@ -44,7 +32,6 @@ bool CHMFSHandler::CanOpen(const wxString& location)
 		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
-
 
 wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 				 const wxString& location)
@@ -107,7 +94,6 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	return NULL;
 }
 
-
 /*
   Local Variables:
   mode: c++
@@ -120,3 +106,4 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

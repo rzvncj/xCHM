@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Mac OS patches contributed by Mojca Miklavec <mojca@macports.org>
@@ -19,9 +18,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmapp.h>
 #include <chmframe.h>
@@ -42,7 +39,6 @@
 
 using namespace XmlRpc;
 
-
 // The better way to use a singleton. Can't rely on the order of
 // construction/initialization of global objects.
 XmlRpcServer& getXmlRpcServer()
@@ -51,11 +47,9 @@ XmlRpcServer& getXmlRpcServer()
 	return s;
 }
 
-
 CHMApp::CHMApp()
 	: wxApp(), XmlRpcServerMethod( "xCHM", &getXmlRpcServer())
 {}
-
 
 void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 {
@@ -100,7 +94,6 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 }
 #endif
 
-
 bool CHMApp::OnInit()
 {
 #if defined __WXMAC__ && WX_VERSION_MAJOR == 2
@@ -129,18 +122,12 @@ bool CHMApp::OnInit()
 			 wxCMD_LINE_VAL_NUMBER);
 #endif
 
-	_cmdLP.AddSwitch(wxT("t"), wxT("notopics"),
-			 wxT("don't load the topics tree"));
-
-	_cmdLP.AddSwitch(wxT("i"), wxT("noindex"),
-			 wxT("don't load the index"));
-
-	_cmdLP.AddSwitch(wxT("h"), wxT("help"),
-			 wxT("displays this message."),
-			 wxCMD_LINE_OPTION_HELP);
+	_cmdLP.AddSwitch(wxT("t"), wxT("notopics"), wxT("don't load the topics tree"));
+	_cmdLP.AddSwitch(wxT("i"), wxT("noindex"), wxT("don't load the index"));
+	_cmdLP.AddSwitch(wxT("h"), wxT("help"), wxT("displays this message."), wxCMD_LINE_OPTION_HELP);
 
 	if(_cmdLP.Parse() != 0) // 0 means everything is ok
-		return FALSE;
+		return false;
 
 	bool loadTopics = !_cmdLP.Found(wxT("notopics"));
 	bool loadIndex  = !_cmdLP.Found(wxT("noindex"));
@@ -156,7 +143,7 @@ bool CHMApp::OnInit()
 	} else if(_cmdLP.Found( wxT("contextid"))) {
 		// can't use a context-ID without a file!
 		_cmdLP.Usage();
-		return FALSE;
+		return false;
 	}
 
 	long xorig = 50, yorig = 50, width = 600, height = 450;
@@ -207,7 +194,6 @@ bool CHMApp::OnInit()
 #ifdef WITH_LIBXMLRPC
 	if( port != -1 )
 	{
-		// do the XML RPC init stuff here
 		_timer.SetOwner( this, TIMER_ID );
 		_timer.Start(100);
 		getXmlRpcServer().bindAndListen(port);
@@ -222,9 +208,8 @@ bool CHMApp::OnInit()
 			_frame->LoadContextID( id );
 	}
 
-	return TRUE;
+	return true;
 }
-
 
 wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
 {
@@ -251,14 +236,12 @@ wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
 	return wxEmptyString;
 }
 
-
 #ifdef __WXMAC__
 void CHMApp::MacOpenFile(const wxString& filename)
 {
 	_frame->LoadCHM(filename);
 }
 #endif
-
 
 #ifdef WITH_LIBXMLRPC
 void CHMApp::WatchForXMLRPC( wxTimerEvent& )
@@ -275,7 +258,6 @@ END_EVENT_TABLE()
 
 // Apparently this macro gets main() pumping.
 IMPLEMENT_APP(CHMApp)
-
 
 /*
   Local Variables:

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,7 +15,6 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
 
 #include <chmsearchpanel.h>
@@ -29,8 +27,6 @@
 #include <wx/utils.h>
 #include <wx/config.h>
 #include <wx/tokenzr.h>
-
-
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       CHMHtmlNotebook *nbhtml)
@@ -65,12 +61,10 @@ CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 	GetConfig();
 }
 
-
 CHMSearchPanel::~CHMSearchPanel()
 {
 	SetConfig();
 }
-
 
 void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 {
@@ -149,7 +143,6 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 	_results->UpdateUI();
 }
 
-
 void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 				  bool wholeWords)
 {
@@ -176,13 +169,11 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text,
 	}
 }
 
-
 static inline bool WHITESPACE(wxChar c)
 {
 	return c == wxT(' ') || c == wxT('\n') || c == wxT('\r')
 		|| c == wxT('\t');
 }
-
 
 bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text,
 				 bool caseSensitive, bool wholeWords)
@@ -252,19 +243,16 @@ void CHMSearchPanel::OnSearchSel(wxListEvent& WXUNUSED(event))
 	_results->LoadSelected();
 }
 
-
 void CHMSearchPanel::Reset()
 {
 	_text->Clear();
 	_results->Reset();
 }
 
-
 void CHMSearchPanel::SetNewFont(const wxFont& font)
 {
 	_results->SetFont(font);
 }
-
 
 void CHMSearchPanel::SetConfig()
 {
@@ -286,13 +274,11 @@ void CHMSearchPanel::GetConfig()
 
 }
 
-
 BEGIN_EVENT_TABLE(CHMSearchPanel, wxPanel)
     EVT_LIST_ITEM_SELECTED(ID_Results, CHMSearchPanel::OnSearchSel)
     EVT_BUTTON(ID_SearchButton, CHMSearchPanel::OnSearch)
     EVT_TEXT_ENTER(ID_SearchText, CHMSearchPanel::OnSearch)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:

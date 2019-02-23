@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,21 +15,16 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
 
-
 #include <chminputstream.h>
-
 
 /*----------------------------------------------------------------------
  * class CHMInputStream static members
  */
 
-
 CHMFile *CHMInputStream::_archiveCache = NULL;
 wxString CHMInputStream::_path;
-
 
 void CHMInputStream::Cleanup()
 {
@@ -39,7 +33,6 @@ void CHMInputStream::Cleanup()
 		_archiveCache = NULL;
 	}
 }
-
 
 CHMFile* CHMInputStream::GetCache()
 {
@@ -101,18 +94,15 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 	}
 }
 
-
 size_t CHMInputStream::GetSize() const
 {
 	return _ui.length;
 }
 
-
 bool CHMInputStream::Eof() const
 {
 	return (uint64_t)_currPos >= _ui.length;
 }
-
 
 size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 {
@@ -137,7 +127,6 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
 	return bufsize;
 }
 
-
 wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 {
 	switch(mode) {
@@ -157,7 +146,6 @@ wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 	return _currPos;
 }
 
-
 bool CHMInputStream::Init(const wxString& archive)
 {
 	if(_archiveCache == NULL ||
@@ -175,7 +163,6 @@ bool CHMInputStream::Init(const wxString& archive)
 
 	return true;
 }
-
 
 /*
   Local Variables:

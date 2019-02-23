@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,25 +15,20 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMFONTDIALOG_H
 #define __CHMFONTDIALOG_H
-
 
 #include <wx/html/htmlwin.h>
 #include <wx/spinctrl.h>
 #include <wx/dialog.h>
 #include <wx/combobox.h>
 
-
 /*!
   \class wxDialog
   \brief wxWidgets generic dialog class.
 */
-
 
 //! Custom font chooser dialog class.
 class CHMFontDialog : public wxDialog
@@ -93,9 +87,7 @@ private:
 	DECLARE_EVENT_TABLE();
 };
 
-
 #endif // __CHMFONTDIALOG_H
-
 
 /*
   Local Variables:

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,9 +15,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmfinddialog.h>
 #include <chmhtmlwindow.h>
@@ -27,7 +24,6 @@
 #include <wx/sizer.h>
 #include <wx/tokenzr.h>
 #include <wx/wx.h>
-
 
 CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	: wxDialog(parent, -1, wxString(_("Find in page.."))),
@@ -64,7 +60,6 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 
 	SetFocusToTextBox();
 }
-
 
 void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 {
@@ -118,13 +113,10 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
-
-
 BEGIN_EVENT_TABLE(CHMFindDialog, wxDialog)
     EVT_TEXT_ENTER(ID_TextFind, CHMFindDialog::OnFind)
     EVT_BUTTON(ID_FindNext, CHMFindDialog::OnFind)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:
@@ -138,5 +130,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

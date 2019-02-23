@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
   (this file originally written by Cedric Boudinet)
 
@@ -18,7 +17,6 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
 
 #ifndef __CHMHTMLNOTEBOOK_H_
@@ -26,7 +24,6 @@
 
 #include <wx/aui/auibook.h>
 #include <wx/treectrl.h>
-
 
 enum {
 	ID_NextPage,
@@ -36,7 +33,6 @@ enum {
 // Forward declarations
 class CHMFrame;
 class CHMHtmlWindow;
-
 
 /*!
   \class wxNotebook
@@ -106,9 +102,7 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-
 #endif // __CHMHTMLNOTEBOOK_H_
-
 
 /*
   Local Variables:
@@ -122,5 +116,4 @@ private:
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
  
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,9 +15,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, 
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmfontdialog.h>
 #include <wx/wx.h>
@@ -44,7 +41,6 @@ const wxChar* test_page = wxT("<html><body><table><tr><td valign=\"top\">Normal 
 	wxT("</html>");
 
 }
-
 
 CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 			     wxArrayString *fixedFonts,
@@ -101,7 +97,6 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 	InitDialog(normalFonts, fixedFonts);
 }
 
-
 void CHMFontDialog::UpdatePreview()
 {
 	if(!_test) // this can happen with wxMSW
@@ -122,18 +117,15 @@ void CHMFontDialog::UpdatePreview()
 
 }
 
-
 void CHMFontDialog::OnUpdate(wxCommandEvent& WXUNUSED(event))
 {
 	UpdatePreview();
 }
 
-
 void CHMFontDialog::OnUpdateSpin(wxSpinEvent& WXUNUSED(event))
 {
 	UpdatePreview();
 }
-
 
 void CHMFontDialog::InitDialog(wxArrayString *normalFonts, 
 				wxArrayString *fixedFonts)
@@ -168,12 +160,10 @@ void CHMFontDialog::InitDialog(wxArrayString *normalFonts,
 	UpdatePreview();
 }
 
-
 BEGIN_EVENT_TABLE(CHMFontDialog, wxDialog)
 	EVT_COMBOBOX(-1, CHMFontDialog::OnUpdate)
 	EVT_SPINCTRL(-1, CHMFontDialog::OnUpdateSpin)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:
@@ -187,3 +177,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

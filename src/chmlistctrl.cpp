@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   ListDirty() patch contributed by Iulian Dragos
   <dragosiulian@users.sourceforge.net>
 
@@ -18,18 +17,14 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmlistctrl.h>
 #include <chmhtmlnotebook.h>
 #include <chminputstream.h>
 #include <wx/settings.h>
 
-
 #define INDEX_HINT_SIZE 2048
-
 
 // Helper
 
@@ -37,8 +32,6 @@ int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2)
 {
 	return (item1->_title).CmpNoCase(item2->_title);
 }
-
-
 
 // CHMListCtrl implementation
 
@@ -57,14 +50,11 @@ CHMListCtrl::CHMListCtrl(wxWindow *parent, CHMHtmlNotebook *nbhtml,
 	_items.Alloc(INDEX_HINT_SIZE);
 }
 
-
 CHMListCtrl::~CHMListCtrl()
 {
 	// Clean the items up.
 	ResetItems();
 }
-
-
 
 void CHMListCtrl::Reset()
 {
@@ -73,13 +63,11 @@ void CHMListCtrl::Reset()
 	UpdateUI();
 }
 
-
 void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 {
 	_items.Add(new CHMListPairItem(title, url));
 	SetItemCount(_items.GetCount());
 }
-
 
 void CHMListCtrl::LoadSelected()
 {
@@ -104,13 +92,10 @@ void CHMListCtrl::LoadSelected()
 	}
 }
 
-
-
 void CHMListCtrl::UpdateUI()
 {
 	SetColumnWidth(0, GetClientSize().GetWidth());
 }
-
 
 void CHMListCtrl::FindBestMatch(const wxString& title)
 {
@@ -138,7 +123,6 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
 	wxWindow::Update();
 }
 
-
 void CHMListCtrl::ResetItems()
 {
 	for(long i = 0; i < (long)_items.GetCount(); ++i) {
@@ -148,14 +132,11 @@ void CHMListCtrl::ResetItems()
 	_items.Empty();
 }
 
-
 void CHMListCtrl::OnSize(wxSizeEvent& event)
 {
 	UpdateUI();
 	event.Skip();
 }
-
-
 
 wxString CHMListCtrl::OnGetItemText(long item, long column) const
 {
@@ -166,11 +147,9 @@ wxString CHMListCtrl::OnGetItemText(long item, long column) const
 	return _items[item]->_title;
 }
 
-
 BEGIN_EVENT_TABLE(CHMListCtrl, wxListCtrl)
 	EVT_SIZE(CHMListCtrl::OnSize)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:

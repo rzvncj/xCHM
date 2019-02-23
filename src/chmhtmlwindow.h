@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,21 +15,16 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMHTMLWINDOW_H_
 #define __CHMHTMLWINDOW_H_
-
 
 #include <wx/html/htmlwin.h>
 #include <wx/treectrl.h>
 #include <wx/menu.h>
 #include <wx/notebook.h>
 #include <chmfinddialog.h>
-
-
 
 //! Event IDs.
 enum {
@@ -44,16 +38,13 @@ enum {
 	ID_OpenInNewTab,
 };
 
-
 //! Minimize dependencies. Forward declaration.
 class CHMFrame;
-
 
 /*!
   \class wxHtmlWindow
   \brief wxWidgets HTML widget class.
 */
-
 
 /*!
   \brief Custom HTML widget class. Needed for sychnronization between
@@ -73,7 +64,9 @@ public:
 
 	//! Destructor. Deletes heap objects allocated in the constructor.
 	~CHMHtmlWindow();
-    virtual void OnSetTitle(const wxString& title);
+	
+	virtual void OnSetTitle(const wxString& title);
+
 	//! Override. Looks up the wanted page in the tree and selects it.
 	bool LoadPage(const wxString& location);
 
@@ -179,10 +172,7 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-
-
 #endif // __CHMHTMLWINDOW_H_
-
 
 /*
   Local Variables:

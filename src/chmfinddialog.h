@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,30 +15,24 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMFINDDIALOG_H
 #define __CHMFINDDIALOG_H
-
 
 #include <wx/dialog.h>
 #include <wx/textctrl.h>
 #include <wx/html/htmlcell.h>
 
-
 // Forward declarations.
 class wxCheckBox;
 class CHMHtmlWindow;
-
 
 //! Event IDs.
 enum {
 	ID_TextFind = 1408,
 	ID_FindNext,
 };
-
 
 //! Dialog for finding a word in the currently displayed page.
 class CHMFindDialog : public wxDialog {
@@ -69,9 +62,7 @@ private:
 	DECLARE_EVENT_TABLE();
 };
 
-
 #endif // __CHMFINDDIALOG_H
-
 
 /*
   Local Variables:

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
    XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Tree control icons code (and the icons) contributed by Fritz Elfert
@@ -20,9 +19,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmframe.h>
 #include <chminputstream.h>
@@ -45,7 +42,6 @@
 
 #include <wx/busyinfo.h>
 
-
 #define OPEN_HELP _("Open a CHM book.")
 #define FONTS_HELP _("Change fonts.")
 #define PRINT_HELP _("Print the page currently displayed.")
@@ -60,7 +56,6 @@
 #define CLOSETAB_HELP _("Close the current tab")
 #define NEWTAB_HELP _("Open a new tab")
 #define REGISTER_EXTENSION_HELP _("Associate the .chm file extension with xCHM.")
-
 
 namespace {
 
@@ -100,10 +95,8 @@ const wxChar *greeting = wxT("<html><head><title>About</title></head>")
 	wxT(" common options.</li></ul><br><br>Ctrl(cmd)-C is copy,")
 	wxT(" Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
 
-
 const wxChar *error_page =
 	wxT("<html><body>Error loading CHM file!</body></html>");
-
 
 const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION)
 	wxT("\nby Razvan Cojocaru <rzvncj@gmail.com>\n\n")
@@ -124,7 +117,6 @@ const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION)
 #include <logo.xpm>
 
 } // namespace
-
 
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const wxPoint& pos, const wxSize& size,
@@ -210,7 +202,6 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nbhtml->GetCurrentPage()->SetFocusFromKbd();
 }
 
-
 CHMFrame::~CHMFrame()
 {
 	if(_tcl) // Supposedly, workaround for wxWin
@@ -221,19 +212,16 @@ CHMFrame::~CHMFrame()
 	delete _normalFonts;
 }
 
-
 void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
 	Close(TRUE);
 }
-
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
 	::wxMessageBox(about_txt, _("About xCHM"),
 		       wxOK | wxICON_INFORMATION, this );
 }
-
 
 void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
@@ -255,7 +243,6 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 	_openPath = selection.BeforeLast(wxT('/'));
 	LoadCHM(selection);
 }
-
 
 void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 {
@@ -302,7 +289,6 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
-
 void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
 {
 	CHMFile *chmf = CHMInputStream::GetCache();
@@ -315,12 +301,10 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
 				       + wxT("#xchm:") + chmf->HomePage());
 }
 
-
 void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
 {
 	_nbhtml->GetCurrentPage()->HistoryForward();
 }
-
 
 void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
@@ -331,7 +315,6 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 			return;
 	}
 }
-
 
 void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 {
@@ -363,7 +346,6 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 	       }*/
 	}
 }
-
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
 
@@ -417,7 +399,6 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 	_ep->PrintFile(_nbhtml->GetCurrentPage()->GetOpenedPage());
 }
 
-
 void CHMFrame::OnHistFile(wxCommandEvent& event)
 {
       wxString f(_fh.GetHistoryFile(event.GetId() - wxID_FILE1));
@@ -425,37 +406,31 @@ void CHMFrame::OnHistFile(wxCommandEvent& event)
 	      LoadCHM(f);
 }
 
-
 void CHMFrame::OnFind(wxCommandEvent& event)
 {
 	_nbhtml->GetCurrentPage()->OnFind(event);
 }
-
 
 void CHMFrame::OnCloseTab(wxCommandEvent& event)
 {
 	_nbhtml->OnCloseTab(event);
 }
 
-
 void CHMFrame::OnNewTab(wxCommandEvent& event)
 {
 	_nbhtml->OnNewTab(event);
 }
-
 
 void CHMFrame::OnCopySelection(wxCommandEvent& event)
 {
 	_nbhtml->GetCurrentPage()->OnCopy(event);
 }
 
-
 void CHMFrame::OnFullScreen(wxCommandEvent& WXUNUSED(event))
 {
 	_fullScreen = !_fullScreen;
 	ShowFullScreen(_fullScreen, wxFULLSCREEN_ALL);
 }
-
 
 void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
 {
@@ -482,7 +457,6 @@ void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
 	_bookmarkSel = true;
 }
 
-
 void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
 {
 	if(!_cb->GetCount())
@@ -499,7 +473,6 @@ void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
 		_cb->SetValue(wxEmptyString);
 	}
 }
-
 
 void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 {
@@ -525,7 +498,6 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 				       chmf->ArchiveName() +
 				       wxT("#xchm:/") + *url);
 }
-
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
@@ -553,14 +525,12 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 	}
 }
 
-
 void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 {
 	SaveExitInfo();
 	SaveBookmarks();
 	Destroy();
 }
-
 
 void CHMFrame::OnChar(wxKeyEvent& event)
 {
@@ -571,7 +541,6 @@ void CHMFrame::OnChar(wxKeyEvent& event)
 
 	event.Skip();
 }
-
 
 bool CHMFrame::LoadCHM(const wxString& archive)
 {
@@ -624,7 +593,6 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 
 	return rtn;
 }
-
 
 bool CHMFrame::LoadContextID( const int contextID )
 {
@@ -770,7 +738,6 @@ void CHMFrame::UpdateCHMInfo()
 	_nb->SetSelection(0);
 }
 
-
 wxMenuBar* CHMFrame::CreateMenu()
 {
 	_menuFile = new wxMenu;
@@ -838,7 +805,6 @@ wxMenuBar* CHMFrame::CreateMenu()
 	return menuBar;
 }
 
-//#ifndef __WXMSW__
 namespace {
 
 #include <hbook_open.xpm>
@@ -846,8 +812,6 @@ namespace {
 #include <hpage.xpm>
 
 } // namespace
-//#endif
-
 
 wxPanel* CHMFrame::CreateContentsPanel()
 {
@@ -896,7 +860,6 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	return temp;
 }
 
-
 void CHMFrame::LoadBookmarks()
 {
 	_cb->Clear();
@@ -930,7 +893,6 @@ void CHMFrame::LoadBookmarks()
 		}
 	}
 }
-
 
 void CHMFrame::SaveBookmarks()
 {
@@ -977,7 +939,6 @@ void CHMFrame::SaveBookmarks()
 	}
 }
 
-
 void CHMFrame::SaveExitInfo()
 {
 	int xorig, yorig, width, height;
@@ -1002,7 +963,6 @@ void CHMFrame::SaveExitInfo()
 	_fh.Save(config);
 }
 
-
 namespace {
 
 #include <fileopen.xpm>
@@ -1018,7 +978,6 @@ namespace {
 #include <fullscreen.xpm>
 
 } // namespace
-
 
 bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 {
@@ -1059,12 +1018,10 @@ bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 	return TRUE;
 }
 
-
 void CHMFrame::AddHtmlView(const wxString& path, const wxString& link)
 {
 	_nbhtml->AddHtmlView(path, link);
 }
-
 
 void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
 {
@@ -1074,7 +1031,6 @@ void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
 	wxCommandEvent dummy;
 	OnFullScreen(dummy);
 }
-
 
 BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_MENU(ID_Quit,  CHMFrame::OnQuit)
@@ -1103,7 +1059,6 @@ BEGIN_EVENT_TABLE(CHMFrame, wxFrame)
 	EVT_CLOSE(CHMFrame::OnCloseWindow)
 	EVT_CHAR(CHMFrame::OnChar)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:

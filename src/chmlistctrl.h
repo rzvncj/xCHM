@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   ListDirty() patch contributed by Iulian Dragos
   <dragosiulian@users.sourceforge.net>
 
@@ -18,9 +17,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMLISTCTRL_H_
 #define __CHMLISTCTRL_H_
@@ -30,10 +27,8 @@
 #include <wx/string.h>
 #include <wx/dynarray.h>
 
-
 // Forward declarations.
 class CHMHtmlNotebook;
-
 
 //! Item to store in the virtual list control
 struct CHMListPairItem {
@@ -47,19 +42,16 @@ struct CHMListPairItem {
 	wxString _url;
 };
 
-
 //! Declare a wxWidgets sorted array
 WX_DEFINE_SORTED_ARRAY(CHMListPairItem *, ItemPairArray);
 
 //! Comparison function to use with the sorted array above.
 int CompareItemPairs(CHMListPairItem *item1, CHMListPairItem *item2);
 
-
 /*!
   \class wxListCtrl
   \brief wxWidgets list control class.
 */
-
 
 //! List control class meant to emulate the look and feel of a wxListBox.
 class CHMListCtrl : public wxListCtrl {
@@ -124,9 +116,7 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-
 #endif // __CHMLISTCTRL_H_
-
 
 /*
   Local Variables:

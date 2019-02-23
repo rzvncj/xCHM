@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,9 +15,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMFRAME_H_
 #define __CHMFRAME_H_
@@ -34,7 +31,6 @@
 #include <wx/docview.h>
 #include <wx/thread.h>
 
-
 // Forward declarations.
 class CHMHtmlWindow;
 class CHMSearchPanel;
@@ -48,14 +44,12 @@ class CHMHtmlNotebook;
 //! Default sash position.
 #define CONTENTS_MARGIN 170
 
-
 #ifdef HAVE_CONFIG_H
 #	include <config.h>
 #else
 	// this should never happen
 #	define VERSION "unknown"
 #endif
-
 
 //! IDs for various widget events.
 enum
@@ -83,12 +77,10 @@ enum
 	ID_TreeCtrl = 1000,
 };
 
-
 /*!
   \class wxFrame
   \brief wxWidgets frame widget class.
 */
-
 
 /*!
   \brief The frame, owner of the wxHtmlWindow, contents tree control and
@@ -272,9 +264,7 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-
 #endif // __CHMFRAME_H_
-
 
 /*
   Local Variables:
@@ -288,3 +278,4 @@ private:
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
+

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,13 +15,10 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMSEARCHPANEL_HPP_
 #define __CHMSEARCHPANEL_HPP_
-
 
 #include <wx/panel.h>
 #include <wx/treectrl.h>
@@ -35,17 +31,14 @@
 #include <wx/font.h>
 #include <wx/string.h>
 
-
 // Forward declaration.
 class CHMListCtrl;
 class CHMHtmlNotebook;
-
 
 /*!
   \class wxPanel
   \brief generic wxWidgets panel widget class.
 */
-
 
 //! IDs for various widget events.
 enum {
@@ -53,7 +46,6 @@ enum {
 	ID_SearchButton,
 	ID_Results,
 };
-
 
 //! Custom built search panel.
 class CHMSearchPanel : public wxPanel {
@@ -117,9 +109,7 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-
 #endif // __CHMSEARCHPANEL_HPP_
-
 
 /*
   Local Variables:

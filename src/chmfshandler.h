@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,22 +15,17 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMFSHANDLER_H_
 #define __CHMFSHANDLER_H_
 
-
 #include <wx/filesys.h>
-
 
 /*!
   \class wxFileSystemHandler
   \brief wxWidgets virtual filesystem handler class.
 */
-
 
 //! CHM filesystem handler class.
 class CHMFSHandler : public wxFileSystemHandler
@@ -41,7 +35,7 @@ public:
 	  \brief Doesn't do anything but needs to be here because of
 	  the private copy constructor.
 	 */
-        CHMFSHandler();
+        CHMFSHandler() = default;
 
 	//! Cleanup code. This calls CHMInputStream's Cleanup().
 	~CHMFSHandler();
@@ -71,9 +65,7 @@ private:
 	CHMFSHandler& operator=(const CHMFSHandler&);
 };
 
-
 #endif // __CHMFSHANDLER_H_
-
 
 /*
   Local Variables:

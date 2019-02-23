@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,9 +15,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __CHMAPP_H_
 #define __CHMAPP_H_
@@ -37,10 +34,8 @@
 using namespace XmlRpc;
 #endif
 
-
 // Forward declaration.
 class CHMFrame;
-
 
 /*!
   \class wxApp
@@ -95,7 +90,6 @@ private:
 };
 
 #endif // __CHMAPP_H_
-
 
 /*
   Local Variables:

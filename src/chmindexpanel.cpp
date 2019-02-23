@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,15 +15,12 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmindexpanel.h>
 #include <chmhtmlwindow.h>
 #include <chmlistctrl.h>
 #include <wx/sizer.h>
-
 
 CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook *nbhtml)
 	: wxPanel(parent), _nbhtml(nbhtml), _lc(NULL), _navigate(true)
@@ -43,19 +39,16 @@ CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook *nbhtml)
         sizer->Add(_lc, 1, wxALL | wxEXPAND, 2);
 }
 
-
 void CHMIndexPanel::Reset()
 {
 	_text->Clear();
 	_lc->Reset();
 }
 
-
 void CHMIndexPanel::SetNewFont(const wxFont& font)
 {
 	_lc->SetFont(font);
 }
-
 
 void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 {
@@ -65,7 +58,6 @@ void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
-
 void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
 {
 	if(_navigate) {
@@ -74,7 +66,6 @@ void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
 	}
 }
 
-
 void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 {
 	_navigate = false;
@@ -82,13 +73,11 @@ void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
 	_navigate = true;
 }
 
-
 BEGIN_EVENT_TABLE(CHMIndexPanel, wxPanel)
 	EVT_TEXT(ID_SearchIndex, CHMIndexPanel::OnText)
 	EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSelRet)
 	EVT_LIST_ITEM_SELECTED(ID_IndexClicked, CHMIndexPanel::OnIndexSel)
 END_EVENT_TABLE()
-
 
 /*
   Local Variables:
@@ -102,5 +91,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

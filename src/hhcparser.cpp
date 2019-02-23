@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,9 +15,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmlistctrl.h>
 #include <hhcparser.h>
@@ -33,7 +30,6 @@
 
 #include <bitfiddle.inl>
 
-
 namespace {
 
 struct HTMLChar {
@@ -41,13 +37,11 @@ struct HTMLChar {
 	unsigned      code;
 };
 
-
 extern "C"
 int HTMLCharCompare(const void *key, const void *item)
 {
 	return wxStrcmp((wxChar*)key, ((HTMLChar*)item)->name);
 }
-
 
 HTMLChar substitutions[] = {
 	{ wxT("AElig"),198 }, { wxT("Aacute"),193 }, { wxT("Acirc"),194 },
@@ -139,10 +133,7 @@ HTMLChar substitutions[] = {
 
 }
 
-
-
 #define TIME_TO_YIELD	1024
-
 
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	: _level(0), _inquote(false), _intag(false), _inobject(false),
@@ -155,7 +146,6 @@ HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	if(_tree)
 		_parents[_level] = _tree->GetRootItem();
 }
-
 
 void HHCParser::parse(const char* chunk)
 {
@@ -190,7 +180,6 @@ void HHCParser::parse(const char* chunk)
 		++chunk;
 	}
 }
-
 
 void HHCParser::handleTag(const std::string& tag)
 {
@@ -273,10 +262,7 @@ void HHCParser::handleTag(const std::string& tag)
 			_inobject = true;
 		}
 	}
-
-
 }
-
 
 bool HHCParser::getParameters(const char* input, std::string& name,
 			      std::string& value)
@@ -359,7 +345,6 @@ bool HHCParser::getParameters(const char* input, std::string& name,
 	return modify;
 }
 
-
 void HHCParser::addToTree(const wxString& name, const wxString& value)
 {
 	if(!_tree)
@@ -389,7 +374,6 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
 	}
 }
 
-
 void HHCParser::addToList(const wxString& name, const wxString& value)
 {
 	if(!_list)
@@ -398,7 +382,6 @@ void HHCParser::addToList(const wxString& name, const wxString& value)
 	if(!name.IsEmpty() && !value.IsEmpty())
 		_list->AddPairItem(name, value);
 }
-
 
 wxString HHCParser::replaceHTMLChars(const wxString& input)
 {
@@ -442,10 +425,9 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 	return result;
 }
 
-
 unsigned HHCParser::getHTMLCode(const wxString& name)
 {
-	size_t substitutions_cnt = sizeof(substitutions)/sizeof(HTMLChar) - 1;
+	size_t substitutions_cnt = sizeof(substitutions) / sizeof(HTMLChar) - 1;
 
 	HTMLChar* hc = (HTMLChar*)bsearch(name.c_str(), substitutions,
 					  substitutions_cnt,
@@ -456,8 +438,6 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 
 	return 0;
 }
-
-
 
 /*
   Local Variables:

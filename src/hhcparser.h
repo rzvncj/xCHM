@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,28 +15,21 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #ifndef __HHCPARSER_H_
 #define __HHCPARSER_H_
-
 
 #include <wx/font.h>
 #include <wx/treectrl.h>
 #include <string>
 #include <memory>
 
-
 // Forward declarations.
 class CHMListCtrl;
 
-
 //! Maximum number of tree levels.
 #define TREE_BUF_SIZE 128
-
-
 
 /*!
   \brief Objects of this class will be used as opaque data to be used with
@@ -52,7 +44,6 @@ struct URLTreeItem : public wxTreeItemData {
 	//! Useful data.
 	wxString _url;
 };
-
 
 //! Fast index/contents file parser
 class HHCParser {
@@ -109,9 +100,7 @@ private:
 	bool _htmlChars;
 };
 
-
 #endif // __HHCPARSER_H_
-
 
 /*
   Local Variables:

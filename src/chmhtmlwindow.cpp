@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   Mac OS specific patches contributed by Chanler White
   <cawhite@nwrails.com>
   "Save link as" patch contributed by Joerg Wunsch
@@ -20,9 +19,7 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <chmhtmlwindow.h>
 #include <chmhtmlnotebook.h>
@@ -36,8 +33,6 @@
 #include <wx/uri.h>
 #include <wx/wfstream.h>
 #include <memory>
-
-
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
@@ -59,13 +54,11 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	_menu->Append(ID_PopupFullScreen, _("&Toggle fullscreen mode"));
 }
 
-
 CHMHtmlWindow::~CHMHtmlWindow()
 {
 	delete _menu;
 	delete _fdlg;
 }
-
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
@@ -97,7 +90,6 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 	return wxHtmlWindow::LoadPage(tmp);
 }
 
-
 void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 {
 	if(_found)
@@ -126,13 +118,11 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	}
 }
 
-
 wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 {
 	return location.AfterLast(wxT(':')).AfterFirst(
 		           wxT('/')).BeforeLast(wxT('/'));
 }
-
 
 void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 {
@@ -143,7 +133,6 @@ void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 	if(!url.Left(7).CmpNoCase(wxT("MS-ITS:")))
 		_frame->UpdateCHMInfo();
 }
-
 
 wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 				     bool wholeWords, bool caseSensitive)
@@ -209,7 +198,6 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 	return NULL;
 }
 
-
 wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 				    bool wholeWords, bool caseSensitive)
 {
@@ -235,7 +223,6 @@ wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 	return FindNext(cell->GetNext(), word, wholeWords, caseSensitive);
 }
 
-
 void CHMHtmlWindow::ClearSelection()
 {
 	delete m_selection;
@@ -247,7 +234,6 @@ void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
 {
 	CopySelection();
 }
-
 
 void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
 {
@@ -265,18 +251,15 @@ void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
 	_fdlg->Reset();
 }
 
-
 void CHMHtmlWindow::OnForward(wxCommandEvent& WXUNUSED(event))
 {
 	HistoryForward();
 }
 
-
 void CHMHtmlWindow::OnBack(wxCommandEvent& WXUNUSED(event))
 {
 	HistoryBack();
 }
-
 
 void CHMHtmlWindow::OnSize(wxSizeEvent& event)
 {
@@ -288,7 +271,6 @@ void CHMHtmlWindow::OnSize(wxSizeEvent& event)
 	Scroll(x, y);
 	event.Skip(false);
 }
-
 
 void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 {
@@ -341,7 +323,6 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
-
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
 	if(IsSelectionEnabled())
@@ -374,7 +355,6 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	PopupMenu(_menu, event.GetPosition());
 }
 
-
 void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 {
 	wxString link = _link;
@@ -385,12 +365,10 @@ void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
 	_frame->AddHtmlView(GetParser()->GetFS()->GetPath(), link);
 }
 
-
 void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent& WXUNUSED(event))
 {
 	_frame->ToggleFullScreen();
 }
-
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
@@ -436,7 +414,6 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 	event.Skip();
 }
 
-
 void CHMHtmlWindow::OnSetTitle(const wxString& title)
 {
 	// Direct access to the notebook
@@ -448,7 +425,6 @@ void CHMHtmlWindow::OnSetTitle(const wxString& title)
 
 	wxHtmlWindow::OnSetTitle(title);
 }
-
 
 BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)
@@ -464,7 +440,6 @@ BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
 	EVT_SIZE(CHMHtmlWindow::OnSize)
 END_EVENT_TABLE()
 
-
 /*
   Local Variables:
   mode: c++
@@ -477,5 +452,4 @@ END_EVENT_TABLE()
 */
 
 // vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-
 

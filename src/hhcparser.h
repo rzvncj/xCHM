@@ -86,10 +86,10 @@ private:
 	unsigned getHTMLCode(const wxString& name);
 
 private:
-	//! Prevent copying, we have an auto_ptr<> member
+	//! Prevent copying, we have an unique_ptr<> member
 	HHCParser(const HHCParser&);
 
-	//! Prevent copying, we have an auto_ptr<> member
+	//! Prevent copying, we have an unique_ptr<> member
 	HHCParser& operator=(const HHCParser&);
 
 private:
@@ -105,7 +105,7 @@ private:
 	wxTreeItemId _parents[TREE_BUF_SIZE];
 	wxFontEncoding _enc;
 	int _counter;
-	std::auto_ptr<wxCSConv> _cvPtr;
+	std::unique_ptr<wxCSConv> _cvPtr;
 	bool _htmlChars;
 };
 

@@ -188,7 +188,7 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 #endif
 
 
-inline void createCSConvPtr(std::auto_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
+inline void createCSConvPtr(std::unique_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
 {
 #ifdef __WXMSW__
 		cvPtr.reset(new wxCSConv(enc));
@@ -218,7 +218,7 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
         if(enc != wxFONTENCODING_SYSTEM) {
 		wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
 
-		std::auto_ptr<wxCSConv> convToPtr;
+		std::unique_ptr<wxCSConv> convToPtr;
 		createCSConvPtr(convToPtr, enc);
 
 		return wxString(input.mb_str(convFrom), *convToPtr);

@@ -1,6 +1,5 @@
 /*
-
-  Copyright (C) 2003 - 2014  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
   Most of the code in this file is a modified version of code from
   Pabs' GPL chmdeco project, credits and thanks go to him.
 
@@ -18,14 +17,11 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
 */
-
 
 #include <wx/string.h>
 #include <stdint.h>
 #include <memory>
-
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 #define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
@@ -35,26 +31,17 @@
 #define INT32ARRAY(x) ((int32_t)UINT32ARRAY(x))
 #define INT16ARRAY(x) ((int16_t)UINT16ARRAY(x))
 
-
-
 #if wxUSE_UNICODE
-
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x), wxConvISO8859_1)
-
 #	define CURRENT_CHAR_STRING_CV(x, cv) \
 	wxString(reinterpret_cast<const char *>(x), cv)
-
 #else
-
 #	define CURRENT_CHAR_STRING(x) \
 	wxString(reinterpret_cast<const char *>(x))
-
 #	define CURRENT_CHAR_STRING_CV(x, cv) \
 	wxString(reinterpret_cast<const char *>(x))
-
 #endif
-
 
 inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 {
@@ -71,7 +58,6 @@ inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 
 	return result;
 }
-
 
 /*
    Finds the first unset bit in memory. Returns the number of set bits found.
@@ -102,7 +88,6 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 
 	return bits;
 }
-
 
 inline uint64_t sr_int(unsigned char* byte, int* bit,
 			unsigned char s, unsigned char r, size_t& length)
@@ -178,7 +163,6 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 	return ret;
 }
 
-
 #if wxUSE_UNICODE
 #	define UNICODE_PARAM(x) x
 #	define NON_UNICODE_PARAM(x)
@@ -187,29 +171,23 @@ inline uint64_t sr_int(unsigned char* byte, int* bit,
 #	define NON_UNICODE_PARAM(x) x
 #endif
 
-
-inline void createCSConvPtr(std::unique_ptr<wxCSConv>& cvPtr, wxFontEncoding enc)
+inline std::unique_ptr<wxCSConv> createCSConvPtr(wxFontEncoding enc)
 {
 #ifdef __WXMSW__
-		cvPtr.reset(new wxCSConv(enc));
+	return std::make_unique<wxCSConv>(enc);
 #else
-		switch(enc) {
-		case wxFONTENCODING_CP950:
-			cvPtr.reset(new wxCSConv(wxT("BIG5")));
-			break;
-		case wxFONTENCODING_CP932:
-			cvPtr.reset(new wxCSConv(wxT("SJIS")));
-			break;
-		default:
-			cvPtr.reset(new wxCSConv(enc));
-			break;
-		}
+	switch(enc) {
+	case wxFONTENCODING_CP950:
+		return std::make_unique<wxCSConv>(wxT("BIG5"));
+	case wxFONTENCODING_CP932:
+		return std::make_unique<wxCSConv>(wxT("SJIS"));
+	default:
+		return std::make_unique<wxCSConv>(enc);
+	}
 #endif
 }
 
-
 #if wxUSE_UNICODE
-
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
         if(input.IsEmpty())
@@ -218,8 +196,7 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
         if(enc != wxFONTENCODING_SYSTEM) {
 		wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
 
-		std::unique_ptr<wxCSConv> convToPtr;
-		createCSConvPtr(convToPtr, enc);
+		std::unique_ptr<wxCSConv> convToPtr = createCSConvPtr(enc);
 
 		return wxString(input.mb_str(convFrom), *convToPtr);
 	}
@@ -230,43 +207,38 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 #define translateEncoding(x, y) x
 #endif
 
-
 inline wxChar charForCode(unsigned code,
 			  const wxCSConv& NON_UNICODE_PARAM(cv),
 			  bool NON_UNICODE_PARAM(conv))
 {
 #if !wxUSE_UNICODE
-
 #	if wxUSE_WCHAR_T
 
 	if(code < 256)
-		return (wxChar)code;
+		return static_cast<wxChar>(code);
 
 	if(conv) {
 		char buf[2];
 		wchar_t wbuf[2];
-		wbuf[0] = (wchar_t)code;
+		wbuf[0] = static_cast<wchar_t>(code);
 		wbuf[1] = 0;
 
 		cv.WC2MB(buf, wbuf, 2);
 
-		if(cv.WC2MB(buf, wbuf, 2) == (size_t)-1)
+		if(cv.WC2MB(buf, wbuf, 2) == static_cast<size_t>(-1))
 			return '?';
 
 		return buf[0];
 	} else
-		return (wxChar)code;
+		return static_cast<wxChar>(code);
 
 #	else
-	return (code < 256) ? (wxChar)code : '?';
-
+	return (code < 256) ? static_cast<wxChar>(code) : '?';
 #	endif
-
 #else
-	return (wxChar)code;
+	return static_cast<wxChar>(code);
 #endif
 }
-
 
 /*
   Local Variables:

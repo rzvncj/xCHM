@@ -640,8 +640,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 	if(!toBuild)
 		return false;
 
-	std::unique_ptr<wxCSConv> cvPtr;
-	createCSConvPtr(cvPtr, _enc);
+	std::unique_ptr<wxCSConv> cvPtr = createCSConvPtr(_enc);
 
 	toBuild->Freeze();
 	bool bindex = BinaryIndex(toBuild, *cvPtr);
@@ -1059,8 +1058,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size,
 				topic = CURRENT_CHAR_STRING(combuf);
 #if wxUSE_UNICODE
 			else {
-				std::unique_ptr<wxCSConv> cvPtr;
-				createCSConvPtr(cvPtr, _enc);
+				std::unique_ptr<wxCSConv> cvPtr = createCSConvPtr(_enc);
 				topic = wxString((const char *)combuf, *cvPtr);
 			}
 #endif

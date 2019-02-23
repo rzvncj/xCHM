@@ -148,9 +148,9 @@ HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list)
 	: _level(0), _inquote(false), _intag(false), _inobject(false),
 	  _tree(tree), _list(list), _enc(enc), _counter(0), _htmlChars(false)
 {
-	memset(_parents, 0, TREE_BUF_SIZE*sizeof(wxTreeItemId));
+	memset(_parents, 0, TREE_BUF_SIZE * sizeof(wxTreeItemId));
 
-	createCSConvPtr(_cvPtr, _enc);
+	_cvPtr = createCSConvPtr(_enc);
 
 	if(_tree)
 		_parents[_level] = _tree->GetRootItem();
@@ -200,7 +200,6 @@ void HHCParser::handleTag(const std::string& tag)
 	++_counter;
 
 	if((_counter % TIME_TO_YIELD) == 0) {
-		//wxSafeYield();
 		wxYield();
 		_counter = 0;
 	}
@@ -452,7 +451,6 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 					  substitutions_cnt,
 					  sizeof(HTMLChar),
 					  HTMLCharCompare);
-
 	if(hc)
 		return hc->code;
 

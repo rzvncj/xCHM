@@ -603,9 +603,10 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	}
 
 	if(!rtn) { // Error, could not load CHM file
-		if(_tcl->GetCount())
+		if(_tcl->GetCount()) {
 			_tcl->Unselect();
 			_tcl->DeleteChildren(_tcl->GetRootItem());
+		}
 		if(_sw->IsSplit()) {
 			_sw->Unsplit(_nb);
 			_nb->Show(FALSE);

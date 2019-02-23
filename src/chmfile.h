@@ -55,7 +55,7 @@ WX_DECLARE_HASH_MAP( int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap );
 class CHMFile {
 public:
 	//! Default constructor.
-	CHMFile();
+	CHMFile() = default;
 
 	/*!
 	  \brief This constructor attempts to open the .chm file passed as
@@ -114,7 +114,7 @@ public:
 	  \return true, if the last attempt to load a .chm file was
 	  succesful, false otherwise.
 	 */
-	bool IsOk() const { return _chmFile != NULL; }
+	bool IsOk() const { return _chmFile != nullptr; }
 
 	//! Checks if a 'ms-its' link has been clicked and the chm changed.
 	bool HasChanged();
@@ -286,9 +286,9 @@ private:
 				size_t bufferLength);
 
 private:
-	chmFile* _chmFile;
+	chmFile* _chmFile{nullptr};
 	wxString _filename;
-	wxString _home;
+	wxString _home{wxT("/")};
 	wxString _topicsFile;
 	wxString _indexFile;
 	wxString _title;

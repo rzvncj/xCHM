@@ -154,13 +154,7 @@ private:
 #define LANG_NEPALI		0x61
 #define LANG_DIVEHI		0x65
 
-CHMFile::CHMFile()
-	: _chmFile(NULL), _home(wxT("/"))
-{
-}
-
 CHMFile::CHMFile(const wxString& archiveName)
-	: _chmFile(NULL), _home(wxT("/"))
 {
 	LoadCHM(archiveName);
 }
@@ -175,11 +169,11 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 	if(_chmFile)
 		CloseCHM();
 
-	assert(_chmFile == NULL);
+	assert(_chmFile == nullptr);
 
 	_chmFile = chm_open(static_cast<const char *>(archiveName.mb_str()));
 
-	if(_chmFile == NULL)
+	if(_chmFile == nullptr)
 		return false;
 
 	_enc = wxFONTENCODING_SYSTEM;
@@ -195,13 +189,13 @@ bool CHMFile::LoadCHM(const wxString&  archiveName)
 
 void CHMFile::CloseCHM()
 {
-	if(_chmFile == NULL)
+	if(_chmFile == nullptr)
 		return;
 
 	chm_close(_chmFile);
 
 	_cidMap.clear();
-	_chmFile = NULL;
+	_chmFile = nullptr;
 	_home = wxT("/");
 	_filename = _home = _topicsFile = _indexFile = _title
 		= _font = wxEmptyString;
@@ -280,7 +274,7 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics,
 
 		if((flags & 0x4) || (flags & 0x8)) { // book or local
 			if(!GetItem(topics, strings, urltbl, urlstr, index,
-				    toBuild, NULL, wxEmptyString, level,
+				    toBuild, nullptr, wxEmptyString, level,
 				    (flags & 0x8) == 0))
 				return;
 		}
@@ -369,32 +363,24 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl,
 
 	if(tree && !name.empty()) {
 		int parentIndex = level ? level - 1 : 0;
-		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()),
-			_enc);
+		tname = translateEncoding(CURRENT_CHAR_STRING(name.c_str()), _enc);
 
 		parents[level] =
-			tree->AppendItem(parents[parentIndex], tname, 2, 2,
-					    new URLTreeItem(tvalue));
+			tree->AppendItem(parents[parentIndex], tname, 2, 2, new URLTreeItem(tvalue));
+
 		if(level) {
 			if(tree->GetItemImage(parents[parentIndex]) != 0) {
-				tree->SetItemImage(parents[parentIndex], 0,
-						   wxTreeItemIcon_Normal);
-
-				tree->SetItemImage(parents[parentIndex], 0,
-						   wxTreeItemIcon_Selected);
-
-				tree->SetItemImage(parents[parentIndex], 1,
-						   wxTreeItemIcon_Expanded);
+				tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Normal);
+				tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Selected);
+				tree->SetItemImage(parents[parentIndex], 1, wxTreeItemIcon_Expanded);
 			}
 		}
 	}
 
 	if(list) {
 		tname = idxName;
-		if(!value.empty()) {
-			if(tname.IsEmpty())
-				tname = EMPTY_INDEX;
-		}
+		if(!value.empty() && tname.IsEmpty())
+			tname = EMPTY_INDEX;
 
 		list->AddPairItem(tname, tvalue);
 	}
@@ -426,7 +412,7 @@ bool CHMFile::GetTopicsTree(wxTreeCtrl *toBuild)
 
 	buffer[0] = '\0';
 
-	HHCParser p(_enc, toBuild, NULL);
+	HHCParser p(_enc, toBuild, nullptr);
 
 	do {
 		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
@@ -453,11 +439,10 @@ bool CHMFile::ConvertFromUnicode(std::string& value, unsigned char* buffer,
 	while(bufferLength >= offset + sizeof(elem)) {
 		elem = UINT16ARRAY(buffer + offset);
 
-		if(elem != 0) {
+		if(elem != 0)
 			value += *((char *)(buffer + offset));
-		} else {
+		else
 			return true;
-		}
 
 		offset += sizeof(elem);
 	}
@@ -585,7 +570,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
 							    + offset);
 
 					GetItem(topics, strings, urltbl,
-						urlstr, index, NULL,
+						urlstr, index, nullptr,
 						toBuild, name, 0, false);
 					++items;
 
@@ -633,7 +618,7 @@ bool CHMFile::GetIndex(CHMListCtrl* toBuild)
 
 	buffer[0] = '\0';
 
-	HHCParser p(_enc, NULL, toBuild);
+	HHCParser p(_enc, nullptr, toBuild);
 
 	do {
 		ret = RetrieveObject(&ui, reinterpret_cast<unsigned char *>(
@@ -880,7 +865,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords,
 
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo *ui)
 {
-	return _chmFile != NULL &&
+	return _chmFile != nullptr &&
 		::chm_resolve_object(_chmFile,
 				     static_cast<const char *>(
 					     fileName.mb_str()),
@@ -1176,7 +1161,7 @@ bool CHMFile::InfoFromSystem()
 	chmUnitInfo ui;
 
 	int index = 0;
-	unsigned char* cursor = NULL;
+	unsigned char* cursor = nullptr;
 	uint16_t value = 0;
 	uint32_t lcid = 0;
 
@@ -1184,13 +1169,11 @@ bool CHMFile::InfoFromSystem()
 	long cs = -1;
 
 	// Do we have the #SYSTEM file in the archive?
-	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) !=
-	   CHM_RESOLVE_SUCCESS)
+	if(::chm_resolve_object(_chmFile, "/#SYSTEM", &ui) != CHM_RESOLVE_SUCCESS)
 		return false;
 
 	// Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-	if((size = ::chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE))
-	   == 0)
+	if((size = ::chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE)) == 0)
 		return false;
 
 	buffer[size - 1] = 0;
@@ -1367,7 +1350,6 @@ wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 	case LANG_FARSI:
 	case LANG_URDU:
 		fontEncoding = wxFONTENCODING_CP1256;
-		//fontEncoding = wxFONTENCODING_UTF8;
 		break;
 	case LANG_AZERI:
 	case LANG_BELARUSIAN:

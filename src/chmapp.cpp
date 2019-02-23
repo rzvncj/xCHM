@@ -59,7 +59,6 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 		switch( int(params[0]) )
 		{
 		case 0: // we want to close everything up!
-			//_frame->Command(ID_Quit);
 			ExitMainLoop();
 			result = TRUE;
 			break;

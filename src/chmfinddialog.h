@@ -21,8 +21,8 @@
 #define __CHMFINDDIALOG_H
 
 #include <wx/dialog.h>
-#include <wx/textctrl.h>
 #include <wx/html/htmlcell.h>
+#include <wx/textctrl.h>
 
 // Forward declarations.
 class wxCheckBox;
@@ -30,50 +30,36 @@ class CHMHtmlWindow;
 
 //! Event IDs.
 enum {
-	ID_TextFind = 1408,
-	ID_FindNext,
+    ID_TextFind = 1408,
+    ID_FindNext,
 };
 
 //! Dialog for finding a word in the currently displayed page.
 class CHMFindDialog : public wxDialog {
 public:
-	//! Initializes the dialog.
-	CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch);
+    //! Initializes the dialog.
+    CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch);
 
-	//! Sets the focus to the textbox.
-	void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
+    //! Sets the focus to the textbox.
+    void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
 
-	//! Resets the word to be found, so 'Find next' will start over.
-	void Reset() { _cell = nullptr; }
+    //! Resets the word to be found, so 'Find next' will start over.
+    void Reset() { _cell = nullptr; }
 
 protected:
-	//! Called when the user clicks the 'Find next' button.
-	void OnFind(wxCommandEvent& event);
+    //! Called when the user clicks the 'Find next' button.
+    void OnFind(wxCommandEvent& event);
 
 private:
-	CHMHtmlWindow* _html;
-	wxTextCtrl* _text;
-	wxCheckBox* _whole;
-	wxCheckBox* _case;
-	wxString _currWord;
-	wxHtmlCell *_cell{nullptr};
+    CHMHtmlWindow* _html;
+    wxTextCtrl*    _text;
+    wxCheckBox*    _whole;
+    wxCheckBox*    _case;
+    wxString       _currWord;
+    wxHtmlCell*    _cell {nullptr};
 
 private:
-	DECLARE_EVENT_TABLE();
+    DECLARE_EVENT_TABLE();
 };
 
 #endif // __CHMFINDDIALOG_H
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

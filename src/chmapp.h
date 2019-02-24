@@ -21,16 +21,16 @@
 #define __CHMAPP_H_
 
 #ifdef HAVE_CONFIG_H
-#	include <config.h>
+#include <config.h>
 #endif
 
-#include <wx/wx.h>
-#include <wx/intl.h>
 #include <wx/cmdline.h>
+#include <wx/intl.h>
+#include <wx/wx.h>
 
 #ifdef WITH_LIBXMLRPC
-#	define TIMER_ID	wxID_HIGHEST + 1
-#	include <XmlRpc.h>
+#define TIMER_ID wxID_HIGHEST + 1
+#include <XmlRpc.h>
 using namespace XmlRpc;
 #endif
 
@@ -51,56 +51,41 @@ class CHMApp : public wxApp {
 
 #ifdef WITH_LIBXMLRPC
 public:
-	//! Default constructor, also links the XMLRPC method
-	CHMApp();
+    //! Default constructor, also links the XMLRPC method
+    CHMApp();
 #endif
-	//! Our entry point into the application.
-	virtual bool OnInit();
+    //! Our entry point into the application.
+    virtual bool OnInit();
 
 #ifdef __WXMAC__
-	//! Respond to Apple Event for opening a document
-	virtual void MacOpenFile(const wxString& filename);
+    //! Respond to Apple Event for opening a document
+    virtual void MacOpenFile(const wxString& filename);
 #endif
 
 protected:
-
 #ifdef WITH_LIBXMLRPC
-	//! Handles actual XMLRPC requests and parameter parsing.
-	void execute(XmlRpcValue& params, XmlRpcValue& result);
+    //! Handles actual XMLRPC requests and parameter parsing.
+    void execute(XmlRpcValue& params, XmlRpcValue& result);
 
-	//! Watches for XMLRPC requests
-	void WatchForXMLRPC( wxTimerEvent& event );
+    //! Watches for XMLRPC requests
+    void WatchForXMLRPC(wxTimerEvent& event);
 #endif
 
 private:
-	// Try to figure out the absolute file path of the executable.
-	wxString getAppPath(const wxString& argv0, const wxString& cwd);
+    // Try to figure out the absolute file path of the executable.
+    wxString getAppPath(const wxString& argv0, const wxString& cwd);
 
 private:
-	CHMFrame* _frame;
-	wxLocale _loc;
+    CHMFrame* _frame;
+    wxLocale  _loc;
 
 #ifdef WITH_LIBXMLRPC
-	wxTimer _timer;
+    wxTimer _timer;
 #endif
-	wxCmdLineParser _cmdLP;
+    wxCmdLineParser _cmdLP;
 #ifdef WITH_LIBXMLRPC
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 #endif
 };
 
 #endif // __CHMAPP_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

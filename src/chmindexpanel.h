@@ -20,9 +20,9 @@
 #ifndef __CHMINDEXPANEL_H_
 #define __CHMINDEXPANEL_H_
 
+#include <wx/listctrl.h>
 #include <wx/panel.h>
 #include <wx/textctrl.h>
-#include <wx/listctrl.h>
 
 class CHMHtmlNotebook;
 class CHMListCtrl;
@@ -34,64 +34,50 @@ class CHMListCtrl;
 
 //! IDs for various widget events.
 enum {
-	ID_SearchIndex = 1500,
-	ID_IndexClicked,
+    ID_SearchIndex = 1500,
+    ID_IndexClicked,
 };
 
 //! Custom panel for displaying the .chm index (if available).
 class CHMIndexPanel : public wxPanel {
 
 public:
-	/*!
-	  \brief Initializes the panel.
-	  \param parent Parent widget.
-	  \param nbhtml HTML-capable widget used for displaying pages
-	  from the index.
-	 */
-	CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook* nbhtml);
+    /*!
+      \brief Initializes the panel.
+      \param parent Parent widget.
+      \param nbhtml HTML-capable widget used for displaying pages
+      from the index.
+     */
+    CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml);
 
 public:
-	//! Accesor for the CHMListCtrl used by this panel.
-	CHMListCtrl* GetResultsList() { return _lc; }
+    //! Accesor for the CHMListCtrl used by this panel.
+    CHMListCtrl* GetResultsList() { return _lc; }
 
-	//! Clears the textbox and removes all items from the list control.
-	void Reset();
+    //! Clears the textbox and removes all items from the list control.
+    void Reset();
 
-	//! Sets the font.
-	void SetNewFont(const wxFont& font);
+    //! Sets the font.
+    void SetNewFont(const wxFont& font);
 
 protected:
-	//! This gets called when the user clicks on a list item.
-	void OnIndexSel(wxListEvent& event);
+    //! This gets called when the user clicks on a list item.
+    void OnIndexSel(wxListEvent& event);
 
-	//! This gets called when the user presses enter on a list item.
-	void OnIndexSelRet(wxCommandEvent& event);
+    //! This gets called when the user presses enter on a list item.
+    void OnIndexSelRet(wxCommandEvent& event);
 
-	//! Called whenever the user types a letter in the textbox.
-	void OnText(wxCommandEvent& event);
-
-private:
-	CHMHtmlNotebook* _nbhtml;
-	wxTextCtrl* _text;
-	CHMListCtrl* _lc;
-	bool _navigate;
+    //! Called whenever the user types a letter in the textbox.
+    void OnText(wxCommandEvent& event);
 
 private:
-	DECLARE_EVENT_TABLE()
+    CHMHtmlNotebook* _nbhtml;
+    wxTextCtrl*      _text;
+    CHMListCtrl*     _lc;
+    bool             _navigate;
+
+private:
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMINDEXPANEL_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

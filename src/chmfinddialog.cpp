@@ -19,104 +19,90 @@
 
 #include <chmfinddialog.h>
 #include <chmhtmlwindow.h>
-#include <wx/checkbox.h>
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/sizer.h>
 #include <wx/tokenzr.h>
 #include <wx/wx.h>
 
-CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
-	: wxDialog(parent, -1, wxString(_("Find in page.."))), _html(toSearch)
+CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
+    : wxDialog(parent, -1, wxString(_("Find in page.."))), _html(toSearch)
 {
-	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	_text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
+    _text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
 
-	_whole = new wxCheckBox(this, -1, _("Whole words only"));
-	_case = new wxCheckBox(this, -1, _("Case sensitive"));
+    _whole = new wxCheckBox(this, -1, _("Whole words only"));
+    _case  = new wxCheckBox(this, -1, _("Case sensitive"));
 
-	sizer->Add(_text, 0, wxLEFT | wxTOP | wxBOTTOM, 5);
-	sizer->Add(_whole, 0, wxLEFT, 5);
-	sizer->Add(_case, 0, wxLEFT | wxBOTTOM, 5);
+    sizer->Add(_text, 0, wxLEFT | wxTOP | wxBOTTOM, 5);
+    sizer->Add(_whole, 0, wxLEFT, 5);
+    sizer->Add(_case, 0, wxLEFT | wxBOTTOM, 5);
 
-	wxSizer *szButtons = new wxBoxSizer(wxVERTICAL);
-	wxButton *find = new wxButton(this, ID_FindNext, _("Find next"));
+    wxSizer*  szButtons = new wxBoxSizer(wxVERTICAL);
+    wxButton* find      = new wxButton(this, ID_FindNext, _("Find next"));
 
-	szButtons->Add(find, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
-	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
+    szButtons->Add(find, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
+    szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
 
-	wxSizer *topsizer = new wxBoxSizer(wxHORIZONTAL);
-	topsizer->Add(sizer);
-	topsizer->Add(szButtons);
+    wxSizer* topsizer = new wxBoxSizer(wxHORIZONTAL);
+    topsizer->Add(sizer);
+    topsizer->Add(szButtons);
 
-	SetAutoLayout(TRUE);
-	SetSizer(topsizer);
-	topsizer->Fit(this);
-	Centre(wxBOTH);
+    SetAutoLayout(TRUE);
+    SetSizer(topsizer);
+    topsizer->Fit(this);
+    Centre(wxBOTH);
 
-	SetFocusToTextBox();
+    SetFocusToTextBox();
 }
 
 void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 {
-	_html->ClearSelection();
+    _html->ClearSelection();
 
-	wxString sr = _text->GetLineText(0);
-	if (sr.IsEmpty())
-		return;
+    wxString sr = _text->GetLineText(0);
+    if (sr.IsEmpty())
+        return;
 
-	wxStringTokenizer tkz(sr, wxT(" \t\r\n"));
-	wxString word;
+    wxStringTokenizer tkz(sr, wxT(" \t\r\n"));
+    wxString          word;
 
-	while(word.IsEmpty())
-		if(tkz.HasMoreTokens())
-			word = tkz.GetNextToken();
+    while (word.IsEmpty())
+        if (tkz.HasMoreTokens())
+            word = tkz.GetNextToken();
 
-	if(!_case->IsChecked())
-		word.MakeLower();
+    if (!_case->IsChecked())
+        word.MakeLower();
 
-	if(!_cell || word.Cmp(_currWord.c_str())) {
-		_cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
-		_currWord = word;
+    if (!_cell || word.Cmp(_currWord.c_str())) {
+        _cell     = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
+        _currWord = word;
 
-	} else {
+    } else {
 
-		if(_cell && _cell->GetNext())
-			_cell = _cell->GetNext();
-	        else {
-			while(_cell && !_cell->GetNext())
-				_cell = _cell->GetParent();
+        if (_cell && _cell->GetNext())
+            _cell = _cell->GetNext();
+        else {
+            while (_cell && !_cell->GetNext())
+                _cell = _cell->GetParent();
 
-			if(_cell)
-				_cell = _cell->GetNext();
-		}
+            if (_cell)
+                _cell = _cell->GetNext();
+        }
 
-		if(!_cell)
-			return;
+        if (!_cell)
+            return;
 
-		_cell = _html->FindNext(_cell, word, _whole->IsChecked(), _case->IsChecked());
+        _cell = _html->FindNext(_cell, word, _whole->IsChecked(), _case->IsChecked());
 
-		// Wrap around.
-		if(!_cell)
-			_cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
-	}
+        // Wrap around.
+        if (!_cell)
+            _cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
+    }
 }
 
 BEGIN_EVENT_TABLE(CHMFindDialog, wxDialog)
-    EVT_TEXT_ENTER(ID_TextFind, CHMFindDialog::OnFind)
-    EVT_BUTTON(ID_FindNext, CHMFindDialog::OnFind)
+EVT_TEXT_ENTER(ID_TextFind, CHMFindDialog::OnFind)
+EVT_BUTTON(ID_FindNext, CHMFindDialog::OnFind)
 END_EVENT_TABLE()
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

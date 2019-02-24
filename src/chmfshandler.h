@@ -28,55 +28,40 @@
 */
 
 //! CHM filesystem handler class.
-class CHMFSHandler : public wxFileSystemHandler
-{
+class CHMFSHandler : public wxFileSystemHandler {
 public:
-	/*!
-	  \brief Doesn't do anything but needs to be here because of
-	  the private copy constructor.
-	 */
-        CHMFSHandler() = default;
+    /*!
+      \brief Doesn't do anything but needs to be here because of
+      the private copy constructor.
+     */
+    CHMFSHandler() = default;
 
-	//! Cleanup code. This calls CHMInputStream's Cleanup().
-	~CHMFSHandler();
+    //! Cleanup code. This calls CHMInputStream's Cleanup().
+    ~CHMFSHandler();
 
-	/*!
-	  \brief Checks if it can open the file passed in location.
-	  \param location File to open.
-	  \returns true if location is in the form
-	  "file:filename.chm#xchm:/file_inside_archive.extension", false
-	  otherwise. Does not attempt to actually open the file.
-	 */
-        virtual bool CanOpen(const wxString& location);
+    /*!
+      \brief Checks if it can open the file passed in location.
+      \param location File to open.
+      \returns true if location is in the form
+      "file:filename.chm#xchm:/file_inside_archive.extension", false
+      otherwise. Does not attempt to actually open the file.
+     */
+    virtual bool CanOpen(const wxString& location);
 
-	/*!
-	  \brief Tries to open the file specified.
-	  \param fs Currently ignored.
-	  \param location filename.
-	  \return A valid pointer to a wxFSFile or nullptr on failure.
-	 */
-        virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
+    /*!
+      \brief Tries to open the file specified.
+      \param fs Currently ignored.
+      \param location filename.
+      \return A valid pointer to a wxFSFile or nullptr on failure.
+     */
+    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
 
 public:
-	//! No copy construction.
-	CHMFSHandler(const CHMFSHandler&) = delete;
+    //! No copy construction.
+    CHMFSHandler(const CHMFSHandler&) = delete;
 
-	//! No assignment.
-	CHMFSHandler& operator=(const CHMFSHandler&) = delete;
+    //! No assignment.
+    CHMFSHandler& operator=(const CHMFSHandler&) = delete;
 };
 
 #endif // __CHMFSHANDLER_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

@@ -23,154 +23,136 @@
  * class CHMInputStream static members
  */
 
-CHMFile *CHMInputStream::_archiveCache = nullptr;
+CHMFile* CHMInputStream::_archiveCache = nullptr;
 wxString CHMInputStream::_path;
 
 void CHMInputStream::Cleanup()
 {
-	if(_archiveCache != nullptr) {
-		delete _archiveCache;
-		_archiveCache = nullptr;
-	}
+    if (_archiveCache != nullptr) {
+        delete _archiveCache;
+        _archiveCache = nullptr;
+    }
 }
 
 CHMFile* CHMInputStream::GetCache()
 {
-	return _archiveCache;
+    return _archiveCache;
 }
 
 /*----------------------------------------------------------------------
  * rest of class CHMInputStream implementation
  */
 
-CHMInputStream::CHMInputStream(const wxString& archive,
-			       const wxString& file)
-	: _currPos(0)
+CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file) : _currPos(0)
 {
-	wxString filename = file;
+    wxString filename = file;
 
-	if(!archive.IsEmpty())
-		_path = archive.BeforeLast(wxT('/')) + wxT("/");
+    if (!archive.IsEmpty())
+        _path = archive.BeforeLast(wxT('/')) + wxT("/");
 
-	memset(&_ui, 0, sizeof(_ui));
+    memset(&_ui, 0, sizeof(_ui));
 
-	// Maybe the cached chmFile* isn't valid anymore,
-	// or maybe there is no chached chmFile* yet.
-	if(!archive.IsEmpty() && !Init(archive)) {
-		m_lasterror = wxSTREAM_READ_ERROR;
-		return;
-	}
+    // Maybe the cached chmFile* isn't valid anymore,
+    // or maybe there is no chached chmFile* yet.
+    if (!archive.IsEmpty() && !Init(archive)) {
+        m_lasterror = wxSTREAM_READ_ERROR;
+        return;
+    }
 
-	// Somebody's looking for the homepage.
-	if(file.IsSameAs(wxT("/")))
-		filename = _archiveCache->HomePage();
+    // Somebody's looking for the homepage.
+    if (file.IsSameAs(wxT("/")))
+        filename = _archiveCache->HomePage();
 
-	if(!filename.Left(8).CmpNoCase(wxT("/MS-ITS:"))) {
-		// If this ever happens chances are Microsoft
-		// decided that even if we went through the
-		// trouble to open this archive and check out
-		// the index file, the index file is just a
-		// link to a file in another archive.
+    if (!filename.Left(8).CmpNoCase(wxT("/MS-ITS:"))) {
+        // If this ever happens chances are Microsoft
+        // decided that even if we went through the
+        // trouble to open this archive and check out
+        // the index file, the index file is just a
+        // link to a file in another archive.
 
-		wxString arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
+        wxString arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
-		filename = filename.AfterLast(wxT(':'));
+        filename = filename.AfterLast(wxT(':'));
 
-		// Reset the cached chmFile* and all.
-		if(!Init(arch_link))
-			if(!Init(_path + arch_link)) {
-				m_lasterror = wxSTREAM_READ_ERROR;
-				return;
-			}
-	}
+        // Reset the cached chmFile* and all.
+        if (!Init(arch_link))
+            if (!Init(_path + arch_link)) {
+                m_lasterror = wxSTREAM_READ_ERROR;
+                return;
+            }
+    }
 
-	assert(_archiveCache != nullptr);
+    assert(_archiveCache != nullptr);
 
-	// See if the file really is in the archive.
-	if(!_archiveCache->ResolveObject(filename, &_ui)) {
-		m_lasterror = wxSTREAM_READ_ERROR;
-		return;
-	}
+    // See if the file really is in the archive.
+    if (!_archiveCache->ResolveObject(filename, &_ui)) {
+        m_lasterror = wxSTREAM_READ_ERROR;
+        return;
+    }
 }
 
 size_t CHMInputStream::GetSize() const
 {
-	return _ui.length;
+    return _ui.length;
 }
 
 bool CHMInputStream::Eof() const
 {
-	return static_cast<uint64_t>(_currPos) >= _ui.length;
+    return static_cast<uint64_t>(_currPos) >= _ui.length;
 }
 
-size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
+size_t CHMInputStream::OnSysRead(void* buffer, size_t bufsize)
 {
-	if((uint64_t)_currPos >= _ui.length) {
-		m_lasterror = wxSTREAM_EOF;
-		return 0;
-	}
+    if ((uint64_t)_currPos >= _ui.length) {
+        m_lasterror = wxSTREAM_EOF;
+        return 0;
+    }
 
-	if(!_archiveCache)
-		return 0;
+    if (!_archiveCache)
+        return 0;
 
-	if((uint64_t)(_currPos + bufsize) > _ui.length)
+    if ((uint64_t)(_currPos + bufsize) > _ui.length)
         bufsize = _ui.length - _currPos;
 
-	bufsize =
-		_archiveCache->RetrieveObject(&_ui, (unsigned char *)buffer, _currPos, bufsize);
+    bufsize = _archiveCache->RetrieveObject(&_ui, (unsigned char*)buffer, _currPos, bufsize);
 
-	_currPos += bufsize;
+    _currPos += bufsize;
 
-	return bufsize;
+    return bufsize;
 }
 
 wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 {
-	switch(mode) {
-	case wxFromCurrent:
-		_currPos += seek;
-		break;
-	case wxFromStart:
-		_currPos = seek;
-		break;
-	case wxFromEnd:
-		_currPos = _ui.length - 1 + seek;
-		break;
-	default:
-		_currPos = seek;
-	}
+    switch (mode) {
+    case wxFromCurrent:
+        _currPos += seek;
+        break;
+    case wxFromStart:
+        _currPos = seek;
+        break;
+    case wxFromEnd:
+        _currPos = _ui.length - 1 + seek;
+        break;
+    default:
+        _currPos = seek;
+    }
 
-	return _currPos;
+    return _currPos;
 }
 
 bool CHMInputStream::Init(const wxString& archive)
 {
-	if(_archiveCache == nullptr ||
-	   !_archiveCache->ArchiveName().IsSameAs(archive)) {
+    if (_archiveCache == nullptr || !_archiveCache->ArchiveName().IsSameAs(archive)) {
 
-		Cleanup();
+        Cleanup();
 
-		_archiveCache = new CHMFile(archive);
+        _archiveCache = new CHMFile(archive);
 
-		if(!_archiveCache->IsOk()) {
-			Cleanup();
-			return false;
-		}
-	}
+        if (!_archiveCache->IsOk()) {
+            Cleanup();
+            return false;
+        }
+    }
 
-	return true;
+    return true;
 }
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

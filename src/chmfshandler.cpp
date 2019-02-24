@@ -22,80 +22,65 @@
 
 CHMFSHandler::~CHMFSHandler()
 {
-	CHMInputStream::Cleanup();
+    CHMInputStream::Cleanup();
 }
 
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
-	wxString p = GetProtocol(location);
-	return (p == wxT("xchm") && GetProtocol(GetLeftLocation(location)) == wxT("file"))
-		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
+    wxString p = GetProtocol(location);
+    return (p == wxT("xchm") && GetProtocol(GetLeftLocation(location)) == wxT("file"))
+        || !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
 
-wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
-				 const wxString& location)
+wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
 {
-	wxString right = GetRightLocation(location);
-	wxString left = GetLeftLocation(location);
-	wxString cwd = GetRightLocation(fs.GetPath());
-	CHMInputStream *s = nullptr;
+    wxString        right = GetRightLocation(location);
+    wxString        left  = GetLeftLocation(location);
+    wxString        cwd   = GetRightLocation(fs.GetPath());
+    CHMInputStream* s     = nullptr;
 
-	if(!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
-		right = wxString(wxT("/")) + location;
-		left = wxEmptyString;
+    if (!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
+        right = wxString(wxT("/")) + location;
+        left  = wxEmptyString;
 
-	} else if (GetProtocol(left) != wxT("file"))
-		return nullptr;
+    } else if (GetProtocol(left) != wxT("file"))
+        return nullptr;
 
-	// HTML code for space is %20
-	right.Replace(wxT("%20"), wxT(" "), TRUE);
-	right.Replace(wxT("%5F"), wxT("_"), TRUE);
-	right.Replace(wxT("%2E"), wxT("."), TRUE);
-	right.Replace(wxT("%2D"), wxT("-"), TRUE);
-	right.Replace(wxT("%26"), wxT("&"), TRUE);
+    // HTML code for space is %20
+    right.Replace(wxT("%20"), wxT(" "), TRUE);
+    right.Replace(wxT("%5F"), wxT("_"), TRUE);
+    right.Replace(wxT("%2E"), wxT("."), TRUE);
+    right.Replace(wxT("%2D"), wxT("-"), TRUE);
+    right.Replace(wxT("%26"), wxT("&"), TRUE);
 
-	wxFileName filename = wxFileSystem::URLToFileName(left);
-	filename.Normalize();
+    wxFileName filename = wxFileSystem::URLToFileName(left);
+    filename.Normalize();
 
-	size_t len = cwd.Length();
-	if(right.Length() > len && right.StartsWith(cwd) && right[len] == wxT('/'))
-		right = right.Mid(len);
+    size_t len = cwd.Length();
+    if (right.Length() > len && right.StartsWith(cwd) && right[len] == wxT('/'))
+        right = right.Mid(len);
 
-        wxFileName fwfn(right, wxPATH_UNIX);
-        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
-	right = fwfn.GetFullPath(wxPATH_UNIX);
+    wxFileName fwfn(right, wxPATH_UNIX);
+    fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
+    right = fwfn.GetFullPath(wxPATH_UNIX);
 
-	s = new CHMInputStream(left.IsEmpty() ? left : filename.GetFullPath(), right);
+    s = new CHMInputStream(left.IsEmpty() ? left : filename.GetFullPath(), right);
 
-	if (s && s->IsOk()) {
+    if (s && s->IsOk()) {
 
-		if(right.IsSameAs(wxT("/")))
-			right = s->GetCache()->HomePage();
+        if (right.IsSameAs(wxT("/")))
+            right = s->GetCache()->HomePage();
 
-		// The dreaded links to files in other archives.
-		// Talk about too much enthusiasm.
-		if(!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
-			right = right.AfterLast(wxT(':'));
+        // The dreaded links to files in other archives.
+        // Talk about too much enthusiasm.
+        if (!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
+            right = right.AfterLast(wxT(':'));
 
-		return new wxFSFile(s, wxString(wxT("file:")) + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
-				    GetMimeTypeFromExt(right.Lower()), GetAnchor(location),
-				    wxDateTime(static_cast<time_t>(-1)));
-	}
+        return new wxFSFile(s, wxString(wxT("file:")) + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
+                            GetMimeTypeFromExt(right.Lower()), GetAnchor(location),
+                            wxDateTime(static_cast<time_t>(-1)));
+    }
 
-	delete s;
-	return nullptr;
+    delete s;
+    return nullptr;
 }
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

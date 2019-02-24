@@ -20,22 +20,22 @@
 #ifndef __CHMHTMLWINDOW_H_
 #define __CHMHTMLWINDOW_H_
 
+#include <chmfinddialog.h>
 #include <wx/html/htmlwin.h>
-#include <wx/treectrl.h>
 #include <wx/menu.h>
 #include <wx/notebook.h>
-#include <chmfinddialog.h>
+#include <wx/treectrl.h>
 
 //! Event IDs.
 enum {
-	ID_CopySel = 1216,
-	ID_CopyLink,
-	ID_SaveLinkAs,
-	ID_PopupForward,
-	ID_PopupBack,
-	ID_PopupFind,
-	ID_PopupFullScreen,
-	ID_OpenInNewTab,
+    ID_CopySel = 1216,
+    ID_CopyLink,
+    ID_SaveLinkAs,
+    ID_PopupForward,
+    ID_PopupBack,
+    ID_PopupFind,
+    ID_PopupFullScreen,
+    ID_OpenInNewTab,
 };
 
 //! Minimize dependencies. Forward declaration.
@@ -53,137 +53,120 @@ class CHMFrame;
 class CHMHtmlWindow : public wxHtmlWindow {
 
 public:
-	/*!
-	  \brief Initializes the widget.
-	  \param parent The parent widget.
-	  \param tc Pointer to the tree control we want to synchronize
-	  with.
-	  \param frame Outer frame.
-	 */
-	CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame* frame);
+    /*!
+      \brief Initializes the widget.
+      \param parent The parent widget.
+      \param tc Pointer to the tree control we want to synchronize
+      with.
+      \param frame Outer frame.
+     */
+    CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame);
 
-	//! Destructor. Deletes heap objects allocated in the constructor.
-	~CHMHtmlWindow();
-	
-	virtual void OnSetTitle(const wxString& title);
+    //! Destructor. Deletes heap objects allocated in the constructor.
+    ~CHMHtmlWindow();
 
-	//! Override. Looks up the wanted page in the tree and selects it.
-	bool LoadPage(const wxString& location);
+    virtual void OnSetTitle(const wxString& title);
 
-	/*!
-	  \brief Dictates the behaviour of LoadPage(). If SetSync()
-	  has been called with a true parameter, the tree control will
-	  be updated by LoadPage(). Otherwise, it will not be updated.
-	  \param value Synchronize the tree widget on load?
-	 */
-	void SetSync(bool value) { _syncTree = value; }
+    //! Override. Looks up the wanted page in the tree and selects it.
+    bool LoadPage(const wxString& location);
 
-	/*!
-	  Returns true if the tree control's EVT_TREE_SEL_CHANGED
-	  event happened as a result of the CHMHtmlWindow calling
-	  SelectItem() on it.
-	*/
-	bool IsCaller() const { return _found; }
+    /*!
+      \brief Dictates the behaviour of LoadPage(). If SetSync()
+      has been called with a true parameter, the tree control will
+      be updated by LoadPage(). Otherwise, it will not be updated.
+      \param value Synchronize the tree widget on load?
+     */
+    void SetSync(bool value) { _syncTree = value; }
+
+    /*!
+      Returns true if the tree control's EVT_TREE_SEL_CHANGED
+      event happened as a result of the CHMHtmlWindow calling
+      SelectItem() on it.
+    */
+    bool IsCaller() const { return _found; }
 
 public:
-	/*!
-	  \brief Finds the first occurence of word in the displayed page.
-	  \param parent Root of the wxHtmlCell tree where the search should
-	  begin.
-	  \param word The word we're looking for. If more words separated
-	  by spaces are typed in, only the first one is taken into
-	  account.
-	  \param wholeWords If true, will search for words that match
-	  word exactly.
-	  \param caseSensitive If true, the search will be performed
-	  case sensitive.
-	  \return A valid cell if the result was found, nullptr otherwise.
-	 */
-	wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word,
-			      bool wholeWords, bool caseSensitive);
+    /*!
+      \brief Finds the first occurence of word in the displayed page.
+      \param parent Root of the wxHtmlCell tree where the search should
+      begin.
+      \param word The word we're looking for. If more words separated
+      by spaces are typed in, only the first one is taken into
+      account.
+      \param wholeWords If true, will search for words that match
+      word exactly.
+      \param caseSensitive If true, the search will be performed
+      case sensitive.
+      \return A valid cell if the result was found, nullptr otherwise.
+     */
+    wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word, bool wholeWords, bool caseSensitive);
 
-	/*!
-	  \brief Same as FindFirst(), but continues the search from start
-	  (start is considered in the search process).
-	*/
-	wxHtmlCell* FindNext(wxHtmlCell *start,
-			     const wxString& word, bool wholeWords,
-			     bool caseSensitive);
+    /*!
+      \brief Same as FindFirst(), but continues the search from start
+      (start is considered in the search process).
+    */
+    wxHtmlCell* FindNext(wxHtmlCell* start, const wxString& word, bool wholeWords, bool caseSensitive);
 
-	//! Clears the current selection.
-	void ClearSelection();
+    //! Clears the current selection.
+    void ClearSelection();
 
-	// Needs to be public, cause I call it from CHMHtmlFrame.
-	//! Called when the user selects 'Find' from the popup menu.
-	void OnFind(wxCommandEvent& event);
+    // Needs to be public, cause I call it from CHMHtmlFrame.
+    //! Called when the user selects 'Find' from the popup menu.
+    void OnFind(wxCommandEvent& event);
 
-	//! Called when the user selects 'Copy' from the popup menu.
-	void OnCopy(wxCommandEvent& event);
+    //! Called when the user selects 'Copy' from the popup menu.
+    void OnCopy(wxCommandEvent& event);
 
 protected:
-	//! Called when the user selects 'Forward' from the popup menu.
-	void OnForward(wxCommandEvent& event);
+    //! Called when the user selects 'Forward' from the popup menu.
+    void OnForward(wxCommandEvent& event);
 
-	//! Called when the user selects 'Back' from the popup menu.
-	void OnBack(wxCommandEvent& event);
+    //! Called when the user selects 'Back' from the popup menu.
+    void OnBack(wxCommandEvent& event);
 
-	//! Called when the user selects 'Copy link' from the popup menu.
-	void OnCopyLink(wxCommandEvent& event);
+    //! Called when the user selects 'Copy link' from the popup menu.
+    void OnCopyLink(wxCommandEvent& event);
 
-	//! Called when the user selects 'Save link as' from the popup menu.
-	void OnSaveLinkAs(wxCommandEvent& event);
+    //! Called when the user selects 'Save link as' from the popup menu.
+    void OnSaveLinkAs(wxCommandEvent& event);
 
-	//! Called when the user presses a key
-	void OnChar(wxKeyEvent &event);
+    //! Called when the user presses a key
+    void OnChar(wxKeyEvent& event);
 
-	//! Called on widget resize.
-	void OnSize(wxSizeEvent& event);
+    //! Called on widget resize.
+    void OnSize(wxSizeEvent& event);
 
-	//! Called when the user selects 'Save link as' from the popup menu.
-	void OnOpenInNewTab(wxCommandEvent& event);
+    //! Called when the user selects 'Save link as' from the popup menu.
+    void OnOpenInNewTab(wxCommandEvent& event);
 
-	//! Called when the 'Toggle fullscreen' is selected from the popup menu.
-	void OnToggleFullScreen(wxCommandEvent& event);
+    //! Called when the 'Toggle fullscreen' is selected from the popup menu.
+    void OnToggleFullScreen(wxCommandEvent& event);
 
 protected:
-	//! Called when the user right clicks the HTML window.
-	void OnRightClick(wxMouseEvent& event);
+    //! Called when the user right clicks the HTML window.
+    void OnRightClick(wxMouseEvent& event);
 
-	//! Overridden. Called when the user clicks on a link.
-	void OnLinkClicked(const wxHtmlLinkInfo& link);
-
-private:
-	//! Helper. Recursively looks for the opened page in the tree.
-	void Sync(wxTreeItemId root, const wxString& page);
-
-	//! Helper. Returns the prefix of the currently loaded page.
-	wxString GetPrefix(const wxString& location) const;
+    //! Overridden. Called when the user clicks on a link.
+    void OnLinkClicked(const wxHtmlLinkInfo& link);
 
 private:
-	wxTreeCtrl *_tcl;
-	bool _syncTree;
-	bool _found;
-	wxMenu *_menu;
-	CHMFrame *_frame;
-	wxString _link;
-	CHMFindDialog* _fdlg;
+    //! Helper. Recursively looks for the opened page in the tree.
+    void Sync(wxTreeItemId root, const wxString& page);
+
+    //! Helper. Returns the prefix of the currently loaded page.
+    wxString GetPrefix(const wxString& location) const;
 
 private:
-	DECLARE_EVENT_TABLE()
+    wxTreeCtrl*    _tcl;
+    bool           _syncTree;
+    bool           _found;
+    wxMenu*        _menu;
+    CHMFrame*      _frame;
+    wxString       _link;
+    CHMFindDialog* _fdlg;
+
+private:
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMHTMLWINDOW_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

@@ -20,10 +20,10 @@
 #ifndef __HHCPARSER_H_
 #define __HHCPARSER_H_
 
+#include <memory>
+#include <string>
 #include <wx/font.h>
 #include <wx/treectrl.h>
-#include <string>
-#include <memory>
 
 // Forward declarations.
 class CHMListCtrl;
@@ -38,80 +38,65 @@ class CHMListCtrl;
 */
 struct URLTreeItem : public wxTreeItemData {
 
-	//! Sets the data to str.
-	URLTreeItem(const wxString& str) : _url(str) {}
+    //! Sets the data to str.
+    URLTreeItem(const wxString& str) : _url(str) {}
 
-	//! Useful data.
-	wxString _url;
+    //! Useful data.
+    wxString _url;
 };
 
 //! Fast index/contents file parser
 class HHCParser {
 
 public:
-	//! Constructor
-	HHCParser(wxFontEncoding enc, wxTreeCtrl *tree, CHMListCtrl *list);
+    //! Constructor
+    HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list);
 
 public:
-	//! Parse a chunk of data.
-	void parse(const char* chunk);
+    //! Parse a chunk of data.
+    void parse(const char* chunk);
 
 private:
-	//! Handle a retrieved tag. I'm only interested in very few tags.
-	void handleTag(const std::string& tag);
+    //! Handle a retrieved tag. I'm only interested in very few tags.
+    void handleTag(const std::string& tag);
 
-	//! Retrieve a parameter name.
-	bool getParameters(const char* input, std::string& name,
-			   std::string& value);
+    //! Retrieve a parameter name.
+    bool getParameters(const char* input, std::string& name, std::string& value);
 
-	//! Add the information to the contents tree
-	void addToTree(const wxString& name, const wxString& value);
+    //! Add the information to the contents tree
+    void addToTree(const wxString& name, const wxString& value);
 
-	//! Add the information to the index list.
-	void addToList(const wxString& name, const wxString& value);
+    //! Add the information to the index list.
+    void addToList(const wxString& name, const wxString& value);
 
-	//! Replace special HTML strings with correct code.
-	wxString replaceHTMLChars(const wxString& input);
+    //! Replace special HTML strings with correct code.
+    wxString replaceHTMLChars(const wxString& input);
 
-	//! HTML code for given name (if available)
-	unsigned getHTMLCode(const wxString& name);
+    //! HTML code for given name (if available)
+    unsigned getHTMLCode(const wxString& name);
+
+public:
+    //! Prevent copying, we have an unique_ptr<> member
+    HHCParser(const HHCParser&) = delete;
+
+    //! Prevent copying, we have an unique_ptr<> member
+    HHCParser& operator=(const HHCParser&) = delete;
 
 private:
-	//! Prevent copying, we have an unique_ptr<> member
-	HHCParser(const HHCParser&);
-
-	//! Prevent copying, we have an unique_ptr<> member
-	HHCParser& operator=(const HHCParser&);
-
-private:
-	int _level;
-	bool _inquote;
-	bool _intag;
-	bool _inobject;
-	std::string _tag;
-	std::string _name;
-	std::string _value;
-	wxTreeCtrl *_tree;
-	CHMListCtrl *_list;
-	wxTreeItemId _parents[TREE_BUF_SIZE];
-	wxFontEncoding _enc;
-	int _counter;
-	std::unique_ptr<wxCSConv> _cvPtr;
-	bool _htmlChars;
+    int                       _level;
+    bool                      _inquote;
+    bool                      _intag;
+    bool                      _inobject;
+    std::string               _tag;
+    std::string               _name;
+    std::string               _value;
+    wxTreeCtrl*               _tree;
+    CHMListCtrl*              _list;
+    wxTreeItemId              _parents[TREE_BUF_SIZE];
+    wxFontEncoding            _enc;
+    int                       _counter;
+    std::unique_ptr<wxCSConv> _cvPtr;
+    bool                      _htmlChars;
 };
 
 #endif // __HHCPARSER_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

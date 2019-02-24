@@ -26,8 +26,8 @@
 #include <wx/treectrl.h>
 
 enum {
-	ID_NextPage,
-	ID_PriorPage,
+    ID_NextPage,
+    ID_PriorPage,
 };
 
 // Forward declarations
@@ -45,75 +45,57 @@ class CHMHtmlWindow;
 class CHMHtmlNotebook : public wxAuiNotebook {
 
 public:
-	//! Constructor
-	CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc,
-			const wxString& normalFont, const wxString& fixedFont,
-			const int fontSize, CHMFrame* frame);
+    //! Constructor
+    CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont, const wxString& fixedFont,
+                    const int fontSize, CHMFrame* frame);
 
-	//! Add a notebook tab and display the specified URL
-	void AddHtmlView(const wxString& path,
-			 const wxString& link);
+    //! Add a notebook tab and display the specified URL
+    void AddHtmlView(const wxString& path, const wxString& link);
 
-	//! Displays the URL in the current tab
-	bool LoadPageInCurrentView(const wxString& location);
+    //! Displays the URL in the current tab
+    bool LoadPageInCurrentView(const wxString& location);
 
-	//! Returns the current page as a CHMHtmlWindow
-	CHMHtmlWindow* GetCurrentPage();
+    //! Returns the current page as a CHMHtmlWindow
+    CHMHtmlWindow* GetCurrentPage();
 
-	//! Callback for when a child's title changes
-	void OnChildrenTitleChanged(const wxString& title);
+    //! Callback for when a child's title changes
+    void OnChildrenTitleChanged(const wxString& title);
 
-	//! Close all pages except the first one
-	void CloseAllPagesExceptFirst();
+    //! Close all pages except the first one
+    void CloseAllPagesExceptFirst();
 
-	//! Propagate font settings to the children
-	void SetChildrenFonts(const wxString& normal_face,
-			      const wxString& fixed_face,
-			      const int *sizes = nullptr);
+    //! Propagate font settings to the children
+    void SetChildrenFonts(const wxString& normal_face, const wxString& fixed_face, const int* sizes = nullptr);
 
-	//! Called when user asks for a tab to close
-	void OnCloseTab(wxCommandEvent&);
+    //! Called when user asks for a tab to close
+    void OnCloseTab(wxCommandEvent&);
 
-	//! Called when user ask for a new tab
-	void OnNewTab(wxCommandEvent& event);
+    //! Called when user ask for a new tab
+    void OnNewTab(wxCommandEvent& event);
 
-	//! Creates a new tab view
-	CHMHtmlWindow* CreateView();
+    //! Creates a new tab view
+    CHMHtmlWindow* CreateView();
 
-	//! Overload for tab height control
-	virtual bool AddPage(wxWindow* page, const wxString& title);
+    //! Overload for tab height control
+    virtual bool AddPage(wxWindow* page, const wxString& title);
 
 protected:
-	//! Called when user asks for next notebook page
-	void OnGoToNextPage(wxCommandEvent&);
+    //! Called when user asks for next notebook page
+    void OnGoToNextPage(wxCommandEvent&);
 
-	//! Called when user asks for prior notebook page
-	void OnGoToPriorPage(wxCommandEvent&);
+    //! Called when user asks for prior notebook page
+    void OnGoToPriorPage(wxCommandEvent&);
 
-	//! Callback for the page changed wxWidgets event
-	void OnPageChanged(wxAuiNotebookEvent&);
+    //! Callback for the page changed wxWidgets event
+    void OnPageChanged(wxAuiNotebookEvent&);
 
 private:
-	wxTreeCtrl* _tcl;
-	CHMFrame *_frame;
-	wxString _fonts_normal_face;
-	wxString _fonts_fixed_face;
-	int _fonts_sizes[7];
-	DECLARE_EVENT_TABLE()
+    wxTreeCtrl* _tcl;
+    CHMFrame*   _frame;
+    wxString    _fonts_normal_face;
+    wxString    _fonts_fixed_face;
+    int         _fonts_sizes[7];
+    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMHTMLNOTEBOOK_H_
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

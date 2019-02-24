@@ -20,172 +20,155 @@
 */
 
 #include <chmframe.h>
-#include <chmhtmlwindow.h>
 #include <chmhtmlnotebook.h>
+#include <chmhtmlwindow.h>
 
-CHMHtmlNotebook::CHMHtmlNotebook(wxWindow *parent, wxTreeCtrl *tc, const wxString& normalFont, const wxString& fixedFont,
-				 const int fontSize, CHMFrame* frame)
-	: wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
-	  _tcl(tc), _frame(frame), _fonts_normal_face(normalFont), _fonts_fixed_face(fixedFont)
+CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont,
+                                 const wxString& fixedFont, const int fontSize, CHMFrame* frame)
+    : wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
+      _tcl(tc), _frame(frame), _fonts_normal_face(normalFont), _fonts_fixed_face(fixedFont)
 {
-	for(int i = -3; i <= 3; ++i)
-		_fonts_sizes[i + 3] = fontSize + i * 2;
+    for (int i = -3; i <= 3; ++i)
+        _fonts_sizes[i + 3] = fontSize + i * 2;
 
-	wxAcceleratorEntry entries[2];
-	entries[0].Set(wxACCEL_CTRL,   WXK_PAGEUP,     ID_PriorPage);
-	entries[1].Set(wxACCEL_CTRL,   WXK_PAGEDOWN,   ID_NextPage);
+    wxAcceleratorEntry entries[2];
+    entries[0].Set(wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage);
+    entries[1].Set(wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage);
 
-	wxAcceleratorTable accel(2, entries);
-	this->SetAcceleratorTable(accel);
-	SetTabCtrlHeight(0);
+    wxAcceleratorTable accel(2, entries);
+    this->SetAcceleratorTable(accel);
+    SetTabCtrlHeight(0);
 
-	AddHtmlView(wxEmptyString, wxT("memory:about.html"));
+    AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
 
 CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 {
-	CHMHtmlWindow * htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
-	htmlWin->SetRelatedFrame(_frame, wxT("xCHM v. ") wxT(VERSION) wxT(": %s"));
-	htmlWin->SetRelatedStatusBar(0);
-	htmlWin->SetFonts(_fonts_normal_face, _fonts_fixed_face, _fonts_sizes);
+    CHMHtmlWindow* htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
+    htmlWin->SetRelatedFrame(_frame, wxT("xCHM v. ") wxT(VERSION) wxT(": %s"));
+    htmlWin->SetRelatedStatusBar(0);
+    htmlWin->SetFonts(_fonts_normal_face, _fonts_fixed_face, _fonts_sizes);
 
-	AddPage(htmlWin, _("(Empty page)"));
-	SetSelection(GetPageCount() - 1);
-	return htmlWin;
+    AddPage(htmlWin, _("(Empty page)"));
+    SetSelection(GetPageCount() - 1);
+    return htmlWin;
 }
 
-void CHMHtmlNotebook::AddHtmlView(const wxString& path,
-				  const wxString& link)
+void CHMHtmlNotebook::AddHtmlView(const wxString& path, const wxString& link)
 {
-	CHMHtmlWindow* htmlWin = CreateView();
+    CHMHtmlWindow* htmlWin = CreateView();
 
-	if(htmlWin && !link.IsEmpty()) {
-		htmlWin->GetParser()->GetFS()->ChangePathTo(path);
-		htmlWin->LoadPage(link);
-	}
+    if (htmlWin && !link.IsEmpty()) {
+        htmlWin->GetParser()->GetFS()->ChangePathTo(path);
+        htmlWin->LoadPage(link);
+    }
 }
 
 bool CHMHtmlNotebook::LoadPageInCurrentView(const wxString& location)
 {
-	return GetCurrentPage()->LoadPage(location);
+    return GetCurrentPage()->LoadPage(location);
 }
 
 // TODO: this is a misleading named function with side effects. It's a no-no.
 CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
 {
-	int selection = GetSelection();
+    int selection = GetSelection();
 
-	if(selection == wxNOT_FOUND)
-		return CreateView();
+    if (selection == wxNOT_FOUND)
+        return CreateView();
 
-	return dynamic_cast<CHMHtmlWindow *>(wxAuiNotebook::GetPage(selection));
+    return dynamic_cast<CHMHtmlWindow*>(wxAuiNotebook::GetPage(selection));
 }
 
 void CHMHtmlNotebook::OnGoToNextPage(wxCommandEvent&)
 {
-	int selection = GetSelection();
+    int selection = GetSelection();
 
-	if(selection >= static_cast<int>(GetPageCount() - 1))
-		return;
+    if (selection >= static_cast<int>(GetPageCount() - 1))
+        return;
 
-	SetSelection(selection + 1);
+    SetSelection(selection + 1);
 }
 
 void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
 {
-	int selection = GetSelection();
+    int selection = GetSelection();
 
-	if(selection <= 0)
-		return;
+    if (selection <= 0)
+        return;
 
-	SetSelection(selection - 1);
+    SetSelection(selection - 1);
 }
 
 void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
 {
-	DeletePage(GetSelection());
+    DeletePage(GetSelection());
 
-	if(GetPageCount() <= 1)
-		SetTabCtrlHeight(0);
+    if (GetPageCount() <= 1)
+        SetTabCtrlHeight(0);
 }
 
 void CHMHtmlNotebook::OnNewTab(wxCommandEvent& WXUNUSED(event))
 {
-	AddHtmlView(wxEmptyString, wxEmptyString);
+    AddHtmlView(wxEmptyString, wxEmptyString);
 }
 
 void CHMHtmlNotebook::OnChildrenTitleChanged(const wxString& title)
 {
-	// We assume the change occured in the currently displayed page
-	// TODO: detect in which page the change occured.
-	SetPageText(GetSelection(), title);
+    // We assume the change occured in the currently displayed page
+    // TODO: detect in which page the change occured.
+    SetPageText(GetSelection(), title);
 }
 
 void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 {
-	SetSelection(0);
+    SetSelection(0);
 
-	while(GetPageCount() > 1)
-		DeletePage(1);
+    while (GetPageCount() > 1)
+        DeletePage(1);
 
-	SetTabCtrlHeight(0);
+    SetTabCtrlHeight(0);
 }
 
-void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face,
-				       const wxString& fixed_face,
-				       const int *sizes)
+void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face, const wxString& fixed_face, const int* sizes)
 {
-	_fonts_normal_face = normal_face;
-	_fonts_fixed_face = fixed_face;
+    _fonts_normal_face = normal_face;
+    _fonts_fixed_face  = fixed_face;
 
-	for(int i = 0; i < 7; ++i)
-		_fonts_sizes[i] = sizes[i];
+    for (int i = 0; i < 7; ++i)
+        _fonts_sizes[i] = sizes[i];
 
-	size_t nPageCount = GetPageCount();
+    size_t nPageCount = GetPageCount();
 
-	for(size_t nPage = 0; nPage < nPageCount; ++nPage) {
-		CHMHtmlWindow* chw = dynamic_cast<CHMHtmlWindow *>(GetPage(nPage));
+    for (size_t nPage = 0; nPage < nPageCount; ++nPage) {
+        CHMHtmlWindow* chw = dynamic_cast<CHMHtmlWindow*>(GetPage(nPage));
 
-		if(chw)
-			chw->SetFonts(normal_face, fixed_face, sizes);
-	}
+        if (chw)
+            chw->SetFonts(normal_face, fixed_face, sizes);
+    }
 }
 
 bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title)
 {
-	if(!page)
-		return false;
+    if (!page)
+        return false;
 
-	bool st = wxAuiNotebook::AddPage(page, title);
+    bool st = wxAuiNotebook::AddPage(page, title);
 
-	if(GetPageCount() == 2)
-		SetTabCtrlHeight(-1);
+    if (GetPageCount() == 2)
+        SetTabCtrlHeight(-1);
 
-	return st;
+    return st;
 }
 
 void CHMHtmlNotebook::OnPageChanged(wxAuiNotebookEvent&)
 {
-	if(GetPageCount() == 1)
-		SetTabCtrlHeight(0);
+    if (GetPageCount() == 1)
+        SetTabCtrlHeight(0);
 }
 
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
-	EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
-	EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
-	EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, CHMHtmlNotebook::OnPageChanged)
+EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
+EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
+EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, CHMHtmlNotebook::OnPageChanged)
 END_EVENT_TABLE()
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8
-

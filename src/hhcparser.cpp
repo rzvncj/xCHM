@@ -97,7 +97,7 @@ HTMLChar substitutions[] = {
 
 }
 
-#define TIME_TO_YIELD 1024
+constexpr int TIME_TO_YIELD = 1024;
 
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list) : _tree(tree), _list(list), _enc(enc)
 {

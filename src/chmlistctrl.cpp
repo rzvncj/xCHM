@@ -24,8 +24,6 @@
 #include <chmlistctrl.h>
 #include <wx/settings.h>
 
-#define INDEX_HINT_SIZE 2048
-
 // Helper
 
 int CompareItemPairs(CHMListPairItem* item1, CHMListPairItem* item2)
@@ -40,6 +38,8 @@ CHMListCtrl::CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID i
                  wxLC_VIRTUAL | wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | wxLC_SORT_ASCENDING | wxSUNKEN_BORDER),
       _items(CompareItemPairs), _nbhtml(nbhtml)
 {
+    constexpr size_t INDEX_HINT_SIZE = 2048;
+
     InsertColumn(0, wxEmptyString);
     SetItemCount(0);
 

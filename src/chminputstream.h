@@ -51,7 +51,7 @@ public:
 	  \brief Returns the static CHMFile pointer associated with
 	  this stream. Archives are being cached until it is
 	  explicitly requested to open a different one.
-	  \return A valid pointer to a CHMFile object or NULL if no
+	  \return A valid pointer to a CHMFile object or nullptr if no
 	  .chm file has been opened yet.
 	 */
 	static CHMFile* GetCache();

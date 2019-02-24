@@ -97,7 +97,7 @@ public:
 	  word exactly.
 	  \param caseSensitive If true, the search will be performed
 	  case sensitive.
-	  \return A valid cell if the result was found, NULL otherwise.
+	  \return A valid cell if the result was found, nullptr otherwise.
 	 */
 	wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word,
 			      bool wholeWords, bool caseSensitive);

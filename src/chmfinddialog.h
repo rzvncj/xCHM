@@ -44,7 +44,7 @@ public:
 	void SetFocusToTextBox() { _text->SetFocusFromKbd(); }
 
 	//! Resets the word to be found, so 'Find next' will start over.
-	void Reset() { _cell = NULL; }
+	void Reset() { _cell = nullptr; }
 
 protected:
 	//! Called when the user clicks the 'Find next' button.

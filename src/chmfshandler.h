@@ -53,7 +53,7 @@ public:
 	  \brief Tries to open the file specified.
 	  \param fs Currently ignored.
 	  \param location filename.
-	  \return A valid pointer to a wxFSFile or NULL on failure.
+	  \return A valid pointer to a wxFSFile or nullptr on failure.
 	 */
         virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
 

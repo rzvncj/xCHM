@@ -69,7 +69,7 @@ public:
 	//! Propagate font settings to the children
 	void SetChildrenFonts(const wxString& normal_face,
 			      const wxString& fixed_face,
-			      const int *sizes = NULL);
+			      const int *sizes = nullptr);
 
 	//! Called when user asks for a tab to close
 	void OnCloseTab(wxCommandEvent&);

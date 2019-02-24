@@ -22,7 +22,7 @@ happy doing a:
 ./configure && make
 ```
 
-Once everything is built, type
+Once everything is built, type:
 
 ```
 make install
@@ -37,7 +37,7 @@ xchm
 
 and start your session.
 
-## Build with
+## Built with
 
 * [wxWidgets](http://www.wxwidgets.org) - GUI
 * [CHMLIB](http://www.jedrea.com/chmlib/) - CHM access logic
@@ -45,14 +45,14 @@ and start your session.
 ## Generating documentation
 
 If you'd like to generate developer documentation go to the root
-of the distribution and type
+of the distribution and type:
+
 ```
 doxygen
 ```
+
 This of course implies that you have doxygen installed. The documentation
-will be generated in the doc directory in HTML and LaTex format. The doc
-directory will be created in the process of creating the documentation so
-it's ok that it's not present by default in the tarball.
+will be generated in the doc directory in HTML and LaTex format.
 
 ## Authors
 

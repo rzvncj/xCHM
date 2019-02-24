@@ -88,7 +88,8 @@ const wxChar* about_txt = wxT("xCHM v. " VERSION
                               "XMLRPC code for context sensitive help contributed by Eamon Millman. "
                               "<SPAN> tag support and contents tree icons contributed by Fritz Elfert. "
                               "Tabbed browsing support contributed by Cedric Boudinet. "
-                              "Mac builds, suggestions and fixes contributed by Mojca Miklavec.");
+                              "Mac builds, suggestions and fixes contributed by Mojca Miklavec. "
+                              "Glasses logo by Anca Macinic.");
 
 #include <logo.xpm>
 #include <xchm-32.xpm>

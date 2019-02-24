@@ -33,108 +33,112 @@
 #include <wx/treectrl.h>
 #include <wx/wx.h>
 
+namespace {
+
 // Big-enough buffer size for use with various routines.
-#define BUF_SIZE 4096
+constexpr size_t BUF_SIZE = 4096;
 
 // Thanks to Vadim Zeitlin.
-#define ANSI_CHARSET 0
-#define DEFAULT_CHARSET 1
-#define SYMBOL_CHARSET 2
-#define SHIFTJIS_CHARSET 128
-#define HANGEUL_CHARSET 129
-#define HANGUL_CHARSET 129
-#define GB2312_CHARSET 134
-#define CHINESEBIG5_CHARSET 136
-#define OEM_CHARSET 255
-#define JOHAB_CHARSET 130
-#define HEBREW_CHARSET 177
-#define ARABIC_CHARSET 178
-#define GREEK_CHARSET 161
-#define TURKISH_CHARSET 162
-#define VIETNAMESE_CHARSET 163
-#define THAI_CHARSET 222
-#define EASTEUROPE_CHARSET 238
-#define RUSSIAN_CHARSET 204
-#define MAC_CHARSET 77
-#define BALTIC_CHARSET 186
+constexpr int ANSI_CHARSET        = 0;
+constexpr int DEFAULT_CHARSET     = 1;
+constexpr int SYMBOL_CHARSET      = 2;
+constexpr int SHIFTJIS_CHARSET    = 128;
+constexpr int HANGEUL_CHARSET     = 129;
+constexpr int HANGUL_CHARSET      = 129;
+constexpr int GB2312_CHARSET      = 134;
+constexpr int CHINESEBIG5_CHARSET = 136;
+constexpr int OEM_CHARSET         = 255;
+constexpr int JOHAB_CHARSET       = 130;
+constexpr int HEBREW_CHARSET      = 177;
+constexpr int ARABIC_CHARSET      = 178;
+constexpr int GREEK_CHARSET       = 161;
+constexpr int TURKISH_CHARSET     = 162;
+constexpr int VIETNAMESE_CHARSET  = 163;
+constexpr int THAI_CHARSET        = 222;
+constexpr int EASTEUROPE_CHARSET  = 238;
+constexpr int RUSSIAN_CHARSET     = 204;
+constexpr int MAC_CHARSET         = 77;
+constexpr int BALTIC_CHARSET      = 186;
 
 // Hello, Microsoft
-#define LANG_NEUTRAL 0x00   // check
-#define LANG_ARABIC 0x01    // check
-#define LANG_BULGARIAN 0x02 // check
-#define LANG_CATALAN 0x03
-#define LANG_CHINESE 0x04 // check
-#define LANG_CZECH 0x05
-#define LANG_DANISH 0x06
-#define LANG_GERMAN 0x07
-#define LANG_GREEK 0x08 // check
-#define LANG_ENGLISH 0x09
-#define LANG_SPANISH 0x0a
-#define LANG_FINNISH 0x0b
-#define LANG_FRENCH 0x0c
-#define LANG_HEBREW 0x0d // check
-#define LANG_HUNGARIAN 0x0e
-#define LANG_ICELANDIC 0x0f
-#define LANG_ITALIAN 0x10
-#define LANG_JAPANESE 0x11 // check
-#define LANG_KOREAN 0x12   // check
-#define LANG_DUTCH 0x13
-#define LANG_NORWEGIAN 0x14
-#define LANG_POLISH 0x15
-#define LANG_PORTUGUESE 0x16
-#define LANG_ROMANIAN 0x18
-#define LANG_RUSSIAN 0x19 // check
-#define LANG_CROATIAN 0x1a
-#define LANG_SERBIAN 0x1a
-#define LANG_SLOVAK 0x1b
-#define LANG_ALBANIAN 0x1c
-#define LANG_SWEDISH 0x1d
-#define LANG_THAI 0x1e    // check
-#define LANG_TURKISH 0x1f // check
-#define LANG_URDU 0x20
-#define LANG_INDONESIAN 0x21
-#define LANG_UKRAINIAN 0x22 // check
-#define LANG_BELARUSIAN 0x23
-#define LANG_SLOVENIAN 0x24
-#define LANG_ESTONIAN 0x25
-#define LANG_LATVIAN 0x26
-#define LANG_LITHUANIAN 0x27
-#define LANG_FARSI 0x29
-#define LANG_VIETNAMESE 0x2a
-#define LANG_ARMENIAN 0x2b
-#define LANG_AZERI 0x2c
-#define LANG_BASQUE 0x2d
-#define LANG_MACEDONIAN 0x2f
-#define LANG_AFRIKAANS 0x36
-#define LANG_GEORGIAN 0x37
-#define LANG_FAEROESE 0x38
-#define LANG_HINDI 0x39
-#define LANG_MALAY 0x3e
-#define LANG_KAZAK 0x3f
-#define LANG_KYRGYZ 0x40
-#define LANG_SWAHILI 0x41
-#define LANG_UZBEK 0x43
-#define LANG_TATAR 0x44
-#define LANG_BENGALI 0x45
-#define LANG_PUNJABI 0x46
-#define LANG_GUJARATI 0x47
-#define LANG_ORIYA 0x48
-#define LANG_TAMIL 0x49
-#define LANG_TELUGU 0x4a
-#define LANG_KANNADA 0x4b
-#define LANG_MALAYALAM 0x4c
-#define LANG_ASSAMESE 0x4d
-#define LANG_MARATHI 0x4e
-#define LANG_SANSKRIT 0x4f
-#define LANG_MONGOLIAN 0x50
-#define LANG_GALICIAN 0x56
-#define LANG_KONKANI 0x57
-#define LANG_MANIPURI 0x58
-#define LANG_SINDHI 0x59
-#define LANG_SYRIAC 0x5a
-#define LANG_KASHMIRI 0x60
-#define LANG_NEPALI 0x61
-#define LANG_DIVEHI 0x65
+constexpr uint32_t LANG_NEUTRAL    = 0x00;
+constexpr uint32_t LANG_ARABIC     = 0x01;
+constexpr uint32_t LANG_BULGARIAN  = 0x02;
+constexpr uint32_t LANG_CATALAN    = 0x03;
+constexpr uint32_t LANG_CHINESE    = 0x04;
+constexpr uint32_t LANG_CZECH      = 0x05;
+constexpr uint32_t LANG_DANISH     = 0x06;
+constexpr uint32_t LANG_GERMAN     = 0x07;
+constexpr uint32_t LANG_GREEK      = 0x08;
+constexpr uint32_t LANG_ENGLISH    = 0x09;
+constexpr uint32_t LANG_SPANISH    = 0x0a;
+constexpr uint32_t LANG_FINNISH    = 0x0b;
+constexpr uint32_t LANG_FRENCH     = 0x0c;
+constexpr uint32_t LANG_HEBREW     = 0x0d;
+constexpr uint32_t LANG_HUNGARIAN  = 0x0e;
+constexpr uint32_t LANG_ICELANDIC  = 0x0f;
+constexpr uint32_t LANG_ITALIAN    = 0x10;
+constexpr uint32_t LANG_JAPANESE   = 0x11;
+constexpr uint32_t LANG_KOREAN     = 0x12;
+constexpr uint32_t LANG_DUTCH      = 0x13;
+constexpr uint32_t LANG_NORWEGIAN  = 0x14;
+constexpr uint32_t LANG_POLISH     = 0x15;
+constexpr uint32_t LANG_PORTUGUESE = 0x16;
+constexpr uint32_t LANG_ROMANIAN   = 0x18;
+constexpr uint32_t LANG_RUSSIAN    = 0x19;
+constexpr uint32_t LANG_CROATIAN   = 0x1a;
+constexpr uint32_t LANG_SERBIAN    = 0x1a;
+constexpr uint32_t LANG_SLOVAK     = 0x1b;
+constexpr uint32_t LANG_ALBANIAN   = 0x1c;
+constexpr uint32_t LANG_SWEDISH    = 0x1d;
+constexpr uint32_t LANG_THAI       = 0x1e;
+constexpr uint32_t LANG_TURKISH    = 0x1f;
+constexpr uint32_t LANG_URDU       = 0x20;
+constexpr uint32_t LANG_INDONESIAN = 0x21;
+constexpr uint32_t LANG_UKRAINIAN  = 0x22;
+constexpr uint32_t LANG_BELARUSIAN = 0x23;
+constexpr uint32_t LANG_SLOVENIAN  = 0x24;
+constexpr uint32_t LANG_ESTONIAN   = 0x25;
+constexpr uint32_t LANG_LATVIAN    = 0x26;
+constexpr uint32_t LANG_LITHUANIAN = 0x27;
+constexpr uint32_t LANG_FARSI      = 0x29;
+constexpr uint32_t LANG_VIETNAMESE = 0x2a;
+constexpr uint32_t LANG_ARMENIAN   = 0x2b;
+constexpr uint32_t LANG_AZERI      = 0x2c;
+constexpr uint32_t LANG_BASQUE     = 0x2d;
+constexpr uint32_t LANG_MACEDONIAN = 0x2f;
+constexpr uint32_t LANG_AFRIKAANS  = 0x36;
+constexpr uint32_t LANG_GEORGIAN   = 0x37;
+constexpr uint32_t LANG_FAEROESE   = 0x38;
+constexpr uint32_t LANG_HINDI      = 0x39;
+constexpr uint32_t LANG_MALAY      = 0x3e;
+constexpr uint32_t LANG_KAZAK      = 0x3f;
+constexpr uint32_t LANG_KYRGYZ     = 0x40;
+constexpr uint32_t LANG_SWAHILI    = 0x41;
+constexpr uint32_t LANG_UZBEK      = 0x43;
+constexpr uint32_t LANG_TATAR      = 0x44;
+constexpr uint32_t LANG_BENGALI    = 0x45;
+constexpr uint32_t LANG_PUNJABI    = 0x46;
+constexpr uint32_t LANG_GUJARATI   = 0x47;
+constexpr uint32_t LANG_ORIYA      = 0x48;
+constexpr uint32_t LANG_TAMIL      = 0x49;
+constexpr uint32_t LANG_TELUGU     = 0x4a;
+constexpr uint32_t LANG_KANNADA    = 0x4b;
+constexpr uint32_t LANG_MALAYALAM  = 0x4c;
+constexpr uint32_t LANG_ASSAMESE   = 0x4d;
+constexpr uint32_t LANG_MARATHI    = 0x4e;
+constexpr uint32_t LANG_SANSKRIT   = 0x4f;
+constexpr uint32_t LANG_MONGOLIAN  = 0x50;
+constexpr uint32_t LANG_GALICIAN   = 0x56;
+constexpr uint32_t LANG_KONKANI    = 0x57;
+constexpr uint32_t LANG_MANIPURI   = 0x58;
+constexpr uint32_t LANG_SINDHI     = 0x59;
+constexpr uint32_t LANG_SYRIAC     = 0x5a;
+constexpr uint32_t LANG_KASHMIRI   = 0x60;
+constexpr uint32_t LANG_NEPALI     = 0x61;
+constexpr uint32_t LANG_DIVEHI     = 0x65;
+
+} // end of anonymous namespace
 
 CHMFile::CHMFile(const wxString& archiveName)
 {

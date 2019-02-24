@@ -65,28 +65,17 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 		case 1:
 			if( params.size() == 2 &&
 			    params[1].getType() == XmlRpcValue::TypeString )
-			{
-				result = _frame->LoadCHM(
-				  CURRENT_CHAR_STRING(
-					std::string(params[1]).c_str()));
-			}
+				result = _frame->LoadCHM(CURRENT_CHAR_STRING(std::string(params[1]).c_str()));
+
 			if( params.size() == 3 &&
 			    params[1].getType() == XmlRpcValue::TypeString &&
 			    params[2].getType() == XmlRpcValue::TypeInt )
-			{
-				result = _frame->LoadCHM(
-				  CURRENT_CHAR_STRING(
-					std::string(params[1]).c_str())) &&
-				   _frame->LoadContextID( int(params[2]) );
-			}
+				result = _frame->LoadCHM(CURRENT_CHAR_STRING(std::string(params[1]).c_str())) &&
+					_frame->LoadContextID( int(params[2]) );
 			break;
 		case 2:
-			if( params.size() == 2 &&
-			    params[1].getType() == XmlRpcValue::TypeInt )
-			{
-				result =
-				    _frame->LoadContextID( int(params[1]) );
-			}
+			if( params.size() == 2 && params[1].getType() == XmlRpcValue::TypeInt )
+				result = _frame->LoadContextID( int(params[1]) );
 			break;
 		}
 	}
@@ -109,8 +98,7 @@ bool CHMApp::OnInit()
 
 	_cmdLP.SetCmdLine(argc, argv);
 
-	_cmdLP.AddParam(wxT("file"), wxCMD_LINE_VAL_STRING,
-			wxCMD_LINE_PARAM_OPTIONAL);
+	_cmdLP.AddParam(wxT("file"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
 
 	_cmdLP.AddOption(wxT("c"), wxT("contextid"),
 			 wxT("context-Id to open in file, requires that a file be specified"),
@@ -179,12 +167,9 @@ bool CHMApp::OnInit()
 	if(argc > 0)
 		fullAppPath = getAppPath(argv[0], wxGetCwd());
 
-	_frame = new CHMFrame(wxT("xCHM v. ") wxT(VERSION),
-			      lastOpenedDir, wxPoint(xorig, yorig),
-			      wxSize(width, height), normalFont,
-			      fixedFont, static_cast<int>(fontSize),
-			      static_cast<int>(sashPos), fullAppPath,
-			      loadTopics, loadIndex);
+	_frame = new CHMFrame(wxT("xCHM v. ") wxT(VERSION), lastOpenedDir, wxPoint(xorig, yorig),
+			      wxSize(width, height), normalFont, fixedFont, static_cast<int>(fontSize),
+			      static_cast<int>(sashPos), fullAppPath, loadTopics, loadIndex);
 
 	_frame->SetSizeHints(200, 200);
 	_frame->Show(TRUE);

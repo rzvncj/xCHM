@@ -47,11 +47,11 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
         return nullptr;
 
     // HTML code for space is %20
-    right.Replace(wxT("%20"), wxT(" "), TRUE);
-    right.Replace(wxT("%5F"), wxT("_"), TRUE);
-    right.Replace(wxT("%2E"), wxT("."), TRUE);
-    right.Replace(wxT("%2D"), wxT("-"), TRUE);
-    right.Replace(wxT("%26"), wxT("&"), TRUE);
+    right.Replace(wxT("%20"), wxT(" "), true);
+    right.Replace(wxT("%5F"), wxT("_"), true);
+    right.Replace(wxT("%2E"), wxT("."), true);
+    right.Replace(wxT("%2D"), wxT("-"), true);
+    right.Replace(wxT("%26"), wxT("&"), true);
 
     wxFileName filename = wxFileSystem::URLToFileName(left);
     filename.Normalize();

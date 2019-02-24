@@ -26,7 +26,7 @@ CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml)
     : wxPanel(parent), _nbhtml(nbhtml), _lc(nullptr), _navigate(true)
 {
     wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-    SetAutoLayout(TRUE);
+    SetAutoLayout(true);
     SetSizer(sizer);
 
     _text = new wxTextCtrl(this, ID_SearchIndex, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);

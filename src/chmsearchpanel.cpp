@@ -33,7 +33,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNote
       _results(nullptr), _nbhtml(nbhtml)
 {
     wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-    SetAutoLayout(TRUE);
+    SetAutoLayout(true);
     SetSizer(sizer);
 
     _text = new wxTextCtrl(this, ID_SearchText, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
@@ -80,13 +80,13 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
         return;
 
     sr.MakeLower();
-    sr.Replace(wxT("+"), wxT(" "), TRUE);
-    sr.Replace(wxT("-"), wxT(" "), TRUE);
-    sr.Replace(wxT("#"), wxT(" "), TRUE);
-    sr.Replace(wxT("@"), wxT(" "), TRUE);
-    sr.Replace(wxT("^"), wxT(" "), TRUE);
-    sr.Replace(wxT("&"), wxT(" "), TRUE);
-    sr.Replace(wxT("%"), wxT(" "), TRUE);
+    sr.Replace(wxT("+"), wxT(" "), true);
+    sr.Replace(wxT("-"), wxT(" "), true);
+    sr.Replace(wxT("#"), wxT(" "), true);
+    sr.Replace(wxT("@"), wxT(" "), true);
+    sr.Replace(wxT("^"), wxT(" "), true);
+    sr.Replace(wxT("&"), wxT(" "), true);
+    sr.Replace(wxT("%"), wxT(" "), true);
 
     wxStringTokenizer tkz(sr, wxT(" \t\r\n"));
 
@@ -154,7 +154,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     wxTreeItemIdValue cookie;
     wxTreeItemId      child = _tcl->GetFirstChild(root, cookie);
 
-    for (size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {
+    for (size_t i = 0; i < _tcl->GetChildrenCount(root, false); ++i) {
         PopulateList(child, text, wholeWords);
         child = _tcl->GetNextChild(root, cookie);
     }
@@ -168,7 +168,7 @@ static inline bool WHITESPACE(wxChar c)
 bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool caseSensitive, bool wholeWords)
 {
     int      i, j, lng = title.Length();
-    bool     found = FALSE;
+    bool     found = false;
     wxString tmp   = title;
 
     if (!caseSensitive) {
@@ -180,7 +180,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
 
     while (tkz.HasMoreTokens()) {
 
-        found          = FALSE;
+        found          = false;
         wxString token = tkz.GetNextToken();
         if (token.IsEmpty())
             continue;
@@ -200,7 +200,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
 
                 if (j == wrd && (WHITESPACE(buf1[i + j]) || i + j == lng))
                     if (i == 0 || WHITESPACE(buf1[i - 1])) {
-                        found = TRUE;
+                        found = true;
                         break;
                     }
             }
@@ -211,7 +211,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
                 while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j]))
                     ++j;
                 if (j == wrd && (i == 0 || WHITESPACE(buf1[i - 1]))) {
-                    found = TRUE;
+                    found = true;
                     break;
                 }
             }

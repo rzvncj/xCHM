@@ -53,12 +53,13 @@ CHMApp::CHMApp() : wxApp(), XmlRpcServerMethod("xCHM", &getXmlRpcServer())
 
 void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
 {
-    result = FALSE;
+    result = false;
+
     if (params.size() > 0 && params[0].getType() == XmlRpcValue::TypeInt) {
         switch (int(params[0])) {
         case 0: // we want to close everything up!
             ExitMainLoop();
-            result = TRUE;
+            result = true;
             break;
         case 1:
             if (params.size() == 2 && params[1].getType() == XmlRpcValue::TypeString)
@@ -164,7 +165,7 @@ bool CHMApp::OnInit()
                           loadTopics, loadIndex);
 
     _frame->SetSizeHints(200, 200);
-    _frame->Show(TRUE);
+    _frame->Show(true);
     SetTopWindow(_frame);
 
 #ifdef WITH_LIBXMLRPC

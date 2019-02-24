@@ -117,14 +117,14 @@ public:
     /*!
       \brief Attempts to load a .chm file and display it's home page.
       \param archive The .chm file name on disk.
-      \return TRUE if the operation was successful.
+      \return true if the operation was successful.
      */
     bool LoadCHM(const wxString& archive);
 
     /*!
       \brief Attempts to load a context-ID from within the current chm file
       \param contextID the context-ID to load.
-      \return TRUE if the operation was successful.
+      \return true if the operation was successful.
      */
     bool LoadContextID(const int contextID);
 

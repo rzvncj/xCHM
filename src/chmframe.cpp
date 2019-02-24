@@ -152,7 +152,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     _sw->SetMinimumPaneSize(CONTENTS_MARGIN);
 
     _nb = new wxNotebook(_sw, ID_Notebook);
-    _nb->Show(FALSE);
+    _nb->Show(false);
 
     wxPanel* temp = CreateContentsPanel();
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
@@ -183,7 +183,7 @@ CHMFrame::~CHMFrame()
 
 void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
-    Close(TRUE);
+    Close(true);
 }
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
@@ -224,7 +224,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 
     if (_fixedFonts == nullptr) {
         wxFontEnumerator enu;
-        enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, TRUE);
+        enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, true);
         _fixedFonts  = new wxArrayString;
         *_fixedFonts = enu.GetFacenames();
         _fixedFonts->Sort();
@@ -278,17 +278,17 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 {
     if (_sw->IsSplit()) {
-        _tb->ToggleTool(ID_Contents, FALSE);
-        _menuFile->Check(ID_Contents, FALSE);
+        _tb->ToggleTool(ID_Contents, false);
+        _menuFile->Check(ID_Contents, false);
         _sashPos = _sw->GetSashPosition();
 
         _sw->Unsplit(_nb);
-        _nb->Show(FALSE);
+        _nb->Show(false);
     } else {
-        _tb->ToggleTool(ID_Contents, TRUE);
-        _menuFile->Check(ID_Contents, TRUE);
+        _tb->ToggleTool(ID_Contents, true);
+        _menuFile->Check(ID_Contents, true);
 
-        _nb->Show(TRUE);
+        _nb->Show(true);
         _sw->SplitVertically(_nb, _nbhtml, _sashPos);
     }
 }
@@ -505,10 +505,10 @@ bool CHMFrame::LoadCHM(const wxString& archive)
         }
         if (_sw->IsSplit()) {
             _sw->Unsplit(_nb);
-            _nb->Show(FALSE);
+            _nb->Show(false);
         }
-        _menuFile->Check(ID_Contents, FALSE);
-        _tb->ToggleTool(ID_Contents, FALSE);
+        _menuFile->Check(ID_Contents, false);
+        _tb->ToggleTool(ID_Contents, false);
         _cip->Reset();
         _csp->Reset();
         _nbhtml->LoadPageInCurrentView(wxT("memory:error.html"));
@@ -528,10 +528,10 @@ bool CHMFrame::LoadContextID(const int contextID)
     CHMFile* chmf = CHMInputStream::GetCache();
 
     if (!chmf)
-        return FALSE;
+        return false;
 
     if (!chmf->IsValidCID(contextID))
-        return FALSE;
+        return false;
 
     return _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:")
                                           + chmf->GetPageByCID(contextID));
@@ -556,7 +556,7 @@ void CHMFrame::UpdateCHMInfo()
         _fh.AddFileToHistory(filename);
 
         if (!_menuFile->IsEnabled(ID_Recent))
-            _menuFile->Enable(ID_Recent, TRUE);
+            _menuFile->Enable(ID_Recent, true);
     }
 
     _nbhtml->GetCurrentPage()->HistoryClear();
@@ -581,7 +581,7 @@ void CHMFrame::UpdateCHMInfo()
         if (fs < 10)
             fs = 10;
 
-        wxFont font(static_cast<int>(fs), wxDEFAULT, wxNORMAL, wxNORMAL, FALSE, fontFace.BeforeFirst(wxT(',')),
+        wxFont font(static_cast<int>(fs), wxDEFAULT, wxNORMAL, wxNORMAL, false, fontFace.BeforeFirst(wxT(',')),
                     chmf->DesiredEncoding());
 
         if (font.Ok()) {
@@ -634,19 +634,19 @@ void CHMFrame::UpdateCHMInfo()
     // if we have contents..
     if (_tcl->GetCount() >= 1) {
         if (!_sw->IsSplit()) {
-            _nb->Show(TRUE);
+            _nb->Show(true);
             _sw->SplitVertically(_nb, _nbhtml, _sashPos);
-            _menuFile->Check(ID_Contents, TRUE);
-            _tb->ToggleTool(ID_Contents, TRUE);
+            _menuFile->Check(ID_Contents, true);
+            _tb->ToggleTool(ID_Contents, true);
         }
     } else {
 
         if (_sw->IsSplit()) {
             _sw->Unsplit(_nb);
-            _nb->Show(FALSE);
+            _nb->Show(false);
         }
-        _menuFile->Check(ID_Contents, FALSE);
-        _tb->ToggleTool(ID_Contents, FALSE);
+        _menuFile->Check(ID_Contents, false);
+        _tb->ToggleTool(ID_Contents, false);
     }
 
     // select Contents
@@ -679,7 +679,7 @@ wxMenuBar* CHMFrame::CreateMenu()
     _fh.Load(config);
 
     if (_fh.GetCount() == 0)
-        _menuFile->Enable(ID_Recent, FALSE);
+        _menuFile->Enable(ID_Recent, false);
 
     _menuFile->AppendSeparator();
     _menuFile->Append(ID_Quit, _("E&xit\tCtrl-X"), _("Quit the application."));
@@ -728,7 +728,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
     wxSizer* bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
     wxSizer* inner  = new wxBoxSizer(wxHORIZONTAL);
 
-    temp->SetAutoLayout(TRUE);
+    temp->SetAutoLayout(true);
     temp->SetSizer(sizer);
 
     wxImageList* il = new wxImageList(16, 16);
@@ -776,7 +776,7 @@ void CHMFrame::LoadBookmarks()
 
     wxConfig config(wxT("xchm"));
     wxString bookname = chmf->ArchiveName();
-    bookname.Replace(wxT("/"), wxT("."), TRUE);
+    bookname.Replace(wxT("/"), wxT("."), true);
 
     bookname = wxString(wxT("/Bookmarks/")) + bookname;
     long noEntries;
@@ -812,7 +812,7 @@ void CHMFrame::SaveBookmarks()
 
     wxConfig config(wxT("xchm"));
     wxString bookname = chmf->ArchiveName();
-    bookname.Replace(wxT("/"), wxT("."), TRUE);
+    bookname.Replace(wxT("/"), wxT("."), true);
     bookname = wxString(wxT("/Bookmarks/")) + bookname;
 
     if (_bookmarksDeleted)
@@ -907,7 +907,7 @@ bool CHMFrame::InitToolBar(wxToolBar* toolbar)
 
     toolbar->Realize();
 
-    return TRUE;
+    return true;
 }
 
 void CHMFrame::AddHtmlView(const wxString& path, const wxString& link)

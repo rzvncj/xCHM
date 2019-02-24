@@ -49,7 +49,7 @@ CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     topsizer->Add(sizer);
     topsizer->Add(szButtons);
 
-    SetAutoLayout(TRUE);
+    SetAutoLayout(true);
     SetSizer(topsizer);
     topsizer->Fit(this);
     Centre(wxBOTH);

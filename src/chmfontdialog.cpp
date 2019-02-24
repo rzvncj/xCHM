@@ -77,7 +77,7 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArr
     sizer2->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 0, wxALL, 10);
     topsizer->Add(sizer2, 0, wxALIGN_RIGHT);
 
-    SetAutoLayout(TRUE);
+    SetAutoLayout(true);
     SetSizer(topsizer);
     topsizer->Fit(this);
     Centre(wxBOTH);
@@ -119,10 +119,10 @@ void CHMFontDialog::InitDialog(wxArrayString* normalFonts, wxArrayString* fixedF
     assert(normalFonts && fixedFonts);
 
     if (_normalFont.IsEmpty())
-        _normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, wxNORMAL, FALSE).GetFaceName();
+        _normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, wxNORMAL, false).GetFaceName();
 
     if (_fixedFont.IsEmpty())
-        _fixedFont = wxFont(_fontSize, wxMODERN, wxNORMAL, wxNORMAL, FALSE).GetFaceName();
+        _fixedFont = wxFont(_fontSize, wxMODERN, wxNORMAL, wxNORMAL, false).GetFaceName();
 
     for (unsigned int i = 0; i < normalFonts->GetCount(); i++)
         _normalFControl->Append((*normalFonts)[i]);

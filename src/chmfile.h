@@ -176,7 +176,7 @@ public:
       \brief Checks whether or not the context ID is valid for the
        loaded file.
       \param contextID The context-ID to check.
-      \return TRUE if the context ID is valid. FALSE otherwise.
+      \return true if the context ID is valid. false otherwise.
      */
     bool IsValidCID(const int contextID);
 

@@ -107,7 +107,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
     wxTreeItemIdValue cookie;
     wxTreeItemId      child = _tcl->GetFirstChild(root, cookie);
 
-    for (size_t i = 0; i < _tcl->GetChildrenCount(root, FALSE); ++i) {
+    for (size_t i = 0; i < _tcl->GetChildrenCount(root, false); ++i) {
         Sync(child, page);
         child = _tcl->GetNextChild(root, cookie);
     }
@@ -155,8 +155,8 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
     if (!caseSensitive)
         text.MakeLower();
 
-    text.Trim(TRUE);
-    text.Trim(FALSE);
+    text.Trim(true);
+    text.Trim(false);
 
     bool found = false;
 

@@ -41,10 +41,10 @@ public:
     CHMInputStream(const wxString& archive, const wxString& file);
 
     //! Returns the size of the file.
-    virtual size_t GetSize() const;
+    size_t GetSize() const override;
 
     //! True if EOF has been found.
-    virtual bool Eof() const;
+    bool Eof() const override;
 
     /*!
       \brief Returns the static CHMFile pointer associated with
@@ -69,7 +69,7 @@ protected:
       \param bufsize Number of bytes requested.
       \return Number of bytes actually read.
     */
-    virtual size_t OnSysRead(void* buffer, size_t bufsize);
+    size_t OnSysRead(void* buffer, size_t bufsize) override;
 
     /*!
       \brief Seeks to the requested position in the file.
@@ -77,13 +77,13 @@ protected:
       \param mode Seek from the beginning, current position, etc.
       \return Position in the file.
      */
-    virtual wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode);
+    wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode) override;
 
     /*!
       \brief Asks what is the current position in the file.
       \return Current position.
      */
-    virtual wxFileOffset OnSysTell() const { return _currPos; }
+    wxFileOffset OnSysTell() const override { return _currPos; }
 
 private:
     //! Helper. Inits the cache.

@@ -65,7 +65,7 @@ public:
     //! Destructor. Deletes heap objects allocated in the constructor.
     ~CHMHtmlWindow();
 
-    virtual void OnSetTitle(const wxString& title);
+    void OnSetTitle(const wxString& title) override;
 
     //! Override. Looks up the wanted page in the tree and selects it.
     bool LoadPage(const wxString& location);

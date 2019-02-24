@@ -46,7 +46,7 @@ public:
       "file:filename.chm#xchm:/file_inside_archive.extension", false
       otherwise. Does not attempt to actually open the file.
      */
-    virtual bool CanOpen(const wxString& location);
+    bool CanOpen(const wxString& location) override;
 
     /*!
       \brief Tries to open the file specified.
@@ -54,7 +54,7 @@ public:
       \param location filename.
       \return A valid pointer to a wxFSFile or nullptr on failure.
      */
-    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
+    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
 
 public:
     //! No copy construction.

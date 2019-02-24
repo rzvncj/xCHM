@@ -55,11 +55,11 @@ public:
     CHMApp();
 #endif
     //! Our entry point into the application.
-    virtual bool OnInit();
+    bool OnInit() override;
 
 #ifdef __WXMAC__
     //! Respond to Apple Event for opening a document
-    virtual void MacOpenFile(const wxString& filename);
+    void MacOpenFile(const wxString& filename) override;
 #endif
 
 protected:

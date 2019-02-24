@@ -76,8 +76,8 @@ public:
     //! Creates a new tab view
     CHMHtmlWindow* CreateView();
 
-    //! Overload for tab height control
-    virtual bool AddPage(wxWindow* page, const wxString& title);
+    //! Override for tab height control
+    bool AddPage(wxWindow* page, const wxString& title, bool select, int imageId) override;
 
 protected:
     //! Called when user asks for next notebook page

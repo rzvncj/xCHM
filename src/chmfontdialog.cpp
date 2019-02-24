@@ -46,8 +46,8 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 			     wxArrayString *fixedFonts,
 			     const wxString& normalFont,
 			     const wxString& fixedFont, const int fontSize)
-	: wxDialog(parent, -1, wxString(_("Change fonts.."))), _test(NULL),
-	  _fontSizeControl(NULL), _normalFControl(NULL), _fixedFControl(NULL),
+	: wxDialog(parent, -1, wxString(_("Change fonts.."))), _test(nullptr),
+	  _fontSizeControl(nullptr), _normalFControl(nullptr), _fixedFControl(nullptr),
 	_normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
 	wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
@@ -60,12 +60,12 @@ CHMFontDialog::CHMFontDialog(wxWindow *parent, wxArrayString *normalFonts,
 	sizer->Add(_normalFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, 
 				  wxDefaultPosition, wxSize(200, -1),
-				  0, NULL, wxCB_DROPDOWN | wxCB_READONLY));
+				  0, nullptr, wxCB_DROPDOWN | wxCB_READONLY));
 
 	sizer->Add(_fixedFControl = 
 		   new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition,
 				  wxSize(200, -1),
-				  0, NULL, wxCB_DROPDOWN | wxCB_READONLY));
+				  0, nullptr, wxCB_DROPDOWN | wxCB_READONLY));
 
 	sizer->Add(_fontSizeControl = new wxSpinCtrl(this, -1));
 

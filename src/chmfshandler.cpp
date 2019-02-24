@@ -39,14 +39,14 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	wxString right = GetRightLocation(location);
 	wxString left = GetLeftLocation(location);
 	wxString cwd = GetRightLocation(fs.GetPath());
-	CHMInputStream *s = NULL;
+	CHMInputStream *s = nullptr;
 
 	if(!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
 		right = wxString(wxT("/")) + location;
 		left = wxEmptyString;
 
 	} else if (GetProtocol(left) != wxT("file"))
-		return NULL;
+		return nullptr;
 
 	// HTML code for space is %20
 	right.Replace(wxT("%20"), wxT(" "), TRUE);
@@ -91,7 +91,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	}
 
 	delete s;
-	return NULL;
+	return nullptr;
 }
 
 /*

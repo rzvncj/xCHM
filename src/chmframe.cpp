@@ -124,10 +124,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 		   const int fontSize, const int sashPosition,
 		   const wxString& fullAppPath, bool loadTopics,
 		   bool loadIndex)
-	: wxFrame(NULL, -1, title, pos, size),
-	  _tcl(NULL), _sw(NULL), _menuFile(NULL), _tb(NULL), _ep(NULL),
-	  _nb(NULL), _cb(NULL), _csp(NULL), _cip(NULL), _openPath(booksDir),
-	  _normalFonts(NULL), _fixedFonts(NULL), _normalFont(normalFont),
+	: wxFrame(nullptr, -1, title, pos, size),
+	  _tcl(nullptr), _sw(nullptr), _menuFile(nullptr), _tb(nullptr), _ep(nullptr),
+	  _nb(nullptr), _cb(nullptr), _csp(nullptr), _cip(nullptr), _openPath(booksDir),
+	  _normalFonts(nullptr), _fixedFonts(nullptr), _normalFont(normalFont),
 	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
 	  _bookmarksDeleted(false), _sashPos(sashPosition),
 	  _fullAppPath(fullAppPath), _loadTopics(loadTopics),
@@ -249,7 +249,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 	wxLogNull wln;
 
 	// First time initialization only.
-	if(_normalFonts == NULL) {
+	if(_normalFonts == nullptr) {
 		wxFontEnumerator enu;
 		enu.EnumerateFacenames();
 		_normalFonts = new wxArrayString;
@@ -257,7 +257,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		_normalFonts->Sort();
 	}
 
-	if(_fixedFonts == NULL) {
+	if(_fixedFonts == nullptr) {
 		wxFontEnumerator enu;
 		enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, TRUE);
 		_fixedFonts = new wxArrayString;
@@ -265,8 +265,8 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 		_fixedFonts->Sort();
 	}
 
-	assert(_normalFonts != NULL);
-	assert(_fixedFonts != NULL);
+	assert(_normalFonts != nullptr);
+	assert(_fixedFonts != nullptr);
 
 	CHMFontDialog cfd(this, _normalFonts, _fixedFonts, _normalFont,
 			  _fixedFont, _fontSize);
@@ -362,13 +362,13 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 		wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath,
 					wxEmptyString,
 					wxT("Compiled HTML help"),
-					wxT("chm"), NULL);
+					wxT("chm"), nullptr);
 
 		wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"),
 				       _fullAppPath,
 				       wxEmptyString,
 				       wxT("Compiled HTML help"),
-				       wxT("chm"), NULL);
+				       wxT("chm"), nullptr);
 
 		wxFileType *ft_xchm =
 			wxTheMimeTypesManager->Associate(fti_xchm);
@@ -838,7 +838,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	_tcl->AddRoot(_("Topics"));
 
 	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
-			     wxDefaultSize, 0, NULL, wxCB_DROPDOWN
+			     wxDefaultSize, 0, nullptr, wxCB_DROPDOWN
 			     | wxCB_READONLY);
 	sizer->Add(_tcl, 1, wxEXPAND, 0);
 	sizer->Add(bmarks, 0, wxEXPAND | wxALL, 0);

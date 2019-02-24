@@ -27,7 +27,7 @@
 
 CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	: wxDialog(parent, -1, wxString(_("Find in page.."))),
-	  _html(toSearch), _cell(NULL)
+	  _html(toSearch), _cell(nullptr)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 

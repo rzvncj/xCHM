@@ -23,14 +23,14 @@
  * class CHMInputStream static members
  */
 
-CHMFile *CHMInputStream::_archiveCache = NULL;
+CHMFile *CHMInputStream::_archiveCache = nullptr;
 wxString CHMInputStream::_path;
 
 void CHMInputStream::Cleanup()
 {
-	if(_archiveCache != NULL) {
+	if(_archiveCache != nullptr) {
 		delete _archiveCache;
-		_archiveCache = NULL;
+		_archiveCache = nullptr;
 	}
 }
 
@@ -85,7 +85,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 			}
 	}
 
-	assert(_archiveCache != NULL);
+	assert(_archiveCache != nullptr);
 
 	// See if the file really is in the archive.
 	if(!_archiveCache->ResolveObject(filename, &_ui)) {
@@ -148,7 +148,7 @@ wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 
 bool CHMInputStream::Init(const wxString& archive)
 {
-	if(_archiveCache == NULL ||
+	if(_archiveCache == nullptr ||
 	   !_archiveCache->ArchiveName().IsSameAs(archive)) {
 
 		Cleanup();

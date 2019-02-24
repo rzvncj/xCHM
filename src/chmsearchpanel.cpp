@@ -30,8 +30,8 @@
 
 CHMSearchPanel::CHMSearchPanel(wxWindow *parent, wxTreeCtrl *topics,
 			       CHMHtmlNotebook *nbhtml)
-	: wxPanel(parent), _tcl(topics), _text(NULL), _partial(NULL),
-	  _titles(NULL), _search(NULL), _results(NULL), _nbhtml(nbhtml)
+	: wxPanel(parent), _tcl(topics), _text(nullptr), _partial(nullptr),
+	  _titles(nullptr), _search(nullptr), _results(nullptr), _nbhtml(nbhtml)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
         SetAutoLayout(TRUE);

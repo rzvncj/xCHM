@@ -128,7 +128,7 @@ HTMLChar substitutions[] = {
 	{ wxT("upsilon"),965 }, { wxT("uuml"),252 }, { wxT("weierp"),8472 },
 	{ wxT("xi"),958 }, { wxT("yacute"),253 }, { wxT("yen"),165 },
 	{ wxT("yuml"),255 }, { wxT("zeta"),950 }, { wxT("zwj"),8205 },
-	{ wxT("zwnj"),8204 }, {NULL, 0}
+	{ wxT("zwnj"),8204 }, { nullptr, 0 }
 };
 
 }

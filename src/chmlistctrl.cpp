@@ -125,10 +125,9 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
 
 void CHMListCtrl::ResetItems()
 {
-	for(long i = 0; i < (long)_items.GetCount(); ++i) {
-		if(_items[i] != NULL)
-			delete _items[i];
-	}
+	for(long i = 0; i < static_cast<long>(_items.GetCount()); ++i)
+		delete _items[i];
+
 	_items.Empty();
 }
 

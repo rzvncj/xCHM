@@ -36,8 +36,8 @@
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
 	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false), _menu(NULL),
-	  _frame(frame), _fdlg(NULL)
+	  _tcl(tc), _syncTree(true), _found(false), _menu(nullptr),
+	  _frame(frame), _fdlg(nullptr)
 {
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
@@ -140,13 +140,13 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 	wxString tmp = word;
 
 	if(!parent)
-		return NULL;
+		return nullptr;
 
 	if(!caseSensitive)
 		tmp.MakeLower();
 
 	// If this cell is not a container, the for body will never happen
-	// (GetFirstChild() will return NULL).
+	// (GetFirstChild() will return nullptr).
 	for(wxHtmlCell *cell = parent->GetFirstChild(); cell;
 	    cell = cell->GetNext()) {
 
@@ -160,7 +160,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 	wxString text = parent->ConvertToText(&ws);
 
 	if(text.IsEmpty())
-		return NULL;
+		return nullptr;
 
 	if(!caseSensitive)
 		text.MakeLower();
@@ -187,7 +187,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 		int y;
 		wxHtmlCell *cell = parent;
 
-		for (y = 0; cell != NULL; cell = cell->GetParent())
+		for (y = 0; cell != nullptr; cell = cell->GetParent())
 			y += cell->GetPosY();
 		Scroll(-1, y / wxHTML_SCROLL_STEP);
 		Refresh();
@@ -195,7 +195,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 		return parent;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
@@ -204,7 +204,7 @@ wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 	wxHtmlCell *cell;
 
 	if(!start)
-		return NULL;
+		return nullptr;
 
 	for(cell = start; cell; cell = cell->GetNext()) {
 		wxHtmlCell *result;
@@ -218,7 +218,7 @@ wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 		cell = cell->GetParent();
 
 	if(!cell)
-		return NULL;
+		return nullptr;
 
 	return FindNext(cell->GetNext(), word, wholeWords, caseSensitive);
 }
@@ -226,7 +226,7 @@ wxHtmlCell* CHMHtmlWindow::FindNext(wxHtmlCell *start, const wxString& word,
 void CHMHtmlWindow::ClearSelection()
 {
 	delete m_selection;
-	m_selection = NULL;
+	m_selection = nullptr;
 	Refresh();
 }
 
@@ -285,7 +285,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 {
 	std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
-	if (f.get() == NULL) {
+	if (f.get() == nullptr) {
 		::wxMessageBox(_("OpenFile(") + _link + _(") failed"),
 			       _("Error"), wxOK, this);
 		return;
@@ -326,7 +326,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
 	if(IsSelectionEnabled())
-		_menu->Enable(ID_CopySel, m_selection != NULL);
+		_menu->Enable(ID_CopySel, m_selection != nullptr);
 
 	_menu->Enable(ID_PopupForward, HistoryCanForward());
 	_menu->Enable(ID_PopupBack, HistoryCanBack());
@@ -340,7 +340,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 	wxHtmlCell *cell = GetInternalRepresentation()->
 		FindCellByPos(x, y);
 
-	wxHtmlLinkInfo* linfo = NULL;
+	wxHtmlLinkInfo* linfo = nullptr;
 
 	if(cell)
 		linfo = cell->GetLink();

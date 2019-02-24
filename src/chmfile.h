@@ -296,12 +296,12 @@ private:
 	wxFontEncoding _enc;
 	CHMIDMap _cidMap;
 
-private:
+public:
 	//! No copy construction allowed.
-	CHMFile(const CHMFile&);
+	CHMFile(const CHMFile&) = delete;
 
 	//! No assignments.
-	CHMFile& operator=(const CHMFile&);
+	CHMFile& operator=(const CHMFile&) = delete;
 };
 
 #endif // __CHMFILE_H_

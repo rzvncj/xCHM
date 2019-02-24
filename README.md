@@ -4,7 +4,7 @@ UNIX CHM viewer.
 
 ## Screenshots
 
-[Python documentation](./screenshot.jpg)
+![Python documentation](./screenshot.jpg)
 
 ## Prerequisites
 

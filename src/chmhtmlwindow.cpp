@@ -35,9 +35,8 @@
 #include <memory>
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow *parent, wxTreeCtrl *tc, CHMFrame *frame)
-	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)),
-	  _tcl(tc), _syncTree(true), _found(false), _menu(nullptr),
-	  _frame(frame), _fdlg(nullptr)
+	: wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200,200)), _tcl(tc), _syncTree(true), _found(false),
+	  _menu(nullptr), _frame(frame), _fdlg(nullptr)
 {
 	_menu = new wxMenu;
 	_menu->Append(ID_PopupForward, _("For&ward"));
@@ -69,15 +68,11 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 
 	if(_syncTree &&
 	   // We should be looking for a valid page, not / (home).
-	   !location.AfterLast(wxT('/')).IsEmpty() &&
-	   _tcl->GetCount() > 1) {
+	   !location.AfterLast(wxT('/')).IsEmpty() && _tcl->GetCount() > 1) {
 
-		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')),
-				wxPATH_UNIX);
-		wxString cwd = GetParser()->GetFS()->
-			GetPath().AfterLast(wxT(':'));
-		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
-				wxPATH_UNIX);
+		wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')), wxPATH_UNIX);
+		wxString cwd = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
+		fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
 
 		// Sync will call SelectItem() on the tree item
 		// if it finds one, and that in turn will call
@@ -87,6 +82,7 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
 		if(_found)
 			_found = false;
 	}
+
 	return wxHtmlWindow::LoadPage(tmp);
 }
 
@@ -95,8 +91,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 	if(_found)
 		return;
 
-	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
-		_tcl->GetItemData(root));
+	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(_tcl->GetItemData(root));
 
 	wxString url;
 
@@ -120,8 +115,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
 
 wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 {
-	return location.AfterLast(wxT(':')).AfterFirst(
-		           wxT('/')).BeforeLast(wxT('/'));
+	return location.AfterLast(wxT(':')).AfterFirst(wxT('/')).BeforeLast(wxT('/'));
 }
 
 void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
@@ -134,8 +128,7 @@ void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 		_frame->UpdateCHMInfo();
 }
 
-wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
-				     bool wholeWords, bool caseSensitive)
+wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word, bool wholeWords, bool caseSensitive)
 {
 	wxString tmp = word;
 
@@ -147,9 +140,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 
 	// If this cell is not a container, the for body will never happen
 	// (GetFirstChild() will return nullptr).
-	for(wxHtmlCell *cell = parent->GetFirstChild(); cell;
-	    cell = cell->GetNext()) {
-
+	for(wxHtmlCell *cell = parent->GetFirstChild(); cell; cell = cell->GetNext()) {
 		wxHtmlCell *result;
 		if((result = FindFirst(cell, word, wholeWords, caseSensitive)))
 			return result;
@@ -170,18 +161,15 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 
 	bool found = false;
 
-	if(wholeWords && text == tmp) {
+	if(wholeWords && text == tmp)
 		found = true;
-	} else if(!wholeWords && text.Find(tmp.c_str()) != -1) {
+	else if(!wholeWords && text.Find(tmp.c_str()) != -1)
 		found = true;
-	}
 
 	if(found) {
-		// What is all this wxWidgets protected member crap?
 		delete m_selection;
-		m_selection = new wxHtmlSelection();
 
-		// !! Must see if this works now. !!
+		m_selection = new wxHtmlSelection();
 		m_selection->Set(parent, parent);
 
 		int y;
@@ -189,6 +177,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell *parent, const wxString& word,
 
 		for (y = 0; cell != nullptr; cell = cell->GetParent())
 			y += cell->GetPosY();
+
 		Scroll(-1, y / wxHTML_SCROLL_STEP);
 		Refresh();
 
@@ -275,8 +264,7 @@ void CHMHtmlWindow::OnSize(wxSizeEvent& event)
 void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
 {
 	if(wxTheClipboard->Open()) {
-		wxTheClipboard->SetData(
-			new wxTextDataObject(_link));
+		wxTheClipboard->SetData(new wxTextDataObject(_link));
 		wxTheClipboard->Close();
 	}
 }
@@ -286,8 +274,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 	std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
 	if (f.get() == nullptr) {
-		::wxMessageBox(_("OpenFile(") + _link + _(") failed"),
-			       _("Error"), wxOK, this);
+		::wxMessageBox(_("OpenFile(") + _link + _(") failed"), _("Error"), wxOK, this);
 		return;
 	}
 
@@ -297,28 +284,25 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 	if(suggestedName.IsEmpty())
 		suggestedName = wxT("index.html");
 
-	wxString filename = ::wxFileSelector(_("Save as"),
-					     wxT(""),
-					     suggestedName,
-					     wxT(""),
-					     wxT("*.*"),
-					     wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
-					     this);
+	wxString filename = ::wxFileSelector(_("Save as"), wxT(""), suggestedName, wxT(""), wxT("*.*"),
+					     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+
 	if (!filename.empty()) {
 		wxInputStream *s = f->GetStream();
 		wxFileOutputStream out(filename);
-		if (!out.IsOk()) {
-			::wxMessageBox(_("Error creating file ") + filename,
-				       _("Error"), wxOK, this);
-		} else {
+
+		if (!out.IsOk())
+			::wxMessageBox(_("Error creating file ") + filename, _("Error"), wxOK, this);
+		else {
 			char buffer[4096];
+
 			while (!s->Eof()) {
 				s->Read(buffer, sizeof(buffer));
 				size_t nbytes = s->LastRead();
 				out.Write((void *)buffer, nbytes);
 			}
-			::wxMessageBox(_("Saved file ") + filename,
-				       _("Success"), wxOK, this);
+
+			::wxMessageBox(_("Saved file ") + filename, _("Success"), wxOK, this);
 		}
 	}
 }
@@ -337,8 +321,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
         int x, y;
         CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
 
-	wxHtmlCell *cell = GetInternalRepresentation()->
-		FindCellByPos(x, y);
+	wxHtmlCell *cell = GetInternalRepresentation()->FindCellByPos(x, y);
 
 	wxHtmlLinkInfo* linfo = nullptr;
 

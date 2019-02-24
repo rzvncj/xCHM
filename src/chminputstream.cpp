@@ -72,8 +72,7 @@ CHMInputStream::CHMInputStream(const wxString& archive,
 		// the index file, the index file is just a
 		// link to a file in another archive.
 
-		wxString arch_link =
-			filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
+		wxString arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
 		filename = filename.AfterLast(wxT(':'));
 
@@ -101,7 +100,7 @@ size_t CHMInputStream::GetSize() const
 
 bool CHMInputStream::Eof() const
 {
-	return (uint64_t)_currPos >= _ui.length;
+	return static_cast<uint64_t>(_currPos) >= _ui.length;
 }
 
 size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
@@ -118,9 +117,7 @@ size_t CHMInputStream::OnSysRead(void *buffer, size_t bufsize)
         bufsize = _ui.length - _currPos;
 
 	bufsize =
-		_archiveCache->RetrieveObject(&_ui,
-					      (unsigned char *)buffer,
-					      _currPos, bufsize);
+		_archiveCache->RetrieveObject(&_ui, (unsigned char *)buffer, _currPos, bufsize);
 
 	_currPos += bufsize;
 

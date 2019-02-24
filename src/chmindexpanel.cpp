@@ -29,10 +29,7 @@ CHMIndexPanel::CHMIndexPanel(wxWindow *parent, CHMHtmlNotebook *nbhtml)
         SetAutoLayout(TRUE);
         SetSizer(sizer);
 
-	_text = new wxTextCtrl(this, ID_SearchIndex, wxEmptyString,
-			       wxDefaultPosition, wxDefaultSize,
-			       wxTE_PROCESS_ENTER);
-
+	_text = new wxTextCtrl(this, ID_SearchIndex, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 	_lc = new CHMListCtrl(this, nbhtml, ID_IndexClicked);
 
         sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
@@ -52,18 +49,14 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
 
 void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
 {
-	if(_navigate) {
-		//_html->AbsoluteFollows();
+	if(_navigate)
 		_lc->LoadSelected();
-	}
 }
 
 void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
 {
-	if(_navigate) {
-		//_html->AbsoluteFollows();
+	if(_navigate)
 		_lc->LoadSelected();
-	}
 }
 
 void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))

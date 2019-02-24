@@ -57,12 +57,12 @@ public:
 	 */
         virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location);
 
-private:
+public:
 	//! No copy construction.
-	CHMFSHandler(const CHMFSHandler&);
+	CHMFSHandler(const CHMFSHandler&) = delete;
 
 	//! No assignment.
-	CHMFSHandler& operator=(const CHMFSHandler&);
+	CHMFSHandler& operator=(const CHMFSHandler&) = delete;
 };
 
 #endif // __CHMFSHANDLER_H_

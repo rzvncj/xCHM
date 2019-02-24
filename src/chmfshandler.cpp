@@ -28,8 +28,7 @@ CHMFSHandler::~CHMFSHandler()
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
 	wxString p = GetProtocol(location);
-	return (p == wxT("xchm")
-		&& GetProtocol(GetLeftLocation(location)) == wxT("file"))
+	return (p == wxT("xchm") && GetProtocol(GetLeftLocation(location)) == wxT("file"))
 		|| !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
 
@@ -59,17 +58,14 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 	filename.Normalize();
 
 	size_t len = cwd.Length();
-	if(right.Length() > len && right.StartsWith(cwd)
-			&& right[len] == wxT('/'))
+	if(right.Length() > len && right.StartsWith(cwd) && right[len] == wxT('/'))
 		right = right.Mid(len);
 
         wxFileName fwfn(right, wxPATH_UNIX);
-        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd,
-			wxPATH_UNIX);
+        fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
 	right = fwfn.GetFullPath(wxPATH_UNIX);
 
-	s = new CHMInputStream(left.IsEmpty() ?
-			       left : filename.GetFullPath(), right);
+	s = new CHMInputStream(left.IsEmpty() ? left : filename.GetFullPath(), right);
 
 	if (s && s->IsOk()) {
 
@@ -81,13 +77,9 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs,
 		if(!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
 			right = right.AfterLast(wxT(':'));
 
-		return new wxFSFile(s,
-				    wxString(wxT("file:")) +
-				    s->GetCache()->ArchiveName() +
-				    wxT("#xchm:") + right,
-				    GetMimeTypeFromExt(right.Lower()),
-				    GetAnchor(location),
-				    wxDateTime((time_t)-1));
+		return new wxFSFile(s, wxString(wxT("file:")) + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
+				    GetMimeTypeFromExt(right.Lower()), GetAnchor(location),
+				    wxDateTime(static_cast<time_t>(-1)));
 	}
 
 	delete s;

@@ -211,13 +211,11 @@ void HHCParser::handleTag(const std::string& tag)
         }
 
     } else {
-        if (tagName == "ul") {
+        if (tagName == "ul")
             ++_level;
-
-        } else if (tagName == "/ul") {
+        else if (tagName == "/ul") {
             if (_level > 0)
                 --_level;
-
         } else if (tagName == "object") {
             _name = _value = "";
             _inobject      = true;
@@ -251,11 +249,11 @@ bool HHCParser::getParameters(const char* input, std::string& name, std::string&
                 ++input;
         }
 
-        if (tmpstr == "name") {
+        if (tmpstr == "name")
             lower = true;
-        } else if (tmpstr == "value") {
+        else if (tmpstr == "value")
             lower = false;
-        } else {
+        else {
             // now skip value.
             while (*input && isspace(*input))
                 ++input;
@@ -311,18 +309,16 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
         return;
 
     if (!name.IsEmpty()) {
-
         int parentIndex = _level ? _level - 1 : 0;
 
         _parents[_level] = _tree->AppendItem(_parents[parentIndex], name, 2, 2, new URLTreeItem(value));
+
         if (!_level)
             _parents[0] = _tree->GetRootItem();
         else {
             if (_tree->GetItemImage(_parents[parentIndex]) != 0) {
                 _tree->SetItemImage(_parents[parentIndex], 0, wxTreeItemIcon_Normal);
-
                 _tree->SetItemImage(_parents[parentIndex], 0, wxTreeItemIcon_Selected);
-
                 _tree->SetItemImage(_parents[parentIndex], 1, wxTreeItemIcon_Expanded);
             }
         }
@@ -370,10 +366,8 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 
         if (inSpecial)
             special.Append(input[i]);
-        else {
-            if (input[i])
-                result.Append(input[i]);
-        }
+        else if (input[i])
+            result.Append(input[i]);
     }
 
     return result;
@@ -383,10 +377,8 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 {
     size_t substitutions_cnt = sizeof(substitutions) / sizeof(HTMLChar) - 1;
 
-    HTMLChar* hc
-        = (HTMLChar*)bsearch(name.c_str(), substitutions, substitutions_cnt, sizeof(HTMLChar), HTMLCharCompare);
-    if (hc)
-        return hc->code;
+    HTMLChar* hc = static_cast<HTMLChar*>(
+        bsearch(name.c_str(), substitutions, substitutions_cnt, sizeof(HTMLChar), HTMLCharCompare));
 
-    return 0;
+    return hc ? hc->code : 0;
 }

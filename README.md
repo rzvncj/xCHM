@@ -1,54 +1,61 @@
+# xCHM - the CHM viewer for UNIX
 
- xCHM - the CHM viewer for UNIX
- (c) 2003 - 2019 Razvan Cojocaru <rzvncj@gmail.com>
+UNIX CHM viewer.
 
- * Prerequisites
+## Prerequisites
 
- In order to be able to compile the code you need to have wxWidgets and
- CHMLIB installed. You can get wxWidgets from:
+In order to be able to compile the code you need to have wxWidgets and
+CHMLIB installed.
 
- http://www.wxwidgets.org
+Get the GTK+ version (also known as wxGTK). xCHM currently compiles
+with all flavours of wxWidgets, but only works well and looks truly
+appealing with wxGTK, so I recommend against bothering to use it with
+anything else.
 
- Get the GTK+ version (also known as wxGTK). xCHM currently compiles
- with all flavours of wxWidgets, but only works well and looks truly
- appealing with wxGTK, so I recommend against bothering to use it with
- anything else.
+## Installing
 
- You can get CHMLIB from:
+Type `./configure --help` if you're interested in parameters you can
+pass to configure for compile switches. Most people will be perfectly
+happy doing a:
 
- http://www.jedrea.com/chmlib/
+```
+./configure && make
+```
 
- After you've installed the above you're ready for the next phase.
+Once everything is built, type
 
- * Installing
+```
+make install
+```
 
- Type ./configure --help if you're interested in parameters you can pass
- to configure for compile switches. Most people will be perfectly happy
- doing a:
+and the executable should be somewhere in your `$PATH` (hopefully :)).
+Now you can just type
 
- ./configure && make
+```
+xchm
+```
 
- Once everything is built, type
+and start your session.
 
- make install
+## Build with
 
- and the executable should be somewhere in your $PATH (hopefully :)).
- Now you can just type
+[wxWidgets](http://www.wxwidgets.org) - GUI
+[CHMLIB](http://www.jedrea.com/chmlib/) - CHM access logic
 
- xchm
+## Generating documentation
 
- and start your session.
- 
- * Generating documentation
+If you'd like to generate developer documentation go to the root
+of the distribution and type
 
- If you'd like to generate developer documentation go to the root
- of the distribution and type
+doxygen
 
- doxygen
+This of course implies that you have doxygen installed. The documentation
+will be generated in the doc directory in HTML and LaTex format. The doc
+directory will be created in the process of creating the documentation so
+it's ok that it's not present by default in the tarball.
 
- This of course implies that you have doxygen installed. The documentation
- will be generated in the doc directory in HTML and LaTex format. The doc
- directory will be created in the process of creating the documentation so
- it's ok that it's not present by default in the tarball.
+## Authors
 
- * Happy reading!
+* **Razvan Cojocaru** [rzvncj](https://github.com/rzvncj)
+
+## Happy reading!

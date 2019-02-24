@@ -118,20 +118,14 @@ const wxChar *about_txt = wxT("xCHM v. ") wxT(VERSION)
 
 } // namespace
 
-CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
-		   const wxPoint& pos, const wxSize& size,
-		   const wxString& normalFont, const wxString& fixedFont,
-		   const int fontSize, const int sashPosition,
-		   const wxString& fullAppPath, bool loadTopics,
-		   bool loadIndex)
-	: wxFrame(nullptr, -1, title, pos, size),
-	  _tcl(nullptr), _sw(nullptr), _menuFile(nullptr), _tb(nullptr), _ep(nullptr),
-	  _nb(nullptr), _cb(nullptr), _csp(nullptr), _cip(nullptr), _openPath(booksDir),
-	  _normalFonts(nullptr), _fixedFonts(nullptr), _normalFont(normalFont),
-	  _fixedFont(fixedFont), _fontSize(fontSize), _bookmarkSel(true),
-	  _bookmarksDeleted(false), _sashPos(sashPosition),
-	  _fullAppPath(fullAppPath), _loadTopics(loadTopics),
-	  _loadIndex(loadIndex), _fullScreen(false)
+CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoint& pos, const wxSize& size,
+		   const wxString& normalFont, const wxString& fixedFont, const int fontSize, const int sashPosition,
+		   const wxString& fullAppPath, bool loadTopics, bool loadIndex)
+	: wxFrame(nullptr, -1, title, pos, size), _tcl(nullptr), _sw(nullptr), _menuFile(nullptr), _tb(nullptr),
+	  _ep(nullptr), _nb(nullptr), _cb(nullptr), _csp(nullptr), _cip(nullptr), _openPath(booksDir),
+	  _normalFonts(nullptr), _fixedFonts(nullptr), _normalFont(normalFont), _fixedFont(fixedFont),
+	  _fontSize(fontSize), _bookmarkSel(true), _bookmarksDeleted(false), _sashPos(sashPosition),
+	  _fullAppPath(fullAppPath), _loadTopics(loadTopics), _loadIndex(loadIndex), _fullScreen(false)
 {
 #	if wxUSE_ACCEL
 	const int NO_ACCELERATOR_ENTRIES = 6;
@@ -171,8 +165,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	SetStatusText(_("Ready."));
 
 	wxBitmap bitmap(logo_xpm);
-	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), bitmap, //wxBITMAP(logo),
-				   wxBITMAP_TYPE_XPM);
+	wxMemoryFSHandler::AddFile(wxT("logo.xpm"), bitmap, wxBITMAP_TYPE_XPM);
 	wxMemoryFSHandler::AddFile(wxT("about.html"), greeting);
 	wxMemoryFSHandler::AddFile(wxT("error.html"), error_page);
 
@@ -185,8 +178,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir,
 	_nb->Show(FALSE);
 
 	wxPanel* temp = CreateContentsPanel();
-	_nbhtml = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont,
-				      fontSize, this);
+	_nbhtml = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
 	_nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
 
 	_csp = new CHMSearchPanel(_nb, _tcl, _nbhtml);
@@ -219,8 +211,7 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-	::wxMessageBox(about_txt, _("About xCHM"),
-		       wxOK | wxICON_INFORMATION, this );
+	::wxMessageBox(about_txt, _("About xCHM"), wxOK | wxICON_INFORMATION, this );
 }
 
 void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
@@ -268,24 +259,20 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
 	assert(_normalFonts != nullptr);
 	assert(_fixedFonts != nullptr);
 
-	CHMFontDialog cfd(this, _normalFonts, _fixedFonts, _normalFont,
-			  _fixedFont, _fontSize);
+	CHMFontDialog cfd(this, _normalFonts, _fixedFonts, _normalFont, _fixedFont, _fontSize);
 
 	if(cfd.ShowModal() == wxID_OK) {
 
 		wxBusyCursor bc;
 
-		_nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(),
-				_fixedFont = cfd.FixedFont(),
-				cfd.Sizes());
+		_nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.Sizes());
 
 		_fontSize = *(cfd.Sizes() + 3);
 
 		wxString page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 
 		if(page.IsEmpty())
-			_nbhtml->GetCurrentPage()
-				->LoadPage(wxT("memory:about.html"));
+			_nbhtml->GetCurrentPage()->LoadPage(wxT("memory:about.html"));
 	}
 }
 
@@ -296,9 +283,7 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
 	if(!chmf)
 		return;
 
-	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) +
-				       chmf->ArchiveName()
-				       + wxT("#xchm:") + chmf->HomePage());
+	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:") + chmf->HomePage());
 }
 
 void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
@@ -355,32 +340,23 @@ associations.\n\nAre you sure you know what you're doing?"
 
 void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 {
-	int answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"),
-				  wxOK | wxCANCEL, this);
+	int answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this);
 
 	if(answer == wxOK) {
-		wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath,
-					wxEmptyString,
-					wxT("Compiled HTML help"),
-					wxT("chm"), nullptr);
+		wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath, wxEmptyString,
+					wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
-		wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"),
-				       _fullAppPath,
-				       wxEmptyString,
-				       wxT("Compiled HTML help"),
-				       wxT("chm"), nullptr);
+		wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"), _fullAppPath, wxEmptyString,
+				       wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
-		wxFileType *ft_xchm =
-			wxTheMimeTypesManager->Associate(fti_xchm);
+		wxFileType *ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
 
-		wxFileType *ft_msh =
-			wxTheMimeTypesManager->Associate(fti_msh);
+		wxFileType *ft_msh = wxTheMimeTypesManager->Associate(fti_msh);
 
 		if(ft_xchm && ft_msh) {
 			ft_xchm->SetDefaultIcon(_fullAppPath);
 			ft_msh->SetDefaultIcon(_fullAppPath);
-			wxMessageBox(_("Registration successful!"),
-				     _("Done"), wxOK, this);
+			wxMessageBox(_("Registration successful!"), _("Done"), wxOK, this);
 		}
 	}
 }
@@ -402,6 +378,7 @@ void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
 void CHMFrame::OnHistFile(wxCommandEvent& event)
 {
       wxString f(_fh.GetHistoryFile(event.GetId() - wxID_FILE1));
+
       if (!f.IsEmpty())
 	      LoadCHM(f);
 }
@@ -444,8 +421,7 @@ void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
 	if(title.IsEmpty())
 		return;
 
-	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(
-		_tcl->GetItemData(id));
+	URLTreeItem *data = reinterpret_cast<URLTreeItem *>(_tcl->GetItemData(id));
 
 	if(!data || (data->_url).IsEmpty())
 		return;
@@ -469,9 +445,8 @@ void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
 		_bookmarkSel = false;
 		_cb->SetSelection(0);
 		_bookmarkSel = true;
-	} else {
+	} else
 		_cb->SetValue(wxEmptyString);
-	}
 }
 
 void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
@@ -494,9 +469,7 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 	if(!chmf)
 		return;
 
-	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) +
-				       chmf->ArchiveName() +
-				       wxT("#xchm:/") + *url);
+	_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:/") + *url);
 }
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
@@ -518,9 +491,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 
 	if(!_nbhtml->GetCurrentPage()->IsCaller()) {
 		_nbhtml->GetCurrentPage()->SetSync(false);
-		_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) +
-					       chmf->ArchiveName() +
-					       wxT("#xchm:/") + data->_url);
+		_nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:/") + data->_url);
 		_nbhtml->GetCurrentPage()->SetSync(true);
 	}
 }
@@ -551,25 +522,20 @@ bool CHMFrame::LoadCHM(const wxString& archive)
 	SaveBookmarks();
 	_nb->SetSelection(0);
 	_nbhtml->CloseAllPagesExceptFirst();
-	if(!archive.StartsWith(wxT("file:")) ||
-	   !archive.Contains(wxT("#xchm:"))) {
+	if(!archive.StartsWith(wxT("file:")) || !archive.Contains(wxT("#xchm:"))) {
 
 		wxFileSystem wfs;
-		std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive +
-			      wxT("#xchm:/")));
+		std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive + wxT("#xchm:/")));
 
 	        CHMFile *chmf = CHMInputStream::GetCache();
 
 		if(!chmf)
 			return false;
 
-		rtn = _nbhtml->LoadPageInCurrentView(wxString(wxT("file:"))
-						+ chmf->ArchiveName()
-				                + wxT("#xchm:")
-						+ chmf->HomePage());
-	} else {
+		rtn = _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName()
+				                + wxT("#xchm:") + chmf->HomePage());
+	} else
 		rtn = _nbhtml->LoadPageInCurrentView(archive);
-	}
 
 	if(!rtn) { // Error, could not load CHM file
 		if(_tcl->GetCount()) {
@@ -606,9 +572,7 @@ bool CHMFrame::LoadContextID( const int contextID )
 	if( !chmf->IsValidCID( contextID ) )
 		return FALSE;
 
-	return _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) +
-					      chmf->ArchiveName()
-					      + wxT("#xchm:") +
+	return _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:") +
 					      chmf->GetPageByCID(contextID));
 }
 
@@ -656,13 +620,11 @@ void CHMFrame::UpdateCHMInfo()
 		if(fs < 10)
 			fs = 10;
 
-		wxFont font((int)fs, wxDEFAULT, wxNORMAL, wxNORMAL,
-			    FALSE, fontFace.BeforeFirst(wxT(',')),
-			    chmf->DesiredEncoding());
+		wxFont font((int)fs, wxDEFAULT, wxNORMAL, wxNORMAL, FALSE, fontFace.BeforeFirst(wxT(',')), chmf->DesiredEncoding());
 
 		if(font.Ok()) {
-
 			int sizes[7];
+
 			for(int i = -3; i <= 3; ++i)
 				sizes[i+3] = _fontSize + i * 2;
 
@@ -670,25 +632,20 @@ void CHMFrame::UpdateCHMInfo()
 			_csp->SetNewFont(font);
 			_cip->SetNewFont(font);
 			_cb->SetFont(font);
-			_nbhtml->SetChildrenFonts(font.GetFaceName(),
-						  font.GetFaceName(),
-						  sizes);
+			_nbhtml->SetChildrenFonts(font.GetFaceName(), font.GetFaceName(), sizes);
 			noSpecialFont = false;
 		}
 
 	} else if(noSpecialFont == false) {
-
 		int sizes[7];
+
 		for(int i = -3; i <= 3; ++i)
 			sizes[i+3] = _fontSize + i * 2;
 
 		_tcl->SetFont(_font);
 
-		wxFont tmp(_font.GetPointSize(),
-			   _font.GetFamily(),
-			   _font.GetStyle(), _font.GetWeight(),
-			   _font.GetUnderlined(), _font.GetFaceName(),
-			   enc);
+		wxFont tmp(_font.GetPointSize(), _font.GetFamily(), _font.GetStyle(), _font.GetWeight(),
+			   _font.GetUnderlined(), _font.GetFaceName(), enc);
 
 		if(tmp.Ok()) {
 			_cb->SetFont(tmp);
@@ -707,14 +664,10 @@ void CHMFrame::UpdateCHMInfo()
 		chmf->GetIndex(_cip->GetResultsList());
 
 	if(!title.IsEmpty()) {
-		wxString titleBarText =
-			wxString(wxT("xCHM v. " wxT(VERSION) wxT(": ")))
-                        + title;
-
+		wxString titleBarText = wxString(wxT("xCHM v. " wxT(VERSION) wxT(": "))) + title;
 		SetTitle(titleBarText);
-	} else {
+	} else
 		SetTitle(wxT("xCHM v. ") wxT(VERSION));
-	}
 
 	// if we have contents..
 	if(_tcl->GetCount() >= 1) {
@@ -746,15 +699,11 @@ wxMenuBar* CHMFrame::CreateMenu()
 	_menuFile->Append(ID_Print, _("&Print page..\tCtrl-P"), PRINT_HELP);
 	_menuFile->Append(ID_Fonts, _("Fon&ts.."), FONTS_HELP);
 	_menuFile->AppendSeparator();
-	_menuFile->AppendCheckItem(ID_Contents,
-				   _("&Show contents tree\tCtrl-S"),
-				   CONTENTS_HELP);
+	_menuFile->AppendCheckItem(ID_Contents, _("&Show contents tree\tCtrl-S"), CONTENTS_HELP);
 	_menuFile->AppendSeparator();
 
 #if defined(__WXMSW__) || defined(__WXMAC__)
-	_menuFile->Append(ID_RegisterExtension,
-			  _("&Make xCHM the default CHM viewer"),
-			  REGISTER_EXTENSION_HELP);
+	_menuFile->Append(ID_RegisterExtension, _("&Make xCHM the default CHM viewer"), REGISTER_EXTENSION_HELP);
 	_menuFile->AppendSeparator();
 #endif
 
@@ -771,14 +720,12 @@ wxMenuBar* CHMFrame::CreateMenu()
 		_menuFile->Enable(ID_Recent, FALSE);
 
 	_menuFile->AppendSeparator();
-	_menuFile->Append(ID_Quit, _("E&xit\tCtrl-X"),
-			  _("Quit the application."));
+	_menuFile->Append(ID_Quit, _("E&xit\tCtrl-X"), _("Quit the application."));
 
 	wxMenu *menuHistory = new wxMenu;
 
 	menuHistory->Append(ID_Home, _("&Home\tCtrl-H"), HOME_HELP);
-	menuHistory->Append(ID_Forward, _("For&ward\tAlt-RIGHT"),
-			    FORWARD_HELP);
+	menuHistory->Append(ID_Forward, _("For&ward\tAlt-RIGHT"), FORWARD_HELP);
 	menuHistory->Append(ID_Back, _("&Back\tAlt-LEFT"), BACK_HELP);
 
 	wxMenu *menuHelp = new wxMenu;
@@ -792,8 +739,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 	menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-T"), NEWTAB_HELP);
 
 	wxMenu *menuView = new wxMenu;
-	menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tF11"),
-			 FULLSCREEN_HELP);
+	menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tF11"), FULLSCREEN_HELP);
 
 	wxMenuBar *menuBar = new wxMenuBar;
 	menuBar->Append(_menuFile, _("&File"));
@@ -817,8 +763,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 {
 	wxPanel *temp = new wxPanel(_nb);
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	wxSizer *bmarks = new wxStaticBoxSizer(
-		new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
+	wxSizer *bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
 	wxSizer *inner = new  wxBoxSizer(wxHORIZONTAL);
 
 	temp->SetAutoLayout(TRUE);
@@ -829,17 +774,14 @@ wxPanel* CHMFrame::CreateContentsPanel()
 	il->Add(wxIcon(hbook_open_xpm));
 	il->Add(wxIcon(hpage_xpm));
 
-	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition,
-			      wxDefaultSize,
-			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT
-			      | wxTR_LINES_AT_ROOT);
+	_tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, wxDefaultSize,
+			      wxSUNKEN_BORDER | wxTR_HIDE_ROOT | wxTR_LINES_AT_ROOT);
 
 	_tcl->AssignImageList(il);
 	_tcl->AddRoot(_("Topics"));
 
-	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition,
-			     wxDefaultSize, 0, nullptr, wxCB_DROPDOWN
-			     | wxCB_READONLY);
+	_cb = new wxComboBox(temp, ID_Bookmarks, wxT(""), wxDefaultPosition, wxDefaultSize, 0, nullptr,
+	                     wxCB_DROPDOWN | wxCB_READONLY);
 	sizer->Add(_tcl, 1, wxEXPAND, 0);
 	sizer->Add(bmarks, 0, wxEXPAND | wxALL, 0);
 
@@ -981,37 +923,26 @@ namespace {
 
 bool CHMFrame::InitToolBar(wxToolBar *toolbar)
 {
-	toolbar->AddTool(ID_Open, _("Open .."), wxBitmap(fileopen_xpm),
-			 OPEN_HELP);
-	toolbar->AddTool(ID_Print, _("Print .."), wxBitmap(print_xpm),
-			 PRINT_HELP);
-	toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm),
-			 FONTS_HELP);
-	toolbar->AddCheckTool(ID_Contents, _("Contents"),
-			      wxBitmap(htmsidep_xpm),
-			      wxBitmap(htmsidep_xpm), CONTENTS_HELP);
+	toolbar->AddTool(ID_Open, _("Open .."), wxBitmap(fileopen_xpm), OPEN_HELP);
+	toolbar->AddTool(ID_Print, _("Print .."), wxBitmap(print_xpm), PRINT_HELP);
+	toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm), FONTS_HELP);
+	toolbar->AddCheckTool(ID_Contents, _("Contents"), wxBitmap(htmsidep_xpm), wxBitmap(htmsidep_xpm), CONTENTS_HELP);
 
 	toolbar->AddSeparator();
-	toolbar->AddTool(ID_CopySelection, _("Copy"),
-			wxBitmap(copy_xpm), COPY_HELP);
-	toolbar->AddTool(ID_FindInPage, _("Find"),
-			wxBitmap(find_xpm), FIND_HELP);
+	toolbar->AddTool(ID_CopySelection, _("Copy"), wxBitmap(copy_xpm), COPY_HELP);
+	toolbar->AddTool(ID_FindInPage, _("Find"), wxBitmap(find_xpm), FIND_HELP);
 
 	toolbar->AddSeparator();
 
-	toolbar->AddTool(ID_FullScreen, _("Fullscreen"),
-			 wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
+	toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
 
 	toolbar->AddSeparator();
 
 	toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);
-	toolbar->AddTool(ID_Forward, _("Forward"), wxBitmap(forward_xpm),
-			 FORWARD_HELP);
-	toolbar->AddTool(ID_Home, _("Home"), wxBitmap(home_xpm),
-			 HOME_HELP);
+	toolbar->AddTool(ID_Forward, _("Forward"), wxBitmap(forward_xpm), FORWARD_HELP);
+	toolbar->AddTool(ID_Home, _("Home"), wxBitmap(home_xpm), HOME_HELP);
 	toolbar->AddSeparator();
-	toolbar->AddTool(ID_About, _("About"), wxBitmap(helpicon_xpm),
-			 ABOUT_HELP);
+	toolbar->AddTool(ID_About, _("About"), wxBitmap(helpicon_xpm), ABOUT_HELP);
 
 	toolbar->Realize();
 

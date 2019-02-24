@@ -1,9 +1,8 @@
 
- xCHM - the CHM viewer for UNIX
+### xCHM - the CHM viewer for UNIX
  (c) 2003 - 2019 Razvan Cojocaru <rzvncj@gmail.com>
 
- 
- * Prerequisites
+#### Prerequisites
 
  In order to be able to compile the code you need to have wxWidgets and
  CHMLIB installed. You can get wxWidgets from:

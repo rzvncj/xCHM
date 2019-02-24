@@ -97,8 +97,6 @@ HTMLChar substitutions[] = {
 
 }
 
-constexpr int TIME_TO_YIELD = 1024;
-
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list) : _tree(tree), _list(list), _enc(enc)
 {
     memset(_parents, 0, TREE_BUF_SIZE * sizeof(wxTreeItemId));
@@ -145,6 +143,8 @@ void HHCParser::parse(const char* chunk)
 
 void HHCParser::handleTag(const std::string& tag)
 {
+    constexpr int TIME_TO_YIELD = 1024;
+
     if (tag.empty())
         return;
 

@@ -238,27 +238,25 @@ void CHMFile::RecurseLoadBTOC(UCharVector& topidx, UCharVector& topics, UCharVec
         if (topidx.size() < offset + 20)
             return;
 
-        uint32_t flags = UINT32ARRAY(&topidx[0] + offset + 4);
-        uint32_t index = UINT32ARRAY(&topidx[0] + offset + 8);
+        uint32_t flags = UINT32ARRAY(&topidx[offset + 4]);
+        uint32_t index = UINT32ARRAY(&topidx[offset + 8]);
 
-        if ((flags & 0x4) || (flags & 0x8)) { // book or local
+        if ((flags & 0x4) || (flags & 0x8)) // book or local
             if (!GetItem(topics, strings, urltbl, urlstr, index, toBuild, nullptr, wxEmptyString, level,
                          (flags & 0x8) == 0))
                 return;
-        }
 
         if (flags & 0x4) { // book
-
             if (topidx.size() < offset + 24)
                 return;
 
-            uint32_t child = UINT32ARRAY(&topidx[0] + offset + 20);
+            uint32_t child = UINT32ARRAY(&topidx[offset + 20]);
 
             if (child)
                 RecurseLoadBTOC(topidx, topics, strings, urltbl, urlstr, child, toBuild, level + 1);
         }
 
-        offset = UINT32ARRAY(&topidx[0] + offset + 0x10);
+        offset = UINT32ARRAY(&topidx[offset + 0x10]);
     }
 }
 
@@ -285,14 +283,15 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
     if (local) {
         if (strings.size() < index + 1)
             return false;
-        name = reinterpret_cast<char*>(&strings[0] + index);
+
+        name = reinterpret_cast<char*>(&strings[index]);
 
     } else {
 
         if (topics.size() < (index * 16) + 12)
             return false;
 
-        uint32_t offset = UINT32ARRAY(&topics[0] + (index * 16) + 4);
+        uint32_t offset = UINT32ARRAY(&topics[index * 16 + 4]);
         int32_t  test   = static_cast<int32_t>(offset);
 
         if (strings.size() < offset + 1)
@@ -302,20 +301,20 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
             return false;
 
         if (!list)
-            name = reinterpret_cast<char*>(&strings[0] + offset);
+            name = reinterpret_cast<char*>(&strings[offset]);
 
         // #URLTBL index
-        offset = UINT32ARRAY(&topics[0] + (index * 16) + 8);
+        offset = UINT32ARRAY(&topics[index * 16 + 8]);
 
         if (urltbl.size() < offset + 12)
             return false;
 
-        offset = UINT32ARRAY(&urltbl[0] + offset + 8);
+        offset = UINT32ARRAY(&urltbl[offset + 8]);
 
         if (urlstr.size() < offset)
             return false;
 
-        value = reinterpret_cast<char*>(&urlstr[0] + offset + 8);
+        value = reinterpret_cast<char*>(&urlstr[offset + 8]);
     }
 
     if (!value.empty() && value[0] != '/')
@@ -456,8 +455,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
         if (bt_ui.length < offset + 12)
             return items != 0; // end of buffer
 
-        freeSpace = UINT16ARRAY(&btree[0] + offset);
-        next      = INT32ARRAY(&btree[0] + offset + 8);
+        freeSpace = UINT16ARRAY(&btree[offset]);
+        next      = INT32ARRAY(&btree[offset + 8]);
         spaceLeft = blockSize - 12;
         offset += 12;
 
@@ -470,7 +469,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
                 if (bt_ui.length < offset + sizeof(uint16_t))
                     return items != 0;
 
-                tmp = UINT16ARRAY(&btree[0] + offset);
+                tmp = UINT16ARRAY(&btree[offset]);
                 offset += sizeof(uint16_t);
                 spaceLeft -= sizeof(uint16_t);
 
@@ -481,8 +480,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
             if (bt_ui.length < offset + 16)
                 return items != 0;
 
-            uint16_t seeAlso   = UINT16ARRAY(&btree[0] + offset);
-            uint32_t numTopics = UINT32ARRAY(&btree[0] + offset + 0xc);
+            uint16_t seeAlso   = UINT16ARRAY(&btree[offset]);
+            uint32_t numTopics = UINT32ARRAY(&btree[offset + 0xc]);
             offset += 16;
             spaceLeft -= 16;
 
@@ -492,18 +491,18 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
                     if (bt_ui.length < offset + sizeof(uint16_t))
                         return items != 0;
 
-                    tmp = UINT16ARRAY(&btree[0] + offset);
+                    tmp = UINT16ARRAY(&btree[offset]);
                     offset += sizeof(uint16_t);
                     spaceLeft -= sizeof(uint16_t);
 
                 } while (tmp != 0);
-            } else {
 
+            } else {
                 for (uint32_t i = 0; i < numTopics && spaceLeft > freeSpace; ++i) {
                     if (bt_ui.length < offset + sizeof(uint32_t))
                         return items != 0;
 
-                    uint32_t index = UINT32ARRAY(&btree[0] + offset);
+                    uint32_t index = UINT32ARRAY(&btree[offset]);
 
                     GetItem(topics, strings, urltbl, urlstr, index, nullptr, toBuild, name, 0, false);
                     ++items;
@@ -596,7 +595,7 @@ bool CHMFile::LoadContextIDs()
 
     // convert our DWORDs to numbers
     for (unsigned int i = 0; i < ivb_len; i++) {
-        ivbs[i] = UINT32ARRAY(&ivb_buf[0] + j);
+        ivbs[i] = UINT32ARRAY(&ivb_buf[j]);
         j += 4; // step to the next DWORD
     }
 
@@ -610,7 +609,7 @@ bool CHMFile::LoadContextIDs()
 
     for (unsigned int i = 0; i < ivb_len; i += 2)
         // context-IDs as KEY, fileName from #STRINGS as VALUE
-        _cidMap[ivbs[i]] = CURRENT_CHAR_STRING(&strs_buf[0] + ivbs[i + 1]);
+        _cidMap[ivbs[i]] = CURRENT_CHAR_STRING(&strs_buf[ivbs[i + 1]]);
 
     delete[] ivbs;
 
@@ -654,8 +653,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
         || ::chm_resolve_object(_chmFile, "/#URLSTR", &uiurlstr) != CHM_RESOLVE_SUCCESS)
         return false;
 
-#define FTS_HEADER_LEN 0x32
-    unsigned char header[FTS_HEADER_LEN];
+    constexpr size_t FTS_HEADER_LEN = 0x32;
+    unsigned char    header[FTS_HEADER_LEN];
 
     if (::chm_retrieve_object(_chmFile, &ui, header, 0, FTS_HEADER_LEN) == 0)
         return false;
@@ -665,8 +664,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
     unsigned char loc_codes_s = header[0x22], loc_codes_r = header[0x23];
 
     if (doc_index_s != 2 || code_count_s != 2 || loc_codes_s != 2)
-        // Don't know how to use values other than 2 yet. Maybe
-        // next chmspec.
+        // Don't know how to use values other than 2 yet. Maybe next chmspec.
         return false;
 
     unsigned char* cursor32    = header + 0x14;
@@ -695,7 +693,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
         if (::chm_retrieve_object(_chmFile, &ui, &buffer[0], node_offset, node_len) == 0)
             return false;
 
-        cursor16   = &buffer[0] + 6;
+        cursor16   = &buffer[6];
         free_space = UINT16ARRAY(cursor16);
 
         i = sizeof(uint32_t) + sizeof(uint16_t) + sizeof(uint16_t);
@@ -703,11 +701,11 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
         uint32_t wlc_offset;
 
         while (i < node_len - free_space) {
-            word_len = *(&buffer[0] + i);
-            pos      = *(&buffer[0] + i + 1);
+            word_len = *(&buffer[i]);
+            pos      = *(&buffer[i + 1]);
 
             char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, &buffer[0] + i + 2, word_len - 1);
+            memcpy(wrd_buf, &buffer[i + 2], word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
@@ -718,17 +716,17 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
             delete[] wrd_buf;
 
             i += 2 + word_len;
-            unsigned char title = *(&buffer[0] + i - 1);
+            unsigned char title = *(&buffer[i - 1]);
 
             size_t encsz;
-            wlc_count = be_encint(&buffer[0] + i, encsz);
+            wlc_count = be_encint(&buffer[i], encsz);
             i += encsz;
 
-            cursor32   = &buffer[0] + i;
+            cursor32   = &buffer[i];
             wlc_offset = UINT32ARRAY(cursor32);
 
             i += sizeof(uint32_t) + sizeof(uint16_t);
-            wlc_size = be_encint(&buffer[0] + i, encsz);
+            wlc_size = be_encint(&buffer[i], encsz);
             i += encsz;
 
             cursor32    = &buffer[0];
@@ -747,10 +745,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
                     ProcessWLC(wlc_count, wlc_size, wlc_offset, doc_index_s, doc_index_r, code_count_s, code_count_r,
                                loc_codes_s, loc_codes_r, &ui, &uiurltbl, &uistrings, &uitopics, &uiurlstr, results);
 
-                } else if (text.CmpNoCase(
-                               // Mid() might be buggy.
-                               word.Mid(0, text.Length()))
-                           < -1)
+                } else if (text.CmpNoCase(word.Mid(0, text.Length())) < -1)
                     break;
             }
 
@@ -811,11 +806,11 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
 
         while (i < buffSize - free_space) {
 
-            word_len = *(&buffer[0] + i);
-            pos      = *(&buffer[0] + i + 1);
+            word_len = *(&buffer[i]);
+            pos      = *(&buffer[i + 1]);
 
             char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, &buffer[0] + i + 2, word_len - 1);
+            memcpy(wrd_buf, &buffer[i + 2], word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
@@ -826,7 +821,7 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
             delete[] wrd_buf;
 
             if (text.CmpNoCase(word) <= 0) {
-                cursor32      = &buffer[0] + i + word_len + 1;
+                cursor32      = &buffer[i + word_len + 1];
                 initialOffset = UINT32ARRAY(cursor32);
                 break;
             }
@@ -853,11 +848,11 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
     unsigned char* cursor32;
     uint32_t       stroff, urloff;
 
-#define TOPICS_ENTRY_LEN 16
-    unsigned char entry[TOPICS_ENTRY_LEN];
+    constexpr size_t TOPICS_ENTRY_LEN = 16;
+    unsigned char    entry[TOPICS_ENTRY_LEN];
 
-#define COMMON_BUF_LEN 1025
-    unsigned char combuf[COMMON_BUF_LEN];
+    constexpr size_t COMMON_BUF_LEN = 1025;
+    unsigned char    combuf[COMMON_BUF_LEN];
 
     if (::chm_retrieve_object(_chmFile, uimain, &buffer[0], wlc_offset, wlc_size) == 0)
         return false;
@@ -869,7 +864,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
             wlc_bit = 7;
         }
 
-        index += sr_int(&buffer[0] + off, &wlc_bit, ds, dr, length);
+        index += sr_int(&buffer[off], &wlc_bit, ds, dr, length);
         off += length;
 
         if (::chm_retrieve_object(_chmFile, topics, entry, index * 16, TOPICS_ENTRY_LEN) == 0)
@@ -920,11 +915,11 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
             (*results)[url] = topic;
         }
 
-        count = sr_int(&buffer[0] + off, &wlc_bit, cs, cr, length);
+        count = sr_int(&buffer[off], &wlc_bit, cs, cr, length);
         off += length;
 
         for (uint64_t j = 0; j < count; ++j) {
-            sr_int(&buffer[0] + off, &wlc_bit, ls, lr, length);
+            sr_int(&buffer[off], &wlc_bit, ls, lr, length);
             off += length;
         }
     }
@@ -934,11 +929,11 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 
 bool CHMFile::InfoFromWindows()
 {
-#define WIN_HEADER_LEN 0x08
-    unsigned char buffer[BUF_SIZE];
-    unsigned int  factor;
-    chmUnitInfo   ui;
-    long          size = 0;
+    constexpr size_t WIN_HEADER_LEN = 0x08;
+    unsigned char    buffer[BUF_SIZE];
+    unsigned int     factor;
+    chmUnitInfo      ui;
+    long             size = 0;
 
     if (::chm_resolve_object(_chmFile, "/#WINDOWS", &ui) == CHM_RESOLVE_SUCCESS) {
         if (!::chm_retrieve_object(_chmFile, &ui, buffer, 0, WIN_HEADER_LEN))
@@ -958,15 +953,11 @@ bool CHMFile::InfoFromWindows()
 
         for (uint32_t i = 0; i < entries; ++i) {
 
-            uint32_t offset = i * entry_size;
-
+            uint32_t offset    = i * entry_size;
             uint32_t off_title = UINT32ARRAY(raw + offset + 0x14);
-
-            uint32_t off_home = UINT32ARRAY(raw + offset + 0x68);
-
-            uint32_t off_hhc = UINT32ARRAY(raw + offset + 0x60);
-
-            uint32_t off_hhk = UINT32ARRAY(raw + offset + 0x64);
+            uint32_t off_home  = UINT32ARRAY(raw + offset + 0x68);
+            uint32_t off_hhc   = UINT32ARRAY(raw + offset + 0x60);
+            uint32_t off_hhk   = UINT32ARRAY(raw + offset + 0x64);
 
             factor = off_title / 4096;
 

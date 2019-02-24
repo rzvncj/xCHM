@@ -73,8 +73,8 @@ protected:
 private:
     CHMHtmlNotebook* _nbhtml;
     wxTextCtrl*      _text;
-    CHMListCtrl*     _lc;
-    bool             _navigate;
+    CHMListCtrl*     _lc {nullptr};
+    bool             _navigate {true};
 
 private:
     DECLARE_EVENT_TABLE()

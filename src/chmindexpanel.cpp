@@ -22,8 +22,7 @@
 #include <chmlistctrl.h>
 #include <wx/sizer.h>
 
-CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml)
-    : wxPanel(parent), _nbhtml(nbhtml), _lc(nullptr), _navigate(true)
+CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml) : wxPanel(parent), _nbhtml(nbhtml)
 {
     wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
     SetAutoLayout(true);

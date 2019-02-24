@@ -35,8 +35,7 @@
 #include <wx/wx.h>
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
-    : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _syncTree(true), _found(false),
-      _menu(nullptr), _frame(frame), _fdlg(nullptr)
+    : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _frame(frame)
 {
     _menu = new wxMenu;
     _menu->Append(ID_PopupForward, _("For&ward"));

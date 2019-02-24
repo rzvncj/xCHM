@@ -158,12 +158,12 @@ private:
 
 private:
     wxTreeCtrl*    _tcl;
-    bool           _syncTree;
-    bool           _found;
-    wxMenu*        _menu;
+    bool           _syncTree {true};
+    bool           _found {false};
+    wxMenu*        _menu {nullptr};
     CHMFrame*      _frame;
     wxString       _link;
-    CHMFindDialog* _fdlg;
+    CHMFindDialog* _fdlg {nullptr};
 
 private:
     DECLARE_EVENT_TABLE()

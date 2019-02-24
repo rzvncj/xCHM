@@ -1,4 +1,4 @@
-# xCHM - the CHM viewer for UNIX
+# xCHM
 
 UNIX CHM viewer.
 
@@ -39,16 +39,16 @@ and start your session.
 
 ## Build with
 
-[wxWidgets](http://www.wxwidgets.org) - GUI
-[CHMLIB](http://www.jedrea.com/chmlib/) - CHM access logic
+* [wxWidgets](http://www.wxwidgets.org) - GUI
+* [CHMLIB](http://www.jedrea.com/chmlib/) - CHM access logic
 
 ## Generating documentation
 
 If you'd like to generate developer documentation go to the root
 of the distribution and type
-
+```
 doxygen
-
+```
 This of course implies that you have doxygen installed. The documentation
 will be generated in the doc directory in HTML and LaTex format. The doc
 directory will be created in the process of creating the documentation so

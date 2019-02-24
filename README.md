@@ -2,6 +2,10 @@
 
 UNIX CHM viewer.
 
+## Screenshots
+
+[Python documentation](./screenshot.jpg)
+
 ## Prerequisites
 
 In order to be able to compile the code you need to have wxWidgets and

@@ -36,7 +36,6 @@
 #endif
 
 #ifdef WITH_LIBXMLRPC
-#warning "CUCU"
 
 using namespace XmlRpc;
 

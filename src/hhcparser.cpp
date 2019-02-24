@@ -182,7 +182,7 @@ void HHCParser::handleTag(const std::string& tag)
             _inobject = false;
 
             if (!_value.empty() && _value[0] != '/')
-                _value = std::string("/") + _value;
+                _value = "/" + _value;
 
             wxString name  = CURRENT_CHAR_STRING(_name.c_str());
             wxString value = CURRENT_CHAR_STRING(_value.c_str());

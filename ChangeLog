@@ -375,3 +375,7 @@
 		chmlib library (by using ./configure --enable-builtin-chmlib)
 		+ added Mac icons and .plist
 
+	* 1.25:
+		+ updated some of the code for modern C++.
+		+ minor code cleanup.
+		+ cleared a few warnings.

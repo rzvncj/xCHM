@@ -83,10 +83,10 @@ public:
     HHCParser& operator=(const HHCParser&) = delete;
 
 private:
-    int                       _level;
-    bool                      _inquote;
-    bool                      _intag;
-    bool                      _inobject;
+    int                       _level {0};
+    bool                      _inquote {false};
+    bool                      _intag {false};
+    bool                      _inobject {false};
     std::string               _tag;
     std::string               _name;
     std::string               _value;
@@ -94,9 +94,9 @@ private:
     CHMListCtrl*              _list;
     wxTreeItemId              _parents[TREE_BUF_SIZE];
     wxFontEncoding            _enc;
-    int                       _counter;
+    int                       _counter {0};
     std::unique_ptr<wxCSConv> _cvPtr;
-    bool                      _htmlChars;
+    bool                      _htmlChars {false};
 };
 
 #endif // __HHCPARSER_H_

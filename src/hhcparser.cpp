@@ -99,9 +99,7 @@ HTMLChar substitutions[] = {
 
 #define TIME_TO_YIELD 1024
 
-HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list)
-    : _level(0), _inquote(false), _intag(false), _inobject(false), _tree(tree), _list(list), _enc(enc), _counter(0),
-      _htmlChars(false)
+HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list) : _tree(tree), _list(list), _enc(enc)
 {
     memset(_parents, 0, TREE_BUF_SIZE * sizeof(wxTreeItemId));
 

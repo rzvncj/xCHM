@@ -71,10 +71,10 @@ private:
     void InitDialog(wxArrayString* normalFonts, wxArrayString* fixedFonts);
 
 private:
-    wxHtmlWindow* _test;
-    wxSpinCtrl*   _fontSizeControl;
-    wxComboBox*   _normalFControl;
-    wxComboBox*   _fixedFControl;
+    wxHtmlWindow* _test {nullptr};
+    wxSpinCtrl*   _fontSizeControl {nullptr};
+    wxComboBox*   _normalFControl {nullptr};
+    wxComboBox*   _fixedFControl {nullptr};
 
     wxString _normalFont;
     wxString _fixedFont;

@@ -230,31 +230,31 @@ private:
 
 private:
     CHMHtmlNotebook*    _nbhtml;
-    wxTreeCtrl*         _tcl;
-    wxSplitterWindow*   _sw;
-    wxMenu*             _menuFile;
-    wxToolBar*          _tb;
-    wxHtmlEasyPrinting* _ep;
-    wxNotebook*         _nb;
-    wxComboBox*         _cb;
-    CHMSearchPanel*     _csp;
-    CHMIndexPanel*      _cip;
+    wxTreeCtrl*         _tcl {nullptr};
+    wxSplitterWindow*   _sw {nullptr};
+    wxMenu*             _menuFile {nullptr};
+    wxToolBar*          _tb {nullptr};
+    wxHtmlEasyPrinting* _ep {nullptr};
+    wxNotebook*         _nb {nullptr};
+    wxComboBox*         _cb {nullptr};
+    CHMSearchPanel*     _csp {nullptr};
+    CHMIndexPanel*      _cip {nullptr};
 
     wxString       _openPath;
-    wxArrayString* _normalFonts;
-    wxArrayString* _fixedFonts;
+    wxArrayString* _normalFonts {nullptr};
+    wxArrayString* _fixedFonts {nullptr};
     wxString       _normalFont;
     wxString       _fixedFont;
     int            _fontSize;
-    bool           _bookmarkSel;
-    bool           _bookmarksDeleted;
+    bool           _bookmarkSel {true};
+    bool           _bookmarksDeleted {false};
     int            _sashPos;
     wxFont         _font;
     wxFileHistory  _fh;
     wxString       _fullAppPath;
     bool           _loadTopics;
     bool           _loadIndex;
-    bool           _fullScreen;
+    bool           _fullScreen {false};
 
 private:
     DECLARE_EVENT_TABLE()

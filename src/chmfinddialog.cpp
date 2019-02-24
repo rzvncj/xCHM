@@ -28,12 +28,11 @@
 CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     : wxDialog(parent, -1, wxString(_("Find in page.."))), _html(toSearch)
 {
-    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-
     _text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
-
     _whole = new wxCheckBox(this, -1, _("Whole words only"));
     _case  = new wxCheckBox(this, -1, _("Case sensitive"));
+
+    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
     sizer->Add(_text, 0, wxLEFT | wxTOP | wxBOTTOM, 5);
     sizer->Add(_whole, 0, wxLEFT, 5);
@@ -80,7 +79,6 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
         _currWord = word;
 
     } else {
-
         if (_cell && _cell->GetNext())
             _cell = _cell->GetNext();
         else {

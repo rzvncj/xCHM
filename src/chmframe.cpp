@@ -99,11 +99,9 @@ const wxChar* about_txt = wxT("xCHM v. " VERSION
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoint& pos, const wxSize& size,
                    const wxString& normalFont, const wxString& fixedFont, const int fontSize, const int sashPosition,
                    const wxString& fullAppPath, bool loadTopics, bool loadIndex)
-    : wxFrame(nullptr, -1, title, pos, size), _tcl(nullptr), _sw(nullptr), _menuFile(nullptr), _tb(nullptr),
-      _ep(nullptr), _nb(nullptr), _cb(nullptr), _csp(nullptr), _cip(nullptr), _openPath(booksDir),
-      _normalFonts(nullptr), _fixedFonts(nullptr), _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize),
-      _bookmarkSel(true), _bookmarksDeleted(false), _sashPos(sashPosition), _fullAppPath(fullAppPath),
-      _loadTopics(loadTopics), _loadIndex(loadIndex), _fullScreen(false)
+    : wxFrame(nullptr, -1, title, pos, size), _openPath(booksDir), _normalFont(normalFont), _fixedFont(fixedFont),
+      _fontSize(fontSize), _sashPos(sashPosition), _fullAppPath(fullAppPath), _loadTopics(loadTopics),
+      _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
     const int          NO_ACCELERATOR_ENTRIES = 6;

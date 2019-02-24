@@ -40,8 +40,7 @@ const wxChar* test_page = wxT(
 
 CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts,
                              const wxString& normalFont, const wxString& fixedFont, const int fontSize)
-    : wxDialog(parent, -1, wxString(_("Change fonts.."))), _test(nullptr), _fontSizeControl(nullptr),
-      _normalFControl(nullptr), _fixedFControl(nullptr), _normalFont(normalFont), _fixedFont(fixedFont),
+    : wxDialog(parent, -1, wxString(_("Change fonts.."))), _normalFont(normalFont), _fixedFont(fixedFont),
       _fontSize(fontSize)
 {
     wxBoxSizer*      topsizer = new wxBoxSizer(wxVERTICAL);
@@ -53,7 +52,6 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArr
 
     sizer->Add(_normalFControl = new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition, wxSize(200, -1), 0, nullptr,
                                                 wxCB_DROPDOWN | wxCB_READONLY));
-
     sizer->Add(_fixedFControl = new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition, wxSize(200, -1), 0, nullptr,
                                                wxCB_DROPDOWN | wxCB_READONLY));
 
@@ -62,7 +60,6 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArr
     _fontSizeControl->SetRange(2, 100);
 
     topsizer->Add(sizer, 0, wxLEFT | wxRIGHT | wxTOP, 10);
-
     topsizer->Add(new wxStaticText(this, -1, _("Preview:")), 0, wxLEFT | wxTOP, 10);
     topsizer->Add(
         _test = new wxHtmlWindow(this, -1, wxDefaultPosition, wxSize(20, 150), wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),

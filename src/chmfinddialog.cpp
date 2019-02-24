@@ -26,14 +26,11 @@
 #include <wx/wx.h>
 
 CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
-	: wxDialog(parent, -1, wxString(_("Find in page.."))),
-	  _html(toSearch), _cell(nullptr)
+	: wxDialog(parent, -1, wxString(_("Find in page.."))), _html(toSearch)
 {
 	wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
-	_text = new wxTextCtrl(this, ID_TextFind, wxEmptyString,
-			       wxDefaultPosition, wxSize(200, -1),
-			       wxTE_PROCESS_ENTER);
+	_text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
 
 	_whole = new wxCheckBox(this, -1, _("Whole words only"));
 	_case = new wxCheckBox(this, -1, _("Case sensitive"));
@@ -46,8 +43,7 @@ CHMFindDialog::CHMFindDialog(wxWindow *parent, CHMHtmlWindow *toSearch)
 	wxButton *find = new wxButton(this, ID_FindNext, _("Find next"));
 
 	szButtons->Add(find, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
-	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")),
-		       1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
+	szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
 
 	wxSizer *topsizer = new wxBoxSizer(wxHORIZONTAL);
 	topsizer->Add(sizer);
@@ -80,9 +76,7 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 		word.MakeLower();
 
 	if(!_cell || word.Cmp(_currWord.c_str())) {
-		_cell = _html->FindFirst(_html->GetInternalRepresentation(),
-					 word, _whole->IsChecked(),
-					 _case->IsChecked());
+		_cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
 		_currWord = word;
 
 	} else {
@@ -100,16 +94,11 @@ void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
 		if(!_cell)
 			return;
 
-		_cell = _html->FindNext(_cell, word, _whole->IsChecked(),
-				       _case->IsChecked());
+		_cell = _html->FindNext(_cell, word, _whole->IsChecked(), _case->IsChecked());
 
 		// Wrap around.
-		if(!_cell) {
-			_cell = _html->FindFirst(
-				_html->GetInternalRepresentation(),
-				word, _whole->IsChecked(),
-				_case->IsChecked());
-		}
+		if(!_cell)
+			_cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
 	}
 }
 

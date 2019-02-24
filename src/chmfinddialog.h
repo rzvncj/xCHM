@@ -56,7 +56,7 @@ private:
 	wxCheckBox* _whole;
 	wxCheckBox* _case;
 	wxString _currWord;
-	wxHtmlCell *_cell;
+	wxHtmlCell *_cell{nullptr};
 
 private:
 	DECLARE_EVENT_TABLE();

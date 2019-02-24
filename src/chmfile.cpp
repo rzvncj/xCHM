@@ -701,8 +701,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
         uint32_t wlc_offset;
 
         while (i < node_len - free_space) {
-            word_len = *(&buffer[i]);
-            pos      = *(&buffer[i + 1]);
+            word_len = buffer[i];
+            pos      = buffer[i + 1];
 
             char* wrd_buf = new char[word_len];
             memcpy(wrd_buf, &buffer[i + 2], word_len - 1);
@@ -716,7 +716,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
             delete[] wrd_buf;
 
             i += 2 + word_len;
-            unsigned char title = *(&buffer[i - 1]);
+            unsigned char title = buffer[i - 1];
 
             size_t encsz;
             wlc_count = be_encint(&buffer[i], encsz);
@@ -805,9 +805,8 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
         uint16_t free_space = UINT16ARRAY(cursor16);
 
         while (i < buffSize - free_space) {
-
-            word_len = *(&buffer[i]);
-            pos      = *(&buffer[i + 1]);
+            word_len = buffer[i];
+            pos      = buffer[i + 1];
 
             char* wrd_buf = new char[word_len];
             memcpy(wrd_buf, &buffer[i + 2], word_len - 1);

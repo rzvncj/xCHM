@@ -33,24 +33,6 @@
 #include <wx/treectrl.h>
 #include <wx/wx.h>
 
-// damn wxWidgets and it's scoped ptr.
-class UCharPtr {
-public:
-    UCharPtr(unsigned char* p, size_t size = 0) : _p(p), _size(size) {}
-    ~UCharPtr() { delete[] _p; }
-
-    unsigned char* get() { return _p; }
-    size_t         size() const { return _size; }
-
-private:
-    UCharPtr(const UCharPtr&);
-    UCharPtr& operator=(const UCharPtr&);
-
-private:
-    unsigned char* _p;
-    size_t         _size;
-};
-
 // Big-enough buffer size for use with various routines.
 #define BUF_SIZE 4096
 
@@ -221,42 +203,39 @@ bool CHMFile::BinaryTOC(wxTreeCtrl* toBuild)
     if (ti_ui.length < 4) // just make sure
         return false;
 
-    UCharPtr topidx(new unsigned char[ti_ui.length], ti_ui.length);
-    UCharPtr topics(new unsigned char[ts_ui.length], ts_ui.length);
-    UCharPtr strings(new unsigned char[st_ui.length], st_ui.length);
-    UCharPtr urltbl(new unsigned char[ut_ui.length], ut_ui.length);
-    UCharPtr urlstr(new unsigned char[us_ui.length], us_ui.length);
+    UCharVector topidx(ti_ui.length), topics(ts_ui.length), strings(st_ui.length), urltbl(ut_ui.length),
+        urlstr(us_ui.length);
 
-    if (::chm_retrieve_object(_chmFile, &ti_ui, topidx.get(), 0, ti_ui.length) != (int64_t)ti_ui.length)
+    if (::chm_retrieve_object(_chmFile, &ti_ui, &topidx[0], 0, ti_ui.length) != (int64_t)ti_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 0, ts_ui.length) != (int64_t)ts_ui.length)
+    if (::chm_retrieve_object(_chmFile, &ts_ui, &topics[0], 0, ts_ui.length) != (int64_t)ts_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 0, st_ui.length) != (int64_t)st_ui.length)
+    if (::chm_retrieve_object(_chmFile, &st_ui, &strings[0], 0, st_ui.length) != (int64_t)st_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &ut_ui, urltbl.get(), 0, ut_ui.length) != (int64_t)ut_ui.length)
+    if (::chm_retrieve_object(_chmFile, &ut_ui, &urltbl[0], 0, ut_ui.length) != (int64_t)ut_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &us_ui, urlstr.get(), 0, us_ui.length) != (int64_t)us_ui.length)
+    if (::chm_retrieve_object(_chmFile, &us_ui, &urlstr[0], 0, us_ui.length) != (int64_t)us_ui.length)
         return false;
 
-    uint32_t off = UINT32ARRAY(topidx.get());
+    uint32_t off = UINT32ARRAY(&topidx[0]);
     RecurseLoadBTOC(topidx, topics, strings, urltbl, urlstr, off, toBuild, 1);
 
     return true;
 }
 
-void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCharPtr& urlstr,
-                              uint32_t offset, wxTreeCtrl* toBuild, int level)
+void CHMFile::RecurseLoadBTOC(UCharVector& topidx, UCharVector& topics, UCharVector& strings, UCharVector& urltbl,
+                              UCharVector& urlstr, uint32_t offset, wxTreeCtrl* toBuild, int level)
 {
     while (offset) {
         if (topidx.size() < offset + 20)
             return;
 
-        uint32_t flags = UINT32ARRAY(topidx.get() + offset + 4);
-        uint32_t index = UINT32ARRAY(topidx.get() + offset + 8);
+        uint32_t flags = UINT32ARRAY(&topidx[0] + offset + 4);
+        uint32_t index = UINT32ARRAY(&topidx[0] + offset + 8);
 
         if ((flags & 0x4) || (flags & 0x8)) { // book or local
             if (!GetItem(topics, strings, urltbl, urlstr, index, toBuild, nullptr, wxEmptyString, level,
@@ -269,18 +248,19 @@ void CHMFile::RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics, UCharPtr& stri
             if (topidx.size() < offset + 24)
                 return;
 
-            uint32_t child = UINT32ARRAY(topidx.get() + offset + 20);
+            uint32_t child = UINT32ARRAY(&topidx[0] + offset + 20);
 
             if (child)
                 RecurseLoadBTOC(topidx, topics, strings, urltbl, urlstr, child, toBuild, level + 1);
         }
 
-        offset = UINT32ARRAY(topidx.get() + offset + 0x10);
+        offset = UINT32ARRAY(&topidx[0] + offset + 0x10);
     }
 }
 
-bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCharPtr& urlstr, uint32_t index,
-                      wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level, bool local)
+bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& urltbl, UCharVector& urlstr,
+                      uint32_t index, wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level,
+                      bool local)
 {
     static wxTreeItemId parents[TREE_BUF_SIZE];
 
@@ -301,15 +281,15 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCh
     if (local) {
         if (strings.size() < index + 1)
             return false;
-        name = (char*)(strings.get() + index);
+        name = reinterpret_cast<char*>(&strings[0] + index);
 
     } else {
 
         if (topics.size() < (index * 16) + 12)
             return false;
 
-        uint32_t offset = UINT32ARRAY(topics.get() + (index * 16) + 4);
-        int32_t  test   = (int32_t)offset;
+        uint32_t offset = UINT32ARRAY(&topics[0] + (index * 16) + 4);
+        int32_t  test   = static_cast<int32_t>(offset);
 
         if (strings.size() < offset + 1)
             return false;
@@ -318,24 +298,24 @@ bool CHMFile::GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCh
             return false;
 
         if (!list)
-            name = (char*)(strings.get() + offset);
+            name = reinterpret_cast<char*>(&strings[0] + offset);
 
         // #URLTBL index
-        offset = UINT32ARRAY(topics.get() + (index * 16) + 8);
+        offset = UINT32ARRAY(&topics[0] + (index * 16) + 8);
 
         if (urltbl.size() < offset + 12)
             return false;
 
-        offset = UINT32ARRAY(urltbl.get() + offset + 8);
+        offset = UINT32ARRAY(&urltbl[0] + offset + 8);
 
         if (urlstr.size() < offset)
             return false;
 
-        value = (char*)(urlstr.get() + offset + 8);
+        value = reinterpret_cast<char*>(&urlstr[0] + offset + 8);
     }
 
     if (!value.empty() && value[0] != '/')
-        value = std::string("/") + value;
+        value = "/" + value;
 
     wxString tname;
     wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
@@ -442,25 +422,22 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
         || ::chm_resolve_object(_chmFile, "/#URLSTR", &us_ui) != CHM_RESOLVE_SUCCESS)
         return false; // failed to find internal files
 
-    UCharPtr btree(new unsigned char[bt_ui.length], bt_ui.length);
-    UCharPtr topics(new unsigned char[ts_ui.length], ts_ui.length);
-    UCharPtr strings(new unsigned char[st_ui.length], st_ui.length);
-    UCharPtr urltbl(new unsigned char[ut_ui.length], ut_ui.length);
-    UCharPtr urlstr(new unsigned char[us_ui.length], us_ui.length);
+    UCharVector btree(bt_ui.length), topics(ts_ui.length), strings(st_ui.length), urltbl(ut_ui.length),
+        urlstr(us_ui.length);
 
-    if (::chm_retrieve_object(_chmFile, &bt_ui, btree.get(), 0, bt_ui.length) != (int64_t)bt_ui.length)
+    if (::chm_retrieve_object(_chmFile, &bt_ui, &btree[0], 0, bt_ui.length) != (int64_t)bt_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &ts_ui, topics.get(), 0, ts_ui.length) != (int64_t)ts_ui.length)
+    if (::chm_retrieve_object(_chmFile, &ts_ui, &topics[0], 0, ts_ui.length) != (int64_t)ts_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &st_ui, strings.get(), 0, st_ui.length) != (int64_t)st_ui.length)
+    if (::chm_retrieve_object(_chmFile, &st_ui, &strings[0], 0, st_ui.length) != (int64_t)st_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &ut_ui, urltbl.get(), 0, ut_ui.length) != (int64_t)ut_ui.length)
+    if (::chm_retrieve_object(_chmFile, &ut_ui, &urltbl[0], 0, ut_ui.length) != (int64_t)ut_ui.length)
         return false;
 
-    if (::chm_retrieve_object(_chmFile, &us_ui, urlstr.get(), 0, us_ui.length) != (int64_t)us_ui.length)
+    if (::chm_retrieve_object(_chmFile, &us_ui, &urlstr[0], 0, us_ui.length) != (int64_t)us_ui.length)
         return false;
 
     if (bt_ui.length < 0x4c + 12)
@@ -475,8 +452,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
         if (bt_ui.length < offset + 12)
             return items != 0; // end of buffer
 
-        freeSpace = UINT16ARRAY(btree.get() + offset);
-        next      = INT32ARRAY(btree.get() + offset + 8);
+        freeSpace = UINT16ARRAY(&btree[0] + offset);
+        next      = INT32ARRAY(&btree[0] + offset + 8);
         spaceLeft = blockSize - 12;
         offset += 12;
 
@@ -489,7 +466,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
                 if (bt_ui.length < offset + sizeof(uint16_t))
                     return items != 0;
 
-                tmp = UINT16ARRAY(btree.get() + offset);
+                tmp = UINT16ARRAY(&btree[0] + offset);
                 offset += sizeof(uint16_t);
                 spaceLeft -= sizeof(uint16_t);
 
@@ -500,8 +477,8 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
             if (bt_ui.length < offset + 16)
                 return items != 0;
 
-            uint16_t seeAlso   = UINT16ARRAY(btree.get() + offset);
-            uint32_t numTopics = UINT32ARRAY(btree.get() + offset + 0xc);
+            uint16_t seeAlso   = UINT16ARRAY(&btree[0] + offset);
+            uint32_t numTopics = UINT32ARRAY(&btree[0] + offset + 0xc);
             offset += 16;
             spaceLeft -= 16;
 
@@ -511,7 +488,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
                     if (bt_ui.length < offset + sizeof(uint16_t))
                         return items != 0;
 
-                    tmp = UINT16ARRAY(btree.get() + offset);
+                    tmp = UINT16ARRAY(&btree[0] + offset);
                     offset += sizeof(uint16_t);
                     spaceLeft -= sizeof(uint16_t);
 
@@ -522,7 +499,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
                     if (bt_ui.length < offset + sizeof(uint32_t))
                         return items != 0;
 
-                    uint32_t index = UINT32ARRAY(btree.get() + offset);
+                    uint32_t index = UINT32ARRAY(&btree[0] + offset);
 
                     GetItem(topics, strings, urltbl, urlstr, index, nullptr, toBuild, name, 0, false);
                     ++items;
@@ -598,10 +575,10 @@ bool CHMFile::LoadContextIDs()
         || chm_resolve_object(_chmFile, "/#STRINGS", &strs_ui) != CHM_RESOLVE_SUCCESS)
         return false; // failed to find internal files
 
-    UCharPtr ivb_buf(new unsigned char[ivb_ui.length]);
-    uint64_t ivb_len = 0;
+    UCharVector ivb_buf(ivb_ui.length);
+    uint64_t    ivb_len = 0;
 
-    if ((ivb_len = chm_retrieve_object(_chmFile, &ivb_ui, ivb_buf.get(), 0, ivb_ui.length)) == 0)
+    if ((ivb_len = chm_retrieve_object(_chmFile, &ivb_ui, &ivb_buf[0], 0, ivb_ui.length)) == 0)
         return false; // failed to retrieve data
 
     // always odd (DWORD + 2(n)*DWORD, so make even
@@ -615,21 +592,21 @@ bool CHMFile::LoadContextIDs()
 
     // convert our DWORDs to numbers
     for (unsigned int i = 0; i < ivb_len; i++) {
-        ivbs[i] = UINT32ARRAY(ivb_buf.get() + j);
+        ivbs[i] = UINT32ARRAY(&ivb_buf[0] + j);
         j += 4; // step to the next DWORD
     }
 
-    UCharPtr strs_buf(new unsigned char[strs_ui.length]);
-    uint64_t strs_len = 0;
+    UCharVector strs_buf(strs_ui.length);
+    uint64_t    strs_len = 0;
 
-    if ((strs_len = chm_retrieve_object(_chmFile, &strs_ui, strs_buf.get(), 0, strs_ui.length)) == 0) {
+    if ((strs_len = chm_retrieve_object(_chmFile, &strs_ui, &strs_buf[0], 0, strs_ui.length)) == 0) {
         delete[] ivbs;
         return false; // failed to retrieve data
     }
 
     for (unsigned int i = 0; i < ivb_len; i += 2)
         // context-IDs as KEY, fileName from #STRINGS as VALUE
-        _cidMap[ivbs[i]] = CURRENT_CHAR_STRING(strs_buf.get() + ivbs[i + 1]);
+        _cidMap[ivbs[i]] = CURRENT_CHAR_STRING(&strs_buf[0] + ivbs[i + 1]);
 
     delete[] ivbs;
 
@@ -702,7 +679,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
     uint32_t      i = sizeof(uint16_t);
     uint16_t      free_space;
 
-    UCharPtr buffer(new unsigned char[node_len]);
+    UCharVector buffer(node_len);
 
     node_offset = GetLeafNodeOffset(text, node_offset, node_len, tree_depth, &ui);
 
@@ -711,10 +688,10 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
 
     do {
         // got a leaf node here.
-        if (::chm_retrieve_object(_chmFile, &ui, buffer.get(), node_offset, node_len) == 0)
+        if (::chm_retrieve_object(_chmFile, &ui, &buffer[0], node_offset, node_len) == 0)
             return false;
 
-        cursor16   = buffer.get() + 6;
+        cursor16   = &buffer[0] + 6;
         free_space = UINT16ARRAY(cursor16);
 
         i = sizeof(uint32_t) + sizeof(uint16_t) + sizeof(uint16_t);
@@ -722,11 +699,11 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
         uint32_t wlc_offset;
 
         while (i < node_len - free_space) {
-            word_len = *(buffer.get() + i);
-            pos      = *(buffer.get() + i + 1);
+            word_len = *(&buffer[0] + i);
+            pos      = *(&buffer[0] + i + 1);
 
             char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, buffer.get() + i + 2, word_len - 1);
+            memcpy(wrd_buf, &buffer[0] + i + 2, word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
@@ -737,20 +714,20 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
             delete[] wrd_buf;
 
             i += 2 + word_len;
-            unsigned char title = *(buffer.get() + i - 1);
+            unsigned char title = *(&buffer[0] + i - 1);
 
             size_t encsz;
-            wlc_count = be_encint(buffer.get() + i, encsz);
+            wlc_count = be_encint(&buffer[0] + i, encsz);
             i += encsz;
 
-            cursor32   = buffer.get() + i;
+            cursor32   = &buffer[0] + i;
             wlc_offset = UINT32ARRAY(cursor32);
 
             i += sizeof(uint32_t) + sizeof(uint16_t);
-            wlc_size = be_encint(buffer.get() + i, encsz);
+            wlc_size = be_encint(&buffer[0] + i, encsz);
             i += encsz;
 
-            cursor32    = buffer.get();
+            cursor32    = &buffer[0];
             node_offset = UINT32ARRAY(cursor32);
 
             if (!title && titlesOnly)
@@ -810,30 +787,31 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
     unsigned char* cursor32;
     unsigned char  word_len, pos;
     uint32_t       i = sizeof(uint16_t);
-    UCharPtr       buffer(new unsigned char[buffSize]);
     wxString       word;
 
-    if (!buffer.get())
+    if (!buffSize)
         return 0;
+
+    UCharVector buffer(buffSize);
 
     while (--treeDepth) {
         if (initialOffset == test_offset)
             return 0;
 
         test_offset = initialOffset;
-        if (::chm_retrieve_object(_chmFile, ui, buffer.get(), initialOffset, buffSize) == 0)
+        if (::chm_retrieve_object(_chmFile, ui, &buffer[0], initialOffset, buffSize) == 0)
             return 0;
 
-        cursor16            = buffer.get();
+        cursor16            = &buffer[0];
         uint16_t free_space = UINT16ARRAY(cursor16);
 
         while (i < buffSize - free_space) {
 
-            word_len = *(buffer.get() + i);
-            pos      = *(buffer.get() + i + 1);
+            word_len = *(&buffer[0] + i);
+            pos      = *(&buffer[0] + i + 1);
 
             char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, buffer.get() + i + 2, word_len - 1);
+            memcpy(wrd_buf, &buffer[0] + i + 2, word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
@@ -844,7 +822,7 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
             delete[] wrd_buf;
 
             if (text.CmpNoCase(word) <= 0) {
-                cursor32      = buffer.get() + i + word_len + 1;
+                cursor32      = &buffer[0] + i + word_len + 1;
                 initialOffset = UINT32ARRAY(cursor32);
                 break;
             }
@@ -867,7 +845,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
     int            wlc_bit = 7;
     uint64_t       index   = 0, count;
     size_t         length, off = 0;
-    UCharPtr       buffer(new unsigned char[wlc_size]);
+    UCharVector    buffer(wlc_size);
     unsigned char* cursor32;
     uint32_t       stroff, urloff;
 
@@ -877,7 +855,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 #define COMMON_BUF_LEN 1025
     unsigned char combuf[COMMON_BUF_LEN];
 
-    if (::chm_retrieve_object(_chmFile, uimain, buffer.get(), wlc_offset, wlc_size) == 0)
+    if (::chm_retrieve_object(_chmFile, uimain, &buffer[0], wlc_offset, wlc_size) == 0)
         return false;
 
     for (uint64_t i = 0; i < wlc_count; ++i) {
@@ -887,7 +865,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
             wlc_bit = 7;
         }
 
-        index += sr_int(buffer.get() + off, &wlc_bit, ds, dr, length);
+        index += sr_int(&buffer[0] + off, &wlc_bit, ds, dr, length);
         off += length;
 
         if (::chm_retrieve_object(_chmFile, topics, entry, index * 16, TOPICS_ENTRY_LEN) == 0)
@@ -938,11 +916,11 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
             (*results)[url] = topic;
         }
 
-        count = sr_int(buffer.get() + off, &wlc_bit, cs, cr, length);
+        count = sr_int(&buffer[0] + off, &wlc_bit, cs, cr, length);
         off += length;
 
         for (uint64_t j = 0; j < count; ++j) {
-            sr_int(buffer.get() + off, &wlc_bit, ls, lr, length);
+            sr_int(&buffer[0] + off, &wlc_bit, ls, lr, length);
             off += length;
         }
     }
@@ -965,8 +943,8 @@ bool CHMFile::InfoFromWindows()
         uint32_t entries    = UINT32ARRAY(buffer);
         uint32_t entry_size = UINT32ARRAY(buffer + 0x04);
 
-        UCharPtr       uptr(new unsigned char[entries * entry_size]);
-        unsigned char* raw = uptr.get();
+        UCharVector    uptr(entries * entry_size);
+        unsigned char* raw = &uptr[0];
 
         if (!::chm_retrieve_object(_chmFile, &ui, raw, 8, entries * entry_size))
             return false;

@@ -31,6 +31,7 @@
 #include <chm_lib.h>
 #endif
 #include <string>
+#include <vector>
 #include <wx/filefn.h>
 #include <wx/font.h>
 #include <wx/hashmap.h>
@@ -39,8 +40,9 @@
 // Forward declarations.
 class wxTreeCtrl;
 class CHMListCtrl;
-class UCharPtr;
 class wxCSConv;
+
+using UCharVector = std::vector<unsigned char>;
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
 WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
@@ -257,11 +259,11 @@ private:
     bool BinaryTOC(wxTreeCtrl* toBuild);
 
     //! Try to recursively load the binary topics tree
-    void RecurseLoadBTOC(UCharPtr& topidx, UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCharPtr& urlstr,
-                         uint32_t offset, wxTreeCtrl* toBuild, int level);
+    void RecurseLoadBTOC(UCharVector& topidx, UCharVector& topics, UCharVector& strings, UCharVector& urltbl,
+                         UCharVector& urlstr, uint32_t offset, wxTreeCtrl* toBuild, int level);
 
     //! Retrieve the data (name/URL) for a single entry (TOC or index)
-    bool GetItem(UCharPtr& topics, UCharPtr& strings, UCharPtr& urltbl, UCharPtr& urlstr, uint32_t index,
+    bool GetItem(UCharVector& topics, UCharVector& strings, UCharVector& urltbl, UCharVector& urlstr, uint32_t index,
                  wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level, bool local);
 
     //! Get the binary index (if available)

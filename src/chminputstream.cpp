@@ -28,10 +28,8 @@ wxString CHMInputStream::_path;
 
 void CHMInputStream::Cleanup()
 {
-    if (_archiveCache != nullptr) {
-        delete _archiveCache;
-        _archiveCache = nullptr;
-    }
+    delete _archiveCache;
+    _archiveCache = nullptr;
 }
 
 CHMFile* CHMInputStream::GetCache()
@@ -43,7 +41,7 @@ CHMFile* CHMInputStream::GetCache()
  * rest of class CHMInputStream implementation
  */
 
-CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file) : _currPos(0)
+CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
 {
     wxString filename = file;
 
@@ -103,7 +101,7 @@ bool CHMInputStream::Eof() const
 
 size_t CHMInputStream::OnSysRead(void* buffer, size_t bufsize)
 {
-    if ((uint64_t)_currPos >= _ui.length) {
+    if (static_cast<uint64_t>(_currPos) >= _ui.length) {
         m_lasterror = wxSTREAM_EOF;
         return 0;
     }
@@ -111,11 +109,10 @@ size_t CHMInputStream::OnSysRead(void* buffer, size_t bufsize)
     if (!_archiveCache)
         return 0;
 
-    if ((uint64_t)(_currPos + bufsize) > _ui.length)
+    if (static_cast<uint64_t>(_currPos + bufsize) > _ui.length)
         bufsize = _ui.length - _currPos;
 
-    bufsize = _archiveCache->RetrieveObject(&_ui, (unsigned char*)buffer, _currPos, bufsize);
-
+    bufsize = _archiveCache->RetrieveObject(&_ui, static_cast<unsigned char*>(buffer), _currPos, bufsize);
     _currPos += bufsize;
 
     return bufsize;
@@ -143,7 +140,6 @@ wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 bool CHMInputStream::Init(const wxString& archive)
 {
     if (_archiveCache == nullptr || !_archiveCache->ArchiveName().IsSameAs(archive)) {
-
         Cleanup();
 
         _archiveCache = new CHMFile(archive);

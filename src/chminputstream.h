@@ -91,7 +91,7 @@ private:
 
 private:
     static CHMFile* _archiveCache;
-    off_t           _currPos;
+    off_t           _currPos {0};
     chmUnitInfo     _ui;
     static wxString _path;
 };

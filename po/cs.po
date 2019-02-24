@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-23 22:56+0200\n"
+"POT-Creation-Date: 2019-02-24 19:22+0200\n"
 "PO-Revision-Date: 2005-08-30 09:34+0200\n"
 "Last-Translator: Luboš Staněk <lubek@users.sourceforge.net>\n"
 "Language-Team: čeština <cs@li.org>\n"
@@ -19,399 +19,399 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/chmfile.cpp:225
+#: src/chmfile.cpp:185
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:226
+#: src/chmfile.cpp:186
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "Nepojmenovaný v rejstříku"
 
-#: src/chmfile.cpp:227
+#: src/chmfile.cpp:187
 msgid "Untitled in index"
 msgstr "Nepojmenovaný v rejstříku"
 
-#: src/chmfinddialog.cpp:33
+#: src/chmfinddialog.cpp:29
 msgid "Find in page.."
 msgstr "Najít na stránce.."
 
-#: src/chmfinddialog.cpp:42
+#: src/chmfinddialog.cpp:32
 msgid "Whole words only"
 msgstr "Jen celá slova"
 
-#: src/chmfinddialog.cpp:43
+#: src/chmfinddialog.cpp:33
 msgid "Case sensitive"
 msgstr "Rozlišovat velká/malá"
 
-#: src/chmfinddialog.cpp:50
+#: src/chmfinddialog.cpp:42
 msgid "Find next"
 msgstr "Hledat další"
 
-#: src/chmfinddialog.cpp:53 src/chmfontdialog.cpp:92
+#: src/chmfinddialog.cpp:45 src/chmfontdialog.cpp:74
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/chmfontdialog.cpp:53
+#: src/chmfontdialog.cpp:43
 msgid "Change fonts.."
 msgstr "Změnit písma.."
 
-#: src/chmfontdialog.cpp:60
+#: src/chmfontdialog.cpp:49
 msgid "Normal font:"
 msgstr "Normální písmo:"
 
-#: src/chmfontdialog.cpp:61
+#: src/chmfontdialog.cpp:50
 msgid "Fixed font:"
 msgstr "Písmo s pevnou šířkou:"
 
-#: src/chmfontdialog.cpp:62
+#: src/chmfontdialog.cpp:51
 msgid "Font size:"
 msgstr "Velikost písma:"
 
-#: src/chmfontdialog.cpp:80
+#: src/chmfontdialog.cpp:63
 msgid "Preview:"
 msgstr "Náhled:"
 
-#: src/chmfontdialog.cpp:90
+#: src/chmfontdialog.cpp:70
 msgid "OK"
 msgstr "OK"
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:44
 msgid "Open a CHM book."
 msgstr "Otevřít knihu CHM."
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:45
 msgid "Change fonts."
 msgstr "Změnit písma."
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:46
 msgid "Print the page currently displayed."
 msgstr "Vytisknout aktuálně zobrazenou stranu."
 
-#: src/chmframe.cpp:52
+#: src/chmframe.cpp:47
 msgid "Toggle table of contents."
 msgstr ""
 
-#: src/chmframe.cpp:53
+#: src/chmframe.cpp:48
 msgid "Go to the book's start page."
 msgstr "Jít na počáteční stranu knihy."
 
-#: src/chmframe.cpp:54
+#: src/chmframe.cpp:49
 msgid "Go forward in history. Per book."
 msgstr "Jít dopředu v historii. V rámci knihy."
 
-#: src/chmframe.cpp:55
+#: src/chmframe.cpp:50
 msgid "Back to the last visited page. Per book."
 msgstr "Zpět na poslední navštívenou stranu. V rámci knihy."
 
-#: src/chmframe.cpp:56
+#: src/chmframe.cpp:51
 msgid "About the program."
 msgstr "O programu."
 
-#: src/chmframe.cpp:57
+#: src/chmframe.cpp:52
 #, fuzzy
 msgid "Copy selection."
 msgstr "&Kopírovat výběr"
 
-#: src/chmframe.cpp:58
+#: src/chmframe.cpp:53
 #, fuzzy
 msgid "Find word in page."
 msgstr "Najít na stránce.."
 
-#: src/chmframe.cpp:59
+#: src/chmframe.cpp:54
 msgid "Toggle fullscreen mode."
 msgstr ""
 
-#: src/chmframe.cpp:60
+#: src/chmframe.cpp:55
 msgid "Close the current tab"
 msgstr ""
 
-#: src/chmframe.cpp:61
+#: src/chmframe.cpp:56
 #, fuzzy
 msgid "Open a new tab"
 msgstr "Otevřít knihu CHM."
 
-#: src/chmframe.cpp:62
+#: src/chmframe.cpp:57
 msgid "Associate the .chm file extension with xCHM."
 msgstr ""
 
-#: src/chmframe.cpp:179
+#: src/chmframe.cpp:141
 msgid "Ready."
 msgstr "Připraven."
 
-#: src/chmframe.cpp:205 src/chmframe.cpp:1030
+#: src/chmframe.cpp:165 src/chmframe.cpp:889
 msgid "Contents"
 msgstr "Obsah"
 
-#: src/chmframe.cpp:206
+#: src/chmframe.cpp:166
 msgid "Index"
 msgstr "Index"
 
-#: src/chmframe.cpp:207 src/chmsearchpanel.cpp:50
+#: src/chmframe.cpp:167 src/chmsearchpanel.cpp:43
 msgid "Search"
 msgstr "Hledat"
 
-#: src/chmframe.cpp:233
+#: src/chmframe.cpp:190
 msgid "About xCHM"
 msgstr "O aplikaci xCHM"
 
-#: src/chmframe.cpp:241
+#: src/chmframe.cpp:195
 msgid "Choose a file.."
 msgstr "Vybrat soubor.."
 
-#: src/chmframe.cpp:376
+#: src/chmframe.cpp:304
 msgid "Confirm"
 msgstr ""
 
-#: src/chmframe.cpp:400
+#: src/chmframe.cpp:320
 msgid "Registration successful!"
 msgstr ""
 
-#: src/chmframe.cpp:401
+#: src/chmframe.cpp:320
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:658
+#: src/chmframe.cpp:551
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:777
+#: src/chmframe.cpp:659
 msgid "&Open..\tCtrl-O"
 msgstr "&Otevřít..\tCtrl-O"
 
-#: src/chmframe.cpp:778
+#: src/chmframe.cpp:660
 msgid "&Print page..\tCtrl-P"
 msgstr "Vy&tisknout stránku..\tCtrl-P"
 
-#: src/chmframe.cpp:779
+#: src/chmframe.cpp:661
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Písma .."
 
-#: src/chmframe.cpp:782
+#: src/chmframe.cpp:663
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Zobrazit &strom obsahu\tCtrl-S"
 
-#: src/chmframe.cpp:788
+#: src/chmframe.cpp:667
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:794
+#: src/chmframe.cpp:672
 msgid "&Recent files"
 msgstr "Nedávné soubo&ry"
 
-#: src/chmframe.cpp:806
+#: src/chmframe.cpp:684
 msgid "E&xit\tCtrl-X"
 msgstr "&Konect\tCtrl-X"
 
-#: src/chmframe.cpp:807
+#: src/chmframe.cpp:684
 msgid "Quit the application."
 msgstr "Ukončit aplikaci."
 
-#: src/chmframe.cpp:811
+#: src/chmframe.cpp:688
 msgid "&Home\tCtrl-H"
 msgstr "&Domů\tCtrl-H"
 
-#: src/chmframe.cpp:812
+#: src/chmframe.cpp:689
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Vpře&d\tCtrl-W"
 
-#: src/chmframe.cpp:814
+#: src/chmframe.cpp:690
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "&Zpět\tCtrl-B"
 
-#: src/chmframe.cpp:817
+#: src/chmframe.cpp:693
 msgid "&About..\tF1"
 msgstr "&O aplikaci ..\tF1"
 
-#: src/chmframe.cpp:820
+#: src/chmframe.cpp:696
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "&Domů\tCtrl-H"
 
-#: src/chmframe.cpp:821
+#: src/chmframe.cpp:697
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "&Otevřít..\tCtrl-O"
 
-#: src/chmframe.cpp:823
+#: src/chmframe.cpp:699
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Domů\tCtrl-H"
 
-#: src/chmframe.cpp:824
+#: src/chmframe.cpp:700
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Písma..\tCtrl-T"
 
-#: src/chmframe.cpp:827
+#: src/chmframe.cpp:703
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:831
+#: src/chmframe.cpp:706
 msgid "&File"
 msgstr "&Soubor"
 
-#: src/chmframe.cpp:832
+#: src/chmframe.cpp:707
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:833
+#: src/chmframe.cpp:708
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:834
+#: src/chmframe.cpp:709
 msgid "Hi&story"
 msgstr "&Historie"
 
-#: src/chmframe.cpp:835
+#: src/chmframe.cpp:710
 msgid "&Help"
 msgstr "&Nápověda"
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:727
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/chmframe.cpp:873
+#: src/chmframe.cpp:742
 msgid "Topics"
 msgstr "Témata"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:752
 msgid "Add"
 msgstr "Přidat"
 
-#: src/chmframe.cpp:885
+#: src/chmframe.cpp:753
 msgid "Remove"
 msgstr "Odstranit"
 
-#: src/chmframe.cpp:888
+#: src/chmframe.cpp:756
 msgid "Add displayed page to bookmarks."
 msgstr "Přidat zobrazenou stránku do záložek."
 
-#: src/chmframe.cpp:889
+#: src/chmframe.cpp:757
 msgid "Remove selected bookmark."
 msgstr "Odstranit zvolenou záložku."
 
-#: src/chmframe.cpp:1024
+#: src/chmframe.cpp:886
 msgid "Open .."
 msgstr "Otevřít .."
 
-#: src/chmframe.cpp:1026
+#: src/chmframe.cpp:887
 msgid "Print .."
 msgstr "Vytisknout .."
 
-#: src/chmframe.cpp:1028
+#: src/chmframe.cpp:888
 msgid "Fonts .."
 msgstr "Písma .."
 
-#: src/chmframe.cpp:1035
+#: src/chmframe.cpp:892
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:1037
+#: src/chmframe.cpp:893
 #, fuzzy
 msgid "Find"
 msgstr "Hledat další"
 
-#: src/chmframe.cpp:1042
+#: src/chmframe.cpp:897
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:1047
+#: src/chmframe.cpp:901
 msgid "Back"
 msgstr "Zpět"
 
-#: src/chmframe.cpp:1048
+#: src/chmframe.cpp:902
 msgid "Forward"
 msgstr "Vpřed"
 
-#: src/chmframe.cpp:1050
+#: src/chmframe.cpp:903
 msgid "Home"
 msgstr "Domů"
 
-#: src/chmframe.cpp:1053
+#: src/chmframe.cpp:905
 msgid "About"
 msgstr "O aplikaci"
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:41
 msgid "For&ward"
 msgstr "&Vpřed"
 
-#: src/chmhtmlwindow.cpp:49
+#: src/chmhtmlwindow.cpp:42
 msgid "&Back"
 msgstr "&Zpět"
 
-#: src/chmhtmlwindow.cpp:50
+#: src/chmhtmlwindow.cpp:43
 msgid "Copy &link location"
 msgstr "Kopírovat umístění odk&azu"
 
-#: src/chmhtmlwindow.cpp:51
+#: src/chmhtmlwindow.cpp:44
 msgid "&Save link as.."
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:52
+#: src/chmhtmlwindow.cpp:45
 msgid "&Open in a new tab"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:55
+#: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
 msgstr "&Kopírovat výběr"
 
-#: src/chmhtmlwindow.cpp:57
+#: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
 msgstr "&Najít na stránce.."
 
-#: src/chmhtmlwindow.cpp:59
+#: src/chmhtmlwindow.cpp:52
 msgid "&Toggle fullscreen mode"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:307
+#: src/chmhtmlwindow.cpp:274
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:307
+#: src/chmhtmlwindow.cpp:274
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:308 src/chmhtmlwindow.cpp:330
+#: src/chmhtmlwindow.cpp:274 src/chmhtmlwindow.cpp:292
 msgid "Error"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:318
+#: src/chmhtmlwindow.cpp:284
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:329
+#: src/chmhtmlwindow.cpp:292
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:338
+#: src/chmhtmlwindow.cpp:302
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:339
+#: src/chmhtmlwindow.cpp:302
 msgid "Success"
 msgstr ""
 
-#: src/chmsearchpanel.cpp:48
+#: src/chmsearchpanel.cpp:41
 msgid "Get partial matches"
 msgstr "Získat částečně odpovídající"
 
-#: src/chmsearchpanel.cpp:49
+#: src/chmsearchpanel.cpp:42
 msgid "Search titles only"
 msgstr "Prohledávat jen názvy"
 
-#: src/chmsearchpanel.cpp:53
+#: src/chmsearchpanel.cpp:46
 msgid "Allow partial matches."
 msgstr "Povolit částečně odpovídající."
 
-#: src/chmsearchpanel.cpp:54
+#: src/chmsearchpanel.cpp:47
 msgid "Only search in the contents' titles."
 msgstr "Vyhledávat jen v názvech obsahu."
 
-#: src/chmsearchpanel.cpp:55
+#: src/chmsearchpanel.cpp:48
 msgid "Search contents for occurences of the specified text."
 msgstr "Vyhledávat výskyty zadaného textu v obsahu."
 

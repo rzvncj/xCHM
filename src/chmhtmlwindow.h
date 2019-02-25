@@ -21,6 +21,7 @@
 #define __CHMHTMLWINDOW_H_
 
 #include <chmfinddialog.h>
+#include <memory>
 #include <wx/html/htmlwin.h>
 #include <wx/menu.h>
 #include <wx/notebook.h>
@@ -61,9 +62,6 @@ public:
       \param frame Outer frame.
      */
     CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame);
-
-    //! Destructor. Deletes heap objects allocated in the constructor.
-    ~CHMHtmlWindow();
 
     void OnSetTitle(const wxString& title) override;
 
@@ -157,13 +155,13 @@ private:
     wxString GetPrefix(const wxString& location) const;
 
 private:
-    wxTreeCtrl*    _tcl;
-    bool           _syncTree {true};
-    bool           _found {false};
-    wxMenu*        _menu {nullptr};
-    CHMFrame*      _frame;
-    wxString       _link;
-    CHMFindDialog* _fdlg {nullptr};
+    wxTreeCtrl*                    _tcl;
+    bool                           _syncTree {true};
+    bool                           _found {false};
+    std::unique_ptr<wxMenu>        _menu;
+    CHMFrame*                      _frame;
+    wxString                       _link;
+    std::unique_ptr<CHMFindDialog> _fdlg;
 
 private:
     DECLARE_EVENT_TABLE()

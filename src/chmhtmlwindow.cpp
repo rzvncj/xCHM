@@ -37,7 +37,7 @@
 CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
     : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _frame(frame)
 {
-    _menu = new wxMenu;
+    _menu = std::make_unique<wxMenu>();
     _menu->Append(ID_PopupForward, _("For&ward"));
     _menu->Append(ID_PopupBack, _("&Back"));
     _menu->Append(ID_CopyLink, _("Copy &link location"));
@@ -50,12 +50,6 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
     _menu->Append(ID_PopupFind, _("&Find in page.."));
     _menu->AppendSeparator();
     _menu->Append(ID_PopupFullScreen, _("&Toggle fullscreen mode"));
-}
-
-CHMHtmlWindow::~CHMHtmlWindow()
-{
-    delete _menu;
-    delete _fdlg;
 }
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
@@ -228,7 +222,7 @@ void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
         while (p->GetParent())
             p = p->GetParent();
 
-        _fdlg = new CHMFindDialog(p, this);
+        _fdlg = std::make_unique<CHMFindDialog>(p, this);
     }
 
     _fdlg->CentreOnParent();
@@ -332,7 +326,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
         _menu->Enable(ID_OpenInNewTab, true);
     }
 
-    PopupMenu(_menu, event.GetPosition());
+    PopupMenu(_menu.get(), event.GetPosition());
 }
 
 void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))

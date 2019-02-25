@@ -29,9 +29,7 @@
 #include <wx/wx.h>
 
 #ifdef WITH_LIBXMLRPC
-constexpr int TIMER_ID = wxID_HIGHEST + 1;
 #include <XmlRpc.h>
-using namespace XmlRpc;
 #endif
 
 // Forward declaration.
@@ -44,7 +42,7 @@ class CHMFrame;
 
 //! This is the application class.
 #ifdef WITH_LIBXMLRPC
-class CHMApp : public wxApp, public XmlRpcServerMethod {
+class CHMApp : public wxApp, public XmlRpc::XmlRpcServerMethod {
 #else
 class CHMApp : public wxApp {
 #endif
@@ -54,6 +52,8 @@ public:
     //! Default constructor, also links the XMLRPC method
     CHMApp();
 #endif
+
+private:
     //! Our entry point into the application.
     bool OnInit() override;
 
@@ -62,16 +62,14 @@ public:
     void MacOpenFile(const wxString& filename) override;
 #endif
 
-protected:
 #ifdef WITH_LIBXMLRPC
     //! Handles actual XMLRPC requests and parameter parsing.
-    void execute(XmlRpcValue& params, XmlRpcValue& result);
+    void execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result);
 
     //! Watches for XMLRPC requests
     void WatchForXMLRPC(wxTimerEvent& event);
 #endif
 
-private:
     // Try to figure out the absolute file path of the executable.
     wxString getAppPath(const wxString& argv0, const wxString& cwd);
 

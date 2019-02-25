@@ -37,25 +37,25 @@
 
 #ifdef WITH_LIBXMLRPC
 
-using namespace XmlRpc;
+constexpr int TIMER_ID = wxID_HIGHEST + 1;
 
-// The better way to use a singleton. Can't rely on the order of
-// construction/initialization of global objects.
-XmlRpcServer& getXmlRpcServer()
+XmlRpc::XmlRpcServer& getXmlRpcServer()
 {
-    static XmlRpcServer s;
+    static XmlRpc::XmlRpcServer s;
     return s;
 }
 
-CHMApp::CHMApp() : wxApp(), XmlRpcServerMethod("xCHM", &getXmlRpcServer())
+CHMApp::CHMApp() : XmlRpc::XmlRpcServerMethod("xCHM", &getXmlRpcServer())
 {
 }
 
-void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
+void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
 {
+    using namespace XmlRpc;
+
     result = false;
 
-    if (params.size() > 0 && params[0].getType() == XmlRpcValue::TypeInt) {
+    if (params.size() > 0 && params[0].getType() == XmlRpcValue::TypeInt)
         switch (int(params[0])) {
         case 0: // we want to close everything up!
             ExitMainLoop();
@@ -75,7 +75,6 @@ void CHMApp::execute(XmlRpcValue& params, XmlRpcValue& result)
                 result = _frame->LoadContextID(int(params[1]));
             break;
         }
-    }
 }
 #endif
 
@@ -86,17 +85,12 @@ bool CHMApp::OnInit()
     GetCurrentProcess(&PSN);
     TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
 #endif
-
-#ifdef WITH_LIBXMLRPC
-    long port = -1;
-#endif
     long     id = -1;
     wxString file;
 
     _cmdLP.SetCmdLine(argc, argv);
 
     _cmdLP.AddParam(wxT("file"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
-
     _cmdLP.AddOption(wxT("c"), wxT("contextid"), wxT("context-Id to open in file, requires that a file be specified"),
                      wxCMD_LINE_VAL_NUMBER);
 #ifdef WITH_LIBXMLRPC
@@ -115,6 +109,8 @@ bool CHMApp::OnInit()
     bool loadIndex  = !_cmdLP.Found(wxT("noindex"));
 
 #ifdef WITH_LIBXMLRPC
+    long port = -1;
+
     // catch the xmlrpc setup if desired
     _cmdLP.Found(wxT("xmlrpc"), &port);
 #endif

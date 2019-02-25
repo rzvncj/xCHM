@@ -49,9 +49,6 @@ WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
 //! Declares a class called CHMIDMap - < int, string> hashmap.
 WX_DECLARE_HASH_MAP(int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap);
 
-//! Maximum allowed number of search-returned items.
-#define MAX_SEARCH_RESULTS 512
-
 //! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
 class CHMFile {
 public:

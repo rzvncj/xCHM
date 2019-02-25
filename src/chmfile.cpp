@@ -35,6 +35,9 @@
 
 namespace {
 
+//! Maximum allowed number of search-returned items.
+constexpr size_t MAX_SEARCH_RESULTS = 512;
+
 // Big-enough buffer size for use with various routines.
 constexpr size_t BUF_SIZE = 4096;
 

@@ -29,7 +29,7 @@
 #include <wx/wx.h>
 
 #ifdef WITH_LIBXMLRPC
-#define TIMER_ID wxID_HIGHEST + 1
+constexpr int TIMER_ID = wxID_HIGHEST + 1;
 #include <XmlRpc.h>
 using namespace XmlRpc;
 #endif

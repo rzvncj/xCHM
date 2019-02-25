@@ -228,11 +228,9 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
     CHMFontDialog cfd(this, _normalFonts.get(), _fixedFonts.get(), _normalFont, _fixedFont, _fontSize);
 
     if (cfd.ShowModal() == wxID_OK) {
-
         wxBusyCursor bc;
 
         _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.Sizes());
-
         _fontSize = *(cfd.Sizes() + 3);
 
         wxString page = _nbhtml->GetCurrentPage()->GetOpenedPage();
@@ -261,9 +259,6 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
     if (_nbhtml->GetCurrentPage()->HistoryCanBack())
         _nbhtml->GetCurrentPage()->HistoryBack();
-    else {
-        if (CHMInputStream::GetCache())
-            return;
     }
 }
 
@@ -304,7 +299,6 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
                                wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
         wxFileType* ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
-
         wxFileType* ft_msh = wxTheMimeTypesManager->Associate(fti_msh);
 
         if (ft_xchm && ft_msh) {

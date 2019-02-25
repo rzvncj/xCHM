@@ -379,3 +379,9 @@
 		+ updated some of the code for modern C++.
 		+ minor code cleanup.
 		+ cleared a few warnings.
+
+	* 1.26:
+		+ more C++ code cleanup.
+		+ now requiring at least wxWidgets 3.0.0 to build.
+		+ minor optimizations.
+		+ fixed scrolling on loading new pages.

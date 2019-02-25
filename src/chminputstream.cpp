@@ -23,18 +23,17 @@
  * class CHMInputStream static members
  */
 
-CHMFile* CHMInputStream::_archiveCache = nullptr;
-wxString CHMInputStream::_path;
+std::unique_ptr<CHMFile> CHMInputStream::_archiveCache;
+wxString                 CHMInputStream::_path;
 
 void CHMInputStream::Cleanup()
 {
-    delete _archiveCache;
-    _archiveCache = nullptr;
+    _archiveCache.reset();
 }
 
 CHMFile* CHMInputStream::GetCache()
 {
-    return _archiveCache;
+    return _archiveCache.get();
 }
 
 /*----------------------------------------------------------------------
@@ -56,6 +55,8 @@ CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
         m_lasterror = wxSTREAM_READ_ERROR;
         return;
     }
+
+    assert(_archiveCache);
 
     // Somebody's looking for the homepage.
     if (file.IsSameAs(wxT("/")))
@@ -79,8 +80,6 @@ CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
                 return;
             }
     }
-
-    assert(_archiveCache != nullptr);
 
     // See if the file really is in the archive.
     if (!_archiveCache->ResolveObject(filename, &_ui)) {
@@ -139,10 +138,8 @@ wxFileOffset CHMInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 
 bool CHMInputStream::Init(const wxString& archive)
 {
-    if (_archiveCache == nullptr || !_archiveCache->ArchiveName().IsSameAs(archive)) {
-        Cleanup();
-
-        _archiveCache = new CHMFile(archive);
+    if (!_archiveCache || !_archiveCache->ArchiveName().IsSameAs(archive)) {
+        _archiveCache = std::make_unique<CHMFile>(archive);
 
         if (!_archiveCache->IsOk()) {
             Cleanup();

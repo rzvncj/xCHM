@@ -21,6 +21,7 @@
 #define __CHMINPUTSTREAM_H_
 
 #include <chmfile.h>
+#include <memory>
 #include <wx/stream.h>
 
 /*!
@@ -54,6 +55,7 @@ public:
       .chm file has been opened yet.
      */
     static CHMFile* GetCache();
+
     /*!
       \brief Cleans up the cache. Has to be public and static
       since the stream doesn't know how many other streams using
@@ -90,10 +92,10 @@ private:
     bool Init(const wxString& archive);
 
 private:
-    static CHMFile* _archiveCache;
-    off_t           _currPos {0};
-    chmUnitInfo     _ui;
-    static wxString _path;
+    static std::unique_ptr<CHMFile> _archiveCache;
+    off_t                           _currPos {0};
+    chmUnitInfo                     _ui;
+    static wxString                 _path;
 };
 
 #endif // __CHMINPUTSTREAM_H_

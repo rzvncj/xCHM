@@ -69,7 +69,6 @@ bool CHMHtmlNotebook::LoadPageInCurrentView(const wxString& location)
     return GetCurrentPage()->LoadPage(location);
 }
 
-// TODO: this is a misleading named function with side effects. It's a no-no.
 CHMHtmlWindow* CHMHtmlNotebook::GetCurrentPage()
 {
     int selection = GetSelection();

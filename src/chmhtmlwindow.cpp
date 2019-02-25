@@ -76,6 +76,8 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
             _found = false;
     }
 
+    Scroll(0, 0);
+
     return wxHtmlWindow::LoadPage(tmp);
 }
 

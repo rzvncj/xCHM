@@ -20,6 +20,7 @@
 #ifndef __CHMFRAME_H_
 #define __CHMFRAME_H_
 
+#include <memory>
 #include <wx/combobox.h>
 #include <wx/docview.h>
 #include <wx/font.h>
@@ -229,32 +230,32 @@ private:
     void SaveExitInfo();
 
 private:
-    CHMHtmlNotebook*    _nbhtml;
-    wxTreeCtrl*         _tcl {nullptr};
-    wxSplitterWindow*   _sw {nullptr};
-    wxMenu*             _menuFile {nullptr};
-    wxToolBar*          _tb {nullptr};
-    wxHtmlEasyPrinting* _ep {nullptr};
-    wxNotebook*         _nb {nullptr};
-    wxComboBox*         _cb {nullptr};
-    CHMSearchPanel*     _csp {nullptr};
-    CHMIndexPanel*      _cip {nullptr};
+    CHMHtmlNotebook*                    _nbhtml;
+    wxTreeCtrl*                         _tcl {nullptr};
+    wxSplitterWindow*                   _sw {nullptr};
+    wxMenu*                             _menuFile {nullptr};
+    wxToolBar*                          _tb {nullptr};
+    std::unique_ptr<wxHtmlEasyPrinting> _ep;
+    wxNotebook*                         _nb {nullptr};
+    wxComboBox*                         _cb {nullptr};
+    CHMSearchPanel*                     _csp {nullptr};
+    CHMIndexPanel*                      _cip {nullptr};
 
-    wxString       _openPath;
-    wxArrayString* _normalFonts {nullptr};
-    wxArrayString* _fixedFonts {nullptr};
-    wxString       _normalFont;
-    wxString       _fixedFont;
-    int            _fontSize;
-    bool           _bookmarkSel {true};
-    bool           _bookmarksDeleted {false};
-    int            _sashPos;
-    wxFont         _font;
-    wxFileHistory  _fh;
-    wxString       _fullAppPath;
-    bool           _loadTopics;
-    bool           _loadIndex;
-    bool           _fullScreen {false};
+    wxString                       _openPath;
+    std::unique_ptr<wxArrayString> _normalFonts;
+    std::unique_ptr<wxArrayString> _fixedFonts;
+    wxString                       _normalFont;
+    wxString                       _fixedFont;
+    int                            _fontSize;
+    bool                           _bookmarkSel {true};
+    bool                           _bookmarksDeleted {false};
+    int                            _sashPos;
+    wxFont                         _font;
+    wxFileHistory                  _fh;
+    wxString                       _fullAppPath;
+    bool                           _loadTopics;
+    bool                           _loadIndex;
+    bool                           _fullScreen {false};
 
 private:
     DECLARE_EVENT_TABLE()

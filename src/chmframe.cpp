@@ -145,7 +145,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     wxMemoryFSHandler::AddFile(wxT("about.html"), greeting);
     wxMemoryFSHandler::AddFile(wxT("error.html"), error_page);
 
-    _ep = new wxHtmlEasyPrinting(wxT("Printing"), this);
+    _ep = std::make_unique<wxHtmlEasyPrinting>(wxT("Printing"), this);
 
     _sw = new wxSplitterWindow(this);
     _sw->SetMinimumPaneSize(CONTENTS_MARGIN);
@@ -174,10 +174,6 @@ CHMFrame::~CHMFrame()
 {
     if (_tcl) // Supposedly, workaround for wxWin
         _tcl->Unselect();
-
-    delete _ep;
-    delete _fixedFonts;
-    delete _normalFonts;
 }
 
 void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
@@ -213,26 +209,23 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
     wxLogNull wln;
 
     // First time initialization only.
-    if (_normalFonts == nullptr) {
+    if (!_normalFonts) {
         wxFontEnumerator enu;
         enu.EnumerateFacenames();
-        _normalFonts  = new wxArrayString;
+        _normalFonts  = std::make_unique<wxArrayString>();
         *_normalFonts = enu.GetFacenames();
         _normalFonts->Sort();
     }
 
-    if (_fixedFonts == nullptr) {
+    if (!_fixedFonts) {
         wxFontEnumerator enu;
         enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, true);
-        _fixedFonts  = new wxArrayString;
+        _fixedFonts  = std::make_unique<wxArrayString>();
         *_fixedFonts = enu.GetFacenames();
         _fixedFonts->Sort();
     }
 
-    assert(_normalFonts != nullptr);
-    assert(_fixedFonts != nullptr);
-
-    CHMFontDialog cfd(this, _normalFonts, _fixedFonts, _normalFont, _fixedFont, _fontSize);
+    CHMFontDialog cfd(this, _normalFonts.get(), _fixedFonts.get(), _normalFont, _fixedFont, _fontSize);
 
     if (cfd.ShowModal() == wxID_OK) {
 

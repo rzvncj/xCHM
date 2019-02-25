@@ -155,14 +155,11 @@ CHMFile::~CHMFile()
 
 bool CHMFile::LoadCHM(const wxString& archiveName)
 {
-    if (_chmFile)
-        CloseCHM();
-
-    assert(_chmFile == nullptr);
+    CloseCHM();
 
     _chmFile = chm_open(static_cast<const char*>(archiveName.mb_str()));
 
-    if (_chmFile == nullptr)
+    if (!_chmFile)
         return false;
 
     _enc      = wxFONTENCODING_SYSTEM;
@@ -178,7 +175,7 @@ bool CHMFile::LoadCHM(const wxString& archiveName)
 
 void CHMFile::CloseCHM()
 {
-    if (_chmFile == nullptr)
+    if (!_chmFile)
         return;
 
     chm_close(_chmFile);

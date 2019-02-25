@@ -47,7 +47,7 @@ class CHMHtmlNotebook : public wxAuiNotebook {
 public:
     //! Constructor
     CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont, const wxString& fixedFont,
-                    const int fontSize, CHMFrame* frame);
+                    int fontSize, CHMFrame* frame);
 
     //! Add a notebook tab and display the specified URL
     void AddHtmlView(const wxString& path, const wxString& link);

@@ -178,7 +178,7 @@ public:
       \param contextID The context-ID to check.
       \return true if the context ID is valid. false otherwise.
      */
-    bool IsValidCID(const int contextID);
+    bool IsValidCID(int contextID);
 
     /*!
      \brief Looks up the page referred to by the context-ID
@@ -186,7 +186,7 @@ public:
      \return the page referred to by the context-ID,
       or file root"/"  if ID is invalid.
      */
-    wxString GetPageByCID(const int contextID);
+    wxString GetPageByCID(int contextID);
 
     /*!
       \brief Have the context-IDs been loaded into memory or not.

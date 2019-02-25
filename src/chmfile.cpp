@@ -266,8 +266,8 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
 {
     static wxTreeItemId parents[TREE_BUF_SIZE];
 
-    static int       calls     = 0;
-    static const int yieldTime = 256;
+    static int           calls     = 0;
+    static constexpr int yieldTime = 256;
 
     ++calls;
     if (calls % yieldTime) {
@@ -617,7 +617,7 @@ bool CHMFile::LoadContextIDs()
     return true;
 }
 
-bool CHMFile::IsValidCID(const int contextID)
+bool CHMFile::IsValidCID(int contextID)
 {
     if (_cidMap.empty())
         return false;
@@ -625,7 +625,7 @@ bool CHMFile::IsValidCID(const int contextID)
     return _cidMap.find(contextID) != _cidMap.end();
 }
 
-wxString CHMFile::GetPageByCID(const int contextID)
+wxString CHMFile::GetPageByCID(int contextID)
 {
     if (_cidMap.empty())
         return wxT("/");

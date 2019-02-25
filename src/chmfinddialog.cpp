@@ -28,7 +28,7 @@
 CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     : wxDialog(parent, -1, wxString(_("Find in page.."))), _html(toSearch)
 {
-    _text = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
+    _text  = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
     _whole = new wxCheckBox(this, -1, _("Whole words only"));
     _case  = new wxCheckBox(this, -1, _("Case sensitive"));
 

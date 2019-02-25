@@ -24,7 +24,7 @@
 #include <chmhtmlwindow.h>
 
 CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont,
-                                 const wxString& fixedFont, const int fontSize, CHMFrame* frame)
+                                 const wxString& fixedFont, int fontSize, CHMFrame* frame)
     : wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
       _tcl(tc), _frame(frame), _fonts_normal_face(normalFont), _fonts_fixed_face(fixedFont)
 {

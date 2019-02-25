@@ -45,7 +45,7 @@ public:
       \param fontSize The size of the font currently selected.
      */
     CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts, const wxString& normalFont,
-                  const wxString& fixedFont, const int fontSize);
+                  const wxString& fixedFont, int fontSize);
 
     //! Returns the fixed font face name.
     const wxString& FixedFont() const { return _fixedFont; }

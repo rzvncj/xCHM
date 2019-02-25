@@ -127,7 +127,7 @@ public:
       \param contextID the context-ID to load.
       \return true if the operation was successful.
      */
-    bool LoadContextID(const int contextID);
+    bool LoadContextID(int contextID);
 
     //! Fills the index and the contents tree.
     void UpdateCHMInfo();

@@ -104,7 +104,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
       _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
-    const int          NO_ACCELERATOR_ENTRIES = 6;
+    constexpr int      NO_ACCELERATOR_ENTRIES = 6;
     wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
 
     entries[0].Set(wxACCEL_CTRL, (int)'F', ID_FindInPage);
@@ -506,7 +506,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
     return rtn;
 }
 
-bool CHMFrame::LoadContextID(const int contextID)
+bool CHMFrame::LoadContextID(int contextID)
 {
     wxBusyCursor bc;
 

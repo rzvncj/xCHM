@@ -39,7 +39,7 @@ const wxChar* test_page = wxT(
 }
 
 CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts,
-                             const wxString& normalFont, const wxString& fixedFont, const int fontSize)
+                             const wxString& normalFont, const wxString& fixedFont, int fontSize)
     : wxDialog(parent, -1, wxString(_("Change fonts.."))), _normalFont(normalFont), _fixedFont(fixedFont),
       _fontSize(fontSize)
 {

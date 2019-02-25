@@ -590,8 +590,8 @@ bool CHMFile::LoadContextIDs()
     if (ivb_len % 2 != 0)
         return false; // we retrieved unexpected data from the file.
 
-    uint32_t* ivbs = new uint32_t[ivb_len];
-    int       j    = 4; // offset to exclude first DWORD
+    std::vector<uint32_t> ivbs(ivb_len);
+    int                   j = 4; // offset to exclude first DWORD
 
     // convert our DWORDs to numbers
     for (unsigned int i = 0; i < ivb_len; i++) {
@@ -602,16 +602,12 @@ bool CHMFile::LoadContextIDs()
     UCharVector strs_buf(strs_ui.length);
     uint64_t    strs_len = 0;
 
-    if ((strs_len = chm_retrieve_object(_chmFile, &strs_ui, &strs_buf[0], 0, strs_ui.length)) == 0) {
-        delete[] ivbs;
+    if ((strs_len = chm_retrieve_object(_chmFile, &strs_ui, &strs_buf[0], 0, strs_ui.length)) == 0)
         return false; // failed to retrieve data
-    }
 
     for (unsigned int i = 0; i < ivb_len; i += 2)
         // context-IDs as KEY, fileName from #STRINGS as VALUE
         _cidMap[ivbs[i]] = CURRENT_CHAR_STRING(&strs_buf[ivbs[i + 1]]);
-
-    delete[] ivbs;
 
     // everything went well!
     return true;
@@ -704,16 +700,15 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
             word_len = buffer[i];
             pos      = buffer[i + 1];
 
-            char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, &buffer[i + 2], word_len - 1);
+            std::vector<char> wrd_buf(word_len);
+
+            memcpy(&wrd_buf[0], &buffer[i + 2], word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
-                word = CURRENT_CHAR_STRING(wrd_buf);
+                word = CURRENT_CHAR_STRING(&wrd_buf[0]);
             else
-                word = word.Mid(0, pos) + CURRENT_CHAR_STRING(wrd_buf);
-
-            delete[] wrd_buf;
+                word = word.Mid(0, pos) + CURRENT_CHAR_STRING(&wrd_buf[0]);
 
             i += 2 + word_len;
             unsigned char title = buffer[i - 1];
@@ -808,16 +803,15 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
             word_len = buffer[i];
             pos      = buffer[i + 1];
 
-            char* wrd_buf = new char[word_len];
-            memcpy(wrd_buf, &buffer[i + 2], word_len - 1);
+            std::vector<char> wrd_buf(word_len);
+
+            memcpy(&wrd_buf[0], &buffer[i + 2], word_len - 1);
             wrd_buf[word_len - 1] = 0;
 
             if (pos == 0)
-                word = CURRENT_CHAR_STRING(wrd_buf);
+                word = CURRENT_CHAR_STRING(&wrd_buf[0]);
             else
-                word = word.Mid(0, pos) + CURRENT_CHAR_STRING(wrd_buf);
-
-            delete[] wrd_buf;
+                word = word.Mid(0, pos) + CURRENT_CHAR_STRING(&wrd_buf[0]);
 
             if (text.CmpNoCase(word) <= 0) {
                 cursor32      = &buffer[i + word_len + 1];

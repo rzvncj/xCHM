@@ -259,7 +259,6 @@ void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
 {
     if (_nbhtml->GetCurrentPage()->HistoryCanBack())
         _nbhtml->GetCurrentPage()->HistoryBack();
-    }
 }
 
 void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))

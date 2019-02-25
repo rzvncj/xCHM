@@ -39,18 +39,18 @@ class CHMIndexPanel;
 class wxFileType;
 class CHMHtmlNotebook;
 
-//! Default font size for the wxHtmlWindow.
-#define CHM_DEFAULT_FONT_SIZE 12
-
-//! Default sash position.
-#define CONTENTS_MARGIN 170
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #else
 // this should never happen
 #define VERSION "unknown"
 #endif
+
+//! Default font size for the wxHtmlWindow.
+constexpr int CHM_DEFAULT_FONT_SIZE = 12;
+
+//! Default sash position.
+constexpr int CONTENTS_MARGIN = 170;
 
 //! IDs for various widget events.
 enum {
@@ -109,7 +109,7 @@ public:
     */
     CHMFrame(const wxString& title, const wxString& booksDir, const wxPoint& pos, const wxSize& size,
              const wxString& normalFont = wxEmptyString, const wxString& fixedFont = wxEmptyString,
-             const int fontSize = CHM_DEFAULT_FONT_SIZE, const int sashPosition = CONTENTS_MARGIN,
+             int fontSize = CHM_DEFAULT_FONT_SIZE, int sashPosition = CONTENTS_MARGIN,
              const wxString& fullAppPath = wxEmptyString, bool loadTopics = true, bool loadIndex = true);
 
     //! Cleans up.

@@ -97,7 +97,7 @@ const wxChar* about_txt = wxT("xCHM v. " VERSION
 } // namespace
 
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoint& pos, const wxSize& size,
-                   const wxString& normalFont, const wxString& fixedFont, const int fontSize, const int sashPosition,
+                   const wxString& normalFont, const wxString& fixedFont, int fontSize, int sashPosition,
                    const wxString& fullAppPath, bool loadTopics, bool loadIndex)
     : wxFrame(nullptr, -1, title, pos, size), _openPath(booksDir), _normalFont(normalFont), _fixedFont(fixedFont),
       _fontSize(fontSize), _sashPos(sashPosition), _fullAppPath(fullAppPath), _loadTopics(loadTopics),
@@ -298,7 +298,7 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
                                wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
         wxFileType* ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
-        wxFileType* ft_msh = wxTheMimeTypesManager->Associate(fti_msh);
+        wxFileType* ft_msh  = wxTheMimeTypesManager->Associate(fti_msh);
 
         if (ft_xchm && ft_msh) {
             ft_xchm->SetDefaultIcon(_fullAppPath);

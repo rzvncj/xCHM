@@ -8,7 +8,7 @@ AM_GNU_GETTEXT_VERSION([0.14.3])
 
 AM_OPTIONS_WXCONFIG
 
-AM_PATH_WXCONFIG(2.8.0, wxWin=1, wxWin=0, [std,aui])
+AM_PATH_WXCONFIG(3.0.0, wxWin=1, wxWin=0, [std,aui])
 if test "$wxWin" != 1; then
 	AC_MSG_ERROR([
            wxWidgets must be installed on your system
@@ -37,7 +37,7 @@ wx_config_minor_version=`echo $WX_VERSION | \
 CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
 CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY -std=c++14 -W -Wall -Wno-ignored-qualifiers -Wno-cast-function-type -Wno-overloaded-virtual"
 CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
-
+XMLRPCDIR=""
      
 AC_ARG_ENABLE(static, 
 	      [  --enable-static         link statically to wxWidgets.], 
@@ -66,6 +66,17 @@ AC_ARG_ENABLE(xmlrpc,
 	      [  --enable-xmlrpc         enable XmlRpc functionality in xchm.],
 	      [ enable_xmlrpc=yes ])
 
+AC_ARG_WITH(xmlrpc-dir,
+    [  --with-xmlrpc-dir       specify XMLRPC++ includes and libraries parent directory],
+XMLRPCDIR="$withval")
+
+if test -n $XMLRPCDIR ; then
+    CFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CFLAGS"
+    CXXFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CXXFLAGS"
+    CPPFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CPPFLAGS"
+    LDFLAGS="-L$XMLRPCDIR/lib -Wl,-rpath,$XMLRPCDIR/lib $LDFLAGS"
+fi
+
 AM_INIT_AUTOMAKE
 AC_PROG_CXX
 AC_PROG_INSTALL
@@ -88,17 +99,17 @@ else
 fi
 
 if test "x$enable_xmlrpc" = "xyes" ; then
-	AC_LANG_PUSH(C++)
-	AC_CHECK_HEADERS(XmlRpc.h,,
-	  AC_MSG_ERROR([Can't find the XmlRpc++ header.]))
+	AC_LANG_PUSH([C++])
 
-	LIBS="$LIBS -lXmlRpc -lssl"	
+	AC_CHECK_HEADER(XmlRpc.h,,AC_MSG_ERROR([Can't find the XmlRpc++ header.]))
+
+	LIBS="$LIBS -lxmlrpcpp -lssl"	
 	AC_TRY_LINK([#include<XmlRpc.h> ],
 		[XmlRpc::XmlRpcServer svr;],
     	  [AC_DEFINE(WITH_LIBXMLRPC, 1, [Compile with XmlRpc functionality.])],
 	  AC_MSG_ERROR([Can't find/use -lXmlRpc. Please install XmlRpc++ first.])
 	  )
-	AC_LANG_POP()
+	AC_LANG_POP([C++])
 fi
 
 case "$host" in

@@ -40,8 +40,7 @@ const wxChar* test_page = wxT(
 
 CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts,
                              const wxString& normalFont, const wxString& fixedFont, int fontSize)
-    : wxDialog(parent, -1, wxString(_("Change fonts.."))), _normalFont(normalFont), _fixedFont(fixedFont),
-      _fontSize(fontSize)
+    : wxDialog(parent, -1, _("Change fonts..")), _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
     wxBoxSizer*      topsizer = new wxBoxSizer(wxVERTICAL);
     wxFlexGridSizer* sizer    = new wxFlexGridSizer(2, 3, 2, 5);

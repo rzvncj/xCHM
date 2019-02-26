@@ -574,23 +574,17 @@ bool CHMFile::LoadContextIDs()
 
 bool CHMFile::IsValidCID(int contextID)
 {
-    if (_cidMap.empty())
-        return false;
-
     return _cidMap.find(contextID) != _cidMap.end();
 }
 
 wxString CHMFile::GetPageByCID(int contextID)
 {
-    if (_cidMap.empty())
-        return wxT("/");
+    auto itr = _cidMap.find(contextID);
 
-    CHMIDMap::iterator itr = _cidMap.find(contextID);
-    // make sure the key/value pair is valid
     if (itr == _cidMap.end())
         return wxT("/");
 
-    return wxString(wxT("/")) + itr->second;
+    return wxT("/") + itr->second;
 }
 
 bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly, CHMSearchResults* results)

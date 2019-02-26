@@ -25,10 +25,19 @@
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 #define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
-#define UINT16ARRAY(x) ((unsigned char)(x)[0] | ((uint16_t)(x)[1] << 8))
-#define UINT32ARRAY(x) (UINT16ARRAY(x) | ((uint32_t)(x)[2] << 16) | ((uint32_t)(x)[3] << 24))
-#define INT32ARRAY(x) ((int32_t)UINT32ARRAY(x))
-#define INT16ARRAY(x) ((int16_t)UINT16ARRAY(x))
+
+inline uint16_t UINT16ARRAY(const unsigned char* x)
+{
+    return x[0] | (static_cast<uint16_t>(x[1]) << 8);
+}
+
+inline uint32_t UINT32ARRAY(const unsigned char* x)
+{
+    return UINT16ARRAY(x) | (static_cast<uint32_t>(x[2]) << 16) | (static_cast<uint32_t>(x[3]) << 24);
+}
+
+#define INT32ARRAY(x) static_cast<int32_t>(UINT32ARRAY(x))
+#define INT16ARRAY(x) static_cast<int16_t>(UINT16ARRAY(x))
 
 #if wxUSE_UNICODE
 #define CURRENT_CHAR_STRING(x) wxString(reinterpret_cast<const char*>(x), wxConvISO8859_1)

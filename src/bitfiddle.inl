@@ -86,15 +86,14 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 
 inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned char r, size_t& length)
 {
-    uint64_t      ret;
+    uint64_t      ret = 0;
     unsigned char mask;
     int           n, n_bits, num_bits, base, count;
     length = 0;
     size_t fflen;
 
     if (!bit || *bit > 7 || s != 2)
-        return ~(uint64_t)0;
-    ret = 0;
+        return ~static_cast<uint64_t>(0);
 
     count = ffus(byte, bit, fflen);
     length += fflen;
@@ -135,7 +134,7 @@ inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned 
         }
 
         mask <<= base;
-        ret = (ret << (num_bits + 1)) | (uint64_t)((*byte & mask) >> base);
+        ret = (ret << (num_bits + 1)) | static_cast<uint64_t>((*byte & mask) >> base);
 
         if (n > *bit) {
             ++byte;
@@ -149,7 +148,7 @@ inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned 
     }
 
     if (count)
-        ret |= (uint64_t)1 << n_bits;
+        ret |= static_cast<uint64_t>(1) << n_bits;
 
     return ret;
 }
@@ -181,12 +180,8 @@ inline std::unique_ptr<wxCSConv> createCSConvPtr(wxFontEncoding enc)
 #if wxUSE_UNICODE
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
-    if (input.IsEmpty())
-        return wxEmptyString;
-
-    if (enc != wxFONTENCODING_SYSTEM) {
+    if (!input.IsEmpty() && enc != wxFONTENCODING_SYSTEM) {
         wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
-
         std::unique_ptr<wxCSConv> convToPtr = createCSConvPtr(enc);
 
         return wxString(input.mb_str(convFrom), *convToPtr);

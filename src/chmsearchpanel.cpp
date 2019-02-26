@@ -28,6 +28,15 @@
 #include <wx/utils.h>
 #include <wx/wx.h>
 
+namespace {
+
+inline bool IS_WHITESPACE(wxChar c)
+{
+    return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') || c == wxT('\t');
+}
+
+} // end of anonymous namespace
+
 CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNotebook* nbhtml)
     : wxPanel(parent), _tcl(topics), _text(nullptr), _partial(nullptr), _titles(nullptr), _search(nullptr),
       _results(nullptr), _nbhtml(nbhtml)
@@ -127,9 +136,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
 
     if (!h1.empty())
         for (i = h1.begin(); i != h1.end(); ++i) {
-
-            wxString url = (i->first.StartsWith(wxT("/")) ? i->first : (wxString(wxT("/") + i->first)));
-
+            wxString url = (i->first.StartsWith(wxT("/")) ? i->first : (wxT("/") + i->first));
             _results->AddPairItem(i->second, url);
         }
 
@@ -160,11 +167,6 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     }
 }
 
-static inline bool WHITESPACE(wxChar c)
-{
-    return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') || c == wxT('\t');
-}
-
 bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool caseSensitive, bool wholeWords)
 {
     int      i, j, lng = title.Length();
@@ -191,15 +193,15 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
         if (wholeWords) {
             for (i = 0; i < lng - wrd + 1; ++i) {
 
-                if (WHITESPACE(buf1[i]))
+                if (IS_WHITESPACE(buf1[i]))
                     continue;
 
                 j = 0;
                 while (j < wrd && buf1[i + j] == buf2[j])
                     ++j;
 
-                if (j == wrd && (WHITESPACE(buf1[i + j]) || i + j == lng))
-                    if (i == 0 || WHITESPACE(buf1[i - 1])) {
+                if (j == wrd && (IS_WHITESPACE(buf1[i + j]) || i + j == lng))
+                    if (i == 0 || IS_WHITESPACE(buf1[i - 1])) {
                         found = true;
                         break;
                     }
@@ -210,7 +212,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
                 j = 0;
                 while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j]))
                     ++j;
-                if (j == wrd && (i == 0 || WHITESPACE(buf1[i - 1]))) {
+                if (j == wrd && (i == 0 || IS_WHITESPACE(buf1[i - 1]))) {
                     found = true;
                     break;
                 }

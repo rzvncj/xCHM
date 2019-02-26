@@ -40,9 +40,10 @@
 
 inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 {
-    uint64_t result = 0;
-    int      shift  = 0;
-    length          = 0;
+    uint64_t result {0};
+    int      shift {0};
+
+    length = 0;
 
     do {
         result |= ((*buffer) & 0x7f) << shift;
@@ -60,8 +61,9 @@ inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 */
 inline int ffus(unsigned char* byte, int* bit, size_t& length)
 {
-    int bits = 0;
-    length   = 0;
+    int bits {0};
+
+    length = 0;
 
     while (*byte & (1 << *bit)) {
         if (*bit)
@@ -86,11 +88,12 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 
 inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned char r, size_t& length)
 {
-    uint64_t      ret = 0;
+    uint64_t      ret {0};
     unsigned char mask;
     int           n, n_bits, num_bits, base, count;
+    size_t        fflen;
+
     length = 0;
-    size_t fflen;
 
     if (!bit || *bit > 7 || s != 2)
         return ~static_cast<uint64_t>(0);
@@ -104,37 +107,8 @@ inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned 
     while (n > 0) {
         num_bits = n > *bit ? *bit : n - 1;
         base     = n > *bit ? 0 : *bit - (n - 1);
-
-        switch (num_bits) {
-        case 0:
-            mask = 1;
-            break;
-        case 1:
-            mask = 3;
-            break;
-        case 2:
-            mask = 7;
-            break;
-        case 3:
-            mask = 0xf;
-            break;
-        case 4:
-            mask = 0x1f;
-            break;
-        case 5:
-            mask = 0x3f;
-            break;
-        case 6:
-            mask = 0x7f;
-            break;
-        case 7:
-        default:
-            mask = 0xff;
-            break;
-        }
-
-        mask <<= base;
-        ret = (ret << (num_bits + 1)) | static_cast<uint64_t>((*byte & mask) >> base);
+        mask     = (0xff >> (7 - num_bits)) << base;
+        ret      = (ret << (num_bits + 1)) | static_cast<uint64_t>((*byte & mask) >> base);
 
         if (n > *bit) {
             ++byte;
@@ -181,7 +155,7 @@ inline std::unique_ptr<wxCSConv> createCSConvPtr(wxFontEncoding enc)
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
     if (!input.IsEmpty() && enc != wxFONTENCODING_SYSTEM) {
-        wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
+        wxCSConv                  convFrom(wxFONTENCODING_ISO8859_1);
         std::unique_ptr<wxCSConv> convToPtr = createCSConvPtr(enc);
 
         return wxString(input.mb_str(convFrom), *convToPtr);
@@ -203,9 +177,9 @@ inline wxChar charForCode(unsigned code, const wxCSConv& NON_UNICODE_PARAM(cv), 
 
     if (conv) {
         char    buf[2];
-        wchar_t wbuf[2];
+        wchar_t wbuf[2] {};
+
         wbuf[0] = static_cast<wchar_t>(code);
-        wbuf[1] = 0;
 
         cv.WC2MB(buf, wbuf, 2);
 

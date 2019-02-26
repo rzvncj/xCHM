@@ -246,9 +246,6 @@ private:
     //! Get the binary index (if available)
     bool BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv);
 
-    //! Get a regular string from a generic buffer of length bufferLength
-    bool ConvertFromUnicode(std::string& value, unsigned char* buffer, size_t bufferLength);
-
 private:
     chmFile*       _chmFile {nullptr};
     wxString       _filename;

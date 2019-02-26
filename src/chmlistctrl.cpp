@@ -79,7 +79,7 @@ void CHMListCtrl::LoadSelected()
         wxString fname = _items[item]->_url;
 
         if (!fname.StartsWith(wxT("file:")))
-            fname = wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:/") + _items[item]->_url;
+            fname = wxT("file:") + chmf->ArchiveName() + wxT("#xchm:/") + _items[item]->_url;
 
         _nbhtml->LoadPageInCurrentView(fname);
     }

@@ -247,7 +247,7 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
     if (!chmf)
         return;
 
-    _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:") + chmf->HomePage());
+    _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:") + chmf->HomePage());
 }
 
 void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
@@ -416,7 +416,7 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
     if (!chmf)
         return;
 
-    _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:/") + *url);
+    _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:/") + *url);
 }
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
@@ -437,7 +437,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 
     if (!_nbhtml->GetCurrentPage()->IsCaller()) {
         _nbhtml->GetCurrentPage()->SetSync(false);
-        _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:/") + data->_url);
+        _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:/") + data->_url);
         _nbhtml->GetCurrentPage()->SetSync(true);
     }
 }
@@ -471,15 +471,14 @@ bool CHMFrame::LoadCHM(const wxString& archive)
     if (!archive.StartsWith(wxT("file:")) || !archive.Contains(wxT("#xchm:"))) {
 
         wxFileSystem              wfs;
-        std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxString(wxT("file:")) + archive + wxT("#xchm:/")));
+        std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxT("file:") + archive + wxT("#xchm:/")));
 
         CHMFile* chmf = CHMInputStream::GetCache();
 
         if (!chmf)
             return false;
 
-        rtn = _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:")
-                                             + chmf->HomePage());
+        rtn = _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:") + chmf->HomePage());
     } else
         rtn = _nbhtml->LoadPageInCurrentView(archive);
 
@@ -518,7 +517,7 @@ bool CHMFrame::LoadContextID(int contextID)
     if (!chmf->IsValidCID(contextID))
         return false;
 
-    return _nbhtml->LoadPageInCurrentView(wxString(wxT("file:")) + chmf->ArchiveName() + wxT("#xchm:")
+    return _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:")
                                           + chmf->GetPageByCID(contextID));
 }
 
@@ -611,10 +610,10 @@ void CHMFrame::UpdateCHMInfo()
         chmf->GetIndex(_cip->GetResultsList());
 
     if (!title.IsEmpty()) {
-        wxString titleBarText = wxString(wxT("xCHM v. " wxT(VERSION) wxT(": "))) + title;
+        wxString titleBarText = wxT("xCHM v. " VERSION ": ") + title;
         SetTitle(titleBarText);
     } else
-        SetTitle(wxT("xCHM v. ") wxT(VERSION));
+        SetTitle(wxT("xCHM v. " VERSION));
 
     // if we have contents..
     if (_tcl->GetCount() >= 1) {
@@ -763,7 +762,7 @@ void CHMFrame::LoadBookmarks()
     wxString bookname = chmf->ArchiveName();
     bookname.Replace(wxT("/"), wxT("."), true);
 
-    bookname = wxString(wxT("/Bookmarks/")) + bookname;
+    bookname = wxT("/Bookmarks/") + bookname;
     long noEntries;
 
     config.SetPath(bookname);
@@ -798,7 +797,7 @@ void CHMFrame::SaveBookmarks()
     wxConfig config(wxT("xchm"));
     wxString bookname = chmf->ArchiveName();
     bookname.Replace(wxT("/"), wxT("."), true);
-    bookname = wxString(wxT("/Bookmarks/")) + bookname;
+    bookname = wxT("/Bookmarks/") + bookname;
 
     if (_bookmarksDeleted)
         config.DeleteGroup(bookname);

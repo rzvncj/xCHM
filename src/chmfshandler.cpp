@@ -40,7 +40,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
     CHMInputStream* s     = nullptr;
 
     if (!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
-        right = wxString(wxT("/")) + location;
+        right = wxT("/") + location;
         left  = wxEmptyString;
 
     } else if (GetProtocol(left) != wxT("file"))
@@ -76,7 +76,7 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
         if (!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
             right = right.AfterLast(wxT(':'));
 
-        return new wxFSFile(s, wxString(wxT("file:")) + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
+        return new wxFSFile(s, wxT("file:") + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
                             GetMimeTypeFromExt(right.Lower()), GetAnchor(location),
                             wxDateTime(static_cast<time_t>(-1)));
     }

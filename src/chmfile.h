@@ -46,18 +46,18 @@ using UCharVector = std::vector<unsigned char>;
 
 //! Declares a class called CHMSearchResults - <string, string> hashmap.
 WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
-//! Declares a class called CHMIDMap - < int, string> hashmap.
+//! Declares a class called CHMIDMap - <int, string> hashmap.
 WX_DECLARE_HASH_MAP(int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap);
 
-//! Mostly a C++ wrapper around the CHMLIB facilities. Concrete class.
+//! C++ wrapper around CHMLIB. Concrete class.
 class CHMFile {
 public:
     //! Default constructor.
     CHMFile() = default;
 
     /*!
-      \brief This constructor attempts to open the .chm file passed as
-      it's argument. If it fails, IsOk() will return false.
+      \brief This constructor attempts to open the .chm file passed as it's argument. If it fails, IsOk() will
+      return false.
       \param archiveName The .chm filename on disk.
      */
     CHMFile(const wxString& archiveName);
@@ -67,50 +67,43 @@ public:
 
     /*!
       \brief Gets the name of the default page in the archive.
-      \return The home page name, with a '/' added in front and
-      relative to the root of the archive filesystem. If no .chm
-      has been opened, the returned value is "/".
+      \return The home page name, with a '/' added in front and relative to the root of the archive filesystem. If
+      no .chm has been opened, the returned value is "/".
      */
     wxString HomePage() const { return _home; }
 
     /*!
-      \brief Gets name of the .hhc file in the archive that
-      could potentially be used to generate content information from.
-      \return The topics file name, with a '/' added in front and
-      relative to the root of the archive filesystem. If no .chm
-      has been opened, the return value is an empty string.
+      \brief Gets name of the .hhc file in the archive that could potentially be used to generate content information
+      from.
+      \return The topics file name, with a '/' added in front and relative to the root of the archive filesystem. If
+      no .chm has been opened, the return value is an empty string.
     */
     wxString TopicsFile() const { return _topicsFile; }
 
     /*!
       \brief Gets the filename of the currently opened .chm file.
-      \return The filename of the currently opened archive, relative
-      to the root of the filesystem, or the empty string if no
-      archive has been opened.
+      \return The filename of the currently opened archive, relative to the root of the filesystem, or the empty string
+      if no archive has been opened.
      */
     wxString ArchiveName() const { return _filename; }
 
     /*!
-      \brief Gets name of the .hhk file in the archive that
-      could potentially be used to generate content information from.
-      \return The index file name, with a '/' added in front and
-      relative to the root of the archive filesystem. If no .chm
-      has been opened, the return value is an empty string.
+      \brief Gets name of the .hhk file in the archive that could potentially be used to generate content information
+      from.
+      \return The index file name, with a '/' added in front and relative to the root of the archive filesystem. If
+      no .chm has been opened, the return value is an empty string.
      */
     wxString IndexFile() const { return _indexFile; }
 
     /*!
       \brief Gets the name of the opened .chm.
-      \return The name of the opened document, or an empty string
-      if no .chm has been loaded.
+      \return The name of the opened document, or an empty string if no .chm has been loaded.
     */
     wxString Title() const { return _title; }
 
     /*!
-      \brief Checks if the last attempt to load a .chm file was
-      succesful.
-      \return true, if the last attempt to load a .chm file was
-      succesful, false otherwise.
+      \brief Checks if the last attempt to load a .chm file was succesful.
+      \return true, if the last attempt to load a .chm file was succesful, false otherwise.
      */
     bool IsOk() const { return _chmFile != nullptr; }
 
@@ -118,8 +111,8 @@ public:
     bool HasChanged();
 
     /*!
-      \brief Determines the encoding that the CHM creator would like
-      me to use. To be used in combination with DefaultFont().
+      \brief Determines the encoding that the CHM creator would like me to use. To be used in combination with
+      DefaultFont().
       \return Desired encoding.
      */
     wxFontEncoding DesiredEncoding() const { return _enc; }
@@ -141,37 +134,29 @@ public:
     void CloseCHM();
 
     /*!
-      \brief Attempts to fill a wxTreeCtrl by parsing the topics
-      file.
-      \param toBuild Pointer to the tree to be filled.
-      If the topics file is not available, the
-      tree is unmodified. The tree must be empty before passing it
-      to this function.
+      \brief Attempts to fill a wxTreeCtrl by parsing the topics file.
+      \param toBuild Pointer to the tree to be filled. If the topics file is not available, the tree is unmodified.
+      The tree must be empty before passing it to this function.
       \return true if it's possible to build the tree, false otherwise.
      */
     bool GetTopicsTree(wxTreeCtrl* toBuild);
 
     /*!
-      \brief Attempts to fill a CHMListCtrl by parsing the index
-      file.
-      \param toBuild Pointer to the list control to be filled.
-      If the index file is not available, the list control
-      is unmodified. The lost must be empty before passing it
-      to this function.
+      \brief Attempts to fill a CHMListCtrl by parsing the index file.
+      \param toBuild Pointer to the list control to be filled. If the index file is not available, the list control
+      is unmodified. The list must be empty before passing it to this function.
       \return true if it's possible to build the tree, false otherwise.
      */
     bool GetIndex(CHMListCtrl* toBuild);
 
     /*!
-      \brief Attempts to build an index of context-ID/page pairs
-       from the file.
+      \brief Attempts to build an index of context-ID/page pairs from the file.
       \return true if it's possible to buld the tree, false otherwise.
      */
     bool LoadContextIDs();
 
     /*!
-      \brief Checks whether or not the context ID is valid for the
-       loaded file.
+      \brief Checks whether or not the context ID is valid for the loaded file.
       \param contextID The context-ID to check.
       \return true if the context ID is valid. false otherwise.
      */
@@ -180,8 +165,7 @@ public:
     /*!
      \brief Looks up the page referred to by the context-ID
      \param contextID The context-ID to look up
-     \return the page referred to by the context-ID,
-      or file root"/"  if ID is invalid.
+     \return the page referred to by the context-ID, or file root"/"  if ID is invalid.
      */
     wxString GetPageByCID(int contextID);
 
@@ -196,8 +180,7 @@ public:
       \param text The text we're looking for.
       \param wholeWords Are we looking for whole words only?
       \param titlesOnly Are we looking for titles only?
-      \param results A string-string hashmap that will hold
-      the results in case of successful search. The keys are
+      \param results A string-string hashmap that will hold the results in case of successful search. The keys are
       the URLs and the values are the page titles.
       \return true if the search succeeded, false otherwise.
      */
@@ -205,20 +188,17 @@ public:
 
     /*!
       \brief Looks up fileName in the archive.
-      \param fileName The file name to look up in the archive,
-      qualified with '/' standing for the root of the archive
+      \param fileName The file name to look up in the archive, qualified with '/' standing for the root of the archive
       filesystem.
-      \param ui A pointer to CHMLIB specific data about the file.
-      The parameter gets filled with useful data if the lookup
-      was succesful.
+      \param ui A pointer to CHMLIB specific data about the file. The parameter gets filled with useful data if the
+      lookup was succesful.
       \return true if the file exists in the archive, false otherwise.
      */
     bool ResolveObject(const wxString& fileName, chmUnitInfo* ui);
 
     /*!
       \brief Retrieves an uncompressed chunk of a file in the .chm.
-      \param ui Pointer to a CHMLIB specific data structure obtained
-      from a succesful call to ResolveObject().
+      \param ui Pointer to a CHMLIB specific data structure obtained from a succesful call to ResolveObject().
       \param buffer The buffer to place the chunk into.
       \param fileOffset Where does the chunk we want begin in the file?
       \param bufferSize The size of the buffer.

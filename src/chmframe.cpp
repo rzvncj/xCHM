@@ -183,19 +183,19 @@ void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 
 void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-    ::wxMessageBox(about_txt, _("About xCHM"), wxOK | wxICON_INFORMATION, this);
+    wxMessageBox(about_txt, _("About xCHM"), wxOK | wxICON_INFORMATION, this);
 }
 
 void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 {
-    wxString selection = ::wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
+    wxString selection = wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
-                                          // they say Motif can't handle the following.
-                                          wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
+                                        // they say Motif can't handle the following.
+                                        wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
 #else
-                                          wxT("All files (*.*)|*.*"),
+                                        wxT("All files (*.*)|*.*"),
 #endif
-                                          wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
+                                        wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
     if (selection.IsEmpty() || !_tcl)
         return;

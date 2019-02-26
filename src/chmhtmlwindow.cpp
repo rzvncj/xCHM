@@ -267,7 +267,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
     std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
     if (f.get() == nullptr) {
-        ::wxMessageBox(_("OpenFile(") + _link + _(") failed"), _("Error"), wxOK, this);
+        wxMessageBox(_("OpenFile(") + _link + _(") failed"), _("Error"), wxOK, this);
         return;
     }
 
@@ -277,15 +277,15 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
     if (suggestedName.IsEmpty())
         suggestedName = wxT("index.html");
 
-    wxString filename = ::wxFileSelector(_("Save as"), wxT(""), suggestedName, wxT(""), wxT("*.*"),
-                                         wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+    wxString filename = wxFileSelector(_("Save as"), wxT(""), suggestedName, wxT(""), wxT("*.*"),
+                                       wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
     if (!filename.empty()) {
         wxInputStream*     s = f->GetStream();
         wxFileOutputStream out(filename);
 
         if (!out.IsOk())
-            ::wxMessageBox(_("Error creating file ") + filename, _("Error"), wxOK, this);
+            wxMessageBox(_("Error creating file ") + filename, _("Error"), wxOK, this);
         else {
             char buffer[4096];
 
@@ -295,7 +295,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
                 out.Write((void*)buffer, nbytes);
             }
 
-            ::wxMessageBox(_("Saved file ") + filename, _("Success"), wxOK, this);
+            wxMessageBox(_("Saved file ") + filename, _("Success"), wxOK, this);
         }
     }
 }

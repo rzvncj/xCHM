@@ -57,10 +57,12 @@ void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
 
     if (params.size() > 0 && params[0].getType() == XmlRpcValue::TypeInt)
         switch (int(params[0])) {
-        case 0: // we want to close everything up!
+
+        case 0: // we want to shut everything down!
             ExitMainLoop();
             result = true;
             break;
+
         case 1:
             if (params.size() == 2 && params[1].getType() == XmlRpcValue::TypeString)
                 result = _frame->LoadCHM(CURRENT_CHAR_STRING(std::string(params[1]).c_str()));
@@ -70,6 +72,7 @@ void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
                 result = _frame->LoadCHM(CURRENT_CHAR_STRING(std::string(params[1]).c_str()))
                     && _frame->LoadContextID(int(params[2]));
             break;
+
         case 2:
             if (params.size() == 2 && params[1].getType() == XmlRpcValue::TypeInt)
                 result = _frame->LoadContextID(int(params[1]));
@@ -85,7 +88,7 @@ bool CHMApp::OnInit()
     GetCurrentProcess(&PSN);
     TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
 #endif
-    long     id = -1;
+    long     id {-1};
     wxString file;
 
     _cmdLP.SetCmdLine(argc, argv);
@@ -105,11 +108,11 @@ bool CHMApp::OnInit()
     if (_cmdLP.Parse() != 0) // 0 means everything is ok
         return false;
 
-    bool loadTopics = !_cmdLP.Found(wxT("notopics"));
-    bool loadIndex  = !_cmdLP.Found(wxT("noindex"));
+    bool loadTopics {!_cmdLP.Found(wxT("notopics"))};
+    bool loadIndex {!_cmdLP.Found(wxT("noindex"))};
 
 #ifdef WITH_LIBXMLRPC
-    long port = -1;
+    long port {-1};
 
     // catch the xmlrpc setup if desired
     _cmdLP.Found(wxT("xmlrpc"), &port);
@@ -124,9 +127,9 @@ bool CHMApp::OnInit()
         return false;
     }
 
-    long     xorig = 50, yorig = 50, width = 600, height = 450;
-    long     sashPos  = CONTENTS_MARGIN;
-    long     fontSize = CHM_DEFAULT_FONT_SIZE;
+    long     xorig {50}, yorig {50}, width {600}, height {450};
+    long     sashPos {CONTENTS_MARGIN};
+    long     fontSize {CHM_DEFAULT_FONT_SIZE};
     wxString lastOpenedDir, normalFont, fixedFont;
 
 #if !defined(__WXMAC__) && !defined(__WXMSW__)
@@ -187,7 +190,7 @@ wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
     if (wxIsAbsolutePath(argv0))
         return argv0;
 
-    wxString cwdtmp(cwd), apppath;
+    wxString cwdtmp {cwd}, apppath;
 
     if (cwdtmp.Last() != wxFILE_SEP_PATH)
         cwdtmp += wxFILE_SEP_PATH;

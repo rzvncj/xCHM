@@ -76,7 +76,6 @@ private:
 private:
     CHMFrame* _frame;
     wxLocale  _loc;
-
 #ifdef WITH_LIBXMLRPC
     wxTimer _timer;
 #endif

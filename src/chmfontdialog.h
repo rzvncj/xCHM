@@ -36,10 +36,10 @@ public:
     /*!
       \brief Constructs a CHMFontDialog.
       \param parent The parent window.
-      \param normalFonts Array of strings denoting all the normal
-      font faces' names available on the system. Managed by the caller.
-      \param fixedFonts Array of strings denoting all the fixes fonts
-      faces' names available on the system. Managed by the caller.
+      \param normalFonts Array of strings denoting all the regular font faces' names available on the system.
+      Managed by the caller.
+      \param fixedFonts Array of strings denoting all the fixed fonts faces' names available on the system.
+      Managed by the caller.
       \param normalFont The normal font currently in use by the caller.
       \param fixedFont The fixed font currently in use by the caller.
       \param fontSize The size of the font currently selected.
@@ -54,7 +54,7 @@ public:
     const wxString& NormalFont() const { return _normalFont; }
 
     //! Return the selected font size.
-    int* Sizes() { return _sizes; }
+    const int* Sizes() const { return _sizes; }
 
 protected:
     //! This is called when a font is selected from the combo box.

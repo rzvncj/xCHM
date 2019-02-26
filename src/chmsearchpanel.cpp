@@ -103,9 +103,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
         if (tkz.HasMoreTokens())
             word = tkz.GetNextToken();
 
-    CHMSearchResults           h1;
-    CHMSearchResults::iterator i;
-
+    CHMSearchResults h1;
     chmf->IndexSearch(word, !_partial->IsChecked(), _titles->IsChecked(), &h1);
 
     while (tkz.HasMoreTokens()) {
@@ -118,9 +116,9 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
         chmf->IndexSearch(token, !_partial->IsChecked(), _titles->IsChecked(), &h2);
 
         if (!h2.empty()) {
-            for (i = h2.begin(); i != h2.end(); ++i)
-                if (h1.find(i->first) != h1.end())
-                    tmp[i->first] = i->second;
+            for (auto&& item : h2)
+                if (h1.find(item.first) != h1.end())
+                    tmp[item.first] = item.second;
             h1 = tmp;
         } else {
             h1.clear();
@@ -134,11 +132,10 @@ void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
         return;
     }
 
-    if (!h1.empty())
-        for (i = h1.begin(); i != h1.end(); ++i) {
-            wxString url = (i->first.StartsWith(wxT("/")) ? i->first : (wxT("/") + i->first));
-            _results->AddPairItem(i->second, url);
-        }
+    for (auto&& item : h1) {
+        wxString url = item.first.StartsWith(wxT("/")) ? item.first : (wxT("/") + item.first);
+        _results->AddPairItem(item.second, url);
+    }
 
     _results->UpdateUI();
 }

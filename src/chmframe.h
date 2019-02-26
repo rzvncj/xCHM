@@ -82,28 +82,22 @@ enum {
   \brief wxWidgets frame widget class.
 */
 
-/*!
-  \brief The frame, owner of the wxHtmlWindow, contents tree control and
-  all the other nifty stuff.
-*/
+//! The frame, owner of the wxHtmlWindow, contents tree control and all the other nifty stuff.
 class CHMFrame : public wxFrame {
 
 public:
     /*!
       \brief Brings the frame into existence.
       \param title The text that shows up on the titlebar.
-      \param booksDir Where to go when you click Open.. on the
-      toolbar. This is used to remember the last directory where
-      a book was sucessfully opened. For the current working
-      directory just pass the empty string.
+      \param booksDir Where to go when you click Open.. on the toolbar. This is used to remember the last directory
+      where a book was sucessfully opened. For the current working directory just pass the empty string.
       \param pos The upper left corner of the frame.
       \param size The size of the frame.
       \param normalFont Name of the font face to use for normal text.
       \param fixedFont Name of the font face to use for fixed text.
       \param fontSize The font size.
       \param sashPosition Distance from the left of the frame to
-      \param fullAppPath The absolute path to the executable of the process
-      the end of the contents / search panel.
+      \param fullAppPath The absolute path to the executable of the process the end of the contents / search panel.
       \param loadTopics If set to false, don't try to load the topics tree.
       \param loadIndex If set to false, don't try to load the index list.
     */
@@ -160,10 +154,7 @@ protected:
     //! Called when the user wants to go back in the history.
     void OnHistoryBack(wxCommandEvent& event);
 
-    /*!
-      \brief Called when the user wants to either disable or enable
-      the contents tree panel on the left.
-    */
+    //! Called when the user wants to either disable or enable the contents tree panel on the left.
     void OnShowContents(wxCommandEvent& event);
 
     //! Called when the user wants to print the displayed page.

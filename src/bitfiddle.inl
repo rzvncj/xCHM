@@ -129,8 +129,6 @@ inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned 
             mask = 0x7f;
             break;
         case 7:
-            mask = 0xff;
-            break;
         default:
             mask = 0xff;
             break;

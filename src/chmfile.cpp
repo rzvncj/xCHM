@@ -279,7 +279,6 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
         name = reinterpret_cast<char*>(&strings[index]);
 
     } else {
-
         if (topics.size() < (index * 16) + 12)
             return false;
 
@@ -841,7 +840,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 #if wxUSE_UNICODE
             else {
                 std::unique_ptr<wxCSConv> cvPtr = createCSConvPtr(_enc);
-                topic                           = wxString((const char*)combuf, *cvPtr);
+                topic                           = wxString(reinterpret_cast<const char*>(combuf), *cvPtr);
             }
 #endif
         }
@@ -926,7 +925,7 @@ bool CHMFile::InfoFromWindows()
             }
 
             if (size && off_home)
-                _home = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + off_home % 4096);
+                _home = wxT("/") + CURRENT_CHAR_STRING(buffer + off_home % 4096);
 
             if (factor != off_hhc / 4096) {
                 factor = off_hhc / 4096;
@@ -934,7 +933,7 @@ bool CHMFile::InfoFromWindows()
             }
 
             if (size && off_hhc)
-                _topicsFile = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + off_hhc % 4096);
+                _topicsFile = wxT("/") + CURRENT_CHAR_STRING(buffer + off_hhc % 4096);
 
             if (factor != off_hhk / 4096) {
                 factor = off_hhk / 4096;
@@ -942,7 +941,7 @@ bool CHMFile::InfoFromWindows()
             }
 
             if (size && off_hhk)
-                _indexFile = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + off_hhk % 4096);
+                _indexFile = wxT("/") + CURRENT_CHAR_STRING(buffer + off_hhk % 4096);
         }
     }
 
@@ -987,21 +986,21 @@ bool CHMFile::InfoFromSystem()
             cursor = buffer + index;
 
             if (_topicsFile.IsEmpty())
-                _topicsFile = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + index + 2);
+                _topicsFile = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
         case 1:
             index += 2;
             cursor = buffer + index;
 
             if (_indexFile.IsEmpty())
-                _indexFile = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + index + 2);
+                _indexFile = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
         case 2:
             index += 2;
             cursor = buffer + index;
 
-            if (_home.IsEmpty() || _home == wxString(wxT("/")))
-                _home = wxString(wxT("/")) + CURRENT_CHAR_STRING(buffer + index + 2);
+            if (_home.IsEmpty() || _home == wxT("/"))
+                _home = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
         case 3:
             index += 2;

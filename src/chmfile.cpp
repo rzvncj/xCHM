@@ -141,6 +141,22 @@ constexpr uint32_t LANG_KASHMIRI   = 0x60;
 constexpr uint32_t LANG_NEPALI     = 0x61;
 constexpr uint32_t LANG_DIVEHI     = 0x65;
 
+#define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
+#define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))
+
+inline uint16_t UINT16ARRAY(const unsigned char* x)
+{
+    return x[0] | (static_cast<uint16_t>(x[1]) << 8);
+}
+
+inline uint32_t UINT32ARRAY(const unsigned char* x)
+{
+    return UINT16ARRAY(x) | (static_cast<uint32_t>(x[2]) << 16) | (static_cast<uint32_t>(x[3]) << 24);
+}
+
+#define INT32ARRAY(x) static_cast<int32_t>(UINT32ARRAY(x))
+#define INT16ARRAY(x) static_cast<int16_t>(UINT16ARRAY(x))
+
 inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 {
     uint64_t result {0};

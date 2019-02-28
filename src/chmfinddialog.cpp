@@ -56,7 +56,7 @@ CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     SetFocusToTextBox();
 }
 
-void CHMFindDialog::OnFind(wxCommandEvent& WXUNUSED(event))
+void CHMFindDialog::OnFind(wxCommandEvent&)
 {
     _html->ClearSelection();
 

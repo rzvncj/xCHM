@@ -266,7 +266,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 {
     std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
-    if (f.get() == nullptr) {
+    if (!f) {
         wxMessageBox(_("OpenFile(") + _link + _(") failed"), _("Error"), wxOK, this);
         return;
     }
@@ -303,7 +303,7 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
 void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 {
     if (IsSelectionEnabled())
-        _menu->Enable(ID_CopySel, m_selection != nullptr);
+        _menu->Enable(ID_CopySel, m_selection);
 
     _menu->Enable(ID_PopupForward, HistoryCanForward());
     _menu->Enable(ID_PopupBack, HistoryCanBack());

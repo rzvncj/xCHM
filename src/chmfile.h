@@ -105,7 +105,7 @@ public:
       \brief Checks if the last attempt to load a .chm file was succesful.
       \return true, if the last attempt to load a .chm file was succesful, false otherwise.
      */
-    bool IsOk() const { return _chmFile != nullptr; }
+    bool IsOk() const { return _chmFile; }
 
     //! Checks if a 'ms-its' link has been clicked and the chm changed.
     bool HasChanged();

@@ -128,8 +128,7 @@ bool CHMApp::OnInit()
     }
 
     long     xorig {50}, yorig {50}, width {600}, height {450};
-    long     sashPos {CONTENTS_MARGIN};
-    long     fontSize {CHM_DEFAULT_FONT_SIZE};
+    long     sashPos {CONTENTS_MARGIN}, fontSize {CHM_DEFAULT_FONT_SIZE};
     wxString lastOpenedDir, normalFont, fixedFont;
 
 #if !defined(__WXMAC__) && !defined(__WXMSW__)

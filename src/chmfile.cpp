@@ -269,6 +269,7 @@ bool CHMFile::LoadCHM(const wxString& archiveName)
 
     _enc      = wxFONTENCODING_SYSTEM;
     _filename = archiveName;
+
     GetArchiveInfo();
     LoadContextIDs();
 
@@ -309,7 +310,7 @@ bool CHMFile::BinaryTOC(wxTreeCtrl* toBuild)
         || chm_resolve_object(_chmFile, "/#URLSTR", &us_ui) != CHM_RESOLVE_SUCCESS)
         return false; // failed to find internal files
 
-    if (ti_ui.length < 4) // just make sure
+    if (ti_ui.length < 4)
         return false;
 
     UCharVector topidx(ti_ui.length), topics(ts_ui.length), strings(st_ui.length), urltbl(ut_ui.length),
@@ -361,12 +362,12 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
                       uint32_t index, wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level,
                       bool local)
 {
-    static wxTreeItemId parents[TREE_BUF_SIZE];
-
+    static wxTreeItemId  parents[TREE_BUF_SIZE];
     static int           calls {0};
     static constexpr int yieldTime {256};
 
     ++calls;
+
     if (calls % yieldTime) {
         calls = 0;
         wxYield();
@@ -390,10 +391,7 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
         uint32_t offset {UINT32ARRAY(&topics[index * 16 + 4])};
         int32_t  test {static_cast<int32_t>(offset)};
 
-        if (strings.size() < offset + 1)
-            return false;
-
-        if (test == -1)
+        if (strings.size() < offset + 1 || test == -1)
             return false;
 
         if (!list)
@@ -416,8 +414,7 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
     if (!value.empty() && value[0] != '/')
         value = "/" + value;
 
-    wxString tname;
-    wxString tvalue = CURRENT_CHAR_STRING(value.c_str());
+    wxString tname, tvalue = CURRENT_CHAR_STRING(value.c_str());
 
     if (tree && !name.empty()) {
         int parentIndex {level ? level - 1 : 0};
@@ -550,7 +547,6 @@ bool CHMFile::BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv)
             spaceLeft -= 16;
 
             if (seeAlso) {
-                // TODO: something about this duplicated code
                 do { // get over the Unicode string
                     if (bt_ui.length < offset + sizeof(uint16_t))
                         return items != 0;
@@ -810,7 +806,7 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
 
 bool CHMFile::ResolveObject(const wxString& fileName, chmUnitInfo* ui)
 {
-    return _chmFile != nullptr
+    return _chmFile
         && chm_resolve_object(_chmFile, static_cast<const char*>(fileName.mb_str()), ui) == CHM_RESOLVE_SUCCESS;
 }
 
@@ -903,7 +899,6 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
         return false;
 
     for (uint64_t i = 0; i < wlc_count; ++i) {
-
         if (wlc_bit != 7) {
             ++off;
             wlc_bit = 7;
@@ -997,7 +992,6 @@ bool CHMFile::InfoFromWindows()
             return false;
 
         for (uint32_t i = 0; i < entries; ++i) {
-
             uint32_t offset {i * entry_size};
             uint32_t off_title {UINT32ARRAY(raw + offset + 0x14)};
             uint32_t off_home {UINT32ARRAY(raw + offset + 0x68)};
@@ -1043,16 +1037,14 @@ bool CHMFile::InfoFromWindows()
 
 bool CHMFile::InfoFromSystem()
 {
-    unsigned char buffer[BUF_SIZE];
-    chmUnitInfo   ui;
-
+    unsigned char  buffer[BUF_SIZE] {};
+    chmUnitInfo    ui;
     int            index {0};
     unsigned char* cursor {nullptr};
     uint16_t       value {0};
     uint32_t       lcid {0};
-
-    long size {0};
-    long cs {-1};
+    long           size {0};
+    long           cs {-1};
 
     // Do we have the #SYSTEM file in the archive?
     if (chm_resolve_object(_chmFile, "/#SYSTEM", &ui) != CHM_RESOLVE_SUCCESS)
@@ -1062,12 +1054,9 @@ bool CHMFile::InfoFromSystem()
     if ((size = chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE)) == 0)
         return false;
 
-    buffer[size - 1] = 0;
-
     for (;;) {
-        // This condition won't hold if I process anything
-        // except NUL-terminated strings!
-        if (index > size - 1 - (long)sizeof(uint16_t))
+        // This condition won't hold if I process anything except NUL-terminated strings!
+        if (index > size - 1 - static_cast<long>(sizeof(uint16_t)))
             break;
 
         cursor = buffer + index;
@@ -1081,6 +1070,7 @@ bool CHMFile::InfoFromSystem()
             if (_topicsFile.IsEmpty())
                 _topicsFile = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
+
         case 1:
             index += 2;
             cursor = buffer + index;
@@ -1088,6 +1078,7 @@ bool CHMFile::InfoFromSystem()
             if (_indexFile.IsEmpty())
                 _indexFile = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
+
         case 2:
             index += 2;
             cursor = buffer + index;
@@ -1095,6 +1086,7 @@ bool CHMFile::InfoFromSystem()
             if (_home.IsEmpty() || _home == wxT("/"))
                 _home = wxT("/") + CURRENT_CHAR_STRING(buffer + index + 2);
             break;
+
         case 3:
             index += 2;
             cursor = buffer + index;
@@ -1298,16 +1290,3 @@ inline wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 
     return fontEncoding;
 }
-
-/*
-  Local Variables:
-  mode: c++
-  c-basic-offset: 8
-  tab-width: 8
-  c-indent-comments-syntactically-p: t
-  c-tab-always-indent: t
-  indent-tabs-mode: t
-  End:
-*/
-
-// vim:shiftwidth=8:autoindent:tabstop=8:noexpandtab:softtabstop=8

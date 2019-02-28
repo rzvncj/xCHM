@@ -34,14 +34,6 @@
 #define CURRENT_CHAR_STRING_CV(x, cv) wxString(reinterpret_cast<const char*>(x))
 #endif
 
-#if wxUSE_UNICODE
-#define UNICODE_PARAM(x) x
-#define NON_UNICODE_PARAM(x)
-#else
-#define UNICODE_PARAM(x)
-#define NON_UNICODE_PARAM(x) x
-#endif
-
 inline std::unique_ptr<wxCSConv> createCSConvPtr(wxFontEncoding enc)
 {
 #ifdef __WXMSW__
@@ -74,11 +66,10 @@ inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 #define translateEncoding(x, y) x
 #endif
 
-inline wxChar charForCode(unsigned code, const wxCSConv& NON_UNICODE_PARAM(cv), bool NON_UNICODE_PARAM(conv))
+inline wxChar charForCode(unsigned code, const wxCSConv& WXUNUSED_IN_UNICODE(cv), bool WXUNUSED_IN_UNICODE(conv))
 {
 #if !wxUSE_UNICODE
 #if wxUSE_WCHAR_T
-
     if (code < 256)
         return static_cast<wxChar>(code);
 
@@ -96,7 +87,6 @@ inline wxChar charForCode(unsigned code, const wxCSConv& NON_UNICODE_PARAM(cv), 
         return buf[0];
     } else
         return static_cast<wxChar>(code);
-
 #else
     return (code < 256) ? static_cast<wxChar>(code) : '?';
 #endif

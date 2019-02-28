@@ -19,6 +19,9 @@
   MA 02110-1301, USA.
 */
 
+#ifndef __WXSTRING_UTILS_H_
+#define __WXSTRING_UTILS_H_
+
 #include <memory>
 #include <stdint.h>
 #include <wx/string.h>
@@ -101,3 +104,5 @@ inline wxChar charForCode(unsigned code, const wxCSConv& NON_UNICODE_PARAM(cv), 
     return static_cast<wxChar>(code);
 #endif
 }
+
+#endif // __WXSTRING_UTILS_H_

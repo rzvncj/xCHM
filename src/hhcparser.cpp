@@ -23,12 +23,11 @@
 #include <map>
 #include <stdlib.h>
 #include <wx/wx.h>
+#include <wxstringutils.h>
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <bitfiddle.inl>
 
 namespace {
 

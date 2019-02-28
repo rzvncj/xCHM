@@ -20,7 +20,6 @@
   MA 02110-1301, USA.
 */
 
-#include <bitfiddle.inl>
 #include <chmapp.h>
 #include <chmfile.h>
 #include <chmframe.h>
@@ -30,6 +29,7 @@
 #include <wx/fs_inet.h>
 #include <wx/fs_mem.h>
 #include <wx/image.h>
+#include <wxstringutils.h>
 
 #ifdef __WXMAC__
 #include <ApplicationServices/ApplicationServices.h>

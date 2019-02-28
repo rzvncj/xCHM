@@ -9,7 +9,7 @@ xchm_SOURCES = chmapp.cpp chmfile.cpp chmframe.cpp chmfshandler.cpp \
 
 noinst_HEADERS = chmapp.h chmfile.h chmframe.h chmfshandler.h \
 	chminputstream.h chmfontdialog.h chmhtmlnotebook.h \
-	chmsearchpanel.h chmhtmlwindow.h bitfiddle.inl \
+	chmsearchpanel.h chmhtmlwindow.h wxstringutils.h \
 	chmfinddialog.h chmindexpanel.h chmlistctrl.h hhcparser.h \
 	xchm_chm_lib.h lzx.h
 

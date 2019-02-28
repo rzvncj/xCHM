@@ -22,7 +22,6 @@
 */
 
 #include <assert.h>
-#include <bitfiddle.inl>
 #include <chmfile.h>
 #include <chmlistctrl.h>
 #include <hhcparser.h>
@@ -32,6 +31,7 @@
 #include <wx/strconv.h>
 #include <wx/treectrl.h>
 #include <wx/wx.h>
+#include <wxstringutils.h>
 
 namespace {
 

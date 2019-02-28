@@ -99,7 +99,7 @@ void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
     SetSelection(selection - 1);
 }
 
-void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlNotebook::OnCloseTab(wxCommandEvent&)
 {
     DeletePage(GetSelection());
 
@@ -107,7 +107,7 @@ void CHMHtmlNotebook::OnCloseTab(wxCommandEvent& WXUNUSED(event))
         SetTabCtrlHeight(0);
 }
 
-void CHMHtmlNotebook::OnNewTab(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlNotebook::OnNewTab(wxCommandEvent&)
 {
     AddHtmlView(wxEmptyString, wxEmptyString);
 }

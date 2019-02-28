@@ -46,19 +46,19 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
     _lc->SetFont(font);
 }
 
-void CHMIndexPanel::OnIndexSelRet(wxCommandEvent& WXUNUSED(event))
+void CHMIndexPanel::OnIndexSelRet(wxCommandEvent&)
 {
     if (_navigate)
         _lc->LoadSelected();
 }
 
-void CHMIndexPanel::OnIndexSel(wxListEvent& WXUNUSED(event))
+void CHMIndexPanel::OnIndexSel(wxListEvent&)
 {
     if (_navigate)
         _lc->LoadSelected();
 }
 
-void CHMIndexPanel::OnText(wxCommandEvent& WXUNUSED(event))
+void CHMIndexPanel::OnText(wxCommandEvent&)
 {
     _navigate = false;
     _lc->FindBestMatch(_text->GetLineText(0));

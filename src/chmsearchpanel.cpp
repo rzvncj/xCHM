@@ -72,7 +72,7 @@ CHMSearchPanel::~CHMSearchPanel()
     SetConfig();
 }
 
-void CHMSearchPanel::OnSearch(wxCommandEvent& WXUNUSED(event))
+void CHMSearchPanel::OnSearch(wxCommandEvent&)
 {
     wxBusyCursor bcr;
 
@@ -223,7 +223,7 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
     return found;
 }
 
-void CHMSearchPanel::OnSearchSel(wxListEvent& WXUNUSED(event))
+void CHMSearchPanel::OnSearchSel(wxListEvent&)
 {
     _results->LoadSelected();
 }

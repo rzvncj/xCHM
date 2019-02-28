@@ -176,17 +176,17 @@ CHMFrame::~CHMFrame()
         _tcl->Unselect();
 }
 
-void CHMFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnQuit(wxCommandEvent&)
 {
     Close(true);
 }
 
-void CHMFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnAbout(wxCommandEvent&)
 {
     wxMessageBox(about_txt, _("About xCHM"), wxOK | wxICON_INFORMATION, this);
 }
 
-void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnOpen(wxCommandEvent&)
 {
     wxString selection = wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
@@ -204,7 +204,7 @@ void CHMFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
     LoadCHM(selection);
 }
 
-void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnChangeFonts(wxCommandEvent&)
 {
     wxLogNull wln;
 
@@ -240,7 +240,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnHome(wxCommandEvent&)
 {
     CHMFile* chmf = CHMInputStream::GetCache();
 
@@ -250,18 +250,18 @@ void CHMFrame::OnHome(wxCommandEvent& WXUNUSED(event))
     _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:") + chmf->HomePage());
 }
 
-void CHMFrame::OnHistoryForward(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnHistoryForward(wxCommandEvent&)
 {
     _nbhtml->GetCurrentPage()->HistoryForward();
 }
 
-void CHMFrame::OnHistoryBack(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnHistoryBack(wxCommandEvent&)
 {
     if (_nbhtml->GetCurrentPage()->HistoryCanBack())
         _nbhtml->GetCurrentPage()->HistoryBack();
 }
 
-void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnShowContents(wxCommandEvent&)
 {
     if (_sw->IsSplit()) {
         _tb->ToggleTool(ID_Contents, false);
@@ -286,7 +286,7 @@ void CHMFrame::OnShowContents(wxCommandEvent& WXUNUSED(event))
 doing this will overwrite any previously registered CHM viewer \
 associations.\n\nAre you sure you know what you're doing?"
 
-void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnRegisterExtension(wxCommandEvent&)
 {
     int answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this);
 
@@ -310,7 +310,7 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent& WXUNUSED(event))
 
 #endif // __WXMSW__
 
-void CHMFrame::OnPrint(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnPrint(wxCommandEvent&)
 {
     wxLogNull wln;
 
@@ -350,13 +350,13 @@ void CHMFrame::OnCopySelection(wxCommandEvent& event)
     _nbhtml->GetCurrentPage()->OnCopy(event);
 }
 
-void CHMFrame::OnFullScreen(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnFullScreen(wxCommandEvent&)
 {
     _fullScreen = !_fullScreen;
     ShowFullScreen(_fullScreen, wxFULLSCREEN_ALL);
 }
 
-void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnAddBookmark(wxCommandEvent&)
 {
     wxTreeItemId id = _tcl->GetSelection();
 
@@ -380,7 +380,7 @@ void CHMFrame::OnAddBookmark(wxCommandEvent& WXUNUSED(event))
     _bookmarkSel = true;
 }
 
-void CHMFrame::OnRemoveBookmark(wxCommandEvent& WXUNUSED(event))
+void CHMFrame::OnRemoveBookmark(wxCommandEvent&)
 {
     if (!_cb->GetCount())
         return;
@@ -442,7 +442,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
     }
 }
 
-void CHMFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
+void CHMFrame::OnCloseWindow(wxCloseEvent&)
 {
     SaveExitInfo();
     SaveBookmarks();

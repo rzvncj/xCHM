@@ -212,12 +212,12 @@ void CHMHtmlWindow::ClearSelection()
     Refresh();
 }
 
-void CHMHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnCopy(wxCommandEvent&)
 {
     CopySelection();
 }
 
-void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnFind(wxCommandEvent&)
 {
     if (!_fdlg) {
         wxWindow* p = GetParent();
@@ -233,12 +233,12 @@ void CHMHtmlWindow::OnFind(wxCommandEvent& WXUNUSED(event))
     _fdlg->Reset();
 }
 
-void CHMHtmlWindow::OnForward(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnForward(wxCommandEvent&)
 {
     HistoryForward();
 }
 
-void CHMHtmlWindow::OnBack(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnBack(wxCommandEvent&)
 {
     HistoryBack();
 }
@@ -254,7 +254,7 @@ void CHMHtmlWindow::OnSize(wxSizeEvent& event)
     event.Skip(false);
 }
 
-void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnCopyLink(wxCommandEvent&)
 {
     if (wxTheClipboard->Open()) {
         wxTheClipboard->SetData(new wxTextDataObject(_link));
@@ -262,7 +262,7 @@ void CHMHtmlWindow::OnCopyLink(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent&)
 {
     std::unique_ptr<wxFSFile> f(m_FS->OpenFile(_link));
 
@@ -331,7 +331,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
     PopupMenu(_menu.get(), event.GetPosition());
 }
 
-void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent&)
 {
     wxString link = _link;
 
@@ -341,7 +341,7 @@ void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent& WXUNUSED(event))
     _frame->AddHtmlView(GetParser()->GetFS()->GetPath(), link);
 }
 
-void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent& WXUNUSED(event))
+void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 {
     _frame->ToggleFullScreen();
 }

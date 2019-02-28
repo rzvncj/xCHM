@@ -38,7 +38,7 @@ const wxChar* test_page = wxT(
 
 }
 
-CHMFontDialog::CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts,
+CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts, const wxArrayString& fixedFonts,
                              const wxString& normalFont, const wxString& fixedFont, int fontSize)
     : wxDialog(parent, -1, _("Change fonts..")), _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
@@ -100,31 +100,29 @@ void CHMFontDialog::UpdatePreview()
     _test->SetPage(test_page);
 }
 
-void CHMFontDialog::OnUpdate(wxCommandEvent& WXUNUSED(event))
+void CHMFontDialog::OnUpdate(wxCommandEvent&)
 {
     UpdatePreview();
 }
 
-void CHMFontDialog::OnUpdateSpin(wxSpinEvent& WXUNUSED(event))
+void CHMFontDialog::OnUpdateSpin(wxSpinEvent&)
 {
     UpdatePreview();
 }
 
-void CHMFontDialog::InitDialog(wxArrayString* normalFonts, wxArrayString* fixedFonts)
+void CHMFontDialog::InitDialog(const wxArrayString& normalFonts, const wxArrayString& fixedFonts)
 {
-    assert(normalFonts && fixedFonts);
-
     if (_normalFont.IsEmpty())
         _normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, wxNORMAL, false).GetFaceName();
 
     if (_fixedFont.IsEmpty())
         _fixedFont = wxFont(_fontSize, wxMODERN, wxNORMAL, wxNORMAL, false).GetFaceName();
 
-    for (unsigned int i = 0; i < normalFonts->GetCount(); i++)
-        _normalFControl->Append((*normalFonts)[i]);
+    for (auto&& font : normalFonts)
+        _normalFControl->Append(font);
 
-    for (unsigned int i = 0; i < fixedFonts->GetCount(); i++)
-        _fixedFControl->Append((*fixedFonts)[i]);
+    for (auto&& font : fixedFonts)
+        _fixedFControl->Append(font);
 
     if (!_normalFont.IsEmpty())
         _normalFControl->SetStringSelection(_normalFont);
@@ -137,6 +135,7 @@ void CHMFontDialog::InitDialog(wxArrayString* normalFonts, wxArrayString* fixedF
         _fixedFControl->SetSelection(0);
 
     _fontSizeControl->SetValue(_fontSize);
+
     UpdatePreview();
 }
 

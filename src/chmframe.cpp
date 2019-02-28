@@ -225,7 +225,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent& WXUNUSED(event))
         _fixedFonts->Sort();
     }
 
-    CHMFontDialog cfd(this, _normalFonts.get(), _fixedFonts.get(), _normalFont, _fixedFont, _fontSize);
+    CHMFontDialog cfd(this, *_normalFonts, *_fixedFonts, _normalFont, _fixedFont, _fontSize);
 
     if (cfd.ShowModal() == wxID_OK) {
         wxBusyCursor bc;

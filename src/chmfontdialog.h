@@ -44,8 +44,8 @@ public:
       \param fixedFont The fixed font currently in use by the caller.
       \param fontSize The size of the font currently selected.
      */
-    CHMFontDialog(wxWindow* parent, wxArrayString* normalFonts, wxArrayString* fixedFonts, const wxString& normalFont,
-                  const wxString& fixedFont, int fontSize);
+    CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts, const wxArrayString& fixedFonts,
+                  const wxString& normalFont, const wxString& fixedFont, int fontSize);
 
     //! Returns the fixed font face name.
     const wxString& FixedFont() const { return _fixedFont; }
@@ -68,7 +68,7 @@ private:
     void UpdatePreview();
 
     //! Helper. Initializes the dialog with the passed data.
-    void InitDialog(wxArrayString* normalFonts, wxArrayString* fixedFonts);
+    void InitDialog(const wxArrayString& normalFonts, const wxArrayString& fixedFonts);
 
 private:
     wxHtmlWindow* _test {nullptr};

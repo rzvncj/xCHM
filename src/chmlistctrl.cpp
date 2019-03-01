@@ -99,12 +99,10 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
     int  tl = title.length();
 
     for (long i = 0; i < sz; ++i) {
-
         info.m_itemId = i;
         GetItem(info);
 
         if (!info.m_text.Left(tl).CmpNoCase(title)) {
-
             EnsureVisible(i);
             SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
             break;

@@ -32,9 +32,8 @@ class CHMListCtrl;
 #define TREE_BUF_SIZE 128
 
 /*!
-  \brief Objects of this class will be used as opaque data to be used with
-  a tree item, so that when the user selects a tree item it will be easy
-  to retrieve the filename associated with the item.
+  \brief Objects of this class will be used as opaque data to be used with a tree item, so that when the user selects
+  a tree item it will be easy to retrieve the filename associated with the item.
 */
 struct URLTreeItem : public wxTreeItemData {
 

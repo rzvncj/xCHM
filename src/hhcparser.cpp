@@ -38,7 +38,7 @@ struct HTMLChar {
 
 extern "C" int HTMLCharCompare(const void* key, const void* item)
 {
-    return wxStrcmp((wxChar*)key, ((HTMLChar*)item)->name);
+    return wxStrcmp(static_cast<const wxChar*>(key), static_cast<const HTMLChar*>(item)->name);
 }
 
 HTMLChar substitutions[] = {

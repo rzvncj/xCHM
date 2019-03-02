@@ -47,10 +47,10 @@ class CHMHtmlNotebook;
 #endif
 
 //! Default font size for the wxHtmlWindow.
-constexpr int CHM_DEFAULT_FONT_SIZE = 12;
+constexpr int CHM_DEFAULT_FONT_SIZE {12};
 
 //! Default sash position.
-constexpr int CONTENTS_MARGIN = 170;
+constexpr int CONTENTS_MARGIN {170};
 
 //! IDs for various widget events.
 enum {

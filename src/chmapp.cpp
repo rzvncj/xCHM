@@ -37,7 +37,7 @@
 
 #ifdef WITH_LIBXMLRPC
 
-constexpr int TIMER_ID = wxID_HIGHEST + 1;
+constexpr int TIMER_ID {wxID_HIGHEST + 1};
 
 XmlRpc::XmlRpcServer& getXmlRpcServer()
 {
@@ -108,8 +108,8 @@ bool CHMApp::OnInit()
     if (_cmdLP.Parse() != 0) // 0 means everything is ok
         return false;
 
-    bool loadTopics {!_cmdLP.Found(wxT("notopics"))};
-    bool loadIndex {!_cmdLP.Found(wxT("noindex"))};
+    auto loadTopics = !_cmdLP.Found(wxT("notopics"));
+    auto loadIndex  = !_cmdLP.Found(wxT("noindex"));
 
 #ifdef WITH_LIBXMLRPC
     long port {-1};
@@ -189,12 +189,12 @@ wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
     if (wxIsAbsolutePath(argv0))
         return argv0;
 
-    wxString cwdtmp {cwd}, apppath;
+    auto cwdtmp = cwd;
 
     if (cwdtmp.Last() != wxFILE_SEP_PATH)
         cwdtmp += wxFILE_SEP_PATH;
 
-    apppath = cwdtmp + apppath;
+    auto apppath = cwdtmp + argv0;
 
     if (wxFileExists(apppath))
         return apppath;

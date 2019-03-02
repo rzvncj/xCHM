@@ -21,6 +21,7 @@
   MA 02110-1301, USA.
 */
 
+#include <algorithm>
 #include <chmfontdialog.h>
 #include <chmframe.h>
 #include <chmhtmlnotebook.h>
@@ -416,16 +417,13 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
-    wxTreeItemId id   = event.GetItem();
-    CHMFile*     chmf = CHMInputStream::GetCache();
+    wxTreeItemId id {event.GetItem()};
+    CHMFile*     chmf {CHMInputStream::GetCache()};
 
-    if (id == _tcl->GetRootItem() || !chmf)
+    if (id == _tcl->GetRootItem() || !chmf || !id.IsOk())
         return;
 
-    if (!id.IsOk())
-        return;
-
-    URLTreeItem* data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
+    URLTreeItem* data {reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id))};
 
     if (!data || data->_url.IsEmpty())
         return;
@@ -459,16 +457,18 @@ bool CHMFrame::LoadCHM(const wxString& archive)
     wxBusyCursor bc;
     wxLogNull    wln;
 
-    bool rtn = false;
+    bool rtn {false};
+
     SaveBookmarks();
+
     _nb->SetSelection(0);
     _nbhtml->CloseAllPagesExceptFirst();
-    if (!archive.StartsWith(wxT("file:")) || !archive.Contains(wxT("#xchm:"))) {
 
+    if (!archive.StartsWith(wxT("file:")) || !archive.Contains(wxT("#xchm:"))) {
         wxFileSystem              wfs;
         std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxT("file:") + archive + wxT("#xchm:/")));
 
-        CHMFile* chmf = CHMInputStream::GetCache();
+        CHMFile* chmf {CHMInputStream::GetCache()};
 
         if (!chmf)
             return false;
@@ -482,10 +482,12 @@ bool CHMFrame::LoadCHM(const wxString& archive)
             _tcl->Unselect();
             _tcl->DeleteChildren(_tcl->GetRootItem());
         }
+
         if (_sw->IsSplit()) {
             _sw->Unsplit(_nb);
             _nb->Show(false);
         }
+
         _menuFile->Check(ID_Contents, false);
         _tb->ToggleTool(ID_Contents, false);
         _cip->Reset();
@@ -504,12 +506,9 @@ bool CHMFrame::LoadContextID(int contextID)
 {
     wxBusyCursor bc;
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    CHMFile* chmf {CHMInputStream::GetCache()};
 
-    if (!chmf)
-        return false;
-
-    if (!chmf->IsValidCID(contextID))
+    if (!chmf || !chmf->IsValidCID(contextID))
         return false;
 
     return _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:")
@@ -519,10 +518,10 @@ bool CHMFrame::LoadContextID(int contextID)
 void CHMFrame::UpdateCHMInfo()
 {
 #if !wxUSE_UNICODE
-    static bool           noSpecialFont = true;
-    static wxFontEncoding enc           = wxFont::GetDefaultEncoding();
+    static bool           noSpecialFont {true};
+    static wxFontEncoding enc {wxFont::GetDefaultEncoding()};
 #endif
-    CHMFile* chmf = CHMInputStream::GetCache();
+    CHMFile* chmf {CHMInputStream::GetCache()};
 
     if (!chmf)
         return;
@@ -530,7 +529,8 @@ void CHMFrame::UpdateCHMInfo()
     wxWindowDisabler wwd;
     wxBusyInfo       wait(_("Loading, please wait.."), this);
 
-    wxString filename = chmf->ArchiveName();
+    wxString filename {chmf->ArchiveName()};
+
     if (!filename.IsEmpty()) {
         _fh.AddFileToHistory(filename);
 
@@ -542,7 +542,7 @@ void CHMFrame::UpdateCHMInfo()
     _csp->Reset();
     _cip->Reset();
 
-    wxString title = chmf->Title();
+    wxString title {chmf->Title()};
 
     if (_tcl->GetCount()) {
         _tcl->Unselect();
@@ -550,15 +550,14 @@ void CHMFrame::UpdateCHMInfo()
     }
 
 #if !wxUSE_UNICODE
-    wxString fontFace = chmf->DefaultFont();
+    wxString fontFace {chmf->DefaultFont()};
 
     if (!fontFace.IsEmpty()) {
+        long fs {-1};
 
-        long fs = -1;
         fontFace.BeforeLast(wxT(',')).AfterLast(wxT(',')).ToLong(&fs);
 
-        if (fs < 10)
-            fs = 10;
+        fs = std::max(fs, 10L);
 
         wxFont font(static_cast<int>(fs), wxDEFAULT, wxNORMAL, wxNORMAL, false, fontFace.BeforeFirst(wxT(',')),
                     chmf->DesiredEncoding());
@@ -577,7 +576,7 @@ void CHMFrame::UpdateCHMInfo()
             noSpecialFont = false;
         }
 
-    } else if (noSpecialFont == false) {
+    } else if (!noSpecialFont) {
         int sizes[7];
 
         for (int i = -3; i <= 3; ++i)
@@ -618,12 +617,13 @@ void CHMFrame::UpdateCHMInfo()
             _menuFile->Check(ID_Contents, true);
             _tb->ToggleTool(ID_Contents, true);
         }
-    } else {
 
+    } else {
         if (_sw->IsSplit()) {
             _sw->Unsplit(_nb);
             _nb->Show(false);
         }
+
         _menuFile->Check(ID_Contents, false);
         _tb->ToggleTool(ID_Contents, false);
     }

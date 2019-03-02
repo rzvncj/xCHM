@@ -54,8 +54,8 @@ inline std::unique_ptr<wxCSConv> createCSConvPtr(wxFontEncoding enc)
 inline wxString translateEncoding(const wxString& input, wxFontEncoding enc)
 {
     if (!input.IsEmpty() && enc != wxFONTENCODING_SYSTEM) {
-        wxCSConv                  convFrom(wxFONTENCODING_ISO8859_1);
-        std::unique_ptr<wxCSConv> convToPtr = createCSConvPtr(enc);
+        wxCSConv convFrom(wxFONTENCODING_ISO8859_1);
+        auto     convToPtr = createCSConvPtr(enc);
 
         return wxString(input.mb_str(convFrom), *convToPtr);
     }

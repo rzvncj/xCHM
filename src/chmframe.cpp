@@ -189,7 +189,13 @@ void CHMFrame::OnAbout(wxCommandEvent&)
 void CHMFrame::OnOpen(wxCommandEvent&)
 {
     wxString selection {wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
-                                        wxT("All files (*.*)|*.*"), wxFD_OPEN | wxFD_FILE_MUST_EXIST, this)};
+#ifndef __WXMOTIF__
+                                        // they say Motif can't handle the following.
+                                        wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
+#else
+                                        wxT("All files (*.*)|*.*"),
+#endif
+                                        wxFD_OPEN | wxFD_FILE_MUST_EXIST, this)};
 
     if (selection.IsEmpty() || !_tcl)
         return;

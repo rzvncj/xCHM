@@ -153,7 +153,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     _nb = new wxNotebook(_sw, ID_Notebook);
     _nb->Show(false);
 
-    wxPanel* temp = CreateContentsPanel();
+    wxPanel* temp {CreateContentsPanel()};
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
     _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
 
@@ -188,14 +188,14 @@ void CHMFrame::OnAbout(wxCommandEvent&)
 
 void CHMFrame::OnOpen(wxCommandEvent&)
 {
-    wxString selection = wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
+    wxString selection {wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
 #ifndef __WXMOTIF__
                                         // they say Motif can't handle the following.
                                         wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
 #else
                                         wxT("All files (*.*)|*.*"),
 #endif
-                                        wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
+                                        wxFD_OPEN | wxFD_FILE_MUST_EXIST, this)};
 
     if (selection.IsEmpty() || !_tcl)
         return;
@@ -233,7 +233,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
         _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.Sizes());
         _fontSize = *(cfd.Sizes() + 3);
 
-        wxString page = _nbhtml->GetCurrentPage()->GetOpenedPage();
+        wxString page {_nbhtml->GetCurrentPage()->GetOpenedPage()};
 
         if (page.IsEmpty())
             _nbhtml->GetCurrentPage()->LoadPage(wxT("memory:about.html"));
@@ -242,7 +242,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
 
 void CHMFrame::OnHome(wxCommandEvent&)
 {
-    CHMFile* chmf = CHMInputStream::GetCache();
+    CHMFile* chmf {CHMInputStream::GetCache()};
 
     if (!chmf)
         return;
@@ -288,7 +288,7 @@ associations.\n\nAre you sure you know what you're doing?"
 
 void CHMFrame::OnRegisterExtension(wxCommandEvent&)
 {
-    int answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this);
+    int answer {wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this)};
 
     if (answer == wxOK) {
         wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath, wxEmptyString, wxT("Compiled HTML help"),
@@ -297,8 +297,8 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent&)
         wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"), _fullAppPath, wxEmptyString,
                                wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
-        wxFileType* ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
-        wxFileType* ft_msh  = wxTheMimeTypesManager->Associate(fti_msh);
+        wxFileType* ft_xchm {wxTheMimeTypesManager->Associate(fti_xchm)};
+        wxFileType* ft_msh {wxTheMimeTypesManager->Associate(fti_msh)};
 
         if (ft_xchm && ft_msh) {
             ft_xchm->SetDefaultIcon(_fullAppPath);
@@ -358,17 +358,17 @@ void CHMFrame::OnFullScreen(wxCommandEvent&)
 
 void CHMFrame::OnAddBookmark(wxCommandEvent&)
 {
-    wxTreeItemId id = _tcl->GetSelection();
+    wxTreeItemId id {_tcl->GetSelection()};
 
     if (!id.IsOk())
         return;
 
-    wxString title = _tcl->GetItemText(id);
+    wxString title {_tcl->GetItemText(id)};
 
     if (title.IsEmpty())
         return;
 
-    URLTreeItem* data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
+    URLTreeItem* data {reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id))};
 
     if (!data || (data->_url).IsEmpty())
         return;
@@ -411,7 +411,7 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
     if (!url || url->IsEmpty())
         return;
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    CHMFile* chmf {CHMInputStream::GetCache()};
 
     if (!chmf)
         return;

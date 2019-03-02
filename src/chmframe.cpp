@@ -108,10 +108,10 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     constexpr int      NO_ACCELERATOR_ENTRIES {6};
     wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
 
-    entries[0].Set(wxACCEL_CTRL, (int)'F', ID_FindInPage);
-    entries[1].Set(wxACCEL_CTRL, (int)'C', ID_CopySelection);
-    entries[2].Set(wxACCEL_CTRL, (int)']', ID_Forward);
-    entries[3].Set(wxACCEL_CTRL, (int)'[', ID_Back);
+    entries[0].Set(wxACCEL_CTRL, 'F', ID_FindInPage);
+    entries[1].Set(wxACCEL_CTRL, 'C', ID_CopySelection);
+    entries[2].Set(wxACCEL_CTRL, ']', ID_Forward);
+    entries[3].Set(wxACCEL_CTRL, '[', ID_Back);
     entries[4].Set(wxACCEL_CTRL, WXK_F4, ID_CloseTab);
     entries[5].Set(wxACCEL_CTRL, 'Q', ID_Quit);
 
@@ -125,7 +125,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
     wxLogNull wln;
     int       sizes[7];
-    for (int i = -3; i <= 3; ++i)
+
+    for (auto i = -3; i <= 3; ++i)
         sizes[i + 3] = _fontSize + i * 2;
 
     SetIcon(wxIcon(xchm_32_xpm));
@@ -154,8 +155,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     _nb = new wxNotebook(_sw, ID_Notebook);
     _nb->Show(false);
 
-    wxPanel* temp {CreateContentsPanel()};
-    _nbhtml = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
+    auto contents = CreateContentsPanel();
+    _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
     _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
 
     _csp  = new CHMSearchPanel(_nb, _tcl, _nbhtml);
@@ -163,7 +164,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
     _cip = new CHMIndexPanel(_nb, _nbhtml);
 
-    _nb->AddPage(temp, _("Contents"));
+    _nb->AddPage(contents, _("Contents"));
     _nb->AddPage(_cip, _("Index"));
     _nb->AddPage(_csp, _("Search"));
 
@@ -189,9 +190,9 @@ void CHMFrame::OnAbout(wxCommandEvent&)
 
 void CHMFrame::OnOpen(wxCommandEvent&)
 {
-    wxString selection {wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
-                                       wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
-                                       wxFD_OPEN | wxFD_FILE_MUST_EXIST, this)};
+    auto selection = wxFileSelector(_("Choose a file.."), _openPath, wxEmptyString, wxT("chm"),
+                                    wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
+                                    wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
     if (selection.IsEmpty() || !_tcl)
         return;
@@ -229,7 +230,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
         _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.Sizes());
         _fontSize = *(cfd.Sizes() + 3);
 
-        wxString page {_nbhtml->GetCurrentPage()->GetOpenedPage()};
+        auto page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 
         if (page.IsEmpty())
             _nbhtml->GetCurrentPage()->LoadPage(wxT("memory:about.html"));
@@ -238,7 +239,7 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
 
 void CHMFrame::OnHome(wxCommandEvent&)
 {
-    CHMFile* chmf {CHMInputStream::GetCache()};
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
@@ -284,7 +285,7 @@ associations.\n\nAre you sure you know what you're doing?"
 
 void CHMFrame::OnRegisterExtension(wxCommandEvent&)
 {
-    int answer {wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this)};
+    auto answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this);
 
     if (answer == wxOK) {
         wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath, wxEmptyString, wxT("Compiled HTML help"),
@@ -293,8 +294,8 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent&)
         wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"), _fullAppPath, wxEmptyString,
                                wxT("Compiled HTML help"), wxT("chm"), nullptr);
 
-        wxFileType* ft_xchm {wxTheMimeTypesManager->Associate(fti_xchm)};
-        wxFileType* ft_msh {wxTheMimeTypesManager->Associate(fti_msh)};
+        auto ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
+        auto ft_msh  = wxTheMimeTypesManager->Associate(fti_msh);
 
         if (ft_xchm && ft_msh) {
             ft_xchm->SetDefaultIcon(_fullAppPath);
@@ -309,9 +310,9 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent&)
 void CHMFrame::OnPrint(wxCommandEvent&)
 {
     wxLogNull wln;
+    int       sizes[7];
 
-    int sizes[7];
-    for (int i = -3; i <= 3; ++i)
+    for (auto i = -3; i <= 3; ++i)
         sizes[i + 3] = _fontSize + i * 2;
 
     _ep->SetFonts(_normalFont, _fixedFont, sizes);
@@ -320,7 +321,7 @@ void CHMFrame::OnPrint(wxCommandEvent&)
 
 void CHMFrame::OnHistFile(wxCommandEvent& event)
 {
-    wxString f(_fh.GetHistoryFile(event.GetId() - wxID_FILE1));
+    auto f = _fh.GetHistoryFile(event.GetId() - wxID_FILE1);
 
     if (!f.IsEmpty())
         LoadCHM(f);
@@ -354,17 +355,17 @@ void CHMFrame::OnFullScreen(wxCommandEvent&)
 
 void CHMFrame::OnAddBookmark(wxCommandEvent&)
 {
-    wxTreeItemId id {_tcl->GetSelection()};
+    auto id = _tcl->GetSelection();
 
     if (!id.IsOk())
         return;
 
-    wxString title {_tcl->GetItemText(id)};
+    auto title = _tcl->GetItemText(id);
 
     if (title.IsEmpty())
         return;
 
-    URLTreeItem* data {reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id))};
+    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
 
     if (!data || (data->_url).IsEmpty())
         return;
@@ -407,7 +408,7 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
     if (!url || url->IsEmpty())
         return;
 
-    CHMFile* chmf {CHMInputStream::GetCache()};
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
@@ -417,13 +418,13 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
 
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
-    wxTreeItemId id {event.GetItem()};
-    CHMFile*     chmf {CHMInputStream::GetCache()};
+    auto id   = event.GetItem();
+    auto chmf = CHMInputStream::GetCache();
 
     if (id == _tcl->GetRootItem() || !chmf || !id.IsOk())
         return;
 
-    URLTreeItem* data {reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id))};
+    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
 
     if (!data || data->_url.IsEmpty())
         return;
@@ -457,7 +458,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
     wxBusyCursor bc;
     wxLogNull    wln;
 
-    bool rtn {false};
+    auto rtn = false;
 
     SaveBookmarks();
 
@@ -468,7 +469,7 @@ bool CHMFrame::LoadCHM(const wxString& archive)
         wxFileSystem              wfs;
         std::unique_ptr<wxFSFile> p(wfs.OpenFile(wxT("file:") + archive + wxT("#xchm:/")));
 
-        CHMFile* chmf {CHMInputStream::GetCache()};
+        auto chmf = CHMInputStream::GetCache();
 
         if (!chmf)
             return false;
@@ -506,7 +507,7 @@ bool CHMFrame::LoadContextID(int contextID)
 {
     wxBusyCursor bc;
 
-    CHMFile* chmf {CHMInputStream::GetCache()};
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf || !chmf->IsValidCID(contextID))
         return false;
@@ -518,10 +519,10 @@ bool CHMFrame::LoadContextID(int contextID)
 void CHMFrame::UpdateCHMInfo()
 {
 #if !wxUSE_UNICODE
-    static bool           noSpecialFont {true};
-    static wxFontEncoding enc {wxFont::GetDefaultEncoding()};
+    static auto noSpecialFont = true;
+    static auto enc           = wxFont::GetDefaultEncoding();
 #endif
-    CHMFile* chmf {CHMInputStream::GetCache()};
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
@@ -529,7 +530,7 @@ void CHMFrame::UpdateCHMInfo()
     wxWindowDisabler wwd;
     wxBusyInfo       wait(_("Loading, please wait.."), this);
 
-    wxString filename {chmf->ArchiveName()};
+    auto filename = chmf->ArchiveName();
 
     if (!filename.IsEmpty()) {
         _fh.AddFileToHistory(filename);
@@ -553,7 +554,7 @@ void CHMFrame::UpdateCHMInfo()
     wxString fontFace {chmf->DefaultFont()};
 
     if (!fontFace.IsEmpty()) {
-        long fs {-1};
+        auto fs = -1L;
 
         fontFace.BeforeLast(wxT(',')).AfterLast(wxT(',')).ToLong(&fs);
 
@@ -565,7 +566,7 @@ void CHMFrame::UpdateCHMInfo()
         if (font.Ok()) {
             int sizes[7];
 
-            for (int i = -3; i <= 3; ++i)
+            for (auto i = -3; i <= 3; ++i)
                 sizes[i + 3] = _fontSize + i * 2;
 
             _tcl->SetFont(font);
@@ -579,7 +580,7 @@ void CHMFrame::UpdateCHMInfo()
     } else if (!noSpecialFont) {
         int sizes[7];
 
-        for (int i = -3; i <= 3; ++i)
+        for (auto i = -3; i <= 3; ++i)
             sizes[i + 3] = _fontSize + i * 2;
 
         _tcl->SetFont(_font);
@@ -604,7 +605,7 @@ void CHMFrame::UpdateCHMInfo()
         chmf->GetIndex(_cip->GetResultsList());
 
     if (!title.IsEmpty()) {
-        wxString titleBarText = wxT("xCHM v. " VERSION ": ") + title;
+        auto titleBarText = wxT("xCHM v. " VERSION ": ") + title;
         SetTitle(titleBarText);
     } else
         SetTitle(wxT("xCHM v. " VERSION));
@@ -648,7 +649,7 @@ wxMenuBar* CHMFrame::CreateMenu()
     _menuFile->AppendSeparator();
 #endif
 
-    wxMenu* recent = new wxMenu;
+    auto recent = new wxMenu;
     _menuFile->Append(ID_Recent, _("&Recent files"), recent);
     _fh.UseMenu(recent);
 
@@ -663,26 +664,26 @@ wxMenuBar* CHMFrame::CreateMenu()
     _menuFile->AppendSeparator();
     _menuFile->Append(ID_Quit, _("E&xit\tCtrl-X"), _("Quit the application."));
 
-    wxMenu* menuHistory = new wxMenu;
+    auto menuHistory = new wxMenu;
 
     menuHistory->Append(ID_Home, _("&Home\tCtrl-H"), HOME_HELP);
     menuHistory->Append(ID_Forward, _("For&ward\tAlt-RIGHT"), FORWARD_HELP);
     menuHistory->Append(ID_Back, _("&Back\tAlt-LEFT"), BACK_HELP);
 
-    wxMenu* menuHelp = new wxMenu;
+    auto menuHelp = new wxMenu;
     menuHelp->Append(ID_About, _("&About..\tF1"), ABOUT_HELP);
 
-    wxMenu* menuEdit = new wxMenu;
+    auto menuEdit = new wxMenu;
     menuEdit->Append(ID_CopySelection, _("&Copy\tCtrl-C"), COPY_HELP);
     menuEdit->Append(ID_FindInPage, _("&Find..\tCtrl-F"), FIND_HELP);
     menuEdit->AppendSeparator();
     menuEdit->Append(ID_CloseTab, _("&Close tab\tCtrl-W"), CLOSETAB_HELP);
     menuEdit->Append(ID_NewTab, _("&New tab\tCtrl-T"), NEWTAB_HELP);
 
-    wxMenu* menuView = new wxMenu;
+    auto menuView = new wxMenu;
     menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tF11"), FULLSCREEN_HELP);
 
-    wxMenuBar* menuBar = new wxMenuBar;
+    auto menuBar = new wxMenuBar;
     menuBar->Append(_menuFile, _("&File"));
     menuBar->Append(menuView, _("&View"));
     menuBar->Append(menuEdit, _("&Edit"));
@@ -702,15 +703,15 @@ namespace {
 
 wxPanel* CHMFrame::CreateContentsPanel()
 {
-    wxPanel* temp   = new wxPanel(_nb);
-    wxSizer* sizer  = new wxBoxSizer(wxVERTICAL);
-    wxSizer* bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
-    wxSizer* inner  = new wxBoxSizer(wxHORIZONTAL);
+    auto temp   = new wxPanel(_nb);
+    auto sizer  = new wxBoxSizer(wxVERTICAL);
+    auto bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
+    auto inner  = new wxBoxSizer(wxHORIZONTAL);
 
     temp->SetAutoLayout(true);
     temp->SetSizer(sizer);
 
-    wxImageList* il = new wxImageList(16, 16);
+    auto il = new wxImageList(16, 16);
     il->Add(wxIcon(hbook_closed_xpm));
     il->Add(wxIcon(hbook_open_xpm));
     il->Add(wxIcon(hpage_xpm));
@@ -729,8 +730,8 @@ wxPanel* CHMFrame::CreateContentsPanel()
     bmarks->Add(_cb, 0, wxEXPAND | wxBOTTOM, 5);
     bmarks->Add(inner, 1, wxEXPAND, 0);
 
-    wxButton* badd    = new wxButton(temp, ID_Add, _("Add"));
-    wxButton* bremove = new wxButton(temp, ID_Remove, _("Remove"));
+    auto badd    = new wxButton(temp, ID_Add, _("Add"));
+    auto bremove = new wxButton(temp, ID_Remove, _("Remove"));
 
 #if wxUSE_TOOLTIPS
     badd->SetToolTip(_("Add displayed page to bookmarks."));
@@ -748,13 +749,13 @@ void CHMFrame::LoadBookmarks()
     _cb->Clear();
     _cb->SetValue(wxEmptyString);
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
 
     wxConfig config(wxT("xchm"));
-    wxString bookname = chmf->ArchiveName();
+    auto     bookname = chmf->ArchiveName();
     bookname.Replace(wxT("/"), wxT("."), true);
 
     bookname = wxT("/Bookmarks/") + bookname;
@@ -764,11 +765,10 @@ void CHMFrame::LoadBookmarks()
     wxString title, url;
 
     if (config.Read(wxT("noEntries"), &noEntries)) {
+        auto format1 = wxT("bookmark_%ld_title");
+        auto format2 = wxT("bookmark_%ld_url");
 
-        const wxChar* format1 = wxT("bookmark_%ld_title");
-        const wxChar* format2 = wxT("bookmark_%ld_url");
-
-        for (long i = 0; i < noEntries; ++i) {
+        for (auto i = 0L; i < noEntries; ++i) {
             config.Read(wxString::Format(format1, i), &title);
             config.Read(wxString::Format(format2, i), &url);
 
@@ -779,18 +779,18 @@ void CHMFrame::LoadBookmarks()
 
 void CHMFrame::SaveBookmarks()
 {
-    long noEntries = _cb->GetCount();
+    auto noEntries = _cb->GetCount();
 
     if (!_bookmarksDeleted && noEntries == 0)
         return;
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
 
     wxConfig config(wxT("xchm"));
-    wxString bookname = chmf->ArchiveName();
+    auto     bookname = chmf->ArchiveName();
     bookname.Replace(wxT("/"), wxT("."), true);
     bookname = wxT("/Bookmarks/") + bookname;
 
@@ -803,11 +803,11 @@ void CHMFrame::SaveBookmarks()
     config.SetPath(bookname);
     config.Write(wxT("noEntries"), noEntries);
 
-    const wxChar* format1 = wxT("bookmark_%ld_title");
-    const wxChar* format2 = wxT("bookmark_%ld_url");
+    auto format1 = wxT("bookmark_%ld_title");
+    auto format2 = wxT("bookmark_%ld_url");
 
-    for (int i = 0; i < noEntries; ++i) {
-        wxString* url = reinterpret_cast<wxString*>(
+    for (decltype(noEntries) i = 0; i < noEntries; ++i) {
+        auto url = reinterpret_cast<wxString*>(
 #ifdef __WXGTK__
             _cb->GetClientData(i));
 #else
@@ -823,8 +823,8 @@ void CHMFrame::SaveBookmarks()
 
 void CHMFrame::SaveExitInfo()
 {
-    int xorig, yorig, width, height;
-    int sashPos = _sw->IsSplit() ? _sw->GetSashPosition() : _sashPos;
+    int  xorig, yorig, width, height;
+    auto sashPos = _sw->IsSplit() ? _sw->GetSashPosition() : _sashPos;
 
     GetPosition(&xorig, &yorig);
     GetSize(&width, &height);

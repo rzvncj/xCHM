@@ -32,19 +32,20 @@ CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     _whole = new wxCheckBox(this, -1, _("Whole words only"));
     _case  = new wxCheckBox(this, -1, _("Case sensitive"));
 
-    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    auto sizer = new wxBoxSizer(wxVERTICAL);
 
     sizer->Add(_text, 0, wxLEFT | wxTOP | wxBOTTOM, 5);
     sizer->Add(_whole, 0, wxLEFT, 5);
     sizer->Add(_case, 0, wxLEFT | wxBOTTOM, 5);
 
-    wxSizer*  szButtons = new wxBoxSizer(wxVERTICAL);
-    wxButton* find      = new wxButton(this, ID_FindNext, _("Find next"));
+    auto szButtons = new wxBoxSizer(wxVERTICAL);
+    auto find      = new wxButton(this, ID_FindNext, _("Find next"));
 
     szButtons->Add(find, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
     szButtons->Add(new wxButton(this, wxID_CANCEL, _("Cancel")), 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 5);
 
-    wxSizer* topsizer = new wxBoxSizer(wxHORIZONTAL);
+    auto topsizer = new wxBoxSizer(wxHORIZONTAL);
+
     topsizer->Add(sizer);
     topsizer->Add(szButtons);
 
@@ -52,7 +53,6 @@ CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     SetSizer(topsizer);
     topsizer->Fit(this);
     Centre(wxBOTH);
-
     SetFocusToTextBox();
 }
 
@@ -60,7 +60,8 @@ void CHMFindDialog::OnFind(wxCommandEvent&)
 {
     _html->ClearSelection();
 
-    wxString sr = _text->GetLineText(0);
+    auto sr = _text->GetLineText(0);
+
     if (sr.IsEmpty())
         return;
 

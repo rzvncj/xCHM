@@ -42,8 +42,8 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts,
                              const wxString& normalFont, const wxString& fixedFont, int fontSize)
     : wxDialog(parent, -1, _("Change fonts..")), _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
 {
-    wxBoxSizer*      topsizer = new wxBoxSizer(wxVERTICAL);
-    wxFlexGridSizer* sizer    = new wxFlexGridSizer(2, 3, 2, 5);
+    auto topsizer = new wxBoxSizer(wxVERTICAL);
+    auto sizer    = new wxFlexGridSizer(2, 3, 2, 5);
 
     sizer->Add(new wxStaticText(this, -1, _("Normal font:")));
     sizer->Add(new wxStaticText(this, -1, _("Fixed font:")));
@@ -64,9 +64,9 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts,
         _test = new wxHtmlWindow(this, -1, wxDefaultPosition, wxSize(20, 150), wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),
         1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
 
-    wxBoxSizer* sizer2 = new wxBoxSizer(wxHORIZONTAL);
+    auto sizer2 = new wxBoxSizer(wxHORIZONTAL);
+    auto ok     = new wxButton(this, wxID_OK, _("OK"));
 
-    wxButton* ok = new wxButton(this, wxID_OK, _("OK"));
     sizer2->Add(ok, 0, wxALL, 10);
     ok->SetDefault();
 
@@ -91,9 +91,9 @@ void CHMFontDialog::UpdatePreview()
     _normalFont = _normalFControl->GetStringSelection();
     _fixedFont  = _fixedFControl->GetStringSelection();
 
-    int size = _fontSizeControl->GetValue();
+    auto size = _fontSizeControl->GetValue();
 
-    for (int i = -3; i <= 3; ++i)
+    for (auto i = -3; i <= 3; ++i)
         _sizes[i + 3] = size + i * 2;
 
     _test->SetFonts(_normalFont, _fixedFont, _sizes);

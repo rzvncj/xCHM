@@ -91,7 +91,7 @@ private:
     std::string               _value;
     wxTreeCtrl*               _tree;
     CHMListCtrl*              _list;
-    wxTreeItemId              _parents[TREE_BUF_SIZE];
+    wxTreeItemId              _parents[TREE_BUF_SIZE] {};
     wxFontEncoding            _enc;
     int                       _counter {0};
     std::unique_ptr<wxCSConv> _cvPtr;

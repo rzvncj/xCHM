@@ -42,12 +42,10 @@ CHMFile* CHMInputStream::GetCache()
 
 CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
 {
-    wxString filename = file;
+    auto filename = file;
 
     if (!archive.IsEmpty())
         _path = archive.BeforeLast(wxT('/')) + wxT("/");
-
-    memset(&_ui, 0, sizeof(_ui));
 
     // Maybe the cached chmFile* isn't valid anymore,
     // or maybe there is no chached chmFile* yet.
@@ -69,7 +67,7 @@ CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
         // the index file, the index file is just a
         // link to a file in another archive.
 
-        wxString arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
+        auto arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));
 
         filename = filename.AfterLast(wxT(':'));
 

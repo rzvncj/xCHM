@@ -94,7 +94,7 @@ private:
 private:
     static std::unique_ptr<CHMFile> _archiveCache;
     off_t                           _currPos {0};
-    chmUnitInfo                     _ui;
+    chmUnitInfo                     _ui {};
     static wxString                 _path;
 };
 

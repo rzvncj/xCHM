@@ -41,7 +41,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNote
     : wxPanel(parent), _tcl(topics), _text(nullptr), _partial(nullptr), _titles(nullptr), _search(nullptr),
       _results(nullptr), _nbhtml(nbhtml)
 {
-    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    auto sizer = new wxBoxSizer(wxVERTICAL);
     SetAutoLayout(true);
     SetSizer(sizer);
 
@@ -78,13 +78,14 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
 
     _results->Reset();
 
-    wxString sr = _text->GetLineText(0);
+    auto     sr = _text->GetLineText(0);
     wxString word;
 
     if (sr.IsEmpty())
         return;
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    auto chmf = CHMInputStream::GetCache();
+
     if (!chmf)
         return;
 
@@ -107,8 +108,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
     chmf->IndexSearch(word, !_partial->IsChecked(), _titles->IsChecked(), &h1);
 
     while (tkz.HasMoreTokens()) {
-
-        wxString token = tkz.GetNextToken();
+        auto token = tkz.GetNextToken();
         if (token.IsEmpty())
             continue;
 
@@ -133,7 +133,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
     }
 
     for (auto&& item : h1) {
-        wxString url = item.first.StartsWith(wxT("/")) ? item.first : (wxT("/") + item.first);
+        auto url = item.first.StartsWith(wxT("/")) ? item.first : (wxT("/") + item.first);
         _results->AddPairItem(item.second, url);
     }
 
@@ -142,12 +142,12 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
 
 void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeWords)
 {
-    static CHMFile* chmf = CHMInputStream::GetCache();
+    static auto chmf = CHMInputStream::GetCache();
 
     if (!chmf)
         return;
 
-    URLTreeItem* data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
+    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
 
     if (data && (!data->_url.IsEmpty())) {
         wxString title = _tcl->GetItemText(root);
@@ -156,9 +156,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     }
 
     wxTreeItemIdValue cookie;
-    wxTreeItemId      child = _tcl->GetFirstChild(root, cookie);
+    auto              child = _tcl->GetFirstChild(root, cookie);
 
-    for (size_t i = 0; i < _tcl->GetChildrenCount(root, false); ++i) {
+    for (auto i = 0UL; i < _tcl->GetChildrenCount(root, false); ++i) {
         PopulateList(child, text, wholeWords);
         child = _tcl->GetNextChild(root, cookie);
     }
@@ -166,9 +166,10 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
 
 bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool caseSensitive, bool wholeWords)
 {
-    int      i, j, lng = title.Length();
-    bool     found = false;
-    wxString tmp   = title;
+    size_t i, j;
+    auto   lng   = title.Length();
+    auto   found = false;
+    auto   tmp   = title;
 
     if (!caseSensitive) {
         tmp.MakeLower();
@@ -178,22 +179,23 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
     wxStringTokenizer tkz(text, wxT(" \t\r\n"));
 
     while (tkz.HasMoreTokens()) {
+        found      = false;
+        auto token = tkz.GetNextToken();
 
-        found          = false;
-        wxString token = tkz.GetNextToken();
         if (token.IsEmpty())
             continue;
 
-        int           wrd  = token.Length();
-        const wxChar *buf1 = tmp.c_str(), *buf2 = token.c_str();
+        auto wrd  = token.Length();
+        auto buf1 = tmp.c_str();
+        auto buf2 = token.c_str();
 
         if (wholeWords) {
             for (i = 0; i < lng - wrd + 1; ++i) {
-
                 if (IS_WHITESPACE(buf1[i]))
                     continue;
 
                 j = 0;
+
                 while (j < wrd && buf1[i + j] == buf2[j])
                     ++j;
 
@@ -205,10 +207,11 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
             }
         } else {
             for (i = 0; i < lng - wrd + 1; ++i) {
-
                 j = 0;
+
                 while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j]))
                     ++j;
+
                 if (j == wrd && (i == 0 || IS_WHITESPACE(buf1[i - 1]))) {
                     found = true;
                     break;
@@ -242,6 +245,7 @@ void CHMSearchPanel::SetNewFont(const wxFont& font)
 void CHMSearchPanel::SetConfig()
 {
     wxConfig config(wxT("xchm"));
+
     config.Write(wxT("/Search/partialWords"), (long)_partial->GetValue());
     config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
 }

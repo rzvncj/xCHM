@@ -55,7 +55,8 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
 bool CHMHtmlWindow::LoadPage(const wxString& location)
 {
     wxLogNull log;
-    wxString  tmp = location;
+    auto      tmp = location;
+
     if (!tmp.Left(19).CmpNoCase(wxT("javascript:fullsize")))
         tmp = tmp.AfterFirst(wxT('\'')).BeforeLast(wxT('\''));
 
@@ -64,7 +65,7 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
         !location.AfterLast(wxT('/')).IsEmpty() && _tcl->GetCount() > 1) {
 
         wxFileName fwfn(tmp.AfterLast(wxT(':')).BeforeFirst(wxT('#')), wxPATH_UNIX);
-        wxString   cwd = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
+        auto       cwd = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
         fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
 
         // Sync will call SelectItem() on the tree item
@@ -86,7 +87,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
     if (_found)
         return;
 
-    URLTreeItem* data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
+    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
 
     wxString url;
 
@@ -100,9 +101,9 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
     }
 
     wxTreeItemIdValue cookie;
-    wxTreeItemId      child = _tcl->GetFirstChild(root, cookie);
+    auto              child = _tcl->GetFirstChild(root, cookie);
 
-    for (size_t i = 0; i < _tcl->GetChildrenCount(root, false); ++i) {
+    for (auto i = 0UL; i < _tcl->GetChildrenCount(root, false); ++i) {
         Sync(child, page);
         child = _tcl->GetNextChild(root, cookie);
     }
@@ -115,7 +116,7 @@ wxString CHMHtmlWindow::GetPrefix(const wxString& location) const
 
 void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 {
-    wxString url = link.GetHref();
+    auto url = link.GetHref();
 
     LoadPage(url);
 
@@ -125,7 +126,7 @@ void CHMHtmlWindow::OnLinkClicked(const wxHtmlLinkInfo& link)
 
 wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, bool wholeWords, bool caseSensitive)
 {
-    wxString tmp = word;
+    auto tmp = word;
 
     if (!parent)
         return nullptr;
@@ -134,7 +135,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
         tmp.MakeLower();
 
     // If this cell is not a container, the for body will never happen (GetFirstChild() will return nullptr).
-    for (wxHtmlCell* cell = parent->GetFirstChild(); cell; cell = cell->GetNext()) {
+    for (auto cell = parent->GetFirstChild(); cell; cell = cell->GetNext()) {
         wxHtmlCell* result;
         if ((result = FindFirst(cell, word, wholeWords, caseSensitive)))
             return result;
@@ -142,7 +143,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
 
     wxHtmlSelection ws;
     ws.Set(parent, parent);
-    wxString text = parent->ConvertToText(&ws);
+    auto text = parent->ConvertToText(&ws);
 
     if (text.IsEmpty())
         return nullptr;
@@ -153,7 +154,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
     text.Trim(true);
     text.Trim(false);
 
-    bool found = false;
+    auto found = false;
 
     if (wholeWords && text == tmp)
         found = true;
@@ -166,8 +167,8 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
         m_selection = new wxHtmlSelection();
         m_selection->Set(parent, parent);
 
-        int         y;
-        wxHtmlCell* cell = parent;
+        int  y;
+        auto cell = parent;
 
         for (y = 0; cell != nullptr; cell = cell->GetParent())
             y += cell->GetPosY();
@@ -220,7 +221,7 @@ void CHMHtmlWindow::OnCopy(wxCommandEvent&)
 void CHMHtmlWindow::OnFind(wxCommandEvent&)
 {
     if (!_fdlg) {
-        wxWindow* p = GetParent();
+        auto p = GetParent();
         while (p->GetParent())
             p = p->GetParent();
 
@@ -272,16 +273,16 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent&)
     }
 
     wxFileName wfn(_link);
-    wxString   suggestedName = wfn.GetFullName();
+    auto       suggestedName = wfn.GetFullName();
 
     if (suggestedName.IsEmpty())
         suggestedName = wxT("index.html");
 
-    wxString filename = wxFileSelector(_("Save as"), wxT(""), suggestedName, wxT(""), wxT("*.*"),
-                                       wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+    auto filename = wxFileSelector(_("Save as"), wxT(""), suggestedName, wxT(""), wxT("*.*"),
+                                   wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
     if (!filename.empty()) {
-        wxInputStream*     s = f->GetStream();
+        auto               s = f->GetStream();
         wxFileOutputStream out(filename);
 
         if (!out.IsOk())
@@ -291,8 +292,8 @@ void CHMHtmlWindow::OnSaveLinkAs(wxCommandEvent&)
 
             while (!s->Eof()) {
                 s->Read(buffer, sizeof(buffer));
-                size_t nbytes = s->LastRead();
-                out.Write((void*)buffer, nbytes);
+                auto nbytes = s->LastRead();
+                out.Write(static_cast<void*>(buffer), nbytes);
             }
 
             wxMessageBox(_("Saved file ") + filename, _("Success"), wxOK, this);
@@ -314,7 +315,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
     int x, y;
     CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
 
-    wxHtmlCell* cell = GetInternalRepresentation()->FindCellByPos(x, y);
+    auto cell = GetInternalRepresentation()->FindCellByPos(x, y);
 
     wxHtmlLinkInfo* linfo = nullptr;
 
@@ -333,7 +334,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
 
 void CHMHtmlWindow::OnOpenInNewTab(wxCommandEvent&)
 {
-    wxString link = _link;
+    auto link = _link;
 
     if (link.StartsWith(wxT("#"))) // anchor
         link = GetOpenedPage() + _link;
@@ -348,8 +349,7 @@ void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
-    int x = 0, y = 0;
-    int xUnit = 0, yUnit = 0;
+    auto x = 0, y = 0, xUnit = 0, yUnit = 0;
 
     switch (event.GetKeyCode()) {
     case WXK_SPACE:
@@ -394,7 +394,7 @@ void CHMHtmlWindow::OnSetTitle(const wxString& title)
 {
     // Direct access to the notebook
     // TODO: design a new event type
-    CHMHtmlNotebook* parent = dynamic_cast<CHMHtmlNotebook*>(GetParent());
+    auto parent = dynamic_cast<CHMHtmlNotebook*>(GetParent());
 
     if (parent)
         parent->OnChildrenTitleChanged(title);

@@ -67,16 +67,16 @@ void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 
 void CHMListCtrl::LoadSelected()
 {
-    long item = -1;
+    auto item = -1L;
     item      = GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
 
-    if (item == -1 || item > (long)_items.GetCount() - 1)
+    if (item == -1L || item > static_cast<long>(_items.GetCount()) - 1)
         return;
 
-    CHMFile* chmf = CHMInputStream::GetCache();
+    auto chmf = CHMInputStream::GetCache();
 
     if (chmf) {
-        wxString fname = _items[item]->_url;
+        auto fname = _items[item]->_url;
 
         if (!fname.StartsWith(wxT("file:")))
             fname = wxT("file:") + chmf->ArchiveName() + wxT("#xchm:/") + _items[item]->_url;
@@ -95,10 +95,10 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
     wxListItem info;
     info.m_col = 0;
 
-    long sz = GetItemCount();
-    int  tl = title.length();
+    auto sz = GetItemCount();
+    auto tl = title.length();
 
-    for (long i = 0; i < sz; ++i) {
+    for (decltype(sz) i = 0; i < sz; ++i) {
         info.m_itemId = i;
         GetItem(info);
 
@@ -115,7 +115,7 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
 
 void CHMListCtrl::ResetItems()
 {
-    for (long i = 0; i < static_cast<long>(_items.GetCount()); ++i)
+    for (auto i = 0UL; i < _items.GetCount(); ++i)
         delete _items[i];
 
     _items.Empty();
@@ -130,7 +130,7 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
 wxString CHMListCtrl::OnGetItemText(long item, long column) const
 {
     // Is this even possible? item == -1 or item > size - 1?
-    if (column != 0 || item == -1 || item > (long)_items.GetCount() - 1)
+    if (column != 0 || item == -1 || item > static_cast<long>(_items.GetCount()) - 1)
         return wxT("");
 
     return _items[item]->_title;

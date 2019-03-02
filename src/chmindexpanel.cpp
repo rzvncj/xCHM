@@ -24,7 +24,8 @@
 
 CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml) : wxPanel(parent), _nbhtml(nbhtml)
 {
-    wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    auto sizer = new wxBoxSizer(wxVERTICAL);
+
     SetAutoLayout(true);
     SetSizer(sizer);
 

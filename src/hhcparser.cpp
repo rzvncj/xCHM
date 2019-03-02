@@ -98,8 +98,6 @@ HTMLChar substitutions[] = {
 
 HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list) : _tree(tree), _list(list), _enc(enc)
 {
-    memset(_parents, 0, TREE_BUF_SIZE * sizeof(wxTreeItemId));
-
     _cvPtr = createCSConvPtr(_enc);
 
     if (_tree)
@@ -109,7 +107,6 @@ HHCParser::HHCParser(wxFontEncoding enc, wxTreeCtrl* tree, CHMListCtrl* list) : 
 void HHCParser::parse(const char* chunk)
 {
     while (*chunk) {
-
         switch (*chunk) {
         case '\"':
             _inquote = !_inquote;
@@ -181,8 +178,8 @@ void HHCParser::handleTag(const std::string& tag)
             if (!_value.empty() && _value[0] != '/')
                 _value = "/" + _value;
 
-            wxString name {CURRENT_CHAR_STRING(_name.c_str())};
-            wxString value {CURRENT_CHAR_STRING(_value.c_str())};
+            auto name  = CURRENT_CHAR_STRING(_name.c_str());
+            auto value = CURRENT_CHAR_STRING(_value.c_str());
 
             if (_htmlChars) {
                 name       = replaceHTMLChars(name);
@@ -196,9 +193,8 @@ void HHCParser::handleTag(const std::string& tag)
             addToList(name, value);
 
         } else if (tagName == "param") {
-
             std::string name, value;
-            bool        special {getParameters(tag.c_str() + i, name, value)};
+            auto        special = getParameters(tag.c_str() + i, name, value);
 
             if (name == "name" && _name.empty()) {
                 _name      = value;
@@ -224,7 +220,7 @@ void HHCParser::handleTag(const std::string& tag)
 
 bool HHCParser::getParameters(const char* input, std::string& name, std::string& value)
 {
-    bool lower {false}, modify {false};
+    auto lower = false, modify = false;
 
     name = value = "";
 
@@ -309,7 +305,7 @@ void HHCParser::addToTree(const wxString& name, const wxString& value)
         return;
 
     if (!name.IsEmpty()) {
-        int parentIndex {_level ? _level - 1 : 0};
+        auto parentIndex = _level ? _level - 1 : 0;
 
         _parents[_level] = _tree->AppendItem(_parents[parentIndex], name, 2, 2, new URLTreeItem(value));
 
@@ -341,10 +337,9 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
     if (input.IsEmpty())
         return wxEmptyString;
 
-    bool     inSpecial {false};
+    auto     inSpecial = false;
     wxString special;
-
-    size_t i;
+    size_t   i;
 
     for (i = 0; i < input.Length(); ++i) {
         switch (wxChar(input[i])) {
@@ -356,7 +351,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
             if (inSpecial) {
                 inSpecial = false;
 
-                unsigned code {getHTMLCode(special)};
+                auto code = getHTMLCode(special);
 
                 if (code)
                     result.Append(charForCode(code, *_cvPtr, false));
@@ -376,9 +371,8 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 
 unsigned HHCParser::getHTMLCode(const wxString& name)
 {
-    size_t substitutions_cnt {sizeof(substitutions) / sizeof(HTMLChar) - 1};
-
-    HTMLChar* hc = static_cast<HTMLChar*>(
+    auto substitutions_cnt = sizeof(substitutions) / sizeof(HTMLChar) - 1;
+    auto hc                = static_cast<HTMLChar*>(
         bsearch(name.c_str(), substitutions, substitutions_cnt, sizeof(HTMLChar), HTMLCharCompare));
 
     return hc ? hc->code : 0;

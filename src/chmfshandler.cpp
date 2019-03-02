@@ -27,17 +27,16 @@ CHMFSHandler::~CHMFSHandler()
 
 bool CHMFSHandler::CanOpen(const wxString& location)
 {
-    wxString p = GetProtocol(location);
+    auto p = GetProtocol(location);
     return (p == wxT("xchm") && GetProtocol(GetLeftLocation(location)) == wxT("file"))
         || !location.Left(6).CmpNoCase(wxT("MS-ITS"));
 }
 
 wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
 {
-    wxString        right = GetRightLocation(location);
-    wxString        left  = GetLeftLocation(location);
-    wxString        cwd   = GetRightLocation(fs.GetPath());
-    CHMInputStream* s     = nullptr;
+    auto right = GetRightLocation(location);
+    auto left  = GetLeftLocation(location);
+    auto cwd   = GetRightLocation(fs.GetPath());
 
     if (!location.Left(6).CmpNoCase(wxT("MS-ITS"))) {
         right = wxT("/") + location;
@@ -53,10 +52,10 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
     right.Replace(wxT("%2D"), wxT("-"), true);
     right.Replace(wxT("%26"), wxT("&"), true);
 
-    wxFileName filename = wxFileSystem::URLToFileName(left);
+    auto filename = wxFileSystem::URLToFileName(left);
     filename.Normalize();
 
-    size_t len = cwd.Length();
+    auto len = cwd.Length();
     if (right.Length() > len && right.StartsWith(cwd) && right[len] == wxT('/'))
         right = right.Mid(len);
 
@@ -64,23 +63,22 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
     fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
     right = fwfn.GetFullPath(wxPATH_UNIX);
 
-    s = new CHMInputStream(left.IsEmpty() ? left : filename.GetFullPath(), right);
+    auto s = std::make_unique<CHMInputStream>(left.IsEmpty() ? left : filename.GetFullPath(), right);
 
     if (s && s->IsOk()) {
+        auto cache = s->GetCache();
 
         if (right.IsSameAs(wxT("/")))
-            right = s->GetCache()->HomePage();
+            right = cache->HomePage();
 
-        // The dreaded links to files in other archives.
-        // Talk about too much enthusiasm.
+        // Links to files in other archives.
         if (!right.Left(8).CmpNoCase(wxT("/MS-ITS:")))
             right = right.AfterLast(wxT(':'));
 
-        return new wxFSFile(s, wxT("file:") + s->GetCache()->ArchiveName() + wxT("#xchm:") + right,
-                            GetMimeTypeFromExt(right.Lower()), GetAnchor(location),
-                            wxDateTime(static_cast<time_t>(-1)));
+        auto newLocation = wxT("file:") + cache->ArchiveName() + wxT("#xchm:") + right;
+
+        return new wxFSFile(s.release(), newLocation, GetMimeTypeFromExt(right.Lower()), GetAnchor(location), {});
     }
 
-    delete s;
     return nullptr;
 }

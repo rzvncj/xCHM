@@ -135,8 +135,7 @@ void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face, const wxStri
     _fonts_normal_face = normal_face;
     _fonts_fixed_face  = fixed_face;
 
-    for (auto i = 0; i < 7; ++i)
-        _fonts_sizes[i] = sizes[i];
+    memcpy(_fonts_sizes, sizes, sizeof(_fonts_sizes));
 
     auto nPageCount = GetPageCount();
 

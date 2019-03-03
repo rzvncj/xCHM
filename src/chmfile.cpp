@@ -160,7 +160,7 @@ inline uint32_t UINT32_FROM_ARRAY(const unsigned char* x)
 inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 {
     uint64_t result {0};
-    int      shift {0};
+    auto     shift = 0;
 
     length = 0;
 
@@ -180,7 +180,7 @@ inline uint64_t be_encint(unsigned char* buffer, size_t& length)
 */
 inline int ffus(unsigned char* byte, int* bit, size_t& length)
 {
-    int bits {0};
+    auto bits = 0;
 
     length = 0;
 
@@ -362,9 +362,9 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
                       uint32_t index, wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level,
                       bool local)
 {
-    static wxTreeItemId  parents[TREE_BUF_SIZE];
-    static int           calls {0};
-    static constexpr int yieldTime {256};
+    static wxTreeItemId   parents[TREE_BUF_SIZE];
+    static auto           calls     = 0;
+    static constexpr auto yieldTime = 256;
 
     ++calls;
 
@@ -648,7 +648,7 @@ bool CHMFile::LoadContextIDs()
         return false; // we retrieved unexpected data from the file.
 
     std::vector<uint32_t> ivbs(ivb_len);
-    int                   j {4}; // offset to exclude first DWORD
+    auto                  j = 4; // offset to exclude first DWORD
 
     // convert our DWORDs to numbers
     for (unsigned int i = 0; i < ivb_len; ++i) {
@@ -706,8 +706,8 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
     if (chm_retrieve_object(_chmFile, &ui, header, 0, FTS_HEADER_LEN) == 0)
         return false;
 
-    unsigned char doc_index_s {header[0x1E]}, doc_index_r {header[0x1F]}, code_count_s {header[0x20]},
-        code_count_r {header[0x21]}, loc_codes_s {header[0x22]}, loc_codes_r {header[0x23]};
+    auto doc_index_s = header[0x1E], doc_index_r = header[0x1F], code_count_s = header[0x20],
+         code_count_r = header[0x21], loc_codes_s = header[0x22], loc_codes_r = header[0x23];
 
     if (doc_index_s != 2 || code_count_s != 2 || loc_codes_s != 2)
         // Don't know how to use values other than 2 yet. Maybe next chmspec.
@@ -722,10 +722,9 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
     auto cursor16   = header + 0x18;
     auto tree_depth = UINT16_FROM_ARRAY(cursor16);
 
-    unsigned char word_len, pos;
-    wxString      word;
-    uint32_t      i {sizeof(uint16_t)};
-    uint16_t      free_space;
+    wxString word;
+    uint32_t i {sizeof(uint16_t)};
+    uint16_t free_space;
 
     UCharVector buffer(node_len);
 
@@ -744,12 +743,9 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
 
         i = sizeof(uint32_t) + sizeof(uint16_t) + sizeof(uint16_t);
 
-        uint64_t wlc_count, wlc_size;
-        uint32_t wlc_offset;
-
         while (i < node_len - free_space) {
-            word_len = buffer[i];
-            pos      = buffer[i + 1];
+            auto word_len = buffer[i];
+            auto pos      = buffer[i + 1];
 
             std::vector<char> wrd_buf(word_len);
 
@@ -766,14 +762,14 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
             auto   title = buffer[i - 1];
             size_t encsz;
 
-            wlc_count = be_encint(&buffer[i], encsz);
+            auto wlc_count = be_encint(&buffer[i], encsz);
             i += encsz;
 
-            cursor32   = &buffer[i];
-            wlc_offset = UINT32_FROM_ARRAY(cursor32);
+            cursor32        = &buffer[i];
+            auto wlc_offset = UINT32_FROM_ARRAY(cursor32);
 
             i += sizeof(uint32_t) + sizeof(uint16_t);
-            wlc_size = be_encint(&buffer[i], encsz);
+            auto wlc_size = be_encint(&buffer[i], encsz);
             i += encsz;
 
             cursor32    = &buffer[0];
@@ -827,12 +823,9 @@ bool CHMFile::GetArchiveInfo()
 uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset, uint32_t buffSize, uint16_t treeDepth,
                                     chmUnitInfo* ui)
 {
-    uint32_t       test_offset {0};
-    unsigned char* cursor16;
-    unsigned char* cursor32;
-    unsigned char  word_len, pos;
-    uint32_t       i {sizeof(uint16_t)};
-    wxString       word;
+    uint32_t test_offset {0};
+    uint32_t i {sizeof(uint16_t)};
+    wxString word;
 
     if (!buffSize)
         return 0;
@@ -847,12 +840,12 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
         if (chm_retrieve_object(_chmFile, ui, &buffer[0], initialOffset, buffSize) == 0)
             return 0;
 
-        cursor16        = &buffer[0];
+        auto cursor16   = &buffer[0];
         auto free_space = UINT16_FROM_ARRAY(cursor16);
 
         while (i < buffSize - free_space) {
-            word_len = buffer[i];
-            pos      = buffer[i + 1];
+            auto word_len = buffer[i];
+            auto pos      = buffer[i + 1];
 
             std::vector<char> wrd_buf(word_len);
 
@@ -865,7 +858,7 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
                 word = word.Mid(0, pos) + CURRENT_CHAR_STRING(&wrd_buf[0]);
 
             if (text.CmpNoCase(word) <= 0) {
-                cursor32      = &buffer[i + word_len + 1];
+                auto cursor32 = &buffer[i + word_len + 1];
                 initialOffset = UINT32_FROM_ARRAY(cursor32);
                 break;
             }
@@ -882,12 +875,10 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
                          chmUnitInfo* uitbl, chmUnitInfo* uistrings, chmUnitInfo* topics, chmUnitInfo* urlstr,
                          CHMSearchResults* results)
 {
-    int            wlc_bit {7};
-    uint64_t       index {0}, count;
-    size_t         length, off {0};
-    UCharVector    buffer(wlc_size);
-    unsigned char* cursor32;
-    uint32_t       stroff, urloff;
+    auto        wlc_bit = 7;
+    uint64_t    index {0};
+    size_t      length, off {0};
+    UCharVector buffer(wlc_size);
 
     constexpr size_t TOPICS_ENTRY_LEN {16};
     unsigned char    entry[TOPICS_ENTRY_LEN];
@@ -910,9 +901,9 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
         if (chm_retrieve_object(_chmFile, topics, entry, index * 16, TOPICS_ENTRY_LEN) == 0)
             return false;
 
-        cursor32                   = entry + 4;
+        auto cursor32              = entry + 4;
         combuf[COMMON_BUF_LEN - 1] = 0;
-        stroff                     = UINT32_FROM_ARRAY(cursor32);
+        auto stroff                = UINT32_FROM_ARRAY(cursor32);
 
         wxString topic;
 
@@ -933,8 +924,8 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 #endif
         }
 
-        cursor32 = entry + 8;
-        urloff   = UINT32_FROM_ARRAY(cursor32);
+        cursor32    = entry + 8;
+        auto urloff = UINT32_FROM_ARRAY(cursor32);
 
         if (chm_retrieve_object(_chmFile, uitbl, combuf, urloff, 12) == 0)
             return false;
@@ -955,7 +946,7 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
             (*results)[url] = topic;
         }
 
-        count = sr_int(&buffer[off], &wlc_bit, cs, cr, length);
+        auto count = sr_int(&buffer[off], &wlc_bit, cs, cr, length);
         off += length;
 
         for (uint64_t j = 0; j < count; ++j) {
@@ -971,7 +962,6 @@ bool CHMFile::InfoFromWindows()
 {
     constexpr size_t WIN_HEADER_LEN {0x08};
     unsigned char    buffer[BUF_SIZE];
-    unsigned int     factor;
     chmUnitInfo      ui;
     auto             size = 0L;
 
@@ -997,8 +987,7 @@ bool CHMFile::InfoFromWindows()
             auto     off_home  = UINT32_FROM_ARRAY(raw + offset + 0x68);
             auto     off_hhc   = UINT32_FROM_ARRAY(raw + offset + 0x60);
             auto     off_hhk   = UINT32_FROM_ARRAY(raw + offset + 0x64);
-
-            factor = off_title / 4096;
+            auto     factor    = off_title / 4096;
 
             if (size == 0)
                 size = chm_retrieve_object(_chmFile, &ui, buffer, factor * 4096, BUF_SIZE);
@@ -1041,8 +1030,6 @@ bool CHMFile::InfoFromSystem()
     chmUnitInfo    ui;
     auto           index = 0;
     unsigned char* cursor {nullptr};
-    uint16_t       value {0};
-    uint32_t       lcid {0};
     auto           size = 0L;
     auto           cs   = -1L;
 
@@ -1059,8 +1046,8 @@ bool CHMFile::InfoFromSystem()
         if (index > size - 1 - static_cast<long>(sizeof(uint16_t)))
             break;
 
-        cursor = buffer + index;
-        value  = UINT16_FROM_ARRAY(cursor);
+        cursor     = buffer + index;
+        auto value = UINT16_FROM_ARRAY(cursor);
 
         switch (value) {
         case 0:
@@ -1099,8 +1086,7 @@ bool CHMFile::InfoFromSystem()
             index += 2;
             cursor = buffer + index;
 
-            lcid = UINT32_FROM_ARRAY(buffer + index + 2);
-            _enc = GetFontEncFromLCID(lcid);
+            _enc = GetFontEncFromLCID(UINT32_FROM_ARRAY(buffer + index + 2));
             break;
 
         case 6:

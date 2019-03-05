@@ -105,7 +105,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
             word = tkz.GetNextToken();
 
     CHMSearchResults h1;
-    chmf->IndexSearch(word, !_partial->IsChecked(), _titles->IsChecked(), &h1);
+    chmf->IndexSearch(word, !_partial->IsChecked(), _titles->IsChecked(), h1);
 
     while (tkz.HasMoreTokens()) {
         auto token = tkz.GetNextToken();
@@ -113,7 +113,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
             continue;
 
         CHMSearchResults h2, tmp;
-        chmf->IndexSearch(token, !_partial->IsChecked(), _titles->IsChecked(), &h2);
+        chmf->IndexSearch(token, !_partial->IsChecked(), _titles->IsChecked(), h2);
 
         if (!h2.empty()) {
             for (auto&& item : h2)

@@ -88,7 +88,7 @@ bool CHMApp::OnInit()
     GetCurrentProcess(&PSN);
     TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
 #endif
-    long     id {-1};
+    auto     id = -1L;
     wxString file;
 
     _cmdLP.SetCmdLine(argc, argv);
@@ -112,7 +112,7 @@ bool CHMApp::OnInit()
     auto loadIndex  = !_cmdLP.Found(wxT("noindex"));
 
 #ifdef WITH_LIBXMLRPC
-    long port {-1};
+    auto port = -1L;
 
     // catch the xmlrpc setup if desired
     _cmdLP.Found(wxT("xmlrpc"), &port);
@@ -127,7 +127,7 @@ bool CHMApp::OnInit()
         return false;
     }
 
-    long     xorig {50}, yorig {50}, width {600}, height {450};
+    auto     xorig = 50L, yorig = 50L, width = 600L, height = 450L;
     long     sashPos {CONTENTS_MARGIN}, fontSize {CHM_DEFAULT_FONT_SIZE};
     wxString lastOpenedDir, normalFont, fixedFont;
 
@@ -159,15 +159,14 @@ bool CHMApp::OnInit()
         fullAppPath = getAppPath(argv[0], wxGetCwd());
 
     _frame = new CHMFrame(wxT("xCHM v. ") wxT(VERSION), lastOpenedDir, wxPoint(xorig, yorig), wxSize(width, height),
-                          normalFont, fixedFont, static_cast<int>(fontSize), static_cast<int>(sashPos), fullAppPath,
-                          loadTopics, loadIndex);
+                          normalFont, fixedFont, fontSize, sashPos, fullAppPath, loadTopics, loadIndex);
 
     _frame->SetSizeHints(200, 200);
     _frame->Show(true);
     SetTopWindow(_frame);
 
 #ifdef WITH_LIBXMLRPC
-    if (port != -1) {
+    if (port != -1L) {
         _timer.SetOwner(this, TIMER_ID);
         _timer.Start(100);
         getXmlRpcServer().bindAndListen(port);
@@ -177,7 +176,7 @@ bool CHMApp::OnInit()
     if (_cmdLP.GetParamCount() == 1) {
         _frame->LoadCHM(file);
 
-        if (id != -1)
+        if (id != -1L)
             _frame->LoadContextID(id);
     }
 

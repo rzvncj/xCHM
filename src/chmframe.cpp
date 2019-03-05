@@ -599,10 +599,10 @@ void CHMFrame::UpdateCHMInfo()
     }
 #endif
     if (_loadTopics)
-        chmf->GetTopicsTree(_tcl);
+        chmf->GetTopicsTree(*_tcl);
 
     if (_loadIndex)
-        chmf->GetIndex(_cip->GetResultsList());
+        chmf->GetIndex(*_cip->GetResultsList());
 
     if (!title.IsEmpty()) {
         auto titleBarText = wxT("xCHM v. " VERSION ": ") + title;

@@ -139,7 +139,7 @@ public:
       The tree must be empty before passing it to this function.
       \return true if it's possible to build the tree, false otherwise.
      */
-    bool GetTopicsTree(wxTreeCtrl* toBuild);
+    bool GetTopicsTree(wxTreeCtrl& toBuild);
 
     /*!
       \brief Attempts to fill a CHMListCtrl by parsing the index file.
@@ -147,7 +147,7 @@ public:
       is unmodified. The list must be empty before passing it to this function.
       \return true if it's possible to build the tree, false otherwise.
      */
-    bool GetIndex(CHMListCtrl* toBuild);
+    bool GetIndex(CHMListCtrl& toBuild);
 
     /*!
       \brief Attempts to build an index of context-ID/page pairs from the file.
@@ -184,7 +184,7 @@ public:
       the URLs and the values are the page titles.
       \return true if the search succeeded, false otherwise.
      */
-    bool IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly, CHMSearchResults* results);
+    bool IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly, CHMSearchResults& results);
 
     /*!
       \brief Looks up fileName in the archive.
@@ -206,6 +206,13 @@ public:
      */
     size_t RetrieveObject(chmUnitInfo* ui, unsigned char* buffer, off_t fileOffset, size_t bufferSize);
 
+public:
+    //! No copy construction allowed.
+    CHMFile(const CHMFile&) = delete;
+
+    //! No assignments.
+    CHMFile& operator=(const CHMFile&) = delete;
+
 private:
     //! Helper. Translates from Win32 encodings to generic wxWidgets ones.
     wxFontEncoding GetFontEncFromCharSet(int cs);
@@ -224,7 +231,7 @@ private:
     bool ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_offset, unsigned char ds, unsigned char dr,
                     unsigned char cs, unsigned char cr, unsigned char ls, unsigned char lr, chmUnitInfo* uifmain,
                     chmUnitInfo* uitbl, chmUnitInfo* uistrings, chmUnitInfo* topics, chmUnitInfo* urlstr,
-                    CHMSearchResults* results);
+                    CHMSearchResults& results);
 
     //! Looks up as much information as possible from #WINDOWS/#STRINGS.
     bool InfoFromWindows();
@@ -233,18 +240,18 @@ private:
     bool InfoFromSystem();
 
     //! Load binary TOC (if available)
-    bool BinaryTOC(wxTreeCtrl* toBuild);
+    bool BinaryTOC(wxTreeCtrl& toBuild);
 
     //! Try to recursively load the binary topics tree
     void RecurseLoadBTOC(UCharVector& topidx, UCharVector& topics, UCharVector& strings, UCharVector& urltbl,
-                         UCharVector& urlstr, uint32_t offset, wxTreeCtrl* toBuild, int level);
+                         UCharVector& urlstr, uint32_t offset, wxTreeCtrl& toBuild, int level);
 
     //! Retrieve the data (name/URL) for a single entry (TOC or index)
     bool GetItem(UCharVector& topics, UCharVector& strings, UCharVector& urltbl, UCharVector& urlstr, uint32_t index,
                  wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level, bool local);
 
     //! Get the binary index (if available)
-    bool BinaryIndex(CHMListCtrl* toBuild, const wxCSConv& cv);
+    bool BinaryIndex(CHMListCtrl& toBuild, const wxCSConv& cv);
 
 private:
     chmFile*       _chmFile {nullptr};
@@ -256,13 +263,6 @@ private:
     wxString       _font;
     wxFontEncoding _enc;
     CHMIDMap       _cidMap;
-
-public:
-    //! No copy construction allowed.
-    CHMFile(const CHMFile&) = delete;
-
-    //! No assignments.
-    CHMFile& operator=(const CHMFile&) = delete;
 };
 
 #endif // __CHMFILE_H_

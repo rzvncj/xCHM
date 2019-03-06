@@ -150,7 +150,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
 
     if (data && (!data->_url.IsEmpty())) {
-        wxString title = _tcl->GetItemText(root);
+        auto title = _tcl->GetItemText(root);
         if (TitleSearch(title, text, false, wholeWords))
             _results->AddPairItem(title, data->_url);
     }
@@ -164,15 +164,13 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     }
 }
 
-bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool caseSensitive, bool wholeWords)
+bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool caseSensitive, bool wholeWords)
 {
-    size_t i, j;
-    auto   lng   = title.Length();
-    auto   found = false;
-    auto   tmp   = title;
+    auto lng   = title.Length();
+    auto found = false;
 
     if (!caseSensitive) {
-        tmp.MakeLower();
+        title.MakeLower();
         text.MakeLower();
     }
 
@@ -186,15 +184,15 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
             continue;
 
         auto wrd  = token.Length();
-        auto buf1 = tmp.c_str();
+        auto buf1 = title.c_str();
         auto buf2 = token.c_str();
 
         if (wholeWords) {
-            for (i = 0; i < lng - wrd + 1; ++i) {
+            for (size_t i = 0; i < lng - wrd + 1; ++i) {
                 if (IS_WHITESPACE(buf1[i]))
                     continue;
 
-                j = 0;
+                size_t j {0};
 
                 while (j < wrd && buf1[i + j] == buf2[j])
                     ++j;
@@ -206,8 +204,8 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, wxString& text, bool cas
                     }
             }
         } else {
-            for (i = 0; i < lng - wrd + 1; ++i) {
-                j = 0;
+            for (size_t i = 0; i < lng - wrd + 1; ++i) {
+                size_t j {0};
 
                 while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j]))
                     ++j;

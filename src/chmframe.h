@@ -20,6 +20,7 @@
 #ifndef __CHMFRAME_H_
 #define __CHMFRAME_H_
 
+#include <array>
 #include <memory>
 #include <wx/combobox.h>
 #include <wx/docview.h>
@@ -84,6 +85,8 @@ enum {
 
 //! The frame, owner of the wxHtmlWindow, contents tree control and all the other nifty stuff.
 class CHMFrame : public wxFrame {
+
+    using FontSizesArray = std::array<int, 7>;
 
 public:
     /*!
@@ -219,6 +222,8 @@ private:
 
     //! Helper. Saves exit information (size, history, etc.)
     void SaveExitInfo();
+
+    FontSizesArray ComputeFontSizes() const;
 
 private:
     CHMHtmlNotebook*                    _nbhtml;

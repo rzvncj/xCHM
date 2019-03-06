@@ -124,10 +124,6 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 #endif
 
     wxLogNull wln;
-    int       sizes[7];
-
-    for (auto i = -3; i <= 3; ++i)
-        sizes[i + 3] = _fontSize + i * 2;
 
     SetIcon(wxIcon(xchm_32_xpm));
     SetMenuBar(CreateMenu());
@@ -157,7 +153,9 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
     auto contents = CreateContentsPanel();
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
-    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
+
+    auto sizes = ComputeFontSizes();
+    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes.data());
 
     _csp  = new CHMSearchPanel(_nb, _tcl, _nbhtml);
     _font = _tcl->GetFont();
@@ -310,12 +308,10 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent&)
 void CHMFrame::OnPrint(wxCommandEvent&)
 {
     wxLogNull wln;
-    int       sizes[7];
 
-    for (auto i = -3; i <= 3; ++i)
-        sizes[i + 3] = _fontSize + i * 2;
+    auto sizes = ComputeFontSizes();
+    _ep->SetFonts(_normalFont, _fixedFont, sizes.data());
 
-    _ep->SetFonts(_normalFont, _fixedFont, sizes);
     _ep->PrintFile(_nbhtml->GetCurrentPage()->GetOpenedPage());
 }
 
@@ -564,25 +560,18 @@ void CHMFrame::UpdateCHMInfo()
                     chmf->DesiredEncoding());
 
         if (font.Ok()) {
-            int sizes[7];
-
-            for (auto i = -3; i <= 3; ++i)
-                sizes[i + 3] = _fontSize + i * 2;
-
             _tcl->SetFont(font);
             _csp->SetNewFont(font);
             _cip->SetNewFont(font);
             _cb->SetFont(font);
-            _nbhtml->SetChildrenFonts(font.GetFaceName(), font.GetFaceName(), sizes);
+
+            auto sizes = ComputeFontSizes();
+            _nbhtml->SetChildrenFonts(font.GetFaceName(), font.GetFaceName(), sizes.data());
+
             noSpecialFont = false;
         }
 
     } else if (!noSpecialFont) {
-        int sizes[7];
-
-        for (auto i = -3; i <= 3; ++i)
-            sizes[i + 3] = _fontSize + i * 2;
-
         _tcl->SetFont(_font);
 
         wxFont tmp(_font.GetPointSize(), _font.GetFamily(), _font.GetStyle(), _font.GetWeight(), _font.GetUnderlined(),
@@ -594,7 +583,9 @@ void CHMFrame::UpdateCHMInfo()
             _cip->SetNewFont(tmp);
         }
 
-        _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes);
+        auto sizes = ComputeFontSizes();
+        _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes.data());
+
         noSpecialFont = true;
     }
 #endif
@@ -901,6 +892,16 @@ void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
 
     wxCommandEvent dummy;
     OnFullScreen(dummy);
+}
+
+CHMFrame::FontSizesArray CHMFrame::ComputeFontSizes() const
+{
+    FontSizesArray sizes;
+
+    for (auto i = -3; i <= 3; ++i)
+        sizes[i + 3] = _fontSize + i * 2;
+
+    return sizes;
 }
 
 BEGIN_EVENT_TABLE(CHMFrame, wxFrame)

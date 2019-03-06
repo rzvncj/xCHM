@@ -139,7 +139,7 @@ void HHCParser::parse(const char* chunk)
 
 void HHCParser::handleTag(const std::string& tag)
 {
-    constexpr int TIME_TO_YIELD {1024};
+    constexpr auto TIME_TO_YIELD = 1024;
 
     if (tag.empty())
         return;
@@ -339,9 +339,8 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
 
     auto     inSpecial = false;
     wxString special;
-    size_t   i;
 
-    for (i = 0; i < input.Length(); ++i) {
+    for (size_t i = 0; i < input.Length(); ++i) {
         switch (wxChar(input[i])) {
         case wxT('&'):
             inSpecial = true;

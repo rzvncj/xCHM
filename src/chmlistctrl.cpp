@@ -130,7 +130,7 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
 wxString CHMListCtrl::OnGetItemText(long item, long column) const
 {
     // Is this even possible? item == -1 or item > size - 1?
-    if (column != 0 || item == -1 || item > static_cast<long>(_items.GetCount()) - 1)
+    if (column != 0 || item == -1L || item > static_cast<long>(_items.GetCount()) - 1)
         return wxT("");
 
     return _items[item]->_title;

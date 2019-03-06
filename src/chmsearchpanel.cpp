@@ -90,13 +90,23 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
         return;
 
     sr.MakeLower();
-    sr.Replace(wxT("+"), wxT(" "), true);
-    sr.Replace(wxT("-"), wxT(" "), true);
-    sr.Replace(wxT("#"), wxT(" "), true);
-    sr.Replace(wxT("@"), wxT(" "), true);
-    sr.Replace(wxT("^"), wxT(" "), true);
-    sr.Replace(wxT("&"), wxT(" "), true);
-    sr.Replace(wxT("%"), wxT(" "), true);
+
+    auto srLen = sr.length();
+
+    for (size_t i = 0; i < srLen; ++i)
+        switch (wxChar(sr[i])) {
+        case wxT('+'):
+        case wxT('-'):
+        case wxT('#'):
+        case wxT('@'):
+        case wxT('^'):
+        case wxT('&'):
+        case wxT('%'):
+            sr[i] = wxT(' ');
+            break;
+        default:
+            break;
+        }
 
     wxStringTokenizer tkz(sr, wxT(" \t\r\n"));
 

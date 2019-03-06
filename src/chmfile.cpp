@@ -207,27 +207,26 @@ inline int ffus(unsigned char* byte, int* bit, size_t& length)
 
 inline uint64_t sr_int(unsigned char* byte, int* bit, unsigned char s, unsigned char r, size_t& length)
 {
-    uint64_t      ret {0};
-    unsigned char mask;
-    int           n, n_bits, num_bits, base, count;
-    size_t        fflen;
+    uint64_t ret {0};
+    size_t   fflen;
 
     length = 0;
 
     if (!bit || *bit > 7 || s != 2)
         return ~static_cast<uint64_t>(0);
 
-    count = ffus(byte, bit, fflen);
+    auto count = ffus(byte, bit, fflen);
     length += fflen;
     byte += length;
 
-    n_bits = n = r + (count ? count - 1 : 0);
+    int  n_bits = r + (count ? count - 1 : 0);
+    auto n      = n_bits;
 
     while (n > 0) {
-        num_bits = n > *bit ? *bit : n - 1;
-        base     = n > *bit ? 0 : *bit - (n - 1);
-        mask     = (0xff >> (7 - num_bits)) << base;
-        ret      = (ret << (num_bits + 1)) | static_cast<uint64_t>((*byte & mask) >> base);
+        auto num_bits = n > *bit ? *bit : n - 1;
+        auto base     = n > *bit ? 0 : *bit - (n - 1);
+        auto mask     = static_cast<unsigned char>((0xff >> (7 - num_bits)) << base);
+        ret           = (ret << (num_bits + 1)) | static_cast<uint64_t>((*byte & mask) >> base);
 
         if (n > *bit) {
             ++byte;
@@ -360,12 +359,12 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
                       bool local)
 {
     static wxTreeItemId   parents[TREE_BUF_SIZE];
-    static auto           calls     = 0;
-    static constexpr auto yieldTime = 256;
+    static auto           calls      = 0;
+    static constexpr auto YIELD_TIME = 256;
 
     ++calls;
 
-    if (calls % yieldTime) {
+    if (calls % YIELD_TIME) {
         calls = 0;
         wxYield();
     }
@@ -501,7 +500,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl& toBuild, const wxCSConv& cv)
 
     unsigned long      offset {0x4c};
     int32_t            next {-1};
-    constexpr uint16_t blockSize {2048};
+    constexpr uint16_t BLOCK_SIZE {2048};
 
     do {
         if (bt_ui.length < offset + 12)
@@ -509,7 +508,7 @@ bool CHMFile::BinaryIndex(CHMListCtrl& toBuild, const wxCSConv& cv)
 
         auto freeSpace = UINT16_FROM_ARRAY(&btree[offset]);
         next           = INT32ARRAY(&btree[offset + 8]);
-        auto spaceLeft = blockSize - 12;
+        auto spaceLeft = BLOCK_SIZE - 12;
         offset += 12;
 
         while (spaceLeft > freeSpace) {

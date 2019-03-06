@@ -105,7 +105,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
       _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
-    constexpr int      NO_ACCELERATOR_ENTRIES {6};
+    constexpr auto     NO_ACCELERATOR_ENTRIES = 6;
     wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
 
     entries[0].Set(wxACCEL_CTRL, 'F', ID_FindInPage);
@@ -543,7 +543,7 @@ void CHMFrame::UpdateCHMInfo()
     _csp->Reset();
     _cip->Reset();
 
-    wxString title {chmf->Title()};
+    auto title = chmf->Title();
 
     if (_tcl->GetCount()) {
         _tcl->Unselect();
@@ -551,7 +551,7 @@ void CHMFrame::UpdateCHMInfo()
     }
 
 #if !wxUSE_UNICODE
-    wxString fontFace {chmf->DefaultFont()};
+    auto fontFace = chmf->DefaultFont();
 
     if (!fontFace.IsEmpty()) {
         auto fs = -1L;

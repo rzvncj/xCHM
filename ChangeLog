@@ -385,3 +385,5 @@
 		+ now requiring at least wxWidgets 3.0.0 to build.
 		+ minor optimizations.
 		+ fixed scrolling on loading new pages.
+		+ fixed Mac build.
+		+ fixed just-broken new tab behaviour.

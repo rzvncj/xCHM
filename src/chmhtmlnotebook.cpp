@@ -48,7 +48,7 @@ CHMHtmlWindow* CHMHtmlNotebook::CreateView()
     htmlWin->SetRelatedStatusBar(0);
     htmlWin->SetFonts(_fontsNormalFace, _fontsFixedFace, sizes.data());
 
-    wxAuiNotebook::AddPage(htmlWin, _("(Empty page)"));
+    AddTab(htmlWin, _("(Empty page)"));
     SetSelection(GetPageCount() - 1);
 
     return htmlWin;
@@ -146,12 +146,12 @@ void CHMHtmlNotebook::SetChildrenFonts(const wxString& normalFace, const wxStrin
     }
 }
 
-bool CHMHtmlNotebook::AddPage(wxWindow* page, const wxString& title, bool select, int imageId)
+bool CHMHtmlNotebook::AddTab(wxWindow* page, const wxString& title)
 {
     if (!page)
         return false;
 
-    auto st = wxAuiNotebook::AddPage(page, title, select, imageId);
+    auto st = AddPage(page, title);
 
     if (GetPageCount() == 2)
         SetTabCtrlHeight(-1);

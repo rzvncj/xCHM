@@ -108,7 +108,6 @@ private:
 private:
     ItemPairArray    _items;
     CHMHtmlNotebook* _nbhtml;
-    int              _currentSize;
 
 private:
     DECLARE_EVENT_TABLE()

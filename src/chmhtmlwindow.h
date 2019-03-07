@@ -66,7 +66,7 @@ public:
     void OnSetTitle(const wxString& title) override;
 
     //! Override. Looks up the wanted page in the tree and selects it.
-    bool LoadPage(const wxString& location);
+    bool LoadPage(const wxString& location) override;
 
     /*!
       \brief Dictates the behaviour of LoadPage(). If SetSync()
@@ -145,7 +145,7 @@ protected:
     void OnRightClick(wxMouseEvent& event);
 
     //! Overridden. Called when the user clicks on a link.
-    void OnLinkClicked(const wxHtmlLinkInfo& link);
+    void OnLinkClicked(const wxHtmlLinkInfo& link) override;
 
 private:
     //! Helper. Recursively looks for the opened page in the tree.

@@ -79,7 +79,7 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts,
     topsizer->Fit(this);
     Centre(wxBOTH);
 
-    InitDialog(normalFonts, fixedFonts);
+    Init(normalFonts, fixedFonts);
 }
 
 void CHMFontDialog::UpdatePreview()
@@ -110,7 +110,7 @@ void CHMFontDialog::OnUpdateSpin(wxSpinEvent&)
     UpdatePreview();
 }
 
-void CHMFontDialog::InitDialog(const wxArrayString& normalFonts, const wxArrayString& fixedFonts)
+void CHMFontDialog::Init(const wxArrayString& normalFonts, const wxArrayString& fixedFonts)
 {
     if (_normalFont.IsEmpty())
         _normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, wxNORMAL, false).GetFaceName();

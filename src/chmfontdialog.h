@@ -68,7 +68,7 @@ private:
     void UpdatePreview();
 
     //! Helper. Initializes the dialog with the passed data.
-    void InitDialog(const wxArrayString& normalFonts, const wxArrayString& fixedFonts);
+    void Init(const wxArrayString& normalFonts, const wxArrayString& fixedFonts);
 
 private:
     wxHtmlWindow* _test {nullptr};

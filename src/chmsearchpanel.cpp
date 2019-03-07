@@ -39,7 +39,7 @@ inline bool IS_WHITESPACE(wxChar c)
 
 CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNotebook* nbhtml)
     : wxPanel(parent), _tcl(topics), _text(nullptr), _partial(nullptr), _titles(nullptr), _search(nullptr),
-      _results(nullptr), _nbhtml(nbhtml)
+      _results(nullptr)
 {
     auto sizer = new wxBoxSizer(wxVERTICAL);
     SetAutoLayout(true);

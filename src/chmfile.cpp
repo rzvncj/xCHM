@@ -43,24 +43,18 @@ constexpr size_t BUF_SIZE {4096};
 
 // Thanks to Vadim Zeitlin.
 constexpr int ANSI_CHARSET {0};
-constexpr int DEFAULT_CHARSET {1};
-constexpr int SYMBOL_CHARSET {2};
 constexpr int SHIFTJIS_CHARSET {128};
-constexpr int HANGEUL_CHARSET {129};
 constexpr int HANGUL_CHARSET {129};
 constexpr int GB2312_CHARSET {134};
 constexpr int CHINESEBIG5_CHARSET {136};
 constexpr int OEM_CHARSET {255};
-constexpr int JOHAB_CHARSET {130};
 constexpr int HEBREW_CHARSET {177};
 constexpr int ARABIC_CHARSET {178};
 constexpr int GREEK_CHARSET {161};
 constexpr int TURKISH_CHARSET {162};
-constexpr int VIETNAMESE_CHARSET {163};
 constexpr int THAI_CHARSET {222};
 constexpr int EASTEUROPE_CHARSET {238};
 constexpr int RUSSIAN_CHARSET {204};
-constexpr int MAC_CHARSET {77};
 constexpr int BALTIC_CHARSET {186};
 
 // Hello, Microsoft
@@ -90,7 +84,6 @@ constexpr uint32_t LANG_PORTUGUESE {0x16};
 constexpr uint32_t LANG_ROMANIAN {0x18};
 constexpr uint32_t LANG_RUSSIAN {0x19};
 constexpr uint32_t LANG_CROATIAN {0x1a};
-constexpr uint32_t LANG_SERBIAN {0x1a};
 constexpr uint32_t LANG_SLOVAK {0x1b};
 constexpr uint32_t LANG_ALBANIAN {0x1c};
 constexpr uint32_t LANG_SWEDISH {0x1d};
@@ -101,45 +94,18 @@ constexpr uint32_t LANG_INDONESIAN {0x21};
 constexpr uint32_t LANG_UKRAINIAN {0x22};
 constexpr uint32_t LANG_BELARUSIAN {0x23};
 constexpr uint32_t LANG_SLOVENIAN {0x24};
-constexpr uint32_t LANG_ESTONIAN {0x25};
-constexpr uint32_t LANG_LATVIAN {0x26};
-constexpr uint32_t LANG_LITHUANIAN {0x27};
 constexpr uint32_t LANG_FARSI {0x29};
-constexpr uint32_t LANG_VIETNAMESE {0x2a};
-constexpr uint32_t LANG_ARMENIAN {0x2b};
 constexpr uint32_t LANG_AZERI {0x2c};
 constexpr uint32_t LANG_BASQUE {0x2d};
-constexpr uint32_t LANG_MACEDONIAN {0x2f};
 constexpr uint32_t LANG_AFRIKAANS {0x36};
-constexpr uint32_t LANG_GEORGIAN {0x37};
-constexpr uint32_t LANG_FAEROESE {0x38};
-constexpr uint32_t LANG_HINDI {0x39};
 constexpr uint32_t LANG_MALAY {0x3e};
 constexpr uint32_t LANG_KAZAK {0x3f};
 constexpr uint32_t LANG_KYRGYZ {0x40};
 constexpr uint32_t LANG_SWAHILI {0x41};
 constexpr uint32_t LANG_UZBEK {0x43};
 constexpr uint32_t LANG_TATAR {0x44};
-constexpr uint32_t LANG_BENGALI {0x45};
-constexpr uint32_t LANG_PUNJABI {0x46};
-constexpr uint32_t LANG_GUJARATI {0x47};
-constexpr uint32_t LANG_ORIYA {0x48};
-constexpr uint32_t LANG_TAMIL {0x49};
-constexpr uint32_t LANG_TELUGU {0x4a};
-constexpr uint32_t LANG_KANNADA {0x4b};
-constexpr uint32_t LANG_MALAYALAM {0x4c};
-constexpr uint32_t LANG_ASSAMESE {0x4d};
-constexpr uint32_t LANG_MARATHI {0x4e};
-constexpr uint32_t LANG_SANSKRIT {0x4f};
 constexpr uint32_t LANG_MONGOLIAN {0x50};
 constexpr uint32_t LANG_GALICIAN {0x56};
-constexpr uint32_t LANG_KONKANI {0x57};
-constexpr uint32_t LANG_MANIPURI {0x58};
-constexpr uint32_t LANG_SINDHI {0x59};
-constexpr uint32_t LANG_SYRIAC {0x5a};
-constexpr uint32_t LANG_KASHMIRI {0x60};
-constexpr uint32_t LANG_NEPALI {0x61};
-constexpr uint32_t LANG_DIVEHI {0x65};
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 #define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))

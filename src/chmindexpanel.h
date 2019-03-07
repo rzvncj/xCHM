@@ -71,7 +71,6 @@ protected:
     void OnText(wxCommandEvent& event);
 
 private:
-    CHMHtmlNotebook* _nbhtml;
     wxTextCtrl*      _text;
     CHMListCtrl*     _lc {nullptr};
     bool             _navigate {true};

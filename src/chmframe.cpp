@@ -284,11 +284,14 @@ void CHMFrame::OnRegisterExtension(wxCommandEvent&)
     auto answer = wxMessageBox(_(EC_WARNING_MSG), _("Confirm"), wxOK | wxCANCEL, this);
 
     if (answer == wxOK) {
+        // Using NULL instead of nullptr here because of this:
+        // error: incomplete definition of type 'wxFormatStringSpecifier<nullptr_t>'
+        // which happens on Mac builds with wxWidgets 3.0.
         wxFileTypeInfo fti_xchm(wxT("application/x-chm"), _fullAppPath, wxEmptyString, wxT("Compiled HTML help"),
-                                wxT("chm"), nullptr);
+                                wxT("chm"), NULL);
 
         wxFileTypeInfo fti_msh(wxT("application/vnd.ms-htmlhelp"), _fullAppPath, wxEmptyString,
-                               wxT("Compiled HTML help"), wxT("chm"), nullptr);
+                               wxT("Compiled HTML help"), wxT("chm"), NULL);
 
         auto ft_xchm = wxTheMimeTypesManager->Associate(fti_xchm);
         auto ft_msh  = wxTheMimeTypesManager->Associate(fti_msh);

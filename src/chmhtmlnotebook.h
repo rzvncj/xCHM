@@ -65,7 +65,7 @@ public:
     void CloseAllPagesExceptFirst();
 
     //! Propagate font settings to the children
-    void SetChildrenFonts(const wxString& normal_face, const wxString& fixed_face, const int* sizes = nullptr);
+    void SetChildrenFonts(const wxString& normalFace, const wxString& fixedFace, int sizes);
 
     //! Called when user asks for a tab to close
     void OnCloseTab(wxCommandEvent&);
@@ -92,9 +92,9 @@ protected:
 private:
     wxTreeCtrl* _tcl;
     CHMFrame*   _frame;
-    wxString    _fonts_normal_face;
-    wxString    _fonts_fixed_face;
-    int         _fonts_sizes[7];
+    wxString    _fontsNormalFace;
+    wxString    _fontsFixedFace;
+    int         _fontSize;
     DECLARE_EVENT_TABLE()
 };
 

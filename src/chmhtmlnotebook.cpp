@@ -26,11 +26,8 @@
 CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont,
                                  const wxString& fixedFont, int fontSize, CHMFrame* frame)
     : wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
-      _tcl(tc), _frame(frame), _fonts_normal_face(normalFont), _fonts_fixed_face(fixedFont)
+      _tcl(tc), _frame(frame), _fontsNormalFace(normalFont), _fontsFixedFace(fixedFont), _fontSize(fontSize)
 {
-    for (auto i = -3; i <= 3; ++i)
-        _fonts_sizes[i + 3] = fontSize + i * 2;
-
     wxAcceleratorEntry entries[2];
     entries[0].Set(wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage);
     entries[1].Set(wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage);
@@ -45,9 +42,11 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxStrin
 CHMHtmlWindow* CHMHtmlNotebook::CreateView()
 {
     auto htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
+    auto sizes   = _frame->ComputeFontSizes(_fontSize);
+
     htmlWin->SetRelatedFrame(_frame, wxT("xCHM v. ") wxT(VERSION) wxT(": %s"));
     htmlWin->SetRelatedStatusBar(0);
-    htmlWin->SetFonts(_fonts_normal_face, _fonts_fixed_face, _fonts_sizes);
+    htmlWin->SetFonts(_fontsNormalFace, _fontsFixedFace, sizes.data());
 
     wxAuiNotebook::AddPage(htmlWin, _("(Empty page)"));
     SetSelection(GetPageCount() - 1);
@@ -130,20 +129,20 @@ void CHMHtmlNotebook::CloseAllPagesExceptFirst()
     SetTabCtrlHeight(0);
 }
 
-void CHMHtmlNotebook::SetChildrenFonts(const wxString& normal_face, const wxString& fixed_face, const int* sizes)
+void CHMHtmlNotebook::SetChildrenFonts(const wxString& normalFace, const wxString& fixedFace, int fontSize)
 {
-    _fonts_normal_face = normal_face;
-    _fonts_fixed_face  = fixed_face;
-
-    memcpy(_fonts_sizes, sizes, sizeof(_fonts_sizes));
+    _fontsNormalFace = normalFace;
+    _fontsFixedFace  = fixedFace;
+    _fontSize        = fontSize;
 
     auto nPageCount = GetPageCount();
+    auto sizes      = _frame->ComputeFontSizes(_fontSize);
 
     for (decltype(nPageCount) nPage = 0; nPage < nPageCount; ++nPage) {
         auto chw = dynamic_cast<CHMHtmlWindow*>(GetPage(nPage));
 
         if (chw)
-            chw->SetFonts(normal_face, fixed_face, sizes);
+            chw->SetFonts(_fontsNormalFace, _fontsFixedFace, sizes.data());
     }
 }
 

@@ -153,9 +153,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
     auto contents = CreateContentsPanel();
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
-
-    auto sizes = ComputeFontSizes(_fontSize);
-    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes.data());
+    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, _fontSize);
 
     _csp  = new CHMSearchPanel(_nb, _tcl, _nbhtml);
     _font = _tcl->GetFont();
@@ -225,9 +223,8 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
     if (cfd.ShowModal() == wxID_OK) {
         wxBusyCursor bc;
 
-        _fontSize  = cfd.FontSize();
-        auto sizes = ComputeFontSizes(_fontSize);
-        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), sizes.data());
+        _fontSize = cfd.FontSize();
+        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), _fontSize);
 
         auto page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 

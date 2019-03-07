@@ -83,10 +83,10 @@ enum {
   \brief wxWidgets frame widget class.
 */
 
+using FontSizesArray = std::array<int, 7>;
+
 //! The frame, owner of the wxHtmlWindow, contents tree control and all the other nifty stuff.
 class CHMFrame : public wxFrame {
-
-    using FontSizesArray = std::array<int, 7>;
 
 public:
     /*!
@@ -134,6 +134,8 @@ public:
 
     //! Toggles fullscreen mode
     void ToggleFullScreen(bool onlyIfFullScreenOn = false);
+
+    FontSizesArray ComputeFontSizes(int size) const;
 
 protected:
     //! Called when the user closes the window.
@@ -222,8 +224,6 @@ private:
 
     //! Helper. Saves exit information (size, history, etc.)
     void SaveExitInfo();
-
-    FontSizesArray ComputeFontSizes() const;
 
 private:
     CHMHtmlNotebook*                    _nbhtml;

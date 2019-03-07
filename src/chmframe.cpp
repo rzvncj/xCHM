@@ -154,7 +154,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
     auto contents = CreateContentsPanel();
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
 
-    auto sizes = ComputeFontSizes();
+    auto sizes = ComputeFontSizes(_fontSize);
     _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes.data());
 
     _csp  = new CHMSearchPanel(_nb, _tcl, _nbhtml);
@@ -225,8 +225,9 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
     if (cfd.ShowModal() == wxID_OK) {
         wxBusyCursor bc;
 
-        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.Sizes());
-        _fontSize = *(cfd.Sizes() + 3);
+        _fontSize  = cfd.FontSize();
+        auto sizes = ComputeFontSizes(_fontSize);
+        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), sizes.data());
 
         auto page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 
@@ -309,7 +310,7 @@ void CHMFrame::OnPrint(wxCommandEvent&)
 {
     wxLogNull wln;
 
-    auto sizes = ComputeFontSizes();
+    auto sizes = ComputeFontSizes(_fontSize);
     _ep->SetFonts(_normalFont, _fixedFont, sizes.data());
 
     _ep->PrintFile(_nbhtml->GetCurrentPage()->GetOpenedPage());
@@ -565,7 +566,7 @@ void CHMFrame::UpdateCHMInfo()
             _cip->SetNewFont(font);
             _cb->SetFont(font);
 
-            auto sizes = ComputeFontSizes();
+            auto sizes = ComputeFontSizes(_fontSize);
             _nbhtml->SetChildrenFonts(font.GetFaceName(), font.GetFaceName(), sizes.data());
 
             noSpecialFont = false;
@@ -583,7 +584,7 @@ void CHMFrame::UpdateCHMInfo()
             _cip->SetNewFont(tmp);
         }
 
-        auto sizes = ComputeFontSizes();
+        auto sizes = ComputeFontSizes(_fontSize);
         _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, sizes.data());
 
         noSpecialFont = true;
@@ -894,12 +895,12 @@ void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
     OnFullScreen(dummy);
 }
 
-CHMFrame::FontSizesArray CHMFrame::ComputeFontSizes() const
+FontSizesArray CHMFrame::ComputeFontSizes(int size) const
 {
     FontSizesArray sizes;
 
     for (auto i = -3; i <= 3; ++i)
-        sizes[i + 3] = _fontSize + i * 2;
+        sizes[i + 3] = size + i * 2;
 
     return sizes;
 }

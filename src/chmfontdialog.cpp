@@ -18,6 +18,7 @@
 */
 
 #include <chmfontdialog.h>
+#include <chmframe.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
@@ -91,12 +92,11 @@ void CHMFontDialog::UpdatePreview()
     _normalFont = _normalFControl->GetStringSelection();
     _fixedFont  = _fixedFControl->GetStringSelection();
 
-    auto size = _fontSizeControl->GetValue();
+    _fontSize   = _fontSizeControl->GetValue();
+    auto parent = dynamic_cast<CHMFrame*>(GetParent());
+    auto sizes  = parent->ComputeFontSizes(_fontSize);
 
-    for (auto i = -3; i <= 3; ++i)
-        _sizes[i + 3] = size + i * 2;
-
-    _test->SetFonts(_normalFont, _fixedFont, _sizes);
+    _test->SetFonts(_normalFont, _fixedFont, sizes.data());
     _test->SetPage(test_page);
 }
 

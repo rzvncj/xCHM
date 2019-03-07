@@ -54,7 +54,7 @@ public:
     const wxString& NormalFont() const { return _normalFont; }
 
     //! Return the selected font size.
-    const int* Sizes() const { return _sizes; }
+    int FontSize() const { return _fontSize; }
 
 protected:
     //! This is called when a font is selected from the combo box.
@@ -78,7 +78,6 @@ private:
 
     wxString _normalFont;
     wxString _fixedFont;
-    int      _sizes[7];
     int      _fontSize;
 
 private:

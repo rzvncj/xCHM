@@ -68,8 +68,7 @@ bool CHMHtmlWindow::LoadPage(const wxString& location)
         auto       cwd = GetParser()->GetFS()->GetPath().AfterLast(wxT(':'));
         fwfn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE, cwd, wxPATH_UNIX);
 
-        // Sync will call SelectItem() on the tree item
-        // if it finds one, and that in turn will call
+        // Sync will call SelectItem() on the tree item if it finds one, and that in turn will call
         // LoadPage() with _syncTree set to false.
         Sync(_tcl->GetRootItem(), fwfn.GetFullPath(wxPATH_UNIX));
 
@@ -349,8 +348,6 @@ void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
-    auto x = 0, y = 0, xUnit = 0, yUnit = 0;
-
     switch (event.GetKeyCode()) {
     case WXK_SPACE:
         event.m_keyCode = WXK_PAGEDOWN;
@@ -366,11 +363,14 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
         Scroll(0, 0);
         break;
     case WXK_END:
-    case 'G':
+    case 'G': {
+        auto x = 0, y = 0, xUnit = 0, yUnit = 0;
+
         GetVirtualSize(&x, &y);
         GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(0, y / yUnit);
         break;
+    }
     case 'j':
         event.m_keyCode = WXK_DOWN;
         break;
@@ -392,8 +392,6 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 
 void CHMHtmlWindow::OnSetTitle(const wxString& title)
 {
-    // Direct access to the notebook
-    // TODO: design a new event type
     auto parent = dynamic_cast<CHMHtmlNotebook*>(GetParent());
 
     if (parent)

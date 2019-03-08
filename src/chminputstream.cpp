@@ -47,8 +47,7 @@ CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
     if (!archive.IsEmpty())
         _path = archive.BeforeLast(wxT('/')) + wxT("/");
 
-    // Maybe the cached chmFile* isn't valid anymore,
-    // or maybe there is no chached chmFile* yet.
+    // Maybe the cached chmFile* isn't valid anymore, or maybe there is no chached chmFile* yet.
     if (!archive.IsEmpty() && !Init(archive)) {
         m_lasterror = wxSTREAM_READ_ERROR;
         return;
@@ -61,10 +60,8 @@ CHMInputStream::CHMInputStream(const wxString& archive, const wxString& file)
         filename = _archiveCache->HomePage();
 
     if (!filename.Left(8).CmpNoCase(wxT("/MS-ITS:"))) {
-        // If this ever happens chances are Microsoft
-        // decided that even if we went through the
-        // trouble to open this archive and check out
-        // the index file, the index file is just a
+        // If this ever happens chances are Microsoft decided that even if we went through the
+        // trouble to open this archive and check out the index file, the index file is just a
         // link to a file in another archive.
 
         auto arch_link = filename.AfterFirst(wxT(':')).BeforeFirst(wxT(':'));

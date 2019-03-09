@@ -42,8 +42,7 @@ CHMHtmlWindow* CHMHtmlNotebook::CreateView()
     auto htmlWin = new CHMHtmlWindow(this, _tcl, _frame);
     auto sizes   = _frame->ComputeFontSizes(_fontSize);
 
-    htmlWin->SetRelatedFrame(_frame, wxT("xCHM v. ") wxT(VERSION) wxT(": %s"));
-    htmlWin->SetRelatedStatusBar(0);
+    htmlWin->SetRelatedStatusBar(_frame->GetStatusBar());
     htmlWin->SetFonts(_fontsNormalFace, _fontsFixedFace, sizes.data());
 
     AddTab(htmlWin, _("(Empty page)"));

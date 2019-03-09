@@ -25,8 +25,8 @@
 
 CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxString& normalFont,
                                  const wxString& fixedFont, int fontSize, CHMFrame* frame)
-    : wxAuiNotebook(parent, -1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE | wxAUI_NB_TAB_FIXED_WIDTH),
-      _tcl(tc), _frame(frame), _fontsNormalFace(normalFont), _fontsFixedFace(fixedFont), _fontSize(fontSize)
+    : wxAuiNotebook(parent), _tcl(tc), _frame(frame), _fontsNormalFace(normalFont), _fontsFixedFace(fixedFont),
+      _fontSize(fontSize)
 {
     wxAcceleratorEntry entries[2];
     entries[0].Set(wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage);
@@ -34,7 +34,6 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxStrin
 
     wxAcceleratorTable accel(2, entries);
     this->SetAcceleratorTable(accel);
-    SetTabCtrlHeight(0);
 
     AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
@@ -102,9 +101,6 @@ void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
 void CHMHtmlNotebook::OnCloseTab(wxCommandEvent&)
 {
     DeletePage(GetSelection());
-
-    if (GetPageCount() <= 1)
-        SetTabCtrlHeight(0);
 }
 
 void CHMHtmlNotebook::OnNewTab(wxCommandEvent&)
@@ -125,8 +121,6 @@ void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 
     while (GetPageCount() > 1)
         DeletePage(1);
-
-    SetTabCtrlHeight(0);
 }
 
 void CHMHtmlNotebook::SetChildrenFonts(const wxString& normalFace, const wxString& fixedFace, int fontSize)
@@ -151,22 +145,10 @@ bool CHMHtmlNotebook::AddTab(wxWindow* page, const wxString& title)
     if (!page)
         return false;
 
-    auto st = AddPage(page, title);
-
-    if (GetPageCount() == 2)
-        SetTabCtrlHeight(-1);
-
-    return st;
-}
-
-void CHMHtmlNotebook::OnPageChanged(wxAuiNotebookEvent&)
-{
-    if (GetPageCount() == 1)
-        SetTabCtrlHeight(0);
+    return AddPage(page, title);
 }
 
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
 EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
 EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
-EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, CHMHtmlNotebook::OnPageChanged)
 END_EVENT_TABLE()

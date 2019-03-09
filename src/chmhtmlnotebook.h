@@ -86,9 +86,6 @@ protected:
     //! Called when user asks for prior notebook page
     void OnGoToPriorPage(wxCommandEvent&);
 
-    //! Callback for the page changed wxWidgets event
-    void OnPageChanged(wxAuiNotebookEvent&);
-
 private:
     wxTreeCtrl* _tcl;
     CHMFrame*   _frame;

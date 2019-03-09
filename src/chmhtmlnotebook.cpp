@@ -106,13 +106,6 @@ void CHMHtmlNotebook::OnNewTab(wxCommandEvent&)
     AddHtmlView(wxEmptyString, wxEmptyString);
 }
 
-void CHMHtmlNotebook::OnChildrenTitleChanged(const wxString& title)
-{
-    // We assume the change occured in the currently displayed page
-    // TODO: detect in which page the change occured.
-    SetPageText(GetSelection(), title);
-}
-
 void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 {
     SetSelection(0);

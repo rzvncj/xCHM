@@ -58,9 +58,6 @@ public:
     //! Returns the current page as a CHMHtmlWindow
     CHMHtmlWindow* GetCurrentPage();
 
-    //! Callback for when a child's title changes
-    void OnChildrenTitleChanged(const wxString& title);
-
     //! Close all pages except the first one
     void CloseAllPagesExceptFirst();
 

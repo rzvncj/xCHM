@@ -395,7 +395,7 @@ void CHMHtmlWindow::OnSetTitle(const wxString& title)
     auto parent = dynamic_cast<CHMHtmlNotebook*>(GetParent());
 
     if (parent)
-        parent->OnChildrenTitleChanged(title);
+        parent->SetPageText(parent->GetSelection(), title);
 
     wxHtmlWindow::OnSetTitle(title);
 }

@@ -105,17 +105,11 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
       _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
-    constexpr auto     NO_ACCELERATOR_ENTRIES = 6;
-    wxAcceleratorEntry entries[NO_ACCELERATOR_ENTRIES];
+    wxAcceleratorEntry entries[]
+        = {{wxACCEL_CTRL, 'F', ID_FindInPage}, {wxACCEL_CTRL, 'C', ID_CopySelection}, {wxACCEL_CTRL, ']', ID_Forward},
+           {wxACCEL_CTRL, '[', ID_Back},       {wxACCEL_CTRL, WXK_F4, ID_CloseTab},   {wxACCEL_CTRL, 'Q', ID_Quit}};
 
-    entries[0].Set(wxACCEL_CTRL, 'F', ID_FindInPage);
-    entries[1].Set(wxACCEL_CTRL, 'C', ID_CopySelection);
-    entries[2].Set(wxACCEL_CTRL, ']', ID_Forward);
-    entries[3].Set(wxACCEL_CTRL, '[', ID_Back);
-    entries[4].Set(wxACCEL_CTRL, WXK_F4, ID_CloseTab);
-    entries[5].Set(wxACCEL_CTRL, 'Q', ID_Quit);
-
-    wxAcceleratorTable accel(NO_ACCELERATOR_ENTRIES, entries);
+    wxAcceleratorTable accel(sizeof(entries) / sizeof(wxAcceleratorEntry), entries);
     SetAcceleratorTable(accel);
 #endif
 

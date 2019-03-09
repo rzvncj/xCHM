@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 19:22+0200\n"
+"POT-Creation-Date: 2019-03-08 09:19+0200\n"
 "PO-Revision-Date: 2004-07-24 09:39+0000\n"
 "Last-Translator: Aron Novak <aaron@szentimre.hu>\n"
 "Language-Team: Hungarian\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:185
+#: src/chmfile.cpp:260
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:186
+#: src/chmfile.cpp:261
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "Névtelen"
 
-#: src/chmfile.cpp:187
+#: src/chmfile.cpp:262
 msgid "Untitled in index"
 msgstr "Névtelen"
 
@@ -49,7 +49,7 @@ msgstr "Következõ keresése"
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: src/chmfontdialog.cpp:43
+#: src/chmfontdialog.cpp:44
 msgid "Change fonts.."
 msgstr "Betûtípus megadása..."
 
@@ -69,266 +69,266 @@ msgstr "Betûtípus mérete:"
 msgid "Preview:"
 msgstr "Elõnézet:"
 
-#: src/chmfontdialog.cpp:70
+#: src/chmfontdialog.cpp:69
 msgid "OK"
 msgstr "OK"
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:45
 msgid "Open a CHM book."
 msgstr "Egy CHM könyv megnyitása"
 
-#: src/chmframe.cpp:45
+#: src/chmframe.cpp:46
 msgid "Change fonts."
 msgstr "Betûtípus megváltoztatása."
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:47
 msgid "Print the page currently displayed."
 msgstr "Az aktuális oldal nyomtatása"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:48
 msgid "Toggle table of contents."
 msgstr ""
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:49
 msgid "Go to the book's start page."
 msgstr "Ugrás a kezdõlapra"
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:50
 msgid "Go forward in history. Per book."
 msgstr "Elõre az elõzményekben"
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:51
 msgid "Back to the last visited page. Per book."
 msgstr "Vissza a legutóbbi oldalra."
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:52
 msgid "About the program."
 msgstr "Megjeleníti a program névjegyét."
 
-#: src/chmframe.cpp:52
+#: src/chmframe.cpp:53
 #, fuzzy
 msgid "Copy selection."
 msgstr "Kijelölés másolása"
 
-#: src/chmframe.cpp:53
+#: src/chmframe.cpp:54
 #, fuzzy
 msgid "Find word in page."
 msgstr "Keresés a lapon..."
 
-#: src/chmframe.cpp:54
+#: src/chmframe.cpp:55
 msgid "Toggle fullscreen mode."
 msgstr ""
 
-#: src/chmframe.cpp:55
+#: src/chmframe.cpp:56
 msgid "Close the current tab"
 msgstr ""
 
-#: src/chmframe.cpp:56
+#: src/chmframe.cpp:57
 #, fuzzy
 msgid "Open a new tab"
 msgstr "Egy CHM könyv megnyitása"
 
-#: src/chmframe.cpp:57
+#: src/chmframe.cpp:58
 msgid "Associate the .chm file extension with xCHM."
 msgstr ""
 
-#: src/chmframe.cpp:141
+#: src/chmframe.cpp:139
 msgid "Ready."
 msgstr "Kész."
 
-#: src/chmframe.cpp:165 src/chmframe.cpp:889
+#: src/chmframe.cpp:163 src/chmframe.cpp:861
 msgid "Contents"
 msgstr "Tartalom"
 
-#: src/chmframe.cpp:166
+#: src/chmframe.cpp:164
 msgid "Index"
 msgstr "Tartalomjegyzék"
 
-#: src/chmframe.cpp:167 src/chmsearchpanel.cpp:43
+#: src/chmframe.cpp:165 src/chmsearchpanel.cpp:52
 msgid "Search"
 msgstr "Keresés"
 
-#: src/chmframe.cpp:190
+#: src/chmframe.cpp:184
 msgid "About xCHM"
 msgstr "Az xCHM névjegye"
 
-#: src/chmframe.cpp:195
+#: src/chmframe.cpp:189
 msgid "Choose a file.."
 msgstr "Fájl kiválasztása.."
 
-#: src/chmframe.cpp:304
+#: src/chmframe.cpp:284
 msgid "Confirm"
 msgstr ""
 
-#: src/chmframe.cpp:320
+#: src/chmframe.cpp:302
 msgid "Registration successful!"
 msgstr ""
 
-#: src/chmframe.cpp:320
+#: src/chmframe.cpp:302
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:551
+#: src/chmframe.cpp:528
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:632
 msgid "&Open..\tCtrl-O"
 msgstr "&Megnyitás..\tCtrl-O"
 
-#: src/chmframe.cpp:660
+#: src/chmframe.cpp:633
 msgid "&Print page..\tCtrl-P"
 msgstr "&Oldal nyomtatása..\tCtrl-D"
 
-#: src/chmframe.cpp:661
+#: src/chmframe.cpp:634
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Betûtípusok .."
 
-#: src/chmframe.cpp:663
+#: src/chmframe.cpp:636
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Tartalomjegyzék mutatása\tCtrl-S"
 
-#: src/chmframe.cpp:667
+#: src/chmframe.cpp:640
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:645
 msgid "&Recent files"
 msgstr "&Legutóbbi fájlok"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:657
 msgid "E&xit\tCtrl-X"
 msgstr "&Kilépés\tCtrl-X"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:657
 msgid "Quit the application."
 msgstr "Kilépés a programból."
 
-#: src/chmframe.cpp:688
+#: src/chmframe.cpp:661
 msgid "&Home\tCtrl-H"
 msgstr "&Kezdõlap\tCtrl-H"
 
-#: src/chmframe.cpp:689
+#: src/chmframe.cpp:662
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "&Elõre\tCtrl-W"
 
-#: src/chmframe.cpp:690
+#: src/chmframe.cpp:663
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "&Vissza\tCtrl-B"
 
-#: src/chmframe.cpp:693
+#: src/chmframe.cpp:666
 msgid "&About..\tF1"
 msgstr "&Névjegy..\tF1"
 
-#: src/chmframe.cpp:696
+#: src/chmframe.cpp:669
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "&Kezdõlap\tCtrl-H"
 
-#: src/chmframe.cpp:697
+#: src/chmframe.cpp:670
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "&Megnyitás..\tCtrl-O"
 
-#: src/chmframe.cpp:699
+#: src/chmframe.cpp:672
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Kezdõlap\tCtrl-H"
 
-#: src/chmframe.cpp:700
+#: src/chmframe.cpp:673
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Betûtípusok..\tCtrl-F"
 
-#: src/chmframe.cpp:703
+#: src/chmframe.cpp:676
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:706
+#: src/chmframe.cpp:679
 msgid "&File"
 msgstr "&Fájl"
 
-#: src/chmframe.cpp:707
+#: src/chmframe.cpp:680
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:708
+#: src/chmframe.cpp:681
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:709
+#: src/chmframe.cpp:682
 msgid "Hi&story"
 msgstr "El&õzmények"
 
-#: src/chmframe.cpp:710
+#: src/chmframe.cpp:683
 msgid "&Help"
 msgstr "&Súgó"
 
-#: src/chmframe.cpp:727
+#: src/chmframe.cpp:700
 msgid "Bookmarks"
 msgstr "Könyvjelzõk"
 
-#: src/chmframe.cpp:742
+#: src/chmframe.cpp:715
 msgid "Topics"
 msgstr "Témák"
 
-#: src/chmframe.cpp:752
+#: src/chmframe.cpp:725
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: src/chmframe.cpp:753
+#: src/chmframe.cpp:726
 msgid "Remove"
 msgstr "Eltávolitás"
 
-#: src/chmframe.cpp:756
+#: src/chmframe.cpp:729
 msgid "Add displayed page to bookmarks."
 msgstr "Aktuális oldal a könyvjelzõkhöz"
 
-#: src/chmframe.cpp:757
+#: src/chmframe.cpp:730
 msgid "Remove selected bookmark."
 msgstr "Kijelölt könyvjelzõ törlése."
 
-#: src/chmframe.cpp:886
+#: src/chmframe.cpp:858
 msgid "Open .."
 msgstr "Megnyitás .."
 
-#: src/chmframe.cpp:887
+#: src/chmframe.cpp:859
 msgid "Print .."
 msgstr "Nyomtatás .."
 
-#: src/chmframe.cpp:888
+#: src/chmframe.cpp:860
 msgid "Fonts .."
 msgstr "Betûtípusok .."
 
-#: src/chmframe.cpp:892
+#: src/chmframe.cpp:864
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:893
+#: src/chmframe.cpp:865
 #, fuzzy
 msgid "Find"
 msgstr "Következõ keresése"
 
-#: src/chmframe.cpp:897
+#: src/chmframe.cpp:869
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:901
+#: src/chmframe.cpp:873
 msgid "Back"
 msgstr "Vissza"
 
-#: src/chmframe.cpp:902
+#: src/chmframe.cpp:874
 msgid "Forward"
 msgstr "Elõre"
 
-#: src/chmframe.cpp:903
+#: src/chmframe.cpp:875
 msgid "Home"
 msgstr "Kezdõlap"
 
-#: src/chmframe.cpp:905
+#: src/chmframe.cpp:877
 msgid "About"
 msgstr "Névjegy"
 
@@ -365,51 +365,51 @@ msgstr "&Keresés az oldalon"
 msgid "&Toggle fullscreen mode"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274
+#: src/chmhtmlwindow.cpp:271
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274
+#: src/chmhtmlwindow.cpp:271
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274 src/chmhtmlwindow.cpp:292
+#: src/chmhtmlwindow.cpp:271 src/chmhtmlwindow.cpp:289
 msgid "Error"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:284
+#: src/chmhtmlwindow.cpp:281
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:292
+#: src/chmhtmlwindow.cpp:289
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:302
+#: src/chmhtmlwindow.cpp:299
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:302
+#: src/chmhtmlwindow.cpp:299
 msgid "Success"
 msgstr ""
 
-#: src/chmsearchpanel.cpp:41
+#: src/chmsearchpanel.cpp:50
 msgid "Get partial matches"
 msgstr "Részleges találatok"
 
-#: src/chmsearchpanel.cpp:42
+#: src/chmsearchpanel.cpp:51
 msgid "Search titles only"
 msgstr "Keresés csak a címekben"
 
-#: src/chmsearchpanel.cpp:46
+#: src/chmsearchpanel.cpp:55
 msgid "Allow partial matches."
 msgstr "Részleges találatok engedélyezése."
 
-#: src/chmsearchpanel.cpp:47
+#: src/chmsearchpanel.cpp:56
 msgid "Only search in the contents' titles."
 msgstr "Csak a címekben keres."
 
-#: src/chmsearchpanel.cpp:48
+#: src/chmsearchpanel.cpp:57
 msgid "Search contents for occurences of the specified text."
 msgstr "Az elõfordulások keresése a megadott szövegben."
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 19:22+0200\n"
+"POT-Creation-Date: 2019-03-08 09:19+0200\n"
 "PO-Revision-Date: 2005-08-10 14:31+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/chmfile.cpp:185
+#: src/chmfile.cpp:260
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:186
+#: src/chmfile.cpp:261
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "索引中不具標題"
 
-#: src/chmfile.cpp:187
+#: src/chmfile.cpp:262
 msgid "Untitled in index"
 msgstr "索引中不具標題"
 
@@ -49,7 +49,7 @@ msgstr "找下一個"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/chmfontdialog.cpp:43
+#: src/chmfontdialog.cpp:44
 msgid "Change fonts.."
 msgstr "變更字型.."
 
@@ -69,266 +69,266 @@ msgstr "字型大小:"
 msgid "Preview:"
 msgstr "預覽:"
 
-#: src/chmfontdialog.cpp:70
+#: src/chmfontdialog.cpp:69
 msgid "OK"
 msgstr "確定"
 
-#: src/chmframe.cpp:44
+#: src/chmframe.cpp:45
 msgid "Open a CHM book."
 msgstr "開啟 CHM 書冊。"
 
-#: src/chmframe.cpp:45
+#: src/chmframe.cpp:46
 msgid "Change fonts."
 msgstr "變更字型。"
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:47
 msgid "Print the page currently displayed."
 msgstr "列印目前顯示頁面。"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:48
 msgid "Toggle table of contents."
 msgstr ""
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:49
 msgid "Go to the book's start page."
 msgstr "前往書冊首頁。"
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:50
 msgid "Go forward in history. Per book."
 msgstr "前往該書冊前方的瀏覽紀錄。"
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:51
 msgid "Back to the last visited page. Per book."
 msgstr "後退至該書冊之前的瀏覽頁面。"
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:52
 msgid "About the program."
 msgstr "關於此程式。"
 
-#: src/chmframe.cpp:52
+#: src/chmframe.cpp:53
 #, fuzzy
 msgid "Copy selection."
 msgstr "複製選擇範圍(&C)"
 
-#: src/chmframe.cpp:53
+#: src/chmframe.cpp:54
 #, fuzzy
 msgid "Find word in page."
 msgstr "在頁面中尋找.."
 
-#: src/chmframe.cpp:54
+#: src/chmframe.cpp:55
 msgid "Toggle fullscreen mode."
 msgstr ""
 
-#: src/chmframe.cpp:55
+#: src/chmframe.cpp:56
 msgid "Close the current tab"
 msgstr ""
 
-#: src/chmframe.cpp:56
+#: src/chmframe.cpp:57
 #, fuzzy
 msgid "Open a new tab"
 msgstr "開啟 CHM 書冊。"
 
-#: src/chmframe.cpp:57
+#: src/chmframe.cpp:58
 msgid "Associate the .chm file extension with xCHM."
 msgstr ""
 
-#: src/chmframe.cpp:141
+#: src/chmframe.cpp:139
 msgid "Ready."
 msgstr "預備。"
 
-#: src/chmframe.cpp:165 src/chmframe.cpp:889
+#: src/chmframe.cpp:163 src/chmframe.cpp:861
 msgid "Contents"
 msgstr "內容"
 
-#: src/chmframe.cpp:166
+#: src/chmframe.cpp:164
 msgid "Index"
 msgstr "索引"
 
-#: src/chmframe.cpp:167 src/chmsearchpanel.cpp:43
+#: src/chmframe.cpp:165 src/chmsearchpanel.cpp:52
 msgid "Search"
 msgstr "搜尋"
 
-#: src/chmframe.cpp:190
+#: src/chmframe.cpp:184
 msgid "About xCHM"
 msgstr "關於 xCHM"
 
-#: src/chmframe.cpp:195
+#: src/chmframe.cpp:189
 msgid "Choose a file.."
 msgstr "選擇一個檔案.."
 
-#: src/chmframe.cpp:304
+#: src/chmframe.cpp:284
 msgid "Confirm"
 msgstr ""
 
-#: src/chmframe.cpp:320
+#: src/chmframe.cpp:302
 msgid "Registration successful!"
 msgstr ""
 
-#: src/chmframe.cpp:320
+#: src/chmframe.cpp:302
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:551
+#: src/chmframe.cpp:528
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:632
 msgid "&Open..\tCtrl-O"
 msgstr "開啟(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:660
+#: src/chmframe.cpp:633
 msgid "&Print page..\tCtrl-P"
 msgstr "列印頁面(&P)..\tCtrl-P"
 
-#: src/chmframe.cpp:661
+#: src/chmframe.cpp:634
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "字型 .."
 
-#: src/chmframe.cpp:663
+#: src/chmframe.cpp:636
 msgid "&Show contents tree\tCtrl-S"
 msgstr "顯示樹狀內容(&S)\tCtrl-S"
 
-#: src/chmframe.cpp:667
+#: src/chmframe.cpp:640
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:645
 msgid "&Recent files"
 msgstr "最近開檔紀錄(&R)"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:657
 msgid "E&xit\tCtrl-X"
 msgstr "離開(&X)\tCtrl-X"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:657
 msgid "Quit the application."
 msgstr "離開程式。"
 
-#: src/chmframe.cpp:688
+#: src/chmframe.cpp:661
 msgid "&Home\tCtrl-H"
 msgstr "首頁(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:689
+#: src/chmframe.cpp:662
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "前進(&W)\tCtrl-W"
 
-#: src/chmframe.cpp:690
+#: src/chmframe.cpp:663
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "後退(&B)\tCtrl-B"
 
-#: src/chmframe.cpp:693
+#: src/chmframe.cpp:666
 msgid "&About..\tF1"
 msgstr "關於(&A)..\tF1"
 
-#: src/chmframe.cpp:696
+#: src/chmframe.cpp:669
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "首頁(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:697
+#: src/chmframe.cpp:670
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "開啟(&O)..\tCtrl-O"
 
-#: src/chmframe.cpp:699
+#: src/chmframe.cpp:672
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "首頁(&H)\tCtrl-H"
 
-#: src/chmframe.cpp:700
+#: src/chmframe.cpp:673
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "字型(&T)..\tCtrl-T"
 
-#: src/chmframe.cpp:703
+#: src/chmframe.cpp:676
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:706
+#: src/chmframe.cpp:679
 msgid "&File"
 msgstr "檔案(&F)"
 
-#: src/chmframe.cpp:707
+#: src/chmframe.cpp:680
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:708
+#: src/chmframe.cpp:681
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:709
+#: src/chmframe.cpp:682
 msgid "Hi&story"
 msgstr "歷史紀錄(&S)"
 
-#: src/chmframe.cpp:710
+#: src/chmframe.cpp:683
 msgid "&Help"
 msgstr "求助(&H)"
 
-#: src/chmframe.cpp:727
+#: src/chmframe.cpp:700
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: src/chmframe.cpp:742
+#: src/chmframe.cpp:715
 msgid "Topics"
 msgstr "主題"
 
-#: src/chmframe.cpp:752
+#: src/chmframe.cpp:725
 msgid "Add"
 msgstr "加入"
 
-#: src/chmframe.cpp:753
+#: src/chmframe.cpp:726
 msgid "Remove"
 msgstr "移除"
 
-#: src/chmframe.cpp:756
+#: src/chmframe.cpp:729
 msgid "Add displayed page to bookmarks."
 msgstr "將所顯示的頁面加入至書籤。"
 
-#: src/chmframe.cpp:757
+#: src/chmframe.cpp:730
 msgid "Remove selected bookmark."
 msgstr "移除所選的書籤。"
 
-#: src/chmframe.cpp:886
+#: src/chmframe.cpp:858
 msgid "Open .."
 msgstr "開啟 .."
 
-#: src/chmframe.cpp:887
+#: src/chmframe.cpp:859
 msgid "Print .."
 msgstr "列印 .."
 
-#: src/chmframe.cpp:888
+#: src/chmframe.cpp:860
 msgid "Fonts .."
 msgstr "字型 .."
 
-#: src/chmframe.cpp:892
+#: src/chmframe.cpp:864
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:893
+#: src/chmframe.cpp:865
 #, fuzzy
 msgid "Find"
 msgstr "找下一個"
 
-#: src/chmframe.cpp:897
+#: src/chmframe.cpp:869
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:901
+#: src/chmframe.cpp:873
 msgid "Back"
 msgstr "上一步"
 
-#: src/chmframe.cpp:902
+#: src/chmframe.cpp:874
 msgid "Forward"
 msgstr "下一步"
 
-#: src/chmframe.cpp:903
+#: src/chmframe.cpp:875
 msgid "Home"
 msgstr "首頁"
 
-#: src/chmframe.cpp:905
+#: src/chmframe.cpp:877
 msgid "About"
 msgstr "關於"
 
@@ -364,51 +364,51 @@ msgstr "在頁面中尋找(&F).."
 msgid "&Toggle fullscreen mode"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274
+#: src/chmhtmlwindow.cpp:271
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274
+#: src/chmhtmlwindow.cpp:271
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:274 src/chmhtmlwindow.cpp:292
+#: src/chmhtmlwindow.cpp:271 src/chmhtmlwindow.cpp:289
 msgid "Error"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:284
+#: src/chmhtmlwindow.cpp:281
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:292
+#: src/chmhtmlwindow.cpp:289
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:302
+#: src/chmhtmlwindow.cpp:299
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:302
+#: src/chmhtmlwindow.cpp:299
 msgid "Success"
 msgstr ""
 
-#: src/chmsearchpanel.cpp:41
+#: src/chmsearchpanel.cpp:50
 msgid "Get partial matches"
 msgstr "獲得部份相符"
 
-#: src/chmsearchpanel.cpp:42
+#: src/chmsearchpanel.cpp:51
 msgid "Search titles only"
 msgstr "只搜尋標題"
 
-#: src/chmsearchpanel.cpp:46
+#: src/chmsearchpanel.cpp:55
 msgid "Allow partial matches."
 msgstr "允許部份相符。"
 
-#: src/chmsearchpanel.cpp:47
+#: src/chmsearchpanel.cpp:56
 msgid "Only search in the contents' titles."
 msgstr "只在內容的標題中搜尋。"
 
-#: src/chmsearchpanel.cpp:48
+#: src/chmsearchpanel.cpp:57
 msgid "Search contents for occurences of the specified text."
 msgstr "在內容中搜尋特定文字的出現。"
 

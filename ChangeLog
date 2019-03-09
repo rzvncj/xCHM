@@ -387,3 +387,6 @@
 		+ fixed scrolling on loading new pages.
 		+ fixed Mac build.
 		+ fixed just-broken new tab behaviour.
+
+	+ 1.27:
+		+ always display tabs.

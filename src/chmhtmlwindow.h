@@ -48,8 +48,8 @@ class CHMFrame;
 */
 
 /*!
-  \brief Custom HTML widget class. Needed for sychnronization between
-  the topics tree control and the currently displayed page.
+  \brief Custom HTML widget class. Needed for sychnronization between the topics tree control and the currently
+  displayed page.
 */
 class CHMHtmlWindow : public wxHtmlWindow {
 
@@ -57,8 +57,7 @@ public:
     /*!
       \brief Initializes the widget.
       \param parent The parent widget.
-      \param tc Pointer to the tree control we want to synchronize
-      with.
+      \param tc Pointer to the tree control we want to synchronize with.
       \param frame Outer frame.
      */
     CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame);
@@ -69,39 +68,32 @@ public:
     bool LoadPage(const wxString& location) override;
 
     /*!
-      \brief Dictates the behaviour of LoadPage(). If SetSync()
-      has been called with a true parameter, the tree control will
-      be updated by LoadPage(). Otherwise, it will not be updated.
+      \brief Dictates the behaviour of LoadPage(). If SetSync() has been called with a true parameter,
+      the tree control will be updated by LoadPage(). Otherwise, it will not be updated.
       \param value Synchronize the tree widget on load?
      */
     void SetSync(bool value) { _syncTree = value; }
 
     /*!
-      Returns true if the tree control's EVT_TREE_SEL_CHANGED
-      event happened as a result of the CHMHtmlWindow calling
-      SelectItem() on it.
+      Returns true if the tree control's EVT_TREE_SEL_CHANGED event happened as a result of the CHMHtmlWindow
+      calling SelectItem() on it.
     */
     bool IsCaller() const { return _found; }
 
 public:
     /*!
       \brief Finds the first occurence of word in the displayed page.
-      \param parent Root of the wxHtmlCell tree where the search should
-      begin.
-      \param word The word we're looking for. If more words separated
-      by spaces are typed in, only the first one is taken into
-      account.
-      \param wholeWords If true, will search for words that match
-      word exactly.
-      \param caseSensitive If true, the search will be performed
-      case sensitive.
+      \param parent Root of the wxHtmlCell tree where the search should begin.
+      \param word The word we're looking for. If more words separated by spaces are typed in, only the first
+      one is taken into account.
+      \param wholeWords If true, will search for words that match word exactly.
+      \param caseSensitive If true, the search will be performed case sensitive.
       \return A valid cell if the result was found, nullptr otherwise.
      */
     wxHtmlCell* FindFirst(wxHtmlCell* parent, const wxString& word, bool wholeWords, bool caseSensitive);
 
     /*!
-      \brief Same as FindFirst(), but continues the search from start
-      (start is considered in the search process).
+      \brief Same as FindFirst(), but continues the search from start (start is considered in the search process).
     */
     wxHtmlCell* FindNext(wxHtmlCell* start, const wxString& word, bool wholeWords, bool caseSensitive);
 

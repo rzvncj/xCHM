@@ -590,10 +590,9 @@ void CHMFrame::UpdateCHMInfo()
     if (_loadIndex)
         chmf->GetIndex(*_cip->GetResultsList());
 
-    if (!title.IsEmpty()) {
-        auto titleBarText = wxT("xCHM v. " VERSION ": ") + title;
-        SetTitle(titleBarText);
-    } else
+    if (!title.IsEmpty())
+        SetTitle(wxT("xCHM v. " VERSION ": ") + title);
+    else
         SetTitle(wxT("xCHM v. " VERSION));
 
     // if we have contents..

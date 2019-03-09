@@ -28,12 +28,11 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxStrin
     : wxAuiNotebook(parent), _tcl(tc), _frame(frame), _fontsNormalFace(normalFont), _fontsFixedFace(fixedFont),
       _fontSize(fontSize)
 {
-    wxAcceleratorEntry entries[2];
-    entries[0].Set(wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage);
-    entries[1].Set(wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage);
+    wxAcceleratorEntry entries[]
+        = {{wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage}, {wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage}};
 
-    wxAcceleratorTable accel(2, entries);
-    this->SetAcceleratorTable(accel);
+    wxAcceleratorTable accel(sizeof(entries) / sizeof(wxAcceleratorEntry), entries);
+    SetAcceleratorTable(accel);
 
     AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }

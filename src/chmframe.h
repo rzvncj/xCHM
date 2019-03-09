@@ -175,7 +175,7 @@ protected:
     void OnCopySelection(wxCommandEvent& event);
 
     //! Called when fullscreen mode is being toggled
-    void OnFullScreen(wxCommandEvent& event);
+    void OnToggleFullScreen(wxCommandEvent& event);
 
     //! Called when the user clicks on the Add button.
     void OnAddBookmark(wxCommandEvent& event);

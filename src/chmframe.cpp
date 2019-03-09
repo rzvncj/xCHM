@@ -338,7 +338,7 @@ void CHMFrame::OnCopySelection(wxCommandEvent& event)
     _nbhtml->GetCurrentPage()->OnCopy(event);
 }
 
-void CHMFrame::OnFullScreen(wxCommandEvent&)
+void CHMFrame::OnToggleFullScreen(wxCommandEvent&)
 {
     _fullScreen = !_fullScreen;
     ShowFullScreen(_fullScreen, wxFULLSCREEN_ALL);
@@ -885,7 +885,7 @@ void CHMFrame::ToggleFullScreen(bool onlyIfFullScreenOn)
         return;
 
     wxCommandEvent dummy;
-    OnFullScreen(dummy);
+    OnToggleFullScreen(dummy);
 }
 
 FontSizesArray CHMFrame::ComputeFontSizes(int size) const
@@ -916,7 +916,7 @@ EVT_MENU(ID_FindInPage, CHMFrame::OnFind)
 EVT_MENU(ID_CloseTab, CHMFrame::OnCloseTab)
 EVT_MENU(ID_NewTab, CHMFrame::OnNewTab)
 EVT_MENU(ID_CopySelection, CHMFrame::OnCopySelection)
-EVT_MENU(ID_FullScreen, CHMFrame::OnFullScreen)
+EVT_MENU(ID_FullScreen, CHMFrame::OnToggleFullScreen)
 EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)

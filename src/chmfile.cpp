@@ -1085,71 +1085,48 @@ bool CHMFile::InfoFromSystem()
 
 inline wxFontEncoding CHMFile::GetFontEncFromCharSet(int cs)
 {
-    wxFontEncoding fontEncoding;
-
     switch (cs) {
     case ANSI_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_1;
-        break;
+        return wxFONTENCODING_ISO8859_1;
     case EASTEUROPE_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_2;
-        break;
+        return wxFONTENCODING_ISO8859_2;
     case BALTIC_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_13;
-        break;
+        return wxFONTENCODING_ISO8859_13;
     case RUSSIAN_CHARSET:
-        fontEncoding = wxFONTENCODING_CP1251;
-        break;
+        return wxFONTENCODING_CP1251;
     case ARABIC_CHARSET:
-        fontEncoding = wxFONTENCODING_CP1256;
-        break;
+        return wxFONTENCODING_CP1256;
     case GREEK_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_7;
-        break;
+        return wxFONTENCODING_ISO8859_7;
     case HEBREW_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_8;
-        break;
+        return wxFONTENCODING_ISO8859_8;
     case TURKISH_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_9;
-        break;
+        return wxFONTENCODING_ISO8859_9;
     case THAI_CHARSET:
-        fontEncoding = wxFONTENCODING_ISO8859_11;
-        break;
+        return wxFONTENCODING_ISO8859_11;
     case SHIFTJIS_CHARSET:
-        fontEncoding = wxFONTENCODING_CP932;
-        break;
+        return wxFONTENCODING_CP932;
     case GB2312_CHARSET:
-        fontEncoding = wxFONTENCODING_CP936;
-        break;
+        return wxFONTENCODING_CP936;
     case HANGUL_CHARSET:
-        fontEncoding = wxFONTENCODING_CP949;
-        break;
+        return wxFONTENCODING_CP949;
     case CHINESEBIG5_CHARSET:
-        fontEncoding = wxFONTENCODING_CP950;
-        break;
+        return wxFONTENCODING_CP950;
     case OEM_CHARSET:
-        fontEncoding = wxFONTENCODING_CP437;
-        break;
+        return wxFONTENCODING_CP437;
     default:
         // assume the system charset
-        fontEncoding = wxFONTENCODING_SYSTEM;
-        break;
+        return wxFONTENCODING_SYSTEM;
     }
-
-    return fontEncoding;
 }
 
 inline wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
 {
-    wxFontEncoding fontEncoding;
-    auto           lid = lcid & 0xff;
-
-    switch (lid) {
+    switch (lcid & 0xff) {
     case LANG_ARABIC:
     case LANG_FARSI:
     case LANG_URDU:
-        fontEncoding = wxFONTENCODING_CP1256;
-        break;
+        return wxFONTENCODING_CP1256;
     case LANG_AZERI:
     case LANG_BELARUSIAN:
     case LANG_BULGARIAN:
@@ -1160,8 +1137,7 @@ inline wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
     case LANG_RUSSIAN:
     case LANG_UKRAINIAN:
     case LANG_UZBEK:
-        fontEncoding = wxFONTENCODING_CP1251;
-        break;
+        return wxFONTENCODING_CP1251;
     case LANG_AFRIKAANS:
     case LANG_BASQUE:
     case LANG_CATALAN:
@@ -1181,32 +1157,24 @@ inline wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
     case LANG_SPANISH:
     case LANG_SWAHILI:
     case LANG_SWEDISH:
-        fontEncoding = wxFONTENCODING_CP1252;
-        break;
+        return wxFONTENCODING_CP1252;
     case LANG_GREEK:
-        fontEncoding = wxFONTENCODING_CP1253;
-        break;
+        return wxFONTENCODING_CP1253;
     case LANG_HEBREW:
-        fontEncoding = wxFONTENCODING_CP1255;
-        break;
+        return wxFONTENCODING_CP1255;
     case LANG_THAI:
-        fontEncoding = wxFONTENCODING_CP874;
-        break;
+        return wxFONTENCODING_CP874;
     case LANG_TURKISH:
-        fontEncoding = wxFONTENCODING_CP1254;
-        break;
+        return wxFONTENCODING_CP1254;
     case LANG_CHINESE:
         if (lcid == 0x0804) // Chinese simplified
-            fontEncoding = wxFONTENCODING_CP936;
+            return wxFONTENCODING_CP936;
         else // Chinese traditional
-            fontEncoding = wxFONTENCODING_CP950;
-        break;
+            return wxFONTENCODING_CP950;
     case LANG_KOREAN:
-        fontEncoding = wxFONTENCODING_CP949;
-        break;
+        return wxFONTENCODING_CP949;
     case LANG_JAPANESE:
-        fontEncoding = wxFONTENCODING_CP932;
-        break;
+        return wxFONTENCODING_CP932;
     case LANG_ALBANIAN:
     case LANG_CROATIAN:
     case LANG_CZECH:
@@ -1215,13 +1183,9 @@ inline wxFontEncoding CHMFile::GetFontEncFromLCID(uint32_t lcid)
     case LANG_ROMANIAN:
     case LANG_SLOVAK:
     case LANG_SLOVENIAN:
-        fontEncoding = wxFONTENCODING_CP1250;
-        break;
+        return wxFONTENCODING_CP1250;
     case LANG_NEUTRAL:
     default:
-        fontEncoding = wxFONTENCODING_SYSTEM;
-        break;
+        return wxFONTENCODING_SYSTEM;
     }
-
-    return fontEncoding;
 }

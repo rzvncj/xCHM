@@ -23,7 +23,6 @@
 #define __WXSTRING_UTILS_H_
 
 #include <memory>
-#include <stdint.h>
 #include <wx/string.h>
 
 #if wxUSE_UNICODE

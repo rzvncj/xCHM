@@ -29,7 +29,7 @@
 class CHMListCtrl;
 
 //! Maximum number of tree levels.
-#define TREE_BUF_SIZE 128
+constexpr size_t TREE_BUF_SIZE {128};
 
 /*!
   \brief Objects of this class will be used as opaque data to be used with a tree item, so that when the user selects

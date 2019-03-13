@@ -58,6 +58,20 @@ doxygen
 This of course implies that you have doxygen installed. The documentation
 will be generated in the doc directory in HTML and LaTex format.
 
+## Binaries
+
+I am no longer providing Mac and Windows binaries, just the source code.
+
+Some Linux distributions already provide binaries ([Debian](https://packages.debian.org/search?searchon=names&keywords=xchm),
+[Arch](https://www.archlinux.org/packages/community/x86_64/xchm/),
+[Gentoo](https://packages.gentoo.org/packages/app-text/xchm),
+[Mint](https://community.linuxmint.com/software/view/xchm),
+[Ubuntu](https://packages.ubuntu.com/search?keywords=xchm), etc.)
+
+For Mac, please see [MacPorts](https://www.macports.org/ports.php?by=name&substr=xchm).
+
+Windows users can (and should) just use the standard viewer (hh.exe).
+
 ## Authors
 
 * **Razvan Cojocaru** [rzvncj](https://github.com/rzvncj)

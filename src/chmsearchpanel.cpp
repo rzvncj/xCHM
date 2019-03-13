@@ -22,6 +22,7 @@
 #include <chmlistctrl.h>
 #include <chmsearchpanel.h>
 #include <hhcparser.h>
+#include <vector>
 #include <wx/config.h>
 #include <wx/sizer.h>
 #include <wx/tokenzr.h>

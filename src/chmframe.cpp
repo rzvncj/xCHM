@@ -323,9 +323,12 @@ void CHMFrame::OnFind(wxCommandEvent& event)
     _nbhtml->GetCurrentPage()->OnFind(event);
 }
 
-void CHMFrame::OnCloseTab(wxCommandEvent& event)
+void CHMFrame::OnCloseTab(wxCommandEvent&)
 {
-    _nbhtml->OnCloseTab(event);
+    _nbhtml->DeletePage(_nbhtml->GetSelection());
+
+    if (!_nbhtml->GetPageCount())
+        Close(true);
 }
 
 void CHMFrame::OnNewTab(wxCommandEvent& event)

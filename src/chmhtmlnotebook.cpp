@@ -96,9 +96,10 @@ void CHMHtmlNotebook::OnGoToPriorPage(wxCommandEvent&)
     SetSelection(selection - 1);
 }
 
-void CHMHtmlNotebook::OnCloseTab(wxCommandEvent&)
+void CHMHtmlNotebook::OnCloseTab(wxAuiNotebookEvent&)
 {
-    DeletePage(GetSelection());
+    if (!GetPageCount())
+        _frame->Close(true);
 }
 
 void CHMHtmlNotebook::OnNewTab(wxCommandEvent&)
@@ -142,4 +143,5 @@ bool CHMHtmlNotebook::AddTab(wxWindow* page, const wxString& title)
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
 EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
 EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
+EVT_AUINOTEBOOK_PAGE_CLOSED(wxID_ANY, CHMHtmlNotebook::OnCloseTab)
 END_EVENT_TABLE()

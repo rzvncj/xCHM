@@ -65,7 +65,7 @@ public:
     void SetChildrenFonts(const wxString& normalFace, const wxString& fixedFace, int sizes);
 
     //! Called when user asks for a tab to close
-    void OnCloseTab(wxCommandEvent&);
+    void OnCloseTab(wxAuiNotebookEvent&);
 
     //! Called when user ask for a new tab
     void OnNewTab(wxCommandEvent& event);

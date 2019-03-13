@@ -176,8 +176,8 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
 
 bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool caseSensitive, bool wholeWords)
 {
-    auto lng   = title.Length();
-    auto found = false;
+    auto titleLen = title.Length();
+    auto found    = false;
 
     if (!caseSensitive) {
         title.MakeLower();
@@ -193,34 +193,34 @@ bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool caseSensit
         if (token.IsEmpty())
             continue;
 
-        auto wrd  = token.Length();
-        auto buf1 = title.c_str();
-        auto buf2 = token.c_str();
+        auto tokenLen  = token.Length();
+        auto titleCStr = title.c_str();
+        auto tokenCStr = token.c_str();
 
         if (wholeWords) {
-            for (size_t i = 0; i < lng - wrd + 1; ++i) {
-                if (IS_WHITESPACE(buf1[i]))
+            for (size_t i = 0; i < titleLen - tokenLen + 1; ++i) {
+                if (IS_WHITESPACE(titleCStr[i]))
                     continue;
 
                 size_t j {0};
 
-                while (j < wrd && buf1[i + j] == buf2[j])
+                while (j < tokenLen && titleCStr[i + j] == tokenCStr[j])
                     ++j;
 
-                if (j == wrd && (IS_WHITESPACE(buf1[i + j]) || i + j == lng))
-                    if (i == 0 || IS_WHITESPACE(buf1[i - 1])) {
+                if (j == tokenLen && (IS_WHITESPACE(titleCStr[i + j]) || i + j == titleLen))
+                    if (i == 0 || IS_WHITESPACE(titleCStr[i - 1])) {
                         found = true;
                         break;
                     }
             }
         } else {
-            for (size_t i = 0; i < lng - wrd + 1; ++i) {
+            for (size_t i = 0; i < titleLen - tokenLen + 1; ++i) {
                 size_t j {0};
 
-                while ((j < wrd) && (buf1[i + j] == buf2[(size_t)j]))
+                while ((j < tokenLen) && (titleCStr[i + j] == tokenCStr[j]))
                     ++j;
 
-                if (j == wrd && (i == 0 || IS_WHITESPACE(buf1[i - 1]))) {
+                if (j == tokenLen && (i == 0 || IS_WHITESPACE(titleCStr[i - 1]))) {
                     found = true;
                     break;
                 }
@@ -254,8 +254,8 @@ void CHMSearchPanel::SetConfig()
 {
     wxConfig config(wxT("xchm"));
 
-    config.Write(wxT("/Search/partialWords"), (long)_partial->GetValue());
-    config.Write(wxT("/Search/titlesOnly"), (long)_titles->GetValue());
+    config.Write(wxT("/Search/partialWords"), static_cast<long>(_partial->GetValue()));
+    config.Write(wxT("/Search/titlesOnly"), static_cast<long>(_titles->GetValue()));
 }
 
 void CHMSearchPanel::GetConfig()

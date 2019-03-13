@@ -86,7 +86,7 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
     if (_found)
         return;
 
-    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
+    auto data = dynamic_cast<URLTreeItem*>(_tcl->GetItemData(root));
 
     wxString url;
 

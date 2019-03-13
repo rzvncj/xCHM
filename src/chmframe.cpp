@@ -359,7 +359,7 @@ void CHMFrame::OnAddBookmark(wxCommandEvent&)
     if (title.IsEmpty())
         return;
 
-    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
+    auto data = dynamic_cast<URLTreeItem*>(_tcl->GetItemData(id));
 
     if (!data || (data->_url).IsEmpty())
         return;
@@ -418,7 +418,7 @@ void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
     if (id == _tcl->GetRootItem() || !chmf || !id.IsOk())
         return;
 
-    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(id));
+    auto data = dynamic_cast<URLTreeItem*>(_tcl->GetItemData(id));
 
     if (!data || data->_url.IsEmpty())
         return;

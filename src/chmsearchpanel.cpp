@@ -157,7 +157,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     if (!chmf)
         return;
 
-    auto data = reinterpret_cast<URLTreeItem*>(_tcl->GetItemData(root));
+    auto data = dynamic_cast<URLTreeItem*>(_tcl->GetItemData(root));
 
     if (data && (!data->_url.IsEmpty())) {
         auto title = _tcl->GetItemText(root);

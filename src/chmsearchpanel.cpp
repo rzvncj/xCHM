@@ -28,15 +28,6 @@
 #include <wx/utils.h>
 #include <wx/wx.h>
 
-namespace {
-
-inline bool IS_WHITESPACE(wxChar c)
-{
-    return c == wxT(' ') || c == wxT('\n') || c == wxT('\r') || c == wxT('\t');
-}
-
-} // end of anonymous namespace
-
 CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNotebook* nbhtml)
     : wxPanel(parent), _tcl(topics)
 {
@@ -161,7 +152,7 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
 
     if (data && (!data->_url.IsEmpty())) {
         auto title = _tcl->GetItemText(root);
-        if (TitleSearch(title, text, false, wholeWords))
+        if (TitleSearch(title, text, wholeWords))
             _results->AddPairItem(title, data->_url);
     }
 
@@ -174,64 +165,45 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     }
 }
 
-bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool caseSensitive, bool wholeWords)
+bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool wholeWords)
 {
-    auto titleLen = title.Length();
-    auto found    = false;
+    title.MakeLower();
+    text.MakeLower();
 
-    if (!caseSensitive) {
-        title.MakeLower();
-        text.MakeLower();
-    }
+    wxStringTokenizer     textTokenizer(text), titleTokenizer(title);
+    std::vector<wxString> titleTokens;
 
-    wxStringTokenizer tkz(text, wxT(" \t\r\n"));
+    if (wholeWords)
+        while (titleTokenizer.HasMoreTokens())
+            titleTokens.push_back(titleTokenizer.GetNextToken());
 
-    while (tkz.HasMoreTokens()) {
-        found      = false;
-        auto token = tkz.GetNextToken();
+    auto processedTokens = false;
 
-        if (token.IsEmpty())
+    while (textTokenizer.HasMoreTokens()) {
+        auto textToken = textTokenizer.GetNextToken();
+
+        if (textToken.IsEmpty())
             continue;
 
-        auto tokenLen  = token.Length();
-        auto titleCStr = title.c_str();
-        auto tokenCStr = token.c_str();
+        processedTokens = true;
 
-        if (wholeWords) {
-            for (size_t i = 0; i < titleLen - tokenLen + 1; ++i) {
-                if (IS_WHITESPACE(titleCStr[i]))
-                    continue;
+        if (!wholeWords) {
+            if (title.find(textToken) == wxString::npos)
+                return false;
 
-                size_t j {0};
-
-                while (j < tokenLen && titleCStr[i + j] == tokenCStr[j])
-                    ++j;
-
-                if (j == tokenLen && (IS_WHITESPACE(titleCStr[i + j]) || i + j == titleLen))
-                    if (i == 0 || IS_WHITESPACE(titleCStr[i - 1])) {
-                        found = true;
-                        break;
-                    }
-            }
         } else {
-            for (size_t i = 0; i < titleLen - tokenLen + 1; ++i) {
-                size_t j {0};
+            auto found = false;
 
-                while ((j < tokenLen) && (titleCStr[i + j] == tokenCStr[j]))
-                    ++j;
-
-                if (j == tokenLen && (i == 0 || IS_WHITESPACE(titleCStr[i - 1]))) {
+            for (auto&& titleToken : titleTokens)
+                if (titleToken == textToken)
                     found = true;
-                    break;
-                }
-            }
-        }
 
-        if (!found)
-            break;
+            if (!found)
+                return false;
+        }
     }
 
-    return found;
+    return processedTokens;
 }
 
 void CHMSearchPanel::OnSearchSel(wxListEvent&)

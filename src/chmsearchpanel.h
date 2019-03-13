@@ -86,7 +86,7 @@ private:
     void PopulateList(wxTreeItemId root, wxString& text, bool wholeWords);
 
     //! Helper. Grep searches page titles for the given text.
-    bool TitleSearch(wxString title, wxString& text, bool caseSensitive, bool wholeWords);
+    bool TitleSearch(wxString title, wxString& text, bool wholeWords);
 
     //! Reads the search configuration from .xchm (case sensitive, etc.).
     void GetConfig();

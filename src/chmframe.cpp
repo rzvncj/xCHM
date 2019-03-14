@@ -164,8 +164,8 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
 CHMFrame::~CHMFrame()
 {
-    if (_tcl) // Supposedly, workaround for wxWin
-        _tcl->Unselect();
+    // Supposedly, workaround for wxWin
+    _tcl->Unselect();
 }
 
 void CHMFrame::OnQuit(wxCommandEvent&)
@@ -184,7 +184,7 @@ void CHMFrame::OnOpen(wxCommandEvent&)
                                     wxT("CHM files (*.chm)|*.chm;*.CHM|") wxT("All files (*.*)|*.*"),
                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
-    if (selection.IsEmpty() || !_tcl)
+    if (selection.IsEmpty())
         return;
 
     _openPath = selection.BeforeLast(wxT('/'));

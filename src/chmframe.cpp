@@ -191,26 +191,26 @@ void CHMFrame::OnOpen(wxCommandEvent&)
     LoadCHM(selection);
 }
 
+std::unique_ptr<wxArrayString> CHMFrame::SortedFontFaceNames(bool fixed) const
+{
+    wxFontEnumerator enu;
+    enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, fixed);
+
+    auto fonts = std::make_unique<wxArrayString>(enu.GetFacenames());
+    fonts->Sort();
+
+    return fonts;
+}
+
 void CHMFrame::OnChangeFonts(wxCommandEvent&)
 {
     wxLogNull wln;
 
-    // First time initialization only.
-    if (!_normalFonts) {
-        wxFontEnumerator enu;
-        enu.EnumerateFacenames();
-        _normalFonts  = std::make_unique<wxArrayString>();
-        *_normalFonts = enu.GetFacenames();
-        _normalFonts->Sort();
-    }
+    if (!_normalFonts)
+        _normalFonts = SortedFontFaceNames();
 
-    if (!_fixedFonts) {
-        wxFontEnumerator enu;
-        enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, true);
-        _fixedFonts  = std::make_unique<wxArrayString>();
-        *_fixedFonts = enu.GetFacenames();
-        _fixedFonts->Sort();
-    }
+    if (!_fixedFonts)
+        _fixedFonts = SortedFontFaceNames(true);
 
     CHMFontDialog cfd(this, *_normalFonts, *_fixedFonts, _normalFont, _fixedFont, _fontSize);
 

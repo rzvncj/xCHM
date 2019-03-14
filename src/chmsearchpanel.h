@@ -83,10 +83,10 @@ protected:
 
 private:
     //! Helper. Searches through the tree recursively.
-    void PopulateList(wxTreeItemId root, wxString& text, bool wholeWords);
+    void PopulateList(wxTreeItemId root, const wxString& text, bool wholeWords);
 
     //! Helper. Grep searches page titles for the given text.
-    bool TitleSearch(wxString title, wxString& text, bool wholeWords);
+    bool TitleSearch(const wxString& title, const wxString& text, bool wholeWords);
 
     //! Reads the search configuration from .xchm (case sensitive, etc.).
     void GetConfig();
@@ -95,12 +95,12 @@ private:
     void SetConfig();
 
 private:
-    wxTreeCtrl*      _tcl;
-    wxTextCtrl*      _text;
-    wxCheckBox*      _partial;
-    wxCheckBox*      _titles;
-    wxButton*        _search;
-    CHMListCtrl*     _results;
+    wxTreeCtrl*  _tcl;
+    wxTextCtrl*  _text;
+    wxCheckBox*  _partial;
+    wxCheckBox*  _titles;
+    wxButton*    _search;
+    CHMListCtrl* _results;
 
 private:
     DECLARE_EVENT_TABLE()

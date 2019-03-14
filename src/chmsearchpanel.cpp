@@ -142,7 +142,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
     _results->UpdateUI();
 }
 
-void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeWords)
+void CHMSearchPanel::PopulateList(wxTreeItemId root, const wxString& text, bool wholeWords)
 {
     static auto chmf = CHMInputStream::GetCache();
 
@@ -166,12 +166,15 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, wxString& text, bool wholeW
     }
 }
 
-bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool wholeWords)
+bool CHMSearchPanel::TitleSearch(const wxString& title, const wxString& text, bool wholeWords)
 {
-    title.MakeLower();
-    text.MakeLower();
+    auto ncTitle = title;
+    auto ncText  = text;
 
-    wxStringTokenizer     textTokenizer(text), titleTokenizer(title);
+    ncTitle.MakeLower();
+    ncText.MakeLower();
+
+    wxStringTokenizer     textTokenizer(ncText), titleTokenizer(ncTitle);
     std::vector<wxString> titleTokens;
 
     if (wholeWords)
@@ -189,7 +192,7 @@ bool CHMSearchPanel::TitleSearch(wxString title, wxString& text, bool wholeWords
         processedTokens = true;
 
         if (!wholeWords) {
-            if (title.find(textToken) == wxString::npos)
+            if (ncTitle.find(textToken) == wxString::npos)
                 return false;
 
         } else {

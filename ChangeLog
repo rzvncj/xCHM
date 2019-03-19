@@ -391,4 +391,5 @@
 	+ 1.27:
 		+ always display tabs.
 		+ display the loaded page title in the tab only (no longer in the main
-		  window title bar as well).
+		  window title bar).
+		+ fixed a title search bug.

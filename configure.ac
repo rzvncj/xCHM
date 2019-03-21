@@ -70,7 +70,7 @@ AC_ARG_WITH(xmlrpc-dir,
     [  --with-xmlrpc-dir       specify XMLRPC++ includes and libraries parent directory],
 XMLRPCDIR="$withval")
 
-if test -n $XMLRPCDIR ; then
+if test -n "$XMLRPCDIR" ; then
     CFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CFLAGS"
     CXXFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CXXFLAGS"
     CPPFLAGS="-I$XMLRPCDIR/include -I$XMLRPCDIR/include/xmlrpcpp $CPPFLAGS"

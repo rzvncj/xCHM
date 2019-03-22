@@ -393,3 +393,6 @@
 		+ display the loaded page title in the tab only (no longer in the main
 		  window title bar).
 		+ fixed a title search bug.
+
+	+ 1.28:
+		+ fixed configure-time XMLRPCDIR detection.

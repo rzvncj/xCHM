@@ -11,8 +11,16 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" 
 
-language: c++
-compiler: gcc
+    # works on Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0 libwxgtk3.0-dev libchm-dev
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
 before_install:
   - eval "${MATRIX_EVAL}"

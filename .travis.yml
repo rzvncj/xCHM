@@ -2,4 +2,3 @@ language: c++
 compiler:
   - clang
   - gcc
-os: osx

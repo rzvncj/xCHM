@@ -7,25 +7,15 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-7
+            - g++-7 libwxgtk3.0-dev libchm-dev
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-      before_install:
-        - eval "${MATRIX_EVAL}"
-
-    - os: osx
-      osx_image: xcode10.1
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" 
 
 language: c++
-
 compiler: gcc
 
-os:
-  - linux
-  - osx
-
 before_install:
-  - sudo apt-get install -y libwxgtk3.0-dev libchm-dev
+  - eval "${MATRIX_EVAL}"
 
 script:
     ./bootstrap && ./configure && make

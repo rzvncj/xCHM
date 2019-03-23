@@ -28,6 +28,8 @@
 enum {
     ID_NextPage,
     ID_PriorPage,
+    ID_ZoomIn,
+    ID_ZoomOut,
 };
 
 // Forward declarations
@@ -70,11 +72,17 @@ public:
     //! Called when user ask for a new tab
     void OnNewTab(wxCommandEvent& event);
 
+    void OnZoomIn(wxCommandEvent& event);
+
+    void OnZoomOut(wxCommandEvent& event);
+
     //! Creates a new tab view
     CHMHtmlWindow* CreateView();
 
     //! Add page and check tab height control
     bool AddTab(wxWindow* page, const wxString& title);
+
+    int FontSize() const { return _fontSize; }
 
 protected:
     //! Called when user asks for next notebook page

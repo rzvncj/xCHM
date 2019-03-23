@@ -28,8 +28,10 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxStrin
     : wxAuiNotebook(parent), _tcl(tc), _frame(frame), _fontsNormalFace(normalFont), _fontsFixedFace(fixedFont),
       _fontSize(fontSize)
 {
-    wxAcceleratorEntry entries[]
-        = {{wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage}, {wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage}};
+    wxAcceleratorEntry entries[] = {{wxACCEL_CTRL, WXK_PAGEUP, ID_PriorPage},
+                                    {wxACCEL_CTRL, WXK_PAGEDOWN, ID_NextPage},
+                                    {wxACCEL_CTRL, '=', ID_ZoomIn},
+                                    {wxACCEL_CTRL, '-', ID_ZoomOut}};
 
     wxAcceleratorTable accel(sizeof(entries) / sizeof(wxAcceleratorEntry), entries);
     SetAcceleratorTable(accel);
@@ -107,6 +109,16 @@ void CHMHtmlNotebook::OnNewTab(wxCommandEvent&)
     AddHtmlView(wxEmptyString, wxEmptyString);
 }
 
+void CHMHtmlNotebook::OnZoomIn(wxCommandEvent&)
+{
+    SetChildrenFonts(_fontsNormalFace, _fontsFixedFace, _fontSize + 1);
+}
+
+void CHMHtmlNotebook::OnZoomOut(wxCommandEvent&)
+{
+    SetChildrenFonts(_fontsNormalFace, _fontsFixedFace, _fontSize - 1);
+}
+
 void CHMHtmlNotebook::CloseAllPagesExceptFirst()
 {
     SetSelection(0);
@@ -143,5 +155,7 @@ bool CHMHtmlNotebook::AddTab(wxWindow* page, const wxString& title)
 BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
 EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
 EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
+EVT_MENU(ID_ZoomIn, CHMHtmlNotebook::OnZoomIn)
+EVT_MENU(ID_ZoomOut, CHMHtmlNotebook::OnZoomOut)
 EVT_AUINOTEBOOK_PAGE_CLOSED(wxID_ANY, CHMHtmlNotebook::OnCloseTab)
 END_EVENT_TABLE()

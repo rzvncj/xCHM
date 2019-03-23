@@ -244,7 +244,6 @@ private:
     std::unique_ptr<wxArrayString> _fixedFonts;
     wxString                       _normalFont;
     wxString                       _fixedFont;
-    int                            _fontSize;
     bool                           _bookmarkSel {true};
     bool                           _bookmarksDeleted {false};
     int                            _sashPos;

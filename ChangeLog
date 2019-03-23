@@ -396,3 +396,4 @@
 
 	+ 1.28:
 		+ fixed configure-time XMLRPCDIR detection.
+		+ added Ctrl-'=' and Ctrl-'-' as shortcuts for zoom-in/out.

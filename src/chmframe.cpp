@@ -79,7 +79,8 @@ const wxChar* greeting = wxT(
     "<li>Allowing partial matches will find pages that contain words that only start with the typed strings, "
     "i.e. searching for \'ans 4\' (quotes not included) will find pages that contain the sentence "
     "\'The answer is 42.\'.</li><li>Right clicking on the displayed page brings out a popup menu with "
-    "common options.</li></ul><br><br>Ctrl(cmd)-C is copy, Ctrl(cmd)-F is find in page.<br><br>Enjoy.</body></html>");
+    "common options.</li></ul><br><br>Ctrl-'c' is copy, Ctrl-'f' is find in page, Ctrl-'=' is zoom-in, "
+    "Ctrl-'-' is zoom-out.<br><br>Enjoy.</body></html>");
 
 const wxChar* error_page = wxT("<html><body>Error loading CHM file!</body></html>");
 
@@ -101,8 +102,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
                    const wxString& normalFont, const wxString& fixedFont, int fontSize, int sashPosition,
                    const wxString& fullAppPath, bool loadTopics, bool loadIndex)
     : wxFrame(nullptr, -1, title, pos, size), _openPath(booksDir), _normalFont(normalFont), _fixedFont(fixedFont),
-      _fontSize(fontSize), _sashPos(sashPosition), _fullAppPath(fullAppPath), _loadTopics(loadTopics),
-      _loadIndex(loadIndex)
+      _sashPos(sashPosition), _fullAppPath(fullAppPath), _loadTopics(loadTopics), _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
     wxAcceleratorEntry entries[]
@@ -147,7 +147,7 @@ CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoin
 
     auto contents = CreateContentsPanel();
     _nbhtml       = new CHMHtmlNotebook(_sw, _tcl, _normalFont, _fixedFont, fontSize, this);
-    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, _fontSize);
+    _nbhtml->SetChildrenFonts(_normalFont, _fixedFont, fontSize);
 
     _csp  = new CHMSearchPanel(_nb, _tcl, _nbhtml);
     _font = _tcl->GetFont();
@@ -212,13 +212,12 @@ void CHMFrame::OnChangeFonts(wxCommandEvent&)
     if (!_fixedFonts)
         _fixedFonts = SortedFontFaceNames(true);
 
-    CHMFontDialog cfd(this, *_normalFonts, *_fixedFonts, _normalFont, _fixedFont, _fontSize);
+    CHMFontDialog cfd(this, *_normalFonts, *_fixedFonts, _normalFont, _fixedFont, _nbhtml->FontSize());
 
     if (cfd.ShowModal() == wxID_OK) {
         wxBusyCursor bc;
 
-        _fontSize = cfd.FontSize();
-        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), _fontSize);
+        _nbhtml->SetChildrenFonts(_normalFont = cfd.NormalFont(), _fixedFont = cfd.FixedFont(), cfd.FontSize());
 
         auto page = _nbhtml->GetCurrentPage()->GetOpenedPage();
 
@@ -304,7 +303,7 @@ void CHMFrame::OnPrint(wxCommandEvent&)
 {
     wxLogNull wln;
 
-    auto sizes = ComputeFontSizes(_fontSize);
+    auto sizes = ComputeFontSizes(_nbhtml->FontSize());
     _ep->SetFonts(_normalFont, _fixedFont, sizes.data());
 
     _ep->PrintFile(_nbhtml->GetCurrentPage()->GetOpenedPage());
@@ -826,7 +825,7 @@ void CHMFrame::SaveExitInfo()
     config.Write(wxT("/Paths/lastOpenedDir"), _openPath);
     config.Write(wxT("/Fonts/normalFontFace"), _normalFont);
     config.Write(wxT("/Fonts/fixedFontFace"), _fixedFont);
-    config.Write(wxT("/Fonts/size"), _fontSize);
+    config.Write(wxT("/Fonts/size"), _nbhtml->FontSize());
     config.Write(wxT("/Sash/leftMargin"), sashPos);
 
     config.SetPath(wxT("/Recent"));

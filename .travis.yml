@@ -12,18 +12,16 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" 
 
-    # works on Trusty
     - os: linux
       dist: xenial
       addons:
         apt:
           sources:
-            - llvm-toolchain-xenial-7.0
+            - ubuntu-toolchain-r-test
+              # - llvm-toolchain-xenial-7.0
           packages:
-            - clang-7.0 libwxgtk3.0-dev libchm-dev
+            - libwxgtk3.0-dev libchm-dev
       compiler: clang
-      env:
-        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
 
 language: c++
 

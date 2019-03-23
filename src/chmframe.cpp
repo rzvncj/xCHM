@@ -793,7 +793,7 @@ void CHMFrame::SaveBookmarks()
     auto format1 = wxT("bookmark_%ld_title");
     auto format2 = wxT("bookmark_%ld_url");
 
-    for (decltype(noEntries) i = 0; i < noEntries; ++i) {
+    for (auto i = 0L; i < noEntries; ++i) {
         auto url = reinterpret_cast<wxString*>(
 #ifdef __WXGTK__
             _cb->GetClientData(i));

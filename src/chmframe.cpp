@@ -383,7 +383,7 @@ void CHMFrame::OnRemoveBookmark(wxCommandEvent&)
         _cb->SetSelection(0);
         _bookmarkSel = true;
     } else
-        _cb->SetValue(wxEmptyString);
+        _cb->ChangeValue(wxEmptyString);
 }
 
 void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
@@ -734,7 +734,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 void CHMFrame::LoadBookmarks()
 {
     _cb->Clear();
-    _cb->SetValue(wxEmptyString);
+    _cb->ChangeValue(wxEmptyString);
 
     auto chmf = CHMInputStream::GetCache();
 

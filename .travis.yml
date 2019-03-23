@@ -17,4 +17,6 @@ compiler: gcc
 before_install:
   - eval "${MATRIX_EVAL}"
   - sudo apt-get install -y libwxgtk3.0-dev libchm-dev
-  - ./bootstrap
+
+script:
+    ./bootstrap && ./configure && make

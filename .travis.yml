@@ -23,6 +23,7 @@ matrix:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
 language: c++
+compiler: gcc
 
 before_install:
   - eval "${MATRIX_EVAL}"

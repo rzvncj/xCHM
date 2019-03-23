@@ -3,4 +3,4 @@ compiler:
   - clang
   - gcc
 before_install:
-  - sudo apt-get install -y libwxgtk3.0-dev libchm-dev
+  - sudo apt-get install -y libwxgtk3.0-dev libchm-dev autotools-dev aclocal

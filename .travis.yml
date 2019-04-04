@@ -22,15 +22,15 @@ matrix:
             - libwxgtk3.0-dev libchm-dev
       compiler: clang
 
-    - os: osx 
-      osx_image: xcode10.2
-      addons:
-        homebrew:
-          packages:
-            - gettext
-            - chmlib
-            - wxmac
-          update: true
+      #    - os: osx 
+      #      osx_image: xcode10.2
+      #      addons:
+      #        homebrew:
+      #          packages:
+      #            - gettext
+      #            - chmlib
+      #            - wxmac
+      #          update: true
 
 language: c++
 

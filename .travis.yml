@@ -28,7 +28,7 @@ matrix:
       addons:
         homebrew:
           packages:
-            - libtool
+            - chmlib
             - wxmac
 
 language: c++

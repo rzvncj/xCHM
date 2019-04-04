@@ -18,18 +18,18 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-              # - llvm-toolchain-xenial-7.0
           packages:
             - libwxgtk3.0-dev libchm-dev
       compiler: clang
 
     - os: osx 
-      #osx_image: xcode10.2
+      osx_image: xcode10.2
       addons:
         homebrew:
           packages:
             - chmlib
             - wxmac
+          update: true
 
 language: c++
 

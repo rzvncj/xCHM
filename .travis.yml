@@ -28,7 +28,7 @@ matrix:
       addons:
         homebrew:
           packages:
-            - gettext
+            - libtool
             - wxmac
 
 language: c++

@@ -80,14 +80,6 @@ public:
     wxString ArchiveName() const { return _filename; }
 
     /*!
-      \brief Gets name of the .hhk file in the archive that could potentially be used to generate content information
-      from.
-      \return The index file name, with a '/' added in front and relative to the root of the archive filesystem. If
-      no .chm has been opened, the return value is an empty string.
-     */
-    wxString IndexFile() const { return _indexFile; }
-
-    /*!
       \brief Gets the name of the opened .chm.
       \return The name of the opened document, or an empty string if no .chm has been loaded.
     */

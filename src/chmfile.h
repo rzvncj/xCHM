@@ -60,7 +60,7 @@ public:
       return false.
       \param archiveName The .chm filename on disk.
      */
-    CHMFile(const wxString& archiveName);
+    explicit CHMFile(const wxString& archiveName);
 
     //! Destructor. If a file has been succesfully opened, it closes it.
     ~CHMFile();

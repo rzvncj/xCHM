@@ -38,7 +38,7 @@ constexpr size_t TREE_BUF_SIZE {128};
 struct URLTreeItem : public wxTreeItemData {
 
     //! Sets the data to str.
-    URLTreeItem(const wxString& str) : _url(str) {}
+    explicit URLTreeItem(const wxString& str) : _url(str) {}
 
     //! Useful data.
     wxString _url;

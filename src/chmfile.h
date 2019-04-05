@@ -73,14 +73,6 @@ public:
     wxString HomePage() const { return _home; }
 
     /*!
-      \brief Gets name of the .hhc file in the archive that could potentially be used to generate content information
-      from.
-      \return The topics file name, with a '/' added in front and relative to the root of the archive filesystem. If
-      no .chm has been opened, the return value is an empty string.
-    */
-    wxString TopicsFile() const { return _topicsFile; }
-
-    /*!
       \brief Gets the filename of the currently opened .chm file.
       \return The filename of the currently opened archive, relative to the root of the filesystem, or the empty string
       if no archive has been opened.

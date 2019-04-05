@@ -74,7 +74,7 @@ private:
     wxString getAppPath(const wxString& argv0, const wxString& cwd);
 
 private:
-    CHMFrame* _frame;
+    CHMFrame* _frame {nullptr};
     wxLocale  _loc;
 #ifdef WITH_LIBXMLRPC
     wxTimer _timer;

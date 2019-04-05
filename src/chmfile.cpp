@@ -909,11 +909,12 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 bool CHMFile::InfoFromWindows()
 {
     constexpr size_t WIN_HEADER_LEN {0x08};
-    unsigned char    buffer[BUF_SIZE];
     chmUnitInfo      ui;
-    auto             size = 0L;
 
     if (chm_resolve_object(_chmFile, "/#WINDOWS", &ui) == CHM_RESOLVE_SUCCESS) {
+        unsigned char buffer[BUF_SIZE];
+        auto          size = 0L;
+
         if (!chm_retrieve_object(_chmFile, &ui, buffer, 0, WIN_HEADER_LEN))
             return false;
 

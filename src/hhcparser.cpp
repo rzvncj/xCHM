@@ -254,11 +254,11 @@ bool HHCParser::getParameters(const char* input, std::string& name, std::string&
             while (*input && isspace(*input))
                 ++input;
 
-            if (*input && *input == '\"') {
+            if (*input == '\"') {
                 ++input;
                 while (*input && *input != '\"')
                     ++input;
-                if (*input && *input == '\"')
+                if (*input == '\"')
                     ++input;
             } else {
                 while (*input && !isspace(*input))
@@ -270,7 +270,7 @@ bool HHCParser::getParameters(const char* input, std::string& name, std::string&
         while (*input && isspace(*input))
             ++input;
 
-        if (*input && *input == '\"') {
+        if (*input == '\"') {
             ++input;
             while (*input && *input != '\"') {
                 if (lower)
@@ -282,7 +282,7 @@ bool HHCParser::getParameters(const char* input, std::string& name, std::string&
                 }
             }
 
-            if (*input && *input == '\"')
+            if (*input == '\"')
                 ++input;
         } else {
             while (*input && !isspace(*input))

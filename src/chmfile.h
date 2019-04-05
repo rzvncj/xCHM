@@ -170,12 +170,6 @@ public:
     wxString GetPageByCID(int contextID);
 
     /*!
-      \brief Have the context-IDs been loaded into memory or not.
-      \return true if they have, false if not.
-     */
-    bool AreContextIDsLoaded() const { return !_cidMap.empty(); }
-
-    /*!
       \brief Fast search using the $FIftiMain file in the .chm.
       \param text The text we're looking for.
       \param wholeWords Are we looking for whole words only?

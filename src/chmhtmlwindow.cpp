@@ -35,9 +35,9 @@
 #include <wx/wx.h>
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
-    : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _frame(frame)
+    : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _menu(std::make_unique<wxMenu>()),
+      _frame(frame)
 {
-    _menu = std::make_unique<wxMenu>();
     _menu->Append(ID_PopupForward, _("For&ward"));
     _menu->Append(ID_PopupBack, _("&Back"));
     _menu->Append(ID_CopyLink, _("Copy &link location"));

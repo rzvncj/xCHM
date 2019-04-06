@@ -17,6 +17,7 @@
   MA 02110-1301, USA.
 */
 
+#include <algorithm>
 #include <chmhtmlnotebook.h>
 #include <chminputstream.h>
 #include <chmlistctrl.h>
@@ -195,16 +196,8 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, const wxString& text, bo
             if (ncTitle.find(textToken) == wxString::npos)
                 return false;
 
-        } else {
-            auto found = false;
-
-            for (auto&& titleToken : titleTokens)
-                if (titleToken == textToken)
-                    found = true;
-
-            if (!found)
-                return false;
-        }
+        } else if (std::find(titleTokens.begin(), titleTokens.end(), textToken) == titleTokens.end())
+            return false;
     }
 
     return processedTokens;

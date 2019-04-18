@@ -83,11 +83,6 @@ void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
 
 bool CHMApp::OnInit()
 {
-#if defined __WXMAC__ && WX_VERSION_MAJOR == 2
-    ProcessSerialNumber PSN;
-    GetCurrentProcess(&PSN);
-    TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
-#endif
     auto     id = -1L;
     wxString file;
 

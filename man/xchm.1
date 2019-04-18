@@ -1,0 +1,52 @@
+.\" Author: Julien Lemoine <speedblue@debian.org>
+.\"
+.\" This is free software; you may redistribute it and/or modify it under the
+.\" terms of the GNU General Public License as published by the Free Software
+.\" Foundation; either version 2 or (at your option) any later version.
+.\"
+.\" This is distributed in the hope that it will be useful, but WITHOUT ANY
+.\" WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+.\" FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+.\" details.
+.\"
+.\" You should have received a copy of the GNU General Public License along with
+.\" the Debian GNU/Linux system; if not, write to the Free Software Foundation,
+.\" Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+.TH "XCHM" 1 "August 2006" "" ""
+
+.SH NAME
+xchm \- Compiled HTML Help (CHM) file viewer for X.
+
+.SH SYNOPSIS
+.B xchm
+.RI [\| OPTIONS \|]
+.RI [\| FILE \|]
+
+.SH DESCRIPTION
+.B xchm
+is a viewer for Compiled HTML Help (CHM) files. It, can show the contents tree
+if one is available, print the current page and do the usual history stunts. It
+allows you to change fonts and search for text in all the pages of the file, or
+in the pages' titles.
+
+xchm does not handle Javascript in the book.
+
+.SH OPTIONS
+.TP
+.B -c, --contextid=<num>
+context-Id to open in file, requires that a file be specified.
+.TP
+.B -h, --help
+displays help message and exit.
+
+.SH SEE ALSO
+.BR Homepage:
+ <https://github.com/rzvncj/xCHM>
+
+.SH AUTHOR
+Razvan Cojocaru <rzvncj@gmail.com>
+.PP
+This manual page was written by Julien Lemoine <speedblue@debian.org> and
+reformatted by Kartik Mistry <kartik.mistry@gmail.com> for the \fBDebian\fP
+system (but may be used by others).

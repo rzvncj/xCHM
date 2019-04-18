@@ -7789,7 +7789,7 @@ case "$host" in
 	;;
 esac
 
-ac_config_files="$ac_config_files Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile mac/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile mac/Makefile data/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -8540,6 +8540,7 @@ do
     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
     "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
     "mac/Makefile") CONFIG_FILES="$CONFIG_FILES mac/Makefile" ;;
+    "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

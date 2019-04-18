@@ -335,7 +335,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = m4 po src art mac
+SUBDIRS = m4 po src art mac data
 EXTRA_DIST = config.rpath Doxyfile README.xmlrpc rc/xchm.rc rc/xchm.ico
 ACLOCAL_AMFLAGS = -I m4 
 all: config.h

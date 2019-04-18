@@ -120,5 +120,5 @@ case "$host" in
 esac
 
 AC_OUTPUT(Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile
-          mac/Makefile)
+          mac/Makefile data/Makefile)
 

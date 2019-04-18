@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.xchm</id>
+  <launchable type="desktop-id">xchm.desktop</launchable>
+  <name>xCHM</name>
+  <summary>View CHM files</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <description>
+    <p>xCHM is a viewer for Compiled HTML Help (CHM) files. It can show the contents tree if one is available, print the current page and do the usual history stunts. It allows one to change fonts and search for text in all the pages of the file, or in the page's titles.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/rzvncj/xCHM/master/art/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/rzvncj/xCHM</url>
+</component>

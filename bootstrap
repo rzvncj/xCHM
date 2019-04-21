@@ -1,6 +1,7 @@
 #!/bin/sh
 
-aclocal \
-&& automake --gnu --add-missing \
-&& autoconf
+#aclocal \
+#&& automake --gnu --add-missing \
+#&& autoconf
 
+autoreconf --install

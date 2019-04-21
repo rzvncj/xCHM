@@ -27,7 +27,6 @@ matrix:
       addons:
         homebrew:
           packages:
-            - autopoint
             - chmlib
             - wxmac
           update: true
@@ -35,6 +34,7 @@ matrix:
 language: c++
 
 before_install:
+  - eval "PATH=${PATH}:/usr/local/opt/gettext/bin"
   - eval "${MATRIX_EVAL}"
 
 script:

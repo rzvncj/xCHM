@@ -7,7 +7,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-7 libwxgtk3.0-dev libchm-dev
+            - g++-7 autopoint libwxgtk3.0-dev libchm-dev
       compiler: gcc
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7" 
@@ -19,7 +19,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - libwxgtk3.0-dev libchm-dev
+            - autopoint libwxgtk3.0-dev libchm-dev
       compiler: clang
 
       #    - os: osx 

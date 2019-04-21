@@ -27,7 +27,7 @@ matrix:
       addons:
         homebrew:
           packages:
-            - gettext
+            - autopoint
             - chmlib
             - wxmac
           update: true

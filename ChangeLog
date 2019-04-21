@@ -397,3 +397,7 @@
 	+ 1.28:
 		+ fixed configure-time XMLRPCDIR detection.
 		+ added Ctrl-'=' and Ctrl-'-' as shortcuts for zoom-in/out.
+
+	+ 1.29:
+		+ added manpage (from Debian), Gnome files (from Arch).
+		+ more code cleanup.

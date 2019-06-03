@@ -4,4 +4,6 @@
 #&& automake --gnu --add-missing \
 #&& autoconf
 
+_here=$(dirname $0)
+cd $_here || exit
 autoreconf --install

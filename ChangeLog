@@ -401,3 +401,6 @@
 	+ 1.29:
 		+ added manpage (from Debian), Gnome files (from Arch).
 		+ more code cleanup.
+
+	+ 1.30:
+		+ install icons to $(datadir)/icons/hicolor/<RESOLUTION>/apps/.

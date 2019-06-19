@@ -94,7 +94,7 @@ const wxChar* about_txt = wxT("xCHM v. " VERSION
                               "Glasses logo by Anca Macinic.");
 
 #include <logo.xpm>
-#include <xchm-32.xpm>
+#include <32x32/apps/xchm.xpm>
 
 } // namespace
 

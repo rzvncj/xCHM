@@ -384,12 +384,10 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
 
         parents[level] = tree->AppendItem(parents[parentIndex], tname, 2, 2, new URLTreeItem(tvalue));
 
-        if (level) {
-            if (tree->GetItemImage(parents[parentIndex]) != 0) {
-                tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Normal);
-                tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Selected);
-                tree->SetItemImage(parents[parentIndex], 1, wxTreeItemIcon_Expanded);
-            }
+        if (level && tree->GetItemImage(parents[parentIndex]) != 0) {
+            tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Normal);
+            tree->SetItemImage(parents[parentIndex], 0, wxTreeItemIcon_Selected);
+            tree->SetItemImage(parents[parentIndex], 1, wxTreeItemIcon_Expanded);
         }
     }
 

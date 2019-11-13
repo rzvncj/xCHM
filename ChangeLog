@@ -404,3 +404,6 @@
 
 	+ 1.30:
 		+ install icons to $(datadir)/icons/hicolor/<RESOLUTION>/apps/.
+
+	+ 1.31:
+		+ the toolbar is now togglable.

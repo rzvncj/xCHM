@@ -75,6 +75,7 @@ enum {
     ID_CloseTab,
     ID_NewTab,
     ID_FullScreen,
+    ID_ToggleToolbar,
     ID_TreeCtrl = 1000,
 };
 
@@ -176,6 +177,9 @@ protected:
 
     //! Called when fullscreen mode is being toggled
     void OnToggleFullScreen(wxCommandEvent& event);
+
+    //! Called when the toolbar is being toggled
+    void OnToggleToolbar(wxCommandEvent& event);
 
     //! Called when the user clicks on the Add button.
     void OnAddBookmark(wxCommandEvent& event);

@@ -53,6 +53,7 @@
 #define COPY_HELP _("Copy selection.")
 #define FIND_HELP _("Find word in page.")
 #define FULLSCREEN_HELP _("Toggle fullscreen mode.")
+#define TOGGLE_TOOLBAR_HELP _("Toggle toolbar.")
 #define CLOSETAB_HELP _("Close the current tab")
 #define NEWTAB_HELP _("Open a new tab")
 #define REGISTER_EXTENSION_HELP _("Associate the .chm file extension with xCHM.")
@@ -344,6 +345,11 @@ void CHMFrame::OnToggleFullScreen(wxCommandEvent&)
 {
     _fullScreen = !_fullScreen;
     ShowFullScreen(_fullScreen, wxFULLSCREEN_ALL);
+}
+
+void CHMFrame::OnToggleToolbar(wxCommandEvent&)
+{
+    _tb->Show(!_tb->IsShown());
 }
 
 void CHMFrame::OnAddBookmark(wxCommandEvent&)
@@ -669,6 +675,7 @@ wxMenuBar* CHMFrame::CreateMenu()
 
     auto menuView = new wxMenu;
     menuView->Append(ID_FullScreen, _("Toggle &fullscreen\tF11"), FULLSCREEN_HELP);
+    menuView->Append(ID_ToggleToolbar, _("Toggle &toolbar\tAlt-T"), TOGGLE_TOOLBAR_HELP);
 
     auto menuBar = new wxMenuBar;
     menuBar->Append(_menuFile, _("&File"));
@@ -919,6 +926,7 @@ EVT_MENU(ID_CloseTab, CHMFrame::OnCloseTab)
 EVT_MENU(ID_NewTab, CHMFrame::OnNewTab)
 EVT_MENU(ID_CopySelection, CHMFrame::OnCopySelection)
 EVT_MENU(ID_FullScreen, CHMFrame::OnToggleFullScreen)
+EVT_MENU(ID_ToggleToolbar, CHMFrame::OnToggleToolbar)
 EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)

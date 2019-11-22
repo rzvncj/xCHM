@@ -770,7 +770,6 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
                                     chmUnitInfo* ui)
 {
     uint32_t test_offset {0};
-    uint32_t i {sizeof(uint16_t)};
     wxString word;
 
     if (!buffSize)
@@ -786,8 +785,9 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
         if (chm_retrieve_object(_chmFile, ui, &buffer[0], initialOffset, buffSize) == 0)
             return 0;
 
-        auto cursor16   = &buffer[0];
-        auto free_space = UINT16_FROM_ARRAY(cursor16);
+        auto     cursor16   = &buffer[0];
+        auto     free_space = UINT16_FROM_ARRAY(cursor16);
+        uint32_t i {sizeof(uint16_t)};
 
         while (i < buffSize - free_space) {
             auto word_len = buffer[i];

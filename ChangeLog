@@ -408,3 +408,6 @@
 	+ 1.31:
 		+ the toolbar is now togglable.
 		+ fixed a crash caused by a search corner case.
+
+	+ 1.32:
+		+ moved gr.po -> el.po.

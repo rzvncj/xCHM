@@ -349,9 +349,15 @@ void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
     switch (event.GetKeyCode()) {
-    case WXK_SPACE:
-        event.m_keyCode = WXK_PAGEDOWN;
+    case WXK_SPACE: {
+        auto xStart = 0, yStart = 0, xSize = 0, ySize = 0, xUnit = 0, yUnit = 0;
+
+        GetViewStart(&xStart, &yStart);
+        GetClientSize(&xSize, &ySize);
+        GetScrollPixelsPerUnit(&xUnit, &yUnit);
+        Scroll(xStart, yStart + ySize / yUnit - 3);  // overlap
         break;
+    }
     case WXK_BACK:
         event.m_keyCode = WXK_PAGEUP;
         break;

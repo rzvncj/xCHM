@@ -367,9 +367,21 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
         event.m_keyCode = WXK_UP;
         break;
     }
-    case WXK_BACK:
-        event.m_keyCode = WXK_PAGEUP;
+    case WXK_BACK: {
+        GetViewStart(&xStart, &yStart);
+        GetClientSize(&xSize, &ySize);
+        GetScrollPixelsPerUnit(&xUnit, &yUnit);
+        Scroll(xStart, yStart - ySize / yUnit + overlap);
         break;
+    }
+    case WXK_PAGEUP: {
+        GetViewStart(&xStart, &yStart);
+        GetClientSize(&xSize, &ySize);
+        GetScrollPixelsPerUnit(&xUnit, &yUnit);
+        Scroll(xStart, yStart - ySize / yUnit + overlap - 1);
+        event.m_keyCode = WXK_DOWN;
+        break;
+    }
     case WXK_ESCAPE:
         _frame->ToggleFullScreen(true);
         break;

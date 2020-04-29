@@ -348,12 +348,24 @@ void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
+    int  xStart, yStart, xUnit, yUnit, xSize, ySize;
+    bool skip = true;
+    const int OVERLAP = 3;
+
+    GetViewStart(&xStart, &yStart);
+    GetScrollPixelsPerUnit(&xUnit, &yUnit);
+    GetClientSize(&xSize, &ySize);
+
     switch (event.GetKeyCode()) {
     case WXK_SPACE:
-        event.m_keyCode = WXK_PAGEDOWN;
+    case WXK_PAGEDOWN:
+        Scroll(xStart, yStart + ySize / yUnit - OVERLAP);
+        skip = false;
         break;
+    case WXK_PAGEUP:
     case WXK_BACK:
-        event.m_keyCode = WXK_PAGEUP;
+        Scroll(xStart, yStart - ySize / yUnit + OVERLAP);
+        skip = false;
         break;
     case WXK_ESCAPE:
         _frame->ToggleFullScreen(true);
@@ -364,10 +376,9 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
         break;
     case WXK_END:
     case 'G': {
-        auto x = 0, y = 0, xUnit = 0, yUnit = 0;
+        int x, y;
 
         GetVirtualSize(&x, &y);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(0, y / yUnit);
         break;
     }
@@ -387,7 +398,8 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
         break;
     }
 
-    event.Skip();
+    if (skip)
+        event.Skip();
 }
 
 void CHMHtmlWindow::OnSetTitle(const wxString& title)

@@ -411,3 +411,4 @@
 
 	+ 1.32:
 		+ moved gr.po -> el.po.
+		+ now overlapping some text on page down / page up.

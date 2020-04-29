@@ -351,33 +351,25 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
     auto xStart = 0, yStart = 0, xSize = 0, ySize = 0, xUnit = 0, yUnit = 0;
     int overlap = 3;
 
+    GetViewStart(&xStart, &yStart);
+    GetClientSize(&xSize, &ySize);
+    GetScrollPixelsPerUnit(&xUnit, &yUnit);
+
     switch (event.GetKeyCode()) {
     case WXK_SPACE: {
-        GetViewStart(&xStart, &yStart);
-        GetClientSize(&xSize, &ySize);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(xStart, yStart + ySize / yUnit - overlap);
         break;
     }
     case WXK_PAGEDOWN: {
-        GetViewStart(&xStart, &yStart);
-        GetClientSize(&xSize, &ySize);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(xStart, yStart + ySize / yUnit - overlap + 1);
         event.m_keyCode = WXK_UP;
         break;
     }
     case WXK_BACK: {
-        GetViewStart(&xStart, &yStart);
-        GetClientSize(&xSize, &ySize);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(xStart, yStart - ySize / yUnit + overlap);
         break;
     }
     case WXK_PAGEUP: {
-        GetViewStart(&xStart, &yStart);
-        GetClientSize(&xSize, &ySize);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(xStart, yStart - ySize / yUnit + overlap - 1);
         event.m_keyCode = WXK_DOWN;
         break;
@@ -392,7 +384,6 @@ void CHMHtmlWindow::OnChar(wxKeyEvent& event)
     case WXK_END:
     case 'G': {
         GetVirtualSize(&xSize, &ySize);
-        GetScrollPixelsPerUnit(&xUnit, &yUnit);
         Scroll(0, ySize / yUnit);
         break;
     }

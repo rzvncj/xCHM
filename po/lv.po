@@ -416,7 +416,7 @@ msgid "Only search in the contents' titles."
 msgstr "Meklēt tikai virsrakstos."
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "Meklēt frāzes, kas satur tekstu."
 
 #~ msgid "On or off?"

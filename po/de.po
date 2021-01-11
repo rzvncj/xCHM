@@ -412,7 +412,7 @@ msgid "Only search in the contents' titles."
 msgstr "Nur im Titel des Inhalts suchen."
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "Inahlt auf Vorkommen des angegebenen Inhalts durchsuchen."
 
 #~ msgid "On or off?"

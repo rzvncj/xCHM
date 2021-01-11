@@ -419,7 +419,7 @@ msgid "Only search in the contents' titles."
 msgstr "Hľadaj iba v obsahu."
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "Nájdi obsah pre náhodný výskit zvoleného textu."
 
 #~ msgid "On or off?"

@@ -406,7 +406,7 @@ msgid "Only search in the contents' titles."
 msgstr "Искать только в заголовках содежания."
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "Поиск фраз, где встречается введённый текст."
 
 #~ msgid "On or off?"

@@ -418,7 +418,7 @@ msgid "Only search in the contents' titles."
 msgstr "Csak a címekben keres."
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "Az elõfordulások keresése a megadott szövegben."
 
 #~ msgid "On or off?"

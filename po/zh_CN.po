@@ -417,7 +417,7 @@ msgid "Only search in the contents' titles."
 msgstr "只在目录标题中查找"
 
 #: src/chmsearchpanel.cpp:50
-msgid "Search contents for occurences of the specified text."
+msgid "Search contents for occurrences of the specified text."
 msgstr "在目录中查找指定的文本"
 
 #~ msgid "On or off?"

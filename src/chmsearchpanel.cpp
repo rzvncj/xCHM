@@ -47,7 +47,7 @@ CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNote
 #if wxUSE_TOOLTIPS
     _partial->SetToolTip(_("Allow partial matches."));
     _titles->SetToolTip(_("Only search in the contents' titles."));
-    _search->SetToolTip(_("Search contents for occurences of the specified text."));
+    _search->SetToolTip(_("Search contents for occurrences of the specified text."));
 #endif
     _results = new CHMListCtrl(this, nbhtml, ID_Results);
 

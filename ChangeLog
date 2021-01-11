@@ -413,3 +413,4 @@
 		+ moved gr.po -> el.po.
 		+ now overlapping some text on page down / page up.
 		+ fixed typo (occurences -> occurrences)
+		+ added Keywords entry to xchm.desktop

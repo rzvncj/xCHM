@@ -2,36 +2,38 @@
 # Copyright (C) 2006 Razvan Cojocaru <rzvncj@gmail.com>
 # This file is distributed under the same license as the xchm package.
 # Daniel Nylander <po@danielnylander.se>, 2006.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xchm\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-23 00:47+0200\n"
-"PO-Revision-Date: 2006-10-15 16:43+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
-"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"PO-Revision-Date: 2021-01-17 15:29+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/chmfile.cpp:260
 msgid "Retrieving table of contents.."
-msgstr ""
+msgstr "Hämtar innehållstabell..."
 
 #: src/chmfile.cpp:261
-#, fuzzy
 msgid "Retrieving index.."
-msgstr "Otitlad i index"
+msgstr "Hämtar index..."
 
 #: src/chmfile.cpp:262
 msgid "Untitled in index"
-msgstr "Otitlad i index"
+msgstr "Namnlös i index"
 
 #: src/chmfinddialog.cpp:29
 msgid "Find in page.."
-msgstr "Sök i sida.."
+msgstr "Sök på sidan..."
 
 #: src/chmfinddialog.cpp:32
 msgid "Whole words only"
@@ -43,7 +45,7 @@ msgstr "Skiftlägeskänslig"
 
 #: src/chmfinddialog.cpp:42
 msgid "Find next"
-msgstr "Hitta nästa"
+msgstr "Sök nästa"
 
 #: src/chmfinddialog.cpp:45 src/chmfontdialog.cpp:74
 msgid "Cancel"
@@ -51,19 +53,19 @@ msgstr "Avbryt"
 
 #: src/chmfontdialog.cpp:44
 msgid "Change fonts.."
-msgstr "Ändra typsnitt.."
+msgstr "Byt teckensnitt..."
 
 #: src/chmfontdialog.cpp:49
 msgid "Normal font:"
-msgstr "Normalt typsnitt:"
+msgstr "Normalt teckensnitt:"
 
 #: src/chmfontdialog.cpp:50
 msgid "Fixed font:"
-msgstr "Fast typsnitt:"
+msgstr "Fast teckensnitt:"
 
 #: src/chmfontdialog.cpp:51
 msgid "Font size:"
-msgstr "Typsnittsstorlek:"
+msgstr "Teckenstorlek:"
 
 #: src/chmfontdialog.cpp:63
 msgid "Preview:"
@@ -79,7 +81,7 @@ msgstr "Öppna en CHM-bok."
 
 #: src/chmframe.cpp:46
 msgid "Change fonts."
-msgstr "Ändra typsnitt."
+msgstr "Byt teckensnitt."
 
 #: src/chmframe.cpp:47
 msgid "Print the page currently displayed."
@@ -87,7 +89,7 @@ msgstr "Skriv ut sidan som för närvarande visas."
 
 #: src/chmframe.cpp:48
 msgid "Toggle table of contents."
-msgstr ""
+msgstr "Innehållstabell av/på."
 
 #: src/chmframe.cpp:49
 msgid "Go to the book's start page."
@@ -99,7 +101,7 @@ msgstr "Gå framåt i historik. Per bok."
 
 #: src/chmframe.cpp:51
 msgid "Back to the last visited page. Per book."
-msgstr "Bakåt till senaste besökta sida. Per bok."
+msgstr "Tillbaka till senaste besökta sida. Per bok."
 
 #: src/chmframe.cpp:52
 msgid "About the program."
@@ -111,24 +113,23 @@ msgstr "Kopiera markering."
 
 #: src/chmframe.cpp:54
 msgid "Find word in page."
-msgstr "Hitta ord på sida."
+msgstr "Sök ord på sida."
 
 #: src/chmframe.cpp:55
 msgid "Toggle fullscreen mode."
-msgstr ""
+msgstr "Fullskärmsläge av/på."
 
 #: src/chmframe.cpp:56
 msgid "Toggle toolbar."
-msgstr ""
+msgstr "Verktygsfält av/på."
 
 #: src/chmframe.cpp:57
 msgid "Close the current tab"
-msgstr ""
+msgstr "Stäng aktuell flik"
 
 #: src/chmframe.cpp:58
-#, fuzzy
 msgid "Open a new tab"
-msgstr "Öppna en CHM-bok."
+msgstr "Öppna en ny flik"
 
 #: src/chmframe.cpp:59
 msgid "Associate the .chm file extension with xCHM."
@@ -156,7 +157,7 @@ msgstr "Om xCHM"
 
 #: src/chmframe.cpp:184
 msgid "Choose a file.."
-msgstr "Välj en fil.."
+msgstr "Välj en fil..."
 
 #: src/chmframe.cpp:278
 msgid "Confirm"
@@ -172,20 +173,19 @@ msgstr "Klar"
 
 #: src/chmframe.cpp:530
 msgid "Loading, please wait.."
-msgstr ""
+msgstr "Läser in, vänta..."
 
 #: src/chmframe.cpp:633
 msgid "&Open..\tCtrl-O"
-msgstr "&Öppna..\tCtrl-O"
+msgstr "&Öppna...\tCtrl-O"
 
 #: src/chmframe.cpp:634
 msgid "&Print page..\tCtrl-P"
-msgstr "Skriv ut sida..\tCtrl-P"
+msgstr "Skriv ut sida...\tCtrl-P"
 
 #: src/chmframe.cpp:635
-#, fuzzy
 msgid "Fon&ts.."
-msgstr "Typsnitt .."
+msgstr "Teckensni&tt..."
 
 #: src/chmframe.cpp:637
 msgid "&Show contents tree\tCtrl-S"
@@ -212,14 +212,12 @@ msgid "&Home\tCtrl-H"
 msgstr "&Hem\tCtrl-H"
 
 #: src/chmframe.cpp:663
-#, fuzzy
 msgid "For&ward\tAlt-RIGHT"
-msgstr "Fra&måt\tCtrl-W"
+msgstr "Fra&måt\tAlt-HÖGER"
 
 #: src/chmframe.cpp:664
-#, fuzzy
 msgid "&Back\tAlt-LEFT"
-msgstr "&Bakåt\tCtrl-B"
+msgstr "&Tillbaka\tAlt-VÄNSTER"
 
 #: src/chmframe.cpp:667
 msgid "&About..\tF1"
@@ -234,22 +232,20 @@ msgid "&Find..\tCtrl-F"
 msgstr "&Sök..\tCtrl-F"
 
 #: src/chmframe.cpp:673
-#, fuzzy
 msgid "&Close tab\tCtrl-W"
-msgstr "&Hem\tCtrl-H"
+msgstr "&Stäng flik\tCtrl-W"
 
 #: src/chmframe.cpp:674
-#, fuzzy
 msgid "&New tab\tCtrl-T"
-msgstr "&Typsnitt..\tCtrl-T"
+msgstr "&Ny flik\tCtrl-T"
 
 #: src/chmframe.cpp:677
 msgid "Toggle &fullscreen\tF11"
-msgstr ""
+msgstr "Fullsk&ärm av/på\tF11"
 
 #: src/chmframe.cpp:678
 msgid "Toggle &toolbar\tAlt-T"
-msgstr ""
+msgstr "Verktygsfäl&t av/på\tAlt-T"
 
 #: src/chmframe.cpp:681
 msgid "&File"
@@ -257,7 +253,7 @@ msgstr "&Arkiv"
 
 #: src/chmframe.cpp:682
 msgid "&View"
-msgstr ""
+msgstr "&Visa"
 
 #: src/chmframe.cpp:683
 msgid "&Edit"
@@ -293,19 +289,19 @@ msgstr "Lägg till visad sida till bokmärken."
 
 #: src/chmframe.cpp:732
 msgid "Remove selected bookmark."
-msgstr "Ta bort valt bokmärke."
+msgstr "Ta bort markerat bokmärke."
 
 #: src/chmframe.cpp:860
 msgid "Open .."
-msgstr "Öppna .."
+msgstr "Öppna..."
 
 #: src/chmframe.cpp:861
 msgid "Print .."
-msgstr "Skriv ut .."
+msgstr "Skriv ut..."
 
 #: src/chmframe.cpp:862
 msgid "Fonts .."
-msgstr "Typsnitt .."
+msgstr "Teckensnitt..."
 
 #: src/chmframe.cpp:866
 msgid "Copy"
@@ -317,11 +313,11 @@ msgstr "Sök"
 
 #: src/chmframe.cpp:871
 msgid "Fullscreen"
-msgstr ""
+msgstr "Fullskärm"
 
 #: src/chmframe.cpp:875
 msgid "Back"
-msgstr "Bakåt"
+msgstr "Tillbaka"
 
 #: src/chmframe.cpp:876
 msgid "Forward"
@@ -341,7 +337,7 @@ msgstr "Fra&måt"
 
 #: src/chmhtmlwindow.cpp:42
 msgid "&Back"
-msgstr "&Bakåt"
+msgstr "&Tillbaka"
 
 #: src/chmhtmlwindow.cpp:43
 msgid "Copy &link location"
@@ -349,11 +345,11 @@ msgstr "Kopiera &länkadress"
 
 #: src/chmhtmlwindow.cpp:44
 msgid "&Save link as.."
-msgstr ""
+msgstr "&Spara länk som..."
 
 #: src/chmhtmlwindow.cpp:45
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "&Öppna i ny flik"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
@@ -361,43 +357,43 @@ msgstr "&Kopiera markering"
 
 #: src/chmhtmlwindow.cpp:50
 msgid "&Find in page.."
-msgstr "&Sök i sida.."
+msgstr "&Sök på sidan..."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Toggle fullscreen mode"
-msgstr ""
+msgstr "&Fullskärmsläge av/på"
 
 #: src/chmhtmlwindow.cpp:270
 msgid "OpenFile("
-msgstr ""
+msgstr "Öppna fil ("
 
 #: src/chmhtmlwindow.cpp:270
 msgid ") failed"
-msgstr ""
+msgstr ") misslyckades"
 
 #: src/chmhtmlwindow.cpp:270 src/chmhtmlwindow.cpp:288
 msgid "Error"
-msgstr ""
+msgstr "Fel"
 
 #: src/chmhtmlwindow.cpp:280
 msgid "Save as"
-msgstr ""
+msgstr "Spara som"
 
 #: src/chmhtmlwindow.cpp:288
 msgid "Error creating file "
-msgstr ""
+msgstr "Kunde inte skapa filen "
 
 #: src/chmhtmlwindow.cpp:298
 msgid "Saved file "
-msgstr ""
+msgstr "Sparade filen "
 
 #: src/chmhtmlwindow.cpp:298
 msgid "Success"
-msgstr ""
+msgstr "Klart"
 
 #: src/chmsearchpanel.cpp:43
 msgid "Get partial matches"
-msgstr "Få halvträffar"
+msgstr "Hämta delträffar"
 
 #: src/chmsearchpanel.cpp:44
 msgid "Search titles only"
@@ -405,7 +401,7 @@ msgstr "Sök endast titlar"
 
 #: src/chmsearchpanel.cpp:48
 msgid "Allow partial matches."
-msgstr "Tillåt halvträffar."
+msgstr "Tillåt delträffar."
 
 #: src/chmsearchpanel.cpp:49
 msgid "Only search in the contents' titles."
@@ -419,12 +415,10 @@ msgstr "Sök i innehåll efter förekomster av angiven text."
 #~ msgstr "På eller av?"
 
 #~ msgid ""
-#~ "This is experimental code, and doing this will overwrite any previously "
-#~ "registered CHM viewer associations.\n"
+#~ "This is experimental code, and doing this will overwrite any previously registered CHM viewer associations.\n"
 #~ "\n"
 #~ "Are you sure you know what you're doing?"
 #~ msgstr ""
-#~ "Det här är experimentell kod, och att göra det här kommer att skriva över "
-#~ "tidigare registrerade associerade CHM-visare.\n"
+#~ "Det här är experimentell kod, och att göra det här kommer att skriva över tidigare registrerade associerade CHM-visare.\n"
 #~ "\n"
 #~ "Är du säker på att du vet vad du gör?"

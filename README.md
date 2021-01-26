@@ -70,6 +70,6 @@ Windows users can (and should) just use the standard viewer (hh.exe).
 
 ## Authors
 
-* **Razvan Cojocaru** [rzvncj](https://github.com/rzvncj)
+* **Răzvan Cojocaru** [rzvncj](https://github.com/rzvncj)
 
 ## Happy reading!

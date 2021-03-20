@@ -1,4 +1,4 @@
-AC_INIT([xchm], [1.32])
+AC_INIT([xchm],[1.33])
 AC_CONFIG_SRCDIR(src/chmfile.cpp)
 AC_CONFIG_HEADERS(config.h)
 
@@ -103,11 +103,8 @@ if test "x$enable_xmlrpc" = "xyes" ; then
 	AC_CHECK_HEADER(XmlRpc.h,,AC_MSG_ERROR([Can't find the XmlRpc++ header.]))
 
 	LIBS="$LIBS -lxmlrpcpp -lssl"	
-	AC_TRY_LINK([#include<XmlRpc.h> ],
-		[XmlRpc::XmlRpcServer svr;],
-    	  [AC_DEFINE(WITH_LIBXMLRPC, 1, [Compile with XmlRpc functionality.])],
-	  AC_MSG_ERROR([Can't find/use -lXmlRpc. Please install XmlRpc++ first.])
-	  )
+	AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include<XmlRpc.h> ]], [[XmlRpc::XmlRpcServer svr;]])],[AC_DEFINE(WITH_LIBXMLRPC, 1, [Compile with XmlRpc functionality.])],[AC_MSG_ERROR(Can't find/use -lXmlRpc. Please install XmlRpc++ first.)
+	  ])
 	AC_LANG_POP([C++])
 fi
 
@@ -118,6 +115,7 @@ case "$host" in
 	;;
 esac
 
-AC_OUTPUT(Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile
-          mac/Makefile data/Makefile man/Makefile)
+AC_CONFIG_FILES([Makefile src/Makefile art/Makefile po/Makefile.in m4/Makefile
+          mac/Makefile data/Makefile man/Makefile])
+AC_OUTPUT
 

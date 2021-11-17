@@ -29,6 +29,7 @@
 #include <wx/fs_inet.h>
 #include <wx/fs_mem.h>
 #include <wx/image.h>
+#include <wx/stdpaths.h>
 #include <wxstringutils.h>
 
 #ifdef __WXMAC__
@@ -86,6 +87,10 @@ bool CHMApp::OnInit()
     auto     id = -1L;
     wxString file;
 
+#if wxCHECK_VERSION(3, 1, 1)
+    wxStandardPaths::Get().SetFileLayout(wxStandardPaths::FileLayout_XDG);
+#endif
+
     _cmdLP.SetCmdLine(argc, argv);
 
     _cmdLP.AddParam(wxT("file"), wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL);
@@ -112,6 +117,7 @@ bool CHMApp::OnInit()
     // catch the xmlrpc setup if desired
     _cmdLP.Found(wxT("xmlrpc"), &port);
 #endif
+
     if (_cmdLP.GetParamCount() == 1) {
         file = _cmdLP.GetParam(0);
         _cmdLP.Found(wxT("contextid"), &id);

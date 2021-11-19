@@ -418,3 +418,4 @@
 
 	+ 1.33:
 		+ removed XPMs from icon theme folders.
+		+ now using the XDG base directory specification (for the config).

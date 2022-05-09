@@ -2,14 +2,6 @@
 
 UNIX CHM viewer.
 
-## WARNING
-
-**Someone has re-created the xchm project on SourceForge, complete
-with the website and downloads. IT'S NOT ME. DO NOT DOWNLOAD
-ANYTHING FROM SOURCEFORGE AND DO NOT FOLLOW THE "RELEASES" THERE.**
-
-The only legitimate xCHM source code and releases are here.
-
 ## Screenshots
 
 ![Python documentation](./art/screenshot.png)

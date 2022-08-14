@@ -113,10 +113,12 @@ void CHMFontDialog::OnUpdateSpin(wxSpinEvent&)
 void CHMFontDialog::Init(const wxArrayString& normalFonts, const wxArrayString& fixedFonts)
 {
     if (_normalFont.IsEmpty())
-        _normalFont = wxFont(_fontSize, wxSWISS, wxNORMAL, wxNORMAL, false).GetFaceName();
+        _normalFont
+            = wxFont(_fontSize, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false).GetFaceName();
 
     if (_fixedFont.IsEmpty())
-        _fixedFont = wxFont(_fontSize, wxMODERN, wxNORMAL, wxNORMAL, false).GetFaceName();
+        _fixedFont
+            = wxFont(_fontSize, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false).GetFaceName();
 
     for (auto&& font : normalFonts)
         _normalFControl->Append(font);

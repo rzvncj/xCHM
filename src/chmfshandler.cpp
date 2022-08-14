@@ -53,7 +53,8 @@ wxFSFile* CHMFSHandler::OpenFile(wxFileSystem& fs, const wxString& location)
     right.Replace(wxT("%26"), wxT("&"), true);
 
     auto filename = wxFileSystem::URLToFileName(left);
-    filename.Normalize();
+    filename.Normalize(wxPATH_NORM_ENV_VARS | wxPATH_NORM_DOTS | wxPATH_NORM_TILDE | wxPATH_NORM_ABSOLUTE
+                       | wxPATH_NORM_LONG | wxPATH_NORM_SHORTCUT);
 
     auto len = cwd.Length();
     if (right.Length() > len && right.StartsWith(cwd) && right[len] == wxT('/'))

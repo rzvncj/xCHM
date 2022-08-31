@@ -32,6 +32,7 @@
 #include <chmsearchpanel.h>
 #include <hhcparser.h>
 #include <wx/accel.h>
+#include <wx/artprov.h>
 #include <wx/bitmap.h>
 #include <wx/busyinfo.h>
 #include <wx/filesys.h>
@@ -688,11 +689,10 @@ wxMenuBar* CHMFrame::CreateMenu()
 }
 
 namespace {
-
+  
 #include <hbook_closed.xpm>
 #include <hbook_open.xpm>
-#include <hpage.xpm>
-
+  
 } // namespace
 
 wxPanel* CHMFrame::CreateContentsPanel()
@@ -708,7 +708,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
     auto il = new wxImageList(16, 16);
     il->Add(wxIcon(hbook_closed_xpm));
     il->Add(wxIcon(hbook_open_xpm));
-    il->Add(wxIcon(hpage_xpm));
+    il->Add(wxIcon(wxArtProvider::GetIcon(wxART_NORMAL_FILE, wxART_HELP_BROWSER)));
 
     _tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, wxDefaultSize,
                           wxSUNKEN_BORDER | wxTR_HIDE_ROOT | wxTR_LINES_AT_ROOT);
@@ -839,44 +839,51 @@ void CHMFrame::SaveExitInfo()
     _fh.Save(config);
 }
 
+#ifndef __WXGTK__
 namespace {
-
-#include <back.xpm>
-#include <copy.xpm>
-#include <fileopen.xpm>
-#include <find.xpm>
-#include <forward.xpm>
+  
 #include <fullscreen.xpm>
-#include <helpicon.xpm>
-#include <home.xpm>
 #include <htmoptns.xpm>
 #include <htmsidep.xpm>
-#include <print.xpm>
-
+  
 } // namespace
+#endif
 
 bool CHMFrame::InitToolBar(wxToolBar* toolbar)
 {
-    toolbar->AddTool(ID_Open, _("Open .."), wxBitmap(fileopen_xpm), OPEN_HELP);
-    toolbar->AddTool(ID_Print, _("Print .."), wxBitmap(print_xpm), PRINT_HELP);
+
+    toolbar->AddTool(ID_Open, _("Open .."), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), OPEN_HELP);
+    toolbar->AddTool(ID_Print, _("Print .."), wxArtProvider::GetBitmap(wxART_PRINT, wxART_TOOLBAR), PRINT_HELP);
+
+#ifdef __WXGTK__
+    toolbar->AddTool(ID_Fonts, _("Fonts .."), wxArtProvider::GetBitmap("gtk-select-font", wxART_TOOLBAR), FONTS_HELP);
+    toolbar->AddCheckTool(ID_Contents, _("Contents"), wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR),
+                          wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR), CONTENTS_HELP);
+#else
     toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm), FONTS_HELP);
     toolbar->AddCheckTool(ID_Contents, _("Contents"), wxBitmap(htmsidep_xpm), wxBitmap(htmsidep_xpm), CONTENTS_HELP);
+#endif
 
     toolbar->AddSeparator();
-    toolbar->AddTool(ID_CopySelection, _("Copy"), wxBitmap(copy_xpm), COPY_HELP);
-    toolbar->AddTool(ID_FindInPage, _("Find"), wxBitmap(find_xpm), FIND_HELP);
+    toolbar->AddTool(ID_CopySelection, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), COPY_HELP);
+    toolbar->AddTool(ID_FindInPage, _("Find"), wxArtProvider::GetBitmap(wxART_FIND, wxART_TOOLBAR), FIND_HELP);
 
     toolbar->AddSeparator();
 
+#ifdef __WXGTK__
+    toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxArtProvider::GetBitmap("gtk-fullscreen", wxART_TOOLBAR),
+                     FULLSCREEN_HELP);
+#else
     toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
+#endif
 
     toolbar->AddSeparator();
 
-    toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);
-    toolbar->AddTool(ID_Forward, _("Forward"), wxBitmap(forward_xpm), FORWARD_HELP);
-    toolbar->AddTool(ID_Home, _("Home"), wxBitmap(home_xpm), HOME_HELP);
+    toolbar->AddTool(ID_Back, _("Back"), wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_TOOLBAR), BACK_HELP);
+    toolbar->AddTool(ID_Forward, _("Forward"), wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_TOOLBAR), FORWARD_HELP);
+    toolbar->AddTool(ID_Home, _("Home"), wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
     toolbar->AddSeparator();
-    toolbar->AddTool(ID_About, _("About"), wxBitmap(helpicon_xpm), ABOUT_HELP);
+    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR), ABOUT_HELP);
 
     toolbar->Realize();
 

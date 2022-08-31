@@ -689,10 +689,10 @@ wxMenuBar* CHMFrame::CreateMenu()
 }
 
 namespace {
-  
+
 #include <hbook_closed.xpm>
 #include <hbook_open.xpm>
-  
+
 } // namespace
 
 wxPanel* CHMFrame::CreateContentsPanel()
@@ -841,11 +841,11 @@ void CHMFrame::SaveExitInfo()
 
 #ifndef __WXGTK__
 namespace {
-  
+
 #include <fullscreen.xpm>
 #include <htmoptns.xpm>
 #include <htmsidep.xpm>
-  
+
 } // namespace
 #endif
 

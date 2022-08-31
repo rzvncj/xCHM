@@ -32,6 +32,7 @@
 #include <chmsearchpanel.h>
 #include <hhcparser.h>
 #include <wx/accel.h>
+#include <wx/artprov.h>
 #include <wx/bitmap.h>
 #include <wx/busyinfo.h>
 #include <wx/filesys.h>
@@ -61,26 +62,44 @@
 namespace {
 
 const wxChar* greeting = wxT(
-    "<html><head><title>About</title></head><body><table border=0><tr><td align=\"left\">"
-    "<img src=\"memory:logo.xpm\"></td><td align=\"left\">Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
-    "<br><br><B>xCHM</B> has been written by Razvan Cojocaru (rzvncj@gmail.com). It is licensed under the "
-    "<TT>GPL</TT>.<br>It's based on Jed Wing's <a href=\"http://www.jedrea.com/chmlib/\">CHMLIB</a> and "
-    "<a href=\"http://www.wxwidgets.org\">wxWidgets</a>.<br><br></td></tr></table>"
-    "<br>If you'd like to know more about CHM, go to <a href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
-    " Specification page</a>.<br>Pabs has contributed time and knowledge to the development of <B>xCHM</B>, "
-    "and features such as the fast index search would not have been implemented without his help."
-    " Portions of the fast index search are modified versions of Pabs' <TT>GPL</TT>d <TT>chmdeco</TT> code."
-    "<br><br>If you'd like to use the code in your own stuff please figure <TT>GPL</TT> out first."
+    "<html><head><title>About</title></head><body><table border=0><tr><td "
+    "align=\"left\">"
+    "<img src=\"memory:logo.xpm\"></td><td align=\"left\">Hello, and welcome "
+    "to <B>xCHM</B>, the UNIX CHM viewer."
+    "<br><br><B>xCHM</B> has been written by Razvan Cojocaru "
+    "(rzvncj@gmail.com). It is licensed under the "
+    "<TT>GPL</TT>.<br>It's based on Jed Wing's <a "
+    "href=\"http://www.jedrea.com/chmlib/\">CHMLIB</a> and "
+    "<a "
+    "href=\"http://www.wxwidgets.org\">wxWidgets</a>.<br><br></td></tr></table>"
+    "<br>If you'd like to know more about CHM, go to <a "
+    "href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
+    " Specification page</a>.<br>Pabs has contributed time and knowledge to "
+    "the development of <B>xCHM</B>, "
+    "and features such as the fast index search would not have been "
+    "implemented without his help."
+    " Portions of the fast index search are modified versions of Pabs' "
+    "<TT>GPL</TT>d <TT>chmdeco</TT> code."
+    "<br><br>If you'd like to use the code in your own stuff please figure "
+    "<TT>GPL</TT> out first."
 #if !defined(wxUSE_UNICODE) || !wxUSE_UNICODE
-    "<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked against a non-Unicode version of wxWidgets! "
-    "While it will work with most CHMs, it might not properly display special character languages."
+    "<br><br><B>WARNING</B>: your <B>xCHM</B> binary is linked against a "
+    "non-Unicode version of wxWidgets! "
+    "While it will work with most CHMs, it might not properly display special "
+    "character languages."
 #endif
-    "<br><br>Tips:<br><ul><li>The global search is an \'AND\' search, i.e. searching for \'word1 word2\' "
-    "(quotes not included) will find all the pages that contain both word1 and word2, in whatever order.</li>"
-    "<li>Allowing partial matches will find pages that contain words that only start with the typed strings, "
-    "i.e. searching for \'ans 4\' (quotes not included) will find pages that contain the sentence "
-    "\'The answer is 42.\'.</li><li>Right clicking on the displayed page brings out a popup menu with "
-    "common options.</li></ul><br><br>Ctrl-'c' is copy, Ctrl-'f' is find in page, Ctrl-'=' is zoom-in, "
+    "<br><br>Tips:<br><ul><li>The global search is an \'AND\' search, i.e. "
+    "searching for \'word1 word2\' "
+    "(quotes not included) will find all the pages that contain both word1 and "
+    "word2, in whatever order.</li>"
+    "<li>Allowing partial matches will find pages that contain words that only "
+    "start with the typed strings, "
+    "i.e. searching for \'ans 4\' (quotes not included) will find pages that "
+    "contain the sentence "
+    "\'The answer is 42.\'.</li><li>Right clicking on the displayed page "
+    "brings out a popup menu with "
+    "common options.</li></ul><br><br>Ctrl-'c' is copy, Ctrl-'f' is find in "
+    "page, Ctrl-'=' is zoom-in, "
     "Ctrl-'-' is zoom-out.<br><br>Enjoy.</body></html>");
 
 const wxChar* error_page = wxT("<html><body>Error loading CHM file!</body></html>");
@@ -688,11 +707,8 @@ wxMenuBar* CHMFrame::CreateMenu()
 }
 
 namespace {
-
 #include <hbook_closed.xpm>
 #include <hbook_open.xpm>
-#include <hpage.xpm>
-
 } // namespace
 
 wxPanel* CHMFrame::CreateContentsPanel()
@@ -708,7 +724,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
     auto il = new wxImageList(16, 16);
     il->Add(wxIcon(hbook_closed_xpm));
     il->Add(wxIcon(hbook_open_xpm));
-    il->Add(wxIcon(hpage_xpm));
+    il->Add(wxIcon(wxArtProvider::GetIcon(wxART_NORMAL_FILE, wxART_HELP_BROWSER)));
 
     _tcl = new wxTreeCtrl(temp, ID_TreeCtrl, wxDefaultPosition, wxDefaultSize,
                           wxSUNKEN_BORDER | wxTR_HIDE_ROOT | wxTR_LINES_AT_ROOT);
@@ -839,44 +855,49 @@ void CHMFrame::SaveExitInfo()
     _fh.Save(config);
 }
 
+#ifndef __WXGTK__
 namespace {
-
-#include <back.xpm>
-#include <copy.xpm>
-#include <fileopen.xpm>
-#include <find.xpm>
-#include <forward.xpm>
 #include <fullscreen.xpm>
-#include <helpicon.xpm>
-#include <home.xpm>
 #include <htmoptns.xpm>
 #include <htmsidep.xpm>
-#include <print.xpm>
-
 } // namespace
+#endif
 
 bool CHMFrame::InitToolBar(wxToolBar* toolbar)
 {
-    toolbar->AddTool(ID_Open, _("Open .."), wxBitmap(fileopen_xpm), OPEN_HELP);
-    toolbar->AddTool(ID_Print, _("Print .."), wxBitmap(print_xpm), PRINT_HELP);
+
+    toolbar->AddTool(ID_Open, _("Open .."), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), OPEN_HELP);
+    toolbar->AddTool(ID_Print, _("Print .."), wxArtProvider::GetBitmap(wxART_PRINT, wxART_TOOLBAR), PRINT_HELP);
+
+#ifdef __WXGTK__
+    toolbar->AddTool(ID_Fonts, _("Fonts .."), wxArtProvider::GetBitmap("gtk-select-font", wxART_TOOLBAR), FONTS_HELP);
+    toolbar->AddCheckTool(ID_Contents, _("Contents"), wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR),
+                          wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR), CONTENTS_HELP);
+#else
     toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm), FONTS_HELP);
     toolbar->AddCheckTool(ID_Contents, _("Contents"), wxBitmap(htmsidep_xpm), wxBitmap(htmsidep_xpm), CONTENTS_HELP);
+#endif
 
     toolbar->AddSeparator();
-    toolbar->AddTool(ID_CopySelection, _("Copy"), wxBitmap(copy_xpm), COPY_HELP);
-    toolbar->AddTool(ID_FindInPage, _("Find"), wxBitmap(find_xpm), FIND_HELP);
+    toolbar->AddTool(ID_CopySelection, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), COPY_HELP);
+    toolbar->AddTool(ID_FindInPage, _("Find"), wxArtProvider::GetBitmap(wxART_FIND, wxART_TOOLBAR), FIND_HELP);
 
     toolbar->AddSeparator();
 
+#ifdef __WXGTK__
+    toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxArtProvider::GetBitmap("gtk-fullscreen", wxART_TOOLBAR),
+                     FULLSCREEN_HELP);
+#else
     toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
+#endif
 
     toolbar->AddSeparator();
 
-    toolbar->AddTool(ID_Back, _("Back"), wxBitmap(back_xpm), BACK_HELP);
-    toolbar->AddTool(ID_Forward, _("Forward"), wxBitmap(forward_xpm), FORWARD_HELP);
-    toolbar->AddTool(ID_Home, _("Home"), wxBitmap(home_xpm), HOME_HELP);
+    toolbar->AddTool(ID_Back, _("Back"), wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_TOOLBAR), BACK_HELP);
+    toolbar->AddTool(ID_Forward, _("Forward"), wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_TOOLBAR), FORWARD_HELP);
+    toolbar->AddTool(ID_Home, _("Home"), wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
     toolbar->AddSeparator();
-    toolbar->AddTool(ID_About, _("About"), wxBitmap(helpicon_xpm), ABOUT_HELP);
+    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR), ABOUT_HELP);
 
     toolbar->Realize();
 

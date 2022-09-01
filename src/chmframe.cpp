@@ -883,7 +883,12 @@ bool CHMFrame::InitToolBar(wxToolBar* toolbar)
     toolbar->AddTool(ID_Forward, _("Forward"), wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_TOOLBAR), FORWARD_HELP);
     toolbar->AddTool(ID_Home, _("Home"), wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
     toolbar->AddSeparator();
+    
+#ifdef __WXGTK__
+    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap("gtk-about", wxART_TOOLBAR), ABOUT_HELP);
+#else
     toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR), ABOUT_HELP);
+#endif
 
     toolbar->Realize();
 

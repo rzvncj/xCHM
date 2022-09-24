@@ -31,6 +31,7 @@
 #include <chmlistctrl.h>
 #include <chmsearchpanel.h>
 #include <hhcparser.h>
+#include <wx/aboutdlg.h> 
 #include <wx/accel.h>
 #include <wx/artprov.h>
 #include <wx/bitmap.h>
@@ -85,15 +86,6 @@ const wxChar* greeting = wxT(
     "Ctrl-'-' is zoom-out.<br><br>Enjoy.</body></html>");
 
 const wxChar* error_page = wxT("<html><body>Error loading CHM file!</body></html>");
-
-const wxChar* about_txt = wxT("xCHM v. " VERSION
-                              "\nby Razvan Cojocaru <rzvncj@gmail.com>\n\n"
-                              "With thanks to Pabs. Based on Jed Wing's CHMLIB.\n"
-                              "XMLRPC code for context sensitive help contributed by Eamon Millman. "
-                              "<SPAN> tag support and contents tree icons contributed by Fritz Elfert. "
-                              "Tabbed browsing support contributed by Cedric Boudinet. "
-                              "Mac builds, suggestions and fixes contributed by Mojca Miklavec. "
-                              "Glasses logo by Anca Macinic.");
 
 #include <logo.xpm>
 #include <xchm.xpm>
@@ -177,7 +169,12 @@ void CHMFrame::OnQuit(wxCommandEvent&)
 
 void CHMFrame::OnAbout(wxCommandEvent&)
 {
-    wxMessageBox(about_txt, _("About xCHM"), wxOK | wxICON_INFORMATION, this);
+    wxAboutDialogInfo info;
+    info.SetName(_("xCHM"));
+    info.SetVersion(_(VERSION));
+    info.SetDescription(_("A Compiled HTML Help (CHM) file viewer."));
+    info.SetCopyright(wxT("(C) 2022 Razvan Cojocaru <rzvncj@gmail.com>"));
+    wxAboutBox(info);
 }
 
 void CHMFrame::OnOpen(wxCommandEvent&)

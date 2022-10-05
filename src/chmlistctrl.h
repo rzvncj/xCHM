@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2022  Razvan Cojocaru <rzvncj@gmail.com>
   ListDirty() patch contributed by Iulian Dragos
   <dragosiulian@users.sourceforge.net>
 

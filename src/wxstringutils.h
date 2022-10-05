@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2019  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2022  Razvan Cojocaru <rzvncj@gmail.com>
   Most of the code in this file is a modified version of code from
   Pabs' GPL chmdeco project, credits and thanks go to him.
 

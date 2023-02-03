@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2022  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2023  Razvan Cojocaru <rzvncj@gmail.com>
   Tabbed browsing support developed by Cedric Boudinet <bouced@gmx.fr>
   (this file originally written by Cedric Boudinet)
 

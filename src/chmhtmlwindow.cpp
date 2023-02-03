@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2022  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2023  Razvan Cojocaru <rzvncj@gmail.com>
   Mac OS specific patches contributed by Chanler White
   <cawhite@nwrails.com>
   "Save link as" patch contributed by Joerg Wunsch

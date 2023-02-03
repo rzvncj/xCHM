@@ -1,4 +1,4 @@
-AC_INIT([xchm],[1.34])
+AC_INIT([xchm],[1.35])
 AC_CONFIG_SRCDIR(src/chmfile.cpp)
 AC_CONFIG_HEADERS(config.h)
 

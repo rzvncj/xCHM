@@ -424,3 +424,5 @@
 		+ fixed a few compile-time deprecation warnings.
 		+ removed a bunch of local .xpm files (icons), now using platform
 		  defaults.
+
+	+ 1.35:

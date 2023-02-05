@@ -851,27 +851,27 @@ namespace {
 
 bool CHMFrame::InitToolBar(wxToolBar* toolbar)
 {
-
-    toolbar->AddTool(ID_Open, _("Open .."), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), OPEN_HELP);
-    toolbar->AddTool(ID_Print, _("Print .."), wxArtProvider::GetBitmap(wxART_PRINT, wxART_TOOLBAR), PRINT_HELP);
+    toolbar->AddTool(ID_Open, _("Open .."), wxArtProvider::GetBitmapBundle(wxART_FILE_OPEN, wxART_TOOLBAR), OPEN_HELP);
+    toolbar->AddTool(ID_Print, _("Print .."), wxArtProvider::GetBitmapBundle(wxART_PRINT, wxART_TOOLBAR), PRINT_HELP);
 
 #ifdef __WXGTK__
-    toolbar->AddTool(ID_Fonts, _("Fonts .."), wxArtProvider::GetBitmap("gtk-select-font", wxART_TOOLBAR), FONTS_HELP);
-    toolbar->AddCheckTool(ID_Contents, _("Contents"), wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR),
-                          wxArtProvider::GetBitmap("gtk-index", wxART_TOOLBAR), CONTENTS_HELP);
+    toolbar->AddTool(ID_Fonts, _("Fonts .."), wxArtProvider::GetBitmapBundle("gtk-select-font", wxART_TOOLBAR),
+                     FONTS_HELP);
+    toolbar->AddCheckTool(ID_Contents, _("Contents"), wxArtProvider::GetBitmapBundle("gtk-index", wxART_TOOLBAR),
+                          wxArtProvider::GetBitmapBundle("gtk-index", wxART_TOOLBAR), CONTENTS_HELP);
 #else
     toolbar->AddTool(ID_Fonts, _("Fonts .."), wxBitmap(htmoptns_xpm), FONTS_HELP);
     toolbar->AddCheckTool(ID_Contents, _("Contents"), wxBitmap(htmsidep_xpm), wxBitmap(htmsidep_xpm), CONTENTS_HELP);
 #endif
 
     toolbar->AddSeparator();
-    toolbar->AddTool(ID_CopySelection, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), COPY_HELP);
-    toolbar->AddTool(ID_FindInPage, _("Find"), wxArtProvider::GetBitmap(wxART_FIND, wxART_TOOLBAR), FIND_HELP);
+    toolbar->AddTool(ID_CopySelection, _("Copy"), wxArtProvider::GetBitmapBundle(wxART_COPY, wxART_TOOLBAR), COPY_HELP);
+    toolbar->AddTool(ID_FindInPage, _("Find"), wxArtProvider::GetBitmapBundle(wxART_FIND, wxART_TOOLBAR), FIND_HELP);
 
     toolbar->AddSeparator();
 
 #ifdef __WXGTK__
-    toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxArtProvider::GetBitmap("gtk-fullscreen", wxART_TOOLBAR),
+    toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxArtProvider::GetBitmapBundle("gtk-fullscreen", wxART_TOOLBAR),
                      FULLSCREEN_HELP);
 #else
     toolbar->AddTool(ID_FullScreen, _("Fullscreen"), wxBitmap(fullscreen_xpm), FULLSCREEN_HELP);
@@ -879,15 +879,16 @@ bool CHMFrame::InitToolBar(wxToolBar* toolbar)
 
     toolbar->AddSeparator();
 
-    toolbar->AddTool(ID_Back, _("Back"), wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_TOOLBAR), BACK_HELP);
-    toolbar->AddTool(ID_Forward, _("Forward"), wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_TOOLBAR), FORWARD_HELP);
-    toolbar->AddTool(ID_Home, _("Home"), wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
+    toolbar->AddTool(ID_Back, _("Back"), wxArtProvider::GetBitmapBundle(wxART_GO_BACK, wxART_TOOLBAR), BACK_HELP);
+    toolbar->AddTool(ID_Forward, _("Forward"), wxArtProvider::GetBitmapBundle(wxART_GO_FORWARD, wxART_TOOLBAR),
+                     FORWARD_HELP);
+    toolbar->AddTool(ID_Home, _("Home"), wxArtProvider::GetBitmapBundle(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
     toolbar->AddSeparator();
 
 #ifdef __WXGTK__
-    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap("gtk-about", wxART_TOOLBAR), ABOUT_HELP);
+    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmapBundle("gtk-about", wxART_TOOLBAR), ABOUT_HELP);
 #else
-    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR), ABOUT_HELP);
+    toolbar->AddTool(ID_About, _("About"), wxArtProvider::GetBitmapBundle(wxART_HELP, wxART_TOOLBAR), ABOUT_HELP);
 #endif
 
     toolbar->Realize();

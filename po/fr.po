@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: 2009-04-07 20:40+0200\n"
 "Last-Translator: Cedric Boudinet <bouced@gmx.fr>\n"
 "Language-Team: français\n"
@@ -292,15 +292,15 @@ msgstr "Ajouter la page affichée dans les signets."
 msgid "Remove selected bookmark."
 msgstr "Supprimer la page sélectionnée des signets."
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "Ouvrir .."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "Imprimer .."
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "Polices .."
 
@@ -324,11 +324,11 @@ msgstr "Précédent"
 msgid "Forward"
 msgstr "Suivant"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "Page d'accueil"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "À propos"
 

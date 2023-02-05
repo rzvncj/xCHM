@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: Sat Apr  3 20:35:46 BRT 2004\n"
 "Last-Translator: José Paulo Matafome Oleiro <matafomeoleiro@gmail.com>\n"
 "Language-Team: Portuguese Team \n"
@@ -296,15 +296,15 @@ msgstr "Adicionar a página actual aos favoritos."
 msgid "Remove selected bookmark."
 msgstr "Remover o favorito seleccionado."
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "Abrir .."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "Imprimir .."
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "Fontes .."
 
@@ -328,11 +328,11 @@ msgstr "Voltar"
 msgid "Forward"
 msgstr "Avançar"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "Início"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "Sobre"
 

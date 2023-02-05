@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: 2006-04-01 18:30+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <mvd@mylinux.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -294,15 +294,15 @@ msgstr "Додати цю сторінку до закладок."
 msgid "Remove selected bookmark."
 msgstr "Видалити виділену закладку."
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "Відкрити..."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "Друк..."
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "Шрифти..."
 
@@ -326,11 +326,11 @@ msgstr "Назад"
 msgid "Forward"
 msgstr "Вперед"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "Додому"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "Про програму"
 

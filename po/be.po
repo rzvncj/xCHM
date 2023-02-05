@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: 2007-09-17 23:17+0300\n"
 "Last-Translator: YOUR NAME <E-MAIL@ADDRESS>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -295,15 +295,15 @@ msgstr "Дадаць бягучую старонку ў закладкі."
 msgid "Remove selected bookmark."
 msgstr "Выдаліць вылучаную закладку."
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "Адкрыць .."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "Друк .."
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "Шрыфты .."
 
@@ -327,11 +327,11 @@ msgstr "Назад"
 msgid "Forward"
 msgstr "Наперад"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "Пачатак"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "Пра .."
 

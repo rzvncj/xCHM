@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xCHM 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: 2005-08-27 14:37+0800\n"
 "Last-Translator: sejishikong <sejishikong@263.net>\n"
 "Language-Team: zh_CN <sejishikong@linuxfans.org>\n"
@@ -299,15 +299,15 @@ msgstr "添加显示的页面到书签。"
 msgid "Remove selected bookmark."
 msgstr "移除选定的书签。"
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "打开 .."
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "打印 .."
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "字体 .."
 
@@ -332,11 +332,11 @@ msgstr "后退"
 msgid "Forward"
 msgstr "前进"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "主页"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "关于"
 

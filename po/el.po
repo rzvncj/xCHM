@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-03 15:20+0200\n"
+"POT-Creation-Date: 2023-02-05 11:34+0200\n"
 "PO-Revision-Date: 2012-12-23 16:13+0200\n"
 "Last-Translator: Klearchos-Angelos Gkountras <kleagkou@gmail.com>\n"
 "Language-Team: Greek <gr@li.org>\n"
@@ -290,15 +290,15 @@ msgstr "Προσθήκη επιλεγόμενης σελίδας στους σε
 msgid "Remove selected bookmark."
 msgstr "Αφαιρέση επιλεγμένου σελιδοδείκτη"
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:854
 msgid "Open .."
 msgstr "'Ανοιγμα ,,"
 
-#: src/chmframe.cpp:856
+#: src/chmframe.cpp:855
 msgid "Print .."
 msgstr "Εκτύπωση"
 
-#: src/chmframe.cpp:859 src/chmframe.cpp:863
+#: src/chmframe.cpp:858 src/chmframe.cpp:863
 msgid "Fonts .."
 msgstr "Γραμματοσειρές"
 
@@ -322,11 +322,11 @@ msgstr "Πίσω "
 msgid "Forward"
 msgstr "Μπροστά"
 
-#: src/chmframe.cpp:884
+#: src/chmframe.cpp:885
 msgid "Home"
 msgstr "Αρχική Σελίδα"
 
-#: src/chmframe.cpp:888 src/chmframe.cpp:890
+#: src/chmframe.cpp:889 src/chmframe.cpp:891
 msgid "About"
 msgstr "Σχετικά"
 

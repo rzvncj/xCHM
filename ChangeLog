@@ -429,3 +429,6 @@
 		+ fixed Mageia Linux build (they're using wxWidgets 3.2.1 in 2.8
 		  backwards-compatibility mode, which adds an unfortunate - and
 		  deprecated - wxToolBarBase::AddTool() overload).
+
+	+ 1.36:
+		+

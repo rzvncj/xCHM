@@ -42,9 +42,9 @@
 #include <wx/mimetype.h>
 #include <wx/statbox.h>
 #include <wx/utils.h>
-#include <wx/version.h> 
+#include <wx/version.h>
 
-#if wxCHECK_VERSION(3, 1, 6) 
+#if wxCHECK_VERSION(3, 1, 6)
 #define ARTPROV_GETTOOLBARBITMAP wxArtProvider::GetBitmapBundle
 #else
 #define ARTPROV_GETTOOLBARBITMAP wxArtProvider::GetBitmap
@@ -862,8 +862,7 @@ bool CHMFrame::InitToolBar(wxToolBar* toolbar)
     toolbar->AddTool(ID_Print, _("Print .."), ARTPROV_GETTOOLBARBITMAP(wxART_PRINT, wxART_TOOLBAR), PRINT_HELP);
 
 #ifdef __WXGTK__
-    toolbar->AddTool(ID_Fonts, _("Fonts .."), ARTPROV_GETTOOLBARBITMAP("gtk-select-font", wxART_TOOLBAR),
-                     FONTS_HELP);
+    toolbar->AddTool(ID_Fonts, _("Fonts .."), ARTPROV_GETTOOLBARBITMAP("gtk-select-font", wxART_TOOLBAR), FONTS_HELP);
     toolbar->AddCheckTool(ID_Contents, _("Contents"), ARTPROV_GETTOOLBARBITMAP("gtk-index", wxART_TOOLBAR),
                           ARTPROV_GETTOOLBARBITMAP("gtk-index", wxART_TOOLBAR), CONTENTS_HELP);
 #else
@@ -887,8 +886,7 @@ bool CHMFrame::InitToolBar(wxToolBar* toolbar)
     toolbar->AddSeparator();
 
     toolbar->AddTool(ID_Back, _("Back"), ARTPROV_GETTOOLBARBITMAP(wxART_GO_BACK, wxART_TOOLBAR), BACK_HELP);
-    toolbar->AddTool(ID_Forward, _("Forward"), ARTPROV_GETTOOLBARBITMAP(wxART_GO_FORWARD, wxART_TOOLBAR),
-                     FORWARD_HELP);
+    toolbar->AddTool(ID_Forward, _("Forward"), ARTPROV_GETTOOLBARBITMAP(wxART_GO_FORWARD, wxART_TOOLBAR), FORWARD_HELP);
     toolbar->AddTool(ID_Home, _("Home"), ARTPROV_GETTOOLBARBITMAP(wxART_GO_HOME, wxART_TOOLBAR), HOME_HELP);
     toolbar->AddSeparator();
 

@@ -431,4 +431,4 @@
 		  deprecated - wxToolBarBase::AddTool() overload).
 
 	+ 1.36:
-		+
+		+ fixed compilation for wxWidgets versions older than 3.1.6.

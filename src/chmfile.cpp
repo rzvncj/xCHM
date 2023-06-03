@@ -41,6 +41,7 @@ constexpr size_t MAX_SEARCH_RESULTS {512};
 // Big-enough buffer size for use with various routines.
 constexpr size_t BUF_SIZE {4096};
 
+#ifndef _WIN32
 // Thanks to Vadim Zeitlin.
 constexpr int ANSI_CHARSET {0};
 constexpr int SHIFTJIS_CHARSET {128};
@@ -106,6 +107,7 @@ constexpr uint32_t LANG_UZBEK {0x43};
 constexpr uint32_t LANG_TATAR {0x44};
 constexpr uint32_t LANG_MONGOLIAN {0x50};
 constexpr uint32_t LANG_GALICIAN {0x56};
+#endif
 
 #define FIXENDIAN16(x) (x = wxUINT16_SWAP_ON_BE(x))
 #define FIXENDIAN32(x) (x = wxUINT32_SWAP_ON_BE(x))

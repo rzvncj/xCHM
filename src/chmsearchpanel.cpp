@@ -159,11 +159,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, const wxString& text, bool 
     }
 
     wxTreeItemIdValue cookie;
-    auto              child = _tcl->GetFirstChild(root, cookie);
 
-    for (auto i = 0UL; i < _tcl->GetChildrenCount(root, false); ++i) {
+    for (auto child = _tcl->GetFirstChild(root, cookie); child; child = _tcl->GetNextChild(root, cookie)) {
         PopulateList(child, text, wholeWords);
-        child = _tcl->GetNextChild(root, cookie);
     }
 }
 

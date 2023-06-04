@@ -550,6 +550,7 @@ bool CHMFile::GetIndex(CHMListCtrl& toBuild)
 
     toBuild.Freeze();
     bool bindex = BinaryIndex(toBuild, *cvPtr);
+    toBuild.UpdateItemCount();
     toBuild.Thaw();
 
     if (bindex)

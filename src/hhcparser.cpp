@@ -128,7 +128,7 @@ void HHCParser::parse(const char* chunk)
                 ++chunk;
                 continue;
             }
-            // falthrough
+            // fallthrough
         }
 
         if (_intag)

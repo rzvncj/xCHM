@@ -131,6 +131,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
 
     if (_titles->IsChecked() && h1.empty()) {
         PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
+        _results->UpdateItemCount();
         _results->UpdateUI();
         return;
     }
@@ -140,6 +141,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
         _results->AddPairItem(item.second, url);
     }
 
+    _results->UpdateItemCount();
     _results->UpdateUI();
 }
 

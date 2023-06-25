@@ -73,6 +73,8 @@ public:
     //! Cleans up and removes all the list items.
     void Reset();
 
+    void UpdateItemCount();
+
     /*!
       \brief Adds a title:url pair to the list. The title is the part
       that gets displayed, the url is tha page where the HTML window

@@ -100,11 +100,9 @@ void CHMHtmlWindow::Sync(wxTreeItemId root, const wxString& page)
     }
 
     wxTreeItemIdValue cookie;
-    auto              child = _tcl->GetFirstChild(root, cookie);
 
-    for (auto i = 0UL; i < _tcl->GetChildrenCount(root, false); ++i) {
+    for (auto child = _tcl->GetFirstChild(root, cookie); child; child = _tcl->GetNextChild(root, cookie)) {
         Sync(child, page);
-        child = _tcl->GetNextChild(root, cookie);
     }
 }
 

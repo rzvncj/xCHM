@@ -131,6 +131,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
 
     if (_titles->IsChecked() && h1.empty()) {
         PopulateList(_tcl->GetRootItem(), sr, !_partial->IsChecked());
+        _results->UpdateItemCount();
         _results->UpdateUI();
         return;
     }
@@ -140,6 +141,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
         _results->AddPairItem(item.second, url);
     }
 
+    _results->UpdateItemCount();
     _results->UpdateUI();
 }
 
@@ -159,11 +161,9 @@ void CHMSearchPanel::PopulateList(wxTreeItemId root, const wxString& text, bool 
     }
 
     wxTreeItemIdValue cookie;
-    auto              child = _tcl->GetFirstChild(root, cookie);
 
-    for (auto i = 0UL; i < _tcl->GetChildrenCount(root, false); ++i) {
+    for (auto child = _tcl->GetFirstChild(root, cookie); child; child = _tcl->GetNextChild(root, cookie)) {
         PopulateList(child, text, wholeWords);
-        child = _tcl->GetNextChild(root, cookie);
     }
 }
 

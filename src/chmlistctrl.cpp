@@ -59,10 +59,14 @@ void CHMListCtrl::Reset()
     UpdateUI();
 }
 
+void CHMListCtrl::UpdateItemCount()
+{
+    SetItemCount(_items.GetCount());
+}
+
 void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 {
     _items.Add(new CHMListPairItem(title, url));
-    SetItemCount(_items.GetCount());
 }
 
 void CHMListCtrl::LoadSelected()

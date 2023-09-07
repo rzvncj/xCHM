@@ -26,38 +26,53 @@
 
 namespace {
 
-const wxChar* test_page = wxT(
-    "<html><body><table><tr><td valign=\"top\">Normal face<br>(and <u>underlined</u>. <i>Italic face.</i> "
-    "<b>Bold face.</b> <b><i>Bold italic face.</i></b><br><font size=-2>font size -2</font><br><font size=-1>"
-    "font size -1</font><br><font size=+0>font size +0</font><br><font size=+1>font size +1</font><br><font "
-    "size=+2>font size +2</font><br><font size=+3>font size +3</font><br><font size=+4>font size +4</font>"
-    "</td><td valign=\"top\"><tt>Fixed size face.<br> <b>bold</b> <i>italic</i> <b><i>bold italic <u>"
-    "underlined</u></i></b><br><font size=-2>font size -2</font><br><font size=-1>font size -1</font><br>"
-    "<font size=+0>font size +0</font><br><font size=+1>font size +1</font><br><font size=+2>font size +2"
-    "</font><br><font size=+3>font size +3</font><br><font size=+4>font size +4</font></tt></td></tr></table>"
-    "</body></html>");
+const wxChar* test_page = wxT(R"(
+<html>
+
+<body>
+    <table>
+        <tr>
+            <td valign="top">Normal face<br>(and <u>underlined</u>. <i>Italic face.</i> <b>Bold face.</b> <b><i>Bold
+                        italic face.</i></b><br>
+                <font size=-2>font size -2</font><br>
+                <font size=-1>font size -1</font><br>
+                <font size=+0>font size +0</font><br>
+                <font size=+1>font size +1</font><br>
+                <font size=+2>font size +2</font><br>
+                <font size=+3>font size +3</font><br>
+                <font size=+4>font size +4</font>
+            </td>
+            <td valign="top"><tt>Fixed size face.<br> <b>bold</b> <i>italic</i> <b><i>bold italic
+                            <u>underlined</u></i></b><br>
+                    <font size=-2>font size -2</font><br>
+                    <font size=-1>font size -1</font><br>
+                    <font size=+0>font size +0</font><br>
+                    <font size=+1>font size +1</font><br>
+                    <font size=+2>font size +2</font><br>
+                    <font size=+3>font size +3</font><br>
+                    <font size=+4>font size +4</font>
+                </tt></td>
+        </tr>
+    </table>
+</body>
+
+</html>)");
 
 }
 
-CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts, const wxArrayString& fixedFonts,
-                             const wxString& normalFont, const wxString& fixedFont, int fontSize)
-    : wxDialog(parent, -1, _("Change fonts..")), _normalFont(normalFont), _fixedFont(fixedFont), _fontSize(fontSize)
+CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxString& normalFont, const wxString& fixedFont, int fontSize)
+    : wxDialog(parent, -1, _("Change fonts..")),
+      _normalFont(fontSize, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, normalFont),
+      _fixedFont(fontSize, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, fixedFont)
 {
     auto topsizer = new wxBoxSizer(wxVERTICAL);
-    auto sizer    = new wxFlexGridSizer(2, 3, 2, 5);
+    auto sizer    = new wxFlexGridSizer(2, 2, 2, 5);
 
     sizer->Add(new wxStaticText(this, -1, _("Normal font:")));
     sizer->Add(new wxStaticText(this, -1, _("Fixed font:")));
-    sizer->Add(new wxStaticText(this, -1, _("Font size:")));
 
-    sizer->Add(_normalFControl = new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition, wxSize(200, -1), 0, nullptr,
-                                                wxCB_DROPDOWN | wxCB_READONLY));
-    sizer->Add(_fixedFControl = new wxComboBox(this, -1, wxEmptyString, wxDefaultPosition, wxSize(200, -1), 0, nullptr,
-                                               wxCB_DROPDOWN | wxCB_READONLY));
-
-    sizer->Add(_fontSizeControl = new wxSpinCtrl(this, -1));
-
-    _fontSizeControl->SetRange(2, 100);
+    sizer->Add(_normalFControl = new wxFontPickerCtrl(this, -1, _normalFont, wxDefaultPosition, wxSize(200, -1)));
+    sizer->Add(_fixedFControl = new wxFontPickerCtrl(this, -1, _fixedFont, wxDefaultPosition, wxSize(200, -1)));
 
     topsizer->Add(sizer, 0, wxLEFT | wxRIGHT | wxTOP, 10);
     topsizer->Add(new wxStaticText(this, -1, _("Preview:")), 0, wxLEFT | wxTOP, 10);
@@ -79,7 +94,7 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts,
     topsizer->Fit(this);
     Centre(wxBOTH);
 
-    Init(normalFonts, fixedFonts);
+    UpdatePreview();
 }
 
 void CHMFontDialog::UpdatePreview()
@@ -89,59 +104,21 @@ void CHMFontDialog::UpdatePreview()
 
     wxBusyCursor bc;
 
-    _normalFont = _normalFControl->GetStringSelection();
-    _fixedFont  = _fixedFControl->GetStringSelection();
-
-    _fontSize   = _fontSizeControl->GetValue();
     auto parent = dynamic_cast<CHMFrame*>(GetParent());
-    auto sizes  = parent->ComputeFontSizes(_fontSize);
+    auto sizes  = parent->ComputeFontSizes(_normalFont.GetPointSize());
 
-    _test->SetFonts(_normalFont, _fixedFont, sizes.data());
+    _test->SetFonts(_normalFont.GetFaceName(), _fixedFont.GetFaceName(), sizes.data());
     _test->SetPage(test_page);
 }
 
-void CHMFontDialog::OnUpdate(wxCommandEvent&)
+void CHMFontDialog::OnUpdate(wxFontPickerEvent&)
 {
-    UpdatePreview();
-}
-
-void CHMFontDialog::OnUpdateSpin(wxSpinEvent&)
-{
-    UpdatePreview();
-}
-
-void CHMFontDialog::Init(const wxArrayString& normalFonts, const wxArrayString& fixedFonts)
-{
-    if (_normalFont.IsEmpty())
-        _normalFont
-            = wxFont(_fontSize, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false).GetFaceName();
-
-    if (_fixedFont.IsEmpty())
-        _fixedFont
-            = wxFont(_fontSize, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false).GetFaceName();
-
-    for (auto&& font : normalFonts)
-        _normalFControl->Append(font);
-
-    for (auto&& font : fixedFonts)
-        _fixedFControl->Append(font);
-
-    if (!_normalFont.IsEmpty())
-        _normalFControl->SetStringSelection(_normalFont);
-    else
-        _normalFControl->SetSelection(0);
-
-    if (!_fixedFont.IsEmpty())
-        _fixedFControl->SetStringSelection(_fixedFont);
-    else
-        _fixedFControl->SetSelection(0);
-
-    _fontSizeControl->SetValue(_fontSize);
+    _normalFont = _normalFControl->GetSelectedFont();
+    _fixedFont  = _fixedFControl->GetSelectedFont();
 
     UpdatePreview();
 }
 
 BEGIN_EVENT_TABLE(CHMFontDialog, wxDialog)
-EVT_COMBOBOX(-1, CHMFontDialog::OnUpdate)
-EVT_SPINCTRL(-1, CHMFontDialog::OnUpdateSpin)
+EVT_FONTPICKER_CHANGED(-1, CHMFontDialog::OnUpdate)
 END_EVENT_TABLE()

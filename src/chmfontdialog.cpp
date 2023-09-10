@@ -111,10 +111,13 @@ void CHMFontDialog::UpdatePreview()
     _test->SetPage(test_page);
 }
 
-void CHMFontDialog::OnUpdate(wxFontPickerEvent&)
+void CHMFontDialog::OnUpdate(wxFontPickerEvent& event)
 {
     _normalFont = _normalFControl->GetSelectedFont();
     _fixedFont  = _fixedFControl->GetSelectedFont();
+
+    _normalFont.SetPointSize(event.GetFont().GetPointSize());
+    _fixedFont.SetPointSize(event.GetFont().GetPointSize());
 
     UpdatePreview();
 }

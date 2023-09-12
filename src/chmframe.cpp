@@ -36,7 +36,6 @@
 #include <wx/bitmap.h>
 #include <wx/busyinfo.h>
 #include <wx/filesys.h>
-#include <wx/fontenum.h>
 #include <wx/fs_mem.h>
 #include <wx/imaglist.h>
 #include <wx/mimetype.h>
@@ -200,28 +199,11 @@ void CHMFrame::OnOpen(wxCommandEvent&)
     LoadCHM(selection);
 }
 
-std::unique_ptr<wxArrayString> CHMFrame::SortedFontFaceNames(bool fixed) const
-{
-    wxFontEnumerator enu;
-    enu.EnumerateFacenames(wxFONTENCODING_SYSTEM, fixed);
-
-    auto fonts = std::make_unique<wxArrayString>(enu.GetFacenames());
-    fonts->Sort();
-
-    return fonts;
-}
-
 void CHMFrame::OnChangeFonts(wxCommandEvent&)
 {
     wxLogNull wln;
 
-    if (!_normalFonts)
-        _normalFonts = SortedFontFaceNames();
-
-    if (!_fixedFonts)
-        _fixedFonts = SortedFontFaceNames(true);
-
-    CHMFontDialog cfd(this, *_normalFonts, *_fixedFonts, _normalFont, _fixedFont, _nbhtml->FontSize());
+    CHMFontDialog cfd(this, _normalFont, _fixedFont, _nbhtml->FontSize());
 
     if (cfd.ShowModal() == wxID_OK) {
         wxBusyCursor bc;

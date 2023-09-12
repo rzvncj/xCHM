@@ -20,10 +20,9 @@
 #ifndef __CHMFONTDIALOG_H
 #define __CHMFONTDIALOG_H
 
-#include <wx/combobox.h>
 #include <wx/dialog.h>
+#include <wx/fontpicker.h>
 #include <wx/html/htmlwin.h>
-#include <wx/spinctrl.h>
 
 /*!
   \class wxDialog
@@ -36,49 +35,35 @@ public:
     /*!
       \brief Constructs a CHMFontDialog.
       \param parent The parent window.
-      \param normalFonts Array of strings denoting all the regular font faces' names available on the system.
-      Managed by the caller.
-      \param fixedFonts Array of strings denoting all the fixed fonts faces' names available on the system.
-      Managed by the caller.
       \param normalFont The normal font currently in use by the caller.
       \param fixedFont The fixed font currently in use by the caller.
       \param fontSize The size of the font currently selected.
      */
-    CHMFontDialog(wxWindow* parent, const wxArrayString& normalFonts, const wxArrayString& fixedFonts,
-                  const wxString& normalFont, const wxString& fixedFont, int fontSize);
+    CHMFontDialog(wxWindow* parent, const wxString& normalFont, const wxString& fixedFont, int fontSize);
 
     //! Returns the fixed font face name.
-    const wxString& FixedFont() const { return _fixedFont; }
-
-    //! Returns the normal font face name.
-    const wxString& NormalFont() const { return _normalFont; }
+    wxString FixedFont() const { return _fixedFont.GetFaceName(); }
 
     //! Return the selected font size.
-    int FontSize() const { return _fontSize; }
+    int FontSize() const { return _normalFont.GetPointSize(); }
+    //! Returns the normal font face name.
+    wxString NormalFont() const { return _normalFont.GetFaceName(); }
 
 protected:
     //! This is called when a font is selected from the combo box.
-    void OnUpdate(wxCommandEvent& event);
-
-    //! This is called when you click on the font size spin control.
-    void OnUpdateSpin(wxSpinEvent& event);
+    void OnUpdate(wxFontPickerEvent& event);
 
 private:
     //! Helper. Updates the font preview window.
     void UpdatePreview();
 
-    //! Helper. Initializes the dialog with the passed data.
-    void Init(const wxArrayString& normalFonts, const wxArrayString& fixedFonts);
-
 private:
-    wxHtmlWindow* _test {nullptr};
-    wxSpinCtrl*   _fontSizeControl {nullptr};
-    wxComboBox*   _normalFControl {nullptr};
-    wxComboBox*   _fixedFControl {nullptr};
+    wxHtmlWindow*     _test {nullptr};
+    wxFontPickerCtrl* _normalFControl {nullptr};
+    wxFontPickerCtrl* _fixedFControl {nullptr};
 
-    wxString _normalFont;
-    wxString _fixedFont;
-    int      _fontSize;
+    wxFont _normalFont;
+    wxFont _fixedFont;
 
 private:
     DECLARE_EVENT_TABLE();

@@ -229,8 +229,6 @@ private:
     //! Helper. Saves exit information (size, history, etc.)
     void SaveExitInfo();
 
-    std::unique_ptr<wxArrayString> SortedFontFaceNames(bool fixed = false) const;
-
 private:
     CHMHtmlNotebook*                    _nbhtml;
     wxTreeCtrl*                         _tcl {nullptr};
@@ -244,8 +242,6 @@ private:
     CHMIndexPanel*                      _cip {nullptr};
 
     wxString                       _openPath;
-    std::unique_ptr<wxArrayString> _normalFonts;
-    std::unique_ptr<wxArrayString> _fixedFonts;
     wxString                       _normalFont;
     wxString                       _fixedFont;
     bool                           _bookmarkSel {true};

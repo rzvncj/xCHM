@@ -35,7 +35,7 @@
 #include <wx/wx.h>
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
-    : wxHtmlWindow(parent, -1, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _menu(std::make_unique<wxMenu>()),
+    : wxHtmlWindow(parent, wxID_ANY, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _menu(std::make_unique<wxMenu>()),
       _frame(frame)
 {
     _menu->Append(ID_PopupForward, _("For&ward"));
@@ -155,7 +155,7 @@ wxHtmlCell* CHMHtmlWindow::FindFirst(wxHtmlCell* parent, const wxString& word, b
 
     if (wholeWords && text == tmp)
         found = true;
-    else if (!wholeWords && text.Find(tmp.c_str()) != -1)
+    else if (!wholeWords && text.Find(tmp.c_str()) != wxNOT_FOUND)
         found = true;
 
     if (found) {
@@ -310,7 +310,7 @@ void CHMHtmlWindow::OnRightClick(wxMouseEvent& event)
     _menu->Enable(ID_OpenInNewTab, false);
 
     int x, y;
-    CalcUnscrolledPosition(event.m_x, event.m_y, &x, &y);
+    CalcUnscrolledPosition(event.GetX(), event.GetY(), &x, &y);
 
     auto cell = GetInternalRepresentation()->FindCellByPos(x, y);
 

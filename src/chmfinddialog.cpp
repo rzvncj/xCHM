@@ -26,11 +26,11 @@
 #include <wx/wx.h>
 
 CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
-    : wxDialog(parent, -1, _("Find in page..")), _html(toSearch)
+    : wxDialog(parent, wxID_ANY, _("Find in page..")), _html(toSearch)
 {
     _text  = new wxTextCtrl(this, ID_TextFind, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_PROCESS_ENTER);
-    _whole = new wxCheckBox(this, -1, _("Whole words only"));
-    _case  = new wxCheckBox(this, -1, _("Case sensitive"));
+    _whole = new wxCheckBox(this, wxID_ANY, _("Whole words only"));
+    _case  = new wxCheckBox(this, wxID_ANY, _("Case sensitive"));
 
     auto sizer = new wxBoxSizer(wxVERTICAL);
 

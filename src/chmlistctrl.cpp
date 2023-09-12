@@ -97,16 +97,16 @@ void CHMListCtrl::UpdateUI()
 void CHMListCtrl::FindBestMatch(const wxString& title)
 {
     wxListItem info;
-    info.m_col = 0;
+    info.SetColumn(0);
 
     auto sz = GetItemCount();
     auto tl = title.length();
 
     for (decltype(sz) i = 0; i < sz; ++i) {
-        info.m_itemId = i;
+        info.SetId(i);
         GetItem(info);
 
-        if (!info.m_text.Left(tl).CmpNoCase(title)) {
+        if (!info.GetText().Left(tl).CmpNoCase(title)) {
             EnsureVisible(i);
             SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
             break;

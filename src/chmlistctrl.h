@@ -64,7 +64,7 @@ public:
       the corresponding page in the HTML window.
       \param id Widget id.
      */
-    CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID id = -1);
+    CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID id = wxID_ANY);
 
     //! Cleanup.
     ~CHMListCtrl();

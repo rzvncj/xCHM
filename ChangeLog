@@ -432,3 +432,5 @@
 
 	+ 1.36:
 		+ fixed compilation for wxWidgets versions older than 3.1.6.
+		+ improved CHM loading speed.
+		+ switched to using the default wxWidgets font picker dialog.

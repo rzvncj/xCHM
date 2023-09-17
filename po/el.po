@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-05 11:34+0200\n"
+"POT-Creation-Date: 2023-09-17 14:29+0300\n"
 "PO-Revision-Date: 2012-12-23 16:13+0200\n"
 "Last-Translator: Klearchos-Angelos Gkountras <kleagkou@gmail.com>\n"
 "Language-Team: Greek <gr@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: src/chmfile.cpp:260
+#: src/chmfile.cpp:262
 msgid "Retrieving table of contents.."
 msgstr "Ευρέση στα περιεχόμενα"
 
-#: src/chmfile.cpp:261
+#: src/chmfile.cpp:263
 msgid "Retrieving index.."
 msgstr "Άνοιγμα καταλόγου"
 
-#: src/chmfile.cpp:262
+#: src/chmfile.cpp:264
 msgid "Untitled in index"
 msgstr "Χωρίς τιτίλο στο καταλόγο"
 
@@ -45,288 +45,284 @@ msgstr ""
 msgid "Find next"
 msgstr "Ευρέση επομένου"
 
-#: src/chmfinddialog.cpp:45 src/chmfontdialog.cpp:74
+#: src/chmfinddialog.cpp:45 src/chmfontdialog.cpp:89
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: src/chmfontdialog.cpp:44
+#: src/chmfontdialog.cpp:64
 msgid "Change fonts.."
 msgstr "Change fonts.."
 
-#: src/chmfontdialog.cpp:49
+#: src/chmfontdialog.cpp:71
 msgid "Normal font:"
 msgstr "Κανονική Γραμματοσειρά:"
 
-#: src/chmfontdialog.cpp:50
+#: src/chmfontdialog.cpp:72
 msgid "Fixed font:"
 msgstr "Σταθερή Γραμματοσειρα:"
 
-#: src/chmfontdialog.cpp:51
-msgid "Font size:"
-msgstr "Μέγεθος Γραμματοσειράς:"
-
-#: src/chmfontdialog.cpp:63
+#: src/chmfontdialog.cpp:78
 msgid "Preview:"
 msgstr "Προεπισκόποιήση"
 
-#: src/chmfontdialog.cpp:69
+#: src/chmfontdialog.cpp:84
 msgid "OK"
 msgstr "Εντάξει"
 
-#: src/chmframe.cpp:46
+#: src/chmframe.cpp:52
 msgid "Open a CHM book."
 msgstr "'Ανοιγμα ενός CHM βιβλίου"
 
-#: src/chmframe.cpp:47
+#: src/chmframe.cpp:53
 msgid "Change fonts."
 msgstr "Έχέι αλλαχθεί η γραματοσειρά"
 
-#: src/chmframe.cpp:48
+#: src/chmframe.cpp:54
 msgid "Print the page currently displayed."
 msgstr "Εκτυπώση σελιδας όπως εμφανίζεται"
 
-#: src/chmframe.cpp:49
+#: src/chmframe.cpp:55
 #, fuzzy
 msgid "Toggle table of contents."
 msgstr "Ευρέση στα περιεχόμενα"
 
-#: src/chmframe.cpp:50
+#: src/chmframe.cpp:56
 msgid "Go to the book's start page."
 msgstr "Μετάβαση στην αρχική σελίδα του βιβλίου"
 
-#: src/chmframe.cpp:51
+#: src/chmframe.cpp:57
 msgid "Go forward in history. Per book."
 msgstr "Μετάβαση μπροστα στο ιστορικό . Ανά βιβλίο"
 
-#: src/chmframe.cpp:52
+#: src/chmframe.cpp:58
 msgid "Back to the last visited page. Per book."
 msgstr "Μετάβαση στην τελευταία σελίδα. Ανά βιβλίο"
 
-#: src/chmframe.cpp:53
+#: src/chmframe.cpp:59
 msgid "About the program."
 msgstr "Σχετικά με το προγράμμα"
 
-#: src/chmframe.cpp:54
+#: src/chmframe.cpp:60
 msgid "Copy selection."
 msgstr "Αντιγραφή επιλεγόμενου"
 
-#: src/chmframe.cpp:55
+#: src/chmframe.cpp:61
 msgid "Find word in page."
 msgstr "Ευρέση λέξης στην σελίδα"
 
-#: src/chmframe.cpp:56
+#: src/chmframe.cpp:62
 msgid "Toggle fullscreen mode."
 msgstr ""
 
-#: src/chmframe.cpp:57
+#: src/chmframe.cpp:63
 msgid "Toggle toolbar."
 msgstr ""
 
-#: src/chmframe.cpp:58
+#: src/chmframe.cpp:64
 msgid "Close the current tab"
 msgstr "Κλείσιμο τρέχουσας καρτέλας"
 
-#: src/chmframe.cpp:59
+#: src/chmframe.cpp:65
 msgid "Open a new tab"
 msgstr "Άνοιγμα σε νέα καρτέλα"
 
-#: src/chmframe.cpp:60
+#: src/chmframe.cpp:66
 msgid "Associate the .chm file extension with xCHM."
 msgstr "Συσχέτιση των αρχείων με κατάληξη .chm με το xCHM"
 
-#: src/chmframe.cpp:135
+#: src/chmframe.cpp:141
 msgid "Ready."
 msgstr "Έτοιμο"
 
-#: src/chmframe.cpp:159 src/chmframe.cpp:860 src/chmframe.cpp:864
+#: src/chmframe.cpp:165 src/chmframe.cpp:847 src/chmframe.cpp:851
 msgid "Contents"
 msgstr "Περιεχόμενα"
 
-#: src/chmframe.cpp:160
+#: src/chmframe.cpp:166
 msgid "Index"
 msgstr "Κατλαλογος"
 
-#: src/chmframe.cpp:161 src/chmsearchpanel.cpp:45
+#: src/chmframe.cpp:167 src/chmsearchpanel.cpp:45
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: src/chmframe.cpp:180
+#: src/chmframe.cpp:186
 msgid "About xCHM"
 msgstr "Σχετικα με το xCHM"
 
-#: src/chmframe.cpp:185
+#: src/chmframe.cpp:191
 msgid "Choose a file.."
 msgstr "Επολογή αρχείου"
 
-#: src/chmframe.cpp:279
+#: src/chmframe.cpp:268
 msgid "Confirm"
 msgstr "Επιβεβαιώση"
 
-#: src/chmframe.cpp:297
+#: src/chmframe.cpp:286
 msgid "Registration successful!"
 msgstr "Η εγγραφή ήταν επιτυχής"
 
-#: src/chmframe.cpp:297
+#: src/chmframe.cpp:286
 msgid "Done"
 msgstr "Έγινε"
 
-#: src/chmframe.cpp:531
+#: src/chmframe.cpp:520
 msgid "Loading, please wait.."
 msgstr "Φόρτωση , παρακαλώ περιμένετε"
 
-#: src/chmframe.cpp:634
+#: src/chmframe.cpp:623
 msgid "&Open..\tCtrl-O"
 msgstr "&'Ανοιγμα..\tCtrl-O"
 
-#: src/chmframe.cpp:635
+#: src/chmframe.cpp:624
 msgid "&Print page..\tCtrl-P"
 msgstr "&Εκτύπωση Σελίδας..\tCtrl-P"
 
-#: src/chmframe.cpp:636
+#: src/chmframe.cpp:625
 msgid "Fon&ts.."
 msgstr "&.."
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:627
 msgid "&Show contents tree\tCtrl-S"
 msgstr "&Δείξε τα περιεχόμενα σε δεδροιδές\tCtrl-S"
 
-#: src/chmframe.cpp:642
+#: src/chmframe.cpp:631
 msgid "&Make xCHM the default CHM viewer"
 msgstr "&Κάνε τον  xCHM το προεπιλεγμένο CHM αναγνώστη"
 
-#: src/chmframe.cpp:647
+#: src/chmframe.cpp:636
 msgid "&Recent files"
 msgstr "&Προσφάτα αρχεία"
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:648
 msgid "E&xit\tCtrl-X"
 msgstr "Έ&ξοδος\t Ctrl-X"
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:648
 msgid "Quit the application."
 msgstr "Κλείσίμο της εφαρμόγης"
 
-#: src/chmframe.cpp:663
+#: src/chmframe.cpp:652
 msgid "&Home\tCtrl-H"
 msgstr "&Αρχική Σελίδά\tCtrl-H"
 
-#: src/chmframe.cpp:664
+#: src/chmframe.cpp:653
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Επόμενο\tAlt+Δεξιά"
 
-#: src/chmframe.cpp:665
+#: src/chmframe.cpp:654
 msgid "&Back\tAlt-LEFT"
 msgstr "&Πίσω\tAlt-Αριστερά"
 
-#: src/chmframe.cpp:668
+#: src/chmframe.cpp:657
 msgid "&About..\tF1"
 msgstr "&Σχετικα..\tF1"
 
-#: src/chmframe.cpp:671
+#: src/chmframe.cpp:660
 msgid "&Copy\tCtrl-C"
 msgstr "&Αντιγραφή\tCtrl-C"
 
-#: src/chmframe.cpp:672
+#: src/chmframe.cpp:661
 msgid "&Find..\tCtrl-F"
 msgstr "&Εύρεση\tCtrl-F"
 
-#: src/chmframe.cpp:674
+#: src/chmframe.cpp:663
 msgid "&Close tab\tCtrl-W"
 msgstr "&Κλείσιμο Καρτέλας\tCtrl-W"
 
-#: src/chmframe.cpp:675
+#: src/chmframe.cpp:664
 msgid "&New tab\tCtrl-T"
 msgstr "&Νέα Καρτέλα\tCtrl-T"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:667
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:679
+#: src/chmframe.cpp:668
 msgid "Toggle &toolbar\tAlt-T"
 msgstr ""
 
-#: src/chmframe.cpp:682
+#: src/chmframe.cpp:671
 msgid "&File"
 msgstr "%Αρχείο"
 
-#: src/chmframe.cpp:683
+#: src/chmframe.cpp:672
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:673
 msgid "&Edit"
 msgstr "Επεξεργασία"
 
-#: src/chmframe.cpp:685
+#: src/chmframe.cpp:674
 msgid "Hi&story"
 msgstr "Ιστορικό"
 
-#: src/chmframe.cpp:686
+#: src/chmframe.cpp:675
 msgid "&Help"
 msgstr "&Βοήθεια"
 
-#: src/chmframe.cpp:702
+#: src/chmframe.cpp:691
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: src/chmframe.cpp:717
+#: src/chmframe.cpp:706
 msgid "Topics"
 msgstr "Θέματα"
 
-#: src/chmframe.cpp:727
+#: src/chmframe.cpp:716
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: src/chmframe.cpp:728
+#: src/chmframe.cpp:717
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: src/chmframe.cpp:731
+#: src/chmframe.cpp:720
 msgid "Add displayed page to bookmarks."
 msgstr "Προσθήκη επιλεγόμενης σελίδας στους σελιδοδείκτες."
 
-#: src/chmframe.cpp:732
+#: src/chmframe.cpp:721
 msgid "Remove selected bookmark."
 msgstr "Αφαιρέση επιλεγμένου σελιδοδείκτη"
 
-#: src/chmframe.cpp:854
+#: src/chmframe.cpp:842
 msgid "Open .."
 msgstr "'Ανοιγμα ,,"
 
-#: src/chmframe.cpp:855
+#: src/chmframe.cpp:843
 msgid "Print .."
 msgstr "Εκτύπωση"
 
-#: src/chmframe.cpp:858 src/chmframe.cpp:863
+#: src/chmframe.cpp:846 src/chmframe.cpp:850
 msgid "Fonts .."
 msgstr "Γραμματοσειρές"
 
-#: src/chmframe.cpp:868
+#: src/chmframe.cpp:855
 msgid "Copy"
 msgstr "Αντιγραφλή"
 
-#: src/chmframe.cpp:869
+#: src/chmframe.cpp:856
 msgid "Find"
 msgstr "Εύρεση"
 
-#: src/chmframe.cpp:874 src/chmframe.cpp:877
+#: src/chmframe.cpp:861 src/chmframe.cpp:864
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:882
+#: src/chmframe.cpp:869
 msgid "Back"
 msgstr "Πίσω "
 
-#: src/chmframe.cpp:883
+#: src/chmframe.cpp:870
 msgid "Forward"
 msgstr "Μπροστά"
 
-#: src/chmframe.cpp:885
+#: src/chmframe.cpp:871
 msgid "Home"
 msgstr "Αρχική Σελίδα"
 
-#: src/chmframe.cpp:889 src/chmframe.cpp:891
+#: src/chmframe.cpp:875 src/chmframe.cpp:877
 msgid "About"
 msgstr "Σχετικά"
 
@@ -362,31 +358,31 @@ msgstr "%Εύρεση στην σελίδα"
 msgid "&Toggle fullscreen mode"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:270
+#: src/chmhtmlwindow.cpp:268
 msgid "OpenFile("
 msgstr "ΆνοιγμαΑρχείου"
 
-#: src/chmhtmlwindow.cpp:270
+#: src/chmhtmlwindow.cpp:268
 msgid ") failed"
 msgstr ") αποτυχία"
 
-#: src/chmhtmlwindow.cpp:270 src/chmhtmlwindow.cpp:288
+#: src/chmhtmlwindow.cpp:268 src/chmhtmlwindow.cpp:286
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: src/chmhtmlwindow.cpp:280
+#: src/chmhtmlwindow.cpp:278
 msgid "Save as"
 msgstr "Αποθήκευση ως"
 
-#: src/chmhtmlwindow.cpp:288
+#: src/chmhtmlwindow.cpp:286
 msgid "Error creating file "
 msgstr "Σφάλμα στην δημιουργία αρχείου"
 
-#: src/chmhtmlwindow.cpp:298
+#: src/chmhtmlwindow.cpp:296
 msgid "Saved file "
 msgstr "Αποθηκευμένο αρχείο"
 
-#: src/chmhtmlwindow.cpp:298
+#: src/chmhtmlwindow.cpp:296
 msgid "Success"
 msgstr "Επιτυχία"
 
@@ -409,6 +405,9 @@ msgstr "Μόνο εύρεση στους τιτλους των περιεχομ�
 #: src/chmsearchpanel.cpp:50
 msgid "Search contents for occurrences of the specified text."
 msgstr ""
+
+#~ msgid "Font size:"
+#~ msgstr "Μέγεθος Γραμματοσειράς:"
 
 #~ msgid "On or off?"
 #~ msgstr "Άνοιγμα ή κλείσιμο"

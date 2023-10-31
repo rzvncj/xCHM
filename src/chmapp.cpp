@@ -175,7 +175,10 @@ bool CHMApp::OnInit()
 #endif
 
     if (_cmdLP.GetParamCount() == 1) {
-        _frame->LoadCHM(file);
+        if (!_frame->LoadCHM(file)) {
+            wxMessageBox(_("Could not open file") + " " + file, _("Error"), wxOK | wxCENTRE | wxICON_ERROR, _frame);
+            return true;
+        }
 
         if (id != -1L)
             _frame->LoadContextID(id);

@@ -196,7 +196,9 @@ void CHMFrame::OnOpen(wxCommandEvent&)
         return;
 
     _openPath = selection.BeforeLast(wxT('/'));
-    LoadCHM(selection);
+
+    if (!LoadCHM(selection))
+        wxMessageBox(_("Could not open file") + " " + selection, _("Error"), wxOK | wxCENTRE | wxICON_ERROR, this);
 }
 
 void CHMFrame::OnChangeFonts(wxCommandEvent&)
@@ -304,8 +306,8 @@ void CHMFrame::OnHistFile(wxCommandEvent& event)
 {
     auto f = _fh.GetHistoryFile(event.GetId() - wxID_FILE1);
 
-    if (!f.IsEmpty())
-        LoadCHM(f);
+    if (!f.IsEmpty() && !LoadCHM(f))
+        wxMessageBox(_("Could not open file") + " " + f, _("Error"), wxOK | wxCENTRE | wxICON_ERROR, this);
 }
 
 void CHMFrame::OnFind(wxCommandEvent& event)

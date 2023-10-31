@@ -436,4 +436,4 @@
 		+ switched to using the default wxWidgets font picker dialog.
 
 	+ 1.37:
-		+
+		+ no longer failing to load CHMs silently.

@@ -61,23 +61,23 @@ const wxChar* test_page = wxT(R"(
 }
 
 CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxString& normalFont, const wxString& fixedFont, int fontSize)
-    : wxDialog(parent, -1, _("Change fonts..")),
+    : wxDialog(parent, wxID_ANY, _("Change fonts..")),
       _normalFont(fontSize, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, normalFont),
       _fixedFont(fontSize, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, fixedFont)
 {
     auto topsizer = new wxBoxSizer(wxVERTICAL);
     auto sizer    = new wxFlexGridSizer(2, 2, 2, 5);
 
-    sizer->Add(new wxStaticText(this, -1, _("Normal font:")));
-    sizer->Add(new wxStaticText(this, -1, _("Fixed font:")));
+    sizer->Add(new wxStaticText(this, wxID_ANY, _("Normal font:")));
+    sizer->Add(new wxStaticText(this, wxID_ANY, _("Fixed font:")));
 
-    sizer->Add(_normalFControl = new wxFontPickerCtrl(this, -1, _normalFont, wxDefaultPosition, wxSize(200, -1)));
-    sizer->Add(_fixedFControl = new wxFontPickerCtrl(this, -1, _fixedFont, wxDefaultPosition, wxSize(200, -1)));
+    sizer->Add(_normalFControl = new wxFontPickerCtrl(this, wxID_ANY, _normalFont, wxDefaultPosition, wxSize(200, -1)));
+    sizer->Add(_fixedFControl = new wxFontPickerCtrl(this, wxID_ANY, _fixedFont, wxDefaultPosition, wxSize(200, -1)));
 
     topsizer->Add(sizer, 0, wxLEFT | wxRIGHT | wxTOP, 10);
-    topsizer->Add(new wxStaticText(this, -1, _("Preview:")), 0, wxLEFT | wxTOP, 10);
+    topsizer->Add(new wxStaticText(this, wxID_ANY, _("Preview:")), 0, wxLEFT | wxTOP, 10);
     topsizer->Add(
-        _test = new wxHtmlWindow(this, -1, wxDefaultPosition, wxSize(20, 150), wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),
+        _test = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxSize(20, 150), wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),
         1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
 
     auto sizer2 = new wxBoxSizer(wxHORIZONTAL);
@@ -123,5 +123,5 @@ void CHMFontDialog::OnUpdate(wxFontPickerEvent& event)
 }
 
 BEGIN_EVENT_TABLE(CHMFontDialog, wxDialog)
-EVT_FONTPICKER_CHANGED(-1, CHMFontDialog::OnUpdate)
+EVT_FONTPICKER_CHANGED(wxID_ANY, CHMFontDialog::OnUpdate)
 END_EVENT_TABLE()

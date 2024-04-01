@@ -109,7 +109,7 @@ const wxChar* about_txt = wxT("xCHM v. " VERSION
 CHMFrame::CHMFrame(const wxString& title, const wxString& booksDir, const wxPoint& pos, const wxSize& size,
                    const wxString& normalFont, const wxString& fixedFont, int fontSize, int sashPosition,
                    const wxString& fullAppPath, bool loadTopics, bool loadIndex)
-    : wxFrame(nullptr, -1, title, pos, size), _openPath(booksDir), _normalFont(normalFont), _fixedFont(fixedFont),
+    : wxFrame(nullptr, wxID_ANY, title, pos, size), _openPath(booksDir), _normalFont(normalFont), _fixedFont(fixedFont),
       _sashPos(sashPosition), _fullAppPath(fullAppPath), _loadTopics(loadTopics), _loadIndex(loadIndex)
 {
 #if wxUSE_ACCEL
@@ -690,7 +690,7 @@ wxPanel* CHMFrame::CreateContentsPanel()
 {
     auto temp   = new wxPanel(_nb);
     auto sizer  = new wxBoxSizer(wxVERTICAL);
-    auto bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, -1, _("Bookmarks")), wxVERTICAL);
+    auto bmarks = new wxStaticBoxSizer(new wxStaticBox(temp, wxID_ANY, _("Bookmarks")), wxVERTICAL);
     auto inner  = new wxBoxSizer(wxHORIZONTAL);
 
     temp->SetAutoLayout(true);

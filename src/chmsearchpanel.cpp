@@ -40,8 +40,8 @@ CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNote
 
     _text = new wxTextCtrl(this, ID_SearchText, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 
-    _partial = new wxCheckBox(this, -1, _("Get partial matches"));
-    _titles  = new wxCheckBox(this, -1, _("Search titles only"));
+    _partial = new wxCheckBox(this, wxID_ANY, _("Get partial matches"));
+    _titles  = new wxCheckBox(this, wxID_ANY, _("Search titles only"));
     _search  = new wxButton(this, ID_SearchButton, _("Search"));
 
 #if wxUSE_TOOLTIPS

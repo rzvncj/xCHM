@@ -16,6 +16,7 @@ NamespaceIndentation: None
 Standard: Cpp11
 SpacesInParentheses: false
 SpaceInEmptyParentheses: false
+SpaceInEmptyBlock: false
 IndentWrappedFunctionNames: false
 SortIncludes: true
 SpaceBeforeAssignmentOperators: true

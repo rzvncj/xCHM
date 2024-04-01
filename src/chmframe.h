@@ -241,18 +241,18 @@ private:
     CHMSearchPanel*                     _csp {nullptr};
     CHMIndexPanel*                      _cip {nullptr};
 
-    wxString                       _openPath;
-    wxString                       _normalFont;
-    wxString                       _fixedFont;
-    bool                           _bookmarkSel {true};
-    bool                           _bookmarksDeleted {false};
-    int                            _sashPos;
-    wxFont                         _font;
-    wxFileHistory                  _fh;
-    wxString                       _fullAppPath;
-    bool                           _loadTopics;
-    bool                           _loadIndex;
-    bool                           _fullScreen {false};
+    wxString      _openPath;
+    wxString      _normalFont;
+    wxString      _fixedFont;
+    bool          _bookmarkSel {true};
+    bool          _bookmarksDeleted {false};
+    int           _sashPos;
+    wxFont        _font;
+    wxFileHistory _fh;
+    wxString      _fullAppPath;
+    bool          _loadTopics;
+    bool          _loadIndex;
+    bool          _fullScreen {false};
 
 private:
     DECLARE_EVENT_TABLE()

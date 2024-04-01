@@ -71,9 +71,9 @@ protected:
     void OnText(wxCommandEvent& event);
 
 private:
-    wxTextCtrl*      _text;
-    CHMListCtrl*     _lc {nullptr};
-    bool             _navigate {true};
+    wxTextCtrl*  _text;
+    CHMListCtrl* _lc {nullptr};
+    bool         _navigate {true};
 
 private:
     DECLARE_EVENT_TABLE()

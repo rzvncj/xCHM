@@ -346,8 +346,8 @@ void CHMHtmlWindow::OnToggleFullScreen(wxCommandEvent&)
 
 void CHMHtmlWindow::OnChar(wxKeyEvent& event)
 {
-    int  xStart, yStart, xUnit, yUnit, xSize, ySize;
-    bool skip = true;
+    int       xStart, yStart, xUnit, yUnit, xSize, ySize;
+    bool      skip    = true;
     const int OVERLAP = 3;
 
     GetViewStart(&xStart, &yStart);

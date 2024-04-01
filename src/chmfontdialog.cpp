@@ -76,9 +76,9 @@ CHMFontDialog::CHMFontDialog(wxWindow* parent, const wxString& normalFont, const
 
     topsizer->Add(sizer, 0, wxLEFT | wxRIGHT | wxTOP, 10);
     topsizer->Add(new wxStaticText(this, wxID_ANY, _("Preview:")), 0, wxLEFT | wxTOP, 10);
-    topsizer->Add(
-        _test = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxSize(20, 150), wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),
-        1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
+    topsizer->Add(_test = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxSize(20, 150),
+                                           wxHW_SCROLLBAR_AUTO | wxSUNKEN_BORDER),
+                  1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
 
     auto sizer2 = new wxBoxSizer(wxHORIZONTAL);
     auto ok     = new wxButton(this, wxID_OK, _("OK"));

@@ -18,6 +18,9 @@ anything else.
 
 ## Installing
 
+(If you've just cloned the code (as opposed to using a release tarball),
+you need to run `./bootstrap` first.)
+
 Type `./configure --help` if you're interested in parameters you can
 pass to configure for compile switches. Most people will be perfectly
 happy doing a:

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xCHM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 16:57+0300\n"
-"PO-Revision-Date: 2007-05-30 23:50+0300\n"
-"Last-Translator: Igor Știrbu <igor.stirbu@gmail.com>\n"
+"PO-Revision-Date: 2024-09-01 10:45+0300\n"
+"Last-Translator: Răzvan Cojocaru <rzvncj@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,6 @@ msgid "Print the page currently displayed."
 msgstr "Tipărește pagina afișată."
 
 #: src/chmframe.cpp:55
-#, fuzzy
 msgid "Toggle table of contents."
 msgstr "Se descarcă cuprinsul..."
 
@@ -112,18 +111,17 @@ msgstr "Caută cuvântul în pagină."
 
 #: src/chmframe.cpp:62
 msgid "Toggle fullscreen mode."
-msgstr ""
+msgstr "Comutați modul fullscreen"
 
 #: src/chmframe.cpp:63
 msgid "Toggle toolbar."
-msgstr ""
+msgstr "Comutați bara de unelte"
 
 #: src/chmframe.cpp:64
 msgid "Close the current tab"
-msgstr ""
+msgstr "Închideți tabul curent"
 
 #: src/chmframe.cpp:65
-#, fuzzy
 msgid "Open a new tab"
 msgstr "Deschide un document CHM."
 
@@ -157,7 +155,7 @@ msgstr "Alege un fișier..."
 
 #: src/chmframe.cpp:201 src/chmframe.cpp:310
 msgid "Could not open file"
-msgstr ""
+msgstr "Nu pot deschide fișierul"
 
 #: src/chmframe.cpp:201 src/chmframe.cpp:310 src/chmhtmlwindow.cpp:268
 #: src/chmhtmlwindow.cpp:286
@@ -189,7 +187,6 @@ msgid "&Print page..\tCtrl-P"
 msgstr "&Tipărește pagina...\tCtrl-P"
 
 #: src/chmframe.cpp:627
-#, fuzzy
 msgid "Fon&ts.."
 msgstr "Fonturi..."
 
@@ -218,17 +215,14 @@ msgid "&Home\tCtrl-H"
 msgstr "&Start\tCtrl-H"
 
 #: src/chmframe.cpp:655
-#, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Îna&inte\tCtrl-W"
 
 #: src/chmframe.cpp:656
-#, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "Î&napoi\tCtrl-B"
 
 #: src/chmframe.cpp:659
-#, fuzzy
 msgid "&About..\tF1"
 msgstr "&Despre...\tF1"
 
@@ -241,31 +235,28 @@ msgid "&Find..\tCtrl-F"
 msgstr "Caută...\tCtrl-F"
 
 #: src/chmframe.cpp:665
-#, fuzzy
 msgid "&Close tab\tCtrl-W"
-msgstr "&Start\tCtrl-H"
+msgstr "Închide &tabul\tCtrl-H"
 
 #: src/chmframe.cpp:666
-#, fuzzy
 msgid "&New tab\tCtrl-T"
-msgstr "&Fonturi...\tCtrl-T"
+msgstr "Tab &nou...\tCtrl-T"
 
 #: src/chmframe.cpp:669
 msgid "Toggle &fullscreen\tF11"
-msgstr ""
+msgstr "Comută &fullscreen\tF11"
 
 #: src/chmframe.cpp:670
 msgid "Toggle &toolbar\tAlt-T"
-msgstr ""
+msgstr "Comută &toolbar\tAlt-T"
 
-# E ok forma plurală?
 #: src/chmframe.cpp:673
 msgid "&File"
 msgstr "&Fișier"
 
 #: src/chmframe.cpp:674
 msgid "&View"
-msgstr ""
+msgstr "Afișa&re"
 
 #: src/chmframe.cpp:675
 msgid "&Edit"
@@ -325,7 +316,7 @@ msgstr "Caută"
 
 #: src/chmframe.cpp:863 src/chmframe.cpp:866
 msgid "Fullscreen"
-msgstr ""
+msgstr "Fullscreen"
 
 #: src/chmframe.cpp:871
 msgid "Back"
@@ -361,7 +352,7 @@ msgstr "&Salvează adresa ca..."
 
 #: src/chmhtmlwindow.cpp:45
 msgid "&Open in a new tab"
-msgstr ""
+msgstr "Deschide într-un tab n&ou"
 
 #: src/chmhtmlwindow.cpp:48
 msgid "&Copy selection"
@@ -373,15 +364,15 @@ msgstr "&Caută în pagină..."
 
 #: src/chmhtmlwindow.cpp:52
 msgid "&Toggle fullscreen mode"
-msgstr ""
+msgstr "Comu&tă în modul fullscreen"
 
 #: src/chmhtmlwindow.cpp:268
 msgid "OpenFile("
-msgstr "Eroare la deschiderea fișierului ("
+msgstr "OpenFile("
 
 #: src/chmhtmlwindow.cpp:268
 msgid ") failed"
-msgstr ")"
+msgstr ") a eșuat"
 
 #: src/chmhtmlwindow.cpp:278
 msgid "Save as"
@@ -418,30 +409,3 @@ msgstr "Caută doar în titlurile din cuprins."
 #: src/chmsearchpanel.cpp:50
 msgid "Search contents for occurrences of the specified text."
 msgstr "Caută în carte pagini care conțin apariții ale textului precizat."
-
-#, fuzzy
-#~ msgid "Open all"
-#~ msgstr "Deschide..."
-
-#~ msgid "Font size:"
-#~ msgstr "Mărimea fontului:"
-
-#~ msgid "On or off?"
-#~ msgstr "Activat sau nu?"
-
-#~ msgid ""
-#~ "This is experimental code, and doing this will overwrite any previously "
-#~ "registered CHM viewer associations.\n"
-#~ "\n"
-#~ "Are you sure you know what you're doing?"
-#~ msgstr ""
-#~ "Acesta este cod experimental. Continuând, veți suprascrie orice asociații "
-#~ "anterioare făcute de alte vizualizatoare CHM.\n"
-#~ "\n"
-#~ "Sunteți sigur ca doriți să continuați?"
-
-#~ msgid "Couldn't extract the book contents tree."
-#~ msgstr "Nu am putut extrage cuprinsul cartii."
-
-#~ msgid "No contents.."
-#~ msgstr "Nu exista cuprins.."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-31 17:15+0200\n"
+"POT-Creation-Date: 2024-04-02 16:57+0300\n"
 "PO-Revision-Date: 2004-06-05 23:36+0300\n"
 "Last-Translator: Атанас Мавров <bugar@developer.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Ready."
 msgstr "Готов"
 
-#: src/chmframe.cpp:165 src/chmframe.cpp:877 src/chmframe.cpp:881
+#: src/chmframe.cpp:165 src/chmframe.cpp:849 src/chmframe.cpp:853
 msgid "Contents"
 msgstr "Съдържание"
 
@@ -179,176 +179,171 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#: src/chmframe.cpp:450
-#, fuzzy
-msgid "Open all"
-msgstr "Отваряне..."
-
-#: src/chmframe.cpp:550
+#: src/chmframe.cpp:522
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:653
+#: src/chmframe.cpp:625
 msgid "&Open..\tCtrl-O"
 msgstr "&Отваряне...\tCtrl-O"
 
-#: src/chmframe.cpp:654
+#: src/chmframe.cpp:626
 msgid "&Print page..\tCtrl-P"
 msgstr "&Отпечатване на страница...\tCtrl-P"
 
-#: src/chmframe.cpp:655
+#: src/chmframe.cpp:627
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Шрифтове..."
 
-#: src/chmframe.cpp:657
+#: src/chmframe.cpp:629
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Показване на &съдържанието\tCtrl-S"
 
-#: src/chmframe.cpp:661
+#: src/chmframe.cpp:633
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:666
+#: src/chmframe.cpp:638
 msgid "&Recent files"
 msgstr "&Последните файлове"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:650
 msgid "E&xit\tCtrl-X"
 msgstr "Из&ход\tCtrl-X"
 
-#: src/chmframe.cpp:678
+#: src/chmframe.cpp:650
 msgid "Quit the application."
 msgstr "Изход от приложението"
 
-#: src/chmframe.cpp:682
+#: src/chmframe.cpp:654
 msgid "&Home\tCtrl-H"
 msgstr "&Начална страница\tCtrl-H"
 
-#: src/chmframe.cpp:683
+#: src/chmframe.cpp:655
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "Напре&д\tCtrl-W"
 
-#: src/chmframe.cpp:684
+#: src/chmframe.cpp:656
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "&Назад\tCtrl-B"
 
-#: src/chmframe.cpp:687
+#: src/chmframe.cpp:659
 msgid "&About..\tF1"
 msgstr "&Относно...\tF1"
 
-#: src/chmframe.cpp:690
+#: src/chmframe.cpp:662
 #, fuzzy
 msgid "&Copy\tCtrl-C"
 msgstr "&Начална страница\tCtrl-H"
 
-#: src/chmframe.cpp:691
+#: src/chmframe.cpp:663
 #, fuzzy
 msgid "&Find..\tCtrl-F"
 msgstr "&Отваряне...\tCtrl-O"
 
-#: src/chmframe.cpp:693
+#: src/chmframe.cpp:665
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Начална страница\tCtrl-H"
 
-#: src/chmframe.cpp:694
+#: src/chmframe.cpp:666
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "Шриф&т...\tCtrl-T"
 
-#: src/chmframe.cpp:697
+#: src/chmframe.cpp:669
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:698
+#: src/chmframe.cpp:670
 msgid "Toggle &toolbar\tAlt-T"
 msgstr ""
 
-#: src/chmframe.cpp:701
+#: src/chmframe.cpp:673
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:702
+#: src/chmframe.cpp:674
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:703
+#: src/chmframe.cpp:675
 msgid "&Edit"
 msgstr ""
 
-#: src/chmframe.cpp:704
+#: src/chmframe.cpp:676
 msgid "Hi&story"
 msgstr "Истор&ия"
 
-#: src/chmframe.cpp:705
+#: src/chmframe.cpp:677
 msgid "&Help"
 msgstr "По&мощ"
 
-#: src/chmframe.cpp:721
+#: src/chmframe.cpp:693
 msgid "Bookmarks"
 msgstr "Отметки"
 
-#: src/chmframe.cpp:736
+#: src/chmframe.cpp:708
 msgid "Topics"
 msgstr "Теми"
 
-#: src/chmframe.cpp:746
+#: src/chmframe.cpp:718
 msgid "Add"
 msgstr "Добавяне"
 
-#: src/chmframe.cpp:747
+#: src/chmframe.cpp:719
 msgid "Remove"
 msgstr "Премахване"
 
-#: src/chmframe.cpp:750
+#: src/chmframe.cpp:722
 msgid "Add displayed page to bookmarks."
 msgstr "Добавяне на текущата страница в отметките"
 
-#: src/chmframe.cpp:751
+#: src/chmframe.cpp:723
 msgid "Remove selected bookmark."
 msgstr "Премахване на избраната страница"
 
-#: src/chmframe.cpp:872
+#: src/chmframe.cpp:844
 msgid "Open .."
 msgstr "Отваряне..."
 
-#: src/chmframe.cpp:873
+#: src/chmframe.cpp:845
 msgid "Print .."
 msgstr "Отпечатване..."
 
-#: src/chmframe.cpp:876 src/chmframe.cpp:880
+#: src/chmframe.cpp:848 src/chmframe.cpp:852
 msgid "Fonts .."
 msgstr "Шрифтове..."
 
-#: src/chmframe.cpp:885
+#: src/chmframe.cpp:857
 msgid "Copy"
 msgstr ""
 
-#: src/chmframe.cpp:886
+#: src/chmframe.cpp:858
 #, fuzzy
 msgid "Find"
 msgstr "Търси следващ"
 
-#: src/chmframe.cpp:891 src/chmframe.cpp:894
+#: src/chmframe.cpp:863 src/chmframe.cpp:866
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:899
+#: src/chmframe.cpp:871
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:900
+#: src/chmframe.cpp:872
 msgid "Forward"
 msgstr "Напред"
 
-#: src/chmframe.cpp:901
+#: src/chmframe.cpp:873
 msgid "Home"
 msgstr "Стартова страница"
 
-#: src/chmframe.cpp:905 src/chmframe.cpp:907
+#: src/chmframe.cpp:877 src/chmframe.cpp:879
 msgid "About"
 msgstr "Относно"
 
@@ -428,6 +423,10 @@ msgstr "Търсене само в заглавията"
 #: src/chmsearchpanel.cpp:50
 msgid "Search contents for occurrences of the specified text."
 msgstr "Търси в определения текст."
+
+#, fuzzy
+#~ msgid "Open all"
+#~ msgstr "Отваряне..."
 
 #~ msgid "Font size:"
 #~ msgstr "Големина на шрифта:"

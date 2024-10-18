@@ -202,7 +202,7 @@ msgstr "&Gör xCHM till standardvisare för CHM"
 
 #: src/chmframe.cpp:638
 msgid "&Recent files"
-msgstr "Tidiga&re filer"
+msgstr "Senaste file&r"
 
 #: src/chmframe.cpp:650
 msgid "E&xit\tCtrl-X"

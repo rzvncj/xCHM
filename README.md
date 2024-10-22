@@ -65,7 +65,7 @@ will be generated in the doc directory in HTML and LaTex format.
 
 I am no longer providing Mac and Windows binaries, just the source code.
 Some Linux distributions already provide binaries ([Debian](https://packages.debian.org/search?searchon=names&keywords=xchm),
-[Arch](https://www.archlinux.org/packages/community/x86_64/xchm/),
+[Arch](https://archlinux.org/packages/extra/x86_64/xchm/),
 [Gentoo](https://packages.gentoo.org/packages/app-text/xchm),
 [Ubuntu](https://packages.ubuntu.com/search?keywords=xchm), etc.)
 For Mac, please see [MacPorts](https://www.macports.org/ports.php?by=name&substr=xchm).

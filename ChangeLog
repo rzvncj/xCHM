@@ -388,53 +388,55 @@
 		+ fixed Mac build.
 		+ fixed just-broken new tab behaviour.
 
-	+ 1.27:
+	* 1.27:
 		+ always display tabs.
 		+ display the loaded page title in the tab only (no longer in the main
 		  window title bar).
 		+ fixed a title search bug.
 
-	+ 1.28:
+	* 1.28:
 		+ fixed configure-time XMLRPCDIR detection.
 		+ added Ctrl-'=' and Ctrl-'-' as shortcuts for zoom-in/out.
 
-	+ 1.29:
+	* 1.29:
 		+ added manpage (from Debian), Gnome files (from Arch).
 		+ more code cleanup.
 
-	+ 1.30:
+	* 1.30:
 		+ install icons to $(datadir)/icons/hicolor/<RESOLUTION>/apps/.
 
-	+ 1.31:
+	* 1.31:
 		+ the toolbar is now togglable.
 		+ fixed a crash caused by a search corner case.
 
-	+ 1.32:
+	* 1.32:
 		+ moved gr.po -> el.po.
 		+ now overlapping some text on page down / page up.
 		+ fixed typo (occurences -> occurrences).
 		+ added Keywords entry to xchm.desktop.
 		+ updated Swedish translation.
 
-	+ 1.33:
+	* 1.33:
 		+ removed XPMs from icon theme folders.
 		+ now using the XDG base directory specification (for the config).
 
-	+ 1.34:
+	* 1.34:
 		+ fixed a few compile-time deprecation warnings.
 		+ removed a bunch of local .xpm files (icons), now using platform
 		  defaults.
 
-	+ 1.35:
+	* 1.35:
 		+ fixed Mageia Linux build (they're using wxWidgets 3.2.1 in 2.8
 		  backwards-compatibility mode, which adds an unfortunate - and
 		  deprecated - wxToolBarBase::AddTool() overload).
 
-	+ 1.36:
+	* 1.36:
 		+ fixed compilation for wxWidgets versions older than 3.1.6.
 		+ improved CHM loading speed.
 		+ switched to using the default wxWidgets font picker dialog.
 
-	+ 1.37:
+	* 1.37:
 		+ no longer failing to load CHMs silently.
 		+ updated Romanian and Swedish translations.
+
+	* 1.38:

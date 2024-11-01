@@ -538,7 +538,9 @@ void CHMFrame::UpdateCHMInfo()
 
     if (_tcl->GetCount()) {
         _tcl->Unselect();
+        _tcl->Freeze();
         _tcl->DeleteChildren(_tcl->GetRootItem());
+        _tcl->Thaw();
     }
 
 #if !wxUSE_UNICODE

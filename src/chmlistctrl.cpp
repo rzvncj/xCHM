@@ -22,6 +22,7 @@
 #include <chmhtmlnotebook.h>
 #include <chminputstream.h>
 #include <chmlistctrl.h>
+#include <wx/listbase.h>
 #include <wx/settings.h>
 
 // Helper
@@ -100,6 +101,7 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
         if (!_items[i]->_title.Left(title.length()).CmpNoCase(title)) {
             EnsureVisible(i);
             SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+            SetItemState(i, wxLIST_STATE_FOCUSED, wxLIST_STATE_FOCUSED);
             break;
         }
     }

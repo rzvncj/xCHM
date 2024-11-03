@@ -71,6 +71,9 @@ protected:
     //! Called whenever the user types a letter in the textbox.
     void OnText(wxCommandEvent& event);
 
+    //! Called whenever the user presses enter in the textbox.
+    void OnTextEnter(wxCommandEvent& event);
+
 private:
     wxTextCtrl*      _text;
     CHMListCtrl*     _lc {nullptr};

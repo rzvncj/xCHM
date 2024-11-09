@@ -28,11 +28,31 @@
 #include <hhcparser.h>
 #include <memory>
 #include <wx/clipbrd.h>
+#include <wx/dnd.h>
 #include <wx/filename.h>
 #include <wx/log.h>
 #include <wx/uri.h>
 #include <wx/wfstream.h>
 #include <wx/wx.h>
+
+class CHMDropTarget : public wxFileDropTarget {
+
+public:
+    CHMDropTarget(CHMFrame* frame) : _frame(frame) {}
+
+    bool OnDropFiles(wxCoord /* x */, wxCoord /* y */, const wxArrayString& filenames) override
+    {
+        if (filenames.size() == 1 && filenames[0].Lower().ends_with(".chm")) {
+            _frame->LoadCHM(filenames[0]);
+            return true;
+        }
+
+        return false;
+    }
+
+private:
+    CHMFrame* _frame;
+};
 
 CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
     : wxHtmlWindow(parent, wxID_ANY, wxDefaultPosition, wxSize(200, 200)), _tcl(tc), _menu(std::make_unique<wxMenu>()),
@@ -50,6 +70,7 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
     _menu->Append(ID_PopupFind, _("&Find in page.."));
     _menu->AppendSeparator();
     _menu->Append(ID_PopupFullScreen, _("&Toggle fullscreen mode"));
+    SetDropTarget(new CHMDropTarget(frame));
 }
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)

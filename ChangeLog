@@ -440,3 +440,5 @@
 		+ updated Romanian and Swedish translations.
 
 	* 1.38:
+		+ added drag-and-drop support.
+		+ performance improvements.

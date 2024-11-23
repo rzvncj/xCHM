@@ -22,6 +22,7 @@
 
 #include <chmfinddialog.h>
 #include <memory>
+#include <wx/event.h>
 #include <wx/html/htmlwin.h>
 #include <wx/menu.h>
 #include <wx/notebook.h>

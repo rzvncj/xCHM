@@ -19,6 +19,7 @@
 
 #include <algorithm>
 #include <chmhtmlnotebook.h>
+#include <chmhtmlwindow.h>
 #include <chminputstream.h>
 #include <chmlistctrl.h>
 #include <chmsearchpanel.h>
@@ -31,7 +32,7 @@
 #include <wx/wx.h>
 
 CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNotebook* nbhtml)
-    : wxPanel(parent), _tcl(topics)
+    : wxPanel(parent), _tcl(topics), _nbhtml(nbhtml)
 {
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -203,9 +204,19 @@ bool CHMSearchPanel::TitleSearch(const wxString& title, const wxString& text, bo
     return processedTokens;
 }
 
-void CHMSearchPanel::OnSearchSel(wxListEvent&)
+void CHMSearchPanel::OnSearchSel(wxListEvent& event)
 {
-    _results->LoadSelected();
+    event.Skip();
+
+    _results->LoadSelected(event.GetIndex());
+}
+
+void CHMSearchPanel::OnItemActivated(wxListEvent& event)
+{
+    event.Skip();
+
+    _results->LoadSelected(event.GetIndex());
+    _nbhtml->GetCurrentPage()->SetFocus();
 }
 
 void CHMSearchPanel::Reset()
@@ -241,6 +252,7 @@ void CHMSearchPanel::GetConfig()
 
 BEGIN_EVENT_TABLE(CHMSearchPanel, wxPanel)
 EVT_LIST_ITEM_SELECTED(ID_Results, CHMSearchPanel::OnSearchSel)
+EVT_LIST_ITEM_ACTIVATED(ID_Results, CHMSearchPanel::OnItemActivated)
 EVT_BUTTON(ID_SearchButton, CHMSearchPanel::OnSearch)
 EVT_TEXT_ENTER(ID_SearchText, CHMSearchPanel::OnSearch)
 END_EVENT_TABLE()

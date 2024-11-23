@@ -35,7 +35,7 @@ int CompareItemPairs(CHMListPairItem* item1, CHMListPairItem* item2)
 // CHMListCtrl implementation
 
 CHMListCtrl::CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID id)
-    : wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
+    : wxListView(parent, id, wxDefaultPosition, wxDefaultSize,
                  wxLC_VIRTUAL | wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | wxLC_SORT_ASCENDING | wxSUNKEN_BORDER),
       _items(CompareItemPairs), _nbhtml(nbhtml)
 {
@@ -70,14 +70,8 @@ void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
     _items.Add(new CHMListPairItem(title, url));
 }
 
-void CHMListCtrl::LoadSelected()
+void CHMListCtrl::LoadSelected(long item)
 {
-    auto item = -1L;
-    item      = GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-
-    if (item == -1L || item > static_cast<long>(_items.GetCount()) - 1)
-        return;
-
     auto chmf = CHMInputStream::GetCache();
 
     if (chmf) {
@@ -100,8 +94,8 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
     for (size_t i = 0; i < _items.size(); ++i) {
         if (!_items[i]->_title.Left(title.length()).CmpNoCase(title)) {
             EnsureVisible(i);
-            SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
-            SetItemState(i, wxLIST_STATE_FOCUSED, wxLIST_STATE_FOCUSED);
+            Select(i);
+            Focus(i);
             break;
         }
     }

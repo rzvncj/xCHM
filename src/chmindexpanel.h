@@ -20,6 +20,7 @@
 #ifndef __CHMINDEXPANEL_H_
 #define __CHMINDEXPANEL_H_
 
+#include <wx/app.h>
 #include <wx/listctrl.h>
 #include <wx/panel.h>
 #include <wx/textctrl.h>
@@ -61,19 +62,20 @@ public:
     void SetNewFont(const wxFont& font);
 
 protected:
-    //! This gets called when the user clicks on a list item.
+    //! This gets called when the user selects a list item.
     void OnIndexSel(wxListEvent& event);
 
-    //! This gets called when the user presses enter on a list item.
-    void OnIndexSelRet(wxCommandEvent& event);
+    //! This gets called when the user activates a list item.
+    void OnItemActivated(wxListEvent& event);
 
     //! Called whenever the user types a letter in the textbox.
     void OnText(wxCommandEvent& event);
 
 private:
-    wxTextCtrl*  _text;
-    CHMListCtrl* _lc {nullptr};
-    bool         _navigate {true};
+    wxTextCtrl*      _text;
+    CHMListCtrl*     _lc {nullptr};
+    bool             _navigate {true};
+    CHMHtmlNotebook* _nbhtml;
 
 private:
     DECLARE_EVENT_TABLE()

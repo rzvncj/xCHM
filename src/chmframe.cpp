@@ -35,11 +35,13 @@
 #include <wx/artprov.h>
 #include <wx/bitmap.h>
 #include <wx/busyinfo.h>
+#include <wx/config.h>
 #include <wx/filesys.h>
 #include <wx/fs_mem.h>
 #include <wx/imaglist.h>
 #include <wx/mimetype.h>
 #include <wx/statbox.h>
+#include <wx/treebase.h>
 #include <wx/utils.h>
 #include <wx/version.h>
 
@@ -407,9 +409,23 @@ void CHMFrame::OnBookmarkSel(wxCommandEvent& event)
     _nbhtml->LoadPageInCurrentView(wxT("file:") + chmf->ArchiveName() + wxT("#xchm:/") + *url);
 }
 
+void CHMFrame::OnItemActivated(wxTreeEvent& event)
+{
+    event.Skip();
+
+    LoadSelected(event.GetItem());
+    _nbhtml->GetCurrentPage()->SetFocus();
+}
+
 void CHMFrame::OnSelectionChanged(wxTreeEvent& event)
 {
-    auto id   = event.GetItem();
+    event.Skip();
+
+    LoadSelected(event.GetItem());
+}
+
+void CHMFrame::LoadSelected(wxTreeItemId id)
+{
     auto chmf = CHMInputStream::GetCache();
 
     if (id == _tcl->GetRootItem() || !chmf || !id.IsOk())
@@ -933,6 +949,7 @@ EVT_MENU(ID_ToggleToolbar, CHMFrame::OnToggleToolbar)
 EVT_BUTTON(ID_Add, CHMFrame::OnAddBookmark)
 EVT_BUTTON(ID_Remove, CHMFrame::OnRemoveBookmark)
 EVT_TREE_SEL_CHANGED(ID_TreeCtrl, CHMFrame::OnSelectionChanged)
+EVT_TREE_ITEM_ACTIVATED(ID_TreeCtrl, CHMFrame::OnItemActivated)
 EVT_COMBOBOX(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 EVT_TEXT_ENTER(ID_Bookmarks, CHMFrame::OnBookmarkSel)
 EVT_CLOSE(CHMFrame::OnCloseWindow)

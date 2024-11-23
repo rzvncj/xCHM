@@ -53,7 +53,7 @@ int CompareItemPairs(CHMListPairItem* item1, CHMListPairItem* item2);
 */
 
 //! List control class meant to emulate the look and feel of a wxListBox.
-class CHMListCtrl : public wxListCtrl {
+class CHMListCtrl : public wxListView {
 
 public:
     /*!
@@ -85,7 +85,7 @@ public:
     void AddPairItem(const wxString& title, const wxString& url);
 
     //! Loads the page that corresponds to the item currently selected.
-    void LoadSelected();
+    void LoadSelected(long item);
 
     //! Should be called each time the list control's state changes.
     void UpdateUI();

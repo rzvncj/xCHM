@@ -51,6 +51,24 @@ WX_DECLARE_HASH_MAP(int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap);
 
 //! C++ wrapper around CHMLIB. Concrete class.
 class CHMFile {
+    //! Helper. To avoid a large list of parameters in 'ProcessWLC', and slightly improve readability
+    struct IndexSearchUnitsInfo {
+        chmFile*    fileMain;
+        chmUnitInfo uiMain {};
+
+        chmFile*    fileTopics;
+        chmUnitInfo uiTopics {};
+
+        chmFile*    fileStrings;
+        chmUnitInfo uiStrings {};
+
+        chmFile*    fileUrltbl;
+        chmUnitInfo uiUrltbl {};
+
+        chmFile*    fileUrlstr;
+        chmUnitInfo uiUrlstr {};
+    };
+
 public:
     //! Default constructor.
     CHMFile() = default;
@@ -203,31 +221,12 @@ private:
 
     //! Helper. Returns the $FIftiMain offset of leaf node or 0.
     uint32_t GetLeafNodeOffset(const wxString& text, uint32_t initalOffset, uint32_t buffSize, uint16_t treeDepth,
-                               chmFile *file, chmUnitInfo* ui);
-    
-    //! Helper. To avoid a large list of parameters in 'ProcessWLC', and slightly improve readability
-    struct IndexSearchUnitsInfo
-    {
-        chmFile *fileMain;
-        chmUnitInfo uiMain;
-        
-        chmFile *fileUrltbl;
-        chmUnitInfo uiUrltbl;
-        
-        chmFile *fileStrings;
-        chmUnitInfo uiStrings;
-        
-        chmFile *fileTopics;
-        chmUnitInfo uiTopics;
-        
-        chmFile *fileUrlstr;
-        chmUnitInfo uiUrlstr;
-    };
-    
+                               chmFile* file, chmUnitInfo* ui);
+
     //! Helper. Processes the word location code entries while searching.
     bool ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_offset, unsigned char ds, unsigned char dr,
-                    unsigned char cs, unsigned char cr, unsigned char ls, unsigned char lr,
-                    IndexSearchUnitsInfo &uis, CHMSearchResults& results);
+                    unsigned char cs, unsigned char cr, unsigned char ls, unsigned char lr, IndexSearchUnitsInfo& uis,
+                    CHMSearchResults& results);
 
     //! Looks up as much information as possible from #WINDOWS/#STRINGS.
     bool InfoFromWindows();
@@ -250,7 +249,7 @@ private:
     bool BinaryIndex(CHMListCtrl& toBuild, const wxCSConv& cv);
 
 private:
-    chmFile*       _chmFile    {nullptr};
+    chmFile*       _chmFile {nullptr};
     chmFile*       _chmChiFile {nullptr};
     wxString       _filename;
     wxString       _home {wxT("/")};

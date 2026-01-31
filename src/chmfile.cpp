@@ -26,11 +26,11 @@
 #include <chmlistctrl.h>
 #include <hhcparser.h>
 #include <wx/defs.h>
+#include <wx/filename.h>
 #include <wx/fontmap.h>
 #include <wx/progdlg.h>
 #include <wx/strconv.h>
 #include <wx/treectrl.h>
-#include <wx/filename.h>
 #include <wx/wx.h>
 #include <wxstringutils.h>
 
@@ -234,15 +234,16 @@ bool CHMFile::LoadCHM(const wxString& archiveName)
 
     if (!_chmFile)
         return false;
-    
+
     wxFileName chiFn(archiveName);
     chiFn.SetExt("chi");
     wxString chiName = chiFn.GetFullPath();
-    
+
     // There may be issues on case-sensitive systems (for example, "doc.chm" and "DOC.chi" in EXT family).
-    // However, these seem to be extremely rare and exotic cases, so complex logic to handle them is intentionally avoided.
+    // However, these seem to be extremely rare and exotic cases, so complex logic to handle them is intentionally
+    // avoided.
     _chmChiFile = chm_open(static_cast<const char*>(chiName.mb_str()));
-    
+
     if (!_chmChiFile)
         _chmChiFile = _chmFile;
 
@@ -262,12 +263,12 @@ void CHMFile::CloseCHM()
 {
     if (!_chmFile)
         return;
-    
+
     if (_chmChiFile != _chmFile)
         chm_close(_chmChiFile);
 
     chm_close(_chmFile);
-    _chmFile = nullptr;
+    _chmFile    = nullptr;
     _chmChiFile = nullptr;
 
     _cidMap.clear();
@@ -659,19 +660,18 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
 
     if (text.IsEmpty())
         return false;
-    
-    IndexSearchUnitsInfo uis;
-    uis.fileMain    = _chmFile;
-    uis.fileTopics  = _chmChiFile;
-    uis.fileStrings = _chmChiFile;
-    uis.fileUrltbl  = _chmChiFile;
-    uis.fileUrlstr  = _chmChiFile;
-    
-    if (   chm_resolve_object(uis.fileMain   , "/$FIftiMain", &uis.uiMain   ) != CHM_RESOLVE_SUCCESS
-        || chm_resolve_object(uis.fileTopics , "/#TOPICS"   , &uis.uiTopics ) != CHM_RESOLVE_SUCCESS
-        || chm_resolve_object(uis.fileStrings, "/#STRINGS"  , &uis.uiStrings) != CHM_RESOLVE_SUCCESS
-        || chm_resolve_object(uis.fileUrltbl , "/#URLTBL"   , &uis.uiUrltbl ) != CHM_RESOLVE_SUCCESS
-        || chm_resolve_object(uis.fileUrlstr , "/#URLSTR"   , &uis.uiUrlstr ) != CHM_RESOLVE_SUCCESS)
+
+    IndexSearchUnitsInfo uis {.fileMain    = _chmFile,
+                              .fileTopics  = _chmChiFile,
+                              .fileStrings = _chmChiFile,
+                              .fileUrltbl  = _chmChiFile,
+                              .fileUrlstr  = _chmChiFile};
+
+    if (chm_resolve_object(uis.fileMain, "/$FIftiMain", &uis.uiMain) != CHM_RESOLVE_SUCCESS
+        || chm_resolve_object(uis.fileTopics, "/#TOPICS", &uis.uiTopics) != CHM_RESOLVE_SUCCESS
+        || chm_resolve_object(uis.fileStrings, "/#STRINGS", &uis.uiStrings) != CHM_RESOLVE_SUCCESS
+        || chm_resolve_object(uis.fileUrltbl, "/#URLTBL", &uis.uiUrltbl) != CHM_RESOLVE_SUCCESS
+        || chm_resolve_object(uis.fileUrlstr, "/#URLSTR", &uis.uiUrlstr) != CHM_RESOLVE_SUCCESS)
         return false;
 
     constexpr size_t FTS_HEADER_LEN {0x32};
@@ -792,7 +792,7 @@ bool CHMFile::GetArchiveInfo()
 }
 
 uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset, uint32_t buffSize, uint16_t treeDepth,
-                                    chmFile *file, chmUnitInfo* ui)
+                                    chmFile* file, chmUnitInfo* ui)
 {
     uint32_t test_offset {0};
     wxString word;
@@ -843,7 +843,7 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
 
 bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_offset, unsigned char ds, unsigned char dr,
                          unsigned char cs, unsigned char cr, unsigned char ls, unsigned char lr,
-                         IndexSearchUnitsInfo &uis, CHMSearchResults& results)
+                         IndexSearchUnitsInfo& uis, CHMSearchResults& results)
 {
     auto        wlc_bit = 7;
     uint64_t    index {0};

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xchm 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-22 14:11+0300\n"
+"POT-Creation-Date: 2026-01-31 23:53+0200\n"
 "PO-Revision-Date: 2006-04-01 18:30+0300\n"
 "Last-Translator: Maxim V. Dziumanenko <mvd@mylinux.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/chmfile.cpp:262
+#: src/chmfile.cpp:279
 msgid "Retrieving table of contents.."
 msgstr ""
 
-#: src/chmfile.cpp:263
+#: src/chmfile.cpp:280
 #, fuzzy
 msgid "Retrieving index.."
 msgstr "Без заголовку"
 
-#: src/chmfile.cpp:264
+#: src/chmfile.cpp:281
 msgid "Untitled in index"
 msgstr "Без заголовку"
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "Ready."
 msgstr "Завершено."
 
-#: src/chmframe.cpp:165 src/chmframe.cpp:849 src/chmframe.cpp:853
+#: src/chmframe.cpp:165 src/chmframe.cpp:851 src/chmframe.cpp:855
 msgid "Contents"
 msgstr "Зміст"
 
@@ -157,8 +157,8 @@ msgstr "Відкрити файл.."
 msgid "Could not open file"
 msgstr ""
 
-#: src/chmframe.cpp:201 src/chmframe.cpp:310 src/chmhtmlwindow.cpp:268
-#: src/chmhtmlwindow.cpp:286
+#: src/chmframe.cpp:201 src/chmframe.cpp:310 src/chmhtmlwindow.cpp:289
+#: src/chmhtmlwindow.cpp:307
 msgid "Error"
 msgstr ""
 
@@ -178,220 +178,220 @@ msgstr ""
 msgid "Loading, please wait.."
 msgstr ""
 
-#: src/chmframe.cpp:625
+#: src/chmframe.cpp:627
 msgid "&Open..\tCtrl-O"
 msgstr "&Відкрити...\tCtrl+O"
 
-#: src/chmframe.cpp:626
+#: src/chmframe.cpp:628
 msgid "&Print page..\tCtrl-P"
 msgstr "Д&рук..\tCtrl-P"
 
-#: src/chmframe.cpp:627
+#: src/chmframe.cpp:629
 #, fuzzy
 msgid "Fon&ts.."
 msgstr "Шрифти..."
 
-#: src/chmframe.cpp:629
+#: src/chmframe.cpp:631
 msgid "&Show contents tree\tCtrl-S"
 msgstr "Показати зміст\tCtrl-S"
 
-#: src/chmframe.cpp:633
+#: src/chmframe.cpp:635
 msgid "&Make xCHM the default CHM viewer"
 msgstr ""
 
-#: src/chmframe.cpp:638
+#: src/chmframe.cpp:640
 msgid "&Recent files"
 msgstr "Не&давні файли..."
 
-#: src/chmframe.cpp:650
+#: src/chmframe.cpp:652
 msgid "E&xit\tCtrl-X"
 msgstr "Ви&йти\tCtrl-X"
 
-#: src/chmframe.cpp:650
+#: src/chmframe.cpp:652
 msgid "Quit the application."
 msgstr "Вийти з програми."
 
-#: src/chmframe.cpp:654
+#: src/chmframe.cpp:656
 msgid "&Home\tCtrl-H"
 msgstr "&Додому\tCtrl-H"
 
-#: src/chmframe.cpp:655
+#: src/chmframe.cpp:657
 #, fuzzy
 msgid "For&ward\tAlt-RIGHT"
 msgstr "&Вперед\tCtrl-W"
 
-#: src/chmframe.cpp:656
+#: src/chmframe.cpp:658
 #, fuzzy
 msgid "&Back\tAlt-LEFT"
 msgstr "&Назад\tCtrl-B"
 
-#: src/chmframe.cpp:659
+#: src/chmframe.cpp:661
 msgid "&About..\tF1"
 msgstr "&Про програму..\tF1"
 
-#: src/chmframe.cpp:662
+#: src/chmframe.cpp:664
 msgid "&Copy\tCtrl-C"
 msgstr "&Копіювати\tCtrl-C"
 
-#: src/chmframe.cpp:663
+#: src/chmframe.cpp:665
 msgid "&Find..\tCtrl-F"
 msgstr "З&найти..\tCtrl-F"
 
-#: src/chmframe.cpp:665
+#: src/chmframe.cpp:667
 #, fuzzy
 msgid "&Close tab\tCtrl-W"
 msgstr "&Додому\tCtrl-H"
 
-#: src/chmframe.cpp:666
+#: src/chmframe.cpp:668
 #, fuzzy
 msgid "&New tab\tCtrl-T"
 msgstr "&Шрифти..\tCtrl-T"
 
-#: src/chmframe.cpp:669
+#: src/chmframe.cpp:671
 msgid "Toggle &fullscreen\tF11"
 msgstr ""
 
-#: src/chmframe.cpp:670
+#: src/chmframe.cpp:672
 msgid "Toggle &toolbar\tAlt-T"
 msgstr ""
 
-#: src/chmframe.cpp:673
+#: src/chmframe.cpp:675
 msgid "&File"
 msgstr "&Файл"
 
-#: src/chmframe.cpp:674
+#: src/chmframe.cpp:676
 msgid "&View"
 msgstr ""
 
-#: src/chmframe.cpp:675
+#: src/chmframe.cpp:677
 msgid "&Edit"
 msgstr "&Правка"
 
-#: src/chmframe.cpp:676
+#: src/chmframe.cpp:678
 msgid "Hi&story"
 msgstr "&Історія"
 
-#: src/chmframe.cpp:677
+#: src/chmframe.cpp:679
 msgid "&Help"
 msgstr "&Довідка"
 
-#: src/chmframe.cpp:693
+#: src/chmframe.cpp:695
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/chmframe.cpp:708
+#: src/chmframe.cpp:710
 msgid "Topics"
 msgstr "Теми"
 
-#: src/chmframe.cpp:718
+#: src/chmframe.cpp:720
 msgid "Add"
 msgstr "Додати"
 
-#: src/chmframe.cpp:719
+#: src/chmframe.cpp:721
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/chmframe.cpp:722
+#: src/chmframe.cpp:724
 msgid "Add displayed page to bookmarks."
 msgstr "Додати цю сторінку до закладок."
 
-#: src/chmframe.cpp:723
+#: src/chmframe.cpp:725
 msgid "Remove selected bookmark."
 msgstr "Видалити виділену закладку."
 
-#: src/chmframe.cpp:844
+#: src/chmframe.cpp:846
 msgid "Open .."
 msgstr "Відкрити..."
 
-#: src/chmframe.cpp:845
+#: src/chmframe.cpp:847
 msgid "Print .."
 msgstr "Друк..."
 
-#: src/chmframe.cpp:848 src/chmframe.cpp:852
+#: src/chmframe.cpp:850 src/chmframe.cpp:854
 msgid "Fonts .."
 msgstr "Шрифти..."
 
-#: src/chmframe.cpp:857
+#: src/chmframe.cpp:859
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/chmframe.cpp:858
+#: src/chmframe.cpp:860
 msgid "Find"
 msgstr "Знайти"
 
-#: src/chmframe.cpp:863 src/chmframe.cpp:866
+#: src/chmframe.cpp:865 src/chmframe.cpp:868
 msgid "Fullscreen"
 msgstr ""
 
-#: src/chmframe.cpp:871
+#: src/chmframe.cpp:873
 msgid "Back"
 msgstr "Назад"
 
-#: src/chmframe.cpp:872
+#: src/chmframe.cpp:874
 msgid "Forward"
 msgstr "Вперед"
 
-#: src/chmframe.cpp:873
+#: src/chmframe.cpp:875
 msgid "Home"
 msgstr "Додому"
 
-#: src/chmframe.cpp:877 src/chmframe.cpp:879
+#: src/chmframe.cpp:879 src/chmframe.cpp:881
 msgid "About"
 msgstr "Про програму"
 
-#: src/chmhtmlwindow.cpp:41
+#: src/chmhtmlwindow.cpp:61
 msgid "For&ward"
 msgstr "&Вперед"
 
-#: src/chmhtmlwindow.cpp:42
+#: src/chmhtmlwindow.cpp:62
 msgid "&Back"
 msgstr "&Назад"
 
-#: src/chmhtmlwindow.cpp:43
+#: src/chmhtmlwindow.cpp:63
 msgid "Copy &link location"
 msgstr "Копіювати &посилання"
 
-#: src/chmhtmlwindow.cpp:44
+#: src/chmhtmlwindow.cpp:64
 msgid "&Save link as.."
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:45
+#: src/chmhtmlwindow.cpp:65
 msgid "&Open in a new tab"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:48
+#: src/chmhtmlwindow.cpp:68
 msgid "&Copy selection"
 msgstr "&Копіювати виділене"
 
-#: src/chmhtmlwindow.cpp:50
+#: src/chmhtmlwindow.cpp:70
 msgid "&Find in page.."
 msgstr "З&найти на цій сторінці.."
 
-#: src/chmhtmlwindow.cpp:52
+#: src/chmhtmlwindow.cpp:72
 msgid "&Toggle fullscreen mode"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:268
+#: src/chmhtmlwindow.cpp:289
 msgid "OpenFile("
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:268
+#: src/chmhtmlwindow.cpp:289
 msgid ") failed"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:278
+#: src/chmhtmlwindow.cpp:299
 msgid "Save as"
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:286
+#: src/chmhtmlwindow.cpp:307
 msgid "Error creating file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:296
+#: src/chmhtmlwindow.cpp:317
 msgid "Saved file "
 msgstr ""
 
-#: src/chmhtmlwindow.cpp:296
+#: src/chmhtmlwindow.cpp:317
 msgid "Success"
 msgstr ""
 

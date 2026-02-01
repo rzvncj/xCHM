@@ -444,3 +444,5 @@
 		+ performance improvements.
 		+ added support for external .chi index files.
 		+ bumped minimum required compiler standard support to C++17.
+
+	* 1.39:

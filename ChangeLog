@@ -446,3 +446,4 @@
 		+ bumped minimum required compiler standard support to C++17.
 
 	* 1.39:
+		+ added Georgian translation.

@@ -1,0 +1,411 @@
+# Georgian translation for xchm.
+# Copyright (C) 2026 Razvan Cojocaru <rzvncj@gmail.com>
+# This file is distributed under the same license as the xchm package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xchm 1.39\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-31 22:53+0100\n"
+"PO-Revision-Date: 2026-02-02 16:25+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: src/chmfile.cpp:279
+msgid "Retrieving table of contents.."
+msgstr "სარჩევის მიღება..."
+
+#: src/chmfile.cpp:280
+msgid "Retrieving index.."
+msgstr "ინდექსის მიღება..."
+
+#: src/chmfile.cpp:281
+msgid "Untitled in index"
+msgstr "უსახელო ინდექსში"
+
+#: src/chmfinddialog.cpp:29
+msgid "Find in page.."
+msgstr "გვერდში ძებნა.."
+
+#: src/chmfinddialog.cpp:32
+msgid "Whole words only"
+msgstr "მხოლოდ, მთელი სიტყვები"
+
+#: src/chmfinddialog.cpp:33
+msgid "Case sensitive"
+msgstr "დიდი და პატარა ასოების განსხვავება"
+
+#: src/chmfinddialog.cpp:42
+msgid "Find next"
+msgstr "მომდევნოს მოძებნა"
+
+#: src/chmfinddialog.cpp:45 src/chmfontdialog.cpp:89
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: src/chmfontdialog.cpp:64
+msgid "Change fonts.."
+msgstr "ფონტების შეცვლა..."
+
+#: src/chmfontdialog.cpp:71
+msgid "Normal font:"
+msgstr "ნორმალური ფონტი:"
+
+#: src/chmfontdialog.cpp:72
+msgid "Fixed font:"
+msgstr "ფიქსირებული ფონტი:"
+
+#: src/chmfontdialog.cpp:78
+msgid "Preview:"
+msgstr "მინიატურა:"
+
+#: src/chmfontdialog.cpp:84
+msgid "OK"
+msgstr "დიახ"
+
+#: src/chmframe.cpp:52
+msgid "Open a CHM book."
+msgstr "CHM წიგნის გახსნა."
+
+#: src/chmframe.cpp:53
+msgid "Change fonts."
+msgstr "ფონტების შეცვლა."
+
+#: src/chmframe.cpp:54
+msgid "Print the page currently displayed."
+msgstr "ამჟამად ნაჩვენები გვერდის ჩვენება."
+
+#: src/chmframe.cpp:55
+msgid "Toggle table of contents."
+msgstr "სარჩევის გადართვა."
+
+#: src/chmframe.cpp:56
+msgid "Go to the book's start page."
+msgstr "წიგნის პირველ გვერდზე გადასვლა."
+
+#: src/chmframe.cpp:57
+msgid "Go forward in history. Per book."
+msgstr "წინ გადასვლა ისტორიაში. თითოეული წიგნისთვის."
+
+#: src/chmframe.cpp:58
+msgid "Back to the last visited page. Per book."
+msgstr "ბოლო ნანახ გვერდზე დაბრუნება. თითოეული წიგნისთვის."
+
+#: src/chmframe.cpp:59
+msgid "About the program."
+msgstr "პროგრამის შესახებ."
+
+#: src/chmframe.cpp:60
+msgid "Copy selection."
+msgstr "მონიშნულის კოპირება."
+
+#: src/chmframe.cpp:61
+msgid "Find word in page."
+msgstr "სიტყვის ძებნა გვერდში."
+
+#: src/chmframe.cpp:62
+msgid "Toggle fullscreen mode."
+msgstr "სრულეკრანიანი რეჟიმის გადართვა."
+
+#: src/chmframe.cpp:63
+msgid "Toggle toolbar."
+msgstr "ხელსაწყოთა ზოლის გადართვა."
+
+#: src/chmframe.cpp:64
+msgid "Close the current tab"
+msgstr "მიმდინარე ჩანართის დახურვა"
+
+#: src/chmframe.cpp:65
+msgid "Open a new tab"
+msgstr "ახალი ჩანართის გახსნა"
+
+#: src/chmframe.cpp:66
+msgid "Associate the .chm file extension with xCHM."
+msgstr ".chm ფაილის გაფართოების ასოცირება xCHM-ისთან."
+
+#: src/chmframe.cpp:141
+msgid "Ready."
+msgstr "მზადაა."
+
+#: src/chmframe.cpp:165 src/chmframe.cpp:851 src/chmframe.cpp:855
+msgid "Contents"
+msgstr "შემცველობა"
+
+#: src/chmframe.cpp:166
+msgid "Index"
+msgstr "ინდექსი"
+
+#: src/chmframe.cpp:167 src/chmsearchpanel.cpp:45
+msgid "Search"
+msgstr "ძებნა"
+
+#: src/chmframe.cpp:186
+msgid "About xCHM"
+msgstr "xCHM-ის შესახებ"
+
+#: src/chmframe.cpp:191
+msgid "Choose a file.."
+msgstr "აირჩიეთ ფაილი..."
+
+#: src/chmframe.cpp:201 src/chmframe.cpp:310
+msgid "Could not open file"
+msgstr "ფაილის გახსნა შეუძლებელია"
+
+#: src/chmframe.cpp:201 src/chmframe.cpp:310 src/chmhtmlwindow.cpp:289
+#: src/chmhtmlwindow.cpp:307
+msgid "Error"
+msgstr "შეცდომა"
+
+#: src/chmframe.cpp:270
+msgid "Confirm"
+msgstr "დადასტურება"
+
+#: src/chmframe.cpp:288
+msgid "Registration successful!"
+msgstr "რეგისტრაცია წარმატებულია!"
+
+#: src/chmframe.cpp:288
+msgid "Done"
+msgstr "მზადაა"
+
+#: src/chmframe.cpp:522
+msgid "Loading, please wait.."
+msgstr "იტვირთება. გთხოვთ, მოითმინეთ..."
+
+#: src/chmframe.cpp:627
+msgid "&Open..\tCtrl-O"
+msgstr "&გახსნა..\tCtrl-O"
+
+#: src/chmframe.cpp:628
+msgid "&Print page..\tCtrl-P"
+msgstr "გვერდის დაბე&ჭდვა..\tCtrl-P"
+
+#: src/chmframe.cpp:629
+msgid "Fon&ts.."
+msgstr "ფონ&ტები..."
+
+#: src/chmframe.cpp:631
+msgid "&Show contents tree\tCtrl-S"
+msgstr "&შემცველობის ხის ჩვენება\tCtrl-S"
+
+#: src/chmframe.cpp:635
+msgid "&Make xCHM the default CHM viewer"
+msgstr "&xCHM-ის დაყენება CHM ფაილების ნაგულისხმევ გამხსნელად"
+
+#: src/chmframe.cpp:640
+msgid "&Recent files"
+msgstr "&უახლესი ფაილები"
+
+#: src/chmframe.cpp:652
+msgid "E&xit\tCtrl-X"
+msgstr "გა&სვლა\tCtrl-X"
+
+#: src/chmframe.cpp:652
+msgid "Quit the application."
+msgstr "აპლიკაციიდან გასვლა."
+
+#: src/chmframe.cpp:656
+msgid "&Home\tCtrl-H"
+msgstr "სა&წყისი\tCtrl-H"
+
+#: src/chmframe.cpp:657
+msgid "For&ward\tAlt-RIGHT"
+msgstr "&წინ\tAlt-RIGHT"
+
+#: src/chmframe.cpp:658
+msgid "&Back\tAlt-LEFT"
+msgstr "&უკან\tAlt-LEFT"
+
+#: src/chmframe.cpp:661
+msgid "&About..\tF1"
+msgstr "&შესახებ..\tF1"
+
+#: src/chmframe.cpp:664
+msgid "&Copy\tCtrl-C"
+msgstr "&კოპირება\tCtrl-C"
+
+#: src/chmframe.cpp:665
+msgid "&Find..\tCtrl-F"
+msgstr "&ძებნა..\tCtrl-F"
+
+#: src/chmframe.cpp:667
+msgid "&Close tab\tCtrl-W"
+msgstr "ჩანართის და&ხურვა\tCtrl-W"
+
+#: src/chmframe.cpp:668
+msgid "&New tab\tCtrl-T"
+msgstr "&ახალი ჩანართი\tCtrl-T"
+
+#: src/chmframe.cpp:671
+msgid "Toggle &fullscreen\tF11"
+msgstr "სრულე&კრანიანი რეჟიმის გადართვა\tF11"
+
+#: src/chmframe.cpp:672
+msgid "Toggle &toolbar\tAlt-T"
+msgstr "&ხელსაწყოთა პანელის გადართვა\tAlt-T"
+
+#: src/chmframe.cpp:675
+msgid "&File"
+msgstr "&ფაილი"
+
+#: src/chmframe.cpp:676
+msgid "&View"
+msgstr "&ხედი"
+
+#: src/chmframe.cpp:677
+msgid "&Edit"
+msgstr "ჩასწორ&ება"
+
+#: src/chmframe.cpp:678
+msgid "Hi&story"
+msgstr "&ისტორია"
+
+#: src/chmframe.cpp:679
+msgid "&Help"
+msgstr "&დახმარება"
+
+#: src/chmframe.cpp:695
+msgid "Bookmarks"
+msgstr "სანიშნეები"
+
+#: src/chmframe.cpp:710
+msgid "Topics"
+msgstr "თემები"
+
+#: src/chmframe.cpp:720
+msgid "Add"
+msgstr "დამატება"
+
+#: src/chmframe.cpp:721
+msgid "Remove"
+msgstr "წაშლა"
+
+#: src/chmframe.cpp:724
+msgid "Add displayed page to bookmarks."
+msgstr "ნაჩვენები გვერდის სანიშნეებში ჩამატება."
+
+#: src/chmframe.cpp:725
+msgid "Remove selected bookmark."
+msgstr "მონიშნული სანიშნეს წაშლა."
+
+#: src/chmframe.cpp:846
+msgid "Open .."
+msgstr "გახსნა .."
+
+#: src/chmframe.cpp:847
+msgid "Print .."
+msgstr "ბეჭდვა .."
+
+#: src/chmframe.cpp:850 src/chmframe.cpp:854
+msgid "Fonts .."
+msgstr "ფონტები .."
+
+#: src/chmframe.cpp:859
+msgid "Copy"
+msgstr "კოპირება"
+
+#: src/chmframe.cpp:860
+msgid "Find"
+msgstr "ძებნა"
+
+#: src/chmframe.cpp:865 src/chmframe.cpp:868
+msgid "Fullscreen"
+msgstr "სრულ ეკრანზე"
+
+#: src/chmframe.cpp:873
+msgid "Back"
+msgstr "უკან"
+
+#: src/chmframe.cpp:874
+msgid "Forward"
+msgstr "წინ"
+
+#: src/chmframe.cpp:875
+msgid "Home"
+msgstr "საწყისი"
+
+#: src/chmframe.cpp:879 src/chmframe.cpp:881
+msgid "About"
+msgstr "შესახებ"
+
+#: src/chmhtmlwindow.cpp:61
+msgid "For&ward"
+msgstr "&წინ"
+
+#: src/chmhtmlwindow.cpp:62
+msgid "&Back"
+msgstr "&უკან"
+
+#: src/chmhtmlwindow.cpp:63
+msgid "Copy &link location"
+msgstr "ბმულის &მდებარეობის კოპირება"
+
+#: src/chmhtmlwindow.cpp:64
+msgid "&Save link as.."
+msgstr "ბმული&ს შენახვა როგორც..."
+
+#: src/chmhtmlwindow.cpp:65
+msgid "&Open in a new tab"
+msgstr "გა&ხსნა ახალ ჩანართში"
+
+#: src/chmhtmlwindow.cpp:68
+msgid "&Copy selection"
+msgstr "მონიშნულის &კოპირება"
+
+#: src/chmhtmlwindow.cpp:70
+msgid "&Find in page.."
+msgstr "გვერდში ძე&ბნა..."
+
+#: src/chmhtmlwindow.cpp:72
+msgid "&Toggle fullscreen mode"
+msgstr "სრულეკრანიანი &რეჟიმის გადართვა."
+
+#: src/chmhtmlwindow.cpp:289
+msgid "OpenFile("
+msgstr "ფაილის გახსნა("
+
+#: src/chmhtmlwindow.cpp:289
+msgid ") failed"
+msgstr ") ჩავარდა"
+
+#: src/chmhtmlwindow.cpp:299
+msgid "Save as"
+msgstr "შენახვა, როგორც"
+
+#: src/chmhtmlwindow.cpp:307
+msgid "Error creating file "
+msgstr "შექმნის შეცდომა ფაილისთვის "
+
+#: src/chmhtmlwindow.cpp:317
+msgid "Saved file "
+msgstr "შენახულია ფაილი "
+
+#: src/chmhtmlwindow.cpp:317
+msgid "Success"
+msgstr "წარმატება"
+
+#: src/chmsearchpanel.cpp:43
+msgid "Get partial matches"
+msgstr "ნაწილობრივი დამთხვევების მიღება"
+
+#: src/chmsearchpanel.cpp:44
+msgid "Search titles only"
+msgstr "მხოლოდ სათაურების ძებნა"
+
+#: src/chmsearchpanel.cpp:48
+msgid "Allow partial matches."
+msgstr "ნაწილობრივი დამთხვევების დაშვება"
+
+#: src/chmsearchpanel.cpp:49
+msgid "Only search in the contents' titles."
+msgstr "ძებნა, მხოლოდ, შემცველობის სათაურებში."
+
+#: src/chmsearchpanel.cpp:50
+msgid "Search contents for occurrences of the specified text."
+msgstr "მითითებული ტექსტის ძებნა შემცველობაში."

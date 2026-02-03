@@ -1,5 +1,5 @@
 # Georgian translation for xchm.
-# Copyright (C) 2026 Razvan Cojocaru <rzvncj@gmail.com>
+# Copyright (C) 2026 Razvan Cojocaru <razvanc@mailbox.org>
 # This file is distributed under the same license as the xchm package.
 # Ekaterine Papava <papava.e@gtu.ge>, 2026.
 #

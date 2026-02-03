@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2026  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2026  Razvan Cojocaru <razvanc@mailbox.org>
   XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Mac OS patches contributed by Mojca Miklavec <mojca@macports.org>

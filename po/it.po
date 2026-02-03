@@ -1,5 +1,5 @@
 # xCHM .pot file.
-# Copyright (C) 2004 Razvan Cojocaru <rzvncj@gmail.com>
+# Copyright (C) 2004 Razvan Cojocaru <razvanc@mailbox.org>
 # This file is distributed under the same license as the xCHM package.
 # Fabio Vescarelli <faber@faberbox.com>, 2004.
 #

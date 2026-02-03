@@ -1,7 +1,7 @@
 # xCHM .pot file.
-# Copyright (C) 2004 Razvan Cojocaru <rzvncj@gmail.com>
+# Copyright (C) 2004 Razvan Cojocaru <razvanc@mailbox.org>
 # This file is distributed under the same license as the xCHM package.
-# FIRST AUTHOR <rzvncj@gmail.com>, 2004.
+# FIRST AUTHOR <razvanc@mailbox.org>, 2004.
 # Igor Stirbu <igor.stirbu@gmail.com>, 2007.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-31 23:53+0200\n"
 "PO-Revision-Date: 2024-09-01 10:45+0300\n"
-"Last-Translator: Răzvan Cojocaru <rzvncj@gmail.com>\n"
+"Last-Translator: Răzvan Cojocaru <razvanc@mailbox.org>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"

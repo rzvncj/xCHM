@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2003 - 2026  Razvan Cojocaru <rzvncj@gmail.com>
+  Copyright (C) 2003 - 2026  Razvan Cojocaru <razvanc@mailbox.org>
    XML-RPC/Context ID code contributed by Eamon Millman / PCI Geomatics
   <millman@pcigeomatics.com>
   Tree control icons code (and the icons) contributed by Fritz Elfert
@@ -70,7 +70,7 @@ namespace {
 const wxChar* greeting = wxT(
     "<html><head><title>About</title></head><body><table border=0><tr><td align=\"left\">"
     "<img src=\"memory:logo.xpm\"></td><td align=\"left\">Hello, and welcome to <B>xCHM</B>, the UNIX CHM viewer."
-    "<br><br><B>xCHM</B> has been written by Razvan Cojocaru (rzvncj@gmail.com). It is licensed under the "
+    "<br><br><B>xCHM</B> has been written by Ra&#774;zvan Cojocaru. It is licensed under the "
     "<TT>GPL</TT>.<br>It's based on Jed Wing's <a href=\"http://www.jedrea.com/chmlib/\">CHMLIB</a> and "
     "<a href=\"http://www.wxwidgets.org\">wxWidgets</a>.<br><br></td></tr></table>"
     "<br>If you'd like to know more about CHM, go to <a href=\"http://www.nongnu.org/chmspec/latest/\">Pabs' CHM"
@@ -93,7 +93,7 @@ const wxChar* greeting = wxT(
 const wxChar* error_page = wxT("<html><body>Error loading CHM file!</body></html>");
 
 const wxChar* about_txt = wxT("xCHM v. " VERSION
-                              "\nby Razvan Cojocaru <rzvncj@gmail.com>\n\n"
+                              "\nby Razvan Cojocaru <razvanc@mailbox.org>\n\n"
                               "With thanks to Pabs. Based on Jed Wing's CHMLIB.\n"
                               "XMLRPC code for context sensitive help contributed by Eamon Millman. "
                               "<SPAN> tag support and contents tree icons contributed by Fritz Elfert. "

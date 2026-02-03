@@ -1,5 +1,5 @@
 # Greek translation.
-# Copyright (C) YEAR Razvan Cojocaru <rzvncj@gmail.com>
+# Copyright (C) YEAR Razvan Cojocaru <razvanc@mailbox.org>
 # This file is distributed under the same license as the xCHM package.
 # Klearchos-Angelos Gkountras <kleagkou@gmail.com>.
 #

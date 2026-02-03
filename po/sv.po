@@ -1,5 +1,5 @@
 # Swedish translation of xchm.
-# Copyright (C) 2006 Razvan Cojocaru <rzvncj@gmail.com>
+# Copyright (C) 2006 Razvan Cojocaru <razvanc@mailbox.org>
 # This file is distributed under the same license as the xchm package.
 # Daniel Nylander <po@danielnylander.se>, 2006.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.

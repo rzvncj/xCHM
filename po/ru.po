@@ -1,6 +1,6 @@
 # translation of ru.po to Russian
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR Razvan Cojocaru <rzvncj@gmail.com>, 2004.
+# Copyright (C) YEAR Razvan Cojocaru <razvanc@mailbox.org>, 2004.
 # Andy Shevchenko <andy@smile.org.ua>, 2004, 2005.
 #
 msgid ""

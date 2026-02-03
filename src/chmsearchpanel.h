@@ -78,8 +78,11 @@ protected:
     */
     void OnSearch(wxCommandEvent& event);
 
-    //! This gets called when the user clicks on a result.
+    //! This gets called when the user selects a result.
     void OnSearchSel(wxListEvent& event);
+
+    //! This gets called when the user activates a result.
+    void OnItemActivated(wxListEvent& event);
 
 private:
     //! Helper. Searches through the tree recursively.
@@ -95,12 +98,13 @@ private:
     void SetConfig();
 
 private:
-    wxTreeCtrl*  _tcl;
-    wxTextCtrl*  _text;
-    wxCheckBox*  _partial;
-    wxCheckBox*  _titles;
-    wxButton*    _search;
-    CHMListCtrl* _results;
+    wxTreeCtrl*      _tcl;
+    wxTextCtrl*      _text;
+    wxCheckBox*      _partial;
+    wxCheckBox*      _titles;
+    wxButton*        _search;
+    CHMListCtrl*     _results;
+    CHMHtmlNotebook* _nbhtml;
 
 private:
     DECLARE_EVENT_TABLE()

@@ -17,12 +17,14 @@
   MA 02110-1301, USA.
 */
 
+#include <chmhtmlnotebook.h>
 #include <chmhtmlwindow.h>
 #include <chmindexpanel.h>
 #include <chmlistctrl.h>
 #include <wx/sizer.h>
+#include <wx/textctrl.h>
 
-CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml) : wxPanel(parent)
+CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml) : wxPanel(parent), _nbhtml(nbhtml)
 {
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -47,16 +49,21 @@ void CHMIndexPanel::SetNewFont(const wxFont& font)
     _lc->SetFont(font);
 }
 
-void CHMIndexPanel::OnIndexSelRet(wxCommandEvent&)
+void CHMIndexPanel::OnIndexSel(wxListEvent& event)
 {
+    event.Skip();
+
     if (_navigate)
-        _lc->LoadSelected();
+        _lc->LoadSelected(event.GetIndex());
 }
 
-void CHMIndexPanel::OnIndexSel(wxListEvent&)
+void CHMIndexPanel::OnItemActivated(wxListEvent& event)
 {
+    event.Skip();
+
     if (_navigate)
-        _lc->LoadSelected();
+        _lc->LoadSelected(event.GetIndex());
+    _nbhtml->GetCurrentPage()->SetFocus();
 }
 
 void CHMIndexPanel::OnText(wxCommandEvent&)
@@ -66,8 +73,18 @@ void CHMIndexPanel::OnText(wxCommandEvent&)
     _navigate = true;
 }
 
+void CHMIndexPanel::OnTextEnter(wxCommandEvent&)
+{
+    _navigate = false;
+    _lc->FindBestMatch(_text->GetLineText(0));
+    _lc->LoadSelected(_lc->GetFocusedItem());
+    _nbhtml->GetCurrentPage()->SetFocusFromKbd();
+    _navigate = true;
+}
+
 BEGIN_EVENT_TABLE(CHMIndexPanel, wxPanel)
 EVT_TEXT(ID_SearchIndex, CHMIndexPanel::OnText)
-EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSelRet)
+EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnTextEnter)
 EVT_LIST_ITEM_SELECTED(ID_IndexClicked, CHMIndexPanel::OnIndexSel)
+EVT_LIST_ITEM_ACTIVATED(ID_IndexClicked, CHMIndexPanel::OnItemActivated)
 END_EVENT_TABLE()

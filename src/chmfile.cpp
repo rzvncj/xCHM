@@ -938,6 +938,8 @@ bool CHMFile::ProcessWLC(uint64_t wlc_count, uint64_t wlc_size, uint32_t wlc_off
 bool CHMFile::InfoFromWindows()
 {
     constexpr size_t WIN_HEADER_LEN {0x08};
+    constexpr size_t MIN_ENTRY_SIZE {0x6C}; // we read up to offset 0x68 + 4 bytes
+    constexpr size_t MAX_ENTRIES {1024};    // reasonable upper bound
     chmUnitInfo      ui;
 
     if (chm_resolve_object(_chmChiFile, "/#WINDOWS", &ui) == CHM_RESOLVE_SUCCESS) {
@@ -950,14 +952,30 @@ bool CHMFile::InfoFromWindows()
         auto entries    = UINT32_FROM_ARRAY(buffer);
         auto entry_size = UINT32_FROM_ARRAY(buffer + 0x04);
 
-        UCharVector uptr(entries * entry_size);
+        // Validate entry_size is large enough for the offsets we read
+        if (entry_size < MIN_ENTRY_SIZE || entries == 0)
+            return true; // no usable data, but not a hard failure
+
+        // Sanity-check entries count and guard against overflow
+        if (entries > MAX_ENTRIES)
+            entries = MAX_ENTRIES;
+
+        auto total_size = static_cast<uint64_t>(entries) * entry_size;
+
+        if (total_size > ui.length)
+            return false;
+
+        UCharVector uptr(static_cast<size_t>(total_size));
         auto        raw = &uptr[0];
 
-        if (!chm_retrieve_object(_chmChiFile, &ui, raw, 8, entries * entry_size))
+        if (!chm_retrieve_object(_chmChiFile, &ui, raw, 8, static_cast<size_t>(total_size)))
             return false;
 
         if (chm_resolve_object(_chmChiFile, "/#STRINGS", &ui) != CHM_RESOLVE_SUCCESS)
             return false;
+
+        // Ensure the buffer is always NUL-terminated for safe string reads
+        buffer[BUF_SIZE - 1] = 0;
 
         for (uint32_t i = 0; i < entries; ++i) {
             uint32_t offset {i * entry_size};
@@ -968,30 +986,35 @@ bool CHMFile::InfoFromWindows()
             auto     factor    = off_title / 4096;
 
             if (size == 0)
-                size = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE);
+                size = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE - 1);
+
+            buffer[BUF_SIZE - 1] = 0;
 
             if (size && off_title)
                 _title = CURRENT_CHAR_STRING(buffer + off_title % 4096);
 
             if (factor != off_home / 4096) {
-                factor = off_home / 4096;
-                size   = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE);
+                factor               = off_home / 4096;
+                size                 = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE - 1);
+                buffer[BUF_SIZE - 1] = 0;
             }
 
             if (size && off_home)
                 _home = wxT("/") + CURRENT_CHAR_STRING(buffer + off_home % 4096);
 
             if (factor != off_hhc / 4096) {
-                factor = off_hhc / 4096;
-                size   = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE);
+                factor               = off_hhc / 4096;
+                size                 = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE - 1);
+                buffer[BUF_SIZE - 1] = 0;
             }
 
             if (size && off_hhc)
                 _topicsFile = wxT("/") + CURRENT_CHAR_STRING(buffer + off_hhc % 4096);
 
             if (factor != off_hhk / 4096) {
-                factor = off_hhk / 4096;
-                size   = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE);
+                factor               = off_hhk / 4096;
+                size                 = chm_retrieve_object(_chmChiFile, &ui, buffer, factor * 4096, BUF_SIZE - 1);
+                buffer[BUF_SIZE - 1] = 0;
             }
 
             if (size && off_hhk)

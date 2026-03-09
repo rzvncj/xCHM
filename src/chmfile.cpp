@@ -349,10 +349,8 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
 
     ++calls;
 
-    if (calls % YIELD_TIME) {
-        calls = 0;
+    if (calls % YIELD_TIME == 0)
         wxYield();
-    }
 
     if (tree)
         parents[0] = tree->GetRootItem();

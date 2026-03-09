@@ -468,11 +468,11 @@ bool CHMFile::BinaryIndex(CHMListCtrl& toBuild, const wxCSConv& cv)
     UCharVector btree(bt_ui.length), topics(ts_ui.length), strings(st_ui.length), urltbl(ut_ui.length),
         urlstr(us_ui.length);
 
-    if (chm_retrieve_object(_chmChiFile, &bt_ui, &btree[0], 0, bt_ui.length) != (int64_t)bt_ui.length
-        || chm_retrieve_object(_chmChiFile, &ts_ui, &topics[0], 0, ts_ui.length) != (int64_t)ts_ui.length
-        || chm_retrieve_object(_chmChiFile, &st_ui, &strings[0], 0, st_ui.length) != (int64_t)st_ui.length
-        || chm_retrieve_object(_chmChiFile, &ut_ui, &urltbl[0], 0, ut_ui.length) != (int64_t)ut_ui.length
-        || chm_retrieve_object(_chmChiFile, &us_ui, &urlstr[0], 0, us_ui.length) != (int64_t)us_ui.length)
+    if (chm_retrieve_object(_chmChiFile, &bt_ui, &btree[0], 0, bt_ui.length) != static_cast<int64_t>(bt_ui.length)
+        || chm_retrieve_object(_chmChiFile, &ts_ui, &topics[0], 0, ts_ui.length) != static_cast<int64_t>(ts_ui.length)
+        || chm_retrieve_object(_chmChiFile, &st_ui, &strings[0], 0, st_ui.length) != static_cast<int64_t>(st_ui.length)
+        || chm_retrieve_object(_chmChiFile, &ut_ui, &urltbl[0], 0, ut_ui.length) != static_cast<int64_t>(ut_ui.length)
+        || chm_retrieve_object(_chmChiFile, &us_ui, &urlstr[0], 0, us_ui.length) != static_cast<int64_t>(us_ui.length))
         return false;
 
     if (bt_ui.length < 0x4c + 12)

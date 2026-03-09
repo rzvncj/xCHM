@@ -1039,9 +1039,11 @@ bool CHMFile::InfoFromSystem()
     if (chm_resolve_object(_chmFile, "/#SYSTEM", &ui) != CHM_RESOLVE_SUCCESS)
         return false;
 
-    // Can we pull BUFF_SIZE bytes of the #SYSTEM file?
-    if ((size = chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE)) == 0)
+    // Retrieve one byte less than BUF_SIZE so we can guarantee NUL termination
+    if ((size = chm_retrieve_object(_chmFile, &ui, buffer, 4, BUF_SIZE - 1)) == 0)
         return false;
+
+    buffer[BUF_SIZE - 1] = 0;
 
     for (;;) {
         // This condition won't hold if I process anything except NUL-terminated strings!
@@ -1050,6 +1052,11 @@ bool CHMFile::InfoFromSystem()
 
         auto cursor = buffer + index;
         auto value  = UINT16_FROM_ARRAY(cursor);
+
+        // Each case reads at buffer + index + 2 (after a 2-byte type and 2-byte length).
+        // Ensure index + 4 doesn't exceed the buffer.
+        if (static_cast<size_t>(index) + 4 > BUF_SIZE - 1)
+            break;
 
         switch (value) {
         case 0:
@@ -1088,7 +1095,8 @@ bool CHMFile::InfoFromSystem()
             index += 2;
             cursor = buffer + index;
 
-            _enc = GetFontEncFromLCID(UINT32_FROM_ARRAY(buffer + index + 2));
+            if (static_cast<size_t>(index) + 2 + sizeof(uint32_t) <= BUF_SIZE - 1)
+                _enc = GetFontEncFromLCID(UINT32_FROM_ARRAY(buffer + index + 2));
             break;
 
         case 6:

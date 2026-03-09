@@ -713,7 +713,11 @@ bool CHMFile::IndexSearch(const wxString& text, bool wholeWords, bool titlesOnly
 
         while (i < node_len - free_space) {
             auto word_len = buffer[i];
-            auto pos      = buffer[i + 1];
+
+            if (word_len == 0 || i + 2 + word_len > node_len - free_space)
+                break;
+
+            auto pos = buffer[i + 1];
 
             std::vector<char> wrd_buf(word_len);
 
@@ -813,7 +817,11 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
 
         while (i < buffSize - free_space) {
             auto word_len = buffer[i];
-            auto pos      = buffer[i + 1];
+
+            if (word_len == 0 || i + 2 + word_len > buffSize - free_space)
+                break;
+
+            auto pos = buffer[i + 1];
 
             std::vector<char> wrd_buf(word_len);
 
@@ -826,8 +834,10 @@ uint32_t CHMFile::GetLeafNodeOffset(const wxString& text, uint32_t initialOffset
                 word = word.Mid(0, pos) + CURRENT_CHAR_STRING(&wrd_buf[0]);
 
             if (text.CmpNoCase(word) <= 0) {
-                auto cursor32 = &buffer[i + word_len + 1];
-                initialOffset = UINT32_FROM_ARRAY(cursor32);
+                if (i + word_len + 1 + sizeof(uint32_t) <= buffSize) {
+                    auto cursor32 = &buffer[i + word_len + 1];
+                    initialOffset = UINT32_FROM_ARRAY(cursor32);
+                }
                 break;
             }
 

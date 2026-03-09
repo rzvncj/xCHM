@@ -54,6 +54,9 @@ CHMFindDialog::CHMFindDialog(wxWindow* parent, CHMHtmlWindow* toSearch)
     topsizer->Fit(this);
     Centre(wxBOTH);
     SetFocusToTextBox();
+
+    Bind(wxEVT_TEXT_ENTER, &CHMFindDialog::OnFind, this, ID_TextFind);
+    Bind(wxEVT_BUTTON, &CHMFindDialog::OnFind, this, ID_FindNext);
 }
 
 void CHMFindDialog::OnFind(wxCommandEvent&)
@@ -100,8 +103,3 @@ void CHMFindDialog::OnFind(wxCommandEvent&)
             _cell = _html->FindFirst(_html->GetInternalRepresentation(), word, _whole->IsChecked(), _case->IsChecked());
     }
 }
-
-BEGIN_EVENT_TABLE(CHMFindDialog, wxDialog)
-EVT_TEXT_ENTER(ID_TextFind, CHMFindDialog::OnFind)
-EVT_BUTTON(ID_FindNext, CHMFindDialog::OnFind)
-END_EVENT_TABLE()

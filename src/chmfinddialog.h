@@ -57,9 +57,6 @@ private:
     wxCheckBox*    _case;
     wxString       _currWord;
     wxHtmlCell*    _cell {nullptr};
-
-private:
-    DECLARE_EVENT_TABLE();
 };
 
 #endif // __CHMFINDDIALOG_H

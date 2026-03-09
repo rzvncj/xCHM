@@ -64,9 +64,6 @@ private:
 
     wxFont _normalFont;
     wxFont _fixedFont;
-
-private:
-    DECLARE_EVENT_TABLE();
 };
 
 #endif // __CHMFONTDIALOG_H

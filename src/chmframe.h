@@ -253,9 +253,6 @@ private:
     bool          _loadTopics;
     bool          _loadIndex;
     bool          _fullScreen {false};
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMFRAME_H_

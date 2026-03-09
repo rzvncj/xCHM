@@ -97,7 +97,6 @@ private:
     wxString    _fontsNormalFace;
     wxString    _fontsFixedFace;
     int         _fontSize;
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMHTMLNOTEBOOK_H_

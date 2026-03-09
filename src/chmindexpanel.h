@@ -74,9 +74,6 @@ private:
     wxTextCtrl*  _text;
     CHMListCtrl* _lc {nullptr};
     bool         _navigate {true};
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMINDEXPANEL_H_

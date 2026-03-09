@@ -57,6 +57,10 @@ CHMSearchPanel::CHMSearchPanel(wxWindow* parent, wxTreeCtrl* topics, CHMHtmlNote
     sizer->Add(_search, 0, wxALL, 10);
     sizer->Add(_results, 1, wxALL | wxEXPAND, 2);
 
+    Bind(wxEVT_LIST_ITEM_SELECTED, &CHMSearchPanel::OnSearchSel, this, ID_Results);
+    Bind(wxEVT_BUTTON, &CHMSearchPanel::OnSearch, this, ID_SearchButton);
+    Bind(wxEVT_TEXT_ENTER, &CHMSearchPanel::OnSearch, this, ID_SearchText);
+
     GetConfig();
 }
 
@@ -238,9 +242,3 @@ void CHMSearchPanel::GetConfig()
         _titles->SetValue(titles);
     }
 }
-
-BEGIN_EVENT_TABLE(CHMSearchPanel, wxPanel)
-EVT_LIST_ITEM_SELECTED(ID_Results, CHMSearchPanel::OnSearchSel)
-EVT_BUTTON(ID_SearchButton, CHMSearchPanel::OnSearch)
-EVT_TEXT_ENTER(ID_SearchText, CHMSearchPanel::OnSearch)
-END_EVENT_TABLE()

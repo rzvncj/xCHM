@@ -34,6 +34,10 @@ CHMIndexPanel::CHMIndexPanel(wxWindow* parent, CHMHtmlNotebook* nbhtml) : wxPane
 
     sizer->Add(_text, 0, wxEXPAND | wxALL, 2);
     sizer->Add(_lc, 1, wxALL | wxEXPAND, 2);
+
+    Bind(wxEVT_TEXT, &CHMIndexPanel::OnText, this, ID_SearchIndex);
+    Bind(wxEVT_TEXT_ENTER, &CHMIndexPanel::OnIndexSelRet, this, ID_SearchIndex);
+    Bind(wxEVT_LIST_ITEM_SELECTED, &CHMIndexPanel::OnIndexSel, this, ID_IndexClicked);
 }
 
 void CHMIndexPanel::Reset()
@@ -65,9 +69,3 @@ void CHMIndexPanel::OnText(wxCommandEvent&)
     _lc->FindBestMatch(_text->GetLineText(0));
     _navigate = true;
 }
-
-BEGIN_EVENT_TABLE(CHMIndexPanel, wxPanel)
-EVT_TEXT(ID_SearchIndex, CHMIndexPanel::OnText)
-EVT_TEXT_ENTER(ID_SearchIndex, CHMIndexPanel::OnIndexSelRet)
-EVT_LIST_ITEM_SELECTED(ID_IndexClicked, CHMIndexPanel::OnIndexSel)
-END_EVENT_TABLE()

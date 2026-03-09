@@ -110,9 +110,6 @@ private:
 private:
     ItemPairArray    _items;
     CHMHtmlNotebook* _nbhtml;
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMLISTCTRL_H_

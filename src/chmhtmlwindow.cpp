@@ -71,6 +71,18 @@ CHMHtmlWindow::CHMHtmlWindow(wxWindow* parent, wxTreeCtrl* tc, CHMFrame* frame)
     _menu->AppendSeparator();
     _menu->Append(ID_PopupFullScreen, _("&Toggle fullscreen mode"));
     SetDropTarget(new CHMDropTarget(frame));
+
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnCopy, this, ID_CopySel);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnFind, this, ID_PopupFind);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnForward, this, ID_PopupForward);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnBack, this, ID_PopupBack);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnCopyLink, this, ID_CopyLink);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnSaveLinkAs, this, ID_SaveLinkAs);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnOpenInNewTab, this, ID_OpenInNewTab);
+    Bind(wxEVT_MENU, &CHMHtmlWindow::OnToggleFullScreen, this, ID_PopupFullScreen);
+    Bind(wxEVT_CHAR, &CHMHtmlWindow::OnChar, this);
+    Bind(wxEVT_RIGHT_DOWN, &CHMHtmlWindow::OnRightClick, this);
+    Bind(wxEVT_SIZE, &CHMHtmlWindow::OnSize, this);
 }
 
 bool CHMHtmlWindow::LoadPage(const wxString& location)
@@ -430,17 +442,3 @@ void CHMHtmlWindow::OnSetTitle(const wxString& title)
 
     wxHtmlWindow::OnSetTitle(title);
 }
-
-BEGIN_EVENT_TABLE(CHMHtmlWindow, wxHtmlWindow)
-EVT_MENU(ID_CopySel, CHMHtmlWindow::OnCopy)
-EVT_MENU(ID_PopupFind, CHMHtmlWindow::OnFind)
-EVT_MENU(ID_PopupForward, CHMHtmlWindow::OnForward)
-EVT_MENU(ID_PopupBack, CHMHtmlWindow::OnBack)
-EVT_MENU(ID_CopyLink, CHMHtmlWindow::OnCopyLink)
-EVT_MENU(ID_SaveLinkAs, CHMHtmlWindow::OnSaveLinkAs)
-EVT_MENU(ID_OpenInNewTab, CHMHtmlWindow::OnOpenInNewTab)
-EVT_MENU(ID_PopupFullScreen, CHMHtmlWindow::OnToggleFullScreen)
-EVT_CHAR(CHMHtmlWindow::OnChar)
-EVT_RIGHT_DOWN(CHMHtmlWindow::OnRightClick)
-EVT_SIZE(CHMHtmlWindow::OnSize)
-END_EVENT_TABLE()

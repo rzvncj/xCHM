@@ -170,6 +170,7 @@ bool CHMApp::OnInit()
     if (port != -1L) {
         _timer.SetOwner(this, TIMER_ID);
         _timer.Start(100);
+        Bind(wxEVT_TIMER, &CHMApp::WatchForXMLRPC, this, TIMER_ID);
         getXmlRpcServer().bindAndListen(port);
     }
 #endif
@@ -224,12 +225,6 @@ void CHMApp::WatchForXMLRPC(wxTimerEvent&)
 {
     getXmlRpcServer().work(0.0); // check for a XMLRPC message
 }
-#endif
-
-#ifdef WITH_LIBXMLRPC
-BEGIN_EVENT_TABLE(CHMApp, wxApp)
-EVT_TIMER(TIMER_ID, CHMApp::WatchForXMLRPC)
-END_EVENT_TABLE()
 #endif
 
 // Apparently this macro gets main() pumping.

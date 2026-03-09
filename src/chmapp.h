@@ -80,9 +80,6 @@ private:
     wxTimer _timer;
 #endif
     wxCmdLineParser _cmdLP;
-#ifdef WITH_LIBXMLRPC
-    DECLARE_EVENT_TABLE()
-#endif
 };
 
 #endif // __CHMAPP_H_

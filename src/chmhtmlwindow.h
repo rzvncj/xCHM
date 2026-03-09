@@ -154,9 +154,6 @@ private:
     CHMFrame*                      _frame;
     wxString                       _link;
     std::unique_ptr<CHMFindDialog> _fdlg;
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMHTMLWINDOW_H_

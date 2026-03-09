@@ -36,6 +36,12 @@ CHMHtmlNotebook::CHMHtmlNotebook(wxWindow* parent, wxTreeCtrl* tc, const wxStrin
     wxAcceleratorTable accel(sizeof(entries) / sizeof(wxAcceleratorEntry), entries);
     SetAcceleratorTable(accel);
 
+    Bind(wxEVT_MENU, &CHMHtmlNotebook::OnGoToPriorPage, this, ID_PriorPage);
+    Bind(wxEVT_MENU, &CHMHtmlNotebook::OnGoToNextPage, this, ID_NextPage);
+    Bind(wxEVT_MENU, &CHMHtmlNotebook::OnZoomIn, this, ID_ZoomIn);
+    Bind(wxEVT_MENU, &CHMHtmlNotebook::OnZoomOut, this, ID_ZoomOut);
+    Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSED, &CHMHtmlNotebook::OnCloseTab, this);
+
     AddHtmlView(wxEmptyString, wxT("memory:about.html"));
 }
 
@@ -151,11 +157,3 @@ bool CHMHtmlNotebook::AddTab(wxWindow* page, const wxString& title)
 
     return AddPage(page, title);
 }
-
-BEGIN_EVENT_TABLE(CHMHtmlNotebook, wxAuiNotebook)
-EVT_MENU(ID_PriorPage, CHMHtmlNotebook::OnGoToPriorPage)
-EVT_MENU(ID_NextPage, CHMHtmlNotebook::OnGoToNextPage)
-EVT_MENU(ID_ZoomIn, CHMHtmlNotebook::OnZoomIn)
-EVT_MENU(ID_ZoomOut, CHMHtmlNotebook::OnZoomOut)
-EVT_AUINOTEBOOK_PAGE_CLOSED(wxID_ANY, CHMHtmlNotebook::OnCloseTab)
-END_EVENT_TABLE()

@@ -101,9 +101,6 @@ private:
     wxCheckBox*  _titles;
     wxButton*    _search;
     CHMListCtrl* _results;
-
-private:
-    DECLARE_EVENT_TABLE()
 };
 
 #endif // __CHMSEARCHPANEL_HPP_

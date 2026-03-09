@@ -44,6 +44,8 @@ CHMListCtrl::CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID i
     SetItemCount(0);
 
     _items.Alloc(INDEX_HINT_SIZE);
+
+    Bind(wxEVT_SIZE, &CHMListCtrl::OnSize, this);
 }
 
 CHMListCtrl::~CHMListCtrl()
@@ -130,7 +132,3 @@ wxString CHMListCtrl::OnGetItemText(long item, long column) const
 
     return _items[item]->_title;
 }
-
-BEGIN_EVENT_TABLE(CHMListCtrl, wxListCtrl)
-EVT_SIZE(CHMListCtrl::OnSize)
-END_EVENT_TABLE()

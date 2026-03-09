@@ -91,7 +91,7 @@ void CHMSearchPanel::OnSearch(wxCommandEvent&)
     auto srLen = sr.length();
 
     for (size_t i = 0; i < srLen; ++i)
-        switch (wxChar(sr[i])) {
+        switch (static_cast<wxChar>(sr[i])) {
         case wxT('+'):
         case wxT('-'):
         case wxT('#'):

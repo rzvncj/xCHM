@@ -57,7 +57,7 @@ void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
     result = false;
 
     if (params.size() > 0 && params[0].getType() == XmlRpcValue::TypeInt)
-        switch (int(params[0])) {
+        switch (static_cast<int>(params[0])) {
 
         case 0: // we want to shut everything down!
             ExitMainLoop();
@@ -71,12 +71,12 @@ void CHMApp::execute(XmlRpc::XmlRpcValue& params, XmlRpc::XmlRpcValue& result)
             if (params.size() == 3 && params[1].getType() == XmlRpcValue::TypeString
                 && params[2].getType() == XmlRpcValue::TypeInt)
                 result = _frame->LoadCHM(CURRENT_CHAR_STRING(std::string(params[1]).c_str()))
-                    && _frame->LoadContextID(int(params[2]));
+                    && _frame->LoadContextID(static_cast<int>(params[2]));
             break;
 
         case 2:
             if (params.size() == 2 && params[1].getType() == XmlRpcValue::TypeInt)
-                result = _frame->LoadContextID(int(params[1]));
+                result = _frame->LoadContextID(static_cast<int>(params[1]));
             break;
         }
 }

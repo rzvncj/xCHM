@@ -209,8 +209,7 @@ void HHCParser::handleTag(const std::string& tag)
         if (tagName == "ul") {
             if (_level + 1 < static_cast<int>(TREE_BUF_SIZE))
                 ++_level;
-        }
-        else if (tagName == "/ul") {
+        } else if (tagName == "/ul") {
             if (_level > 0)
                 --_level;
         } else if (tagName == "object") {
@@ -343,7 +342,7 @@ wxString HHCParser::replaceHTMLChars(const wxString& input)
     wxString special;
 
     for (size_t i = 0; i < input.Length(); ++i) {
-        switch (wxChar(input[i])) {
+        switch (static_cast<wxChar>(input[i])) {
         case wxT('&'):
             inSpecial = true;
             special   = wxEmptyString;

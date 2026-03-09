@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include <stdint.h>
+#include <cstdint>
 #ifdef ENABLE_BUILTIN_CHMLIB
 #include "xchm_chm_lib.h"
 #else

@@ -17,11 +17,11 @@
   MA 02110-1301, USA.
 */
 
+#include <cctype>
 #include <chmlistctrl.h>
-#include <ctype.h>
+#include <cstdlib>
 #include <hhcparser.h>
 #include <map>
-#include <stdlib.h>
 #include <wx/wx.h>
 #include <wxstringutils.h>
 

@@ -21,7 +21,6 @@
   MA 02110-1301, USA.
 */
 
-#include <assert.h>
 #include <chmfile.h>
 #include <chmlistctrl.h>
 #include <hhcparser.h>

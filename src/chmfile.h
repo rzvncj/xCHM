@@ -31,10 +31,10 @@
 #include <chm_lib.h>
 #endif
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include <wx/filefn.h>
 #include <wx/font.h>
-#include <wx/hashmap.h>
 #include <wx/string.h>
 
 // Forward declarations.
@@ -44,10 +44,10 @@ class wxCSConv;
 
 using UCharVector = std::vector<unsigned char>;
 
-//! Declares a class called CHMSearchResults - <string, string> hashmap.
-WX_DECLARE_STRING_HASH_MAP(wxString, CHMSearchResults);
-//! Declares a class called CHMIDMap - <int, string> hashmap.
-WX_DECLARE_HASH_MAP(int, wxString, wxIntegerHash, wxIntegerEqual, CHMIDMap);
+//! <string, string> hashmap for search results.
+using CHMSearchResults = std::unordered_map<wxString, wxString>;
+//! <int, string> hashmap for context ID mapping.
+using CHMIDMap = std::unordered_map<int, wxString>;
 
 //! C++ wrapper around CHMLIB. Concrete class.
 class CHMFile {

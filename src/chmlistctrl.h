@@ -22,8 +22,9 @@
 #ifndef __CHMLISTCTRL_H_
 #define __CHMLISTCTRL_H_
 
-#include <wx/dynarray.h>
-#include <wx/listbox.h>
+#include <algorithm>
+#include <memory>
+#include <vector>
 #include <wx/listctrl.h>
 #include <wx/string.h>
 
@@ -41,11 +42,8 @@ struct CHMListPairItem {
     wxString _url;
 };
 
-//! Declare a wxWidgets sorted array
-WX_DEFINE_SORTED_ARRAY(CHMListPairItem*, ItemPairArray);
-
-//! Comparison function to use with the sorted array above.
-int CompareItemPairs(CHMListPairItem* item1, CHMListPairItem* item2);
+//! Sorted container of list items with RAII ownership.
+using ItemPairArray = std::vector<std::unique_ptr<CHMListPairItem>>;
 
 /*!
   \class wxListCtrl
@@ -65,9 +63,6 @@ public:
       \param id Widget id.
      */
     CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID id = wxID_ANY);
-
-    //! Cleanup.
-    ~CHMListCtrl();
 
 public:
     //! Cleans up and removes all the list items.
@@ -101,11 +96,7 @@ protected:
     void OnSize(wxSizeEvent& event);
 
     //! Gets called when an item needs to be displayed.
-    wxString OnGetItemText(long item, long column) const;
-
-private:
-    //! Delete/empty the items in the item array.
-    void ResetItems();
+    wxString OnGetItemText(long item, long column) const override;
 
 private:
     ItemPairArray    _items;

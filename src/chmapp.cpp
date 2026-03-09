@@ -228,4 +228,4 @@ void CHMApp::WatchForXMLRPC(wxTimerEvent&)
 #endif
 
 // Apparently this macro gets main() pumping.
-IMPLEMENT_APP(CHMApp)
+wxIMPLEMENT_APP(CHMApp);

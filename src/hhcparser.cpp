@@ -206,8 +206,10 @@ void HHCParser::handleTag(const std::string& tag)
         }
 
     } else {
-        if (tagName == "ul")
-            ++_level;
+        if (tagName == "ul") {
+            if (_level + 1 < static_cast<int>(TREE_BUF_SIZE))
+                ++_level;
+        }
         else if (tagName == "/ul") {
             if (_level > 0)
                 --_level;

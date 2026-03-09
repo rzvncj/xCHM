@@ -342,6 +342,9 @@ bool CHMFile::GetItem(UCharVector& topics, UCharVector& strings, UCharVector& ur
                       uint32_t index, wxTreeCtrl* tree, CHMListCtrl* list, const wxString& idxName, int level,
                       bool local)
 {
+    if (level < 0 || level >= static_cast<int>(TREE_BUF_SIZE))
+        return false;
+
     static wxTreeItemId   parents[TREE_BUF_SIZE];
     static auto           calls      = 0;
     static constexpr auto YIELD_TIME = 256;

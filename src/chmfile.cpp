@@ -272,8 +272,8 @@ void CHMFile::CloseCHM()
     _chmChiFile = nullptr;
 
     _cidMap.clear();
-    _home     = wxT("/");
-    _filename = _home = _topicsFile = _indexFile = _title = _font = wxEmptyString;
+    _filename = _topicsFile = _indexFile = _title = _font = wxEmptyString;
+    _home                                                 = wxT("/");
 }
 
 #define MSG_RETR_TOC _("Retrieving table of contents..")

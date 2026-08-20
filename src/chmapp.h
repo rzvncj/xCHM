@@ -70,9 +70,6 @@ private:
     void WatchForXMLRPC(wxTimerEvent& event);
 #endif
 
-    // Try to figure out the absolute file path of the executable.
-    wxString getAppPath(const wxString& argv0, const wxString& cwd);
-
 private:
     CHMFrame* _frame {nullptr};
     wxLocale  _loc;

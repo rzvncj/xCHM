@@ -379,7 +379,7 @@ unsigned HHCParser::getHTMLCode(const wxString& name)
 {
     auto substitutions_cnt = sizeof(substitutions) / sizeof(HTMLChar) - 1;
     auto hc                = static_cast<HTMLChar*>(
-        bsearch(name.c_str(), substitutions, substitutions_cnt, sizeof(HTMLChar), HTMLCharCompare));
+        bsearch(name.wc_str(), substitutions, substitutions_cnt, sizeof(HTMLChar), HTMLCharCompare));
 
     return hc ? hc->code : 0;
 }

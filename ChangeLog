@@ -453,3 +453,4 @@
 
 	* 1.40:
 		+ updated Polish translation.
+		+ fixed detection of non-ASCII contents tree characters.

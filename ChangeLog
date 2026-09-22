@@ -454,3 +454,7 @@
 	* 1.40:
 		+ updated Polish translation.
 		+ fixed detection of non-ASCII contents tree characters.
+
+	* 1.41:
+		+ replace CHMApp::getAppPath() with
+		wxStandardPaths::GetExecutablePath.

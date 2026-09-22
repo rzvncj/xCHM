@@ -154,10 +154,7 @@ bool CHMApp::OnInit()
         config.Read(wxT("/Sash/leftMargin"), &sashPos);
     }
 
-    wxString fullAppPath;
-
-    if (argc > 0)
-        fullAppPath = getAppPath(argv[0], wxGetCwd());
+    wxString fullAppPath = wxStandardPaths::Get().GetExecutablePath();
 
     _frame = new CHMFrame(wxT("xCHM v. ") wxT(VERSION), lastOpenedDir, wxPoint(xorig, yorig), wxSize(width, height),
                           normalFont, fixedFont, fontSize, sashPos, fullAppPath, loadTopics, loadIndex);
@@ -186,31 +183,6 @@ bool CHMApp::OnInit()
     }
 
     return true;
-}
-
-wxString CHMApp::getAppPath(const wxString& argv0, const wxString& cwd)
-{
-    if (wxIsAbsolutePath(argv0))
-        return argv0;
-
-    auto cwdtmp = cwd;
-
-    if (cwdtmp.Last() != wxFILE_SEP_PATH)
-        cwdtmp += wxFILE_SEP_PATH;
-
-    auto apppath = cwdtmp + argv0;
-
-    if (wxFileExists(apppath))
-        return apppath;
-
-    wxPathList pathList;
-    pathList.AddEnvList(wxT("PATH"));
-    apppath = pathList.FindAbsoluteValidPath(argv0);
-
-    if (!apppath.IsEmpty())
-        return wxPathOnly(apppath);
-
-    return wxEmptyString;
 }
 
 #ifdef __WXMAC__

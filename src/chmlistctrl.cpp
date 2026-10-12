@@ -37,7 +37,7 @@ bool ItemLessThan(const std::unique_ptr<CHMListPairItem>& a, const std::unique_p
 // CHMListCtrl implementation
 
 CHMListCtrl::CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID id)
-    : wxListCtrl(parent, id, wxDefaultPosition, wxDefaultSize,
+    : wxListView(parent, id, wxDefaultPosition, wxDefaultSize,
                  wxLC_VIRTUAL | wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | wxLC_SORT_ASCENDING | wxSUNKEN_BORDER),
       _nbhtml(nbhtml)
 {
@@ -53,8 +53,8 @@ CHMListCtrl::CHMListCtrl(wxWindow* parent, CHMHtmlNotebook* nbhtml, wxWindowID i
 
 void CHMListCtrl::Reset()
 {
-    _items.clear();
     DeleteAllItems();
+    _items.clear();
     UpdateUI();
 }
 
@@ -72,10 +72,9 @@ void CHMListCtrl::AddPairItem(const wxString& title, const wxString& url)
 
 void CHMListCtrl::LoadSelected()
 {
-    auto item = -1L;
-    item      = GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    auto item = GetFirstSelected();
 
-    if (item == -1L || item >= static_cast<long>(_items.size()))
+    if (item == wxNOT_FOUND)
         return;
 
     auto chmf = CHMInputStream::GetCache();
@@ -100,7 +99,7 @@ void CHMListCtrl::FindBestMatch(const wxString& title)
     for (size_t i = 0; i < _items.size(); ++i) {
         if (!_items[i]->_title.Left(title.length()).CmpNoCase(title)) {
             EnsureVisible(i);
-            SetItemState(i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+            Select(i);
             break;
         }
     }
@@ -115,11 +114,7 @@ void CHMListCtrl::OnSize(wxSizeEvent& event)
     event.Skip();
 }
 
-wxString CHMListCtrl::OnGetItemText(long item, long column) const
+wxString CHMListCtrl::OnGetItemText(long item, long) const
 {
-    // Is this even possible? item == -1 or item > size - 1?
-    if (column != 0 || item == -1L || item >= static_cast<long>(_items.size()))
-        return wxT("");
-
     return _items[item]->_title;
 }

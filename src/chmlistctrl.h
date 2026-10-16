@@ -51,7 +51,7 @@ using ItemPairArray = std::vector<std::unique_ptr<CHMListPairItem>>;
 */
 
 //! List control class meant to emulate the look and feel of a wxListBox.
-class CHMListCtrl : public wxListCtrl {
+class CHMListCtrl : public wxListView {
 
 public:
     /*!

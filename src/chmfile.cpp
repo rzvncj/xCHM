@@ -588,6 +588,7 @@ bool CHMFile::GetIndex(CHMListCtrl& toBuild)
         curr += ret;
     } while (ret == BUF_SIZE - 1);
 
+    toBuild.UpdateItemCount();
     toBuild.Thaw();
 
     return true;
